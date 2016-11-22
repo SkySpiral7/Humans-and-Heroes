@@ -214,5 +214,46 @@ Object.freeze(Main);
 Main.clear();  //in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
 document.getElementById('ruleset').value = Main.getActiveRuleset().toString();
 </script>
+<script type="text/javascript">
+if (location.search.startsWith('?characterUrl='))
+{(function(){
+   var url = decodeURIComponent(location.search.substring('?characterUrl='.length));  //I don't allow any other query parameters
+   var ajaxRequest = new XMLHttpRequest();
+   ajaxRequest.onreadystatechange = function()
+   {
+      try
+      {
+         if (XMLHttpRequest.DONE === ajaxRequest.readyState)
+         {
+            if(0 === ajaxRequest.status) alert('Cross origin request denied.');
+            else if(400 > ajaxRequest.status) Main.loadFromString(ajaxRequest.responseText);
+            else
+            {
+               if(404 === ajaxRequest.status) alert('Character file not found.');  //it's specific, simple, and the only one that's expected
+               else alert('Failed to load character file.\nHTTP Status Code: ' + ajaxRequest.status);
+               console.error(ajaxRequest);
+            }
+         }
+      }
+      catch (error)
+      {
+         alert('Failed to load character file.\n' + error);
+         console.error(ajaxRequest, error);
+      }
+   };
+   //ajaxRequest.onerror don't use since it will only trigger from a Cross origin request being denied which I've already covered
+   //ajaxRequest.onload don't use since it will trigger on a 404 etc
+   try
+   {
+      ajaxRequest.open('GET', url, true);  //IE11 will throw here for a Cross origin request being denied
+      ajaxRequest.send();
+   }
+   catch (error)
+   {
+      alert('Failed to load character file.\n' + error);
+      console.error(ajaxRequest, error);
+   }
+})();}
+</script>
 </body>
 </html>
