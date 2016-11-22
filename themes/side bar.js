@@ -1,8 +1,27 @@
+//Polyfill for IE11
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function(searchString, position){
+      position = position || 0;
+      return this.substr(position, searchString.length) === searchString;
+  };
+}
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.lastIndexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+
 (function(){
 /**This is used to make links and upc.png be an absolute path on both localhost and skyspiral7.github.io */
-var absolutePrefix = window.location.href.replace(/(\/Humans(?:%20| |-)(?:%26|&|and)(?:%20| |-)Heroes(?:-gh-pages)?)\/?.*?$/, '$1/');
+var absolutePrefix = location.href.replace(/(\/Humans(?:%20| |-)(?:%26|&|and)(?:%20| |-)Heroes(?:-gh-pages)?)\/?.*?$/, '$1/');
 /**This is used to determine which link in the sidebar is my current page or a parent of current*/
-var currentPage = window.location.href.substring(absolutePrefix.length);
+var currentPage = location.href.substring(absolutePrefix.length);
 
 currentPage = currentPage.replace(/\?.*$/, '').replace(/#.*$/, '');  //ignore query parameters and anchor
 if (!currentPage.endsWith('.html'))

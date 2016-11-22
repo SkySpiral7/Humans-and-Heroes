@@ -148,7 +148,7 @@ TestSuite.main.loadFile=function(isFirst)
     SelectUtil.changeText('powerChoices0', 'Damage');
     Main.loadFile();
     testResults.push({Expected: 'Damage', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Loading no file does nothing'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+    } catch(e){testResults.push({Error: e, Description: 'Loading no file does nothing'});}
 
     //this test is complete since I can't set the file chooser to anything else
 
@@ -165,7 +165,7 @@ TestSuite.main.loadImageFromFile=function(isFirst)
     var expected = document.getElementById('characterImage').src;  //will be converted to absolute path
     Main.loadImageFromFile();
     testResults.push({Expected: expected, Actual: document.getElementById('characterImage').src, Description: 'Loading no file does nothing'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+    } catch(e){testResults.push({Error: e, Description: 'Loading no file does nothing'});}
 
     //this test is complete since I can't set the file chooser to anything else
 
