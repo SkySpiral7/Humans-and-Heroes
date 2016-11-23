@@ -32,9 +32,13 @@ function xmlToJson(xmlString)
     json.Hero.name = xmlDoc.getElementsByTagName('Hero')[0].getAttribute('name');
     if(xmlDoc.getElementsByTagName('Hero')[0].hasAttribute('transcendence')) json.Hero.transcendence = xmlDoc.getElementsByTagName('Hero')[0].getAttribute('transcendence');
     json.Hero.image = xmlDoc.getElementsByTagName('Hero')[0].getAttribute('image');
+
     var informationNode = xmlDoc.getElementsByTagName('Information')[0].childNodes;
-    if(informationNode.length === 0) json.Information = '';  //if <Information></Information>
-    else json.Information = informationNode[0].nodeValue;  //if <Information>Any text</Information>
+    json.Information = '';  //stays empty if <Information></Information>
+   for (i=0; i < informationNode.length; ++i)
+   {
+      json.Information += informationNode[i].nodeValue;  //if <Information>Any text</Information>. will have more than 1 if nested CDATA
+   }
 
    for (i=0; i < Data.Ability.names.length; i++)
    {
@@ -114,7 +118,7 @@ function jsonToXml(jsonDoc)
     xmlString+='   <Hero name="'+jsonDoc.Hero.name+'"';
     if(jsonDoc.Hero.transcendence !== undefined) xmlString+=' transcendence="'+jsonDoc.Hero.transcendence+'"';
     xmlString+=' image="'+jsonDoc.Hero.image+'" />\n';
-    xmlString+='   <Information>'+jsonDoc.Information+'</Information>\n';
+    xmlString+='   <Information><![CDATA['+jsonDoc.Information.replace(']]', ']]>]]<![CDATA[')+']]></Information>\n';
 
     xmlString+='   <Abilities>\n';
    for (i=0; i < Data.Ability.names.length; i++)
