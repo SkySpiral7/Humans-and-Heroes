@@ -111,15 +111,15 @@ function jsonToXml(jsonDoc)
 {
     var i;  //loop variable used throughout
     var xmlString='<?xml version="1.0" encoding="UTF-8"?>\n\n<Document ruleset="'+jsonDoc.ruleset+'" version="'+jsonDoc.version+'">\n';
-    xmlString+='    <Hero name="'+jsonDoc.Hero.name+'"';
+    xmlString+='   <Hero name="'+jsonDoc.Hero.name+'"';
     if(jsonDoc.Hero.transcendence !== undefined) xmlString+=' transcendence="'+jsonDoc.Hero.transcendence+'"';
     xmlString+=' image="'+jsonDoc.Hero.image+'" />\n';
-    xmlString+='    <Information>'+jsonDoc.Information+'</Information>\n';
+    xmlString+='   <Information>'+jsonDoc.Information+'</Information>\n';
 
-    xmlString+='   <Abilities>\n';  //always has this spacing because it is never empty
+    xmlString+='   <Abilities>\n';
    for (i=0; i < Data.Ability.names.length; i++)
    {
-       xmlString+='       <'+Data.Ability.names[i]+' value="'+jsonDoc.Abilities[Data.Ability.names[i]]+'" />\n';
+       xmlString+='      <'+Data.Ability.names[i]+' value="'+jsonDoc.Abilities[Data.Ability.names[i]]+'" />\n';
    }
     xmlString+='   </Abilities>\n';
 
@@ -127,14 +127,14 @@ function jsonToXml(jsonDoc)
     xmlString+='   '+convertJsonPowersBothToXml(jsonDoc.Equipment, 'Equipment');
 
     xmlString+='   ';
-    if(jsonDoc.Advantages.isEmpty()) xmlString+=' <Advantages></Advantages>\n';
+    if(jsonDoc.Advantages.isEmpty()) xmlString+='<Advantages></Advantages>\n';
    else
    {
        xmlString+='<Advantages>\n';
       for (i=0; i < jsonDoc.Advantages.length; i++)
       {
           var thisRow = jsonDoc.Advantages[i];
-          xmlString+='       <Row name="'+thisRow.name+'"';
+          xmlString+='      <Row name="'+thisRow.name+'"';
           if(thisRow.rank !== undefined) xmlString+=' rank="'+thisRow.rank+'"';
           if(thisRow.text !== undefined) xmlString+=' text="'+thisRow.text+'"';
           xmlString+=' />\n';
@@ -143,14 +143,14 @@ function jsonToXml(jsonDoc)
    }
 
     xmlString+='   ';
-    if(jsonDoc.Skills.isEmpty()) xmlString+=' <Skills></Skills>\n';
+    if(jsonDoc.Skills.isEmpty()) xmlString+='<Skills></Skills>\n';
    else
    {
        xmlString+='<Skills>\n';
       for (i=0; i < jsonDoc.Skills.length; i++)
       {
           var skillRow = jsonDoc.Skills[i];
-          xmlString+='       <Row name="'+skillRow.name+'"';
+          xmlString+='      <Row name="'+skillRow.name+'"';
           if(skillRow.subtype !== undefined) xmlString+=' subtype="'+skillRow.subtype+'"';
           xmlString+=' rank="'+skillRow.rank+'"';
           xmlString+=' ability="'+skillRow.ability+'"';
@@ -159,10 +159,10 @@ function jsonToXml(jsonDoc)
        xmlString+='   </Skills>\n';
    }
 
-    xmlString+='   <Defenses>\n';  //also never empty
+    xmlString+='   <Defenses>\n';
    for (i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
    {
-       xmlString+='       <'+Data.Defense.names[i]+' value="'+jsonDoc.Defenses[Data.Defense.names[i]]+'" />\n';
+       xmlString+='      <'+Data.Defense.names[i]+' value="'+jsonDoc.Defenses[Data.Defense.names[i]]+'" />\n';
    }
     xmlString+='   </Defenses>\n';
 
@@ -173,11 +173,10 @@ function jsonToXml(jsonDoc)
    This function is nested so that it is private*/
    function convertJsonPowersBothToXml(jsonSection, sectionXmlName)
    {
-       if(jsonSection.isEmpty()) return ' <'+sectionXmlName+'></'+sectionXmlName+'>\n';
+       if(jsonSection.isEmpty()) return '<'+sectionXmlName+'></'+sectionXmlName+'>\n';
        var fileString = '<'+sectionXmlName+'>\n';
       for (var i=0; i < jsonSection.length; i++)
       {
-          if(jsonSection[i].Modifiers.isEmpty()) fileString+=' ';
           fileString+='      <Row effect="'+jsonSection[i].effect+'" ';
           if(jsonSection[i].cost !== undefined) fileString+='cost="'+jsonSection[i].cost+'" ';
           fileString+='text="'+jsonSection[i].text+'" ';
@@ -194,7 +193,7 @@ function jsonToXml(jsonDoc)
          for (var j=0; j < jsonSection[i].Modifiers.length; j++)
          {
              var thisModifier=jsonSection[i].Modifiers[j];
-             fileString+='          <Modifier name="'+thisModifier.name+'" ';
+             fileString+='         <Modifier name="'+thisModifier.name+'" ';
              if(thisModifier.applications !== undefined) fileString+='applications="'+thisModifier.applications+'" ';
              if(thisModifier.text !== undefined) fileString+='text="'+thisModifier.text+'" ';
              fileString+='/>\n';
