@@ -382,6 +382,10 @@ var navigationJson = [
             "link":"meta/known-issues.html"
          },
          {
+            "name":"Statistics",
+            "link":"meta/statistics.html"
+         },
+         {
             "name":"Survey",
             "link":"meta/survey.html"
          },
