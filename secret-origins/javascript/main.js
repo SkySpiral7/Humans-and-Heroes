@@ -70,7 +70,7 @@ function MainObject()
                 var jsonDoc = this.save();
                 this.setRuleset(ruleset.major, ruleset.minor);
                 jsonDoc.ruleset = activeRuleset.toString();  //so that the activeRuleset isn't reverted on load
-                this.loadFromString(JSON.stringify(jsonDoc));
+                this.load(jsonDoc);
             }
          }
       }
@@ -144,7 +144,7 @@ function MainObject()
    this.messageUser=function(errorCode, messsageSent)
    {
        if(mockMessenger !== undefined){mockMessenger(errorCode, messsageSent); return;}
-       document.getElementById('code box').value += messsageSent + '\n\n';
+       document.getElementById('code box').value += messsageSent + '\n';
    };
    /**Onclick event for the saveToFileLink anchor link only.
    It changes the a tag so that the link downloads the document as a saved file.*/
@@ -400,53 +400,71 @@ function MainObject()
        jsonDoc.ruleset = ruleset;
        jsonDoc.version = version;
    };
+   /**This function loads the json document.*/
+   this.load=function(jsonDoc)
+   {
+      document.getElementById('code box').value = '';
+      location.hash = '';  //clear out so that it may change later
+
+      this.determineCompatibilityIssues(jsonDoc);
+      if(jsonDoc.version < latestVersion) this.convertDocument(jsonDoc);
+      //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
+
+      this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
+      document.getElementById('ruleset').value = activeRuleset.toString();
+      //clear does not change activeRuleset
+      this.clear();  //must clear out all other data first so not to have any remain
+      document.getElementById('HeroName').value = jsonDoc.Hero.name;
+      if (activeRuleset.major > 1)
+      {
+         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
+         document.getElementById('transcendence').value = transcendence;
+      }
+      document.getElementById('imgFilePath').value = jsonDoc.Hero.image;
+      this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
+      document.getElementById('bio box').value = jsonDoc.Information;
+      this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
+
+      this.powerSection.load(jsonDoc.Powers);
+      this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
+
+      this.advantageSection.load(jsonDoc.Advantages);
+      this.skillSection.load(jsonDoc.Skills);
+      this.defenseSection.load(jsonDoc.Defenses);
+      if ('' !== document.getElementById('code box').value)
+      {
+         location.hash = '#code box';  //scroll to the code box if there's an error
+         alert('An error has occurred, see text box for details.');  //won't trigger in test because messageUser won't write to box
+      }
+      else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
+   };
    /**This function loads the document according to the text string given.*/
    this.loadFromString=function(fileString)
    {
-       fileString = fileString.trim();
-       if(fileString === '') return;  //done
+      fileString = fileString.trim();
+      if('' === fileString) return;  //ignore
 
-       document.getElementById('code box').value = '';
-       var jsonDoc, docType;
-       try{
-       if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
-       else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
-       }
-       catch(e)
-       {
-           Main.messageUser('MainObject.loadFromString.parsing', 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
-           //yeah I know the error message is completely unhelpful but there's nothing more I can do
-           window.location.hash = '#code box';  //scroll to the code box
-           throw e;
-       }
-
-       this.determineCompatibilityIssues(jsonDoc);
-       if(jsonDoc.version < latestVersion) this.convertDocument(jsonDoc);
-       //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
-
-       this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
-       document.getElementById('ruleset').value = activeRuleset.toString();
-       //clear does not change activeRuleset
-       this.clear();  //must clear out all other data first so not to have any remain
-       document.getElementById('HeroName').value = jsonDoc.Hero.name;
-      if (activeRuleset.major > 1)
-      {
-          transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
-          document.getElementById('transcendence').value = transcendence;
+      var jsonDoc, docType;
+      try {
+         if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
+         else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
       }
-       document.getElementById('imgFilePath').value = jsonDoc.Hero.image;
-       this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
-       document.getElementById('bio box').value = jsonDoc.Information;
-       this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
+      catch(e)
+      {
+         document.getElementById('code box').value = '';
+         Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
+         //yeah I know the error message is completely unhelpful but there's nothing more I can do
 
-       this.powerSection.load(jsonDoc.Powers);
-       this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
+         if (undefined === mockMessenger)
+         {
+            location.hash = '';  //clear out then set it in order to force scroll
+            location.hash = '#code box';  //scroll to the code box
+            alert('Invalid document, see text box for details.');
+         }
+         throw e;  //stop the process and cause a console.error
+      }
 
-       this.advantageSection.load(jsonDoc.Advantages);
-       this.skillSection.load(jsonDoc.Skills);
-       this.defenseSection.load(jsonDoc.Defenses);
-       if('' !== document.getElementById('code box').value) window.location.hash = '#code box';  //scroll to the code box if there's an error
-       else window.scrollTo(0,0);  //jump to top left of page after loading so the user can see the loaded hero
+      this.load(jsonDoc);
    };
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
    this.makeOffenseRow=function(skillName, attackBonus, range, effect, damage)

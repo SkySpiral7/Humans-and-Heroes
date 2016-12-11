@@ -180,6 +180,6 @@ public class Main
 
    public static File[] getAllHtmlFiles(final File containingFolder)
    {
-      return FileGatherer.searchForFiles(containingFolder, FileGatherer.Filters.acceptExtensions("html")).toArray(new File[0]);
+      return FileGatherer.searchForFilesWithExtension(containingFolder, "html").toArray(new File[0]);
    }
 }

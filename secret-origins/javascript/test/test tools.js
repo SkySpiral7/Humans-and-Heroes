@@ -102,7 +102,7 @@ function allDataInfoToCodeBox(dataSource)
 
 SelectUtil.setText('saveType', 'JSON');  //not needed for Loader but when I test I always use json
 var Loader = {};
-var errorList = [];
+var errorList = [];  //intentionally public in order to clear it (without Loader) or to read the exact message if desired
 Loader.resetData=function()
 {
     errorList = [];
@@ -124,7 +124,7 @@ Messages.isOnlyErrorCodes=function(errorCodeArray)
 {
     if(!Array.isArray(errorCodeArray)) errorCodeArray = [errorCodeArray];
     if(errorList.length !== errorCodeArray.length) return false;
-   for (var i=0; i<errorCodeArray.length; ++i)
+   for (var i=0; i < errorCodeArray.length; ++i)
    {
        if(errorList[i].errorCode !== errorCodeArray[i]) return false;
    }

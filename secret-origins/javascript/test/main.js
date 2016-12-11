@@ -396,20 +396,59 @@ TestSuite.main.determineCompatibilityIssues=function(isFirst)
 
     return TestRunner.displayResults('TestSuite.main.determineCompatibilityIssues', testResults, isFirst);
 };
+TestSuite.main.load=function(isFirst)
+{
+   return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+   TestRunner.clearResults(isFirst);
+
+   var testResults=[];
+   var actionTaken='Initial';
+   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
+   try{
+   actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
+   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
+   } catch(e){testResults.push({Error: e, Description: actionTaken});}
+
+   return TestRunner.displayResults('TestSuite.main.load', testResults, isFirst);
+};
 TestSuite.main.loadFromString=function(isFirst)
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(isFirst);
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   var testResults=[], actual, expected;
 
-    return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
+   Main.setMockMessenger(Messages.errorCapture);
+
+   try{
+   errorList = [];
+   TestRunner.changeValue('Strength', '2');
+   Main.loadFromString('  \n\t');
+   testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});
+   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'No errors from blank input'});
+   } catch(e){testResults.push({Error: e, Description: 'Ignore blank input'});}
+
+   try{
+   errorList = [];
+   Main.loadFromString('<3');
+   TestRunner.failedToThrow(testResults, 'XML error code');
+   }
+   catch(e)
+   {
+      testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('MainObject.loadFromString.parsing.XML'), Description: 'XML error code'});
+   }
+
+   try{
+   errorList = [];
+   Main.loadFromString('{');
+   TestRunner.failedToThrow(testResults, 'JSON error code');
+   }
+   catch(e)
+   {
+      testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('MainObject.loadFromString.parsing.JSON'), Description: 'JSON error code'});
+   }
+
+    Main.clearMockMessenger();  //restore default behavior
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
 };
 TestSuite.main.makeOffenseRow=function(isFirst)
 {
