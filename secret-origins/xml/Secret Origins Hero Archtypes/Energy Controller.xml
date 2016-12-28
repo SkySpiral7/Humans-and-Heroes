@@ -14,8 +14,8 @@
        <Presence value="2" />
    </Abilities>
    <Powers>
-      <Row effect="Damage" text="Energy Aura" action="Triggered" range="Close" duration="Instant" name="Energy Aura" skill="Energy Aura" rank="3">
-          <Modifier name="Faster Action" applications="4" />
+      <Row effect="Damage" text="Energy Aura" action="Reaction" range="Close" duration="Instant" name="Energy Aura" skill="Energy Aura" rank="3">
+          <Modifier name="Faster Action" applications="3" />
           <Modifier name="Selective" />
       </Row>
       <Row effect="Damage" text="Energy Control" action="Standard" range="Ranged" duration="Instant" name="Energy Control" skill="Energy Control" rank="12">
