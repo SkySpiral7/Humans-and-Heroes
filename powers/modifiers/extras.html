@@ -67,6 +67,11 @@ rank in character points, along with a description of what the extra does in gam
 <td>Personal effect works on others as an attack.</td>
 </tr>
 <tr>
+<td>Aura</td>
+<td>+2 per rank</td>
+<td>Physical contact triggers an automatic attack.</td>
+</tr>
+<tr>
 <td>Contagious</td>
 <td>+1 per rank</td>
 <td>Effect works on anyone coming into contact with its target.</td>
@@ -328,6 +333,38 @@ gets a Fortitude or Will check (chosen when this modifier is applied) vs DC = ef
 failure means that the target is affected by a number of ranks equal to the difference of success with a maximum of the number
 of ranks you have in the effect. Note that if you are attacking yourself you may choose to fail a Will defense check
 but Fortitude must still be rolled.</div>
+<h3 class="generated-class-8" id="TOC-AURA">AURA +2 COST PER RANK</h3>
+<div style="padding:5px">This extra can only be applied to attack powers but not ones with the <a href="#TOC-ATTACK">Attack</a> extra.
+In order to apply this the power must have an action of standard and a range of close. The power's action becomes reaction
+and the condition is physical contact. When physical contact is made (such as from a grab or unarmed attack) the effect activates.
+In the case of a grab (or other extended contact) the effect activates again each round that contact remains.
+All characters in physical contact will be affected (it is not limited to a single target) therefore <a href="#TOC-SPLIT">Split</a>
+can't be applied.</div>
+<div style="padding:5px">The <a href="#TOC-AREA">Area</a> extra can't be applied to an aura unless you first apply
+a "Big Aura" extra which is +2 cost per rank. Big Aura only allows Burst Area but doesn't include ranks of it.
+When an area is applied the reaction condition changes to "targets within the area's range" rather than physical contact
+therefore targets are affected when entering the range and each round while within range. Note that unlike normal Burst Area
+there is no attack check: it automatically hits based on range (consider this when determining power level limitations).
+As a cost example: <a href="../effects/damage-attack.html">Damage</a> 10, Aura, Big Aura, Burst Area 2 costs 70 points compared to
+<a href="../effects/damage-attack.html">Damage</a> 10, Burst Area 2 which only costs 30 points.</div>
+<div style="padding:5px">When applying the Aura extra choose where the aura is located (it doesn't matter where a Big Aura
+is centered). For example you may say that the Aura is only on the palm of your right hand, your entire skin, or your
+whole body including equipment, clothes, and melee weapons. Whether the aura covers everything or very little, it doesn't
+change the cost (since it doesn't really change the effectiveness). Note that the aura doesn't apply to ranged weapons
+such as the arrow fired from a bow for such things you'll need a <a href="../../the-basics/index.html#TOC-POWER-STUNT">power stunt</a>.</div>
+<div style="padding:5px">When applying the Aura extra to <a href="../effects/damage-attack.html">Damage</a> choose if it will
+affect objects (the other powers will affect objects based on the presence of the <a href="#TOC-AFFECTS-OBJECTS">Affects Objects</a>
+extra). If objects are affected then decide if the floor is affected (although the floor is an object it gets a special exception).
+If the power is <a href="#TOC-SELECTIVE">Selective</a> then you choose when the floor is or isn't affected but must still specify
+a default behavior. If objects are affected but the floor isn't then the floor can still be affected by attacking it.</div>
+<div style="padding:5px">If the effect is <a href="#TOC-SELECTIVE">Selective</a> then you can choose to have it not
+activate against certain targets, however the
+default action is to affect everyone therefore it will activate while you are unable to decide (eg being incapacitated). In order
+to turn it off see the <a href="flaws.html#TOC-ACTIVATION">Activation</a> flaw.</div>
+<div style="padding:5px">The <a href="#TOC-LINKED">Linked</a> extra can't be applied with this extra. That is to say
+nothing can be linked to an aura and an aura can't be linked to anything. Although it is possible to have multiple auras
+each of which will activate upon physical contact. Also keep in mind that the aura may activate while using powers, skills, etc
+based on if physical contact is involved.</div>
 <h3 class="generated-class-8" id="TOC-CONTAGIOUS">CONTAGIOUS +1 COST PER RANK</h3>
 <div style="padding:5px">This can't be applied to personal range effects.
 Contagious effects work on both the target and anyone coming into contact with the target. New
@@ -363,19 +400,10 @@ makes it impossible to see anything to target it). On Earth at sea level, this i
 10).</div>
 <h3 class="generated-class-8" id="TOC-FASTER-ACTION">FASTER ACTION +1 COST PER RANK PER APPLICATION</h3>
 <div style="padding:5px">The action type for an effect is grouped as follows from slowest to fastest: Slow, Full,
-Standard, Move, Free, and Reaction. Each application speeds up the action from that effect's action type
+Standard, Move, and Free. Each application speeds up the action from that effect's action type
 (move to free, for example) and is worth +1 cost per rank. Permanent effects have an action type listed as None which
 can't be modified. See <a href="../../action-adventure.html#TOC-ACTION-TYPES">Action &amp; Adventure: Action Types</a> for a full description of each type.</div>
-<div style="padding:5px">When you apply this modifier to make an effect Reaction choose which conditions are set. You
-can have any number of conditions but some of them may depend on perception or knowledge in which case they might fail
-to activate. There is also a default behavior: whether it should or should not activate if no conditions are met (in the
-former case the conditions would be cases where it should not activate). The effect will activate as often as possible
-as long as the conditions are met to do so (such as the case of the default behavior). The conditions can only be set
-when appling this modifier unless you take a Flat 2 point modifier (called Resetable Triggers) which allows you to
-change conditions as a free action (not a reaction). Recall that attacks and others have a usage limitation that ignores
-action taken (see <a href="../../action-adventure.html#TOC-ACTION-LIMITATIONS">Action &amp; Adventure: Action Limitations</a>).
-Setting up a reaction <b>Nullify</b>
-will act as a barrier against the choose powers or descriptors.</div>
+<div style="padding:5px">This extra can't change a power to be reaction. For that see <a href="#TOC-AURA">Aura</a>.</div>
 <h3 class="generated-class-8" id="TOC-FEATURE">FEATURE FLAT 1 POINT PER RANK</h3>
 <div style="padding:5px">The <b>Feature effect</b> can also serve as an effect modifier, essentially adding on some
 minor additional capability or benefit to a basic effect. Although listed here as an extra, this is essentially the same
