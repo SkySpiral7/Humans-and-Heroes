@@ -76,52 +76,34 @@ function MapDefault(obj, defaultValue)  //based on http://www.mojavelinux.com/ar
     /**Removes all keys from this map. The default value is unaffected*/
     this.clear=function(){items={};};
 
-   /**Returns a string that represents how this map could be created using MapDefault.makeFromArray. The keys are sorted.*/
-   this.toSource=function()
-   {
-       var output='MapDefault.makeFromArray([';
-       var keys=this.getAllKeys().sort();
-      for (var i=0; i < keys.length; i++)
-      {
-          output+='[';
-          if(typeof(keys[i]) === 'string') output+='\''+keys[i]+'\'';
-          else output+=keys[i];
-          output+=', ';
+   /**Returns JSON that represents this object. The keys of items are not sorted.*/
+   this.toJSON=function(){return {items: items, defaultValue: defaultValue};};
 
-          var value=items[keys[i]];
-          if(typeof(value) === 'string') output+='\''+value+'\'';
-          else output+=value;
-          output+=']';
-          if(i+1 < keys.length) output+=', ';  //if not the last then add a comma
-      }
-       output+='], ';
-       if(typeof(defaultValue) === 'string') output+='\''+defaultValue+'\'';
-       else output+=defaultValue;
-       output+=')';
-       return output;
+   /**Returns true if other has the same keys, values, and defaultValue.*/
+   this.equals=function(other)
+   {
+      if(!(other instanceof MapDefault)) return false;
+      if(this === other) return true;
+      return (this.toSource() === other.toSource());
    };
 
-   /**Returns a string that represents how this map could be created using literal map notation in haxe. The keys are sorted and assume the keys are String.*/
-   this.toHaxeSource=function()
+   /**Returns a string that represents how this map could be created using new MapDefault. The keys are sorted.*/
+   this.toSource=function()
    {
-       var output='new MapDefault<String, ';
+       var output='new MapDefault({';
        var keys=this.getAllKeys().sort();
-       if(typeof(items[keys[0]]) === 'string') output+='String';
-       else if(typeof(items[keys[0]]) === 'number') output+='Int';
-       else output+='Bool';
-       output+='>([';
       for (var i=0; i < keys.length; i++)
       {
           if(typeof(keys[i]) === 'string') output+='\''+keys[i]+'\'';
           else output+=keys[i];
-          output+=' => ';
+          output+=': ';
 
           var value=items[keys[i]];
           if(typeof(value) === 'string') output+='\''+value+'\'';
           else output+=value;
           if(i+1 < keys.length) output+=', ';  //if not the last then add a comma
       }
-       output+='], ';
+       output+='}, ';
        if(typeof(defaultValue) === 'string') output+='\''+defaultValue+'\'';
        else output+=defaultValue;
        output+=')';
