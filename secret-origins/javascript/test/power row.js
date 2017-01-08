@@ -573,6 +573,7 @@ TestSuite.powerRow.updateActionModifiers=function(isFirst)
     var testResults=[];
 
     try{
+    Main.setRuleset(3,3);
     SelectUtil.changeText('powerChoices0', 'Teleport'); SelectUtil.changeText('powerSelectAction0', 'Reaction');
     testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Faster Description: action'});
     testResults.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Faster Description: was auto created'});
