@@ -230,13 +230,13 @@ TestSuite.main.updateInitiative=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'Add Seize Initiative'});}
 
     try{
-    SelectUtil.changeText('advantageChoices1', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank1', 2);
-    testResults.push({Expected: '+1 with Seize Initiative', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative 2'});
+    Main.clear(); Main.setRuleset(2,7);
+    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
+    TestRunner.changeValue('advantageRank0', 2);
+    testResults.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative 2'});
     } catch(e){testResults.push({Error: e, Description: '2.7 Improved Initiative 2'});}
 
     try{
-    Main.clear();
     Main.setRuleset(1, 1);
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
     TestRunner.changeValue('advantageRank0', 3);
@@ -244,7 +244,6 @@ TestSuite.main.updateInitiative=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: '1.1 Improved Initiative 3'});}
 
     try{
-    Main.clear();
     Main.setRuleset(3, 0);
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
     TestRunner.changeValue('advantageRank0', 4);

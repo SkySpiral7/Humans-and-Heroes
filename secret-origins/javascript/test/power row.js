@@ -547,7 +547,7 @@ TestSuite.powerRow.setAction=function(isFirst)
     var testResults=[];
 
     try{
-    //version starts at 2.7
+    Main.setRuleset(3, 3);
     SelectUtil.changeText('powerChoices0', 'Damage');
     SelectUtil.changeText('powerSelectRange0', 'Ranged');
     SelectUtil.changeText('powerSelectAction0', 'Reaction');
@@ -557,7 +557,7 @@ TestSuite.powerRow.setAction=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'v2.7 Reaction Damage doesn\'t become close range'});}
 
     try{
-    Main.setRuleset(3,4);  //also clears
+    Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Damage');
     SelectUtil.changeText('powerSelectRange0', 'Ranged');
     SelectUtil.changeText('powerSelectAction0', 'Reaction');
@@ -567,7 +567,7 @@ TestSuite.powerRow.setAction=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'v3.4 Reaction Damage becomes close range'});}
 
     try{
-    //v3.4
+    Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Feature');
     SelectUtil.changeText('powerSelectRange0', 'Ranged');
     SelectUtil.changeText('powerSelectAction0', 'Reaction');
@@ -577,7 +577,7 @@ TestSuite.powerRow.setAction=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'v3.4 Reaction Feature doesn\'t become close range'});}
 
     try{
-    //v3.4
+    Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Luck Control');
     SelectUtil.changeText('powerSelectAction0', 'Reaction');
     testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 Luck Control starts as ranged: getAction'});
@@ -730,6 +730,7 @@ TestSuite.powerRow.updateActionModifiers=function(isFirst)
     var testResults=[];
 
     try{
+    Main.setRuleset(3,3);
     SelectUtil.changeText('powerChoices0', 'Teleport'); SelectUtil.changeText('powerSelectAction0', 'Reaction');
     testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Faster Action: action'});
     testResults.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Faster Action: was auto created'});

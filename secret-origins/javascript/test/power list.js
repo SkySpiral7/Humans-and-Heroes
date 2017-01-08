@@ -74,6 +74,7 @@ TestSuite.powerList.load=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'Errors'});}
 
     try{
+    Main.setRuleset(3, 3);
     dataToLoad = Loader.resetData();
     dataToLoad.Hero.transcendence = 1;  //set godhood
     dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
