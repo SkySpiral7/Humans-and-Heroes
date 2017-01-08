@@ -54,7 +54,7 @@ TestSuite.advantageRow.setRank=function(isFirst)
     try{
     SelectUtil.changeText('advantageChoices0', 'Lucky');
     testResults.push({Expected: 'Lucky', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Change to Lucky'});
-    testResults.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getMaxRanks(), Description: 'Lucky getMaxRanks'});
+    testResults.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getmaxRank(), Description: 'Lucky getmaxRank'});
 
     TestRunner.changeValue('advantageRank0', 5);
     testResults.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Lucky max rank enforced'});

@@ -20,8 +20,7 @@ Data.change = function(major, minor)
       godhoodNames: ['Beyond Mortal', 'Let There Be', 'Luck of the Gods', 'Omnipresent', 'Omniscient', 'Perfect Focus',
          'Stay Like That', 'Supreme', 'Variable Modifier', 'Your Petty Rules Don\'t Apply to Me'],
       mapThese: ['Close Attack', 'Defensive Roll', 'Improved Critical', 'Improved Initiative', 'Ranged Attack', 'Seize Initiative'],
-      //TODO: rename to maxRank
-      maxRanks: new MapDefault({'Attractive': 2, 'Benefit': Infinity, 'Close Attack': Infinity, 'Daze': 2, 'Defensive Roll': Infinity,
+      maxRank: new MapDefault({'Attractive': 2, 'Benefit': Infinity, 'Close Attack': Infinity, 'Daze': 2, 'Defensive Roll': Infinity,
          'Equipment': Infinity, 'Evasion': 2, 'Fascinate': Infinity, 'Improved Critical': 4, 'Improved Initiative': Infinity,
          'Improvised Weapon': Infinity, 'Inspire': 5, 'Languages': Infinity, 'Luck': Infinity, 'Lucky': 3, 'Minion': Infinity,
          'Omnipresent': 3, 'Omniscient': 5, 'Precise Attack': 4, 'Ranged Attack': Infinity, 'Second Chance': Infinity, 'Set-up': Infinity,
@@ -146,7 +145,7 @@ Data.change = function(major, minor)
          'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
          'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'];
       Data.Advantage.costPerRank.set('Sidekick', 2);
-      Data.Advantage.maxRanks.set('Improved Initiative', 5);
+      Data.Advantage.maxRank.set('Improved Initiative', 5);
 
       Data.Defense.abilityUsed[Data.Defense.names.indexOf('Will')] = 'Presence';
 
@@ -207,7 +206,7 @@ Data.change = function(major, minor)
       Data.Advantage.names.removeByValue('Trance');  //moved to feature
       Data.Advantage.names.push('Persistent Information');
       Data.Advantage.names.sort();
-      Data.Advantage.maxRanks.set('Inspire', 1);
+      Data.Advantage.maxRank.set('Inspire', 1);
 
       if (minor < 4)  //v3.0 added it then v3.4 removed it
       {
