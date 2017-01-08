@@ -138,5 +138,15 @@ TestSuite.modifierList.sortOrder=function(isFirst)
     testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,3).getName(), Description: 'Auto Flaws: Modifier 4'});
     } catch(e){testResults.push({Error: e, Description: 'Auto Flaws'});}
 
+    try{
+    Main.clear(); Main.setRuleset(3,4);
+    SelectUtil.changeText('powerChoices0', 'Nullify');
+    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    //this test proves that Aura comes before Reduced Range
+
+    testResults.push({Expected: 'Aura', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Aura sort order: Aura first'});
+    testResults.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Aura sort order: then range'});
+    } catch(e){testResults.push({Error: e, Description: 'Aura sort order'});}
+
     return TestRunner.displayResults('TestSuite.modifierList.sortOrder', testResults, isFirst);
 };

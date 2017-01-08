@@ -57,33 +57,33 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    The data set is independent of the document and doesn't call update.*/
    this.setModifier=function(nameGiven)
    {
+      if('Selective' === name && 'Triggered' === this.getPower().getAction()) return;  //prevent removing this row
+      //TODO: change Selective to be a span in this case (and change sort order)
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, eg: 'Select One'
       {
-          var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
-          //TODO: remove these modifiers for non-personal powers. Those would need to be Enhanced trait attack
-          if(wasAttack && 'Feature' !== this.getPower().getEffect() && 'Personal' === this.getPower().getDefaultRange())
-             this.getPower().setRange('Personal');
-          this.constructor();  //reset row
-          return;
+         var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
+         //TODO: remove these modifiers for non-personal powers. Those would need to be Enhanced trait attack
+         if(wasAttack && 'Feature' !== this.getPower().getEffect() && 'Personal' === this.getPower().getDefaultRange())
+            this.getPower().setRange('Personal');
+         this.constructor();  //reset row
+         return;
       }
-       if('Selective' === name && 'Triggered' === this.getPower().getAction()) return;  //prevent removing this row
-       //TODO: change Selective to be a span in this case (and change sort order)
 
-       name = nameGiven;
-       modifierType = Data.Modifier.type.get(name);
-       costPerRank = Data.Modifier.cost.get(name);
-       maxRank = Data.Modifier.maxRank.get(name);
-       hasRank = (maxRank !== 1);
-       rank = 1;
-       hasText = Data.Modifier.hasText.contains(name);
-       if(hasText) text = Data.Modifier.defaultText.get(name);
-       else text = undefined;
-       hasAutoTotal = Data.Modifier.hasAutoTotal.contains(name);
-       this.calculateTotal();
+      name = nameGiven;
+      modifierType = Data.Modifier.type.get(name);
+      costPerRank = Data.Modifier.cost.get(name);
+      maxRank = Data.Modifier.maxRank.get(name);
+      hasRank = (1 !== maxRank);
+      rank = 1;
+      hasText = Data.Modifier.hasText.contains(name);
+      if(hasText) text = Data.Modifier.defaultText.get(name);
+      else text = undefined;
+      hasAutoTotal = Data.Modifier.hasAutoTotal.contains(name);
+      this.calculateTotal();
 
-       if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name) && 'Personal' === this.getPower().getRange())
-          this.getPower().setRange('Close');
-       if(name === 'Attack') this.getPower().setDefaultNameAndSkill();
+      if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name) && 'Personal' === this.getPower().getRange())
+         this.getPower().setRange('Close');
+      if('Attack' === name) this.getPower().setDefaultNameAndSkill();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
@@ -124,7 +124,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        var htmlString='';
        htmlString+='   <tr>\n';  //TODO: confirm
        htmlString+='      <td width="34%" style="text-align:right;">\n';
-      if (this.getPower().getEffect() === 'Feature' || !Data.Modifier.actionRangeDuration.contains(name))
+      if (this.getPower().getEffect() === 'Feature' || !Data.Modifier.readOnly.contains(name))
       {
           htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
           htmlString+='             <option>Select One</option>\n';
@@ -133,7 +133,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
              if(this.getPower().getSection() === Main.equipmentSection &&
                 (Data.Modifier.names[i] === 'Removable' || Data.Modifier.names[i] === 'Easily Removable')) continue;
                   //equipment has removable built in and can't have the modifiers
-             if(this.getPower().getEffect() === 'Feature' || !Data.Modifier.actionRangeDuration.contains(Data.Modifier.names[i]))
+             if(this.getPower().getEffect() === 'Feature' || !Data.Modifier.readOnly.contains(Data.Modifier.names[i]))
                 htmlString+='             <option>'+Data.Modifier.names[i]+'</option>\n';
          }
           htmlString+='         </select>\n';

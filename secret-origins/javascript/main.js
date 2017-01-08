@@ -10,7 +10,8 @@ if (null !== document.getElementById('testResults'))  //false in production to s
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/abilities', 'test/advantage list',
       'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
-      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/test tools']);
+      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/Version',
+      'test/test tools']);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)

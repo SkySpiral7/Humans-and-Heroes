@@ -124,19 +124,21 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**Used to set data independent of the document and without calling update*/
    this.setAction=function(newActionName)
    {
-       if(this.isBlank()) return;
-       if(action === newActionName) return;  //nothing has changed (only possible when loading)
+      if(this.isBlank()) return;
+      if(action === newActionName) return;  //nothing has changed (only possible when loading)
       if (!Data.Power.actions.contains(newActionName))
       {
-          //if not found (only possible when loading bad data)
-          Main.messageUser('PowerObjectAgnostic.setAction.notExist', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' + newActionName + ' is not the name of an action.');
-          return;
+         //if not found (only possible when loading bad data)
+         Main.messageUser('PowerObjectAgnostic.setAction.notExist', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' + newActionName + ' is not the name of an action.');
+         return;
       }
       //TODO: the above only applies when loading. If moved this method would only set
 
-       action = newActionName;
+      action = newActionName;
 
-       if(shouldValidateActivationInfo) this.updateActionModifiers();
+      if(!shouldValidateActivationInfo) return;  //done
+      this.updateActionModifiers();
+      if('Reaction' === action && 'Feature' !== effect && 'Luck Control' !== effect && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4)) this.setRange('Close');
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRange=function(newRangeName)
@@ -249,219 +251,242 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
    {
-       var htmlString = '', i;
-       htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
-       htmlString+='    <option>Select One</option>\n';
+      var htmlString = '', i;
+      htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
+      htmlString+='    <option>Select One</option>\n';
       for (i=0; i < Data.Power.names.length; i++)
       {
-          htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
+         htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
       }
       if (Main !== undefined && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodHood()))
       //equipment can't be god-like so I only need to check power section's switch
          //must check both hasGodhoodAdvantages and canUseGodHood since they are not yet in sync
          for (i=0; i < Data.Power.godhoodNames.length; i++)
          {
-             htmlString+='    <option>'+Data.Power.godhoodNames[i]+'</option>\n';
+            htmlString+='    <option>'+Data.Power.godhoodNames[i]+'</option>\n';
          }
-       htmlString+='</select>\n';
-       if(this.isBlank()) return htmlString;  //done
+      htmlString+='</select>\n';
+      if(this.isBlank()) return htmlString;  //done
 
-       htmlString+='Base Cost per Rank:\n';
-       if(canSetBaseCost) htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
-       else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
-       htmlString+='<input type="text" size="90" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" />\n';
-       htmlString+='<br />\n';
-       htmlString+='<table width="100%">\n';
-       htmlString+='   <tr>\n';
+      htmlString+='Base Cost per Rank:\n';
+      if(canSetBaseCost) htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
+      else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
+      htmlString+='<input type="text" size="90" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" />\n';
+      htmlString+='<br />\n';
+      htmlString+='<table width="100%">\n';
+      htmlString+='   <tr>\n';
 
-       htmlString+='      <td width="34%" style="text-align:right;">\n';
-       htmlString+='          Action\n';
-       //feature has the same action as the others
-       if(action === 'None') htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
-          //same as duration === 'Permanent'. although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
+      htmlString+='      <td width="34%" style="text-align:right;">\n';
+      htmlString+='          Action\n';
+      //feature has the same action as the others
+      if(action === 'None') htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+         //same as duration === 'Permanent'. although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
       {
-          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
+         htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
+         var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power.allowReaction.contains(effect));
          for (i=0; i < Data.Power.actions.length-1; i++)  //-1 to avoid 'None'
-             {htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';}
-          htmlString+='         </select>\n';
+         {
+            if(allowReaction || 'Reaction' !== Data.Power.actions[i]) htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';
+         }
+         htmlString+='         </select>\n';
       }
-       htmlString+='      </td>\n';
+      htmlString+='      </td>\n';
 
-       htmlString+='      <td colspan="2" width="66%">\n';
-       htmlString+='          Range\n';
-       if(range === 'Personal' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      htmlString+='      <td colspan="2" width="66%">\n';
+      htmlString+='          Range\n';
+      var forcedCloseRange = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect);
+      if('Feature' !== effect && ('Personal' === range || forcedCloseRange))
+         htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
-          htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
-          if(effect === 'Feature') htmlString+='             <option>Personal</option>\n';
-          htmlString+='             <option>Close</option>\n';
-          htmlString+='             <option>Ranged</option>\n';
-          htmlString+='             <option>Perception</option>\n';
-          htmlString+='          </select>\n';
+         htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
+         if(effect === 'Feature') htmlString+='             <option>Personal</option>\n';
+         htmlString+='             <option>Close</option>\n';
+         htmlString+='             <option>Ranged</option>\n';
+         htmlString+='             <option>Perception</option>\n';
+         htmlString+='          </select>\n';
       }
-       htmlString+='          Duration\n';
-       if(duration === 'Instant' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      htmlString+='          Duration\n';
+      if(duration === 'Instant' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
-          htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
-          htmlString+='             <option>Concentration</option>\n';
-          htmlString+='             <option>Sustained</option>\n';
-          htmlString+='             <option>Continuous</option>\n';
-          if(range === 'Personal') htmlString+='             <option>Permanent</option>\n';
-          if(effect === 'Feature') htmlString+='             <option>Instant</option>\n';
-          htmlString+='          </select>\n';
+         htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
+         htmlString+='             <option>Concentration</option>\n';
+         htmlString+='             <option>Sustained</option>\n';
+         htmlString+='             <option>Continuous</option>\n';
+         if(range === 'Personal') htmlString+='             <option>Permanent</option>\n';
+         if(effect === 'Feature') htmlString+='             <option>Instant</option>\n';
+         htmlString+='          </select>\n';
       }
-       htmlString+='      </td>\n';
-       htmlString+='   </tr>\n';
+      htmlString+='      </td>\n';
+      htmlString+='   </tr>\n';
       if (Data.Power.isAttack.contains(effect))  //don't check for attack modifier because that's handled by the modifier generate
       {
-          htmlString+='   <tr>\n';
-          htmlString+='       <td width="34%" style="text-align:right;"></td>\n';
-          htmlString+='      <td colspan="2" width="66%">\n';
-          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
-          if(range !== 'Perception') htmlString+=Data.SharedHtml.powerSkill(sectionName, rowIndex);
-          htmlString+='      </td>\n';
-          htmlString+='   </tr>\n';
+         htmlString+='   <tr>\n';
+         htmlString+='       <td width="34%" style="text-align:right;"></td>\n';
+         htmlString+='      <td colspan="2" width="66%">\n';
+         htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
+         if(range !== 'Perception') htmlString+=Data.SharedHtml.powerSkill(sectionName, rowIndex);
+         htmlString+='      </td>\n';
+         htmlString+='   </tr>\n';
       }
 
-       htmlString+=modifierSection.generate();
+      htmlString+=modifierSection.generate();
 
-       htmlString+='</table>\n';
-       htmlString+='Ranks:\n';
-       htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" />\n';
-       htmlString+='Total Cost Per Rank:\n';
-       htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span>.\n';
-       htmlString+='Total Flat Modifier Cost:\n';
-       htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span>\n';
-       htmlString+='=\n';
-       htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span>\n';
-       htmlString+='<br /><br />\n\n';
-       return htmlString;
+      htmlString+='</table>\n';
+      htmlString+='Ranks:\n';
+      htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" />\n';
+      htmlString+='Total Cost Per Rank:\n';
+      htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span>.\n';
+      htmlString+='Total Flat Modifier Cost:\n';
+      htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span>\n';
+      htmlString+='=\n';
+      htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span>\n';
+      htmlString+='<br /><br />\n\n';
+      return htmlString;
    };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
-       var json={};
-       json.effect=effect;
-       if(canSetBaseCost) json.cost=baseCost;
-       json.text=text;
-       json.action=action;
-       json.range=range;
-       json.duration=duration;
-       if(name !== undefined) json.name=name;
-       if(skillUsed !== undefined) json.skill=skillUsed;  //if no name then there is also no skill but can have name without skill
-       json.Modifiers=modifierSection.save();
-       json.rank=rank;
-       return json;
+      var json={};
+      json.effect=effect;
+      if(canSetBaseCost) json.cost=baseCost;
+      json.text=text;
+      json.action=action;
+      json.range=range;
+      json.duration=duration;
+      if(name !== undefined) json.name=name;
+      if(skillUsed !== undefined) json.skill=skillUsed;  //if no name then there is also no skill but can have name without skill
+      json.Modifiers=modifierSection.save();
+      json.rank=rank;
+      return json;
    };
    /**Used by this.setPower and setModifier in order to set the default text for name and skill*/
    this.setDefaultNameAndSkill=function()
    {
-       name = sectionName.toTitleCase() + ' ' + ((rowIndex+1) + ' ' + effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
-       if(range === 'Perception') skillUsed = undefined;  //needs to be explicitly set because it might have been defined before
-       else skillUsed = 'Skill used for attack';
+      name = sectionName.toTitleCase() + ' ' + ((rowIndex+1) + ' ' + effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+      if(range === 'Perception') skillUsed = undefined;  //needs to be explicitly set because it might have been defined before
+      else skillUsed = 'Skill used for attack';
    };
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-       if(this.isBlank()) return;  //already set (to default)
-       SelectUtil.setText((sectionName+'Choices'+rowIndex), effect);
-       if(canSetBaseCost) document.getElementById(sectionName+'BaseCost'+rowIndex).value = baseCost;
-       else document.getElementById(sectionName+'BaseCost'+rowIndex).innerHTML = baseCost;
-       document.getElementById(sectionName+'Text'+rowIndex).value=text;  //might be empty
-       //feature has the same action as the others
-       if(action === 'None') document.getElementById(sectionName+'SelectAction'+rowIndex).innerHTML = '<b>None</b>';
-          //same as duration === 'Permanent'
-       else SelectUtil.setText((sectionName+'SelectAction'+rowIndex), action);
+      if(this.isBlank()) return;  //already set (to default)
+      SelectUtil.setText((sectionName+'Choices'+rowIndex), effect);
+      if(canSetBaseCost) document.getElementById(sectionName+'BaseCost'+rowIndex).value = baseCost;
+      else document.getElementById(sectionName+'BaseCost'+rowIndex).innerHTML = baseCost;
+      document.getElementById(sectionName+'Text'+rowIndex).value=text;  //might be empty
+      if('SPAN' === document.getElementById(sectionName+'SelectAction'+rowIndex).tagName)
+         document.getElementById(sectionName+'SelectAction'+rowIndex).innerHTML = '<b>' + action + '</b>';
+      else SelectUtil.setText((sectionName+'SelectAction'+rowIndex), action);  //Feature edge cases are handled in generate
       if (effect === 'Feature')  //has unique drop downs
       {
-          //these 2 holders always have selects
-          SelectUtil.setText((sectionName+'SelectRange'+rowIndex), range);
-          SelectUtil.setText((sectionName+'SelectDuration'+rowIndex), duration);
+         //these 2 holders always have selects
+         SelectUtil.setText((sectionName+'SelectRange'+rowIndex), range);
+         SelectUtil.setText((sectionName+'SelectDuration'+rowIndex), duration);
       }
       else
       {
-          if(range === 'Personal') document.getElementById(sectionName+'SelectRange'+rowIndex).innerHTML = '<b>Personal</b>';
-          else SelectUtil.setText((sectionName+'SelectRange'+rowIndex), range);
-          if(duration === 'Instant') document.getElementById(sectionName+'SelectDuration'+rowIndex).innerHTML = '<b>Instant</b>';
-          else SelectUtil.setText((sectionName+'SelectDuration'+rowIndex), duration);
+         if('SPAN' === document.getElementById(sectionName+'SelectRange'+rowIndex).tagName)
+            document.getElementById(sectionName+'SelectRange'+rowIndex).innerHTML = '<b>' + range + '</b>';
+         else SelectUtil.setText((sectionName+'SelectRange'+rowIndex), range);
+         if(duration === 'Instant') document.getElementById(sectionName+'SelectDuration'+rowIndex).innerHTML = '<b>Instant</b>';
+         else SelectUtil.setText((sectionName+'SelectDuration'+rowIndex), duration);
       }
-       if(document.getElementById(sectionName+'Name'+rowIndex) !== null)  //might have been defined by power or modifier
-          document.getElementById(sectionName+'Name'+rowIndex).value = name;
-       if(document.getElementById(sectionName+'Skill'+rowIndex) !== null)
-          document.getElementById(sectionName+'Skill'+rowIndex).value = skillUsed;
-       document.getElementById(sectionName+'Rank'+rowIndex).value=rank;  //must come before modifiers
-       modifierSection.setAll();
+      if(document.getElementById(sectionName+'Name'+rowIndex) !== null)  //might have been defined by power or modifier
+         document.getElementById(sectionName+'Name'+rowIndex).value = name;
+      if(document.getElementById(sectionName+'Skill'+rowIndex) !== null)
+         document.getElementById(sectionName+'Skill'+rowIndex).value = skillUsed;
+      document.getElementById(sectionName+'Rank'+rowIndex).value=rank;  //must come before modifiers
+      modifierSection.setAll();
 
-       var totalRankCost=baseCost+modifierSection.getRankTotal();
-       if(totalRankCost > 0) document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=totalRankCost;
-       else document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=' (1/'+(2-totalRankCost)+') ';  //awesome
-       document.getElementById(sectionName+'FlatModifierCost'+rowIndex).innerHTML=modifierSection.getFlatTotal();
-       document.getElementById(sectionName+'RowTotal'+rowIndex).innerHTML=total;
+      var totalRankCost=baseCost+modifierSection.getRankTotal();
+      if(totalRankCost > 0) document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=totalRankCost;
+      else document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=' (1/'+(2-totalRankCost)+') ';  //0 is 1/2 and -1 is 1/3
+      document.getElementById(sectionName+'FlatModifierCost'+rowIndex).innerHTML=modifierSection.getFlatTotal();
+      document.getElementById(sectionName+'RowTotal'+rowIndex).innerHTML=total;
    };
    /**Called when loading after action, range, and duration have been set. This function validates the values
-   making sure the values are possible and consistent with priority given to range then duration.*/
+   making sure the values are possible and consistent with priority given to range then duration.
+   It will changes values to be valid. The precedence is range, duration, then action.*/
    this.validateActivationInfo=function()
    {
-       shouldValidateActivationInfo = true;
+      shouldValidateActivationInfo = true;
 
-       var defaultRange = Data.Power.defaultRange.get(effect);
+      var defaultRange = Data.Power.defaultRange.get(effect);
       if ('Personal' === range  && 'Personal' !== defaultRange)
       {
-          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-          effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
-          range = defaultRange;  //can't change something to personal unless it started out as that (Feature's baseRange is Personal)
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
+         range = defaultRange;  //can't change something to personal unless it started out as that (Feature's baseRange is Personal)
       }
 
-       var defaultDuration = Data.Power.defaultDuration.get(effect);
+      var defaultDuration = Data.Power.defaultDuration.get(effect);
       if ('Instant' === defaultDuration)
       {
          if ('Instant' !== duration)
          {
-             Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-             effect + ' can\'t have ' + duration + ' duration. It can only be Instant.');
-             duration = 'Instant';  //can't be changed (Feature's baseDuration is Permanent)
+            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+               effect + ' can\'t have ' + duration + ' duration. It can only be Instant.');
+            duration = 'Instant';  //can't be changed (Feature's baseDuration is Permanent)
          }
       }
       else if ('Instant' === duration && 'Feature' !== effect)
       {
-          //only Feature can change to Instant duration
-          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-          effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
-          duration = defaultDuration;
+         //only Feature can change to Instant duration
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
+         duration = defaultDuration;
       }
       else if ('Permanent' === duration && 'Personal' !== range)  //only personal range can have Permanent duration
       {
-          if('Permanent' === defaultDuration) duration = 'Sustained';
-          else duration = defaultDuration;
-          //use default duration if possible. otherwise use Sustained
-          //either way it will cost 0
-          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPermanent', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-          effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + range + '). Using duration of ' + duration + ' instead.');
+         if('Permanent' === defaultDuration) duration = 'Sustained';
+         else duration = defaultDuration;
+         //use default duration if possible. otherwise use Sustained
+         //either way it will cost 0
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPermanent', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + range + '). Using duration of ' + duration + ' instead.');
       }
 
       if ('None' === action && 'Permanent' !== duration)  //only Permanent duration can have action None
       {
-          action = Data.Power.defaultAction.get(effect);
-          if('None' === action) action = 'Free';
-          //use default action if possible. otherwise use Free
-          //either way it will cost 0
-          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-          effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + duration + '). Using action of ' + action + ' instead.');
+         action = Data.Power.defaultAction.get(effect);
+         if('None' === action) action = 'Free';
+         //use default action if possible. otherwise use Free
+         //either way it will cost 0
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + duration + '). Using action of ' + action + ' instead.');
       }
       else if ('None' !== action && 'Permanent' === duration)
       {
-          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-          effect + ' can\'t have an action of ' + action + '. It can only be None because the duration is Permanent.');
-          //Permanent duration can only have action None
-          action = 'None';
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have an action of ' + action + '. It can only be None because the duration is Permanent.');
+         //Permanent duration can only have action None
+         action = 'None';
+      }
+      else if ('Reaction' === action && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Feature' !== effect && 'Luck Control' !== effect)
+      {
+         if (!Data.Power.allowReaction.contains(effect))
+         {
+            action = Data.Power.defaultAction.get(effect);
+            if('None' === action) action = 'Free';
+            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+               effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + action + ' instead.');
+         }
+         else if ('Close' !== range)
+         {
+            action = Data.Power.defaultAction.get(effect);
+            if('None' === action) action = 'Free';  //dead code since there are none like this
+            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotCloseRange', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+               effect + ' can\'t have an action of Reaction because it isn\'t Close range (range is ' + range + '). Using action of ' + action + ' instead.');
+         }
       }
 
-       //create all of the modifiers
-       this.updateActionModifiers();
-       this.updateRangeModifiers();
-       this.updateDurationModifiers();
+      //create all of the modifiers
+      this.updateActionModifiers();
+      this.updateRangeModifiers();
+      this.updateDurationModifiers();
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
@@ -483,24 +508,30 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
    this.updateActionModifiers=function()
    {
-       if('Triggered' === action) modifierSection.createByNameRank('Selective', 1);  //Triggered must also be selective so it auto adds but doesn't remove
+      if('Triggered' === action) modifierSection.createByNameRank('Selective', 1);  //Triggered must also be selective so it auto adds but doesn't remove
 
-       if('Feature' === effect) return;  //Feature doesn't change any other modifiers
+      if('Feature' === effect) return;  //Feature doesn't change any other modifiers
 
-       //remove both if possible
-       modifierSection.removeByName('Faster Action');
-       modifierSection.removeByName('Slower Action');
+      //remove all if possible
+      modifierSection.removeByName('Faster Action');
+      modifierSection.removeByName('Slower Action');
+      modifierSection.removeByName('Aura');
 
-       if('None' === action) return;  //don't add any modifiers
+      if('None' === action) return;  //don't add any modifiers
 
-       var defaultActionName = Data.Power.defaultAction.get(effect);
-       if('None' === defaultActionName) defaultActionName = 'Free';  //calculate distance from free
-       var defaultActionIndex = Data.Power.actions.indexOf(defaultActionName);
-       var newActionIndex = Data.Power.actions.indexOf(action);
+      var defaultActionName = Data.Power.defaultAction.get(effect);
+      if('None' === defaultActionName) defaultActionName = 'Free';  //calculate distance from free
+      var defaultActionIndex = Data.Power.actions.indexOf(defaultActionName);
+      var newActionIndex = Data.Power.actions.indexOf(action);
+      if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect)
+      {
+         newActionIndex = Data.Power.actions.indexOf('Standard');  //calculate distance from Standard
+         modifierSection.createByNameRank('Aura', 1);
+      }
 
-       var actionDifference = (newActionIndex - defaultActionIndex);
-       if(actionDifference > 0) modifierSection.createByNameRank('Faster Action', actionDifference);
-       else if(actionDifference < 0) modifierSection.createByNameRank('Slower Action', -actionDifference);
+      var actionDifference = (newActionIndex - defaultActionIndex);
+      if(actionDifference > 0) modifierSection.createByNameRank('Faster Action', actionDifference);
+      else if(actionDifference < 0) modifierSection.createByNameRank('Slower Action', -actionDifference);
    };
    /**This function recreates Increased/Decreased Duration as needed.*/
    this.updateDurationModifiers=function()

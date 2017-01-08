@@ -99,7 +99,8 @@ function PowerListAgnostic(sectionName)
           if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);
           //skill requires name however perception range has name without skill
           rowPointer.setRank(jsonSection[i].rank);
-          rowPointer.getModifierList().load(jsonSection[i].Modifiers);  //load modifiers
+          rowPointer.getModifierList().load(jsonSection[i].Modifiers);
+          //TODO: bug: loading Reaction Damage of v3.3 (Faster Action 3) into v3.4 keeps the mod
           this.addRow();
       }
        this.update();

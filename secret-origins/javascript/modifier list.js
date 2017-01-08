@@ -185,6 +185,8 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 
        if('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
        if('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst;
+       if('Aura' === a.getName()) return aFirst;
+       if('Aura' === b.getName()) return bFirst;
 
        if('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
        if('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;

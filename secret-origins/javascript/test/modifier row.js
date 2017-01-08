@@ -1,18 +1,26 @@
 TestSuite.modifierRow={};
 TestSuite.modifierRow.setModifier=function(isFirst)
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(isFirst);
 
     var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
+
+    //version starts at 2.7
     try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+    SelectUtil.changeText('powerChoices0', 'Damage'); SelectUtil.changeText('powerSelectAction0', 'Triggered');
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 1).getName(), Description: 'Triggered auto-created Selective'});
+    SelectUtil.changeText('powerModifierChoices0.1', 'Area');
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 1).getName(), Description: 'Can\'t change Selective to Area'});
+    SelectUtil.changeText('powerModifierChoices0.1', 'Select One');
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 1).getName(), Description: 'Can\'t remove Selective'});
+    SelectUtil.changeText('powerSelectAction0', 'Free');  //still has a Faster Action
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 1).getName(), Description: 'Not Triggered: Selective not auto-removed'});
+    SelectUtil.changeText('powerModifierChoices0.1', 'Select One');
+    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Not Triggered: Selective can be removed'});
+    } catch(e){testResults.push({Error: e, Description: 'Selective is protected'});}
 
     return TestRunner.displayResults('TestSuite.modifierRow.setModifier', testResults, isFirst);
+    //ADD TESTS (more of them)
 };
 TestSuite.modifierRow.setRank=function(isFirst)
 {
