@@ -27,7 +27,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
 
    //Single line function section
     this.getModifierRowIndex=function(){return modifierRowIndex;};
-    this.getPower=function(){return modifierListParent.getParent();};
+    this.getPower=function(){return modifierListParent.getPower();};
     /**True if this row has no data*/
     this.isBlank=function(){return (name === undefined);};
     /**True if this modifier increases the total power cost in any way*/
@@ -57,8 +57,6 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    The data set is independent of the document and doesn't call update.*/
    this.setModifier=function(nameGiven)
    {
-      if('Selective' === name && 'Triggered' === this.getPower().getAction()) return;  //prevent removing this row
-      //TODO: change Selective to be a span in this case (and change sort order)
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, eg: 'Select One'
       {
          var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
@@ -124,7 +122,8 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        var htmlString='';
        htmlString+='   <tr>\n';  //TODO: confirm
        htmlString+='      <td width="34%" style="text-align:right;">\n';
-      if (this.getPower().getEffect() === 'Feature' || !Data.Modifier.readOnly.contains(name))
+       var isReadOnlySelective = ('Selective' === name && 'Triggered' === this.getPower().getAction());  //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
+      if (this.getPower().getEffect() === 'Feature' || (!Data.Modifier.readOnly.contains(name) && !isReadOnlySelective))
       {
           htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
           htmlString+='             <option>Select One</option>\n';

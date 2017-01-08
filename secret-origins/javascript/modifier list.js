@@ -10,7 +10,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
     this.getFlatTotal=function(){return flatTotal;};  //TODO: make sure these are not called before they are defined
     /**This total will be the sum of all rank modifiers*/
     this.getRankTotal=function(){return rankTotal;};
-    this.getParent=function(){return powerRowParent;};
+    this.getPower=function(){return powerRowParent;};
 
    //public common section
     /**Removes all rows then updates*/
@@ -161,7 +161,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
           if(rowArray[i].isBlank() && i < rowArray.length-1){this.removeRow(i); i--; continue;}  //remove blank row that isn't last
           else if(rowArray[i].isBlank()) continue;  //do nothing if last row is blank
 
-          if(this.getParent().getSection() === Main.equipmentSection &&
+          if(powerRowParent.getSection() === Main.equipmentSection &&
              (rowArray[i].getName() === 'Removable' || rowArray[i].getName() === 'Easily Removable')){this.removeRow(i); i--; continue;}
           //equipment has removable built in and can't have the modifiers
 
@@ -185,8 +185,9 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 
        if('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
        if('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst;
-       if('Aura' === a.getName()) return aFirst;
-       if('Aura' === b.getName()) return bFirst;
+       //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
+       if('Aura' === a.getName() || ('Selective' === a.getName() && 'Triggered' === powerRowParent.getAction())) return aFirst;
+       if('Aura' === b.getName() || ('Selective' === b.getName() && 'Triggered' === powerRowParent.getAction())) return bFirst;
 
        if('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
        if('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;

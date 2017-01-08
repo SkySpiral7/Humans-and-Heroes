@@ -148,5 +148,28 @@ TestSuite.modifierList.sortOrder=function(isFirst)
     testResults.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Aura sort order: then range'});
     } catch(e){testResults.push({Error: e, Description: 'Aura sort order'});}
 
+    try{
+    Main.clear(); Main.setRuleset(3,3);
+    SelectUtil.changeText('powerChoices0', 'Nullify');
+    SelectUtil.changeText('powerSelectRange0', 'Close');
+    SelectUtil.changeText('powerSelectAction0', 'Triggered');
+
+    testResults.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective span sorts before Range: action'});
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective span sorts before Range: Selective'});
+    testResults.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Selective span sorts before Range: then range'});
+    } catch(e){testResults.push({Error: e, Description: 'Selective span sorts before Range'});}
+
+    try{
+    Main.clear(); Main.setRuleset(3,3);
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Precise');
+    SelectUtil.changeText('powerModifierChoices0.1', 'Selective');
+    SelectUtil.changeText('powerSelectDuration0', 'Concentration');
+
+    testResults.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective non-span retains order: Duration'});
+    testResults.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective non-span retains order: then rest'});
+    testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Selective non-span retains order: Selective'});
+    } catch(e){testResults.push({Error: e, Description: 'Selective non-span retains order'});}
+
     return TestRunner.displayResults('TestSuite.modifierList.sortOrder', testResults, isFirst);
 };
