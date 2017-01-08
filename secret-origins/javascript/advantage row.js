@@ -6,13 +6,13 @@ Text: changeText();
 function AdvantageObject(rowIndex)
 {
    //private variable section:
-    var name, maxRanks, costPerRank, hasRank, rank, hasText, text, total;
+    var name, maxRank, costPerRank, hasRank, rank, hasText, text, total;
 
    //Basic getter section (all single line)
     this.doesHaveRank=function(){return hasRank;};
     this.doesHaveText=function(){return hasText;};
     this.getCostPerRank=function(){return costPerRank;};
-    this.getMaxRanks=function(){return maxRanks;};
+    this.getmaxRank=function(){return maxRank;};
     this.getName=function(){return name;};
     this.getRank=function(){return rank;};
     this.getText=function(){return text;};
@@ -41,8 +41,8 @@ function AdvantageObject(rowIndex)
        var useNewData = !((name === 'Minion' && nameGiven === 'Sidekick') || (name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        name = nameGiven;
-       maxRanks = Data.Advantage.maxRanks.get(name);
-       hasRank = (maxRanks !== 1);  //if max ranks is 1 then there are no ranks
+       maxRank = Data.Advantage.maxRank.get(name);
+       hasRank = (1 !== maxRank);  //if max rank is 1 then there are no ranks
        if(useNewData) rank = 1;
        costPerRank = Data.Advantage.costPerRank.get(name);
        total = costPerRank * rank;
@@ -57,7 +57,7 @@ function AdvantageObject(rowIndex)
        if(this.isBlank()) return;
        if(!hasRank) return;  //can only happen when loading
        rank = sanitizeNumber(rankGiven, 1, 1);
-       if(rank > maxRanks) rank = maxRanks;
+       if(rank > maxRank) rank = maxRank;
        total=costPerRank*rank;
    };
    /**Used to set data independent of the document and without calling update*/
@@ -136,7 +136,7 @@ function AdvantageObject(rowIndex)
    this.constructor=function()
    {
        name = undefined;
-       maxRanks = undefined;
+       maxRank = undefined;
        hasRank = undefined;
        rank = undefined;
        hasText = undefined;
