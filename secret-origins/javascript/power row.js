@@ -101,13 +101,13 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        effect = effectNameGiven;
        canSetBaseCost = Data.Power.hasInputBaseCost.contains(effect);
        baseCost = Data.Power.baseCost.get(effect);
-       text = 'Descriptors and other text';
+       if(undefined === text) text = 'Descriptors and other text';  //let the text stay if changing between powers
        action = Data.Power.defaultAction.get(effect);
        range = Data.Power.defaultRange.get(effect);
        duration = Data.Power.defaultDuration.get(effect);
        rank = 1;
-       if(Data.Power.isAttack.contains(effect)) this.setDefaultNameAndSkill();
-       else name = skillUsed = undefined;
+       //name = skillUsed = undefined;  //don't clear so that if changing between 2 different attacks these carry over
+       this.generateNameAndSkill();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setBaseCost=function(baseGiven)
@@ -132,13 +132,13 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          Main.messageUser('PowerObjectAgnostic.setAction.notExist', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' + newActionName + ' is not the name of an action.');
          return;
       }
-      //TODO: the above only applies when loading. If moved this method would only set
 
       action = newActionName;
 
       if(!shouldValidateActivationInfo) return;  //done
       this.updateActionModifiers();
       if('Reaction' === action && 'Feature' !== effect && 'Luck Control' !== effect && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4)) this.setRange('Close');
+      this.generateNameAndSkill();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRange=function(newRangeName)
@@ -158,12 +158,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        if(!shouldValidateActivationInfo) return;  //done
 
       //TODO: loading should make sure that skillUsed can't be set when Perception range
-      if (undefined !== name)
-      {
-          if('Perception' === newRangeName) skillUsed = undefined;  //if becoming perception range then skillUsed no longer applies
-          else if('Perception' === oldRange) skillUsed = 'Skill used for attack';  //if no longer perception range then skillUsed now applies
-          //note that changing from Perception to Personal will set name to undefined
-      }
+      this.generateNameAndSkill();
 
       if ('Personal' === oldRange && 'Permanent' === duration)
       {
@@ -327,7 +322,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          htmlString+='       <td width="34%" style="text-align:right;"></td>\n';
          htmlString+='      <td colspan="2" width="66%">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
-         if(range !== 'Perception') htmlString+=Data.SharedHtml.powerSkill(sectionName, rowIndex);
+         if(undefined !== skillUsed) htmlString+=Data.SharedHtml.powerSkill(sectionName, rowIndex);
          htmlString+='      </td>\n';
          htmlString+='   </tr>\n';
       }
@@ -362,12 +357,19 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       json.rank=rank;
       return json;
    };
-   /**Used by this.setPower and setModifier in order to set the default text for name and skill*/
-   this.setDefaultNameAndSkill=function()
+   /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
+   this.generateNameAndSkill=function()
    {
-      name = sectionName.toTitleCase() + ' ' + ((rowIndex+1) + ' ' + effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
-      if(range === 'Perception') skillUsed = undefined;  //needs to be explicitly set because it might have been defined before
-      else skillUsed = 'Skill used for attack';
+      if (!Data.Power.isAttack.contains(effect) && undefined === modifierSection.findRowByName('Attack'))
+      {
+         name = skillUsed = undefined;
+         return;
+      }
+      if(undefined === name) name = (sectionName.toTitleCase() + ' ' + (rowIndex+1) + ' ' + effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+
+      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect);
+      if('Perception' === range || isAura) skillUsed = undefined;
+      else if(undefined === skillUsed) skillUsed = 'Skill used for attack';
    };
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()

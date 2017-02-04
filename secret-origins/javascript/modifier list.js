@@ -77,7 +77,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    Note that this should only be called with modifiers that don't have text.*/
    this.findRowByName=function(rowName)
    {
-      for(var i=0; i < rowArray.length-1; i++)  //last row is always blank
+      for(var i=0; i < rowArray.length; i++)  //no -1 because the last row isn't blank while it is being created
          {if(rowArray[i].getName() === rowName) return i;}  //found it
       //else return undefined
    };

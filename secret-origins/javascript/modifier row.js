@@ -57,13 +57,15 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    The data set is independent of the document and doesn't call update.*/
    this.setModifier=function(nameGiven)
    {
+      var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
+      //TODO: remove these modifiers for non-personal powers. Those would need to be Enhanced trait attack
+      if(wasAttack && 'Feature' !== this.getPower().getEffect() && 'Personal' === this.getPower().getDefaultRange())
+         this.getPower().setRange('Personal');
+
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, eg: 'Select One'
       {
-         var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
-         //TODO: remove these modifiers for non-personal powers. Those would need to be Enhanced trait attack
-         if(wasAttack && 'Feature' !== this.getPower().getEffect() && 'Personal' === this.getPower().getDefaultRange())
-            this.getPower().setRange('Personal');
          this.constructor();  //reset row
+         if(wasAttack) this.getPower().generateNameAndSkill();  //technically only necessary if 'Attack' === name
          return;
       }
 
@@ -81,7 +83,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
 
       if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name) && 'Personal' === this.getPower().getRange())
          this.getPower().setRange('Close');
-      if('Attack' === name) this.getPower().setDefaultNameAndSkill();
+      if(wasAttack || 'Attack' === name) this.getPower().generateNameAndSkill();  //create or destroy as needed
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)

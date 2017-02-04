@@ -194,7 +194,7 @@ Data.change = function(major, minor)
       Data.Skill.names = Data.Skill.names.concat(['Common Knowledge', 'Knowledge', 'Memory', 'Strategy', 'Tracking']).sort();
       Data.Skill.names.push('Other');  //must be last instead of sorted
       Data.Skill.hasText = Data.Skill.names.copy();
-      //in new rules most of them have text except the following:
+      //most of them have text except the following:
       Data.Skill.hasText.removeByValue('Memory');
       Data.Skill.hasText.removeByValue('Perception');
       Data.Skill.hasText.removeByValue('Persuasion');

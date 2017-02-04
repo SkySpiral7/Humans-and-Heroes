@@ -253,9 +253,9 @@ function MainObject()
              var skillUsed = rowPointer.getSkillUsed();
 
              //TODO: probably won't work for Feature
-             if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
-             else if(range === 'Ranged') attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);
-             else attackBonus = '--';  //range === 'Perception' can't miss
+             if(undefined === skillUsed) attackBonus = '--';  //can't miss
+             else if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
+             else attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);  //if(range === 'Ranged')
              allOffensiveRows+=this.makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), rowPointer.getRank());
          }
       }

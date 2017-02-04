@@ -3,7 +3,7 @@ const SelectUtil={};
 SelectUtil.isSelect=function(elementId)  //this is used by many other SelectUtils
 {
     var element = document.getElementById(elementId);
-    if(null === element) throw new Error(optionID + ' doesn\'t exist');
+    if(null === element) throw new Error(elementId + ' doesn\'t exist');
     return ('SELECT' === element.tagName);
 };
 /**Given the id of the select, this returns the text of the selected option*/

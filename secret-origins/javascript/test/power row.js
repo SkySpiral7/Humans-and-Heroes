@@ -993,14 +993,40 @@ TestSuite.powerRow.generate=function(isFirst)
     //TODO: TestSuite sections should exist for generate and set all so that the gui logic is tested
 
     return TestRunner.displayResults('TestSuite.powerRow.generate', testResults, isFirst);
+};
+TestSuite.powerRow.generateNameAndSkill=function(isFirst)
+{
+    TestRunner.clearResults(isFirst);
 
-    return;
-    TestSuite.powerRow.setDuration(isFirst, 'equipment');
+    var testResults=[];
+    try{
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    testResults.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name 1'});
+    testResults.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Default skill 1'});
+    SelectUtil.changeText('powerChoices1', 'Affliction');
+    testResults.push({Expected: 'Power 2 Affliction', Actual: Main.powerSection.getRow(1).getName(), Description: 'Default name 2'});
+    SelectUtil.changeText('equipmentChoices0', 'Nullify');
+    testResults.push({Expected: 'Equipment 1 Nullify', Actual: Main.equipmentSection.getRow(0).getName(), Description: 'Default name 3'});
+    testResults.push({Expected: 'Skill used for attack', Actual: Main.equipmentSection.getRow(0).getSkillUsed(), Description: 'Default skill 2'});
+    } catch(e){testResults.push({Error: e, Description: 'Default name and skill'});}
 
-    if(sectionName === undefined) sectionName='power';
-    SelectUtil.changeText(sectionName+'Choices0', 'Damage');
-    Main[sectionName+'Section'].getRow(0).getDuration();
-    return TestRunner.displayResults('TestSuite.'+sectionName+'Row.setDuration', testResults, isFirst);
+    try{
+    Main.clear();
+    Main.setRuleset(3,4);
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'No name'});
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'No skill'});
+
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    testResults.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name'});
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Aura has no skill'});
+    SelectUtil.changeText('powerSelectAction0', 'Standard');
+    SelectUtil.changeText('powerSelectRange0', 'Perception');
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Perception has no skill'});
+    } catch(e){testResults.push({Error: e, Description: 'No name or skill'});}
+
+    return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', testResults, isFirst);
 };
 TestSuite.powerRow.setValues=function(isFirst)
 {
