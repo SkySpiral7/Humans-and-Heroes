@@ -1,16 +1,42 @@
 TestSuite.modifierRow={};
 TestSuite.modifierRow.setModifier=function(isFirst)
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(isFirst);
 
     var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
+
     try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Flight is Personal'});
+
+    SelectUtil.changeText('powerModifierChoices0.0', 'Attack');
+    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Adding Attack makes Flight Close'});
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Changing Attack to Limited makes Flight Personal'});
+    SelectUtil.changeText('powerModifierChoices0.0', 'Attack'); SelectUtil.changeText('powerModifierChoices0.0', 'Select One');
+    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Removing Attack makes Flight Personal'});
+    } catch(e){testResults.push({Error: e, Description: 'Attack changes range'});}
+
+    try{
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'Flight has no name'});
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Flight has no skill'});
+
+    SelectUtil.changeText('powerModifierChoices0.0', 'Attack');
+    testResults.push({Expected: 'Power 1 Flight', Actual: Main.powerSection.getRow(0).getName(), Description: 'Adding Attack makes Flight have a name'});
+    testResults.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Adding Attack makes Flight have a skill'});
+
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'Changing Attack to Limited removes name'});
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Changing Attack to Limited removes skill'});
+
+    SelectUtil.changeText('powerModifierChoices0.0', 'Attack'); SelectUtil.changeText('powerModifierChoices0.0', 'Select One');
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'Removing Attack removes name'});
+    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Removing Attack removes skill'});
+    } catch(e){testResults.push({Error: e, Description: 'Attack calls generateNameAndSkill'});}
+
+    //ADD TESTS small ones for the rest
 
     return TestRunner.displayResults('TestSuite.modifierRow.setModifier', testResults, isFirst);
 };

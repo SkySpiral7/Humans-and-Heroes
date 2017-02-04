@@ -10,7 +10,8 @@ if (null !== document.getElementById('testResults'))  //false in production to s
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/abilities', 'test/advantage list',
       'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
-      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/test tools']);
+      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/Version',
+      'test/test tools']);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
@@ -252,9 +253,9 @@ function MainObject()
              var skillUsed = rowPointer.getSkillUsed();
 
              //TODO: probably won't work for Feature
-             if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
-             else if(range === 'Ranged') attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);
-             else attackBonus = '--';  //range === 'Perception' can't miss
+             if(undefined === skillUsed) attackBonus = '--';  //can't miss
+             else if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
+             else attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);  //if(range === 'Ranged')
              allOffensiveRows+=this.makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), rowPointer.getRank());
          }
       }

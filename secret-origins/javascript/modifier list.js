@@ -77,7 +77,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    Note that this should only be called with modifiers that don't have text.*/
    this.findRowByName=function(rowName)
    {
-      for(var i=0; i < rowArray.length-1; i++)  //last row is always blank
+      for(var i=0; i < rowArray.length; i++)  //no -1 because the last row isn't blank while it is being created
          {if(rowArray[i].getName() === rowName) return i;}  //found it
       //else return undefined
    };
@@ -185,9 +185,9 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 
        if('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
        if('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst;
-       //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
-       if('Selective' === a.getName() && 'Triggered' === powerRowParent.getAction()) return aFirst;
-       if('Selective' === b.getName() && 'Triggered' === powerRowParent.getAction()) return bFirst;
+       //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
+       if('Aura' === a.getName() || ('Selective' === a.getName() && 'Triggered' === powerRowParent.getAction())) return aFirst;
+       if('Aura' === b.getName() || ('Selective' === b.getName() && 'Triggered' === powerRowParent.getAction())) return bFirst;
 
        if('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
        if('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;

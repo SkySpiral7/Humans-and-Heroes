@@ -54,7 +54,7 @@ Data.change = function(major, minor)
    Data.Modifier = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
       cost: new MapDefault({'Activation': -1, 'Affects Objects Only': 0, 'Affects Others Only': 0, 'Alternate Effect': -1, 'Alternate Resistance (Free)': 0,
-         'Ammunition': -1, 'Attack': 0, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': -1,
+         'Ammunition': -1, 'Attack': 0, 'Aura': 2, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': -1,
          'Easily Removable': -1, 'Existence Dependent': 0, 'Fades': -1, 'Feedback': -1, 'Fragile': -1, 'Grab-Based': -1, 'Impervious': 1, 'Inaccurate': -1,
          'Increased Mass': 1, 'Limited': -1, 'Linked': 0, 'Noticeable': -1, 'Other Flat Flaw': -1, 'Other Free Modifier': 0, 'Other Rank Flaw': -1,
          'Penetrating': 1, 'Quirk': -1, 'Reduced Range': -1, 'Removable': -1, 'Resistible': -1, 'Sense-Dependent': -1, 'Side Effect': -1, 'Sleep': 0,
@@ -84,6 +84,7 @@ Data.change = function(major, minor)
          'Reversible': 'Flat', 'Ricochet': 'Flat', 'Sleep': 'Free', 'Split': 'Flat', 'Subtle': 'Flat', 'System Dependent': 'Flat', 'Triggered': 'Flat',
          'Variable Descriptor': 'Flat'}, 'Rank')
    };
+   Data.Modifier.readOnly = Data.Modifier.actionRangeDuration.copy();
    Data.Modifier.hasAutoRank = Data.Modifier.hasAutoTotal.concat(Data.Modifier.actionRangeDuration);
    Data.Modifier.hasText = Data.Modifier.defaultText.getAllKeys().concat(['Feature', 'Limited', 'Noticeable', 'Quirk', 'Side Effect', 'Subtle', 'Triggered']).
       concat(otherModifierNames);
@@ -193,7 +194,7 @@ Data.change = function(major, minor)
       Data.Skill.names = Data.Skill.names.concat(['Common Knowledge', 'Knowledge', 'Memory', 'Strategy', 'Tracking']).sort();
       Data.Skill.names.push('Other');  //must be last instead of sorted
       Data.Skill.hasText = Data.Skill.names.copy();
-      //in new rules most of them have text except the following:
+      //most of them have text except the following:
       Data.Skill.hasText.removeByValue('Memory');
       Data.Skill.hasText.removeByValue('Perception');
       Data.Skill.hasText.removeByValue('Persuasion');
@@ -207,8 +208,23 @@ Data.change = function(major, minor)
       Data.Advantage.names.sort();
       Data.Advantage.maxRank.set('Inspire', 1);
 
-      flawNames.push('Uncontrollable Activation');
-      flawNames.sort();
-      Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
+      if (minor < 4)  //v3.0 added it then v3.4 removed it
+      {
+         flawNames.push('Uncontrollable Activation');
+         flawNames.sort();
+         Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
+      }
+      if (minor >= 4)
+      {
+         Data.Power.actions.removeByValue('Triggered');  //Reaction is still here but is only sometimes a choice
+         Data.Power.defaultAction.set('A God I Am', 'Free');
+         Data.Power.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+
+         Data.Modifier.readOnly.push('Aura');
+         extraNames.push('Aura');
+         extraNames.sort();
+         flawNames.removeByValue('Grab-Based');
+         Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
+      }
    }
 };

@@ -94,12 +94,12 @@ function PowerListAgnostic(sectionName)
           rowPointer.setRange(jsonSection[i].range);
           rowPointer.setDuration(jsonSection[i].duration);
           rowPointer.validateActivationInfo();  //also creates all faster action etc
-          //TODO: setName and setSkill should check if allowed
           if(undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
-          if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);
-          //skill requires name however perception range has name without skill
+          if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);  //skill requires name however perception range has name without skill
+          rowPointer.generateNameAndSkill();  //TODO: should give warning about removing name and skill
           rowPointer.setRank(jsonSection[i].rank);
-          rowPointer.getModifierList().load(jsonSection[i].Modifiers);  //load modifiers
+          rowPointer.getModifierList().load(jsonSection[i].Modifiers);
+          //TODO: bug: loading Reaction Damage of v3.3 (Faster Action 3) into v3.4 keeps the mod
           this.addRow();
       }
        this.update();
