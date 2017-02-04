@@ -1,0 +1,14 @@
+* text eol=lf
+
+*.html text
+*.css text
+*.js text
+*.xml text
+*.md text
+*.java text
+.* text
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.gif binary
