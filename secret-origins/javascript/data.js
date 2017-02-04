@@ -218,6 +218,11 @@ Data.change = function(major, minor)
       {
          Data.Power.actions.removeByValue('Triggered');  //Reaction is still here but is only sometimes a choice
          Data.Power.defaultAction.set('A God I Am', 'Free');
+         Data.Power.defaultAction.set('Flight', 'Move');
+         Data.Power.defaultAction.set('Leaping', 'Move');
+         Data.Power.defaultAction.set('Movement', 'Move');
+         Data.Power.defaultAction.set('Permeate', 'Move');
+         Data.Power.defaultAction.set('Teleport', 'Move');
          Data.Power.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
 
          Data.Modifier.readOnly.push('Aura');

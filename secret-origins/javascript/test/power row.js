@@ -207,6 +207,7 @@ TestSuite.powerRow.validateActivationInfo_action=function(isFirst)
     var dataToLoad;
     var testResults=[];
 
+    Main.setRuleset(3,3);
     Main.setMockMessenger(Messages.errorCapture);
 
     try{
@@ -598,6 +599,7 @@ TestSuite.powerRow.setDuration=function(isFirst)
 
     var testResults=[];
 
+    Main.setRuleset(3,3);
     //TODO: test that the gui doesn't allow instant for non-feature. and none, personal, permanent
     try{
     SelectUtil.changeText('powerChoices0', 'Feature');

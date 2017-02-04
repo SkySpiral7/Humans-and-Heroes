@@ -21,6 +21,7 @@ TestSuite.powerList.load=function(isFirst)
     var dataToLoad;
     var testResults=[];
 
+    Main.setRuleset(3,3);
     Main.setMockMessenger(Messages.errorCapture);
 
     try{
