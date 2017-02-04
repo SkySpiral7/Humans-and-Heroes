@@ -226,5 +226,10 @@ Data.change = function(major, minor)
          flawNames.removeByValue('Grab-Based');
          Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
       }
+      if (minor >= 5)
+      {
+         extraNames.removeByValue('Secondary Effect');
+         Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
+      }
    }
 };
