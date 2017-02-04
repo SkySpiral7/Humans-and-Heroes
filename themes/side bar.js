@@ -18,8 +18,8 @@ if (!String.prototype.endsWith) {
 }
 
 (function(){
-/**This is used to make links and upc.png be an absolute path on both localhost and skyspiral7.github.io */
-var absolutePrefix = location.href.replace(/(\/Humans(?:%20| |-)(?:%26|&|and)(?:%20| |-)Heroes(?:-gh-pages)?)\/?.*?$/, '$1/');
+/**This is used to make links and upc.png be an absolute path on both localhost and skyspiral7.github.io. The gh-pages part is the default unzipped name.*/
+var absolutePrefix = location.href.replace(/(\/Humans-and-Heroes(?:-gh-pages)?)\/?.*?$/, '$1/');
 /**This is used to determine which link in the sidebar is my current page or a parent of current*/
 var currentPage = location.href.substring(absolutePrefix.length);
 
