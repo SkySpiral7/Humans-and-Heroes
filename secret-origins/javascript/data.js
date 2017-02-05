@@ -224,6 +224,7 @@ Data.change = function(major, minor)
          Data.Power.defaultAction.set('Permeate', 'Move');
          Data.Power.defaultAction.set('Teleport', 'Move');
          Data.Power.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+         Data.Power.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
 
          Data.Modifier.readOnly.push('Aura');
          extraNames.push('Aura');

@@ -7,6 +7,7 @@ TestSuite.powerRow.disableValidationForActivationInfo=function(isFirst)
     var testResults=[];
     //these tests are things that wouldn't be valid if loaded in order: action, range, duration
 
+    Main.setRuleset(3,3);
     try{
     dataToLoad = Loader.resetData();
     dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Close","duration":"Sustained",
@@ -36,6 +37,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
     var dataToLoad;
     var testResults=[];
 
+    Main.setRuleset(3,3);
     Main.setMockMessenger(Messages.errorCapture);
 
     //none of these tests will have modifiers because they should be ignored and recreated
@@ -969,15 +971,90 @@ TestSuite.powerRow.updateRangeModifiers=function(isFirst)
 };
 TestSuite.powerRow.calculateValues=function(isFirst)
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(isFirst);
 
     var testResults=[];
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
     try{
-    SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: 'Equipment Row is not created'});}
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    TestRunner.changeValue('powerRank0', 2);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
+    testResults.push({Expected: 16, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank extras increase cost/rank'});
+    } catch(e){testResults.push({Error: e, Description: 'Rank extras'});}
+
+    try{
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    TestRunner.changeValue('powerRank0', 2);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: 12, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws reduce cost/rank'});
+
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    TestRunner.changeValue('powerRank0', 4);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: 2, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws can reduce to fraction'});
+
+    TestRunner.changeValue('powerRank0', 3);
+    testResults.push({Expected: 2, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Total cost rounds up'});
+
+    TestRunner.changeValue('powerRank0', 100);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 100);
+    testResults.push({Expected: 20, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws min of 1/5'});
+    } catch(e){testResults.push({Error: e, Description: 'Rank flaws'});}
+
+    try{
+    Main.powerSection.clear();
+    Main.setRuleset(3,4);
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 6);
+    testResults.push({Expected: 1, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'v3.4 Variable has no min cost'});
+
+    Main.powerSection.clear();
+    Main.setRuleset(3,5);
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 6);
+    testResults.push({Expected: 5, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'v3.5 Variable has a min cost of 5/rank'});
+    } catch(e){testResults.push({Error: e, Description: 'Variable min cost'});}
+
+    try{
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    TestRunner.changeValue('powerRank0', 2);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
+    SelectUtil.changeText('powerModifierChoices0.1', 'Accurate');
+    testResults.push({Expected: 5, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat Extras add to cost after ranks'});
+    } catch(e){testResults.push({Error: e, Description: 'Flat Extras'});}
+
+    try{
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    TestRunner.changeValue('powerRank0', 2);
+    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
+    SelectUtil.changeText('powerModifierChoices0.1', 'Inaccurate');
+    testResults.push({Expected: 3, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat flaws reduce cost after ranks'});
+
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Inaccurate');
+    TestRunner.changeValue('powerModifierRank0.0', 3);
+    testResults.push({Expected: 4, Actual: Main.powerSection.getRow(0).getRank(), Description: 'Flat flaws may increase ranks'});
+    testResults.push({Expected: 1, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat flaws retains total of 1'});
+    } catch(e){testResults.push({Error: e, Description: 'Flat flaws'});}
+
+    try{
+    Main.powerSection.clear();
+    //Main.setRuleset(3,5);
+    TestRunner.changeValue('Strength', 100);
+    SelectUtil.changeText('powerChoices0', 'A God I Am');
+    TestRunner.changeValue('powerRank0', 2);
+    testResults.push({Expected: 155, Actual: Main.powerSection.getRow(0).getTotal(), Description: '2 ranks: A God I Am'});
+
+    SelectUtil.changeText('powerChoices0', 'Reality Warp');
+    TestRunner.changeValue('powerRank0', 2);
+    testResults.push({Expected: 85, Actual: Main.powerSection.getRow(0).getTotal(), Description: '2 ranks: Reality Warp'});
+    } catch(e){testResults.push({Error: e, Description: 'Odd first rank values'});}
 
     return TestRunner.displayResults('TestSuite.powerRow.calculateValues', testResults, isFirst);
 };
@@ -990,6 +1067,60 @@ TestSuite.powerRow.generate=function(isFirst)
     SelectUtil.changeText('powerChoices0', 'Damage');
     testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Set Damage: Damage has a default duration of Instant'});
     testResults.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectDuration0'), Description: 'Set Damage: The user can\'t change the duration'});
+    } catch(e){testResults.push({Error: e, Description: 'Set Damage'});}
+
+    try{
+    Main.setRuleset(3,3);
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    SelectUtil.changeText('powerSelectAction0', 'Move');
+    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows move Damage'});
+    SelectUtil.changeText('powerSelectAction0', 'Free');
+    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows free Damage'});
+    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows Reaction Damage'});
+
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    SelectUtil.changeText('powerSelectAction0', 'Free');
+    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows Free Flight'});
+    SelectUtil.changeText('powerChoices0', 'Growth');
+    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows Reaction Growth'});
+
+    SelectUtil.changeText('powerChoices0', 'Move Object');
+    SelectUtil.changeText('powerSelectAction0', 'Move');
+    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows move Move Object'});
+    SelectUtil.changeText('powerSelectAction0', 'Free');
+    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows free Move Object'});
+
+    SelectUtil.changeText('powerChoices0', 'Healing');
+    SelectUtil.changeText('powerSelectAction0', 'Move');
+    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows move Healing'});
+    SelectUtil.changeText('powerSelectAction0', 'Free');
+    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows free Healing'});
+
+    Main.powerSection.clear();
+    Main.setRuleset(3,4);
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'v3.4 prevents move Damage'});
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 prevents free Damage'});
+    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 allows Reaction Damage'});
+
+    SelectUtil.changeText('powerChoices0', 'Flight');
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 prevents Free Flight'});
+    SelectUtil.changeText('powerChoices0', 'Growth');
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Reaction'), Description: 'v3.4 prevents Reaction Growth'});
+
+    SelectUtil.changeText('powerChoices0', 'Move Object');
+    SelectUtil.changeText('powerSelectAction0', 'Move');
+    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 allows move Move Object'});
+    SelectUtil.changeText('powerSelectAction0', 'Free');
+    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 allows free Move Object'});
+
+    SelectUtil.changeText('powerChoices0', 'Healing');
+    SelectUtil.changeText('powerSelectAction0', 'Move');
+    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 allows move Healing'});
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 prevents free Healing'});
     } catch(e){testResults.push({Error: e, Description: 'Set Damage'});}
     //ADD TESTS
     //TODO: TestSuite sections should exist for generate and set all so that the gui logic is tested
@@ -1032,15 +1163,40 @@ TestSuite.powerRow.generateNameAndSkill=function(isFirst)
 };
 TestSuite.powerRow.setValues=function(isFirst)
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(isFirst);
 
+    //ADD TESTS
     var testResults=[];
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
     try{
-    SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: 'Equipment Row is not created'});}
+    Main.powerSection.clear();
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: '6', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Rank flaws reduce cost/rank'});
+
+    SelectUtil.changeText('powerChoices0', 'Damage');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    testResults.push({Expected: '(1/2)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Displays fractional Rank flaws'});
+
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 100);
+    testResults.push({Expected: '(1/5)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Rank flaws min of 1/5'});
+    } catch(e){testResults.push({Error: e, Description: 'Rank flaws'});}
+
+    try{
+    Main.powerSection.clear();
+    Main.setRuleset(3,4);
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 6);
+    testResults.push({Expected: '1', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.4 Variable has no min cost'});
+
+    Main.powerSection.clear();
+    Main.setRuleset(3,5);
+    SelectUtil.changeText('powerChoices0', 'Variable');
+    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+    TestRunner.changeValue('powerModifierRank0.0', 6);
+    testResults.push({Expected: '5', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.5 Variable has a min cost of 5/rank'});
+    } catch(e){testResults.push({Error: e, Description: 'Variable min cost'});}
 
     return TestRunner.displayResults('TestSuite.powerRow.setValues', testResults, isFirst);
 };

@@ -227,21 +227,24 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues=function()
    {
-       modifierSection.calculateValues();
-       var costPerRank=baseCost + modifierSection.getRankTotal();
-       if(costPerRank < 1) costPerRank=1/(2-costPerRank);
-       total=Math.ceil(costPerRank*rank);  //round up
-       var flatValue=modifierSection.getFlatTotal();
-      if (flatValue < 0 && (total+flatValue) < 1)  //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
+      modifierSection.calculateValues();
+      var costPerRank = (baseCost + modifierSection.getRankTotal());
+      if(costPerRank < 1) costPerRank = 1/(2 - costPerRank);
+      if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === effect && costPerRank < 5) costPerRank = 5;
+      else if(costPerRank < 0.2) costPerRank = 0.2;  //can't be less than 1/5
+
+      total = Math.ceil(costPerRank*rank);  //round up
+      var flatValue = modifierSection.getFlatTotal();
+      if (flatValue < 0 && (total + flatValue) < 1)  //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
       {
-          rank=(Math.abs(flatValue)/costPerRank);
-          rank=Math.floor(rank)+1;  //must be higher than for this to work. don't use ceil so that if whole number will still be +1
-          total=Math.ceil(costPerRank*rank);  //round up
+         rank = (Math.abs(flatValue) / costPerRank);
+         rank = Math.floor(rank) + 1;  //must be higher than for this to work. don't use ceil so that if whole number will still be +1
+         total = Math.ceil(costPerRank * rank);  //round up
       }
-       total+=flatValue;  //might be negative
-       if(effect === 'A God I Am') total+=145;  //for first ranks
-       else if(effect === 'Reality Warp') total+=75;
-       total=modifierSection.calculateGrandTotal(total);  //used to calculate all auto modifiers
+      total += flatValue;  //flatValue might be negative
+      if('A God I Am' === effect) total += 145;  //for first ranks
+      else if('Reality Warp' === effect) total += 75;
+      total = modifierSection.calculateGrandTotal(total);  //used to calculate all auto modifiers
    };
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
@@ -279,10 +282,16 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       else
       {
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
+         var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power.isAttack.contains(effect) || 'Move Object' === effect);
+         var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power.isMovement.contains(effect) && 'Healing' !== effect));
          var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power.allowReaction.contains(effect));
          for (i=0; i < Data.Power.actions.length-1; i++)  //-1 to avoid 'None'
          {
-            if(allowReaction || 'Reaction' !== Data.Power.actions[i]) htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';
+            //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
+            if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
+            if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
+            if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
+            htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';
          }
          htmlString+='         </select>\n';
       }
@@ -404,8 +413,11 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       modifierSection.setAll();
 
       var totalRankCost=baseCost+modifierSection.getRankTotal();
+      if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === effect && totalRankCost < 5) totalRankCost = 5;
+      else if(totalRankCost < -3) totalRankCost = -3;  //can't be less than 1/5
+
       if(totalRankCost > 0) document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=totalRankCost;
-      else document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML=' (1/'+(2-totalRankCost)+') ';  //0 is 1/2 and -1 is 1/3
+      else document.getElementById(sectionName+'TotalCostPerRank'+rowIndex).innerHTML='(1/'+(2-totalRankCost)+')';  //0 is 1/2 and -1 is 1/3
       document.getElementById(sectionName+'FlatModifierCost'+rowIndex).innerHTML=modifierSection.getFlatTotal();
       document.getElementById(sectionName+'RowTotal'+rowIndex).innerHTML=total;
    };
