@@ -562,6 +562,7 @@ power:
 skill: Main.updateOffense();
 */
 /*xml version list:
-1: original from rule set 2.5
-2: (added version and ruleset) name and skill attributes were added to both powers. old "name" was renamed to "effect"
+1: original format from ruleset 2.5
+2: added version and ruleset. name and skill attributes were added to both powers. old power "name" was renamed to "effect"
+pending: 3: added header (UTF-8;3.0.0;application/xml;) removed version. Added feature exclusive baseAction, baseRange, baseDuration. renamed power name to attackName and skill to attackSkill
 */
