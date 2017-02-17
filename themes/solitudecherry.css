@@ -29,7 +29,17 @@ official colors: http://dev.w3.org/csswg/css-color-3/#svg-color
 
 /*If you want to replace the arrows with unicode:
 http://stackoverflow.com/questions/2701192/ascii-character-for-up-down-triangle-arrow-to-display-in-html/6325076#6325076
-but you'd have to mess with font size and getting them to fit on one line*/
+but you'd have to mess with font size and getting them to fit on one line
+
+U+25B6 (Black right-pointing triangle ▶)
+U+25BC (Black down-pointing triangle ▼)
+U+25B7 (White right-pointing triangle ▷)
+U+25BD (White down-pointing triangle ▽)
+U+25B8 (Black right-pointing small triangle ▸)
+U+25BE (Black down-pointing small triangle ▾)
+U+25B9 (White right-pointing small triangle ▹)
+U+25BF (White down-pointing small triangle ▿)
+*/
 
 .sites-sidebar-nav li.closed .expander {
     background: url(../images/arrow-left.gif) no-repeat;
@@ -50,31 +60,39 @@ but you'd have to mess with font size and getting them to fit on one line*/
     text-align: left;
 }
 
-ol.goog-toc {
-    margin-left: 10px;
-    padding-left: 0;
-}
-
 .goog-toc {
     text-align: left;
     line-height: 1.5em;
     list-style: none;
 }
 
-div.goog-toc h4 {
-    margin: 1em 0;
-    padding: 2px 6px;
+ol.goog-toc {
+    margin-left: 10px;
+    padding-left: 0;
+}
+
+.goog-toc a {
+    text-decoration: none;
+}
+
+div.goog-toc {
+    margin-bottom: 5px;
+    overflow: hidden;
+    width: auto;
+    background: url(bg-pattern.gif) repeat;
+    padding: 2px;
+    border: 1px solid #efefef;
+}
+
+div.goog-toc p {
+    padding: 3px 5px 0;
+    margin: 0;
     font-weight: bold;
-    text-align: left;
+    font-size: 1.1em;
 }
 
-div.goog-toc>ul,.sites-embed>ul {
+.sites-embed>ul {
     margin: 1em 0;
-}
-
-x:-moz-any-link,x:-moz-any-link {
-    border-left: none;
-    margin-left: 0;
 }
 
 html,body {
@@ -83,7 +101,15 @@ html,body {
 }
 
 body {
-    font: normal 10pt Arial,sans-serif;
+    margin: 0 auto;
+    width: 100%;
+    background-color: white;
+    background: url(bg-top.gif) top repeat-x;
+    color: #333333;
+    padding: 0;
+    font: normal 10pt "Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
+    line-height: 1.5;
+    min-width: 90%;
 }
 
 a img {
@@ -97,39 +123,6 @@ th {
 
 td {
     vertical-align: top;
-}
-
-body {
-    margin: 0 auto;
-}
-
-.sites-tile-name-footer {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-tt:-moz-any-link {
-    height: 23px;
-}
-
-tt:-moz-any-link {
-    display: -moz-inline-box;
-    line-height: 25px;
-    padding-left: 5px;
-}
-
-tt:-moz-any-link,tt:default {
-    height: 24px;
-}
-
-tt:-moz-any-link,tt:default {
-    display: inline-block;
-}
-
-tt:-moz-any-link {
-    display: -moz-inline-box;
-    line-height: 15px;
-    padding-left: 0;
 }
 
 div.sites-sidebar-nav {
@@ -189,36 +182,8 @@ body .sites-sidebar-nav ul {
     display: table-cell;
 }
 
-div.goog-toc {
-    margin-bottom: 5px;
-    overflow: hidden;
-    width: auto;
-}
-
-.goog-toc a {
-    text-decoration: none;
-}
-
-div.goog-toc .expander {
-    margin-top: 3px;
-}
-
-div.goog-toc ul {
-    line-height: 1.5em;
-}
-
 div.nav-toc-content {
     margin: 5px 0;
-}
-
-.goog-toc h4,div.goog-toc p {
-    padding: 4px 5px 0;
-    margin: 0;
-    font-weight: bold;
-}
-
-body {
-    width: 100%;
 }
 
 #sites-chrome-sidebar-left {
@@ -236,10 +201,6 @@ ol {
 
 .sites-embed-content-sidebar-textbox {
     padding: 5px;
-}
-
-body {
-    background-color: white;
 }
 
 h2 {
@@ -292,14 +253,6 @@ ul li {
     list-style-type: square;
 }
 
-body {
-    background: url(bg-top.gif) top repeat-x;
-    color: #333333;
-    padding: 0;
-    font: 1em "Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
-    line-height: 1.5;
-}
-
 body #sites-chrome-sidebar-left {
     padding: 5px 0;
     width: 150px;
@@ -326,7 +279,6 @@ body #sites-chrome-sidebar-left .sites-embed-title {
 }
 
 #sites-chrome-sidebar-left .sites-sidebar-nav a,#sites-chrome-sidebar-left .sites-sidebar-nav a:visited {
-    color: #666666;
     border-bottom: 1px dotted #eeeeee;
     text-decoration: none;
     background-image: none;
@@ -349,28 +301,6 @@ body #sites-chrome-sidebar-left .sites-embed-title {
     padding-left: 202px;
 }
 
-div.goog-toc {
-    background: url(bg-pattern.gif) repeat;
-    padding: 2px;
-    border: 1px solid #efefef;
-}
-
-div.goog-toc a,div.goog-toc a:visited {
-    color: #a90707;
-    background-image: none;
-}
-
-div.goog-toc p {
-    padding: 3px 5px 0;
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.goog-toc h4 {
-    color: #333333;
-}
-
 th {
     background: url(bg-pattern.gif) repeat;
     color: #333333;
@@ -380,32 +310,28 @@ th {
     border-bottom: 1px dotted #999999;
 }
 
-body {
-    min-width: 90%!important;
-}
-
 #sites-chrome-sidebar-left {
-    width: 170px!important;
+    width: 170px;
 }
 
 body,h1,h2,h3,h4,h5,h6,input {
-    font-family: Antic,serif!important;
+    font-family: Antic,serif;
 }
 
 #sites-canvas h1,#sites-canvas h2,#sites-canvas h3,#sites-canvas h4,#sites-canvas h5,#sites-canvas h6 {
-    font-family: Paytone One,serif!important;
+    font-family: Paytone One,serif;
 }
 
 #sites-chrome-sidebar-left .sites-embed,#sites-chrome-sidebar-left .sites-embed h1,#sites-chrome-sidebar-left .sites-embed h2,#sites-chrome-sidebar-left .sites-embed h3,#sites-chrome-sidebar-left .sites-embed h4,#sites-chrome-sidebar-left .sites-embed h5,#sites-chrome-sidebar-left .sites-embed h6 {
-    font-family: Aldrich,serif!important;
+    font-family: Aldrich,serif;
 }
 
 #sites-chrome-sidebar-left .sites-sidebar-nav a {
-    color: #a90707!important;
+    color: #a90707;
 }
 
 .sites-sidebar-nav .current-bg {
-    background-color: #8b0000!important;
+    background-color: #8b0000;
 }
 
 .sites-sidebar-nav li.topLevel {
@@ -430,7 +356,7 @@ body,h1,h2,h3,h4,h5,h6,input {
 
 /*Stuff I added*/
 body {
-    padding: 15px 0 0;
+    padding: 15px 0 0 0;
 }
 
 .table-body {
