@@ -416,6 +416,11 @@ var navigationJson = [
 var expandIndex = 0;
 var output = '';
 
+output+='<form action="javascript:search();">\n';
+output+='<input type="text" value="" width="100%" id="searchBar" />\n';
+output+='<input type="submit" value="Search" />\n';
+output+='</form>\n';
+
 output+='<div class="sites-embed">\n';
 output+='<div class="sites-embed-content sites-sidebar-nav"><ul>\n';
 
@@ -513,10 +518,17 @@ document.write(output);
 
 function toggleMe(elementId)
 {
-    var elementFound = document.getElementById(elementId);
-    if(null === elementFound) return true;
+   var elementFound = document.getElementById(elementId);
+   if(null === elementFound) return true;
 
-    if(elementFound.className.endsWith(' closed')) elementFound.className = elementFound.className.replace(' closed', '');
-    else elementFound.className += ' closed';
-    return true;
+   if(elementFound.className.endsWith(' closed')) elementFound.className = elementFound.className.replace(' closed', '');
+   else elementFound.className += ' closed';
+   return true;
+}
+function search()
+{
+   var searchText = document.getElementById('searchBar').value;
+   var url = 'https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fskyspiral7.github.io%20' + encodeURIComponent(searchText);
+   window.location.href = url;
+   return false;
 }
