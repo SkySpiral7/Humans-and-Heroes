@@ -1,11 +1,17 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import java.io.File;
-import java.util.*;
-import java.util.regex.Pattern;
-
 import com.github.SkySpiral7.Java.util.FileIoUtil;
-import empty.MyTools;
+import com.github.SkySpiral7.Java.util.StringUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -106,7 +112,7 @@ public class CssChanger
       {
          String style = iterator.next();
          if (!style.endsWith(";")) style += ";";
-         if (MyTools.CountCharOccurrencesInString(style, ';') <= 3) iterator.remove();
+         if (StringUtil.countCharOccurrences(style, ';') <= 3) iterator.remove();
       }
       System.out.println("Filtered them.");
       for (int i = 0; i < styleList.size(); i++)
@@ -181,9 +187,9 @@ public class CssChanger
    {
       String cssFileText = FileIoUtil.readTextFile(cssFile);
       Set<String> allCssNames = new HashSet<>();
-      cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "");
+      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "");
       //remove all text which also removes all hex colors (which would mess up finding id selectors)
-      cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
+      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
       //remove all comments which may contain a dot (which would mess up finding class selectors)
       cssFileText = cssFileText.replace(".", " .");  //make sure all dots have a space before them
       cssFileText = cssFileText.replace("#", " #");  //ditto even though there are none like this
@@ -214,9 +220,9 @@ public class CssChanger
    {
       String cssFileText = FileIoUtil.readTextFile(cssFile);
       Set<String> fullCssNames = new HashSet<>();
-      cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "\n");
+      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "\n");
       //remove all text which also removes all hex colors
-      cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
+      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
       //remove comments
       String[] cssSplit = cssFileText.split("[,\r\n]");  //split by comma and endline
       for (String splitItem : cssSplit)
@@ -242,17 +248,17 @@ public class CssChanger
       String cssFileText = FileIoUtil.readTextFile(cssFile);
       for (String cssName : cssNameList)
       {
-         cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("(, *|^)\\Q" + cssName + "\\E( *,| *\\{$)", Pattern.MULTILINE), "$1$2");
+         cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("(, *|^)\\Q" + cssName + "\\E( *,| *\\{$)", Pattern.MULTILINE), "$1$2");
       }
       cssFileText = cssFileText.replaceAll(" *,+", ",");  //delete multi commas
       cssFileText = cssFileText.replaceAll(", *\\{", " {");  //delete trailing commas (including ones I added)
-      cssFileText = MyTools.StringRegexReplaceAll(cssFileText, Pattern.compile("^ *,", Pattern.MULTILINE), "");
+      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("^ *,", Pattern.MULTILINE), "");
       //delete leading commas. also deletes ones I added
       Pattern emptyBlockPattern = Pattern.compile("\\}\\s*\\{.*?\\}", Pattern.DOTALL);
       while (emptyBlockPattern.matcher(cssFileText).find())
-      { cssFileText = MyTools.StringRegexReplaceAll(cssFileText, emptyBlockPattern, "}"); }
+      { cssFileText = StringUtil.regexReplaceAll(cssFileText, emptyBlockPattern, "}"); }
       //delete empty blocks (not first). needs a loop because replacement is used for match
-      cssFileText = MyTools.StringRegexReplaceFirst(cssFileText, Pattern.compile("\\*/\\s*\\{.*?\\}", Pattern.DOTALL), "*/");
+      cssFileText = StringUtil.regexReplaceFirst(cssFileText, Pattern.compile("\\*/\\s*\\{.*?\\}", Pattern.DOTALL), "*/");
       //delete first block if empty
       FileIoUtil.writeToFile(cssFile, cssFileText);
    }

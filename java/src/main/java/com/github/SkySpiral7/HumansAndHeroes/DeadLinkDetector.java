@@ -1,5 +1,8 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
+import com.github.SkySpiral7.Java.util.FileIoUtil;
+import com.github.SkySpiral7.Java.util.StringUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -8,9 +11,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import empty.MyTools;
 
 public class DeadLinkDetector
 {
@@ -79,7 +79,7 @@ public class DeadLinkDetector
    public static Set<String> findAllLocalLinks(final File currentFile)
    {
       return findAllLinks(currentFile).stream().filter(linkText ->
-            !MyTools.regexFoundInString(linkText, "^(?:src|href)=\"(?:https?|mailto|javascript|data):")
+            !StringUtil.regexFoundInString(linkText, "^(?:src|href)=\"(?:https?|mailto|javascript|data):")
       ).collect(Collectors.toSet());
    }
 

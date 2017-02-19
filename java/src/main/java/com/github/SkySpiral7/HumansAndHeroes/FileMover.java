@@ -1,13 +1,13 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
+import com.github.SkySpiral7.Java.util.FileIoUtil;
+import com.github.SkySpiral7.Java.util.StringUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import empty.MyTools;
 
 public class FileMover
 {
@@ -52,7 +52,7 @@ public class FileMover
       final File fakeFile = new File(Main.rootFolder + "/fake.txt");
       final String pathToOld = linkBetween(fakeFile, oldFile);
       final String pathToNew = linkBetween(fakeFile, newFile);
-      final String newContents = MyTools.StringLiteralReplaceFirst(originalContents, pathToOld, pathToNew);
+      final String newContents = StringUtil.literalReplaceFirst(originalContents, pathToOld, pathToNew);
       try
       {
          Thread.sleep(10);

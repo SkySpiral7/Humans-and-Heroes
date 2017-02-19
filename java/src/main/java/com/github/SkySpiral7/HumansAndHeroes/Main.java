@@ -1,14 +1,15 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import java.io.File;
-import java.lang.annotation.Annotation;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.github.SkySpiral7.Java.pojo.FileGatherer;
 import com.github.SkySpiral7.Java.util.FileIoUtil;
-import empty.MyTools;
+import com.github.SkySpiral7.Java.util.StringUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -30,7 +31,7 @@ public class Main
       {
          String originalContents = FileIoUtil.readTextFile(myFileArray[i]);
          String newContents = originalContents;
-         //String newContents = MyTools.StringLiteralReplaceFirst(originalContents, "<table style=\"margin: 50px\" cellspacing=\"0\" border=\"0\">", "<table
+         //String newContents = StringUtil.literalReplaceFirst(originalContents, "<table style=\"margin: 50px\" cellspacing=\"0\" border=\"0\">", "<table
          // style=\"margin: 50px; border-spacing: 0px; border-width: 0px;\">");
          if (!newContents.equals(originalContents))
          {
@@ -105,7 +106,7 @@ public class Main
       for (int i = 0; i < myFileArray.length; i++)
       {
          String contents = FileIoUtil.readTextFile(myFileArray[i]);
-         if (MyTools.regexFoundInString(contents, searchingFor)) results.add(myFileArray[i]);
+         if (StringUtil.regexFoundInString(contents, searchingFor)) results.add(myFileArray[i]);
       }
       System.out.println("Done.\r\n");
       if (results.isEmpty())

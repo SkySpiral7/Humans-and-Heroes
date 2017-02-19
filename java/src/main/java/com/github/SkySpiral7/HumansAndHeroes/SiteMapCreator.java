@@ -1,5 +1,8 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
+import com.github.SkySpiral7.Java.util.FileIoUtil;
+import com.github.SkySpiral7.Java.util.StringUtil;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -8,9 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import empty.MyTools;
 
 public class SiteMapCreator
 {
@@ -33,7 +33,7 @@ public class SiteMapCreator
             final String link = input.toString().substring(rootPathOffset).replace("\\", "/");
             if (previousLink != null) printUnorderedListTags(link);
 
-            int depth = MyTools.CountCharOccurrencesInString(link, '/');
+            int depth = StringUtil.countCharOccurrences(link, '/');
             if (link.endsWith("index.html")) --depth;
             if (depth > 0) System.out.print("<li>");
             System.out.print("<a href=\"" + link + "\">");
