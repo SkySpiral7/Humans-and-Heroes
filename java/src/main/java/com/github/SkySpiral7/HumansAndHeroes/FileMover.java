@@ -16,7 +16,7 @@ public class FileMover
       for (final File currentFile : Main.getAllHtmlFiles(new File("../powers/effects/effect-descriptions")))
       {
          System.out.print("Top: Looking at ");
-         System.out.println(currentFile);
+         Main.printFileOutput(currentFile);
          moveFile(currentFile, Paths.get("../powers/effects", currentFile.getName()).toFile());
       }
    }
@@ -26,12 +26,12 @@ public class FileMover
       for (final File currentFile : Main.getAllHtmlFiles())
       {
          System.out.print("Looking at ");
-         System.out.println(currentFile);
+         Main.printFileOutput(currentFile);
          if (currentFile.equals(oldFile)) updateAllMyLinks(currentFile, newFile);
          else updateSingleLink(currentFile, oldFile, newFile);
       }
       System.out.print("Looking at ");
-      System.out.println(Main.sideBar);
+      Main.printFileOutput(Main.sideBar);
       updateSideBar(oldFile, newFile);
       try
       {

@@ -18,10 +18,41 @@ public class Main
 {
    public static final File rootFolder = new File("..");
    public static final File sideBar = new File("../themes/side bar.js");
+   private static String rootFolderPath;
+
+   private enum RunCommands{DEAD, UNLINKED, MOVE, MAP}
 
    public static void main(String[] args) throws Exception
    {
-      SiteMapCreator.generate();
+      rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+      switch (RunCommands.valueOf(args[0].toUpperCase()))
+      {
+         case DEAD:
+            DeadLinkDetector.detect();
+            break;
+         case UNLINKED:
+            UnlinkedFileDetector.detect();
+            break;
+         case MOVE:
+            final String oldPath = "../" + args[1];
+            final String newPath = "../" + args[2];
+            FileMover.moveFile(new File(oldPath), new File(newPath));
+            break;
+         case MAP:
+            SiteMapCreator.generate();
+            break;
+      }
+   }
+
+   public static void printFileOutput(final File output)
+   {
+      final String outputAbsolutePath = output.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+      System.out.println(outputAbsolutePath.replace(rootFolderPath, ""));
+   }
+
+   public static void printFileOutput(final String fileOutput)
+   {
+      printFileOutput(new File(fileOutput));
    }
 
    public static void writeToFiles()

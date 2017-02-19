@@ -31,8 +31,8 @@ public class UnlinkedFileDetector
       hiddenFiles.removeAll(findAllLinkedFiles());
 
       System.out.println();
-      System.out.println();
-      System.out.println(hiddenFiles.toString().replace(",", ",\r\n"));
+      System.out.println("Unlinked files:");
+      hiddenFiles.forEach(Main::printFileOutput);
    }
 
    private static Set<String> findAllLinkedFiles()
@@ -42,14 +42,14 @@ public class UnlinkedFileDetector
       unexaminedFiles.add(homePage.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath());
 
       System.out.print("Looking at ");
-      System.out.println(Main.sideBar);
+      Main.printFileOutput(Main.sideBar);
       unexaminedFiles.addAll(readSideBar());
 
       while (!unexaminedFiles.isEmpty())
       {
          final String currentFile = unexaminedFiles.removeLast();
          System.out.print("Looking at ");
-         System.out.println(currentFile);
+         Main.printFileOutput(currentFile);
          linkedFiles.add(currentFile);
 
          final Set<String> links = readLinks(new File(currentFile));

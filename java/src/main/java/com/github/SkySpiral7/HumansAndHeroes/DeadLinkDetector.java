@@ -14,17 +14,23 @@ import java.util.stream.Collectors;
 
 public class DeadLinkDetector
 {
+   private static boolean hasDeadLinks = false;
+
+   /**
+    * Prints out each broken hyperlink (ones that are 404).
+    */
    public static void detect() throws IOException
    {
       for (final File currentFile : Main.getAllHtmlFiles())
       {
          System.out.print("Looking at ");
-         System.out.println(currentFile);
+         Main.printFileOutput(currentFile);
          readLinks(currentFile);
       }
       System.out.print("Looking at ");
-      System.out.println(Main.sideBar);
+      Main.printFileOutput(Main.sideBar);
       readSideBar();
+      if(!hasDeadLinks) System.out.println("No dead links.");
    }
 
    private static void readSideBar()
@@ -35,7 +41,7 @@ public class DeadLinkDetector
       {
          final String pathToFile = matcher.group(1);
          final File linkedFile = Paths.get(Main.rootFolder.getAbsolutePath(), pathToFile).toFile();
-         if (!linkedFile.exists()) System.out.println("   Broken link to: " + pathToFile);
+         if (!linkedFile.exists()){System.out.println("   Broken link to: " + pathToFile); hasDeadLinks=true;}
       }
    }
 
@@ -47,18 +53,18 @@ public class DeadLinkDetector
          {
             final String contents = FileIoUtil.readTextFile(currentFile);
             final String anchor = linkText.replaceFirst("^href=\"#([^\"]+)\"$", "$1");
-            if (!contents.contains("id=\"" + anchor + "\"")) System.out.println("   Broken link to: #" + anchor);
+            if (!contents.contains("id=\"" + anchor + "\"")){System.out.println("   Broken link to: #" + anchor); hasDeadLinks=true;}
          }
          else
          {
             final String pathToFile = linkText.replaceFirst("^(?:src|href)=\"([^\"#?]+).*\"$", "$1");
             final File linkedFile = Paths.get(currentFile.getParentFile().getAbsolutePath(), pathToFile).toFile();
-            if (!linkedFile.exists()) System.out.println("   Broken link to: " + pathToFile);
+            if (!linkedFile.exists()){System.out.println("   Broken link to: " + pathToFile); hasDeadLinks=true;}
             else if (linkText.contains("#"))
             {
                final String contents = FileIoUtil.readTextFile(linkedFile);
                final String anchor = linkText.replaceFirst("^href=\"[^\"#]+#([^\"]+)\"$", "$1");
-               if (!contents.contains("id=\"" + anchor + "\"")) System.out.println("   Broken link to: " + pathToFile + "#" + anchor);
+               if (!contents.contains("id=\"" + anchor + "\"")){System.out.println("   Broken link to: " + pathToFile + "#" + anchor); hasDeadLinks=true;}
             }
          }
       });
@@ -66,7 +72,7 @@ public class DeadLinkDetector
 
    public static Set<String> findAllLinks(final File currentFile)
    {
-      final String contents = FileIoUtil.readTextFile(currentFile);
+      final String contents = FileIoUtil.readTextFile(currentFile).replaceAll("<!--[\\s\\S]*?-->", "");
       final Matcher matcher = Pattern.compile("(?:src|href)=\"[^\"]+\"").matcher(contents);
       final Set<String> linkSet = new HashSet<>();
       while (matcher.find())
