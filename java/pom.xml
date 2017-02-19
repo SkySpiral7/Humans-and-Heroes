@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>com.github.SkySpiral7</groupId>
+   <artifactId>Humans-and-Heroes</artifactId>
+   <version>0.0.0-SNAPSHOT</version>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</maven.build.timestamp.format>
+      <project.timestamp>${maven.build.timestamp}</project.timestamp>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>com.github.SkySpiral7</groupId>
+         <artifactId>Java</artifactId>
+         <version>0.0.0-SNAPSHOT</version>
+      </dependency>
+   </dependencies>
+</project>
