@@ -1,6 +1,6 @@
 //Polyfill for IE11
 if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function(searchString, position){
+    String.prototype.startsWith = function(searchString, position) {
       position = position || 0;
       return this.substr(position, searchString.length) === searchString;
   };
@@ -26,8 +26,8 @@ var currentPage = location.href.substring(absolutePrefix.length);
 currentPage = currentPage.replace(/\?.*$/, '').replace(/#.*$/, '');  //ignore query parameters and anchor
 if (!currentPage.endsWith('.html'))
 {
-   if(!currentPage.endsWith('/')) currentPage+='/';
-   currentPage+='index.html';
+   if(!currentPage.endsWith('/')) currentPage += '/';
+   currentPage += 'index.html';
 }
 
 var navigationJson = [
@@ -42,6 +42,10 @@ var navigationJson = [
          {
             "name":"Conditions",
             "link":"the-basics/conditions.html"
+         },
+         {
+            "name":"Glossary of Terms",
+            "link":"the-basics/glossary-of-terms.html"
          },
          {
             "name":"Ranks and Measures",
@@ -122,14 +126,6 @@ var navigationJson = [
    {
       "name":"Abilities",
       "link":"abilities.html"
-   },
-   {
-      "name":"Skills",
-      "link":"skills.html"
-   },
-   {
-      "name":"Advantages",
-      "link":"advantages.html"
    },
    {
       "name":"Powers",
@@ -358,12 +354,28 @@ var navigationJson = [
       ]
    },
    {
+      "name":"Advantages",
+      "link":"advantages.html"
+   },
+   {
+      "name":"Skills",
+      "link":"skills.html"
+   },
+   {
       "name":"Action &amp; Adventure",
       "link":"action-adventure.html"
    },
    {
       "name":"Gamemastering",
       "link":"gamemastering.html"
+   },
+   {
+      "name":"Supplementary Rules",
+      "link":"supplementary-rules.html"
+   },
+   {
+      "name":"Examples",
+      "link":"examples.html"
    },
    {
       "name":"Meta",
@@ -382,6 +394,10 @@ var navigationJson = [
             "link":"meta/known-issues.html"
          },
          {
+            "name":"Open Game License",
+            "link":"meta/open-game-license.html"
+         },
+         {
             "name":"Statistics",
             "link":"meta/statistics.html"
          },
@@ -394,22 +410,6 @@ var navigationJson = [
             "link":"meta/versioning.html"
          }
       ]
-   },
-   {
-      "name":"Supplementary Rules",
-      "link":"supplementary-rules.html"
-   },
-   {
-      "name":"Examples",
-      "link":"examples.html"
-   },
-   {
-      "name":"Glossary of Terms",
-      "link":"glossary-of-terms.html"
-   },
-   {
-      "name":"Open Game License",
-      "link":"open-game-license.html"
    }
 ];
 
@@ -518,11 +518,11 @@ document.write(output);
 
 function toggleMe(elementId)
 {
-   var elementFound = document.getElementById(elementId);
-   if(null === elementFound) return true;
+   var element = document.getElementById(elementId);
+   if(null === element) return true;
 
-   if(elementFound.className.endsWith(' closed')) elementFound.className = elementFound.className.replace(' closed', '');
-   else elementFound.className += ' closed';
+   if(element.className.endsWith(' closed')) element.className = element.className.replace(' closed', '');
+   else element.className += ' closed';
    return true;
 }
 function search()
