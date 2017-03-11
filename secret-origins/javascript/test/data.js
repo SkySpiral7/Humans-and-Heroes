@@ -19,12 +19,12 @@ TestSuite.data.allVersions=function(isFirst)
          "Presence"
       ]
    };
-   testResults.push({Expected: expected, Actual: Data2.Ability, Description: 'Data2.Ability'});
+   testResults.push({Expected: expected, Actual: Data.Ability, Description: 'Data.Ability'});
 
    expected = '          Name <input type="text" size="20" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" />\n';
-   testResults.push({Expected: expected, Actual: Data2.SharedHtml.powerName('power', 5), Description: 'Data2.SharedHtml.powerName'});
+   testResults.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5), Description: 'Data.SharedHtml.powerName'});
    expected = '          Skill <input type="text" size="20" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" />\n';
-   testResults.push({Expected: expected, Actual: Data2.SharedHtml.powerSkill('power', 5), Description: 'Data2.SharedHtml.powerSkill'});
+   testResults.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
    return TestRunner.displayResults('TestSuite.data.allVersions', testResults, isFirst);
@@ -36,7 +36,7 @@ TestSuite.data.v1=function(isFirst)
    var testResults=[], expected;
 
    try {
-   Data2.change(1, 0);
+   Data.change(1, 0);
 
    expected = {
       "godhoodNames": [
@@ -724,7 +724,7 @@ TestSuite.data.v1=function(isFirst)
          "maxRank": 1
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Advantage, Description: 'Data2.Advantage'});
+   testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
    expected = {
       "names": [
@@ -755,7 +755,7 @@ TestSuite.data.v1=function(isFirst)
          "name": "Toughness"
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Defense, Description: 'Data2.Defense'});
+   testResults.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
 
    expected = {
       "names": [
@@ -1645,7 +1645,7 @@ TestSuite.data.v1=function(isFirst)
          "type": "Rank"
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Modifier, Description: 'Data2.Modifier'});
+   testResults.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
 
    expected = {
       "actions": [
@@ -2093,7 +2093,7 @@ TestSuite.data.v1=function(isFirst)
          "isAttack": false
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Power, Description: 'Data2.Power'});
+   testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
 
    expected = {
       "names": [
@@ -2195,7 +2195,7 @@ TestSuite.data.v1=function(isFirst)
          "hasText": true
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Skill, Description: 'Data2.Skill'});
+   testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
    return TestRunner.displayResults('TestSuite.data.v1', testResults, isFirst);
@@ -2207,7 +2207,7 @@ TestSuite.data.v2=function(isFirst)
    var testResults=[], expected;
 
    try {
-   Data2.change(2, 7);
+   Data.change(2, 7);
 
    expected = {
       "godhoodNames": [
@@ -2623,7 +2623,7 @@ TestSuite.data.v2=function(isFirst)
          "maxRank": 1
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Advantage, Description: 'Data2.Advantage'});
+   testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
    expected = {
       "names": [
@@ -2654,7 +2654,7 @@ TestSuite.data.v2=function(isFirst)
          "name": "Toughness"
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Defense, Description: 'Data2.Defense'});
+   testResults.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
 
    expected = {
       "names": [
@@ -3557,7 +3557,7 @@ TestSuite.data.v2=function(isFirst)
          "type": "Rank"
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Modifier, Description: 'Data2.Modifier'});
+   testResults.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
 
    expected = {
       "actions": [
@@ -4018,7 +4018,7 @@ TestSuite.data.v2=function(isFirst)
          "isAttack": false
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Power, Description: 'Data2.Power'});
+   testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
 
    expected = {
       "names": [
@@ -4156,7 +4156,7 @@ TestSuite.data.v2=function(isFirst)
          "hasText": true
       }
    };
-   testResults.push({Expected: expected, Actual: Data2.Skill, Description: 'Data2.Skill'});
+   testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
    return TestRunner.displayResults('TestSuite.data.v2', testResults, isFirst);
@@ -4168,51 +4168,51 @@ TestSuite.data.v3=function(isFirst)
    var testResults=[];
 
    try {
-   Data2.change(3, 0);
+   Data.change(3, 0);
 
-   testResults.push({Expected: false, Actual: Data2.Advantage.names.contains('Improved Critical'), Description: 'Removed Data2.Advantage[Improved Critical]'});
-   testResults.push({Expected: false, Actual: Data2.Advantage.names.contains('Trance'), Description: 'Removed Data2.Advantage[Trance]'});
-   testResults.push({Expected: true, Actual: Data2.Advantage.names.contains('Persistent Information'), Description: 'Added Data2.Advantage[Persistent Information]'});
-   testResults.push({Expected: 1, Actual: Data2.Advantage['Inspire'].maxRank, Description: 'Data2.Advantage[Inspire] no longer ranked'});
-   testResults.push({Expected: true, Actual: Data2.Modifier.names.contains('Uncontrollable Activation'), Description: 'Added Data2.Modifier[Uncontrollable Activation]'});
+   testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
+   testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
+   testResults.push({Expected: true, Actual: Data.Advantage.names.contains('Persistent Information'), Description: 'Added Data.Advantage[Persistent Information]'});
+   testResults.push({Expected: 1, Actual: Data.Advantage['Inspire'].maxRank, Description: 'Data.Advantage[Inspire] no longer ranked'});
+   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Added Data.Modifier[Uncontrollable Activation]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.0 Same data'});}
 
    try {
-   Data2.change(3, 4);
+   Data.change(3, 4);
 
-   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data2.Modifier[Uncontrollable Activation]'});
-   testResults.push({Expected: false, Actual: Data2.Power.actions.contains('Triggered'), Description: 'Removed Data2.Power.actions[Triggered]'});
-   testResults.push({Expected: 'Free', Actual: Data2.Power['A God I Am'].defaultAction, Description: 'Data2.Power[A God I Am].defaultAction = Free'});
-   testResults.push({Expected: 'Move', Actual: Data2.Power['Flight'].defaultAction, Description: 'Data2.Power[Flight].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data2.Power['Leaping'].defaultAction, Description: 'Data2.Power[Leaping].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data2.Power['Movement'].defaultAction, Description: 'Data2.Power[Movement].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data2.Power['Permeate'].defaultAction, Description: 'Data2.Power[Permeate].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data2.Power['Teleport'].defaultAction, Description: 'Data2.Power[Teleport].defaultAction = Move'});
+   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier[Uncontrollable Activation]'});
+   testResults.push({Expected: false, Actual: Data.Power.actions.contains('Triggered'), Description: 'Removed Data.Power.actions[Triggered]'});
+   testResults.push({Expected: 'Free', Actual: Data.Power['A God I Am'].defaultAction, Description: 'Data.Power[A God I Am].defaultAction = Free'});
+   testResults.push({Expected: 'Move', Actual: Data.Power['Flight'].defaultAction, Description: 'Data.Power[Flight].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data.Power['Leaping'].defaultAction, Description: 'Data.Power[Leaping].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data.Power['Movement'].defaultAction, Description: 'Data.Power[Movement].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data.Power['Permeate'].defaultAction, Description: 'Data.Power[Permeate].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data.Power['Teleport'].defaultAction, Description: 'Data.Power[Teleport].defaultAction = Move'});
 
    var actualAllowReaction=[], actualIsMovement=[];
    var allNames = Data.Power.names.concat(Data.Power.godhoodNames);
    for (var i = 0; i < allNames.length; ++i)
    {
       var name = allNames[i];
-      if(true === Data2.Power[name].allowReaction) actualAllowReaction.push(name);
-      if(true === Data2.Power[name].isMovement) actualIsMovement.push(name);
+      if(true === Data.Power[name].allowReaction) actualAllowReaction.push(name);
+      if(true === Data.Power[name].isMovement) actualIsMovement.push(name);
    }
    actualAllowReaction.sort();
    actualIsMovement.sort();
    var expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
-   testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data2.Power[*].allowReaction'});
+   testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data.Power[*].allowReaction'});
    expected = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
-   testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data2.Power[*].isMovement'});
+   testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data.Power[*].isMovement'});
 
-   testResults.push({Expected: true, Actual: Data2.Modifier.names.contains('Aura'), Description: 'Added Data2.Modifier[Aura]'});
-   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Grab-Based'), Description: 'Removed Data2.Modifier[Grab-Based]'});
-   testResults.push({Expected: true, Actual: Data2.Modifier['Aura'].isReadOnly, Description: 'Data2.Modifier[Aura].isReadOnly = true'});
+   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Aura'), Description: 'Added Data.Modifier[Aura]'});
+   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
+   testResults.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
    } catch(e){testResults.push({Error: e, Description: 'v3.4 Same data'});}
 
    try {
-   Data2.change(3, 5);
+   Data.change(3, 5);
 
-   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data2.Modifier[Secondary Effect]'});
+   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.5 Same data'});}
 
    return TestRunner.displayResults('TestSuite.data.v3', testResults, isFirst);
