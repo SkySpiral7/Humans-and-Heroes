@@ -15,15 +15,16 @@ TestSuite.migration.advantage=function(isFirst)
    testResults.push({Expected: Data.Advantage.mapThese, Actual: Data2.Advantage.mapThese, Description: 'Data.Advantage.mapThese'});
    testResults.push({Expected: Data.Advantage.names, Actual: Data2.Advantage.names, Description: 'Data.Advantage.names'});
 
-   for (var i = 0; i < Data.Advantage.names.length; ++i)
+   var allNames = Data.Advantage.names.concat(Data.Advantage.godhoodNames);
+   for (var i = 0; i < allNames.length; ++i)
    {
-      var name = Data.Advantage.names[i];
+      var name = allNames[i];
 
-      testResults.push({Expected: name, Actual: Data2.Advantage[name].name, Description: 'Data2.Advantage[name].name'});
-      testResults.push({Expected: Data.Advantage.costPerRank.get(name), Actual: Data2.Advantage[name].costPerRank, Description: 'Data.Advantage.costPerRank'});
-      testResults.push({Expected: Data.Advantage.defaultText.get(name), Actual: Data2.Advantage[name].defaultText, Description: 'Data.Advantage.defaultText'});
-      testResults.push({Expected: Data.Advantage.hasText.contains(name), Actual: Data2.Advantage[name].hasText, Description: 'Data.Advantage.hasText'});
-      testResults.push({Expected: Data.Advantage.maxRank.get(name), Actual: Data2.Advantage[name].maxRank, Description: 'Data.Advantage.maxRank'});
+      testResults.push({Expected: name, Actual: Data2.Advantage[name].name, Description: 'Data2.Advantage['+name+'].name'});
+      testResults.push({Expected: Data.Advantage.costPerRank.get(name), Actual: Data2.Advantage[name].costPerRank, Description: 'Data.Advantage['+name+'].costPerRank'});
+      testResults.push({Expected: Data.Advantage.defaultText.get(name), Actual: Data2.Advantage[name].defaultText, Description: 'Data.Advantage['+name+'].defaultText'});
+      testResults.push({Expected: Data.Advantage.hasText.contains(name), Actual: Data2.Advantage[name].hasText, Description: 'Data.Advantage['+name+'].hasText'});
+      testResults.push({Expected: Data.Advantage.maxRank.get(name), Actual: Data2.Advantage[name].maxRank, Description: 'Data.Advantage['+name+'].maxRank'});
    }
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
@@ -46,8 +47,8 @@ TestSuite.migration.defense=function(isFirst)
    {
       var name = Data.Defense.names[i];
 
-      testResults.push({Expected: name, Actual: Data2.Defense[name].name, Description: 'Data2.Defense[name].name'});
-      testResults.push({Expected: Data.Defense.abilityUsed[i], Actual: Data2.Defense[name].ability, Description: 'Data.Defense.ability'});
+      testResults.push({Expected: name, Actual: Data2.Defense[name].name, Description: 'Data2.Defense['+name+'].name'});
+      testResults.push({Expected: Data.Defense.abilityUsed[i], Actual: Data2.Defense[name].ability, Description: 'Data.Defense['+name+'].ability'});
    }
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
@@ -70,16 +71,16 @@ TestSuite.migration.modifier=function(isFirst)
    {
       var name = Data.Modifier.names[i];
 
-      testResults.push({Expected: name, Actual: Data2.Modifier[name].name, Description: 'Data2.Modifier[name].name'});
-      testResults.push({Expected: Data.Modifier.actionRangeDuration.contains(name), Actual: Data2.Modifier[name].isActionRangeDuration, Description: 'Data.Modifier.actionRangeDuration'});
-      testResults.push({Expected: Data.Modifier.cost.get(name), Actual: Data2.Modifier[name].cost, Description: 'Data.Modifier.cost'});
-      testResults.push({Expected: Data.Modifier.defaultText.get(name), Actual: Data2.Modifier[name].defaultText, Description: 'Data.Modifier.defaultText'});
-      testResults.push({Expected: Data.Modifier.hasAutoTotal.contains(name), Actual: Data2.Modifier[name].hasAutoTotal, Description: 'Data.Modifier.hasAutoTotal'});
-      testResults.push({Expected: Data.Modifier.maxRank.get(name), Actual: Data2.Modifier[name].maxRank, Description: 'Data.Modifier.maxRank'});
-      testResults.push({Expected: Data.Modifier.type.get(name), Actual: Data2.Modifier[name].type, Description: 'Data.Modifier.type'});
-      testResults.push({Expected: Data.Modifier.readOnly.contains(name), Actual: Data2.Modifier[name].isReadOnly, Description: 'Data.Modifier.readOnly'});
-      testResults.push({Expected: Data.Modifier.hasAutoRank.contains(name), Actual: Data2.Modifier[name].hasAutoRank, Description: 'Data.Modifier.hasAutoRank'});
-      testResults.push({Expected: Data.Modifier.hasText.contains(name), Actual: Data2.Modifier[name].hasText, Description: 'Data.Modifier.hasText'});
+      testResults.push({Expected: name, Actual: Data2.Modifier[name].name, Description: 'Data2.Modifier['+name+'].name'});
+      testResults.push({Expected: Data.Modifier.actionRangeDuration.contains(name), Actual: Data2.Modifier[name].isActionRangeDuration, Description: 'Data.Modifier['+name+'].actionRangeDuration'});
+      testResults.push({Expected: Data.Modifier.cost.get(name), Actual: Data2.Modifier[name].cost, Description: 'Data.Modifier['+name+'].cost'});
+      testResults.push({Expected: Data.Modifier.defaultText.get(name), Actual: Data2.Modifier[name].defaultText, Description: 'Data.Modifier['+name+'].defaultText'});
+      testResults.push({Expected: Data.Modifier.hasAutoTotal.contains(name), Actual: Data2.Modifier[name].hasAutoTotal, Description: 'Data.Modifier['+name+'].hasAutoTotal'});
+      testResults.push({Expected: Data.Modifier.maxRank.get(name), Actual: Data2.Modifier[name].maxRank, Description: 'Data.Modifier['+name+'].maxRank'});
+      testResults.push({Expected: Data.Modifier.type.get(name), Actual: Data2.Modifier[name].type, Description: 'Data.Modifier['+name+'].type'});
+      testResults.push({Expected: Data.Modifier.readOnly.contains(name), Actual: Data2.Modifier[name].isReadOnly, Description: 'Data.Modifier['+name+'].readOnly'});
+      testResults.push({Expected: Data.Modifier.hasAutoRank.contains(name), Actual: Data2.Modifier[name].hasAutoRank, Description: 'Data.Modifier['+name+'].hasAutoRank'});
+      testResults.push({Expected: Data.Modifier.hasText.contains(name), Actual: Data2.Modifier[name].hasText, Description: 'Data.Modifier['+name+'].hasText'});
    }
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
@@ -102,17 +103,26 @@ TestSuite.migration.power=function(isFirst)
    testResults.push({Expected: Data.Power.names, Actual: Data2.Power.names, Description: 'Data.Power.names'});
    testResults.push({Expected: Data.Power.ranges, Actual: Data2.Power.ranges, Description: 'Data.Power.ranges'});
 
-   for (var i = 0; i < Data.Power.names.length; ++i)
+   var allNames = Data.Power.names.concat(Data.Power.godhoodNames);
+   for (var i = 0; i < allNames.length; ++i)
    {
-      var name = Data.Power.names[i];
+      var name = allNames[i];
 
-      testResults.push({Expected: name, Actual: Data2.Power[name].name, Description: 'Data2.Power[name].name'});
-      testResults.push({Expected: Data.Power.baseCost.get(name), Actual: Data2.Power[name].baseCost, Description: 'Data.Power.baseCost'});
-      testResults.push({Expected: Data.Power.defaultAction.get(name), Actual: Data2.Power[name].defaultAction, Description: 'Data.Power.defaultAction'});
-      testResults.push({Expected: Data.Power.defaultDuration.get(name), Actual: Data2.Power[name].defaultDuration, Description: 'Data.Power.defaultDuration'});
-      testResults.push({Expected: Data.Power.defaultRange.get(name), Actual: Data2.Power[name].defaultRange, Description: 'Data.Power.defaultRange'});
-      testResults.push({Expected: Data.Power.hasInputBaseCost.contains(name), Actual: Data2.Power[name].hasInputBaseCost, Description: 'Data.Power.hasInputBaseCost'});
-      testResults.push({Expected: Data.Power.isAttack.contains(name), Actual: Data2.Power[name].isAttack, Description: 'Data.Power.isAttack'});
+      testResults.push({Expected: name, Actual: Data2.Power[name].name, Description: 'Data2.Power['+name+'].name'});
+      testResults.push({Expected: Data.Power.baseCost.get(name), Actual: Data2.Power[name].baseCost, Description: 'Data.Power['+name+'].baseCost'});
+      testResults.push({Expected: Data.Power.defaultAction.get(name), Actual: Data2.Power[name].defaultAction, Description: 'Data.Power['+name+'].defaultAction'});
+      testResults.push({Expected: Data.Power.defaultDuration.get(name), Actual: Data2.Power[name].defaultDuration, Description: 'Data.Power['+name+'].defaultDuration'});
+      testResults.push({Expected: Data.Power.defaultRange.get(name), Actual: Data2.Power[name].defaultRange, Description: 'Data.Power['+name+'].defaultRange'});
+      testResults.push({Expected: Data.Power.hasInputBaseCost.contains(name), Actual: Data2.Power[name].hasInputBaseCost, Description: 'Data.Power['+name+'].hasInputBaseCost'});
+      testResults.push({Expected: Data.Power.isAttack.contains(name), Actual: Data2.Power[name].isAttack, Description: 'Data.Power['+name+'].isAttack'});
+
+      var expected = undefined;
+      if(undefined !== Data.Power.allowReaction) expected = Data.Power.allowReaction.contains(name);
+      testResults.push({Expected: expected, Actual: Data2.Power[name].allowReaction, Description: 'Data.Power['+name+'].allowReaction'});
+
+      expected = undefined;
+      if(undefined !== Data.Power.isMovement) expected = Data.Power.isMovement.contains(name);
+      testResults.push({Expected: expected, Actual: Data2.Power[name].isMovement, Description: 'Data.Power['+name+'].isMovement'});
    }
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
@@ -135,9 +145,9 @@ TestSuite.migration.skill=function(isFirst)
    {
       var name = Data.Skill.names[i];
 
-      testResults.push({Expected: name, Actual: Data2.Skill[name].name, Description: 'Data2.Skill[name].name'});
-      testResults.push({Expected: Data.Skill.abilityMap.get(name), Actual: Data2.Skill[name].ability, Description: 'Data.Skill.abilityMap'});
-      testResults.push({Expected: Data.Skill.hasText.contains(name), Actual: Data2.Skill[name].hasText, Description: 'Data.Skill.hasText'});
+      testResults.push({Expected: name, Actual: Data2.Skill[name].name, Description: 'Data2.Skill['+name+'].name'});
+      testResults.push({Expected: Data.Skill.abilityMap.get(name), Actual: Data2.Skill[name].ability, Description: 'Data.Skill['+name+'].abilityMap'});
+      testResults.push({Expected: Data.Skill.hasText.contains(name), Actual: Data2.Skill[name].hasText, Description: 'Data.Skill['+name+'].hasText'});
    }
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 

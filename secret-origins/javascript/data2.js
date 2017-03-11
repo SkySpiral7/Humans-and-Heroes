@@ -226,18 +226,19 @@ Data2.change = function(major, minor)
          powerLookup.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
          powerLookup.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
 
-         modifierLookup.readOnly.push('Aura');
          extraNames.push('Aura');
          flawNames.removeByValue('Grab-Based');
+         modifierLookup.readOnly.push('Aura');
       }
       if(minor >= 5) extraNames.removeByValue('Secondary Effect');
    }
 
-   var i, name;
+   var i, name, allNames;
    Data2.Advantage.names.sort();
-   for (i = 0; i < Data2.Advantage.names.length; ++i)
+   allNames = Data2.Advantage.names.concat(Data2.Advantage.godhoodNames);
+   for (i = 0; i < allNames.length; ++i)
    {
-      name = Data2.Advantage.names[i];
+      name = allNames[i];
       Data2.Advantage[name] = {
          name: name,
          costPerRank: advantageLookup.costPerRank.get(name),
@@ -268,9 +269,10 @@ Data2.change = function(major, minor)
       };
    }
    Data2.Power.names.sort();
-   for (i = 0; i < Data2.Power.names.length; ++i)
+   allNames = Data2.Power.names.concat(Data2.Power.godhoodNames);
+   for (i = 0; i < allNames.length; ++i)
    {
-      name = Data2.Power.names[i];
+      name = allNames[i];
       Data2.Power[name] = {
          name: name,
          baseCost: powerLookup.baseCost.get(name),
@@ -280,6 +282,7 @@ Data2.change = function(major, minor)
          hasInputBaseCost: powerLookup.hasInputBaseCost.contains(name),
          isAttack: powerLookup.isAttack.contains(name)
       };
+      if(undefined !== powerLookup.allowReaction) Data2.Power[name].allowReaction = powerLookup.allowReaction.contains(name);
       if(undefined !== powerLookup.isMovement) Data2.Power[name].isMovement = powerLookup.isMovement.contains(name);
    }
    for (i = 0; i < Data2.Skill.names.length; ++i)
