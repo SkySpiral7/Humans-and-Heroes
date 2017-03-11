@@ -55,7 +55,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        rankTotal=0; flatTotal=0;
       for (var i=0; i < rowArray.length-1; i++)  //the last row is always blank
       {
-          if(Data.Modifier.hasAutoTotal.contains(rowArray[i].getName())) autoModifierNameToRowIndex.add(rowArray[i].getName(), i);
+          if(Data.Modifier[rowArray[i].getName()].hasAutoTotal) autoModifierNameToRowIndex.add(rowArray[i].getName(), i);
           if(rowArray[i].isRank()) rankTotal+=rowArray[i].getRawTotal();
           else flatTotal+=rowArray[i].getRawTotal();  //could be flat or free. if free the total will be 0
       }

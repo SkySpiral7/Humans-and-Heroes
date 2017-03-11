@@ -70,15 +70,15 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       }
 
       name = nameGiven;
-      modifierType = Data.Modifier.type.get(name);
-      costPerRank = Data.Modifier.cost.get(name);
-      maxRank = Data.Modifier.maxRank.get(name);
+      modifierType = Data.Modifier[name].type;
+      costPerRank = Data.Modifier[name].cost;
+      maxRank = Data.Modifier[name].maxRank;
       hasRank = (1 !== maxRank);
       rank = 1;
-      hasText = Data.Modifier.hasText.contains(name);
-      if(hasText) text = Data.Modifier.defaultText.get(name);
+      hasText = Data.Modifier[name].hasText;
+      if(hasText) text = Data.Modifier[name].defaultText;
       else text = undefined;
-      hasAutoTotal = Data.Modifier.hasAutoTotal.contains(name);
+      hasAutoTotal = Data.Modifier[name].hasAutoTotal;
       this.calculateTotal();
 
       if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name) && 'Personal' === this.getPower().getRange())
@@ -90,7 +90,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    {
        if(this.isBlank()) return;
        //TODO: test that this allows setting auto
-      //if (Data.Modifier.hasAutoRank.contains(name))  //ModifierList.allAutoModifierCanCreate are span so that this isn't called (can't change them anyway)
+      //if (Data.Modifier[name].hasAutoRank)  //ModifierList.allAutoModifierCanCreate are span so that this isn't called (can't change them anyway)
           //return;  //can't change the rank since it is auto
        if(!hasRank) return;  //can only happen when loading bad data
        if(name === 'Fragile') rank = sanitizeNumber(rankGiven, 0, 0);  //the only modifier than can have 0 ranks
@@ -124,8 +124,9 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        var htmlString='';
        htmlString+='   <tr>\n';  //TODO: confirm
        htmlString+='      <td width="34%" style="text-align:right;">\n';
-       var isReadOnlySelective = ('Selective' === name && 'Triggered' === this.getPower().getAction());  //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
-      if (this.getPower().getEffect() === 'Feature' || (!Data.Modifier.readOnly.contains(name) && !isReadOnlySelective))
+       var amReadOnly = ('Selective' === name && 'Triggered' === this.getPower().getAction());  //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
+       if(undefined !== name && !amReadOnly) amReadOnly = Data.Modifier[name].isReadOnly;
+      if (this.getPower().getEffect() === 'Feature' || !amReadOnly)
       {
           htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
           htmlString+='             <option>Select One</option>\n';
@@ -134,7 +135,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
              if(this.getPower().getSection() === Main.equipmentSection &&
                 (Data.Modifier.names[i] === 'Removable' || Data.Modifier.names[i] === 'Easily Removable')) continue;
                   //equipment has removable built in and can't have the modifiers
-             if(this.getPower().getEffect() === 'Feature' || !Data.Modifier.readOnly.contains(Data.Modifier.names[i]))
+             if(this.getPower().getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
                 htmlString+='             <option>'+Data.Modifier.names[i]+'</option>\n';
          }
           htmlString+='         </select>\n';
@@ -152,7 +153,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
           //if hasAutoTotal then hasRank is false
          if (hasRank)
          {
-             if(this.getPower().getEffect() !== 'Feature' && Data.Modifier.hasAutoRank.contains(name)) htmlString+='          Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span>\n';
+             if(this.getPower().getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='          Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span>\n';
                 //only Feature can change the ranks of these
             else
             {
