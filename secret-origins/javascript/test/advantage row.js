@@ -2,7 +2,7 @@ TestSuite.advantageRow={};
 TestSuite.advantageRow.setAdvantage=function(isFirst)
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    //testResults.push({Expected: Data.Advantage.defaultText.get('Benefit'), Actual: Main.advantageSection.getRow(0).getText(), Description: actionTaken+': of default text'});
+    //testResults.push({Expected: Data.Advantage['Benefit'].defaultText, Actual: Main.advantageSection.getRow(0).getText(), Description: actionTaken+': of default text'});
     TestRunner.clearResults(isFirst);
 
     var testResults=[];
@@ -170,7 +170,7 @@ TestSuite.advantageRow.generate=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Advantage section is blank'});
 
     actionTaken='Set Languages'; SelectUtil.changeText('advantageChoices0', 'Languages');
-    testResults.push({Expected: Data.Advantage.defaultText.get('Languages'), Actual: document.getElementById('advantageText0').value, Description: actionTaken+': Advantage text was created with default text'});
+    testResults.push({Expected: Data.Advantage['Languages'].defaultText, Actual: document.getElementById('advantageText0').value, Description: actionTaken+': Advantage text was created with default text'});
     actionTaken='Set Diehard'; SelectUtil.changeText('advantageChoices0', 'Diehard');
     testResults.push({Expected: null, Actual: document.getElementById('advantageText0'), Description: actionTaken+': Advantage text was removed'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
@@ -181,7 +181,7 @@ TestSuite.advantageRow.generate=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Advantage section is blank'});
 
     actionTaken='Set Lucky'; SelectUtil.changeText('advantageChoices0', 'Lucky');
-    testResults.push({Expected: Data.Advantage.costPerRank.get('Lucky').toString(), Actual: document.getElementById('advantageRowTotal0').innerHTML, Description: actionTaken+': Advantage row total was created with default value'});
+    testResults.push({Expected: Data.Advantage['Lucky'].costPerRank.toString(), Actual: document.getElementById('advantageRowTotal0').innerHTML, Description: actionTaken+': Advantage row total was created with default value'});
     actionTaken='Set Diehard'; SelectUtil.changeText('advantageChoices0', 'Diehard');
     testResults.push({Expected: null, Actual: document.getElementById('advantageRowTotal0'), Description: actionTaken+': Advantage row total was removed'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}

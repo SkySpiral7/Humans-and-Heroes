@@ -2117,12 +2117,12 @@ TestSuite.data.v1=function(isFirst)
       "Acrobatics": {
          "name": "Acrobatics",
          "ability": "Agility",
-         "hasText": true
+         "hasText": false
       },
       "Athletics": {
          "name": "Athletics",
          "ability": "Strength",
-         "hasText": true
+         "hasText": false
       },
       "Close Combat": {
          "name": "Close Combat",
@@ -2132,7 +2132,7 @@ TestSuite.data.v1=function(isFirst)
       "Deception": {
          "name": "Deception",
          "ability": "Presence",
-         "hasText": true
+         "hasText": false
       },
       "Expertise": {
          "name": "Expertise",
@@ -2142,17 +2142,17 @@ TestSuite.data.v1=function(isFirst)
       "Insight": {
          "name": "Insight",
          "ability": "Awareness",
-         "hasText": true
+         "hasText": false
       },
       "Intimidation": {
          "name": "Intimidation",
          "ability": "Presence",
-         "hasText": true
+         "hasText": false
       },
       "Investigation": {
          "name": "Investigation",
          "ability": "Intellect",
-         "hasText": true
+         "hasText": false
       },
       "Perception": {
          "name": "Perception",
@@ -2172,27 +2172,27 @@ TestSuite.data.v1=function(isFirst)
       "Sleight of Hand": {
          "name": "Sleight of Hand",
          "ability": "Dexterity",
-         "hasText": true
+         "hasText": false
       },
       "Stealth": {
          "name": "Stealth",
          "ability": "Agility",
-         "hasText": true
+         "hasText": false
       },
       "Technology": {
          "name": "Technology",
          "ability": "Intellect",
-         "hasText": true
+         "hasText": false
       },
       "Treatment": {
          "name": "Treatment",
          "ability": "Intellect",
-         "hasText": true
+         "hasText": false
       },
       "Vehicles": {
          "name": "Vehicles",
          "ability": "Dexterity",
-         "hasText": true
+         "hasText": false
       }
    };
    testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});

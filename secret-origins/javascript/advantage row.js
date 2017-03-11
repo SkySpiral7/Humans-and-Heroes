@@ -41,13 +41,13 @@ function AdvantageObject(rowIndex)
        var useNewData = !((name === 'Minion' && nameGiven === 'Sidekick') || (name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        name = nameGiven;
-       maxRank = Data.Advantage.maxRank.get(name);
+       maxRank = Data.Advantage[name].maxRank;
        hasRank = (1 !== maxRank);  //if max rank is 1 then there are no ranks
        if(useNewData) rank = 1;
-       costPerRank = Data.Advantage.costPerRank.get(name);
+       costPerRank = Data.Advantage[name].costPerRank;
        total = costPerRank * rank;
-       hasText = Data.Advantage.hasText.contains(name);
-       if(hasText && useNewData) text = Data.Advantage.defaultText.get(name);
+       hasText = Data.Advantage[name].hasText;
+       if(hasText && useNewData) text = Data.Advantage[name].defaultText;
        else if(useNewData) text = undefined;  //needs to be explicit so that the previous data is destroyed
        //else keep using the current text
    };

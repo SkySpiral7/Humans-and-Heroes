@@ -42,19 +42,19 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.getDefaultAction=function()
    {
        if(this.isBlank()) return;
-       return Data.Power.defaultAction.get(effect);
+       return Data.Power[effect].defaultAction;
    };
    /**Returns the default duration for this power or nothing if this row is blank.*/
    this.getDefaultDuration=function()
    {
        if(this.isBlank()) return;
-       return Data.Power.defaultDuration.get(effect);
+       return Data.Power[effect].defaultDuration;
    };
    /**Returns the default range or nothing if this row is blank.*/
    this.getDefaultRange=function()
    {
        if(this.isBlank()) return;
-       return Data.Power.defaultRange.get(effect);
+       return Data.Power[effect].defaultRange;
    };
     /**Get the name of the power appended with text and modifiers to determine redundancy*/
     this.getUniqueName=function(){return effect+': '+text+'; '+modifierSection.getUniqueName();};  //text might be empty
@@ -99,12 +99,12 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
           //this is only reachable if you select the default value in the drop down
 
        effect = effectNameGiven;
-       canSetBaseCost = Data.Power.hasInputBaseCost.contains(effect);
-       baseCost = Data.Power.baseCost.get(effect);
+       canSetBaseCost = Data.Power[effect].hasInputBaseCost;
+       baseCost = Data.Power[effect].baseCost;
        if(undefined === text) text = 'Descriptors and other text';  //let the text stay if changing between powers
-       action = Data.Power.defaultAction.get(effect);
-       range = Data.Power.defaultRange.get(effect);
-       duration = Data.Power.defaultDuration.get(effect);
+       action = Data.Power[effect].defaultAction;
+       range = Data.Power[effect].defaultRange;
+       duration = Data.Power[effect].defaultDuration;
        rank = 1;
        //name = skillUsed = undefined;  //don't clear so that if changing between 2 different attacks these carry over
        this.generateNameAndSkill();
@@ -113,7 +113,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.setBaseCost=function(baseGiven)
    {
        if(!canSetBaseCost || this.isBlank()) return;  //only possible when loading bad data
-       baseCost = sanitizeNumber(baseGiven, 1, Data.Power.baseCost.get(effect));  //unique defaults
+       baseCost = sanitizeNumber(baseGiven, 1, Data.Power[effect].baseCost);  //unique defaults
    };
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
@@ -163,7 +163,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       if ('Personal' === oldRange && 'Permanent' === duration)
       {
           //changing from personal must change duration to not be permanent
-          var defaultDuration = Data.Power.defaultDuration.get(effect);
+          var defaultDuration = Data.Power[effect].defaultDuration;
           if('Permanent' === defaultDuration) this.setDuration('Sustained');
           else this.setDuration(defaultDuration);
           //use default duration if possible. otherwise use Sustained
@@ -189,14 +189,14 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
        if(!shouldValidateActivationInfo) return;  //done
 
-       var defaultDurationName = Data.Power.defaultDuration.get(effect);
+       var defaultDurationName = Data.Power[effect].defaultDuration;
 
        if('Permanent' === newDurationName) this.setAction('None');  //if changing to Permanent
       else if('Permanent' === oldDuration)  //if changing from Permanent
       {
           //then reset action
           if('Permanent' === defaultDurationName) this.setAction('Free');  //default action is None so use Free instead
-          else this.setAction(Data.Power.defaultAction.get(effect));
+          else this.setAction(Data.Power[effect].defaultAction);
           //use default action if possible otherwise use Free
           //either way it will cost 0
       }
@@ -282,9 +282,9 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       else
       {
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
-         var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power.isAttack.contains(effect) || 'Move Object' === effect);
-         var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power.isMovement.contains(effect) && 'Healing' !== effect));
-         var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power.allowReaction.contains(effect));
+         var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
+         var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[effect].isMovement && 'Healing' !== effect));
+         var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[effect].allowReaction);
          for (i=0; i < Data.Power.actions.length-1; i++)  //-1 to avoid 'None'
          {
             //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
@@ -325,7 +325,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </td>\n';
       htmlString+='   </tr>\n';
-      if (Data.Power.isAttack.contains(effect))  //don't check for attack modifier because that's handled by the modifier generate
+      if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
          htmlString+='   <tr>\n';
          htmlString+='       <td width="34%" style="text-align:right;"></td>\n';
@@ -369,7 +369,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
    this.generateNameAndSkill=function()
    {
-      if (!Data.Power.isAttack.contains(effect) && undefined === modifierSection.findRowByName('Attack'))
+      if (!Data.Power[effect].isAttack && undefined === modifierSection.findRowByName('Attack'))
       {
          name = skillUsed = undefined;
          return;
@@ -428,7 +428,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    {
       shouldValidateActivationInfo = true;
 
-      var defaultRange = Data.Power.defaultRange.get(effect);
+      var defaultRange = Data.Power[effect].defaultRange;
       if ('Personal' === range  && 'Personal' !== defaultRange)
       {
          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
@@ -436,7 +436,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          range = defaultRange;  //can't change something to personal unless it started out as that (Feature's baseRange is Personal)
       }
 
-      var defaultDuration = Data.Power.defaultDuration.get(effect);
+      var defaultDuration = Data.Power[effect].defaultDuration;
       if ('Instant' === defaultDuration)
       {
          if ('Instant' !== duration)
@@ -465,7 +465,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       if ('None' === action && 'Permanent' !== duration)  //only Permanent duration can have action None
       {
-         action = Data.Power.defaultAction.get(effect);
+         action = Data.Power[effect].defaultAction;
          if('None' === action) action = 'Free';
          //use default action if possible. otherwise use Free
          //either way it will cost 0
@@ -481,16 +481,16 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       else if ('Reaction' === action && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Feature' !== effect && 'Luck Control' !== effect)
       {
-         if (!Data.Power.allowReaction.contains(effect))
+         if (!Data.Power[effect].allowReaction)
          {
-            action = Data.Power.defaultAction.get(effect);
+            action = Data.Power[effect].defaultAction;
             if('None' === action) action = 'Free';
             Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
                effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + action + ' instead.');
          }
          else if ('Close' !== range)
          {
-            action = Data.Power.defaultAction.get(effect);
+            action = Data.Power[effect].defaultAction;
             if('None' === action) action = 'Free';  //dead code since there are none like this
             Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotCloseRange', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
                effect + ' can\'t have an action of Reaction because it isn\'t Close range (range is ' + range + '). Using action of ' + action + ' instead.');
@@ -533,7 +533,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       if('None' === action) return;  //don't add any modifiers
 
-      var defaultActionName = Data.Power.defaultAction.get(effect);
+      var defaultActionName = Data.Power[effect].defaultAction;
       if('None' === defaultActionName) defaultActionName = 'Free';  //calculate distance from free
       var defaultActionIndex = Data.Power.actions.indexOf(defaultActionName);
       var newActionIndex = Data.Power.actions.indexOf(action);
@@ -552,7 +552,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    {
        if('Feature' === effect) return;  //Feature doesn't change modifiers
 
-       var defaultDurationName = Data.Power.defaultDuration.get(effect);
+       var defaultDurationName = Data.Power[effect].defaultDuration;
        var defaultDurationIndex = Data.Power.durations.indexOf(defaultDurationName);
        var newDurationIndex = Data.Power.durations.indexOf(duration);
        if('Permanent' === defaultDurationName && 'Personal' !== range) defaultDurationIndex = Data.Power.durations.indexOf('Sustained');  //calculate distance from Sustained
@@ -576,7 +576,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        //so that Feature will have the modifiers auto set. This should be less confusing to the user
        //this will also allow and require more edge case testing
 
-       var defaultRangeName = Data.Power.defaultRange.get(effect);
+       var defaultRangeName = Data.Power[effect].defaultRange;
        var defaultRangeIndex = Data.Power.ranges.indexOf(defaultRangeName);
        var newRangeIndex = Data.Power.ranges.indexOf(range);
        if('Personal' === defaultRangeName) defaultRangeIndex = Data.Power.ranges.indexOf('Close');  //calculate distance from close

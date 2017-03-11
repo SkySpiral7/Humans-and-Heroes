@@ -290,8 +290,8 @@ Data.change = function(major, minor)
       name = Data.Skill.names[i];
       Data.Skill[name] = {
          name: name,
-         ability: Data.Skill.abilityMap.get(name),
-         hasText: Data.Skill.hasText.contains(name)
+         ability: skillLookup.abilityMap.get(name),
+         hasText: skillLookup.hasText.contains(name)
       };
    }
 };
