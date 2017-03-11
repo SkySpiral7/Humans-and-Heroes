@@ -1,0 +1,4219 @@
+'use strict';
+TestSuite.data={};
+TestSuite.data.allVersions=function(isFirst)
+{
+   TestRunner.clearResults(isFirst);
+
+   var testResults=[], expected;
+
+   try {
+   expected = {
+      "names": [
+         "Strength",
+         "Agility",
+         "Fighting",
+         "Awareness",
+         "Stamina",
+         "Dexterity",
+         "Intellect",
+         "Presence"
+      ]
+   };
+   testResults.push({Expected: expected, Actual: Data2.Ability, Description: 'Data2.Ability'});
+
+   expected = '          Name <input type="text" size="20" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" />\n';
+   testResults.push({Expected: expected, Actual: Data2.SharedHtml.powerName('power', 5), Description: 'Data2.SharedHtml.powerName'});
+   expected = '          Skill <input type="text" size="20" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" />\n';
+   testResults.push({Expected: expected, Actual: Data2.SharedHtml.powerSkill('power', 5), Description: 'Data2.SharedHtml.powerSkill'});
+   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+
+   return TestRunner.displayResults('TestSuite.data.allVersions', testResults, isFirst);
+};
+TestSuite.data.v1=function(isFirst)
+{
+   TestRunner.clearResults(isFirst);
+
+   var testResults=[], expected;
+
+   try {
+   Data2.change(1, 0);
+
+   expected = {
+      "godhoodNames": [
+         "Beyond Mortal",
+         "Let There Be",
+         "Luck of the Gods",
+         "Omnipresent",
+         "Omniscient",
+         "Perfect Focus",
+         "Stay Like That",
+         "Supreme",
+         "Variable Modifier",
+         "Your Petty Rules Don't Apply to Me"
+      ],
+      "mapThese": [
+         "Close Attack",
+         "Defensive Roll",
+         "Improved Critical",
+         "Improved Initiative",
+         "Ranged Attack",
+         "Seize Initiative"
+      ],
+      "names": [
+         "Accurate Attack",
+         "Agile Feint",
+         "All-out Attack",
+         "Animal Empathy",
+         "Artificer",
+         "Assessment",
+         "Attractive",
+         "Beginner's Luck",
+         "Benefit",
+         "Chokehold",
+         "Close Attack",
+         "Connected",
+         "Contacts",
+         "Daze",
+         "Defensive Attack",
+         "Defensive Roll",
+         "Diehard",
+         "Eidetic Memory",
+         "Equipment",
+         "Evasion",
+         "Extraordinary Effort",
+         "Fascinate",
+         "Fast Grab",
+         "Favored Environment",
+         "Favored Foe",
+         "Fearless",
+         "Grabbing Finesse",
+         "Great Endurance",
+         "Hide in Plain Sight",
+         "Improved Aim",
+         "Improved Critical",
+         "Improved Defense",
+         "Improved Disarm",
+         "Improved Grab",
+         "Improved Hold",
+         "Improved Initiative",
+         "Improved Smash",
+         "Improved Trip",
+         "Improvised Tools",
+         "Improvised Weapon",
+         "Inspire",
+         "Instant Up",
+         "Interpose",
+         "Inventor",
+         "Jack of All Trades",
+         "Languages",
+         "Leadership",
+         "Luck",
+         "Minion",
+         "Move-by Action",
+         "Power Attack",
+         "Precise Attack",
+         "Prone Fighting",
+         "Quick Draw",
+         "Ranged Attack",
+         "Redirect",
+         "Ritualist",
+         "Second Chance",
+         "Seize Initiative",
+         "Set-up",
+         "Sidekick",
+         "Skill Mastery",
+         "Startle",
+         "Takedown",
+         "Taunt",
+         "Teamwork",
+         "Throwing Mastery",
+         "Tracking",
+         "Trance",
+         "Ultimate Effort",
+         "Uncanny Dodge",
+         "Weapon Bind",
+         "Weapon Break",
+         "Well-informed"
+      ],
+      "Accurate Attack": {
+         "name": "Accurate Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Agile Feint": {
+         "name": "Agile Feint",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "All-out Attack": {
+         "name": "All-out Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Animal Empathy": {
+         "name": "Animal Empathy",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Artificer": {
+         "name": "Artificer",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Assessment": {
+         "name": "Assessment",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Attractive": {
+         "name": "Attractive",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Beginner's Luck": {
+         "name": "Beginner's Luck",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Benefit": {
+         "name": "Benefit",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Chokehold": {
+         "name": "Chokehold",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Close Attack": {
+         "name": "Close Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Connected": {
+         "name": "Connected",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Contacts": {
+         "name": "Contacts",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Daze": {
+         "name": "Daze",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Defensive Attack": {
+         "name": "Defensive Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Defensive Roll": {
+         "name": "Defensive Roll",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Diehard": {
+         "name": "Diehard",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Eidetic Memory": {
+         "name": "Eidetic Memory",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Equipment": {
+         "name": "Equipment",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Evasion": {
+         "name": "Evasion",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Extraordinary Effort": {
+         "name": "Extraordinary Effort",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Fascinate": {
+         "name": "Fascinate",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Fast Grab": {
+         "name": "Fast Grab",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Favored Environment": {
+         "name": "Favored Environment",
+         "costPerRank": 1,
+         "defaultText": "Environment",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Favored Foe": {
+         "name": "Favored Foe",
+         "costPerRank": 1,
+         "defaultText": "Foe type",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Fearless": {
+         "name": "Fearless",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Grabbing Finesse": {
+         "name": "Grabbing Finesse",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Great Endurance": {
+         "name": "Great Endurance",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Hide in Plain Sight": {
+         "name": "Hide in Plain Sight",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Aim": {
+         "name": "Improved Aim",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Critical": {
+         "name": "Improved Critical",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 4
+      },
+      "Improved Defense": {
+         "name": "Improved Defense",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Disarm": {
+         "name": "Improved Disarm",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Grab": {
+         "name": "Improved Grab",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Hold": {
+         "name": "Improved Hold",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Initiative": {
+         "name": "Improved Initiative",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Improved Smash": {
+         "name": "Improved Smash",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Trip": {
+         "name": "Improved Trip",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improvised Tools": {
+         "name": "Improvised Tools",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improvised Weapon": {
+         "name": "Improvised Weapon",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Inspire": {
+         "name": "Inspire",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 5
+      },
+      "Instant Up": {
+         "name": "Instant Up",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Interpose": {
+         "name": "Interpose",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Inventor": {
+         "name": "Inventor",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Jack of All Trades": {
+         "name": "Jack of All Trades",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Languages": {
+         "name": "Languages",
+         "costPerRank": 1,
+         "defaultText": "Languages Known",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Leadership": {
+         "name": "Leadership",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Luck": {
+         "name": "Luck",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Minion": {
+         "name": "Minion",
+         "costPerRank": 1,
+         "defaultText": "Helper Name",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Move-by Action": {
+         "name": "Move-by Action",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Power Attack": {
+         "name": "Power Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Precise Attack": {
+         "name": "Precise Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 4
+      },
+      "Prone Fighting": {
+         "name": "Prone Fighting",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Quick Draw": {
+         "name": "Quick Draw",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Ranged Attack": {
+         "name": "Ranged Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Redirect": {
+         "name": "Redirect",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Ritualist": {
+         "name": "Ritualist",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Second Chance": {
+         "name": "Second Chance",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Seize Initiative": {
+         "name": "Seize Initiative",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Set-up": {
+         "name": "Set-up",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Sidekick": {
+         "name": "Sidekick",
+         "costPerRank": 1,
+         "defaultText": "Helper Name",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Skill Mastery": {
+         "name": "Skill Mastery",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Startle": {
+         "name": "Startle",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Takedown": {
+         "name": "Takedown",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Taunt": {
+         "name": "Taunt",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Teamwork": {
+         "name": "Teamwork",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Throwing Mastery": {
+         "name": "Throwing Mastery",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Tracking": {
+         "name": "Tracking",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Trance": {
+         "name": "Trance",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Ultimate Effort": {
+         "name": "Ultimate Effort",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Uncanny Dodge": {
+         "name": "Uncanny Dodge",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Weapon Bind": {
+         "name": "Weapon Bind",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Weapon Break": {
+         "name": "Weapon Break",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Well-informed": {
+         "name": "Well-informed",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Beyond Mortal": {
+         "name": "Beyond Mortal",
+         "costPerRank": 50,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Let There Be": {
+         "name": "Let There Be",
+         "costPerRank": 40,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Luck of the Gods": {
+         "name": "Luck of the Gods",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Omnipresent": {
+         "name": "Omnipresent",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 3
+      },
+      "Omniscient": {
+         "name": "Omniscient",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 5
+      },
+      "Perfect Focus": {
+         "name": "Perfect Focus",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Stay Like That": {
+         "name": "Stay Like That",
+         "costPerRank": 15,
+         "defaultText": "Power Modified",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Supreme": {
+         "name": "Supreme",
+         "costPerRank": 1,
+         "defaultText": "Power Gained",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Variable Modifier": {
+         "name": "Variable Modifier",
+         "costPerRank": 35,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Your Petty Rules Don't Apply to Me": {
+         "name": "Your Petty Rules Don't Apply to Me",
+         "costPerRank": 50,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Advantage, Description: 'Data2.Advantage'});
+
+   expected = {
+      "names": [
+         "Dodge",
+         "Fortitude",
+         "Parry",
+         "Will",
+         "Toughness"
+      ],
+      "Dodge": {
+         "ability": "Agility",
+         "name": "Dodge"
+      },
+      "Fortitude": {
+         "ability": "Stamina",
+         "name": "Fortitude"
+      },
+      "Parry": {
+         "ability": "Fighting",
+         "name": "Parry"
+      },
+      "Will": {
+         "ability": "Awareness",
+         "name": "Will"
+      },
+      "Toughness": {
+         "ability": "Stamina",
+         "name": "Toughness"
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Defense, Description: 'Data2.Defense'});
+
+   expected = {
+      "names": [
+         "Accurate",
+         "Affects Corporeal",
+         "Affects Insubstantial",
+         "Affects Objects Also",
+         "Affects Objects Only",
+         "Affects Others Also",
+         "Affects Others Only",
+         "Alternate Effect",
+         "Alternate Resistance (Cost)",
+         "Alternate Resistance (Free)",
+         "Area",
+         "Attack",
+         "Contagious",
+         "Dimensional",
+         "Dynamic Alternate Effect",
+         "Extended Range",
+         "Faster Action",
+         "Feature",
+         "Homing",
+         "Impervious",
+         "Increased Duration",
+         "Increased Mass",
+         "Increased Range",
+         "Incurable",
+         "Indirect",
+         "Innate",
+         "Insidious",
+         "Linked",
+         "Multiattack",
+         "Penetrating",
+         "Precise",
+         "Reach",
+         "Reversible",
+         "Ricochet",
+         "Secondary Effect",
+         "Selective",
+         "Sleep",
+         "Split",
+         "Subtle",
+         "Triggered",
+         "Variable Descriptor",
+         "Activation",
+         "Check Required",
+         "Decreased Duration",
+         "Diminished Range",
+         "Distracting",
+         "Easily Removable",
+         "Fades",
+         "Feedback",
+         "Grab-Based",
+         "Inaccurate",
+         "Limited",
+         "Noticeable",
+         "Quirk",
+         "Reduced Range",
+         "Removable",
+         "Resistible",
+         "Sense-Dependent",
+         "Side Effect",
+         "Slower Action",
+         "Tiring",
+         "Uncontrolled",
+         "Unreliable",
+         "Other Rank Extra",
+         "Other Flat Extra",
+         "Other Free Modifier",
+         "Other Flat Flaw",
+         "Other Rank Flaw"
+      ],
+      "Accurate": {
+         "name": "Accurate",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Affects Corporeal": {
+         "name": "Affects Corporeal",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Affects Insubstantial": {
+         "name": "Affects Insubstantial",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Affects Objects Also": {
+         "name": "Affects Objects Also",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Affects Objects Only": {
+         "name": "Affects Objects Only",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Affects Others Also": {
+         "name": "Affects Others Also",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Affects Others Only": {
+         "name": "Affects Others Only",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Alternate Effect": {
+         "name": "Alternate Effect",
+         "cost": -1,
+         "defaultText": "To What",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Alternate Resistance (Cost)": {
+         "name": "Alternate Resistance (Cost)",
+         "cost": 1,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Alternate Resistance (Free)": {
+         "name": "Alternate Resistance (Free)",
+         "cost": 0,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Area": {
+         "name": "Area",
+         "cost": 1,
+         "defaultText": "Shape",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      },
+      "Attack": {
+         "name": "Attack",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Contagious": {
+         "name": "Contagious",
+         "cost": 1,
+         "defaultText": "Method of Spreading",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Dimensional": {
+         "name": "Dimensional",
+         "cost": 1,
+         "defaultText": "Which Dimensions",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 3,
+         "type": "Flat"
+      },
+      "Dynamic Alternate Effect": {
+         "name": "Dynamic Alternate Effect",
+         "cost": -1,
+         "defaultText": "To What",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Extended Range": {
+         "name": "Extended Range",
+         "cost": 1,
+         "defaultText": "Total Ranges",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Faster Action": {
+         "name": "Faster Action",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 6,
+         "type": "Rank"
+      },
+      "Feature": {
+         "name": "Feature",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Homing": {
+         "name": "Homing",
+         "cost": 1,
+         "defaultText": "Description or Method of targeting",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Impervious": {
+         "name": "Impervious",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Increased Duration": {
+         "name": "Increased Duration",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 3,
+         "type": "Rank"
+      },
+      "Increased Mass": {
+         "name": "Increased Mass",
+         "cost": 1,
+         "defaultText": "Total Mass",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Increased Range": {
+         "name": "Increased Range",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 4,
+         "type": "Rank"
+      },
+      "Incurable": {
+         "name": "Incurable",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Indirect": {
+         "name": "Indirect",
+         "cost": 1,
+         "defaultText": "Direction",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 4,
+         "type": "Flat"
+      },
+      "Innate": {
+         "name": "Innate",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Insidious": {
+         "name": "Insidious",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Linked": {
+         "name": "Linked",
+         "cost": 0,
+         "defaultText": "To What",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Multiattack": {
+         "name": "Multiattack",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Penetrating": {
+         "name": "Penetrating",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Precise": {
+         "name": "Precise",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Reach": {
+         "name": "Reach",
+         "cost": 1,
+         "defaultText": "Total Attack Distance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Reversible": {
+         "name": "Reversible",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Ricochet": {
+         "name": "Ricochet",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Secondary Effect": {
+         "name": "Secondary Effect",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Selective": {
+         "name": "Selective",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Sleep": {
+         "name": "Sleep",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Split": {
+         "name": "Split",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Subtle": {
+         "name": "Subtle",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Triggered": {
+         "name": "Triggered",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Variable Descriptor": {
+         "name": "Variable Descriptor",
+         "cost": 1,
+         "defaultText": "Category",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Activation": {
+         "name": "Activation",
+         "cost": -1,
+         "defaultText": "Action Required",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Check Required": {
+         "name": "Check Required",
+         "cost": 1,
+         "defaultText": "What Check",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Decreased Duration": {
+         "name": "Decreased Duration",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 3,
+         "type": "Rank"
+      },
+      "Diminished Range": {
+         "name": "Diminished Range",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 3,
+         "type": "Flat"
+      },
+      "Distracting": {
+         "name": "Distracting",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Easily Removable": {
+         "name": "Easily Removable",
+         "cost": -1,
+         "defaultText": "Type of item",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Fades": {
+         "name": "Fades",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Feedback": {
+         "name": "Feedback",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Grab-Based": {
+         "name": "Grab-Based",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Inaccurate": {
+         "name": "Inaccurate",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Limited": {
+         "name": "Limited",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Rank"
+      },
+      "Noticeable": {
+         "name": "Noticeable",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Quirk": {
+         "name": "Quirk",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Reduced Range": {
+         "name": "Reduced Range",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 4,
+         "type": "Rank"
+      },
+      "Removable": {
+         "name": "Removable",
+         "cost": -1,
+         "defaultText": "Type of item",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Resistible": {
+         "name": "Resistible",
+         "cost": -1,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Sense-Dependent": {
+         "name": "Sense-Dependent",
+         "cost": -1,
+         "defaultText": "Name of Sense",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Side Effect": {
+         "name": "Side Effect",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Rank"
+      },
+      "Slower Action": {
+         "name": "Slower Action",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 6,
+         "type": "Rank"
+      },
+      "Tiring": {
+         "name": "Tiring",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Uncontrolled": {
+         "name": "Uncontrolled",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Unreliable": {
+         "name": "Unreliable",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Other Rank Extra": {
+         "name": "Other Rank Extra",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      },
+      "Other Flat Extra": {
+         "name": "Other Flat Extra",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Other Free Modifier": {
+         "name": "Other Free Modifier",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Other Flat Flaw": {
+         "name": "Other Flat Flaw",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Other Rank Flaw": {
+         "name": "Other Rank Flaw",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Modifier, Description: 'Data2.Modifier'});
+
+   expected = {
+      "actions": [
+         "Standard",
+         "Move",
+         "Free",
+         "Reaction",
+         "None"
+      ],
+      "durations": [
+         "Concentration",
+         "Sustained",
+         "Continuous",
+         "Permanent",
+         "Instant"
+      ],
+      "godhoodNames": [
+         "A God I Am",
+         "Reality Warp"
+      ],
+      "names": [
+         "Affliction",
+         "Burrowing",
+         "Communication",
+         "Comprehend",
+         "Concealment",
+         "Create",
+         "Damage",
+         "Deflect",
+         "Elongation",
+         "Enhanced Trait",
+         "Environment",
+         "Extra Limbs",
+         "Feature",
+         "Flight",
+         "Growth",
+         "Healing",
+         "Illusion",
+         "Immortality",
+         "Immunity",
+         "Insubstantial",
+         "Leaping",
+         "Luck Control",
+         "Mind Reading",
+         "Morph",
+         "Move Object",
+         "Movement",
+         "Nullify",
+         "Protection",
+         "Quickness",
+         "Regeneration",
+         "Remote Sensing",
+         "Senses",
+         "Shrinking",
+         "Speed",
+         "Summon",
+         "Swimming",
+         "Teleport",
+         "Transform",
+         "Variable",
+         "Weaken"
+      ],
+      "ranges": [
+         "Close",
+         "Ranged",
+         "Perception",
+         "Personal"
+      ],
+      "Affliction": {
+         "name": "Affliction",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Burrowing": {
+         "name": "Burrowing",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Communication": {
+         "name": "Communication",
+         "baseCost": 4,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Comprehend": {
+         "name": "Comprehend",
+         "baseCost": 2,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Concealment": {
+         "name": "Concealment",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Create": {
+         "name": "Create",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Damage": {
+         "name": "Damage",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Deflect": {
+         "name": "Deflect",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Elongation": {
+         "name": "Elongation",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Enhanced Trait": {
+         "name": "Enhanced Trait",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Environment": {
+         "name": "Environment",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Extra Limbs": {
+         "name": "Extra Limbs",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Feature": {
+         "name": "Feature",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Flight": {
+         "name": "Flight",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Growth": {
+         "name": "Growth",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Healing": {
+         "name": "Healing",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Illusion": {
+         "name": "Illusion",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": true,
+         "isAttack": true
+      },
+      "Immortality": {
+         "name": "Immortality",
+         "baseCost": 2,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Immunity": {
+         "name": "Immunity",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Insubstantial": {
+         "name": "Insubstantial",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Leaping": {
+         "name": "Leaping",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Instant",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Luck Control": {
+         "name": "Luck Control",
+         "baseCost": 3,
+         "defaultAction": "Reaction",
+         "defaultDuration": "Instant",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Mind Reading": {
+         "name": "Mind Reading",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Morph": {
+         "name": "Morph",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Move Object": {
+         "name": "Move Object",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Movement": {
+         "name": "Movement",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Nullify": {
+         "name": "Nullify",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Protection": {
+         "name": "Protection",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Quickness": {
+         "name": "Quickness",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Regeneration": {
+         "name": "Regeneration",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Remote Sensing": {
+         "name": "Remote Sensing",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Senses": {
+         "name": "Senses",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Shrinking": {
+         "name": "Shrinking",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Speed": {
+         "name": "Speed",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Summon": {
+         "name": "Summon",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Swimming": {
+         "name": "Swimming",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Teleport": {
+         "name": "Teleport",
+         "baseCost": 2,
+         "defaultAction": "Move",
+         "defaultDuration": "Instant",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Transform": {
+         "name": "Transform",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Variable": {
+         "name": "Variable",
+         "baseCost": 7,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Weaken": {
+         "name": "Weaken",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "A God I Am": {
+         "name": "A God I Am",
+         "baseCost": 5,
+         "defaultAction": "Triggered",
+         "defaultDuration": "Continuous",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Reality Warp": {
+         "name": "Reality Warp",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Continuous",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Power, Description: 'Data2.Power'});
+
+   expected = {
+      "names": [
+         "Acrobatics",
+         "Athletics",
+         "Close Combat",
+         "Deception",
+         "Expertise",
+         "Insight",
+         "Intimidation",
+         "Investigation",
+         "Perception",
+         "Persuasion",
+         "Ranged Combat",
+         "Sleight of Hand",
+         "Stealth",
+         "Technology",
+         "Treatment",
+         "Vehicles"
+      ],
+      "Acrobatics": {
+         "name": "Acrobatics",
+         "ability": "Agility",
+         "hasText": true
+      },
+      "Athletics": {
+         "name": "Athletics",
+         "ability": "Strength",
+         "hasText": true
+      },
+      "Close Combat": {
+         "name": "Close Combat",
+         "ability": "Fighting",
+         "hasText": true
+      },
+      "Deception": {
+         "name": "Deception",
+         "ability": "Presence",
+         "hasText": true
+      },
+      "Expertise": {
+         "name": "Expertise",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Insight": {
+         "name": "Insight",
+         "ability": "Awareness",
+         "hasText": true
+      },
+      "Intimidation": {
+         "name": "Intimidation",
+         "ability": "Presence",
+         "hasText": true
+      },
+      "Investigation": {
+         "name": "Investigation",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Perception": {
+         "name": "Perception",
+         "ability": "Awareness",
+         "hasText": false
+      },
+      "Persuasion": {
+         "name": "Persuasion",
+         "ability": "Presence",
+         "hasText": false
+      },
+      "Ranged Combat": {
+         "name": "Ranged Combat",
+         "ability": "Dexterity",
+         "hasText": true
+      },
+      "Sleight of Hand": {
+         "name": "Sleight of Hand",
+         "ability": "Dexterity",
+         "hasText": true
+      },
+      "Stealth": {
+         "name": "Stealth",
+         "ability": "Agility",
+         "hasText": true
+      },
+      "Technology": {
+         "name": "Technology",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Treatment": {
+         "name": "Treatment",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Vehicles": {
+         "name": "Vehicles",
+         "ability": "Dexterity",
+         "hasText": true
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Skill, Description: 'Data2.Skill'});
+   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+
+   return TestRunner.displayResults('TestSuite.data.v1', testResults, isFirst);
+};
+TestSuite.data.v2=function(isFirst)
+{
+   TestRunner.clearResults(isFirst);
+
+   var testResults=[], expected;
+
+   try {
+   Data2.change(2, 7);
+
+   expected = {
+      "godhoodNames": [
+         "Beyond Mortal",
+         "Let There Be",
+         "Luck of the Gods",
+         "Omnipresent",
+         "Omniscient",
+         "Perfect Focus",
+         "Stay Like That",
+         "Supreme",
+         "Variable Modifier",
+         "Your Petty Rules Don't Apply to Me"
+      ],
+      "mapThese": [
+         "Close Attack",
+         "Defensive Roll",
+         "Improved Critical",
+         "Improved Initiative",
+         "Ranged Attack",
+         "Seize Initiative"
+      ],
+      "names": [
+         "Accurate Attack",
+         "All-out Attack",
+         "Attractive",
+         "Beginner's Luck",
+         "Benefit",
+         "Connected",
+         "Defensive Attack",
+         "Defensive Roll",
+         "Diehard",
+         "Equipment",
+         "Evasion",
+         "Extraordinary Effort",
+         "Fast Grab",
+         "Improved Aim",
+         "Improved Critical",
+         "Improved Defense",
+         "Improved Disarm",
+         "Improved Grab",
+         "Improved Hold",
+         "Improved Initiative",
+         "Improved Trip",
+         "Improvised Tools",
+         "Inspire",
+         "Instant Up",
+         "Interpose",
+         "Jack of All Trades",
+         "Languages",
+         "Lucky",
+         "Meekness",
+         "Minion",
+         "Move-by Action",
+         "Power Attack",
+         "Prone Fighting",
+         "Quick Draw",
+         "Seize Initiative",
+         "Sidekick",
+         "Skill Mastery",
+         "Teamwork",
+         "Trance",
+         "Ultimate Effort"
+      ],
+      "Accurate Attack": {
+         "name": "Accurate Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "All-out Attack": {
+         "name": "All-out Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Attractive": {
+         "name": "Attractive",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Beginner's Luck": {
+         "name": "Beginner's Luck",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Benefit": {
+         "name": "Benefit",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Connected": {
+         "name": "Connected",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Defensive Attack": {
+         "name": "Defensive Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Defensive Roll": {
+         "name": "Defensive Roll",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Diehard": {
+         "name": "Diehard",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Equipment": {
+         "name": "Equipment",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": Infinity
+      },
+      "Evasion": {
+         "name": "Evasion",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 2
+      },
+      "Extraordinary Effort": {
+         "name": "Extraordinary Effort",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Fast Grab": {
+         "name": "Fast Grab",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Aim": {
+         "name": "Improved Aim",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Critical": {
+         "name": "Improved Critical",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 4
+      },
+      "Improved Defense": {
+         "name": "Improved Defense",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Disarm": {
+         "name": "Improved Disarm",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Grab": {
+         "name": "Improved Grab",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Hold": {
+         "name": "Improved Hold",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improved Initiative": {
+         "name": "Improved Initiative",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 5
+      },
+      "Improved Trip": {
+         "name": "Improved Trip",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Improvised Tools": {
+         "name": "Improvised Tools",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Inspire": {
+         "name": "Inspire",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 5
+      },
+      "Instant Up": {
+         "name": "Instant Up",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Interpose": {
+         "name": "Interpose",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Jack of All Trades": {
+         "name": "Jack of All Trades",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Languages": {
+         "name": "Languages",
+         "costPerRank": 1,
+         "defaultText": "Languages Known",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Lucky": {
+         "name": "Lucky",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 3
+      },
+      "Meekness": {
+         "name": "Meekness",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Minion": {
+         "name": "Minion",
+         "costPerRank": 1,
+         "defaultText": "Helper Name",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Move-by Action": {
+         "name": "Move-by Action",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Power Attack": {
+         "name": "Power Attack",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Prone Fighting": {
+         "name": "Prone Fighting",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Quick Draw": {
+         "name": "Quick Draw",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Seize Initiative": {
+         "name": "Seize Initiative",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Sidekick": {
+         "name": "Sidekick",
+         "costPerRank": 2,
+         "defaultText": "Helper Name",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Skill Mastery": {
+         "name": "Skill Mastery",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Teamwork": {
+         "name": "Teamwork",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Trance": {
+         "name": "Trance",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Ultimate Effort": {
+         "name": "Ultimate Effort",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Beyond Mortal": {
+         "name": "Beyond Mortal",
+         "costPerRank": 50,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Let There Be": {
+         "name": "Let There Be",
+         "costPerRank": 40,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Luck of the Gods": {
+         "name": "Luck of the Gods",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Omnipresent": {
+         "name": "Omnipresent",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 3
+      },
+      "Omniscient": {
+         "name": "Omniscient",
+         "costPerRank": 5,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 5
+      },
+      "Perfect Focus": {
+         "name": "Perfect Focus",
+         "costPerRank": 1,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Stay Like That": {
+         "name": "Stay Like That",
+         "costPerRank": 15,
+         "defaultText": "Power Modified",
+         "hasText": true,
+         "maxRank": 1
+      },
+      "Supreme": {
+         "name": "Supreme",
+         "costPerRank": 1,
+         "defaultText": "Power Gained",
+         "hasText": true,
+         "maxRank": Infinity
+      },
+      "Variable Modifier": {
+         "name": "Variable Modifier",
+         "costPerRank": 35,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      },
+      "Your Petty Rules Don't Apply to Me": {
+         "name": "Your Petty Rules Don't Apply to Me",
+         "costPerRank": 50,
+         "defaultText": "Advantage Subtype",
+         "hasText": false,
+         "maxRank": 1
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Advantage, Description: 'Data2.Advantage'});
+
+   expected = {
+      "names": [
+         "Dodge",
+         "Fortitude",
+         "Parry",
+         "Will",
+         "Toughness"
+      ],
+      "Dodge": {
+         "ability": "Agility",
+         "name": "Dodge"
+      },
+      "Fortitude": {
+         "ability": "Stamina",
+         "name": "Fortitude"
+      },
+      "Parry": {
+         "ability": "Fighting",
+         "name": "Parry"
+      },
+      "Will": {
+         "ability": "Presence",
+         "name": "Will"
+      },
+      "Toughness": {
+         "ability": "Stamina",
+         "name": "Toughness"
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Defense, Description: 'Data2.Defense'});
+
+   expected = {
+      "names": [
+         "Accurate",
+         "Affects Corporeal",
+         "Affects Objects Also",
+         "Affects Objects Only",
+         "Affects Others Also",
+         "Affects Others Only",
+         "Alternate Resistance (Cost)",
+         "Alternate Resistance (Free)",
+         "Area",
+         "Attack",
+         "Contagious",
+         "Dimensional",
+         "Existence Dependent",
+         "Extended Range",
+         "Faster Action",
+         "Feature",
+         "Homing",
+         "Impervious",
+         "Increased Duration",
+         "Increased Mass",
+         "Increased Range",
+         "Indirect",
+         "Innate",
+         "Insidious",
+         "Linked",
+         "Multiattack",
+         "Penetrating",
+         "Precise",
+         "Reach",
+         "Reversible",
+         "Ricochet",
+         "Secondary Effect",
+         "Selective",
+         "Split",
+         "Subtle",
+         "Variable Descriptor",
+         "Activation",
+         "Alternate Effect",
+         "Ammunition",
+         "Check Required",
+         "Decreased Duration",
+         "Diminished Range",
+         "Distracting",
+         "Easily Removable",
+         "Fades",
+         "Feedback",
+         "Fragile",
+         "Grab-Based",
+         "Inaccurate",
+         "Limited",
+         "Noticeable",
+         "Quirk",
+         "Reduced Range",
+         "Removable",
+         "Resistible",
+         "Sense-Dependent",
+         "Side Effect",
+         "Slower Action",
+         "System Dependent",
+         "Tiring",
+         "Uncontrollable Entirely",
+         "Uncontrollable Result",
+         "Uncontrollable Target",
+         "Unreliable",
+         "Other Rank Extra",
+         "Other Flat Extra",
+         "Other Free Modifier",
+         "Other Flat Flaw",
+         "Other Rank Flaw"
+      ],
+      "Accurate": {
+         "name": "Accurate",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Affects Corporeal": {
+         "name": "Affects Corporeal",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Affects Objects Also": {
+         "name": "Affects Objects Also",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Affects Objects Only": {
+         "name": "Affects Objects Only",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Affects Others Also": {
+         "name": "Affects Others Also",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Affects Others Only": {
+         "name": "Affects Others Only",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Alternate Resistance (Cost)": {
+         "name": "Alternate Resistance (Cost)",
+         "cost": 1,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Alternate Resistance (Free)": {
+         "name": "Alternate Resistance (Free)",
+         "cost": 0,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Area": {
+         "name": "Area",
+         "cost": 1,
+         "defaultText": "Shape",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      },
+      "Attack": {
+         "name": "Attack",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Contagious": {
+         "name": "Contagious",
+         "cost": 1,
+         "defaultText": "Method of Spreading",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Dimensional": {
+         "name": "Dimensional",
+         "cost": 1,
+         "defaultText": "Which Dimensions",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 3,
+         "type": "Flat"
+      },
+      "Existence Dependent": {
+         "name": "Existence Dependent",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Extended Range": {
+         "name": "Extended Range",
+         "cost": 1,
+         "defaultText": "Total Ranges",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Faster Action": {
+         "name": "Faster Action",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 6,
+         "type": "Rank"
+      },
+      "Feature": {
+         "name": "Feature",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Homing": {
+         "name": "Homing",
+         "cost": 1,
+         "defaultText": "Description or Method of targeting",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Impervious": {
+         "name": "Impervious",
+         "cost": 2,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Increased Duration": {
+         "name": "Increased Duration",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 3,
+         "type": "Rank"
+      },
+      "Increased Mass": {
+         "name": "Increased Mass",
+         "cost": 3,
+         "defaultText": "Total Mass",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Increased Range": {
+         "name": "Increased Range",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 4,
+         "type": "Rank"
+      },
+      "Indirect": {
+         "name": "Indirect",
+         "cost": 1,
+         "defaultText": "Direction",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 4,
+         "type": "Flat"
+      },
+      "Innate": {
+         "name": "Innate",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Insidious": {
+         "name": "Insidious",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Linked": {
+         "name": "Linked",
+         "cost": 0,
+         "defaultText": "To What",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Multiattack": {
+         "name": "Multiattack",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Penetrating": {
+         "name": "Penetrating",
+         "cost": 2,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Precise": {
+         "name": "Precise",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Reach": {
+         "name": "Reach",
+         "cost": 1,
+         "defaultText": "Total Attack Distance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Reversible": {
+         "name": "Reversible",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Ricochet": {
+         "name": "Ricochet",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Secondary Effect": {
+         "name": "Secondary Effect",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Selective": {
+         "name": "Selective",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Split": {
+         "name": "Split",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Subtle": {
+         "name": "Subtle",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Variable Descriptor": {
+         "name": "Variable Descriptor",
+         "cost": 1,
+         "defaultText": "Category",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Activation": {
+         "name": "Activation",
+         "cost": -1,
+         "defaultText": "Action Required",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Flat"
+      },
+      "Alternate Effect": {
+         "name": "Alternate Effect",
+         "cost": -1,
+         "defaultText": "To What",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Ammunition": {
+         "name": "Ammunition",
+         "cost": -1,
+         "defaultText": "Usage Per time or reload",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Rank"
+      },
+      "Check Required": {
+         "name": "Check Required",
+         "cost": 1,
+         "defaultText": "What Check",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Decreased Duration": {
+         "name": "Decreased Duration",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 3,
+         "type": "Rank"
+      },
+      "Diminished Range": {
+         "name": "Diminished Range",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Distracting": {
+         "name": "Distracting",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Easily Removable": {
+         "name": "Easily Removable",
+         "cost": -1,
+         "defaultText": "Type of item",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Fades": {
+         "name": "Fades",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Feedback": {
+         "name": "Feedback",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Fragile": {
+         "name": "Fragile",
+         "cost": -1,
+         "defaultText": "Total Toughness",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Grab-Based": {
+         "name": "Grab-Based",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Inaccurate": {
+         "name": "Inaccurate",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Limited": {
+         "name": "Limited",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Rank"
+      },
+      "Noticeable": {
+         "name": "Noticeable",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Quirk": {
+         "name": "Quirk",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Reduced Range": {
+         "name": "Reduced Range",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 4,
+         "type": "Rank"
+      },
+      "Removable": {
+         "name": "Removable",
+         "cost": -1,
+         "defaultText": "Type of item",
+         "hasAutoRank": true,
+         "hasAutoTotal": true,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Resistible": {
+         "name": "Resistible",
+         "cost": -1,
+         "defaultText": "Name of Resistance",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Sense-Dependent": {
+         "name": "Sense-Dependent",
+         "cost": -1,
+         "defaultText": "Name of Sense",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Side Effect": {
+         "name": "Side Effect",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 2,
+         "type": "Rank"
+      },
+      "Slower Action": {
+         "name": "Slower Action",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": true,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": true,
+         "isReadOnly": true,
+         "maxRank": 6,
+         "type": "Rank"
+      },
+      "System Dependent": {
+         "name": "System Dependent",
+         "cost": -2,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Flat"
+      },
+      "Tiring": {
+         "name": "Tiring",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Uncontrollable Entirely": {
+         "name": "Uncontrollable Entirely",
+         "cost": -5,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Uncontrollable Result": {
+         "name": "Uncontrollable Result",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Uncontrollable Target": {
+         "name": "Uncontrollable Target",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Unreliable": {
+         "name": "Unreliable",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": false,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Rank"
+      },
+      "Other Rank Extra": {
+         "name": "Other Rank Extra",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      },
+      "Other Flat Extra": {
+         "name": "Other Flat Extra",
+         "cost": 1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Other Free Modifier": {
+         "name": "Other Free Modifier",
+         "cost": 0,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": 1,
+         "type": "Free"
+      },
+      "Other Flat Flaw": {
+         "name": "Other Flat Flaw",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Flat"
+      },
+      "Other Rank Flaw": {
+         "name": "Other Rank Flaw",
+         "cost": -1,
+         "defaultText": "Description",
+         "hasAutoRank": false,
+         "hasAutoTotal": false,
+         "hasText": true,
+         "isActionRangeDuration": false,
+         "isReadOnly": false,
+         "maxRank": Infinity,
+         "type": "Rank"
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Modifier, Description: 'Data2.Modifier'});
+
+   expected = {
+      "actions": [
+         "Slow",
+         "Full",
+         "Standard",
+         "Move",
+         "Free",
+         "Reaction",
+         "Triggered",
+         "None"
+      ],
+      "durations": [
+         "Concentration",
+         "Sustained",
+         "Continuous",
+         "Permanent",
+         "Instant"
+      ],
+      "godhoodNames": [
+         "A God I Am",
+         "Reality Warp"
+      ],
+      "names": [
+         "Affliction",
+         "Attain Knowledge",
+         "Communication",
+         "Comprehend",
+         "Concealment",
+         "Create",
+         "Damage",
+         "Enhanced Trait",
+         "Environment",
+         "Feature",
+         "Flight",
+         "Growth",
+         "Healing",
+         "Illusion",
+         "Immortality",
+         "Immunity",
+         "Insubstantial",
+         "Leaping",
+         "Luck Control",
+         "Mental Transform",
+         "Mind Reading",
+         "Mind Switch",
+         "Morph",
+         "Move Object",
+         "Movement",
+         "Nullify",
+         "Permeate",
+         "Phantom Ranks",
+         "Protection",
+         "Quickness",
+         "Regeneration",
+         "Remote Sensing",
+         "Resistance",
+         "Senses",
+         "Shrinking",
+         "Summon Minion",
+         "Summon Object",
+         "Teleport",
+         "Transform",
+         "Variable",
+         "Weaken"
+      ],
+      "ranges": [
+         "Close",
+         "Ranged",
+         "Perception",
+         "Personal"
+      ],
+      "Affliction": {
+         "name": "Affliction",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Attain Knowledge": {
+         "name": "Attain Knowledge",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Communication": {
+         "name": "Communication",
+         "baseCost": 4,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Comprehend": {
+         "name": "Comprehend",
+         "baseCost": 2,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Concealment": {
+         "name": "Concealment",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Create": {
+         "name": "Create",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Damage": {
+         "name": "Damage",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Enhanced Trait": {
+         "name": "Enhanced Trait",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Environment": {
+         "name": "Environment",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Feature": {
+         "name": "Feature",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Flight": {
+         "name": "Flight",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Growth": {
+         "name": "Growth",
+         "baseCost": 6,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Healing": {
+         "name": "Healing",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Illusion": {
+         "name": "Illusion",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": true,
+         "isAttack": true
+      },
+      "Immortality": {
+         "name": "Immortality",
+         "baseCost": 5,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Immunity": {
+         "name": "Immunity",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Insubstantial": {
+         "name": "Insubstantial",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Leaping": {
+         "name": "Leaping",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Instant",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Luck Control": {
+         "name": "Luck Control",
+         "baseCost": 3,
+         "defaultAction": "Reaction",
+         "defaultDuration": "Instant",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Mental Transform": {
+         "name": "Mental Transform",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Mind Reading": {
+         "name": "Mind Reading",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Mind Switch": {
+         "name": "Mind Switch",
+         "baseCost": 8,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Morph": {
+         "name": "Morph",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Move Object": {
+         "name": "Move Object",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Movement": {
+         "name": "Movement",
+         "baseCost": 2,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Nullify": {
+         "name": "Nullify",
+         "baseCost": 3,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Ranged",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "Permeate": {
+         "name": "Permeate",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Phantom Ranks": {
+         "name": "Phantom Ranks",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Protection": {
+         "name": "Protection",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Quickness": {
+         "name": "Quickness",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Regeneration": {
+         "name": "Regeneration",
+         "baseCost": 3,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Remote Sensing": {
+         "name": "Remote Sensing",
+         "baseCost": 1,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Resistance": {
+         "name": "Resistance",
+         "baseCost": 3,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Senses": {
+         "name": "Senses",
+         "baseCost": 1,
+         "defaultAction": "None",
+         "defaultDuration": "Permanent",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Shrinking": {
+         "name": "Shrinking",
+         "baseCost": 3,
+         "defaultAction": "Free",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Summon Minion": {
+         "name": "Summon Minion",
+         "baseCost": 5,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Summon Object": {
+         "name": "Summon Object",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Teleport": {
+         "name": "Teleport",
+         "baseCost": 2,
+         "defaultAction": "Move",
+         "defaultDuration": "Instant",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Transform": {
+         "name": "Transform",
+         "baseCost": 2,
+         "defaultAction": "Standard",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Close",
+         "hasInputBaseCost": true,
+         "isAttack": false
+      },
+      "Variable": {
+         "name": "Variable",
+         "baseCost": 7,
+         "defaultAction": "Full",
+         "defaultDuration": "Sustained",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Weaken": {
+         "name": "Weaken",
+         "baseCost": 1,
+         "defaultAction": "Standard",
+         "defaultDuration": "Instant",
+         "defaultRange": "Close",
+         "hasInputBaseCost": false,
+         "isAttack": true
+      },
+      "A God I Am": {
+         "name": "A God I Am",
+         "baseCost": 5,
+         "defaultAction": "Triggered",
+         "defaultDuration": "Continuous",
+         "defaultRange": "Personal",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      },
+      "Reality Warp": {
+         "name": "Reality Warp",
+         "baseCost": 5,
+         "defaultAction": "Free",
+         "defaultDuration": "Continuous",
+         "defaultRange": "Perception",
+         "hasInputBaseCost": false,
+         "isAttack": false
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Power, Description: 'Data2.Power'});
+
+   expected = {
+      "names": [
+         "Acrobatics",
+         "Athletics",
+         "Close Combat",
+         "Common Knowledge",
+         "Deception",
+         "Expertise",
+         "Insight",
+         "Intimidation",
+         "Investigation",
+         "Knowledge",
+         "Memory",
+         "Perception",
+         "Persuasion",
+         "Ranged Combat",
+         "Sleight of Hand",
+         "Stealth",
+         "Strategy",
+         "Technology",
+         "Tracking",
+         "Treatment",
+         "Vehicles",
+         "Other"
+      ],
+      "Acrobatics": {
+         "name": "Acrobatics",
+         "ability": "Agility",
+         "hasText": true
+      },
+      "Athletics": {
+         "name": "Athletics",
+         "ability": "Strength",
+         "hasText": true
+      },
+      "Close Combat": {
+         "name": "Close Combat",
+         "ability": "Fighting",
+         "hasText": true
+      },
+      "Common Knowledge": {
+         "name": "Common Knowledge",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Deception": {
+         "name": "Deception",
+         "ability": "Presence",
+         "hasText": true
+      },
+      "Expertise": {
+         "name": "Expertise",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Insight": {
+         "name": "Insight",
+         "ability": "Awareness",
+         "hasText": true
+      },
+      "Intimidation": {
+         "name": "Intimidation",
+         "ability": "Presence",
+         "hasText": true
+      },
+      "Investigation": {
+         "name": "Investigation",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Knowledge": {
+         "name": "Knowledge",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Memory": {
+         "name": "Memory",
+         "ability": "Intellect",
+         "hasText": false
+      },
+      "Perception": {
+         "name": "Perception",
+         "ability": "Awareness",
+         "hasText": false
+      },
+      "Persuasion": {
+         "name": "Persuasion",
+         "ability": "Presence",
+         "hasText": false
+      },
+      "Ranged Combat": {
+         "name": "Ranged Combat",
+         "ability": "Dexterity",
+         "hasText": true
+      },
+      "Sleight of Hand": {
+         "name": "Sleight of Hand",
+         "ability": "Dexterity",
+         "hasText": true
+      },
+      "Stealth": {
+         "name": "Stealth",
+         "ability": "Agility",
+         "hasText": true
+      },
+      "Strategy": {
+         "name": "Strategy",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Technology": {
+         "name": "Technology",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Tracking": {
+         "name": "Tracking",
+         "ability": "Awareness",
+         "hasText": false
+      },
+      "Treatment": {
+         "name": "Treatment",
+         "ability": "Intellect",
+         "hasText": true
+      },
+      "Vehicles": {
+         "name": "Vehicles",
+         "ability": "Dexterity",
+         "hasText": true
+      },
+      "Other": {
+         "name": "Other",
+         "ability": "Strength",
+         "hasText": true
+      }
+   };
+   testResults.push({Expected: expected, Actual: Data2.Skill, Description: 'Data2.Skill'});
+   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+
+   return TestRunner.displayResults('TestSuite.data.v2', testResults, isFirst);
+};
+TestSuite.data.v3=function(isFirst)
+{
+   TestRunner.clearResults(isFirst);
+
+   var testResults=[];
+
+   try {
+   Data2.change(3, 0);
+
+   testResults.push({Expected: false, Actual: Data2.Advantage.names.contains('Improved Critical'), Description: 'Removed Data2.Advantage[Improved Critical]'});
+   testResults.push({Expected: false, Actual: Data2.Advantage.names.contains('Trance'), Description: 'Removed Data2.Advantage[Trance]'});
+   testResults.push({Expected: true, Actual: Data2.Advantage.names.contains('Persistent Information'), Description: 'Added Data2.Advantage[Persistent Information]'});
+   testResults.push({Expected: 1, Actual: Data2.Advantage['Inspire'].maxRank, Description: 'Data2.Advantage[Inspire] no longer ranked'});
+   testResults.push({Expected: true, Actual: Data2.Modifier.names.contains('Uncontrollable Activation'), Description: 'Added Data2.Modifier[Uncontrollable Activation]'});
+   } catch(e){testResults.push({Error: e, Description: 'v3.0 Same data'});}
+
+   try {
+   Data2.change(3, 4);
+
+   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data2.Modifier[Uncontrollable Activation]'});
+   testResults.push({Expected: false, Actual: Data2.Power.actions.contains('Triggered'), Description: 'Removed Data2.Power.actions[Triggered]'});
+   testResults.push({Expected: 'Free', Actual: Data2.Power['A God I Am'].defaultAction, Description: 'Data2.Power[A God I Am].defaultAction = Free'});
+   testResults.push({Expected: 'Move', Actual: Data2.Power['Flight'].defaultAction, Description: 'Data2.Power[Flight].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data2.Power['Leaping'].defaultAction, Description: 'Data2.Power[Leaping].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data2.Power['Movement'].defaultAction, Description: 'Data2.Power[Movement].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data2.Power['Permeate'].defaultAction, Description: 'Data2.Power[Permeate].defaultAction = Move'});
+   testResults.push({Expected: 'Move', Actual: Data2.Power['Teleport'].defaultAction, Description: 'Data2.Power[Teleport].defaultAction = Move'});
+
+   var actualAllowReaction=[], actualIsMovement=[];
+   var allNames = Data.Power.names.concat(Data.Power.godhoodNames);
+   for (var i = 0; i < allNames.length; ++i)
+   {
+      var name = allNames[i];
+      if(true === Data2.Power[name].allowReaction) actualAllowReaction.push(name);
+      if(true === Data2.Power[name].isMovement) actualIsMovement.push(name);
+   }
+   actualAllowReaction.sort();
+   actualIsMovement.sort();
+   var expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+   testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data2.Power[*].allowReaction'});
+   expected = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
+   testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data2.Power[*].isMovement'});
+
+   testResults.push({Expected: true, Actual: Data2.Modifier.names.contains('Aura'), Description: 'Added Data2.Modifier[Aura]'});
+   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Grab-Based'), Description: 'Removed Data2.Modifier[Grab-Based]'});
+   testResults.push({Expected: true, Actual: Data2.Modifier['Aura'].isReadOnly, Description: 'Data2.Modifier[Aura].isReadOnly = true'});
+   } catch(e){testResults.push({Error: e, Description: 'v3.4 Same data'});}
+
+   try {
+   Data2.change(3, 5);
+
+   testResults.push({Expected: false, Actual: Data2.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data2.Modifier[Secondary Effect]'});
+   } catch(e){testResults.push({Error: e, Description: 'v3.5 Same data'});}
+
+   return TestRunner.displayResults('TestSuite.data.v3', testResults, isFirst);
+};

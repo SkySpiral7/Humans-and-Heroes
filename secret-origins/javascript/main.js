@@ -11,7 +11,7 @@ if (null !== document.getElementById('testResults'))  //false in production to s
       'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
       'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/Version',
-      'test/test tools', 'test/migration', 'data2']);
+      'test/test tools', 'test/migration', 'data2', 'test/data']);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
