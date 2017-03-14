@@ -237,5 +237,14 @@ Data.change = function(major, minor)
          extraNames.removeByValue('Secondary Effect');
          Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
       }
+      if (minor >= 9)
+      {
+         Data.Power.baseCost.set('Transform', 1);
+         Data.Power.hasInputBaseCost.removeByValue('Transform');
+
+         //TODO: this branch needs to merge with prod
+         extraNames.removeByValue('Increased Mass');  //moved to page specific extra
+         Data.Modifier.names = extraNames.concat(flawNames).concat(otherModifierNames);
+      }
    }
 };
