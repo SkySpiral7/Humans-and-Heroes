@@ -107,8 +107,8 @@ function DefenseObject(defenseName)
    The ability value is zeroed because you can't lack defense scores*/
    this.getAbilityValue=function()
    {
-       var abilityNameUsed = Data.Defense.abilityUsed[Data.Defense.names.indexOf(defenseName)];
-       return Main.abilitySection.getByName(abilityNameUsed).getZeroedValue();
+       var abilityUsed = Data.Defense[defenseName].ability;
+       return Main.abilitySection.getByName(abilityUsed).getZeroedValue();
    };
     /**Call this to get the final defense value. The ability value used is from this.getAbilityValue()*/
     this.getTotalBonus=function(){return (defenseValue + this.getAbilityValue());};

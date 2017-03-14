@@ -46,9 +46,9 @@ function SkillObject(rowIndex)
        if(!Data.Skill.names.contains(nameGiven)){this.constructor(); return;}
        name = nameGiven;
        rank = 1;
-       abilityName = Data.Skill.abilityMap.get(name);
-       hasText = Data.Skill.hasText.contains(name);
-       if(name === 'Other') text = 'Skill Name and Subtype';  //doesn't exist in old rules
+       abilityName = Data.Skill[name].ability;
+       hasText = Data.Skill[name].hasText;
+       if(name === 'Other') text = 'Skill Name and Subtype';  //doesn't exist in v1
        else if(hasText) text = 'Skill Subtype';
        else text = undefined;
    };
@@ -91,7 +91,7 @@ function SkillObject(rowIndex)
        htmlString+='Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" />\n';
        htmlString+='+\n';
        htmlString+='<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
-       htmlString+='    <option>Strength</option>\n';  //hard coding made more sense then using Data.Ability.names (because loop unrolling)
+       htmlString+='    <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
        htmlString+='    <option>Agility</option>\n';
        htmlString+='    <option>Fighting</option>\n';
        htmlString+='    <option>Awareness</option>\n';
