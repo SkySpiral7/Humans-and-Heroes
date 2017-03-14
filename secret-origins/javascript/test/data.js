@@ -4215,5 +4215,13 @@ TestSuite.data.v3=function(isFirst)
    testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.5 Same data'});}
 
+   try {
+   Data.change(3, 9);
+
+   testResults.push({Expected: 1, Actual: Data.Power['Transform'].baseCost, Description: 'Data.Power[Transform].baseCost = 1'});
+   testResults.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
+   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
+   } catch(e){testResults.push({Error: e, Description: 'v3.9 Same data'});}
+
    return TestRunner.displayResults('TestSuite.data.v3', testResults, isFirst);
 };

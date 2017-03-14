@@ -59,6 +59,7 @@ Data.change = function(major, minor)
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
+      //TODO: can be much more flat if I look at if it is Free or extra
       cost: new MapDefault({'Activation': -1, 'Affects Objects Only': 0, 'Affects Others Only': 0, 'Alternate Effect': -1, 'Alternate Resistance (Free)': 0,
          'Ammunition': -1, 'Attack': 0, 'Aura': 2, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': -1,
          'Easily Removable': -1, 'Existence Dependent': 0, 'Fades': -1, 'Feedback': -1, 'Fragile': -1, 'Grab-Based': -1, 'Impervious': 1, 'Inaccurate': -1,
@@ -233,6 +234,7 @@ Data.change = function(major, minor)
       if(minor >= 5) extraNames.removeByValue('Secondary Effect');
       if (minor >= 9)
       {
+         //TODO: restructure data so that I can delete Data.Modifer['Increased Mass']
          powerLookup.baseCost.set('Transform', 1);
          powerLookup.hasInputBaseCost.removeByValue('Transform');
 
