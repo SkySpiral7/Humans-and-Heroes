@@ -145,70 +145,6 @@ Data.change = function(major, minor)
          'Ranged Combat', 'Sleight of Hand', 'Stealth', 'Technology', 'Treatment', 'Vehicles']
    };
 
-   //if(1 === major) ;  //v1.x is already done (no delta)
-   if (major >= 2)
-   {
-      //v1.x has 74 advantages but 36 of them are removed so I might as well redefine the array
-      Data.Advantage.names = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
-         'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',
-         'Improved Disarm', 'Improved Grab', 'Improved Hold', 'Improved Initiative', 'Improved Trip', 'Improvised Tools', 'Inspire', 'Instant Up',
-         'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
-         'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'].concat(advantageLookup.godhoodNames);
-      advantageLookup.costPerRank.set('Sidekick', 2);
-      advantageLookup.maxRank.set('Improved Initiative', 5);
-
-      Data.Defense.Will.ability = 'Presence';
-
-      extraNames.removeByValue('Affects Insubstantial');
-      extraNames.removeByValue('Alternate Effect');
-      extraNames.removeByValue('Dynamic Alternate Effect');
-      extraNames.removeByValue('Incurable');
-      extraNames.removeByValue('Sleep');
-      extraNames.removeByValue('Triggered');
-      extraNames.push('Existence Dependent');
-      flawNames.removeByValue('Uncontrolled');
-      flawNames = flawNames.concat(['Alternate Effect', 'Ammunition', 'Fragile', 'System Dependent', 'Uncontrollable Entirely', 'Uncontrollable Result', 'Uncontrollable Target']);
-         //Alternate Effect is a flaw in 2.x even though it was mislabeled as an extra
-      modifierLookup.cost.set('Alternate Effect', -1);
-
-      modifierLookup.cost.set('Attack', 1);
-      modifierLookup.type.set('Attack', 'Rank');
-      modifierLookup.maxRank.set('Diminished Range', 1);
-      modifierLookup.cost.set('Impervious', 2);
-      modifierLookup.maxRank.set('Impervious', Infinity);
-      modifierLookup.type.set('Impervious', 'Flat');
-      modifierLookup.cost.set('Increased Mass', 3);
-      modifierLookup.type.set('Innate', 'Rank');
-      modifierLookup.cost.set('Penetrating', 2);
-
-      Data.Power.actions = ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction', 'Triggered', 'None'];  //None isn't a choice
-      powerLookup.defaultAction.set('Variable', 'Full');
-      powerLookup.baseCost.set('Growth', 6);
-      powerLookup.baseCost.set('Immortality', 5);
-      powerLookup.baseCost.set('Morph', 1);  //I could add/remove morph but this is nicer
-      powerLookup.baseCost.set('Nullify', 3);
-      powerLookup.baseCost.set('Regeneration', 3);
-      powerLookup.baseCost.set('Shrinking', 3);
-      Data.Power.names.removeByValue('Burrowing');
-      Data.Power.names.removeByValue('Deflect');
-      Data.Power.names.removeByValue('Elongation');
-      Data.Power.names.removeByValue('Extra Limbs');
-      Data.Power.names.removeByValue('Speed');
-      Data.Power.names.removeByValue('Summon');
-      Data.Power.names.removeByValue('Swimming');
-      Data.Power.names = Data.Power.names.concat(['Attain Knowledge', 'Mental Transform', 'Mind Switch',
-         'Permeate', 'Phantom Ranks', 'Resistance', 'Summon Minion', 'Summon Object']).concat(powerLookup.godhoodNames);
-
-      Data.Skill.names = Data.Skill.names.concat(['Common Knowledge', 'Knowledge', 'Memory', 'Strategy', 'Tracking']).sort();
-      Data.Skill.names.push('Other');  //must be last instead of sorted
-      skillLookup.hasText = Data.Skill.names.copy();
-      //most of them have text except the following:
-      skillLookup.hasText.removeByValue('Memory');
-      skillLookup.hasText.removeByValue('Perception');
-      skillLookup.hasText.removeByValue('Persuasion');
-      skillLookup.hasText.removeByValue('Tracking');
-   }
-
    var i, name;
    for (i = 0; i < Data.Advantage.names.length; ++i)
    {
@@ -223,26 +159,101 @@ Data.change = function(major, minor)
    }
    for (i = 0; i < Data.Power.names.length; ++i)
    {
-      name = Data.Power.names[i];
-      Data.Power[name] = {
-         name: name,
-         baseCost: powerLookup.baseCost.get(name),
-         defaultAction: powerLookup.defaultAction.get(name),
-         defaultDuration: powerLookup.defaultDuration.get(name),
-         defaultRange: powerLookup.defaultRange.get(name),
-         hasInputBaseCost: powerLookup.hasInputBaseCost.contains(name),
-         isAttack: powerLookup.isAttack.contains(name),
-         isGodhood: powerLookup.godhoodNames.contains(name)
-      };
+      addPower(Data.Power.names[i]);
    }
    for (i = 0; i < Data.Skill.names.length; ++i)
    {
-      name = Data.Skill.names[i];
-      Data.Skill[name] = {
-         name: name,
-         ability: skillLookup.abilityMap.get(name),
-         hasText: skillLookup.hasText.contains(name)
-      };
+      addSkill(Data.Skill.names[i]);
+   }
+
+   //if(1 === major) ;  //v1.x is already done (no delta)
+   if (major >= 2)
+   {
+      //v1.x has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
+      Data.Advantage = {mapThese: Data.Advantage.mapThese};  //keep the value for mapThese
+      Data.Advantage.names = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
+         'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',
+         'Improved Disarm', 'Improved Grab', 'Improved Hold', 'Improved Initiative', 'Improved Trip', 'Improvised Tools', 'Inspire', 'Instant Up',
+         'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
+         'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'].concat(advantageLookup.godhoodNames);
+      for (i = 0; i < Data.Advantage.names.length; ++i)
+      {
+         addAdvantage(Data.Advantage.names[i]);
+      }
+      Data.Advantage.Sidekick.costPerRank = 2;
+      Data.Advantage['Improved Initiative'].maxRank = 5;
+
+      Data.Defense.Will.ability = 'Presence';
+
+      remove(Data.Modifier, 'Affects Insubstantial');
+      remove(Data.Modifier, 'Dynamic Alternate Effect');
+      remove(Data.Modifier, 'Incurable');
+      remove(Data.Modifier, 'Sleep');
+      remove(Data.Modifier, 'Triggered');
+      addModifier('Existence Dependent');
+      remove(Data.Modifier, 'Uncontrolled');
+      addModifier('Existence Dependent');
+      addModifier('Ammunition');
+      addModifier('Fragile');
+      addModifier('System Dependent');
+      addModifier('Uncontrollable Entirely');
+      addModifier('Uncontrollable Result');
+      addModifier('Uncontrollable Target');
+      Data.Modifier['Alternate Effect'].cost = -1;
+         //Alternate Effect is a flaw in 2.x even though it was mislabeled as an extra
+
+      Data.Modifier.Attack.cost = 1;
+      Data.Modifier.Attack.type = 'Rank';
+      Data.Modifier['Diminished Range'].maxRank = 1;
+      Data.Modifier['Impervious'].cost = 2;
+      Data.Modifier['Impervious'].maxRank = Infinity;
+      Data.Modifier.Impervious.type = 'Flat';
+      Data.Modifier['Increased Mass'].cost = 3;
+      Data.Modifier.Innate.type = 'Rank';
+      Data.Modifier['Penetrating'].cost = 2;
+
+      Data.Power.actions = ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction', 'Triggered', 'None'];  //None isn't a choice
+      Data.Power['Variable'].defaultAction = 'Full';
+      Data.Power['Growth'].baseCost = 6;
+      Data.Power['Immortality'].baseCost = 5;
+      Data.Power['Morph'].baseCost = 1;
+      Data.Power['Nullify'].baseCost = 3;
+      Data.Power['Regeneration'].baseCost = 3;
+      Data.Power['Shrinking'].baseCost = 3;
+      remove(Data.Power, 'Burrowing');
+      remove(Data.Power, 'Deflect');
+      remove(Data.Power, 'Elongation');
+      remove(Data.Power, 'Extra Limbs');
+      remove(Data.Power, 'Speed');
+      remove(Data.Power, 'Summon');
+      remove(Data.Power, 'Swimming');
+      addPower('Attain Knowledge');
+      addPower('Mental Transform');
+      addPower('Mind Switch');
+      addPower('Permeate');
+      addPower('Phantom Ranks');
+      addPower('Resistance');
+      addPower('Summon Minion');
+      addPower('Summon Object');
+      addPower('A God I Am');
+      addPower('Reality Warp');
+
+      addSkill('Common Knowledge');
+      addSkill('Knowledge');
+      addSkill('Memory');
+      addSkill('Strategy');
+      addSkill('Tracking');
+      addSkill('Other');
+      skillLookup.hasText = Data.Skill.names.copy();
+      //most of them have text except the following:
+      skillLookup.hasText.removeByValue('Memory');
+      skillLookup.hasText.removeByValue('Perception');
+      skillLookup.hasText.removeByValue('Persuasion');
+      skillLookup.hasText.removeByValue('Tracking');
+      for (i = 0; i < Data.Skill.names.length; ++i)
+      {
+         Data.Skill[Data.Skill.names[i]].hasText = skillLookup.hasText.contains(Data.Skill.names[i]);
+      }
    }
 
    if (major >= 3)
@@ -262,14 +273,14 @@ Data.change = function(major, minor)
          Data.Power['Movement'].defaultAction = 'Move';
          Data.Power['Permeate'].defaultAction = 'Move';
          Data.Power['Teleport'].defaultAction = 'Move';
-         powerLookup.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
-         powerLookup.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
 
+         var allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+         var isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
          for (i = 0; i < Data.Power.names.length; ++i)
          {
             name = Data.Power.names[i];
-            Data.Power[name].allowReaction = powerLookup.allowReaction.contains(name);
-            Data.Power[name].isMovement = powerLookup.isMovement.contains(name);
+            Data.Power[name].allowReaction = allowReaction.contains(name);
+            Data.Power[name].isMovement = isMovement.contains(name);
          }
 
          addModifier('Aura');
@@ -299,6 +310,20 @@ Data.change = function(major, minor)
          maxRank: advantageLookup.maxRank.get(nameToAdd)
       };
    }
+   function addPower(nameToAdd)
+   {
+      if(!Data.Power.names.contains(nameToAdd)) Data.Power.names.push(nameToAdd);
+      Data.Power[nameToAdd] = {
+         name: nameToAdd,
+         baseCost: powerLookup.baseCost.get(nameToAdd),
+         defaultAction: powerLookup.defaultAction.get(nameToAdd),
+         defaultDuration: powerLookup.defaultDuration.get(nameToAdd),
+         defaultRange: powerLookup.defaultRange.get(nameToAdd),
+         hasInputBaseCost: powerLookup.hasInputBaseCost.contains(nameToAdd),
+         isAttack: powerLookup.isAttack.contains(nameToAdd),
+         isGodhood: powerLookup.godhoodNames.contains(nameToAdd)
+      };
+   }
    function addModifier(nameToAdd)
    {
       if(!Data.Modifier.names.contains(nameToAdd)) Data.Modifier.names.push(nameToAdd);
@@ -313,6 +338,15 @@ Data.change = function(major, minor)
          isReadOnly: modifierLookup.readOnly.contains(nameToAdd),
          maxRank: modifierLookup.maxRank.get(nameToAdd),
          type: modifierLookup.type.get(nameToAdd)
+      };
+   }
+   function addSkill(nameToAdd)
+   {
+      if(!Data.Skill.names.contains(nameToAdd)) Data.Skill.names.push(nameToAdd);
+      Data.Skill[nameToAdd] = {
+         name: nameToAdd,
+         ability: skillLookup.abilityMap.get(nameToAdd),
+         hasText: skillLookup.hasText.contains(nameToAdd)
       };
    }
    function remove(objectToModify, nameToRemove)
