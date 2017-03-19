@@ -57,7 +57,7 @@ function PowerListAgnostic(sectionName)
           rowArray[i].calculateValues();  //will calculate rank and total
           var powerEffect = rowArray[i].getEffect();
           var rank = rowArray[i].getRank();
-          if(Data.Power.godhoodNames.contains(powerEffect)) usingGodhoodPowers=true;
+          if(Data.Power[powerEffect].isGodhood) usingGodhoodPowers = true;
           else if(powerEffect === 'Protection' && rank > protectionRankTotal) protectionRankTotal = rank;
              //protection doesn't stack and may have more than 1
           if(rowArray[i].getName() !== undefined) attackEffectRanks.add(rowArray[i].getSkillUsed(), i);
@@ -78,10 +78,10 @@ function PowerListAgnostic(sectionName)
       for (var i=0; i < jsonSection.length; i++)
       {
           var nameToLoad = jsonSection[i].effect;
-          if(!Data.Power.names.contains(nameToLoad) && !Data.Power.godhoodNames.contains(nameToLoad))
+          if(!Data.Power.names.contains(nameToLoad))
              {Main.messageUser('PowerListAgnostic.load.notExist', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
               nameToLoad + ' is not a power name.'); continue;}
-          if(Data.Power.godhoodNames.contains(nameToLoad) && !Main.canUseGodHood())
+          if(Data.Power[nameToLoad].isGodhood && !Main.canUseGodhood())
              {Main.messageUser('PowerListAgnostic.load.godhood', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
               nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.'); continue;}
           var rowPointer = rowArray.last();

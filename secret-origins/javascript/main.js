@@ -30,13 +30,13 @@ function MainObject()
 {
    //private variable section:
     const latestRuleset = new VersionObject(3, latestMinorVersion), latestVersion = 2;  //see bottom of this file for a version list
-    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodHood = false;
+    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
     var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
     var activeRuleset = latestRuleset.clone();
     var mockMessenger;  //used for testing
 
    //Single line function section
-    this.canUseGodHood=function(){return (transcendence > 0);};
+    this.canUseGodhood=function(){return (transcendence > 0);};
     this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
     this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
     this.getTranscendence=function(){return transcendence;};
@@ -270,8 +270,8 @@ function MainObject()
    this.updateTranscendence=function()
    {
        document.getElementById('transcendence').value = transcendence;
-       if(previousGodHood === this.canUseGodHood()) return;  //same transcendence so don't need to regenerate
-       previousGodHood = this.canUseGodHood();
+       if(previousGodhood === this.canUseGodhood()) return;  //same transcendence so don't need to regenerate
+       previousGodhood = this.canUseGodhood();
        this.powerSection.update();  //transcendence changed so update these
        this.advantageSection.update();
        //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated

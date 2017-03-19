@@ -37,7 +37,7 @@ function AdvantageObject(rowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setAdvantage=function(nameGiven)
    {
-       if(!Data.Advantage.names.contains(nameGiven) && !Data.Advantage.godhoodNames.contains(nameGiven)){this.constructor(); return;}  //reset values
+       if(!Data.Advantage.names.contains(nameGiven)){this.constructor(); return;}  //reset values
        var useNewData = !((name === 'Minion' && nameGiven === 'Sidekick') || (name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        name = nameGiven;
@@ -78,17 +78,13 @@ function AdvantageObject(rowIndex)
       {
           htmlString+='<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
           htmlString+='    <option>Select One</option>\n';
+          var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
+             //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
          for (i=0; i < Data.Advantage.names.length; i++)
          {
-             if(Data.Advantage.names[i] !== 'Equipment')
+             if('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
                 htmlString+='    <option>'+Data.Advantage.names[i]+'</option>\n';
          }
-         if (Main !== undefined && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodHood()))
-         //must check both hasGodhoodAdvantages and canUseGodHood since they are not yet in sync
-            for (i=0; i < Data.Advantage.godhoodNames.length; i++)
-            {
-                htmlString+='    <option>'+Data.Advantage.godhoodNames[i]+'</option>\n';
-            }
           htmlString+='</select>\n';
       }
        if(this.isBlank()) return htmlString;  //done

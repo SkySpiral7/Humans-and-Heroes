@@ -50,7 +50,7 @@ TestSuite.advantageList.calculateValues=function(isFirst)
    //test non petty godhood
     try{
     actionTaken='Set Godhood'; TestRunner.changeValue('Strength', 30);
-    testResults.push({Expected: true, Actual: Main.canUseGodHood(), Description: actionTaken+': Godhood is usable'});
+    testResults.push({Expected: true, Actual: Main.canUseGodhood(), Description: actionTaken+': Godhood is usable'});
     actionTaken='Set Beyond Mortal'; SelectUtil.changeText('advantageChoices0', 'Beyond Mortal');
     testResults.push({Expected: 'Beyond Mortal', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': Beyond Mortal is set'});
     testResults.push({Expected: true, Actual: Main.advantageSection.hasGodhoodAdvantages(), Description: actionTaken+': Advantage section has godhood'});
@@ -127,7 +127,7 @@ TestSuite.advantageList.load=function(isFirst)
     dataToLoad.Advantages.push({name: 'Seize Initiative'});
     dataToLoad.Advantages.push({name: 'Beyond Mortal'});  //godhood
     Loader.sendData(dataToLoad);
-    testResults.push({Expected: false, Actual: Main.canUseGodHood(), Description: 'Errors: Godhood is off'});
+    testResults.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
     testResults.push({Expected: 'Seize Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Errors: Seize Initiative was loaded'});
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
     testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('AdvantageList.load.godhood'), Description: 'Errors: Beyond Mortal was not allowed'});
@@ -140,7 +140,7 @@ TestSuite.advantageList.load=function(isFirst)
     dataToLoad.Advantages.push({name: 'Seize Initiative'});  //normal to make sure transcendence isn't reset
     dataToLoad.Advantages.push({name: 'Beyond Mortal'});  //godhood
     Loader.sendData(dataToLoad);
-    testResults.push({Expected: true, Actual: Main.canUseGodHood(), Description: 'Load godhood: Godhood is on'});
+    testResults.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load godhood: Godhood is on'});
     testResults.push({Expected: 'Seize Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Load godhood: Seize Initiative was loaded'});
     testResults.push({Expected: 'Beyond Mortal', Actual: Main.advantageSection.getRow(1).getName(), Description: 'Load godhood: Beyond Mortal was loaded'});
     testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Load godhood: no errors'});

@@ -95,7 +95,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.setPower=function(effectNameGiven)
    {
        modifierSection.clear();  //always clear them out on select
-       if(!Data.Power.names.contains(effectNameGiven) && !Data.Power.godhoodNames.contains(effectNameGiven)){this.constructor(); return;}  //reset values
+       if(!Data.Power.names.contains(effectNameGiven)){this.constructor(); return;}  //reset values
           //this is only reachable if you select the default value in the drop down
 
        effect = effectNameGiven;
@@ -252,17 +252,14 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       var htmlString = '', i;
       htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
       htmlString+='    <option>Select One</option>\n';
+      var disaplyGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
+      //equipment can't be god-like so I only need to check power section's switch
+         //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
       for (i=0; i < Data.Power.names.length; i++)
       {
-         htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
+         if(disaplyGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
+            htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
       }
-      if (Main !== undefined && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodHood()))
-      //equipment can't be god-like so I only need to check power section's switch
-         //must check both hasGodhoodAdvantages and canUseGodHood since they are not yet in sync
-         for (i=0; i < Data.Power.godhoodNames.length; i++)
-         {
-            htmlString+='    <option>'+Data.Power.godhoodNames[i]+'</option>\n';
-         }
       htmlString+='</select>\n';
       if(this.isBlank()) return htmlString;  //done
 

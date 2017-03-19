@@ -39,18 +39,6 @@ TestSuite.data.v1=function(isFirst)
    Data.change(1, 0);
 
    expected = {
-      "godhoodNames": [
-         "Beyond Mortal",
-         "Let There Be",
-         "Luck of the Gods",
-         "Omnipresent",
-         "Omniscient",
-         "Perfect Focus",
-         "Stay Like That",
-         "Supreme",
-         "Variable Modifier",
-         "Your Petty Rules Don't Apply to Me"
-      ],
       "mapThese": [
          "Close Attack",
          "Defensive Roll",
@@ -140,6 +128,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Agile Feint": {
@@ -147,6 +136,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "All-out Attack": {
@@ -154,6 +144,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Animal Empathy": {
@@ -161,6 +152,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Artificer": {
@@ -168,6 +160,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Assessment": {
@@ -175,6 +168,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Attractive": {
@@ -182,6 +176,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Beginner's Luck": {
@@ -189,6 +184,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Benefit": {
@@ -196,6 +192,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Chokehold": {
@@ -203,6 +200,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Close Attack": {
@@ -210,6 +208,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Connected": {
@@ -217,6 +216,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Contacts": {
@@ -224,6 +224,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Daze": {
@@ -231,6 +232,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Defensive Attack": {
@@ -238,6 +240,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Defensive Roll": {
@@ -245,6 +248,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Diehard": {
@@ -252,6 +256,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Eidetic Memory": {
@@ -259,6 +264,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Equipment": {
@@ -266,6 +272,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Evasion": {
@@ -273,6 +280,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Extraordinary Effort": {
@@ -280,6 +288,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Fascinate": {
@@ -287,6 +296,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Fast Grab": {
@@ -294,6 +304,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Favored Environment": {
@@ -301,6 +312,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Environment",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Favored Foe": {
@@ -308,6 +320,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Foe type",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Fearless": {
@@ -315,6 +328,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Grabbing Finesse": {
@@ -322,6 +336,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Great Endurance": {
@@ -329,6 +344,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Hide in Plain Sight": {
@@ -336,6 +352,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Aim": {
@@ -343,6 +360,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Critical": {
@@ -350,6 +368,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 4
       },
       "Improved Defense": {
@@ -357,6 +376,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Disarm": {
@@ -364,6 +384,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Grab": {
@@ -371,6 +392,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Hold": {
@@ -378,6 +400,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Initiative": {
@@ -385,6 +408,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Improved Smash": {
@@ -392,6 +416,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Trip": {
@@ -399,6 +424,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improvised Tools": {
@@ -406,6 +432,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improvised Weapon": {
@@ -413,6 +440,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Inspire": {
@@ -420,6 +448,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 5
       },
       "Instant Up": {
@@ -427,6 +456,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Interpose": {
@@ -434,6 +464,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Inventor": {
@@ -441,6 +472,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Jack of All Trades": {
@@ -448,6 +480,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Languages": {
@@ -455,6 +488,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Languages Known",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Leadership": {
@@ -462,6 +496,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Luck": {
@@ -469,6 +504,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Minion": {
@@ -476,6 +512,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Helper Name",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Move-by Action": {
@@ -483,6 +520,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Power Attack": {
@@ -490,6 +528,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Precise Attack": {
@@ -497,6 +536,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 4
       },
       "Prone Fighting": {
@@ -504,6 +544,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Quick Draw": {
@@ -511,6 +552,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Ranged Attack": {
@@ -518,6 +560,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Redirect": {
@@ -525,6 +568,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Ritualist": {
@@ -532,6 +576,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Second Chance": {
@@ -539,6 +584,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Seize Initiative": {
@@ -546,6 +592,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Set-up": {
@@ -553,6 +600,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Sidekick": {
@@ -560,6 +608,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Helper Name",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Skill Mastery": {
@@ -567,6 +616,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Startle": {
@@ -574,6 +624,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Takedown": {
@@ -581,6 +632,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Taunt": {
@@ -588,6 +640,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Teamwork": {
@@ -595,6 +648,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Throwing Mastery": {
@@ -602,6 +656,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Tracking": {
@@ -609,6 +664,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Trance": {
@@ -616,6 +672,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Ultimate Effort": {
@@ -623,6 +680,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Uncanny Dodge": {
@@ -630,6 +688,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Weapon Bind": {
@@ -637,6 +696,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Weapon Break": {
@@ -644,6 +704,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Well-informed": {
@@ -651,76 +712,7 @@ TestSuite.data.v1=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
-         "maxRank": 1
-      },
-      "Beyond Mortal": {
-         "name": "Beyond Mortal",
-         "costPerRank": 50,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 1
-      },
-      "Let There Be": {
-         "name": "Let There Be",
-         "costPerRank": 40,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 1
-      },
-      "Luck of the Gods": {
-         "name": "Luck of the Gods",
-         "costPerRank": 5,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 1
-      },
-      "Omnipresent": {
-         "name": "Omnipresent",
-         "costPerRank": 5,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 3
-      },
-      "Omniscient": {
-         "name": "Omniscient",
-         "costPerRank": 5,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 5
-      },
-      "Perfect Focus": {
-         "name": "Perfect Focus",
-         "costPerRank": 1,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 1
-      },
-      "Stay Like That": {
-         "name": "Stay Like That",
-         "costPerRank": 15,
-         "defaultText": "Power Modified",
-         "hasText": true,
-         "maxRank": 1
-      },
-      "Supreme": {
-         "name": "Supreme",
-         "costPerRank": 1,
-         "defaultText": "Power Gained",
-         "hasText": true,
-         "maxRank": Infinity
-      },
-      "Variable Modifier": {
-         "name": "Variable Modifier",
-         "costPerRank": 35,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
-         "maxRank": 1
-      },
-      "Your Petty Rules Don't Apply to Me": {
-         "name": "Your Petty Rules Don't Apply to Me",
-         "costPerRank": 50,
-         "defaultText": "Advantage Subtype",
-         "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       }
    };
@@ -914,7 +906,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Alternate Effect": {
          "name": "Alternate Effect",
-         "cost": -1,
+         "cost": 1,
          "defaultText": "To What",
          "hasAutoRank": true,
          "hasAutoTotal": true,
@@ -998,7 +990,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Dynamic Alternate Effect": {
          "name": "Dynamic Alternate Effect",
-         "cost": -1,
+         "cost": 1,
          "defaultText": "To What",
          "hasAutoRank": true,
          "hasAutoTotal": true,
@@ -1334,7 +1326,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Check Required": {
          "name": "Check Required",
-         "cost": 1,
+         "cost": -1,
          "defaultText": "What Check",
          "hasAutoRank": false,
          "hasAutoTotal": false,
@@ -1662,10 +1654,6 @@ TestSuite.data.v1=function(isFirst)
          "Permanent",
          "Instant"
       ],
-      "godhoodNames": [
-         "A God I Am",
-         "Reality Warp"
-      ],
       "names": [
          "Affliction",
          "Burrowing",
@@ -1721,7 +1709,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Burrowing": {
          "name": "Burrowing",
@@ -1730,7 +1719,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Communication": {
          "name": "Communication",
@@ -1739,7 +1729,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Comprehend": {
          "name": "Comprehend",
@@ -1748,7 +1739,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Concealment": {
          "name": "Concealment",
@@ -1757,7 +1749,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Create": {
          "name": "Create",
@@ -1766,7 +1759,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Damage": {
          "name": "Damage",
@@ -1775,7 +1769,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Deflect": {
          "name": "Deflect",
@@ -1784,7 +1779,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Elongation": {
          "name": "Elongation",
@@ -1793,7 +1789,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Enhanced Trait": {
          "name": "Enhanced Trait",
@@ -1802,7 +1799,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Environment": {
          "name": "Environment",
@@ -1811,7 +1809,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Extra Limbs": {
          "name": "Extra Limbs",
@@ -1820,7 +1819,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Feature": {
          "name": "Feature",
@@ -1829,7 +1829,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Flight": {
          "name": "Flight",
@@ -1838,7 +1839,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Growth": {
          "name": "Growth",
@@ -1847,7 +1849,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Healing": {
          "name": "Healing",
@@ -1856,7 +1859,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Illusion": {
          "name": "Illusion",
@@ -1865,7 +1869,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Perception",
          "hasInputBaseCost": true,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Immortality": {
          "name": "Immortality",
@@ -1874,7 +1879,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Immunity": {
          "name": "Immunity",
@@ -1883,7 +1889,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Insubstantial": {
          "name": "Insubstantial",
@@ -1892,7 +1899,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Leaping": {
          "name": "Leaping",
@@ -1901,7 +1909,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Luck Control": {
          "name": "Luck Control",
@@ -1910,7 +1919,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Perception",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Mind Reading": {
          "name": "Mind Reading",
@@ -1919,7 +1929,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Perception",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Morph": {
          "name": "Morph",
@@ -1928,7 +1939,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Move Object": {
          "name": "Move Object",
@@ -1937,7 +1949,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Movement": {
          "name": "Movement",
@@ -1945,8 +1958,9 @@ TestSuite.data.v1=function(isFirst)
          "defaultAction": "Free",
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
-         "hasInputBaseCost": true,
-         "isAttack": false
+         "hasInputBaseCost": false,
+         "isAttack": false,
+         "isGodhood": false
       },
       "Nullify": {
          "name": "Nullify",
@@ -1955,7 +1969,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Protection": {
          "name": "Protection",
@@ -1964,7 +1979,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Quickness": {
          "name": "Quickness",
@@ -1973,7 +1989,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Regeneration": {
          "name": "Regeneration",
@@ -1982,7 +1999,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Remote Sensing": {
          "name": "Remote Sensing",
@@ -1991,7 +2009,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Senses": {
          "name": "Senses",
@@ -2000,7 +2019,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Shrinking": {
          "name": "Shrinking",
@@ -2009,7 +2029,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Speed": {
          "name": "Speed",
@@ -2018,7 +2039,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Summon": {
          "name": "Summon",
@@ -2027,7 +2049,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Swimming": {
          "name": "Swimming",
@@ -2036,7 +2059,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Teleport": {
          "name": "Teleport",
@@ -2045,7 +2069,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Transform": {
          "name": "Transform",
@@ -2054,7 +2079,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Variable": {
          "name": "Variable",
@@ -2063,7 +2089,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Weaken": {
          "name": "Weaken",
@@ -2072,25 +2099,8 @@ TestSuite.data.v1=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
-      },
-      "A God I Am": {
-         "name": "A God I Am",
-         "baseCost": 5,
-         "defaultAction": "Triggered",
-         "defaultDuration": "Continuous",
-         "defaultRange": "Personal",
-         "hasInputBaseCost": false,
-         "isAttack": false
-      },
-      "Reality Warp": {
-         "name": "Reality Warp",
-         "baseCost": 5,
-         "defaultAction": "Free",
-         "defaultDuration": "Continuous",
-         "defaultRange": "Perception",
-         "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": true,
+         "isGodhood": false
       }
    };
    testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
@@ -2210,18 +2220,6 @@ TestSuite.data.v2=function(isFirst)
    Data.change(2, 7);
 
    expected = {
-      "godhoodNames": [
-         "Beyond Mortal",
-         "Let There Be",
-         "Luck of the Gods",
-         "Omnipresent",
-         "Omniscient",
-         "Perfect Focus",
-         "Stay Like That",
-         "Supreme",
-         "Variable Modifier",
-         "Your Petty Rules Don't Apply to Me"
-      ],
       "mapThese": [
          "Close Attack",
          "Defensive Roll",
@@ -2270,13 +2268,24 @@ TestSuite.data.v2=function(isFirst)
          "Skill Mastery",
          "Teamwork",
          "Trance",
-         "Ultimate Effort"
+         "Ultimate Effort",
+         "Beyond Mortal",
+         "Let There Be",
+         "Luck of the Gods",
+         "Omnipresent",
+         "Omniscient",
+         "Perfect Focus",
+         "Stay Like That",
+         "Supreme",
+         "Variable Modifier",
+         "Your Petty Rules Don't Apply to Me"
       ],
       "Accurate Attack": {
          "name": "Accurate Attack",
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "All-out Attack": {
@@ -2284,6 +2293,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Attractive": {
@@ -2291,6 +2301,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Beginner's Luck": {
@@ -2298,6 +2309,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Benefit": {
@@ -2305,6 +2317,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Connected": {
@@ -2312,6 +2325,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Defensive Attack": {
@@ -2319,6 +2333,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Defensive Roll": {
@@ -2326,6 +2341,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Diehard": {
@@ -2333,6 +2349,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Equipment": {
@@ -2340,6 +2357,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Evasion": {
@@ -2347,6 +2365,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 2
       },
       "Extraordinary Effort": {
@@ -2354,6 +2373,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Fast Grab": {
@@ -2361,6 +2381,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Aim": {
@@ -2368,6 +2389,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Critical": {
@@ -2375,6 +2397,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 4
       },
       "Improved Defense": {
@@ -2382,6 +2405,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Disarm": {
@@ -2389,6 +2413,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Grab": {
@@ -2396,6 +2421,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Hold": {
@@ -2403,6 +2429,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improved Initiative": {
@@ -2410,6 +2437,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 5
       },
       "Improved Trip": {
@@ -2417,6 +2445,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Improvised Tools": {
@@ -2424,6 +2453,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Inspire": {
@@ -2431,6 +2461,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 5
       },
       "Instant Up": {
@@ -2438,6 +2469,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Interpose": {
@@ -2445,6 +2477,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Jack of All Trades": {
@@ -2452,6 +2485,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Languages": {
@@ -2459,6 +2493,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Languages Known",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Lucky": {
@@ -2466,6 +2501,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 5,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 3
       },
       "Meekness": {
@@ -2473,6 +2509,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Minion": {
@@ -2480,6 +2517,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Helper Name",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Move-by Action": {
@@ -2487,6 +2525,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Power Attack": {
@@ -2494,6 +2533,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Prone Fighting": {
@@ -2501,6 +2541,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Quick Draw": {
@@ -2508,6 +2549,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Seize Initiative": {
@@ -2515,6 +2557,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Sidekick": {
@@ -2522,6 +2565,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 2,
          "defaultText": "Helper Name",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": Infinity
       },
       "Skill Mastery": {
@@ -2529,6 +2573,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Teamwork": {
@@ -2536,6 +2581,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Trance": {
@@ -2543,6 +2589,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Ultimate Effort": {
@@ -2550,6 +2597,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": true,
+         "isGodhood": false,
          "maxRank": 1
       },
       "Beyond Mortal": {
@@ -2557,6 +2605,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 50,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Let There Be": {
@@ -2564,6 +2613,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 40,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Luck of the Gods": {
@@ -2571,6 +2621,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 5,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Omnipresent": {
@@ -2578,6 +2629,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 5,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 3
       },
       "Omniscient": {
@@ -2585,6 +2637,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 5,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 5
       },
       "Perfect Focus": {
@@ -2592,6 +2645,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Stay Like That": {
@@ -2599,6 +2653,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 15,
          "defaultText": "Power Modified",
          "hasText": true,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Supreme": {
@@ -2606,6 +2661,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 1,
          "defaultText": "Power Gained",
          "hasText": true,
+         "isGodhood": true,
          "maxRank": Infinity
       },
       "Variable Modifier": {
@@ -2613,6 +2669,7 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 35,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       },
       "Your Petty Rules Don't Apply to Me": {
@@ -2620,41 +2677,13 @@ TestSuite.data.v2=function(isFirst)
          "costPerRank": 50,
          "defaultText": "Advantage Subtype",
          "hasText": false,
+         "isGodhood": true,
          "maxRank": 1
       }
    };
    testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
-   expected = {
-      "names": [
-         "Dodge",
-         "Fortitude",
-         "Parry",
-         "Will",
-         "Toughness"
-      ],
-      "Dodge": {
-         "ability": "Agility",
-         "name": "Dodge"
-      },
-      "Fortitude": {
-         "ability": "Stamina",
-         "name": "Fortitude"
-      },
-      "Parry": {
-         "ability": "Fighting",
-         "name": "Parry"
-      },
-      "Will": {
-         "ability": "Presence",
-         "name": "Will"
-      },
-      "Toughness": {
-         "ability": "Stamina",
-         "name": "Toughness"
-      }
-   };
-   testResults.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
+   testResults.push({Expected: 'Presence', Actual: Data.Defense['Will'].ability, Description: 'Data.Defense[Will].ability = Presence'});
 
    expected = {
       "names": [
@@ -3198,7 +3227,7 @@ TestSuite.data.v2=function(isFirst)
       },
       "Check Required": {
          "name": "Check Required",
-         "cost": 1,
+         "cost": -1,
          "defaultText": "What Check",
          "hasAutoRank": false,
          "hasAutoTotal": false,
@@ -3577,10 +3606,6 @@ TestSuite.data.v2=function(isFirst)
          "Permanent",
          "Instant"
       ],
-      "godhoodNames": [
-         "A God I Am",
-         "Reality Warp"
-      ],
       "names": [
          "Affliction",
          "Attain Knowledge",
@@ -3622,7 +3647,9 @@ TestSuite.data.v2=function(isFirst)
          "Teleport",
          "Transform",
          "Variable",
-         "Weaken"
+         "Weaken",
+         "A God I Am",
+         "Reality Warp"
       ],
       "ranges": [
          "Close",
@@ -3637,7 +3664,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Attain Knowledge": {
          "name": "Attain Knowledge",
@@ -3646,7 +3674,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Communication": {
          "name": "Communication",
@@ -3655,7 +3684,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Comprehend": {
          "name": "Comprehend",
@@ -3664,7 +3694,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Concealment": {
          "name": "Concealment",
@@ -3673,7 +3704,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Create": {
          "name": "Create",
@@ -3682,7 +3714,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Damage": {
          "name": "Damage",
@@ -3691,7 +3724,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Enhanced Trait": {
          "name": "Enhanced Trait",
@@ -3700,7 +3734,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Environment": {
          "name": "Environment",
@@ -3709,7 +3744,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Feature": {
          "name": "Feature",
@@ -3718,7 +3754,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Flight": {
          "name": "Flight",
@@ -3727,7 +3764,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Growth": {
          "name": "Growth",
@@ -3736,7 +3774,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Healing": {
          "name": "Healing",
@@ -3745,7 +3784,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Illusion": {
          "name": "Illusion",
@@ -3754,7 +3794,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Perception",
          "hasInputBaseCost": true,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Immortality": {
          "name": "Immortality",
@@ -3763,7 +3804,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Immunity": {
          "name": "Immunity",
@@ -3772,7 +3814,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Insubstantial": {
          "name": "Insubstantial",
@@ -3781,7 +3824,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Leaping": {
          "name": "Leaping",
@@ -3790,7 +3834,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Luck Control": {
          "name": "Luck Control",
@@ -3799,7 +3844,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Perception",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Mental Transform": {
          "name": "Mental Transform",
@@ -3808,7 +3854,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Mind Reading": {
          "name": "Mind Reading",
@@ -3817,7 +3864,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Perception",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Mind Switch": {
          "name": "Mind Switch",
@@ -3826,7 +3874,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Morph": {
          "name": "Morph",
@@ -3835,7 +3884,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Move Object": {
          "name": "Move Object",
@@ -3844,7 +3894,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Movement": {
          "name": "Movement",
@@ -3853,7 +3904,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Nullify": {
          "name": "Nullify",
@@ -3862,7 +3914,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Ranged",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "Permeate": {
          "name": "Permeate",
@@ -3871,7 +3924,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Phantom Ranks": {
          "name": "Phantom Ranks",
@@ -3880,7 +3934,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Protection": {
          "name": "Protection",
@@ -3889,7 +3944,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Quickness": {
          "name": "Quickness",
@@ -3898,7 +3954,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Regeneration": {
          "name": "Regeneration",
@@ -3907,7 +3964,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Remote Sensing": {
          "name": "Remote Sensing",
@@ -3916,7 +3974,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Resistance": {
          "name": "Resistance",
@@ -3925,7 +3984,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Senses": {
          "name": "Senses",
@@ -3934,7 +3994,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Permanent",
          "defaultRange": "Personal",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Shrinking": {
          "name": "Shrinking",
@@ -3943,7 +4004,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Summon Minion": {
          "name": "Summon Minion",
@@ -3952,7 +4014,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Summon Object": {
          "name": "Summon Object",
@@ -3961,7 +4024,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Teleport": {
          "name": "Teleport",
@@ -3970,7 +4034,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Transform": {
          "name": "Transform",
@@ -3979,7 +4044,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Close",
          "hasInputBaseCost": true,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Variable": {
          "name": "Variable",
@@ -3988,7 +4054,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": false
       },
       "Weaken": {
          "name": "Weaken",
@@ -3997,7 +4064,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Instant",
          "defaultRange": "Close",
          "hasInputBaseCost": false,
-         "isAttack": true
+         "isAttack": true,
+         "isGodhood": false
       },
       "A God I Am": {
          "name": "A God I Am",
@@ -4006,7 +4074,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Continuous",
          "defaultRange": "Personal",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": true
       },
       "Reality Warp": {
          "name": "Reality Warp",
@@ -4015,7 +4084,8 @@ TestSuite.data.v2=function(isFirst)
          "defaultDuration": "Continuous",
          "defaultRange": "Perception",
          "hasInputBaseCost": false,
-         "isAttack": false
+         "isAttack": false,
+         "isGodhood": true
       }
    };
    testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
@@ -4165,16 +4235,36 @@ TestSuite.data.v3=function(isFirst)
 {
    TestRunner.clearResults(isFirst);
 
-   var testResults=[];
+   var testResults=[], expected;
 
    try {
    Data.change(3, 0);
 
    testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
    testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
-   testResults.push({Expected: true, Actual: Data.Advantage.names.contains('Persistent Information'), Description: 'Added Data.Advantage[Persistent Information]'});
+   expected = {
+      "name": "Persistent Information",
+      "costPerRank": 1,
+      "defaultText": "Advantage Subtype",
+      "hasText": false,
+      "isGodhood": false,
+      "maxRank": 1
+   };
+   testResults.push({Expected: expected, Actual: Data.Advantage['Persistent Information'], Description: 'Added Data.Advantage[Persistent Information]'});
    testResults.push({Expected: 1, Actual: Data.Advantage['Inspire'].maxRank, Description: 'Data.Advantage[Inspire] no longer ranked'});
-   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Added Data.Modifier[Uncontrollable Activation]'});
+   expected = {
+      "name": "Uncontrollable Activation",
+      "cost": 1,
+      "defaultText": "Description",
+      "hasAutoRank": false,
+      "hasAutoTotal": false,
+      "hasText": false,
+      "isActionRangeDuration": false,
+      "isReadOnly": false,
+      "maxRank": 1,
+      "type": "Rank"
+   };
+   testResults.push({Expected: expected, Actual: Data.Modifier['Uncontrollable Activation'], Description: 'Added Data.Modifier[Uncontrollable Activation]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.0 Same data'});}
 
    try {
@@ -4190,21 +4280,32 @@ TestSuite.data.v3=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Data.Power['Teleport'].defaultAction, Description: 'Data.Power[Teleport].defaultAction = Move'});
 
    var actualAllowReaction=[], actualIsMovement=[];
-   var allNames = Data.Power.names.concat(Data.Power.godhoodNames);
-   for (var i = 0; i < allNames.length; ++i)
+   for (var i = 0; i < Data.Power.names.length; ++i)
    {
-      var name = allNames[i];
+      var name = Data.Power.names[i];
       if(true === Data.Power[name].allowReaction) actualAllowReaction.push(name);
       if(true === Data.Power[name].isMovement) actualIsMovement.push(name);
    }
    actualAllowReaction.sort();
    actualIsMovement.sort();
-   var expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+   expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
    testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data.Power[*].allowReaction'});
    expected = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
    testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data.Power[*].isMovement'});
 
-   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Aura'), Description: 'Added Data.Modifier[Aura]'});
+   expected = {
+      "name": "Aura",
+      "cost": 2,
+      "defaultText": "Description",
+      "hasAutoRank": false,
+      "hasAutoTotal": false,
+      "hasText": false,
+      "isActionRangeDuration": false,
+      "isReadOnly": true,
+      "maxRank": 1,
+      "type": "Rank"
+   };
+   testResults.push({Expected: expected, Actual: Data.Modifier['Aura'], Description: 'Added Data.Modifier[Aura]'});
    testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
    testResults.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
    } catch(e){testResults.push({Error: e, Description: 'v3.4 Same data'});}
