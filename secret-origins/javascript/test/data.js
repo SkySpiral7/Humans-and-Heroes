@@ -914,7 +914,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Alternate Effect": {
          "name": "Alternate Effect",
-         "cost": -1,
+         "cost": 1,
          "defaultText": "To What",
          "hasAutoRank": true,
          "hasAutoTotal": true,
@@ -998,7 +998,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Dynamic Alternate Effect": {
          "name": "Dynamic Alternate Effect",
-         "cost": -1,
+         "cost": 1,
          "defaultText": "To What",
          "hasAutoRank": true,
          "hasAutoTotal": true,
@@ -1334,7 +1334,7 @@ TestSuite.data.v1=function(isFirst)
       },
       "Check Required": {
          "name": "Check Required",
-         "cost": 1,
+         "cost": -1,
          "defaultText": "What Check",
          "hasAutoRank": false,
          "hasAutoTotal": false,
@@ -3198,7 +3198,7 @@ TestSuite.data.v2=function(isFirst)
       },
       "Check Required": {
          "name": "Check Required",
-         "cost": 1,
+         "cost": -1,
          "defaultText": "What Check",
          "hasAutoRank": false,
          "hasAutoTotal": false,

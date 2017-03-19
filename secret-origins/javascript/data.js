@@ -59,8 +59,8 @@ Data.change = function(major, minor)
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
-      cost: new MapDefault({'Activation': -1, 'Affects Objects Only': 0, 'Affects Others Only': 0, 'Alternate Effect': -1, 'Alternate Resistance (Free)': 0,
-         'Ammunition': -1, 'Attack': 0, 'Aura': 2, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': -1,
+      cost: new MapDefault({'Activation': -1, 'Affects Objects Only': 0, 'Affects Others Only': 0, 'Alternate Effect': 1, 'Alternate Resistance (Free)': 0,
+         'Ammunition': -1, 'Attack': 0, 'Aura': 2, 'Check Required': -1, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': 1,
          'Easily Removable': -1, 'Existence Dependent': 0, 'Fades': -1, 'Feedback': -1, 'Fragile': -1, 'Grab-Based': -1, 'Impervious': 1, 'Inaccurate': -1,
          'Increased Mass': 1, 'Limited': -1, 'Linked': 0, 'Noticeable': -1, 'Other Flat Flaw': -1, 'Other Free Modifier': 0, 'Other Rank Flaw': -1,
          'Penetrating': 1, 'Quirk': -1, 'Reduced Range': -1, 'Removable': -1, 'Resistible': -1, 'Sense-Dependent': -1, 'Side Effect': -1, 'Sleep': 0,
@@ -168,6 +168,7 @@ Data.change = function(major, minor)
       flawNames.removeByValue('Uncontrolled');
       flawNames = flawNames.concat(['Alternate Effect', 'Ammunition', 'Fragile', 'System Dependent', 'Uncontrollable Entirely', 'Uncontrollable Result', 'Uncontrollable Target']);
          //Alternate Effect is a flaw in 2.x even though it was mislabeled as an extra
+      modifierLookup.cost.set('Alternate Effect', -1);
 
       modifierLookup.cost.set('Attack', 1);
       modifierLookup.type.set('Attack', 'Rank');
@@ -206,69 +207,20 @@ Data.change = function(major, minor)
       skillLookup.hasText.removeByValue('Persuasion');
       skillLookup.hasText.removeByValue('Tracking');
    }
-   if (major >= 3)
-   {
-      Data.Advantage.names.removeByValue('Improved Critical');
-      Data.Advantage.names.removeByValue('Trance');  //moved to feature
-      Data.Advantage.names.push('Persistent Information');
-      advantageLookup.maxRank.set('Inspire', 1);
-
-      if(minor < 4) flawNames.push('Uncontrollable Activation');  //v3.0 added it then v3.4 removed it
-      if (minor >= 4)
-      {
-         Data.Power.actions.removeByValue('Triggered');  //Reaction is still here but is only sometimes a choice
-         powerLookup.defaultAction.set('A God I Am', 'Free');
-         powerLookup.defaultAction.set('Flight', 'Move');
-         powerLookup.defaultAction.set('Leaping', 'Move');
-         powerLookup.defaultAction.set('Movement', 'Move');
-         powerLookup.defaultAction.set('Permeate', 'Move');
-         powerLookup.defaultAction.set('Teleport', 'Move');
-         powerLookup.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
-         powerLookup.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
-
-         extraNames.push('Aura');
-         flawNames.removeByValue('Grab-Based');
-         modifierLookup.readOnly.push('Aura');
-      }
-      if(minor >= 5) extraNames.removeByValue('Secondary Effect');
-   }
 
    var i, name, allNames;
-   Data.Advantage.names.sort();
    allNames = Data.Advantage.names.concat(Data.Advantage.godhoodNames);
    for (i = 0; i < allNames.length; ++i)
    {
-      name = allNames[i];
-      Data.Advantage[name] = {
-         name: name,
-         costPerRank: advantageLookup.costPerRank.get(name),
-         defaultText: advantageLookup.defaultText.get(name),
-         hasText: advantageLookup.hasText.contains(name),
-         maxRank: advantageLookup.maxRank.get(name)
-      };
+      addAdvantage(allNames[i]);
    }
-   extraNames.sort();
-   flawNames.sort();
    Data.Modifier = {
       names: extraNames.concat(flawNames).concat(otherModifierNames)
    };
    for (i = 0; i < Data.Modifier.names.length; ++i)
    {
-      name = Data.Modifier.names[i];
-      Data.Modifier[name] = {
-         name: name,
-         cost: modifierLookup.cost.get(name),
-         defaultText: modifierLookup.defaultText.get(name),
-         hasAutoRank: modifierLookup.hasAutoRank.contains(name),
-         hasAutoTotal: modifierLookup.hasAutoTotal.contains(name),
-         hasText: modifierLookup.hasText.contains(name),
-         isActionRangeDuration: modifierLookup.actionRangeDuration.contains(name),
-         isReadOnly: modifierLookup.readOnly.contains(name),
-         maxRank: modifierLookup.maxRank.get(name),
-         type: modifierLookup.type.get(name)
-      };
+      addModifier(Data.Modifier.names[i]);
    }
-   Data.Power.names.sort();
    allNames = Data.Power.names.concat(Data.Power.godhoodNames);
    for (i = 0; i < allNames.length; ++i)
    {
@@ -282,8 +234,6 @@ Data.change = function(major, minor)
          hasInputBaseCost: powerLookup.hasInputBaseCost.contains(name),
          isAttack: powerLookup.isAttack.contains(name)
       };
-      if(undefined !== powerLookup.allowReaction) Data.Power[name].allowReaction = powerLookup.allowReaction.contains(name);
-      if(undefined !== powerLookup.isMovement) Data.Power[name].isMovement = powerLookup.isMovement.contains(name);
    }
    for (i = 0; i < Data.Skill.names.length; ++i)
    {
@@ -294,4 +244,126 @@ Data.change = function(major, minor)
          hasText: skillLookup.hasText.contains(name)
       };
    }
+
+   if (major >= 3)
+   {
+      remove(Data.Advantage, 'Improved Critical');
+      remove(Data.Advantage, 'Trance');  //moved to feature
+      addAdvantage('Persistent Information');
+      Data.Advantage.Inspire.maxRank = 1;
+
+      if(minor < 4) addModifier('Uncontrollable Activation');  //v3.0 added it then v3.4 removed it
+      if (minor >= 4)
+      {
+         Data.Power.actions.removeByValue('Triggered');  //Reaction is still here but is only sometimes a choice
+         Data.Power['A God I Am'].defaultAction = 'Free';
+         Data.Power['Flight'].defaultAction = 'Move';
+         Data.Power['Leaping'].defaultAction = 'Move';
+         Data.Power['Movement'].defaultAction = 'Move';
+         Data.Power['Permeate'].defaultAction = 'Move';
+         Data.Power['Teleport'].defaultAction = 'Move';
+         powerLookup.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+         powerLookup.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
+
+         allNames = Data.Power.names.concat(Data.Power.godhoodNames);
+         for (i = 0; i < allNames.length; ++i)
+         {
+            name = allNames[i];
+            Data.Power[name].allowReaction = powerLookup.allowReaction.contains(name);
+            Data.Power[name].isMovement = powerLookup.isMovement.contains(name);
+         }
+
+         addModifier('Aura');
+         Data.Modifier.Aura.isReadOnly = true;
+         remove(Data.Modifier, 'Grab-Based');
+      }
+      if(minor >= 5) remove(Data.Modifier, 'Secondary Effect');
+   }
+   sortData();
+
+   function addAdvantage(nameToAdd)
+   {
+      if(!Data.Advantage.names.contains(nameToAdd) && (undefined === Data.Advantage.godHoodnames || !Data.Advantage.godHoodnames.contains(nameToAdd))) Data.Advantage.names.push(nameToAdd);
+      Data.Advantage[nameToAdd] = {
+         name: nameToAdd,
+         costPerRank: advantageLookup.costPerRank.get(nameToAdd),
+         defaultText: advantageLookup.defaultText.get(nameToAdd),
+         hasText: advantageLookup.hasText.contains(nameToAdd),
+         maxRank: advantageLookup.maxRank.get(nameToAdd)
+      };
+   }
+   function addModifier(nameToAdd)
+   {
+      if(!Data.Modifier.names.contains(nameToAdd)) Data.Modifier.names.push(nameToAdd);
+      Data.Modifier[nameToAdd] = {
+         name: nameToAdd,
+         cost: modifierLookup.cost.get(nameToAdd),
+         defaultText: modifierLookup.defaultText.get(nameToAdd),
+         hasAutoRank: modifierLookup.hasAutoRank.contains(nameToAdd),
+         hasAutoTotal: modifierLookup.hasAutoTotal.contains(nameToAdd),
+         hasText: modifierLookup.hasText.contains(nameToAdd),
+         isActionRangeDuration: modifierLookup.actionRangeDuration.contains(nameToAdd),
+         isReadOnly: modifierLookup.readOnly.contains(nameToAdd),
+         maxRank: modifierLookup.maxRank.get(nameToAdd),
+         type: modifierLookup.type.get(nameToAdd)
+      };
+   }
+   function remove(objectToModify, nameToRemove)
+   {
+      delete objectToModify[nameToRemove];
+      objectToModify.names.removeByValue(nameToRemove);
+   }
+   function sortData()
+   {
+      var aFirst = -1, bFirst = 1;
+      Data.Advantage.names.sort(function(a, b)
+      {
+         var aIsGodHood = Data.Advantage.godhoodNames.contains(a);
+         var bIsGodHood = Data.Advantage.godhoodNames.contains(b);
+         if(!aIsGodHood && bIsGodHood) return aFirst;
+         if(aIsGodHood && !bIsGodHood) return bFirst;
+
+         if(a < b) return aFirst;
+         return bFirst;  //can't be a tie
+      });
+
+      Data.Power.names.sort(function(a, b)
+      {
+         var aIsGodHood = Data.Power.godhoodNames.contains(a);
+         var bIsGodHood = Data.Power.godhoodNames.contains(b);
+         if(!aIsGodHood && bIsGodHood) return aFirst;
+         if(aIsGodHood && !bIsGodHood) return bFirst;
+
+         if(a < b) return aFirst;
+         return bFirst;  //can't be a tie
+      });
+
+      Data.Modifier.names.sort(function(a, b)
+      {
+         var aIsOther = otherModifierNames.contains(a);
+         var bIsOther = otherModifierNames.contains(b);
+         if(!aIsOther && bIsOther) return aFirst;
+         if(aIsOther && !bIsOther) return bFirst;
+         if (aIsOther && bIsOther)
+         {
+            if(otherModifierNames.indexOf(a) < otherModifierNames.indexOf(b)) return aFirst;
+            return bFirst;  //can't be a tie
+         }
+
+         //extras first
+         if(Data.Modifier[a].cost >= 0 && Data.Modifier[b].cost < 0) return aFirst;
+         if(Data.Modifier[a].cost < 0 && Data.Modifier[b].cost >= 0) return bFirst;
+
+         if(a < b) return aFirst;
+         return bFirst;  //can't be a tie
+      });
+      Data.Skill.names.sort(function(a, b)
+      {
+         if('Other' === a) return bFirst;
+         if('Other' === b) return aFirst;
+
+         if(a < b) return aFirst;
+         return bFirst;  //can't be a tie
+      });
+   };
 };
