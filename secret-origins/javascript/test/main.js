@@ -9,7 +9,7 @@ TestSuite.main.changeRuleset=function(isFirst)
 
     TestRunner.changeValue('ruleset', latestRuleString);
     //unfortunately I can't test the default values because by test runner resets the version every test
-    //it needs to do this so that a test for 1.1 doesn't mess up a test for 2.7
+    //it needs to do this so that a test for 1.0 doesn't mess up a test for 2.7
     //testResults.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Default ActiveRuleset is LatestRuleset'});
     //testResults.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Default value of element'});
 
@@ -38,6 +38,12 @@ TestSuite.main.changeRuleset=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: 'Typo v2.0'});}
 
     try{
+    TestRunner.changeValue('ruleset', '0');
+    testResults.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: 'Zero: ActiveRuleset 0 -> 1.0'});
+    testResults.push({Expected: '1.0', Actual: rulesetElement.value, Description: 'Zero: Element 0 -> 1.0'});
+    } catch(e){testResults.push({Error: e, Description: 'Zero'});}
+
+    try{
     TestRunner.changeValue('ruleset', '-2.0');
     testResults.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: 'Negative: ActiveRuleset -2.0 -> 1.0'});
     testResults.push({Expected: '1.0', Actual: rulesetElement.value, Description: 'Negative: Element -2.0 -> 1.0'});
@@ -54,6 +60,24 @@ TestSuite.main.changeRuleset=function(isFirst)
     testResults.push({Expected: '2.5', Actual: Main.getActiveRuleset().toString(), Description: 'Normal: ActiveRuleset 2.5 -> 2.5'});
     testResults.push({Expected: '2.5', Actual: rulesetElement.value, Description: 'Normal: Element 2.5 -> 2.5'});
     } catch(e){testResults.push({Error: e, Description: 'Normal'});}
+
+    try{
+    TestRunner.changeValue('ruleset', '1.5');
+    testResults.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: '1.x Minor too large: ActiveRuleset 1.5 -> 1.0'});
+    testResults.push({Expected: '1.0', Actual: rulesetElement.value, Description: '1.x Minor too large: Element 1.5 -> 1.0'});
+    } catch(e){testResults.push({Error: e, Description: '1.x Minor too large'});}
+
+    try{
+    TestRunner.changeValue('ruleset', '2.55');
+    testResults.push({Expected: '2.7', Actual: Main.getActiveRuleset().toString(), Description: '2.x Minor too large: ActiveRuleset 2.55 -> 2.7'});
+    testResults.push({Expected: '2.7', Actual: rulesetElement.value, Description: '2.x Minor too large: Element 2.55 -> 2.7'});
+    } catch(e){testResults.push({Error: e, Description: '2.x Minor too large'});}
+
+    try{
+    TestRunner.changeValue('ruleset', '3.999');
+    testResults.push({Expected: Main.getLatestRuleset(), Actual: Main.getActiveRuleset(), Description: '3.x Minor too large: ActiveRuleset 3.999 -> latest'});
+    testResults.push({Expected: Main.getLatestRuleset().toString(), Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.999 -> latest'});
+    } catch(e){testResults.push({Error: e, Description: '3.x Minor too large'});}
 
     try{
     TestRunner.changeValue('ruleset', '2');

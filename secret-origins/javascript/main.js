@@ -21,6 +21,11 @@ function includeJsFile(jsName)
 }
 })();
 
+{  //TODO: move this into minorVersion when possible
+var latestMinorRuleset = latestMinorVersion;
+var largestPossibleMinorRulesets = [undefined, 0, 7, latestMinorRuleset];
+}
+
 /**Call List onChange
 Hero Name: Nothing (only need to look at it when saving or loading)
 Transcendence: changeTranscendence()
@@ -29,7 +34,7 @@ bio box: nothing: same as hero name
 function MainObject()
 {
    //private variable section:
-    const latestRuleset = new VersionObject(3, latestMinorVersion), latestVersion = 2;  //see bottom of this file for a version list
+    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
     var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
     var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
     var activeRuleset = latestRuleset.clone();
@@ -65,6 +70,7 @@ function MainObject()
          {
              if(ruleset.major < 1) ruleset = new VersionObject(1, 0);  //easy way to change to the oldest version
              else if(ruleset.isGreaterThan(latestRuleset)) ruleset = latestRuleset.clone();  //easy way to change to the latest version
+             if(ruleset.minor > largestPossibleMinorRulesets[ruleset.major]) ruleset.minor = largestPossibleMinorRulesets[ruleset.major];
 
             if (!ruleset.equals(activeRuleset))  //if changed
             {
@@ -391,10 +397,10 @@ function MainObject()
           Main.messageUser('MainObject.determineCompatibilityIssues.newRuleset', 'The requested document uses game rules newer than what is supported by this code. It might not load correctly.');
           ruleset = latestRuleset.clone();  //default so that things can possibly load
       }
-      if (version > latestVersion)
+      if (version > latestSchemaVersion)
       {
           Main.messageUser('MainObject.determineCompatibilityIssues.newVersion', 'The requested document was saved in a format newer than what is supported by this code. It might not load correctly.');
-          version = latestVersion;
+          version = latestSchemaVersion;
       }
 
        //(re)set these so they can be used later
@@ -408,7 +414,7 @@ function MainObject()
       location.hash = '';  //clear out so that it may change later
 
       this.determineCompatibilityIssues(jsonDoc);
-      if(jsonDoc.version < latestVersion) this.convertDocument(jsonDoc);
+      if(jsonDoc.version < latestSchemaVersion) this.convertDocument(jsonDoc);
       //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
 
       this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
@@ -489,7 +495,7 @@ function MainObject()
        var jsonDoc = {Hero: {}, Abilities: {}, Powers: [], Equipment: [], Advantages: [], Skills: [], Defenses: {}};
           //skeleton so I don't need to create these later
        jsonDoc.ruleset = activeRuleset.toString();
-       jsonDoc.version = latestVersion;
+       jsonDoc.version = latestSchemaVersion;
        jsonDoc.Hero.name = document.getElementById('HeroName').value;
        if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
        jsonDoc.Hero.image = document.getElementById('imgFilePath').value;
@@ -561,8 +567,9 @@ power:
 }
 skill: Main.updateOffense();
 */
-/*xml version list:
+/*latestSchemaVersion change list:
 1: original format from ruleset 2.5
 2: added version and ruleset. name and skill attributes were added to both powers. old power "name" was renamed to "effect"
-pending: 3: added header (UTF-8;3.0.0;application/xml;) removed version. Added feature exclusive baseAction, baseRange, baseDuration. renamed power name to attackName and skill to attackSkill
+pending: 3: added header (3.0.0;application/xml;) removed version. Added feature exclusive baseAction, baseRange, baseDuration. renamed power name to attackName and skill to attackSkill
+    TODO: What do these numbers mean? If I use more than 1
 */
