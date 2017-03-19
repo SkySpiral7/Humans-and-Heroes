@@ -176,7 +176,7 @@ Data.change = function(major, minor)
       Data.Advantage.Sidekick.costPerRank = 2;
       Data.Advantage['Improved Initiative'].maxRank = 5;
 
-      Data.Defense.Will.ability = 'Presence';
+      Data.Defense['Will'].ability = 'Presence';
 
       remove(Data.Modifier, 'Affects Insubstantial');
       remove(Data.Modifier, 'Dynamic Alternate Effect');
@@ -287,7 +287,7 @@ Data.change = function(major, minor)
          Data.Power.Transform.baseCost = 1;
          Data.Power.Transform.hasInputBaseCost = false;
 
-         remove(Data.Modifier, 'Increased Mass');  //moved to page specific extra
+         remove(Data.Modifier, 'Increased Mass');  //moved into the specific pages
       }
    }
    sortData();

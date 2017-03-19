@@ -2683,36 +2683,7 @@ TestSuite.data.v2=function(isFirst)
    };
    testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
-   expected = {
-      "names": [
-         "Dodge",
-         "Fortitude",
-         "Parry",
-         "Will",
-         "Toughness"
-      ],
-      "Dodge": {
-         "ability": "Agility",
-         "name": "Dodge"
-      },
-      "Fortitude": {
-         "ability": "Stamina",
-         "name": "Fortitude"
-      },
-      "Parry": {
-         "ability": "Fighting",
-         "name": "Parry"
-      },
-      "Will": {
-         "ability": "Presence",
-         "name": "Will"
-      },
-      "Toughness": {
-         "ability": "Stamina",
-         "name": "Toughness"
-      }
-   };
-   testResults.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
+   testResults.push({Expected: 'Presence', Actual: Data.Defense['Will'].ability, Description: 'Data.Defense[Will].ability = Presence'});
 
    expected = {
       "names": [
@@ -4264,16 +4235,36 @@ TestSuite.data.v3=function(isFirst)
 {
    TestRunner.clearResults(isFirst);
 
-   var testResults=[];
+   var testResults=[], expected;
 
    try {
    Data.change(3, 0);
 
    testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
    testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
-   testResults.push({Expected: true, Actual: Data.Advantage.names.contains('Persistent Information'), Description: 'Added Data.Advantage[Persistent Information]'});
+   expected = {
+      "name": "Persistent Information",
+      "costPerRank": 1,
+      "defaultText": "Advantage Subtype",
+      "hasText": false,
+      "isGodhood": false,
+      "maxRank": 1
+   };
+   testResults.push({Expected: expected, Actual: Data.Advantage['Persistent Information'], Description: 'Added Data.Advantage[Persistent Information]'});
    testResults.push({Expected: 1, Actual: Data.Advantage['Inspire'].maxRank, Description: 'Data.Advantage[Inspire] no longer ranked'});
-   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Added Data.Modifier[Uncontrollable Activation]'});
+   expected = {
+      "name": "Uncontrollable Activation",
+      "cost": 1,
+      "defaultText": "Description",
+      "hasAutoRank": false,
+      "hasAutoTotal": false,
+      "hasText": false,
+      "isActionRangeDuration": false,
+      "isReadOnly": false,
+      "maxRank": 1,
+      "type": "Rank"
+   };
+   testResults.push({Expected: expected, Actual: Data.Modifier['Uncontrollable Activation'], Description: 'Added Data.Modifier[Uncontrollable Activation]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.0 Same data'});}
 
    try {
@@ -4297,12 +4288,24 @@ TestSuite.data.v3=function(isFirst)
    }
    actualAllowReaction.sort();
    actualIsMovement.sort();
-   var expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+   expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
    testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data.Power[*].allowReaction'});
    expected = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
    testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data.Power[*].isMovement'});
 
-   testResults.push({Expected: true, Actual: Data.Modifier.names.contains('Aura'), Description: 'Added Data.Modifier[Aura]'});
+   expected = {
+      "name": "Aura",
+      "cost": 2,
+      "defaultText": "Description",
+      "hasAutoRank": false,
+      "hasAutoTotal": false,
+      "hasText": false,
+      "isActionRangeDuration": false,
+      "isReadOnly": true,
+      "maxRank": 1,
+      "type": "Rank"
+   };
+   testResults.push({Expected: expected, Actual: Data.Modifier['Aura'], Description: 'Added Data.Modifier[Aura]'});
    testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
    testResults.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
    } catch(e){testResults.push({Error: e, Description: 'v3.4 Same data'});}
