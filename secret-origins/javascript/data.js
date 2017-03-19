@@ -59,14 +59,8 @@ Data.change = function(major, minor)
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
-      //TODO: can be much more flat if I look at if it is Free or extra
-      cost: new MapDefault({'Activation': -1, 'Affects Objects Only': 0, 'Affects Others Only': 0, 'Alternate Effect': 1, 'Alternate Resistance (Free)': 0,
-         'Ammunition': -1, 'Attack': 0, 'Aura': 2, 'Check Required': -1, 'Decreased Duration': -1, 'Diminished Range': -1, 'Distracting': -1, 'Dynamic Alternate Effect': 1,
-         'Easily Removable': -1, 'Existence Dependent': 0, 'Fades': -1, 'Feedback': -1, 'Fragile': -1, 'Grab-Based': -1, 'Impervious': 1, 'Inaccurate': -1,
-         'Increased Mass': 1, 'Limited': -1, 'Linked': 0, 'Noticeable': -1, 'Other Flat Flaw': -1, 'Other Free Modifier': 0, 'Other Rank Flaw': -1,
-         'Penetrating': 1, 'Quirk': -1, 'Reduced Range': -1, 'Removable': -1, 'Resistible': -1, 'Sense-Dependent': -1, 'Side Effect': -1, 'Sleep': 0,
-         'Slower Action': -1, 'System Dependent': -2, 'Tiring': -1, 'Uncontrollable Activation': -1, 'Uncontrollable Entirely': -5,
-         'Uncontrollable Result': -1, 'Uncontrollable Target': -1, 'Uncontrolled': -1, 'Unreliable': -1}, 1),
+      cost: new MapDefault({'Ammunition': -1, 'Aura': 2, 'Fragile': -1, 'Other Flat Flaw': -1, 'Other Rank Flaw': -1, 'System Dependent': -2,
+         'Uncontrollable Entirely': -5, 'Uncontrollable Result': -1, 'Uncontrollable Target': -1}, undefined),
       defaultText: new MapDefault({'Activation': 'Action Required', 'Alternate Effect': 'To What', 'Alternate Resistance (Cost)': 'Name of Resistance',
          'Alternate Resistance (Free)': 'Name of Resistance', 'Ammunition': 'Usage Per time or reload', 'Area': 'Shape', 'Check Required': 'What Check',
          'Contagious': 'Method of Spreading', 'Dimensional': 'Which Dimensions', 'Dynamic Alternate Effect': 'To What', 'Easily Removable': 'Type of item',
@@ -118,8 +112,7 @@ Data.change = function(major, minor)
          'Summon Object': 'Close', 'Transform': 'Close', 'Weaken': 'Close'}, 'Personal'),
       godhoodNames: ['A God I Am', 'Reality Warp'],
       hasInputBaseCost: ['Attain Knowledge', 'Concealment', 'Enhanced Trait', 'Environment', 'Feature', 'Illusion',
-         'Movement', 'Remote Sensing', 'Senses', 'Transform'],
-      //TODO: in 1.x Movement always costs 2 (not input)
+         'Remote Sensing', 'Senses', 'Transform'],
       isAttack: ['Affliction', 'Damage', 'Illusion', 'Mental Transform', 'Mind Reading', 'Mind Switch', 'Move Object', 'Nullify', 'Weaken']
    };
    Data.Power = {
@@ -213,6 +206,7 @@ Data.change = function(major, minor)
       Data.Modifier['Penetrating'].cost = 2;
 
       Data.Power.actions = ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction', 'Triggered', 'None'];  //None isn't a choice
+      Data.Power['Movement'].hasInputBaseCost = true;
       Data.Power['Variable'].defaultAction = 'Full';
       Data.Power['Growth'].baseCost = 6;
       Data.Power['Immortality'].baseCost = 5;
@@ -339,6 +333,12 @@ Data.change = function(major, minor)
          maxRank: modifierLookup.maxRank.get(nameToAdd),
          type: modifierLookup.type.get(nameToAdd)
       };
+      if (undefined === Data.Modifier[nameToAdd].cost)
+      {
+         if('Free' === Data.Modifier[nameToAdd].type) Data.Modifier[nameToAdd].cost = 0;
+         else if(flawNames.contains(nameToAdd)) Data.Modifier[nameToAdd].cost = -1;
+         else Data.Modifier[nameToAdd].cost = 1;
+      }
    }
    function addSkill(nameToAdd)
    {

@@ -1958,7 +1958,7 @@ TestSuite.data.v1=function(isFirst)
          "defaultAction": "Free",
          "defaultDuration": "Sustained",
          "defaultRange": "Personal",
-         "hasInputBaseCost": true,
+         "hasInputBaseCost": false,
          "isAttack": false,
          "isGodhood": false
       },
