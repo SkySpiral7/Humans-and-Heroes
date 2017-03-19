@@ -54,7 +54,7 @@ function AdvantageList()
       {
           rowArray[i].setRowIndex(i);  //needs to be reset because of the sorting
           var advantageName = rowArray[i].getName();
-          if(Data.Advantage.godhoodNames.contains(advantageName)) usingGodhoodAdvantages = true;
+          if(Data.Advantage[advantageName].isGodhood) usingGodhoodAdvantages = true;
           //do not connected with else since Petty Rules are godhood
           if(advantageName === 'Your Petty Rules Don\'t Apply to Me') pettyRulesApply = false;
              //this needs to be tracked because it changes minimum possible power level
@@ -70,9 +70,9 @@ function AdvantageList()
       for (var i=0; i < jsonSection.length; i++)
       {
           var nameToLoad = jsonSection[i].name;
-          if(!Data.Advantage.names.contains(nameToLoad) && !Data.Advantage.godhoodNames.contains(nameToLoad))
+          if(!Data.Advantage.names.contains(nameToLoad))
              {Main.messageUser('AdvantageList.load.notExist', 'Advantage #' + (i+1) + ': ' + nameToLoad + ' is not an advantage name.'); continue;}
-          if(Data.Advantage.godhoodNames.contains(nameToLoad) && !Main.canUseGodHood())
+          if(Data.Advantage[nameToLoad].isGodhood && !Main.canUseGodhood())
              {Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i+1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.'); continue;}
           var rowPointer = rowArray.last();
           rowPointer.setAdvantage(nameToLoad);

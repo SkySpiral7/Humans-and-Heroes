@@ -68,7 +68,7 @@ TestSuite.powerList.load=function(isFirst)
     dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
     dataToLoad.Powers.push({"effect":"A God I Am","text":"","action":"Triggered","range":"Personal","duration":"Continuous","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
-    testResults.push({Expected: false, Actual: Main.canUseGodHood(), Description: 'Errors: Godhood is off'});
+    testResults.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Errors: Flight was loaded'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
     testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerListAgnostic.load.godhood'), Description: 'Errors: A God I Am was not allowed'});
@@ -82,7 +82,7 @@ TestSuite.powerList.load=function(isFirst)
     //flight is to make sure transcendence isn't reset
     dataToLoad.Powers.push({"effect":"A God I Am","text":"","action":"Triggered","range":"Personal","duration":"Continuous","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
-    testResults.push({Expected: true, Actual: Main.canUseGodHood(), Description: 'Load Godhood: Godhood is on'});
+    testResults.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load Godhood: Godhood is on'});
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Load Godhood: Flight was loaded'});
     testResults.push({Expected: 'A God I Am', Actual: Main.powerSection.getRow(1).getEffect(), Description: 'Load Godhood: A God I Am was loaded'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(2).isBlank(), Description: 'Load Godhood: Nothing else was loaded'});

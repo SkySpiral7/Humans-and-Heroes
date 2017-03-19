@@ -13,8 +13,6 @@ Object.freeze(Data.SharedHtml);
 Data.change = function(major, minor)
 {
    Data.Advantage = {
-      godhoodNames: ['Beyond Mortal', 'Let There Be', 'Luck of the Gods', 'Omnipresent', 'Omniscient', 'Perfect Focus',
-         'Stay Like That', 'Supreme', 'Variable Modifier', 'Your Petty Rules Don\'t Apply to Me'],
       mapThese: ['Close Attack', 'Defensive Roll', 'Improved Critical', 'Improved Initiative', 'Ranged Attack', 'Seize Initiative'],
       names: ['Accurate Attack', 'Agile Feint', 'All-out Attack', 'Animal Empathy', 'Artificer', 'Assessment', 'Attractive', 'Beginner\'s Luck',
          'Benefit',  'Chokehold', 'Close Attack', 'Connected', 'Contacts', 'Daze', 'Defensive Attack', 'Defensive Roll', 'Diehard', 'Eidetic Memory',
@@ -31,6 +29,8 @@ Data.change = function(major, minor)
          'Sidekick': 1, 'Stay Like That': 15, 'Variable Modifier': 35, 'Your Petty Rules Don\'t Apply to Me': 50}, 1),
       defaultText: new MapDefault({'Favored Environment': 'Environment', 'Favored Foe': 'Foe type', 'Languages': 'Languages Known',
          'Minion': 'Helper Name', 'Sidekick': 'Helper Name', 'Stay Like That': 'Power Modified', 'Supreme': 'Power Gained'}, 'Advantage Subtype'),
+      godhoodNames: ['Beyond Mortal', 'Let There Be', 'Luck of the Gods', 'Omnipresent', 'Omniscient', 'Perfect Focus',
+         'Stay Like That', 'Supreme', 'Variable Modifier', 'Your Petty Rules Don\'t Apply to Me'],
       maxRank: new MapDefault({'Attractive': 2, 'Benefit': Infinity, 'Close Attack': Infinity, 'Daze': 2, 'Defensive Roll': Infinity,
          'Equipment': Infinity, 'Evasion': 2, 'Fascinate': Infinity, 'Improved Critical': 4, 'Improved Initiative': Infinity,
          'Improvised Weapon': Infinity, 'Inspire': 5, 'Languages': Infinity, 'Luck': Infinity, 'Lucky': 3, 'Minion': Infinity,
@@ -115,6 +115,7 @@ Data.change = function(major, minor)
          'Healing': 'Close', 'Illusion': 'Perception', 'Luck Control': 'Perception', 'Mental Transform': 'Close', 'Mind Reading': 'Perception',
          'Mind Switch': 'Close', 'Move Object': 'Ranged', 'Nullify': 'Ranged', 'Reality Warp': 'Perception', 'Summon': 'Close', 'Summon Minion': 'Close',
          'Summon Object': 'Close', 'Transform': 'Close', 'Weaken': 'Close'}, 'Personal'),
+      godhoodNames: ['A God I Am', 'Reality Warp'],
       hasInputBaseCost: ['Attain Knowledge', 'Concealment', 'Enhanced Trait', 'Environment', 'Feature', 'Illusion',
          'Movement', 'Remote Sensing', 'Senses', 'Transform'],
       //TODO: in 1.x Movement always costs 2 (not input)
@@ -123,7 +124,6 @@ Data.change = function(major, minor)
    Data.Power = {
       actions: ['Standard', 'Move', 'Free', 'Reaction', 'None'],  //None isn't a choice
       durations: ['Concentration', 'Sustained', 'Continuous', 'Permanent', 'Instant'],  //Instant isn't a choice and Permanent cost weird
-      godhoodNames: ['A God I Am', 'Reality Warp'],
       names: ['Affliction', 'Burrowing', 'Communication', 'Comprehend', 'Concealment', 'Create', 'Damage', 'Deflect', 'Elongation', 'Enhanced Trait',
          'Environment', 'Extra Limbs', 'Feature', 'Flight', 'Growth', 'Healing', 'Illusion', 'Immortality', 'Immunity', 'Insubstantial', 'Leaping',
          'Luck Control', 'Mind Reading', 'Morph', 'Move Object', 'Movement', 'Nullify', 'Protection', 'Quickness', 'Regeneration', 'Remote Sensing',
@@ -152,7 +152,7 @@ Data.change = function(major, minor)
          'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',
          'Improved Disarm', 'Improved Grab', 'Improved Hold', 'Improved Initiative', 'Improved Trip', 'Improvised Tools', 'Inspire', 'Instant Up',
          'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
-         'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'];
+         'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'].concat(advantageLookup.godhoodNames);
       advantageLookup.costPerRank.set('Sidekick', 2);
       advantageLookup.maxRank.set('Improved Initiative', 5);
 
@@ -196,7 +196,7 @@ Data.change = function(major, minor)
       Data.Power.names.removeByValue('Summon');
       Data.Power.names.removeByValue('Swimming');
       Data.Power.names = Data.Power.names.concat(['Attain Knowledge', 'Mental Transform', 'Mind Switch',
-         'Permeate', 'Phantom Ranks', 'Resistance', 'Summon Minion', 'Summon Object']);
+         'Permeate', 'Phantom Ranks', 'Resistance', 'Summon Minion', 'Summon Object']).concat(powerLookup.godhoodNames);
 
       Data.Skill.names = Data.Skill.names.concat(['Common Knowledge', 'Knowledge', 'Memory', 'Strategy', 'Tracking']).sort();
       Data.Skill.names.push('Other');  //must be last instead of sorted
@@ -208,11 +208,10 @@ Data.change = function(major, minor)
       skillLookup.hasText.removeByValue('Tracking');
    }
 
-   var i, name, allNames;
-   allNames = Data.Advantage.names.concat(Data.Advantage.godhoodNames);
-   for (i = 0; i < allNames.length; ++i)
+   var i, name;
+   for (i = 0; i < Data.Advantage.names.length; ++i)
    {
-      addAdvantage(allNames[i]);
+      addAdvantage(Data.Advantage.names[i]);
    }
    Data.Modifier = {
       names: extraNames.concat(flawNames).concat(otherModifierNames)
@@ -221,10 +220,9 @@ Data.change = function(major, minor)
    {
       addModifier(Data.Modifier.names[i]);
    }
-   allNames = Data.Power.names.concat(Data.Power.godhoodNames);
-   for (i = 0; i < allNames.length; ++i)
+   for (i = 0; i < Data.Power.names.length; ++i)
    {
-      name = allNames[i];
+      name = Data.Power.names[i];
       Data.Power[name] = {
          name: name,
          baseCost: powerLookup.baseCost.get(name),
@@ -232,7 +230,8 @@ Data.change = function(major, minor)
          defaultDuration: powerLookup.defaultDuration.get(name),
          defaultRange: powerLookup.defaultRange.get(name),
          hasInputBaseCost: powerLookup.hasInputBaseCost.contains(name),
-         isAttack: powerLookup.isAttack.contains(name)
+         isAttack: powerLookup.isAttack.contains(name),
+         isGodhood: powerLookup.godhoodNames.contains(name)
       };
    }
    for (i = 0; i < Data.Skill.names.length; ++i)
@@ -265,10 +264,9 @@ Data.change = function(major, minor)
          powerLookup.allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
          powerLookup.isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
 
-         allNames = Data.Power.names.concat(Data.Power.godhoodNames);
-         for (i = 0; i < allNames.length; ++i)
+         for (i = 0; i < Data.Power.names.length; ++i)
          {
-            name = allNames[i];
+            name = Data.Power.names[i];
             Data.Power[name].allowReaction = powerLookup.allowReaction.contains(name);
             Data.Power[name].isMovement = powerLookup.isMovement.contains(name);
          }
@@ -283,12 +281,13 @@ Data.change = function(major, minor)
 
    function addAdvantage(nameToAdd)
    {
-      if(!Data.Advantage.names.contains(nameToAdd) && (undefined === Data.Advantage.godHoodnames || !Data.Advantage.godHoodnames.contains(nameToAdd))) Data.Advantage.names.push(nameToAdd);
+      if(!Data.Advantage.names.contains(nameToAdd)) Data.Advantage.names.push(nameToAdd);
       Data.Advantage[nameToAdd] = {
          name: nameToAdd,
          costPerRank: advantageLookup.costPerRank.get(nameToAdd),
          defaultText: advantageLookup.defaultText.get(nameToAdd),
          hasText: advantageLookup.hasText.contains(nameToAdd),
+         isGodhood: advantageLookup.godhoodNames.contains(nameToAdd),
          maxRank: advantageLookup.maxRank.get(nameToAdd)
       };
    }
@@ -318,10 +317,8 @@ Data.change = function(major, minor)
       var aFirst = -1, bFirst = 1;
       Data.Advantage.names.sort(function(a, b)
       {
-         var aIsGodHood = Data.Advantage.godhoodNames.contains(a);
-         var bIsGodHood = Data.Advantage.godhoodNames.contains(b);
-         if(!aIsGodHood && bIsGodHood) return aFirst;
-         if(aIsGodHood && !bIsGodHood) return bFirst;
+         if(!Data.Advantage[a].isGodhood && Data.Advantage[b].isGodhood) return aFirst;
+         if(Data.Advantage[a].isGodhood && !Data.Advantage[b].isGodhood) return bFirst;
 
          if(a < b) return aFirst;
          return bFirst;  //can't be a tie
@@ -329,10 +326,8 @@ Data.change = function(major, minor)
 
       Data.Power.names.sort(function(a, b)
       {
-         var aIsGodHood = Data.Power.godhoodNames.contains(a);
-         var bIsGodHood = Data.Power.godhoodNames.contains(b);
-         if(!aIsGodHood && bIsGodHood) return aFirst;
-         if(aIsGodHood && !bIsGodHood) return bFirst;
+         if(!Data.Power[a].isGodhood && Data.Power[b].isGodhood) return aFirst;
+         if(Data.Power[a].isGodhood && !Data.Power[b].isGodhood) return bFirst;
 
          if(a < b) return aFirst;
          return bFirst;  //can't be a tie

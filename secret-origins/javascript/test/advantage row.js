@@ -116,21 +116,22 @@ TestSuite.advantageRow.generate=function(isFirst)
     var testResults=[];
     var actionTaken='Initial';
     testResults.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Equipment'), Description: actionTaken+': Advantage Row exists but doesn\'t have Equipment'});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', Data.Advantage.names.last()), Description: actionTaken+': Advantage Row has (last) '+Data.Advantage.names.last()});
-    testResults.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', Data.Advantage.godhoodNames[0]), Description: actionTaken+': Advantage Row doesn\'t have (first Godhood) '+Data.Advantage.godhoodNames[0]});
+    //TODO: this test is now less useful
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Ultimate Effort'), Description: actionTaken+': Advantage Row has (last) Ultimate Effort'});
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row doesn\'t have (first Godhood) Beyond Mortal'});
 
     try{
     actionTaken='Set Godhood'; TestRunner.changeValue('Strength', 100);
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', Data.Advantage.godhoodNames[0]), Description: actionTaken+': Advantage Row now has (first) '+Data.Advantage.godhoodNames[0]});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', Data.Advantage.godhoodNames.last()), Description: actionTaken+': And has (last) '+Data.Advantage.godhoodNames.last()});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row now has (first) Beyond Mortal'});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me'), Description: actionTaken+': And has (last) Your Petty Rules Don\'t Apply to Me'});
     actionTaken='Clear Godhood'; TestRunner.changeValue('Strength', 0);
-    testResults.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', Data.Advantage.godhoodNames[0]), Description: actionTaken+': Advantage Row Godhood removed'});
+    testResults.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row Godhood removed'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
     try{
-    actionTaken='Padded Equipment Row Test'; SelectUtil.changeText('advantageChoices0', Data.Advantage.names.last()); SelectUtil.changeText('equipmentChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 10); SelectUtil.changeText('advantageChoices2', Data.Advantage.names[0]);
+    actionTaken='Padded Equipment Row Test'; SelectUtil.changeText('advantageChoices0', 'Ultimate Effort'); SelectUtil.changeText('equipmentChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 10); SelectUtil.changeText('advantageChoices2', Data.Advantage.names[0]);
     testResults.push({Expected: 'Equipment', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is Equipment'});
-    testResults.push({Expected: Data.Advantage.names.last(), Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then '+Data.Advantage.names.last()});
+    testResults.push({Expected: 'Ultimate Effort', Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then Ultimate Effort'});
     testResults.push({Expected: Data.Advantage.names[0], Actual: Main.advantageSection.getRow(2).getName(), Description: actionTaken+': Then '+Data.Advantage.names[0]});
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(3).isBlank(), Description: actionTaken+': Then blank'});
 
@@ -144,7 +145,7 @@ TestSuite.advantageRow.generate=function(isFirst)
     testResults.push({Expected: null, Actual: document.getElementById('advantageRank2'), Description: actionTaken+': Equipment rank input doesn\'t exist'});
 
     actionTaken='Cleared Equipment'; Main.equipmentSection.clear();
-    testResults.push({Expected: Data.Advantage.names.last(), Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is '+Data.Advantage.names.last()});
+    testResults.push({Expected: 'Ultimate Effort', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is Ultimate Effort'});
     testResults.push({Expected: Data.Advantage.names[0], Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then '+Data.Advantage.names[0]});
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(2).isBlank(), Description: actionTaken+': Then blank'});
 
