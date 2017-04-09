@@ -6,7 +6,7 @@ var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantage
 //the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
-   var runnerPath = '../../../Miscellaneous/src/javascript/test runner';  //only works locally
+   var runnerPath = '../../../Miscellaneous/src/main/javascript/testRunner';  //only works locally
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantage list',
       'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
