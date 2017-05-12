@@ -59,7 +59,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replace(" border=\"0\"", "");
+         String newContents = originalContents.replace("bordercolor=\"#888\"", "bordercolor=\"#888888\"");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
