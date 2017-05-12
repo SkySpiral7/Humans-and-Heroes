@@ -24,6 +24,10 @@ body {
     min-width: 90%;
 }
 
+table,img {
+    border: 0;
+}
+
 .sites-layout-sidebar-left {
     padding-left: 5px;
 }
