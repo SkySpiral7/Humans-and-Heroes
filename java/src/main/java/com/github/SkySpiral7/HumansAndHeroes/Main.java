@@ -59,7 +59,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceFirst("<div style=\"font-size:16px\">\n([\\s\\S]+)</div>", "$1");
+         String newContents = StringUtil.literalReplaceFirst(originalContents, "side bar.js\"></script>", "side%20bar.js\"></script>");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
