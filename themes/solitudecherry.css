@@ -7,6 +7,23 @@ my-light-green   #D9EAD3;
 official colors: http://dev.w3.org/csswg/css-color-3/#svg-color
 */
 
+html,body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0 auto;
+    width: 100%;
+    background-color: white;
+    background: url(bg-top.gif) top repeat-x;
+    color: #333333;
+    padding: 0;
+    font: normal 16px "Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
+    line-height: 1.5;
+    min-width: 90%;
+}
+
 .sites-layout-sidebar-left {
     padding-left: 5px;
 }
@@ -93,23 +110,6 @@ div.goog-toc p {
 
 .sites-embed>ul {
     margin: 1em 0;
-}
-
-html,body {
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    margin: 0 auto;
-    width: 100%;
-    background-color: white;
-    background: url(bg-top.gif) top repeat-x;
-    color: #333333;
-    padding: 0;
-    font: normal 10pt "Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
-    line-height: 1.5;
-    min-width: 90%;
 }
 
 a img {

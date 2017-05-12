@@ -57,20 +57,14 @@ public class Main
 
    public static void writeToFiles()
    {
-      File[] myFileArray = getAllHtmlFiles();
-      for (int i = 0; i < myFileArray.length; i++)
-      {
-         String originalContents = FileIoUtil.readTextFile(myFileArray[i]);
-         String newContents = originalContents;
-         //String newContents = StringUtil.literalReplaceFirst(originalContents, "<table style=\"margin: 50px\" cellspacing=\"0\" border=\"0\">", "<table
-         // style=\"margin: 50px; border-spacing: 0px; border-width: 0px;\">");
-         if (!newContents.equals(originalContents))
-         {
-            FileIoUtil.writeToFile(myFileArray[i], newContents);
+      for (File currentFile : getAllHtmlFiles()) {
+         String originalContents = FileIoUtil.readTextFile(currentFile);
+         String newContents = originalContents.replaceFirst("<div style=\"font-size:16px\">\n([\\s\\S]+)</div>", "$1");
+         if (!newContents.equals(originalContents)) {
+            FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
-         }
-         else System.out.print("Same: ");
-         System.out.println(myFileArray[i].getAbsolutePath());
+         } else System.out.print("Same: ");
+         System.out.println(currentFile.getAbsolutePath());
       }
       System.out.println("Done.\r\n");
    }
