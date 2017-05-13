@@ -532,9 +532,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-2 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     width: 50%;
 }
 
@@ -546,9 +543,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-4 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     width: 100%;
 }
 
@@ -586,9 +580,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-10 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     margin: 10px;
 }
 
@@ -622,9 +613,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-15 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     margin: 10px 0px;
 }
 
@@ -697,9 +685,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-26 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     width: 40%;
     margin-top: 5px;
 }
@@ -712,9 +697,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-28 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     margin: 5px 0px;
     width: 100%;
 }
@@ -734,17 +716,6 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-31 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
-    width: 100%;
-    margin: 10px 0px;
-}
-
-.generated-class-32 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
     margin: 10px 0px;
     width: 100%;
 }
@@ -754,15 +725,6 @@ and create classes for styles that are used more than once (even if small)
     width: 450px;
     margin: 10px;
     float: right;
-}
-
-.generated-class-36 {
-    border-collapse: collapse;
-    border-color: #888888;
-    border-width: 1px;
-    width: 50%;
-    width: 40%;
-    margin-top: 5px;
 }
 
 .generated-class-37 {

@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceAll("<table border=\"1\" bordercolor=\"#888888\" cellpadding=\"5\" class=\"(generated-class-\\d+) alt\">", "<table cellpadding=\"5\" class=\"$1 alt grey-88-table-border\">");
+         String newContents = originalContents.replace("generated-class-32", "generated-class-31");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
