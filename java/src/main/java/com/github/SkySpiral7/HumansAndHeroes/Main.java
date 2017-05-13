@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceAll("<table cellspacing=\"(\\d)\" style=\"(width:100%;margin:\\d+px 0px \\d+px 0px)\">", "<table style=\"$2;border-spacing:$1px\">");
+         String newContents = originalContents.replace("<th style=\"border-top:8px solid #0B5394;text-align:center\">", "<th class=\"blue-top-th\">");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
