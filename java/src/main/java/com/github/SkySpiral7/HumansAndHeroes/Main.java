@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replace(" cellpadding=\"5\"", "");
+         String newContents = StringUtil.literalReplaceFirst(originalContents, "<meta charset=\"ASCII\" />", "<meta charset=\"UTF-8\" />");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
