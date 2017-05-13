@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = StringUtil.literalReplaceFirst(originalContents, "<meta charset=\"ASCII\" />", "<meta charset=\"UTF-8\" />");
+         String newContents = originalContents.replaceAll("<table cellspacing=\"(\\d)\" style=\"(width:100%;margin:\\d+px 0px \\d+px 0px)\">", "<table style=\"$2;border-spacing:$1px\">");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
