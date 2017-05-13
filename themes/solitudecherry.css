@@ -4,7 +4,7 @@ Um was I allowed to copy this? Because I did then stripped most of it out (like 
 /* ========Color reference========
       hero-red   #990000;
 my-light-green   #D9EAD3;
-official colors: http://dev.w3.org/csswg/css-color-3/#svg-color
+official colors: https://www.w3.org/TR/css3-color/
 */
 
 html,body {
@@ -24,7 +24,7 @@ body {
     min-width: 90%;
 }
 
-table,img {
+table,th,td,img {
     border: 0;
 }
 
@@ -503,6 +503,11 @@ body {
     text-align: center;
     font-weight: bolder;
     font-size: 24px;
+}
+
+table.grey-88-table-border,table.grey-88-table-border th,table.grey-88-table-border td {
+    border-collapse: collapse;
+    border: 1px inset #888888;
 }
 
 /* TODO: more css clean up

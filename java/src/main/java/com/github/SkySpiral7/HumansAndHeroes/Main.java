@@ -25,6 +25,11 @@ public class Main
    public static void main(String[] args) throws Exception
    {
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+      if (args.length == 0)
+      {
+         writeToFiles();
+         return;
+      }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
       {
          case DEAD:
@@ -59,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replace("bordercolor=\"#888\"", "bordercolor=\"#888888\"");
+         String newContents = originalContents.replaceAll("<table border=\"1\" bordercolor=\"#888888\" cellpadding=\"5\" class=\"(generated-class-\\d+) alt\">", "<table cellpadding=\"5\" class=\"$1 alt grey-88-table-border\">");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
