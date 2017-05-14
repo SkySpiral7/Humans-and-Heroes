@@ -79,7 +79,7 @@ U+25BF (White down-pointing small triangle ▿)
 
 .goog-toc {
    text-align: left;
-   line-height: 1.5em;
+   line-height: 18px;
    list-style: none;
 }
 
@@ -105,11 +105,11 @@ div.goog-toc p {
    padding: 3px 5px 0;
    margin: 0;
    font-weight: bold;
-   font-size: 1.1em;
+   font-size: 17px;
 }
 
 .sites-embed>ul {
-   margin: 1em 0;
+   margin: 16px 0;
 }
 
 a img {
@@ -141,7 +141,7 @@ div.sites-sidebar-nav {
 }
 
 body .sites-sidebar-nav ul {
-   line-height: 1.33em;
+   line-height: 21px;
    margin: 0;
    padding: 0;
    overflow: visible;
@@ -200,23 +200,23 @@ ol {
 }
 
 h2 {
-   margin: .9em 0 .5em;
+   margin: 14px 0 8px;
    font-family: "Palatino","Palatino Linotype",serif;
-   font-size: 1.8em;
+   font-size: 28px;
    font-weight: normal;
    color: #a90707;
 }
 
 h3 {
    font-family: "Palatino","Palatino Linotype",serif;
-   font-size: 1.5em;
+   font-size: 24px;
    font-weight: normal;
-   margin-top: 1em;
+   margin-top: 16px;
    color: #a90707;
 }
 
 h4 {
-   font-size: 1.1em;
+   font-size: 17px;
    color: #a90707;
 }
 
@@ -269,7 +269,7 @@ body .sites-layout-sidebar-left .sites-embed-content {
 
 body .sites-layout-sidebar-left .sites-embed-title {
    font-family: "Palatino","Palatino Linotype",serif;
-   font-size: 1.4em;
+   font-size: 22px;
    font-weight: normal;
    border-bottom: 1px dotted #a90707;
 }
@@ -331,8 +331,8 @@ body,input {
 }
 
 .sites-sidebar-nav li.nav-first {
-   border-top-width: 0px;
-   margin-top: 0px;
+   border-top-width: 0;
+   margin-top: 0;
 }
 
 /*Stuff I added*/
@@ -342,8 +342,8 @@ body {
 
 body > table {
    margin: 25px;
-   border-spacing: 0px;
-   border-width: 0px;
+   border-spacing: 0;
+   border-width: 0;
 }
 
 .alt tr {
@@ -359,7 +359,7 @@ body > table {
    font-weight: bolder;
    background-color: #0B5394;
    padding: 10px;
-   margin: 0px 0px 30px 0px;
+   margin: 0 0 30px 0;
    color: white;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
@@ -371,7 +371,7 @@ body > table {
    font-weight: bolder;
    background-color: #990000; /*hero-red*/
    padding: 10px;
-   margin: 0px 0px 30px 0px;
+   margin: 0 0 30px 0;
    color: white;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
@@ -383,7 +383,7 @@ body > table {
    font-weight: bolder;
    background-color: #0B5394;
    padding: 5px;
-   margin: 30px 0px;
+   margin: 30px 0;
    color: white;
    border-radius: 10px 10px 10px 10px;
    clear: both;
@@ -428,7 +428,7 @@ body > table {
    text-align: center;
 }
 .character-sheet-initiative {
-   padding: 5px 0px;
+   padding: 5px 0;
    text-align: center;
    font-weight: bold;
    background-color: #D9EAD3; /*my-light-green*/
@@ -537,7 +537,6 @@ table.grey-88-table-border th.blue-top-th {
 /* TODO: more css clean up
 I doubt the need for clear: both; and text-align: left;
 Unify all colors to a few. use color names where possible
-Convert em etc to px
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
@@ -597,7 +596,7 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-15 {
-   margin: 10px 0px;
+   margin: 10px 0;
 }
 
 .generated-class-19 {
@@ -627,12 +626,12 @@ and create classes for styles that are used more than once (even if small)
 }
 
 .generated-class-28 {
-   margin: 5px 0px;
+   margin: 5px 0;
    width: 100%;
 }
 
 .generated-class-31 {
-   margin: 10px 0px;
+   margin: 10px 0;
    width: 100%;
 }
 
@@ -640,7 +639,7 @@ and create classes for styles that are used more than once (even if small)
    background-color: #FF9900;
    color: white;
    padding: 5px;
-   margin: 30px 0px 5px 0px;
+   margin: 30px 0 5px 0;
    font-weight: bold;
 }
 
@@ -673,7 +672,7 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-55 {
    width: 361px;
-   margin: 0px auto;
+   margin: 0 auto;
    border: solid medium #990000; /*hero-red*/
    padding: 10px 10px 5px 5px;
    background-color: white;
@@ -737,5 +736,5 @@ and create classes for styles that are used more than once (even if small)
    font-size: 18px;
    font-weight: bold;
    color: #0B5394;
-   margin: 10px 0px 5px 0px;
+   margin: 10px 0 5px 0;
 }
