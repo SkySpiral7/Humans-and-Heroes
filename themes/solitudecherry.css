@@ -318,12 +318,8 @@ th {
    width: 170px;
 }
 
-body,h1,h2,h3,h4,h5,h6,input {
+body,input {
    font-family: Antic,serif;
-}
-
-#sites-canvas h1,#sites-canvas h2,#sites-canvas h3,#sites-canvas h4,#sites-canvas h5,#sites-canvas h6 {
-   font-family: Paytone One,serif;
 }
 
 #sites-chrome-sidebar-left .sites-embed,#sites-chrome-sidebar-left .sites-embed h1,#sites-chrome-sidebar-left .sites-embed h2,#sites-chrome-sidebar-left .sites-embed h3,#sites-chrome-sidebar-left .sites-embed h4,#sites-chrome-sidebar-left .sites-embed h5,#sites-chrome-sidebar-left .sites-embed h6 {
