@@ -62,9 +62,22 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles()) {
+      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/sample-powers"))) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = StringUtil.literalReplaceFirst(originalContents,"side%20bar.js", "sideBar.js");
+         String newContents = originalContents.replaceFirst("<div class=\"green-panel\">\n" +
+                 "<div>([^<]+)</div>\n" +
+                 "<div>\n" +
+                 "<div style=\"padding:5px\">([\\s\\S]+?)</div>", "<h3 class=\"generated-class-8\">$1</h3>\n" +
+                 "<div class=\"generated-class-70\">$2</div>");
+         newContents = StringUtil.literalReplaceFirst(newContents, "</div>\n" +
+                 "</div>\n" +
+                 "</td>\n" +
+                 "</tr>\n" +
+                 "</table>\n" +
+                 "</body>", "</td>\n" +
+                 "</tr>\n" +
+                 "</table>\n" +
+                 "</body>");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
