@@ -552,17 +552,35 @@ table.grey-88-table-border th.blue-top-th {
     padding: 10px;
     background-color: #CFE2F3;
 }
-/*
-green:
-generated-class-74
-generated-class-6
-generated-class-42
-generated-class-20
-generated-class-0
 
-combine the 3 color classes more
+.under-the-hood-green {
+    border: solid thin #999999;
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.under-the-hood-green > div:nth-child(odd) {
+    font-weight: bold;
+    background-color: #274E13;
+    padding: 5px;
+    color: white;
+}
+
+.under-the-hood-green > div:nth-child(even) {
+   padding: 10px;
+   background-color: #D9EAD3;
+}
+
+/*
+combine the color classes more
+
+purple:
+<div class="generated-class-20">
+<div class="generated-class-75">A GOD I AM (GENERAL)</div>
+<div style="padding:10px;background-color: #E8B9EE">
 
 then search for float:right and classes of it to make sure they all use right-panel
+generated-class-59
 */
 
 /* TODO: more css clean up
@@ -571,11 +589,6 @@ Look into fixing up the constructs like I did the example characters
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
 */
-
-.generated-class-0 {
-    border: solid thin #999999;
-    margin: 5px 0px;
-}
 
 .generated-class-2 {
     width: 50%;
@@ -598,13 +611,6 @@ and create classes for styles that are used more than once (even if small)
     font-weight: bolder;
     font-size: 20px;
     color: #990000; /*hero-red*/
-}
-
-.generated-class-6 {
-    font-weight: bold;
-    background-color: #274E13;
-    padding: 5px;
-    color: white;
 }
 
 .generated-class-7 {
@@ -745,14 +751,6 @@ and create classes for styles that are used more than once (even if small)
     padding: 10px;
     font-weight: bold;
     font-size: 24px;
-}
-
-.generated-class-42 {
-    border: solid thin #999999;
-    margin: 10px;
-    width: 450px;
-    float: right;
-    margin: 10px;
 }
 
 .generated-class-43 {
@@ -934,11 +932,6 @@ and create classes for styles that are used more than once (even if small)
     font-weight: bold;
     padding: 10px;
     font-size: 18px;
-}
-
-.generated-class-74 {
-    border: solid thin #999999;
-    width: 100%;
 }
 
 .generated-class-75 {
