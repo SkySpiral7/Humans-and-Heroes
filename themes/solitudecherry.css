@@ -521,17 +521,17 @@ table.grey-88-table-border th.blue-top-th {
     margin: 10px;
 }
 
-.red-panel,.blue-panel,.green-panel {
+.red-panel,.blue-panel,.green-panel,.purple-panel {
     border: solid thin #999999;
 }
 
-.red-panel > div:nth-child(odd),.blue-panel > div:nth-child(odd),.green-panel > div:nth-child(odd) {
+.red-panel > div:nth-child(odd),.blue-panel > div:nth-child(odd),.green-panel > div:nth-child(odd),.purple-panel > div:nth-child(odd) {
     font-weight: bold;
     padding: 5px;
     color: white;
 }
 
-.red-panel > div:nth-child(even),.blue-panel > div:nth-child(even),.green-panel > div:nth-child(even) {
+.red-panel > div:nth-child(even),.blue-panel > div:nth-child(even),.green-panel > div:nth-child(even),.purple-panel > div:nth-child(even) {
     padding: 10px;
 }
 
@@ -559,13 +559,16 @@ table.grey-88-table-border th.blue-top-th {
    background-color: #D9EAD3;
 }
 
-/*
-purple:
-<div class="generated-class-20">
-<div class="generated-class-75">A GOD I AM (GENERAL)</div>
-<div style="padding:10px;background-color: #E8B9EE">
+.purple-panel > div:nth-child(odd) {
+    background-color: #CC23D3;
+}
 
-then search for float:right and classes of it to make sure they all use right-panel
+.purple-panel > div:nth-child(even) {
+   background-color: #E8B9EE;
+}
+
+/*
+search for float:right and classes of it to make sure they all use right-panel
 generated-class-59
 */
 
@@ -653,12 +656,6 @@ and create classes for styles that are used more than once (even if small)
     font-style: italic;
     clear: both;
     text-align: left;
-}
-
-.generated-class-20 {
-    border: solid thin #999999;
-    width: 100%;
-    margin: 10px 0px;
 }
 
 .generated-class-21 {
@@ -918,11 +915,4 @@ and create classes for styles that are used more than once (even if small)
     font-weight: bold;
     padding: 10px;
     font-size: 18px;
-}
-
-.generated-class-75 {
-    font-weight: bold;
-    background-color: #CC23D3;
-    padding: 5px;
-    color: white;
 }

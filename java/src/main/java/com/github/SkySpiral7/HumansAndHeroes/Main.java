@@ -64,7 +64,11 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceAll("\\bunder-the-hood-(red|blue|green)\\b", "$1-panel");
+         String newContents = originalContents.replaceAll("<div class=\"generated-class-20\">\n" +
+                 "<div class=\"generated-class-75\">([^>]+)</div>\n" +
+                 "<div style=\"padding:10px;background-color: #E8B9EE\">", "<div class=\"purple-panel\">\n" +
+                 "<div>$1</div>\n" +
+                 "<div>");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
