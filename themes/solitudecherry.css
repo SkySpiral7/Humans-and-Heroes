@@ -567,11 +567,6 @@ table.grey-88-table-border th.blue-top-th {
    background-color: #E8B9EE;
 }
 
-/*
-search for float:right and classes of it to make sure they all use right-panel
-generated-class-59
-*/
-
 /* TODO: more css clean up
 I doubt the need for clear: both; and text-align: left;
 Look into fixing up the constructs like I did the example characters
@@ -600,13 +595,6 @@ and create classes for styles that are used more than once (even if small)
     font-weight: bolder;
     font-size: 20px;
     color: #990000; /*hero-red*/
-}
-
-.generated-class-7 {
-    float: right;
-    width: 425px;
-    background-color: white;
-    margin: 20px 0px 20px 20px;
 }
 
 .generated-class-8 {
@@ -658,14 +646,6 @@ and create classes for styles that are used more than once (even if small)
     text-align: left;
 }
 
-.generated-class-21 {
-    width: 450px;
-    float: right;
-    margin: 0px 0px 10px 10px;
-    clear: both;
-    background-color: white;
-}
-
 .generated-class-22 {
     font-size: 16px;
     color: black;
@@ -677,22 +657,6 @@ and create classes for styles that are used more than once (even if small)
 .generated-class-23 {
     border-bottom: solid thin #990000; /*hero-red*/
     clear: both;
-}
-
-.generated-class-24 {
-    float: right;
-    width: 510px;
-    margin: 20px 0px 20px 20px;
-    padding: 5px;
-    background-color: white;
-}
-
-.generated-class-25 {
-    float: right;
-    width: 300px;
-    margin: 20px 0px 20px 20px;
-    padding: 10px;
-    background-color: white;
 }
 
 .generated-class-26 {
@@ -812,20 +776,6 @@ and create classes for styles that are used more than once (even if small)
     border-bottom: solid 5px #FF9900;
 }
 
-.generated-class-59 {
-    margin: 10px;
-    width: 450px;
-    float: right;
-    margin: 10px;
-}
-
-.generated-class-60 {
-    display: inline;
-    float: right;
-    margin: 5px 0 5px 20px;
-    width: 400px;
-}
-
 .generated-class-61 {
     display: block;
     margin: 5px auto 5px 0;
@@ -859,20 +809,6 @@ and create classes for styles that are used more than once (even if small)
     font-size: 20px;
     font-weight: bolder;
     padding: 10px 5px;
-}
-
-.generated-class-66 {
-    width: 450px;
-    float: right;
-    margin: 10px;
-    background-color: white;
-}
-
-.generated-class-67 {
-    margin: 10px;
-    background-color: white;
-    width: 450px;
-    float: right;
 }
 
 .generated-class-68 {
