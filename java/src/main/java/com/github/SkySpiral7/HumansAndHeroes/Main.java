@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -62,9 +64,17 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/sample-powers/Features"))) {
+      for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = StringUtil.literalReplaceFirst(originalContents, "<b>Effect</b>: <a href=\"../../feature-general.html\">Feature</a>\n<b>Action</b>:", "<b>Effect</b>: <a href=\"../../feature-general.html\">Feature</a> &#8226;\n<b>Action</b>:");
+         Matcher matcher = Pattern.compile("<div style=\"padding:5px\">([\\s\\S]+?)</div>").matcher(originalContents);
+         String newContents = originalContents;
+         while(matcher.find()) {
+            String entireMatch = matcher.group();
+            if (entireMatch.substring(1).contains("<div") ||  //ignore if nested divs
+                    entireMatch.contains("<p") ||  //ignore if would cause nested p
+                    StringUtil.regexFoundInString(entireMatch.substring(1), "<\\w\\w+")) continue;  //ignore if contains tags that aren't a,b,i,u
+            newContents = StringUtil.literalReplaceFirst(newContents, entireMatch, "<p>"+matcher.group(1)+"</p>");
+         }
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
@@ -185,8 +195,8 @@ public class Main
             {
                results.add(newContents.charAt(j) + " = " + newContents.codePointAt(j));
                System.out.println(
-                     myFileArray[i].getAbsolutePath() + " on line " + lineCount + " column " + colCount + " (length " + j + ") has " + newContents.charAt(j)
-                     + " = " + newContents.codePointAt(j));
+                       myFileArray[i].getAbsolutePath() + " on line " + lineCount + " column " + colCount + " (length " + j + ") has " + newContents.charAt(j)
+                               + " = " + newContents.codePointAt(j));
             }
             if (newContents.charAt(j) == '\n' && newContents.charAt(j - 1) != '\r')
                System.out.println(myFileArray[i].getAbsolutePath() + " broken endline found on line " + lineCount + " (length " + j + ") has \\n alone");
