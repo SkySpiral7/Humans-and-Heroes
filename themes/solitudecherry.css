@@ -510,6 +510,30 @@ table.grey-88-table-border,table.grey-88-table-border th,table.grey-88-table-bor
     border: 1px inset #888888;
 }
 
+table.grey-88-table-border th.blue-top-th {
+    border-top: 8px solid #0B5394;
+    text-align: center;
+}
+
+.under-the-hood {
+    width: 450px;
+    float: right;
+    margin: 10px;
+    border: solid thin #999999;
+}
+
+.under-the-hood > div:nth-child(odd) {
+    font-weight: bold;
+    background-color: #990000; /*hero-red*/
+    padding: 5px;
+    color: white;
+}
+
+.under-the-hood > div:nth-child(even) {
+    padding: 10px;
+    background-color: #F4CCCC;
+}
+
 /* TODO: more css clean up
 generated-classes: 0, 16, 17, 18, 20, 35, 42, 74, 76
 All have border: solid thin #999999;
@@ -687,11 +711,6 @@ and create classes for styles that are used more than once (even if small)
 .generated-class-26 {
     width: 40%;
     margin-top: 5px;
-}
-
-table.grey-88-table-border th.blue-top-th {
-    border-top: 8px solid #0B5394;
-    text-align: center;
 }
 
 .generated-class-28 {
