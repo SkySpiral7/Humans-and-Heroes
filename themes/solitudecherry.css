@@ -702,7 +702,6 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-43 {
    padding: 5px;
-   float: left;
    width: 50px;
    background-color: #FF9900;
    margin-right: 5px;
@@ -712,7 +711,6 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-44 {
    padding: 5px;
-   float: left;
    width: 50px;
    background-color: #D9EAD3; /*my-light-green*/
    margin-right: 5px;
