@@ -2,8 +2,8 @@
 Um was I allowed to copy this? Because I did then stripped most of it out (like 90%).*/
 
 /* ========Color reference========
-      hero-red   #990000;
-my-light-green   #D9EAD3;
+#990000; hero-red
+#D9EAD3; my-light-green
 official colors: https://www.w3.org/TR/css3-color/
 */
 
@@ -528,9 +528,17 @@ table.grey-88-table-border th.blue-top-th {
    background-color: #D9EAD3;
 }
 
+.example {
+   padding: 5px;
+   margin-left: 40px;
+   font-style: italic;
+}
+
 /* TODO: more css clean up
 I doubt the need for clear: both; and text-align: left;
-Look into fixing up the constructs like I did the example characters
+Unify all colors to a few. use color names where possible
+Convert em etc to px
+Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
 */
