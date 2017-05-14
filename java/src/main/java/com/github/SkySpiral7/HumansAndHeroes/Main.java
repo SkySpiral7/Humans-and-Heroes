@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = StringUtil.literalReplaceFirst(originalContents," id=\"sites-chrome-sidebar-left\"", "");
+         String newContents = StringUtil.literalReplaceFirst(originalContents,"side%20bar.js", "sideBar.js");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
