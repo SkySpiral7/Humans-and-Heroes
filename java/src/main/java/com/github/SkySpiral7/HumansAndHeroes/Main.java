@@ -64,7 +64,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = StringUtil.literalReplaceFirst(originalContents,"id=\"sites-canvas\" ", "");
+         String newContents = StringUtil.literalReplaceFirst(originalContents,"<table class=\"table-body\">", "<table>");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");

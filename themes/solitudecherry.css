@@ -359,7 +359,7 @@ body {
    padding: 15px 0 0 0;
 }
 
-.table-body {
+body > table {
    margin: 25px;
    border-spacing: 0px;
    border-width: 0px;
