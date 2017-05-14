@@ -1,17 +1,17 @@
 (function(){
 //include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantage list', 'advantage row', 'CommonsLibrary',
-    'conversions', 'defenses', 'modifier list', 'modifier row', 'power list', 'power row', 'prototypes', 'SelectUtil',
-    'skill list', 'skill row', 'Version'];
+var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
+    'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
+    'skillList', 'skillRow', 'Version'];
 //the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
    var runnerPath = '../../../Miscellaneous/src/main/javascript/testRunner';  //only works locally
-   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantage list',
-      'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
-      'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
-      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/Version',
-      'test/test tools']);
+   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
+      'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
+      'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
+      'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
+      'test/testTools']);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
