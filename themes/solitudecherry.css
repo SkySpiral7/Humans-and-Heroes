@@ -536,20 +536,31 @@ table.grey-88-table-border th.blue-top-th {
     padding: 10px;
     background-color: #F4CCCC;
 }
+
+.under-the-hood-blue {
+    border: solid thin #999999;
+}
+
+.under-the-hood-blue > div:nth-child(odd) {
+    font-weight: bold;
+    background-color: #0B5394;
+    padding: 5px;
+    color: white;
+}
+
+.under-the-hood-blue > div:nth-child(even) {
+    padding: 10px;
+    background-color: #CFE2F3;
+}
 /*
-then make a class for the other 2 colors
-
-blue/white:
-generated-class-35
-generated-class-9
-generated-class-74
-
 green:
 generated-class-74
 generated-class-6
 generated-class-42
 generated-class-20
 generated-class-0
+
+combine the 3 color classes more
 
 then search for float:right and classes of it to make sure they all use right-panel
 */
@@ -605,13 +616,6 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-8 {
     border-bottom: solid thin #990000; /*hero-red*/
-}
-
-.generated-class-9 {
-    font-weight: bold;
-    background-color: #0B5394;
-    padding: 5px;
-    color: white;
 }
 
 .generated-class-10 {
@@ -715,13 +719,6 @@ and create classes for styles that are used more than once (even if small)
 .generated-class-31 {
     margin: 10px 0px;
     width: 100%;
-}
-
-.generated-class-35 {
-    border: solid thin #999999;
-    width: 450px;
-    margin: 10px;
-    float: right;
 }
 
 .generated-class-37 {
