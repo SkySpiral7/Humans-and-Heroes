@@ -62,22 +62,9 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/sample-powers"))) {
+      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/sample-powers/Features"))) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceFirst("<div class=\"green-panel\">\n" +
-                 "<div>([^<]+)</div>\n" +
-                 "<div>\n" +
-                 "<div style=\"padding:5px\">([\\s\\S]+?)</div>", "<h3 class=\"generated-class-8\">$1</h3>\n" +
-                 "<div class=\"generated-class-70\">$2</div>");
-         newContents = StringUtil.literalReplaceFirst(newContents, "</div>\n" +
-                 "</div>\n" +
-                 "</td>\n" +
-                 "</tr>\n" +
-                 "</table>\n" +
-                 "</body>", "</td>\n" +
-                 "</tr>\n" +
-                 "</table>\n" +
-                 "</body>");
+         String newContents = StringUtil.literalReplaceFirst(originalContents, "<b>Effect</b>: <a href=\"../../feature-general.html\">Feature</a>\n<b>Action</b>:", "<b>Effect</b>: <a href=\"../../feature-general.html\">Feature</a> &#8226;\n<b>Action</b>:");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
