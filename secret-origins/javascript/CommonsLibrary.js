@@ -61,7 +61,7 @@ CommonsLibrary.generate=function(rowArray, sectionName)
     var allSectionRows='';
    for(var i=0; i < rowArray.length; i++)  //last row is always blank
        {allSectionRows+=rowArray[i].generate();}
-    document.getElementById(sectionName+' section').innerHTML=allSectionRows;
+    document.getElementById(sectionName+'-section').innerHTML=allSectionRows;
     this.setAll();
 };
 /**Removes the row from the array and updates the index of all others in the list.*/

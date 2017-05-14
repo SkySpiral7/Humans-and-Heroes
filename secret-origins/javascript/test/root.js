@@ -8,7 +8,7 @@ function confirmAllXmls()
     TestRunner.clearResults();
     //Main.setRuleset(2, 7);  //the xmls are only saved with current rules
        //covered by clearResults and by Main.load
-    SelectUtil.setText('saveType', 'XML');  //needed
+    SelectUtil.setText('save-type', 'XML');  //needed
 
     var testResults=[];
     var actionTaken='Load Save Confirm';
@@ -35,7 +35,7 @@ function confirmAllXmls()
       for (var fileIndex=0; fileIndex < allFiles[folderIndex].length; fileIndex++)
       {
           var originalContents=readXMLAsString(basePath+allFolders[folderIndex]+allFiles[folderIndex][fileIndex]);
-          document.getElementById('code box').value=originalContents;
+          document.getElementById('code-box').value=originalContents;
           originalContents=originalContents.replace(/\/>/g, ' />');
           //originalContents=originalContents.replace(/<Document ruleset="\d+.\d+" version="\d+">/, '<Document>');  //don't replace: being out of date is noteworthy
           originalContents=originalContents.replace('?>', '?>\n\n');  //add a blank line
@@ -47,10 +47,10 @@ function confirmAllXmls()
           originalContents=originalContents.replace(/\s+<!--[\s\S]*?-->/g, '');  //remove comments when comparing because save doesn't generate them
           Main.loadFromTextArea();
           Main.saveToTextArea();
-          var newContents=document.getElementById('code box').value;
+          var newContents=document.getElementById('code-box').value;
           testResults.push({Expected: originalContents, Actual: newContents, Description: actionTaken+allFolders[folderIndex]+allFiles[folderIndex][fileIndex]});
-          //document.getElementById('code box').value=originalContents;
-          //document.getElementById('code box').value+=stringDiffDisplay(originalContents, newContents);
+          //document.getElementById('code-box').value=originalContents;
+          //document.getElementById('code-box').value+=stringDiffDisplay(originalContents, newContents);
           //break;
       }
        //break;

@@ -168,7 +168,7 @@ TestSuite.main.loadFile=function(isFirst)
 
     var testResults=[];
     try{
-    document.getElementById('fileChooser').value = '';  //clear the input
+    document.getElementById('file-chooser').value = '';  //clear the input
     SelectUtil.changeText('powerChoices0', 'Damage');
     Main.loadFile();
     testResults.push({Expected: 'Damage', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Loading no file does nothing'});
@@ -184,11 +184,11 @@ TestSuite.main.loadImageFromFile=function(isFirst)
 
     var testResults=[];
     try{
-    document.getElementById('imgFileChooser').value = '';  //clear the input
-    document.getElementById('characterImage').src = '../images/Construct.jpg';
-    var expected = document.getElementById('characterImage').src;  //will be converted to absolute path
+    document.getElementById('img-file-chooser').value = '';  //clear the input
+    document.getElementById('character-image').src = '../images/Construct.jpg';
+    var expected = document.getElementById('character-image').src;  //will be converted to absolute path
     Main.loadImageFromFile();
-    testResults.push({Expected: expected, Actual: document.getElementById('characterImage').src, Description: 'Loading no file does nothing'});
+    testResults.push({Expected: expected, Actual: document.getElementById('character-image').src, Description: 'Loading no file does nothing'});
     } catch(e){testResults.push({Error: e, Description: 'Loading no file does nothing'});}
 
     //this test is complete since I can't set the file chooser to anything else
@@ -329,17 +329,17 @@ TestSuite.main.convertDocument=function(isFirst)
     var actionTaken, input, expected;
 
     Main.clear(); Main.setRuleset(2, 7);
-    SelectUtil.setText('saveType', 'JSON');
+    SelectUtil.setText('save-type', 'JSON');
     const blankDoc = JSON.stringify(Main.save());
    function useLoadButton(input)
    {
-       document.getElementById('code box').value = input;
-       document.getElementById('load text button').onclick();
+       document.getElementById('code-box').value = input;
+       document.getElementById('load-text-button').onclick();
    }
    function useSaveButton()
    {
-       document.getElementById('save text button').onclick();
-       return document.getElementById('code box').value;
+       document.getElementById('save-text-button').onclick();
+       return document.getElementById('code-box').value;
    }
 
     try{
@@ -400,7 +400,7 @@ TestSuite.main.convertDocument=function(isFirst)
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
     //minor clean up:
-    document.getElementById('code box').value = '';
+    document.getElementById('code-box').value = '';
 
     return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, isFirst);
 };
