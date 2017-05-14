@@ -515,28 +515,46 @@ table.grey-88-table-border th.blue-top-th {
     text-align: center;
 }
 
-.under-the-hood {
+.right-panel {
     width: 450px;
     float: right;
     margin: 10px;
+}
+
+.under-the-hood-red {
     border: solid thin #999999;
 }
 
-.under-the-hood > div:nth-child(odd) {
+.under-the-hood-red > div:nth-child(odd) {
     font-weight: bold;
     background-color: #990000; /*hero-red*/
     padding: 5px;
     color: white;
 }
 
-.under-the-hood > div:nth-child(even) {
+.under-the-hood-red > div:nth-child(even) {
     padding: 10px;
     background-color: #F4CCCC;
 }
+/*
+then make a class for the other 2 colors
+
+blue/white:
+generated-class-35
+generated-class-9
+generated-class-74
+
+green:
+generated-class-74
+generated-class-6
+generated-class-42
+generated-class-20
+generated-class-0
+
+then search for float:right and classes of it to make sure they all use right-panel
+*/
 
 /* TODO: more css clean up
-generated-classes: 0, 16, 17, 18, 20, 35, 42, 74, 76
-All have border: solid thin #999999;
 I doubt the need for clear: both; and text-align: left;
 Look into fixing up the constructs like I did the example characters
 Write a script to inline classes that are only used once
@@ -546,13 +564,6 @@ and create classes for styles that are used more than once (even if small)
 .generated-class-0 {
     border: solid thin #999999;
     margin: 5px 0px;
-}
-
-.generated-class-1 {
-    font-weight: bold;
-    background-color: #990000; /*hero-red*/
-    padding: 5px;
-    color: white;
 }
 
 .generated-class-2 {
@@ -638,23 +649,6 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-15 {
     margin: 10px 0px;
-}
-
-.generated-class-16 {
-    border: solid thin #999999;
-    margin: 10px;
-    width: 100%;
-}
-
-.generated-class-17 {
-    border: solid thin #999999;
-    margin: 10px;
-}
-
-.generated-class-18 {
-    border: solid thin #999999;
-    margin: 10px;
-    width: 450px;
 }
 
 .generated-class-19 {
@@ -955,9 +949,4 @@ and create classes for styles that are used more than once (even if small)
     background-color: #CC23D3;
     padding: 5px;
     color: white;
-}
-
-.generated-class-76 {
-    border: solid thin #999999;
-    width: 450px;
 }
