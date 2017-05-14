@@ -28,10 +28,6 @@ table,th,td,img {
    border: 0;
 }
 
-.sites-layout-sidebar-left {
-   padding-left: 5px;
-}
-
 .sites-sidebar-nav li {
    list-style: none;
    list-style-image: none;
@@ -190,10 +186,6 @@ div.nav-toc-content {
    margin: 5px 0;
 }
 
-#sites-chrome-sidebar-left {
-   width: 150px;
-}
-
 body a[imageanchor] {
    background: none;
    border-bottom: none;
@@ -257,38 +249,39 @@ ul li {
    list-style-type: square;
 }
 
-body #sites-chrome-sidebar-left {
+body .sites-layout-sidebar-left {
    padding: 5px 0;
-   width: 150px;
+   width: 170px;
    margin: 10px 25px 10px 0;
    background: url(bg-pattern.gif) repeat;
 }
 
-#sites-chrome-sidebar-left .sites-embed {
+.sites-layout-sidebar-left .sites-embed {
    font-size: 12px;
    padding-bottom: 10px;
    margin-bottom: 5px;
 }
 
-body #sites-chrome-sidebar-left .sites-embed-content {
+body .sites-layout-sidebar-left .sites-embed-content {
    background-color: none;
    margin: 0;
 }
 
-body #sites-chrome-sidebar-left .sites-embed-title {
+body .sites-layout-sidebar-left .sites-embed-title {
    font-family: "Palatino","Palatino Linotype",serif;
    font-size: 1.4em;
    font-weight: normal;
    border-bottom: 1px dotted #a90707;
 }
 
-#sites-chrome-sidebar-left .sites-sidebar-nav a,#sites-chrome-sidebar-left .sites-sidebar-nav a:visited {
+.sites-layout-sidebar-left .sites-sidebar-nav a,.sites-layout-sidebar-left .sites-sidebar-nav a:visited {
    border-bottom: 1px dotted #eeeeee;
    text-decoration: none;
    background-image: none;
+   color: #a90707;
 }
 
-#sites-chrome-sidebar-left .sites-sidebar-nav a:hover {
+.sites-layout-sidebar-left .sites-sidebar-nav a:hover {
    text-decoration: underline;
    color: #a90707;
    background-color: transparent;
@@ -314,20 +307,8 @@ th {
    border-bottom: 1px dotted #999999;
 }
 
-#sites-chrome-sidebar-left {
-   width: 170px;
-}
-
 body,input {
    font-family: Antic,serif;
-}
-
-#sites-chrome-sidebar-left .sites-embed,#sites-chrome-sidebar-left .sites-embed h1,#sites-chrome-sidebar-left .sites-embed h2,#sites-chrome-sidebar-left .sites-embed h3,#sites-chrome-sidebar-left .sites-embed h4,#sites-chrome-sidebar-left .sites-embed h5,#sites-chrome-sidebar-left .sites-embed h6 {
-   font-family: Aldrich,serif;
-}
-
-#sites-chrome-sidebar-left .sites-sidebar-nav a {
-   color: #a90707;
 }
 
 .sites-sidebar-nav .current-bg {
