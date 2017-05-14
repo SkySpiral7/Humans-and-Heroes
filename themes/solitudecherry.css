@@ -580,13 +580,6 @@ and create classes for styles that are used more than once (even if small)
    color: white;
 }
 
-.generated-class-13 {
-   padding: 5px 0px;
-   text-align: center;
-   font-weight: bold;
-   background-color: #D9EAD3; /*my-light-green*/
-}
-
 .generated-class-14 {
    vertical-align: middle;
    padding: 10px;
@@ -643,49 +636,12 @@ and create classes for styles that are used more than once (even if small)
    font-weight: bold;
 }
 
-.generated-class-38 {
-   width: 85%;
-   background-color: #FF9900;
-   color: white;
-   padding: 10px;
-   font-weight: bold;
-   font-size: 24px;
-}
-
 .generated-class-41 {
    width: 40%;
    background-color: #38761D;
    color: white;
    padding: 10px;
    font-weight: bold;
-   font-size: 24px;
-}
-
-.generated-class-43 {
-   padding: 5px;
-   width: 50px;
-   background-color: #FF9900;
-   margin-right: 5px;
-   text-align: center;
-   font-weight: bold;
-}
-
-.generated-class-44 {
-   padding: 5px;
-   width: 50px;
-   background-color: #D9EAD3; /*my-light-green*/
-   margin-right: 5px;
-   text-align: center;
-   font-weight: bold;
-}
-
-.generated-class-45 {
-   width: 15%;
-   background-color: #FF9900;
-   color: white;
-   padding: 10px;
-   font-weight: bold;
-   text-align: center;
    font-size: 24px;
 }
 
@@ -707,13 +663,6 @@ and create classes for styles that are used more than once (even if small)
    border: solid 5px #38761D;
 }
 
-.generated-class-51 {
-   background-color: #D9EAD3; /*my-light-green*/
-   font-weight: bold;
-   padding: 10px;
-   border-bottom: solid 5px #FF9900;
-}
-
 .generated-class-55 {
    width: 361px;
    margin: 0px auto;
@@ -725,14 +674,6 @@ and create classes for styles that are used more than once (even if small)
 .generated-class-56 {
    border-bottom: solid thin #990000; /*hero-red*/
    border-top: solid thin #990000; /*hero-red*/
-}
-
-.generated-class-58 {
-   background-color: #D9EAD3; /*my-light-green*/
-   font-weight: bold;
-   text-align: center;
-   padding: 10px;
-   border-bottom: solid 5px #FF9900;
 }
 
 .generated-class-61 {
@@ -777,13 +718,6 @@ and create classes for styles that are used more than once (even if small)
    width: 150px;
 }
 
-.generated-class-69 {
-   width: 30%;
-   background-color: #D9EAD3; /*my-light-green*/
-   font-weight: bold;
-   padding: 10px;
-}
-
 .generated-class-70 {
    padding: 5px;
    background-color: #F9CB9C;
@@ -791,23 +725,9 @@ and create classes for styles that are used more than once (even if small)
    clear: both;
 }
 
-.generated-class-71 {
-   width: 20%;
-   background-color: #D9EAD3; /*my-light-green*/
-   text-align: center;
-   padding: 10px;
-}
-
 .generated-class-72 {
    font-size: 18px;
    font-weight: bold;
    color: #0B5394;
    margin: 10px 0px 5px 0px;
-}
-
-.generated-class-73 {
-   background-color: #FF9900;
-   font-weight: bold;
-   padding: 10px;
-   font-size: 18px;
 }
