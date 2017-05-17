@@ -7,6 +7,14 @@ Um was I allowed to copy this? Because I did then stripped most of it out (like 
 official colors: https://www.w3.org/TR/css3-color/
 */
 
+/* TODO: more css clean up
+I doubt the need for clear: both; and text-align: left;
+Unify all colors to a few. use color names where possible
+Look into making the character sheet a single top level class. Ignore the point counter at first.
+Write a script to inline classes that are only used once
+and create classes for styles that are used more than once (even if small)
+*/
+
 html,body {
    padding: 0;
    margin: 0;
@@ -263,7 +271,6 @@ body .sites-layout-sidebar-left {
 }
 
 body .sites-layout-sidebar-left .sites-embed-content {
-   background-color: none;
    margin: 0;
 }
 
@@ -482,12 +489,12 @@ body > table {
    font-size: 24px;
 }
 
-table.grey-88-table-border,table.grey-88-table-border th,table.grey-88-table-border td {
+.grey-88-table-border,.grey-88-table-border th,.grey-88-table-border td {
    border-collapse: collapse;
    border: 1px inset #888888;
 }
 
-table.grey-88-table-border th.blue-top-th {
+.grey-88-table-border .blue-top-th {
    border-top: 8px solid #0B5394;
    text-align: center;
 }
@@ -533,14 +540,6 @@ table.grey-88-table-border th.blue-top-th {
    margin-left: 40px;
    font-style: italic;
 }
-
-/* TODO: more css clean up
-I doubt the need for clear: both; and text-align: left;
-Unify all colors to a few. use color names where possible
-Look into making the character sheet a single top level class. Ignore the point counter at first.
-Write a script to inline classes that are only used once
-and create classes for styles that are used more than once (even if small)
-*/
 
 .generated-class-2 {
    width: 50%;
@@ -597,14 +596,6 @@ and create classes for styles that are used more than once (even if small)
 
 .generated-class-15 {
    margin: 10px 0;
-}
-
-.generated-class-19 {
-   padding: 5px;
-   background-color: #F9CB9C;
-   font-style: italic;
-   clear: both;
-   text-align: left;
 }
 
 .generated-class-22 {
