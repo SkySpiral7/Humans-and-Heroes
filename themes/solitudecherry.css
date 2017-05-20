@@ -487,13 +487,12 @@ body > table {
    font-size: 24px;
 }
 
-/*TODO: Rename to remove '88'*/
-.grey-88-table-border,.grey-88-table-border th,.grey-88-table-border td {
+.grey-table-border,.grey-table-border th,.grey-table-border td {
    border-collapse: collapse;
    border: 1px inset grey;
 }
 
-.grey-88-table-border .blue-top-th {
+.grey-table-border .blue-top-th {
    border-top: 8px solid darkblue;
    text-align: center;
 }

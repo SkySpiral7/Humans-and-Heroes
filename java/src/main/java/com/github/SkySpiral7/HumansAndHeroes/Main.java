@@ -66,15 +66,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         Matcher matcher = Pattern.compile("<div class=\"example\">([\\s\\S]+?)</div>").matcher(originalContents);
-         String newContents = originalContents;
-         while(matcher.find()) {
-            String entireMatch = matcher.group();
-            if (entireMatch.substring(1).contains("<div") ||  //ignore if nested divs
-                    entireMatch.contains("<p") ||  //ignore if would cause nested p
-                    StringUtil.regexFoundInString(entireMatch.substring(1), "<\\w\\w+")) continue;  //ignore if contains tags that aren't a,b,i,u
-            newContents = StringUtil.literalReplaceFirst(newContents, entireMatch, "<p class=\"example\">"+matcher.group(1)+"</p>");
-         }
+         String newContents = originalContents.replace("grey-88-table-border", "grey-table-border");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
