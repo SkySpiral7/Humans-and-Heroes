@@ -66,7 +66,7 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replace("grey-88-table-border", "grey-table-border");
+         String newContents = originalContents.replaceAll("([\" ])alt([\" ])", "$1table-alt-rows$2");
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");

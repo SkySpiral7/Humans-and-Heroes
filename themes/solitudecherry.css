@@ -351,11 +351,11 @@ body > table {
    border-width: 0;
 }
 
-.alt tr {
+.table-alt-rows tr {
    text-align: center;
 }
 
-.alt tr:nth-child(even) {
+.table-alt-rows tr:nth-child(even) {
    background-color: lightskyblue;
 }
 
