@@ -489,7 +489,7 @@ output+='<div class="stamp-middle">\n';
 output+='35&cent;\n';
 output+='</div>\n';
 output+='<div class="stamp-bottom" title="Send me an email!">\n';
-output+='<a href="mailto:rworcest@g.emporia.edu" style="color:darkred;text-decoration:none">CONTACT ME</a>\n';
+output+='<a href="mailto:rworcest@g.emporia.edu">CONTACT ME</a>\n';
 output+='</div></div></div>\n';
 output+='<div class="sites-embed">\n';
 output+='<h4 class="sites-embed-title">External Links</h4>\n';

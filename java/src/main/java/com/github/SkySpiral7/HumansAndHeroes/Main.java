@@ -66,7 +66,8 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replaceAll("([\" ])alt([\" ])", "$1table-alt-rows$2");
+         String newContents = originalContents.replace("<h2 style=\"font-size:28px\"", "<h2");
+
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");

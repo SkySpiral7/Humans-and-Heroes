@@ -38,10 +38,6 @@ h1: font-size: 32px; red (for top level) or blue box. only used for page name
 h2: font-size: 28px; red underline. for extras also has red top border. used for main section
 h3: font-size: 24px; black underline. used for sub section
 left side bar: font-size: 12px;
-
-next:
-replace: <h2 style="font-size:28px" with <h2
-search all pages
 */
 
 /* TODO: more css clean up
