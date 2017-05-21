@@ -36,7 +36,7 @@ would like:
 body: font-size: 16px; is default
 h1: font-size: 32px; red (for top level) or blue box. only used for page name
 h2: font-size: 28px; red underline. for extras also has red top border. used for main section
-h3: font-size: 24px; black underline. used for sub section
+h3: font-size: 24px; black underline. used for sub section or table name
 left side bar: font-size: 12px;
 */
 
@@ -218,10 +218,6 @@ div.nav-toc-content {
    margin: 5px 0;
 }
 
-ol {
-   list-style-type: decimal;
-}
-
 .sites-embed-content-sidebar-textbox {
    padding: 5px;
 }
@@ -242,6 +238,13 @@ h3 {
 
 h4 {
    color: darkred;
+}
+
+.black-header {
+   font-size: 16px;
+   color: black;
+   border-bottom-style: solid;
+   border-bottom-width: thin;
 }
 
 td {
@@ -462,21 +465,14 @@ body > table {
    text-align: center;
    font-size: 28px;
 }
+.character-sheet-section-label {
+   font-size: 28px;
+}
 .character-sheet-ability-label {
    width: 100px;
    height: 50px;
    vertical-align: middle;
    text-align: center;
-}
-.character-sheet-section-label {
-   font-size: 28px;
-}
-.character-sheet-point-totals {
-   text-align: center;
-   font-size: 28px;
-   border-bottom-left-radius: 20px;
-   border-bottom-right-radius: 20px;
-   clear: both;
 }
 .character-sheet-ability-value {
    width: 100px;
@@ -487,6 +483,18 @@ body > table {
    text-align: center;
    font-weight: bold;
    font-size: 28px;
+}
+.character-sheet-options {
+   padding: 5px;
+   background-color: palegreen;
+   font-weight: bold;
+}
+.character-sheet-point-totals {
+   text-align: center;
+   font-size: 28px;
+   border-bottom-left-radius: 20px;
+   border-bottom-right-radius: 20px;
+   clear: both;
 }
 
 .grey-table-border,.grey-table-border th,.grey-table-border td {
@@ -541,22 +549,14 @@ body > table {
    font-style: italic;
 }
 
-.character-sheet-options {
-   padding: 5px;
-   background-color: palegreen;
+.table-name {
+   color: darkblue;
+   font-size: 24px;
    font-weight: bold;
 }
 
 .generated-class-2 {
    width: 50%;
-}
-
-/*TODO: rename to black-header*/
-.generated-class-3 {
-   font-size: 16px;
-   color: black;
-   border-bottom-style: solid;
-   border-bottom-width: thin;
 }
 
 .generated-class-4 {
@@ -578,13 +578,6 @@ body > table {
 
 .generated-class-10 {
    margin: 10px;
-}
-
-/*TODO: remove this class*/
-.generated-class-14 {
-   vertical-align: middle;
-   padding: 10px;
-   text-align: center;
 }
 
 .generated-class-15 {
@@ -662,13 +655,6 @@ body > table {
    margin: 5px auto 5px 0;
    text-align: left;
    width: 250px;
-}
-
-/*TODO: rename to table-name*/
-.generated-class-65 {
-   color: darkblue;
-   font-size: 24px;
-   font-weight: bold;
 }
 
 .generated-class-68 {

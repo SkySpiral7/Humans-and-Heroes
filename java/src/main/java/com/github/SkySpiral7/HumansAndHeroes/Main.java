@@ -66,7 +66,9 @@ public class Main
    {
       for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
-         String newContents = originalContents.replace("<h2 style=\"font-size:28px\"", "<h2");
+         String newContents = originalContents;
+
+         newContents = newContents.replace("<h3 class=\"generated-class-3\"", "<h3 class=\"black-header\"");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
@@ -74,7 +76,7 @@ public class Main
          } else System.out.print("Same: ");
          System.out.println(currentFile.getAbsolutePath());
       }
-      System.out.println("Done.\r\n");
+      System.out.println("Done.");
    }
 
    /**
