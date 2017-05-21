@@ -433,7 +433,7 @@ function sideBarCreation(entry, depth)
    {
       output+=' class="';
       if(0 === depth) output+='topLevel';
-      if(0 === expandIndex) output+=' nav-first';
+      if(navigationJson[0] === entry) output+=' nav-first';
       if (isParent)
       {
          if(0 === depth) output+=' ';
@@ -482,7 +482,6 @@ output+='</ul></div>\n';
 output+='</div>\n';
 output+='\n';
 output+='<div class="sites-embed"><hr/><div class="sites-embed-content sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
-output+='D20PFSRD<br />\n';
 output+='COMICS<br />\n';
 output+='GROUP\n';
 output+='</div>\n';
