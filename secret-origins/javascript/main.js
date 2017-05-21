@@ -82,6 +82,7 @@ function MainObject()
          }
       }
        document.getElementById('ruleset').value = activeRuleset.toString();
+       //TODO: make transcendence-span be visibility:hidden when possible
    };
    /**Onchange function for changing the transcendence. Sets the document values as needed*/
    this.changeTranscendence=function()

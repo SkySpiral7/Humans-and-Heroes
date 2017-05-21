@@ -68,7 +68,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replace("<h3 class=\"generated-class-3\"", "<h3 class=\"black-header\"");
+         newContents = newContents.replaceAll("<div class=\"(page-header-blue|page-header-red|blue-box-header)\"([^<]+?)</div>", "<h1 class=\"$1\"$2</h1>");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);

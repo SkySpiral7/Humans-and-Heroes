@@ -29,12 +29,12 @@ h3: font-size: 24px;
 h4: font-size: 16px; is default
 left side bar: font-size: 12px;
 
-generated-class-3 should be a black h3 but is smaller because the others on page should be higher h
+black-header is smaller because the others on page should be higher h
 generated-class-5 should be a no underline red h3
 
 would like:
 body: font-size: 16px; is default
-h1: font-size: 32px; red (for top level) or blue box. only used for page name
+h1: font-size: 32px; red (for top level) or blue box. only used for page name (or for ones that should be page names)
 h2: font-size: 28px; red underline. for extras also has red top border. used for main section
 h3: font-size: 24px; black underline. used for sub section or table name
 left side bar: font-size: 12px;
@@ -366,7 +366,6 @@ body > table {
 }
 
 .page-header-blue {
-   font-size: 32px;
    font-weight: bold;
    background-color: darkblue;
    padding: 10px;
@@ -378,7 +377,6 @@ body > table {
 }
 
 .page-header-red {
-   font-size: 32px;
    font-weight: bold;
    background-color: darkred;
    padding: 10px;
@@ -390,7 +388,6 @@ body > table {
 }
 
 .blue-box-header {
-   font-size: 28px;
    font-weight: bold;
    background-color: darkblue;
    padding: 5px;
