@@ -17,7 +17,7 @@ import java.util.Set;
 public class Main
 {
    public static final File rootFolder = new File("..");
-   public static final File sideBar = new File("../themes/side bar.js");
+   public static final File sideBar = new File("../themes/sideBar.js");
    private static String rootFolderPath;
 
    private enum RunCommands{DEAD, UNLINKED, MOVE, MAP}
