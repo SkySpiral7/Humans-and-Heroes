@@ -43,7 +43,6 @@ left side bar: font-size: 12px;
 /* TODO: more css clean up
 redo all h tags (see font reference above)
 {
-make all extras be h2
 all meta pages
 /the-basics/index.html
 }
@@ -251,6 +250,11 @@ h4 {
    color: black;
    border-bottom-style: solid;
    border-bottom-width: thin;
+}
+
+.power-modifier-header {
+   border-bottom: solid thin darkred;
+   border-top: solid thin darkred;
 }
 
 td {
@@ -632,11 +636,6 @@ body > table {
    margin: 0 auto;
    border: solid medium darkred;
    padding: 10px 10px 5px 5px;
-}
-
-.generated-class-56 {
-   border-bottom: solid thin darkred;
-   border-top: solid thin darkred;
 }
 
 .generated-class-61 {

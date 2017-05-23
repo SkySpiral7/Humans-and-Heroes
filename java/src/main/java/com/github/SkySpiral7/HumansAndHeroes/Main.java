@@ -66,10 +66,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceFirst("(sideBar\\.js\"></script>\n" +
-                 "</td>\n" +
-                 "<td>\n" +
-                 "<div style=\"margin-left: 10px;\">\n<h1 class=\"page-header-(?:red|blue)\") id=\"[^\"]*\"(>[^<]+</h1>)", "$1$2");
+         newContents = StringUtil.literalReplaceAll(newContents,"generated-class-56", "power-modifier-header");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
