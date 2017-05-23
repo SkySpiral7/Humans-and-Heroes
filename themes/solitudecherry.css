@@ -42,6 +42,13 @@ left side bar: font-size: 12px;
 
 /* TODO: more css clean up
 redo all h tags (see font reference above)
+{
+remove ids from h1 (only the actual page headers)
+make all extras be h2
+all meta pages
+/the-basics/index.html
+}
+
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once

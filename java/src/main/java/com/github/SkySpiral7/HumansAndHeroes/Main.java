@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -51,15 +49,15 @@ public class Main
       }
    }
 
-   public static void printFileOutput(final File output)
+   public static void printFilePath(final File file)
    {
-      final String outputAbsolutePath = output.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+      final String outputAbsolutePath = file.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       System.out.println(outputAbsolutePath.replace(rootFolderPath, ""));
    }
 
-   public static void printFileOutput(final String fileOutput)
+   public static void printFilePath(final String filePath)
    {
-      printFileOutput(new File(fileOutput));
+      printFilePath(new File(filePath));
    }
 
    public static void writeToFiles()
@@ -68,13 +66,16 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceAll("<div class=\"(page-header-blue|page-header-red|blue-box-header)\"([^<]+?)</div>", "<h1 class=\"$1\"$2</h1>");
+         newContents = newContents.replaceFirst("(sideBar\\.js\"></script>\n" +
+                 "</td>\n" +
+                 "<td>\n" +
+                 "<div style=\"margin-left: 10px;\">\n<h1 class=\"page-header-(?:red|blue)\") id=\"[^\"]*\"(>[^<]+</h1>)", "$1$2");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
          } else System.out.print("Same: ");
-         System.out.println(currentFile.getAbsolutePath());
+         printFilePath(currentFile);
       }
       System.out.println("Done.");
    }
@@ -120,7 +121,7 @@ public class Main
          if (contents.contains(searchingFor)) foundList.add(myFileArray[i]);
          else remainingList.add(myFileArray[i]);
       }
-      System.out.println("Done.\r\n");
+      System.out.println("Done.");
       if (foundList.isEmpty())
       {
          System.out.println("Not found.");
@@ -129,7 +130,8 @@ public class Main
       System.out.println("Results:");
       for (int i = 0; i < foundList.size(); i++)
       { System.out.println(foundList.get(i).getAbsolutePath()); }
-      System.out.println("\nNot found in these files:");
+      System.out.println();
+      System.out.println("Not found in these files:");
       for (int i = 0; i < remainingList.size(); i++)
       { System.out.println(remainingList.get(i).getAbsolutePath()); }
    }
@@ -143,7 +145,7 @@ public class Main
          String contents = FileIoUtil.readTextFile(myFileArray[i]);
          if (StringUtil.regexFoundInString(contents, searchingFor)) results.add(myFileArray[i]);
       }
-      System.out.println("Done.\r\n");
+      System.out.println("Done.");
       if (results.isEmpty())
       {
          System.out.println("Not found.");
@@ -199,7 +201,7 @@ public class Main
                System.out.println(myFileArray[i].getAbsolutePath() + " broken endline found on line " + lineCount + " (length " + j + ") has \\r alone");
          }
       }
-      System.out.println("Done.\r\n");
+      System.out.println("Done.");
       if (results.isEmpty())
       {
          System.out.println("All 7 bit ASCII (and on the keyboard).");
