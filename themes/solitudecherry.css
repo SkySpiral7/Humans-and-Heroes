@@ -44,7 +44,6 @@ left side bar: font-size: 12px;
 redo all h tags (see font reference above)
 {
 remove need for black-header and generated 5
-make all non-top level h1 be blue
 }
 
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
