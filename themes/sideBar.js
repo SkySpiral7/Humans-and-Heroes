@@ -492,7 +492,7 @@ output+='<div class="stamp-bottom" title="Send me an email!">\n';
 output+='<a href="mailto:rworcest@g.emporia.edu">CONTACT ME</a>\n';
 output+='</div></div></div>\n';
 output+='<div class="sites-embed">\n';
-output+='<h4 class="sites-embed-title">External Links</h4>\n';
+output+='<h2>External Links</h2>\n';
 output+='<div class="sites-embed-content sites-embed-content-sidebar-textbox">\n';
 output+='<a href="http://www.greenronin.com/">Green Ronin</a><br />\n';
 output+='<a href="http://mutantsandmasterminds.com/">Mutants &amp; Masterminds.com</a><br />\n';

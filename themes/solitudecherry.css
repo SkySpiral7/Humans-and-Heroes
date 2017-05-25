@@ -103,12 +103,6 @@ U+25BF (White down-pointing small triangle ▿)
    background: url(../images/arrow-left.gif) no-repeat;
 }
 
-.sites-embed-title {
-   margin: 0;
-   padding: 3px 5px;
-   text-align: left;
-}
-
 .sites-embed-content {
    text-align: left;
 }
@@ -240,10 +234,6 @@ h3 {
    color: darkred;
 }
 
-h4 {
-   color: darkred;
-}
-
 .black-header {
    font-size: 16px;
    color: black;
@@ -301,7 +291,8 @@ body .sites-layout-sidebar-left .sites-embed-content {
    margin: 0;
 }
 
-body .sites-layout-sidebar-left h4 {
+body .sites-layout-sidebar-left h2 {
+   font-weight: bold;
    font-size: 16px;
    border-bottom: 1px dotted darkred;
 }
