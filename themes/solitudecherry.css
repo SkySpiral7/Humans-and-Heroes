@@ -30,22 +30,27 @@ h4: font-size: 16px; is default
 left side bar: font-size: 12px;
 
 black-header is smaller because the others on page should be higher h
-generated-class-5 should be a no underline red h3
+generated-class-5 looks like h2 but isn't
 
 would like:
 body: font-size: 16px; is default
 h1: font-size: 32px; red (for top level) or blue box. only used for page name (or for ones that should be page names)
 h2: font-size: 28px; red underline. for extras also has red top border. used for main section
-h3: font-size: 24px; black underline. used for sub section or table name
+h3: font-size: 24px; black underline. used for sub section (including inside a red panel) or table name
 left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
 redo all h tags (see font reference above)
 {
-remove need for black-header and generated 5
+change headers to above plan (eg h3 is black)
+   replace generated-class-23 with generated-class-8 using clear:both as needed
+   replace generated-class-8 with h2 and rename it to red-underline-header
+   search for all header style/class again
+do something with generated-class-5
 }
 
+give the power banner to the senses page
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once

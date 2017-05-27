@@ -3,6 +3,7 @@ package com.github.SkySpiral7.HumansAndHeroes;
 import com.github.SkySpiral7.Java.pojo.FileGatherer;
 import com.github.SkySpiral7.Java.util.FileIoUtil;
 import com.github.SkySpiral7.Java.util.StringUtil;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -27,7 +30,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         writeToFiles();
+         advancedSearch();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -62,11 +65,11 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles()) {
+      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/"))) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = StringUtil.literalReplaceAll(newContents,"generated-class-56", "power-modifier-header");
+         newContents = StringUtil.literalReplaceAll(newContents," class=\"black-header\"", "");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
@@ -83,7 +86,7 @@ public class Main
    public static String lineMax(String contentsToChange)
    {
       Scanner scanner;
-      String returnValue = "";
+      StringBuilder returnValue = new StringBuilder();
       scanner = new Scanner(contentsToChange);
       while (scanner.hasNextLine())
       {
@@ -94,65 +97,79 @@ public class Main
             {
                int lastSpaceIndex = line.lastIndexOf(' ', 120);
                if (lastSpaceIndex == -1) break;
-               returnValue += line.substring(0, lastSpaceIndex) + "\r\n";
+               returnValue.append(line.substring(0, lastSpaceIndex)).append("\n");
                line = line.substring(lastSpaceIndex + 1);
             }
          }
-         returnValue += line + "\r\n";
+         returnValue.append(line).append("\n");
       }
       scanner.close();
-      return returnValue;
+      return returnValue.toString();
    }
 
    public static void searchForText(String searchingFor, boolean ignoreCase, boolean removeTags)
    {
       File[] myFileArray = getAllHtmlFiles();
       List<File> foundList = new ArrayList<>();
-      List<File> remainingList = new ArrayList<>();
       if (ignoreCase) searchingFor = searchingFor.toLowerCase();
       for (int i = 0; i < myFileArray.length; i++)
       {
          String contents = FileIoUtil.readTextFile(myFileArray[i]);
+         if (removeTags) contents = contents.replaceAll("<[^>]+>", "");
          if (ignoreCase) contents = contents.toLowerCase();
-         if (removeTags) contents = contents.replaceAll("<.*?>", "");
          if (contents.contains(searchingFor)) foundList.add(myFileArray[i]);
-         else remainingList.add(myFileArray[i]);
       }
-      System.out.println("Done.");
       if (foundList.isEmpty())
       {
          System.out.println("Not found.");
          return;
       }
       System.out.println("Results:");
-      for (int i = 0; i < foundList.size(); i++)
-      { System.out.println(foundList.get(i).getAbsolutePath()); }
-      System.out.println();
-      System.out.println("Not found in these files:");
-      for (int i = 0; i < remainingList.size(); i++)
-      { System.out.println(remainingList.get(i).getAbsolutePath()); }
+      foundList.forEach(Main::printFilePath);
    }
 
-   public static void searchForRegex(String searchingFor)
+   public static void advancedSearch()
    {
-      File[] myFileArray = getAllHtmlFiles();
-      List<File> results = new ArrayList<>();
-      for (int i = 0; i < myFileArray.length; i++)
+      final File[] allHtmlFiles = getAllHtmlFiles();
+      final Set<String> classesFound = new HashSet<>();
+      final Set<String> stylesFound = new HashSet<>();
+      for (int i = 0; i < allHtmlFiles.length; i++)
       {
-         String contents = FileIoUtil.readTextFile(myFileArray[i]);
-         if (StringUtil.regexFoundInString(contents, searchingFor)) results.add(myFileArray[i]);
+         final String fileContents = FileIoUtil.readTextFile(allHtmlFiles[i]);
+         final Matcher headerMatcher = Pattern.compile("<h[1-6][^<]+</h[1-6]>").matcher(fileContents);
+         while(headerMatcher.find())
+         {
+            final String headerTag = headerMatcher.group();
+            final Matcher classMatcher = Pattern.compile("class=\"([^\"]+)\"").matcher(headerTag);
+            if(classMatcher.find()) {
+               classesFound.add(classMatcher.group(1));
+            }
+            final Matcher styleMatcher = Pattern.compile("style=\"([^\"]+)\"").matcher(headerTag);
+            if(styleMatcher.find()) {
+               stylesFound.add(styleMatcher.group(1));
+            }
+         }
       }
-      System.out.println("Done.");
-      if (results.isEmpty())
+
+      System.out.println("Classes:");
+      if (classesFound.isEmpty())
       {
          System.out.println("Not found.");
-         return;
       }
-      System.out.println("Results:");
-      for (int i = 0; i < results.size(); i++)
-      { System.out.println(results.get(i).getAbsolutePath()); }
+      else classesFound.forEach(System.out::println);
+
+      System.out.println();
+      System.out.println("Styles:");
+      if (stylesFound.isEmpty())
+      {
+         System.out.println("Not found.");
+      }
+      else stylesFound.forEach(System.out::println);
    }
 
+   /**
+    * I'd like to use HTML entities with ASCII. The HTML meta is UTF-8 but this method finds ones that aren't ASCII.
+    */
    public static void searchForSymbols()
    {
       File[] myFileArray = getAllHtmlFiles();
@@ -192,20 +209,15 @@ public class Main
                        myFileArray[i].getAbsolutePath() + " on line " + lineCount + " column " + colCount + " (length " + j + ") has " + newContents.charAt(j)
                                + " = " + newContents.codePointAt(j));
             }
-            if (newContents.charAt(j) == '\n' && newContents.charAt(j - 1) != '\r')
-               System.out.println(myFileArray[i].getAbsolutePath() + " broken endline found on line " + lineCount + " (length " + j + ") has \\n alone");
-            if (newContents.charAt(j) == '\r' && newContents.charAt(j + 1) != '\n')
-               System.out.println(myFileArray[i].getAbsolutePath() + " broken endline found on line " + lineCount + " (length " + j + ") has \\r alone");
          }
       }
-      System.out.println("Done.");
       if (results.isEmpty())
       {
          System.out.println("All 7 bit ASCII (and on the keyboard).");
          return;
       }
       System.out.println("Results:");
-      for (String item : results) { System.out.println(item); }
+      results.forEach(System.out::println);
    }
 
    public static File[] getAllHtmlFiles()
