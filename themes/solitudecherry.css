@@ -30,8 +30,6 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-change GM info-banner into green-panel
-change h* border to underline
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height, min-width
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
@@ -221,21 +219,22 @@ h1 {
 }
 
 h2 {
-   border-bottom: solid thin darkred;
    color: darkred;
    font-size: 28px;
    margin: 0;
+   text-decoration: underline;
 }
 
 h3 {
-   border-bottom-style: solid;
-   border-bottom-width: thin;
    font-size: 20px;
    margin: 0;
+   text-decoration: underline;
 }
 
 .power-modifier-header {
+   border-bottom: solid thin darkred;
    border-top: solid thin darkred;
+   text-decoration: none;
 }
 
 .table-name {
@@ -243,8 +242,8 @@ h3 {
 }
 
 td {
-   vertical-align: top;
    padding: 1px 4px;
+   vertical-align: top;
 }
 
 a:link, a:visited {
