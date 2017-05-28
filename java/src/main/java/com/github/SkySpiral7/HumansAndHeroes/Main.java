@@ -69,7 +69,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceAll("<div class=\"generated-class-5\">([^<]+)</div>", "<span class=\"generated-class-5\">$1</span>");
+         newContents = newContents.replaceAll("<div class=\"generated-class-70\">([\\s\\S]+?)</div>", "<span class=\"info-banner\">$1</span>");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);

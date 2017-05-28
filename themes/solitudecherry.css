@@ -12,7 +12,7 @@ black (for the huge stamp border)
 darkred
 pink (under red)
 
-navajowhite (under orange. power info banner)
+navajowhite (under orange. info-banner)
 
 darkgreen
 palegreen (under green)
@@ -30,8 +30,10 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-give the power banner to the senses page and godhood advantages
-I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
+give the info-banner to the senses page and godhood advantages
+change GM info-banner into green-panel
+change h* border to underline
+I doubt the need for: clear: both; text-align: left; all padding and margin, line-height, min-width
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
@@ -509,6 +511,12 @@ body > table {
    font-style: italic;
 }
 
+.info-banner {
+   background-color: navajowhite;
+   display: block;
+   padding: 5px;
+}
+
 .generated-class-2 {
    width: 50%;
 }
@@ -596,11 +604,4 @@ body > table {
    border-style: solid;
    border-width: 5px;
    width: 150px;
-}
-
-.generated-class-70 {
-   padding: 5px;
-   background-color: navajowhite;
-   font-style: italic;
-   clear: both;
 }
