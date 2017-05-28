@@ -30,7 +30,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         advancedSearch();
+         DeadLinkDetector.detect();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -131,40 +131,28 @@ public class Main
    public static void advancedSearch()
    {
       final File[] allHtmlFiles = getAllHtmlFiles();
-      final Set<String> classesFound = new HashSet<>();
-      final Set<String> stylesFound = new HashSet<>();
-      for (int i = 0; i < allHtmlFiles.length; i++)
-      {
-         final String fileContents = FileIoUtil.readTextFile(allHtmlFiles[i]);
-         final Matcher headerMatcher = Pattern.compile("<h[1-6][^<]+</h[1-6]>").matcher(fileContents);
-         while(headerMatcher.find())
-         {
-            final String headerTag = headerMatcher.group();
-            final Matcher classMatcher = Pattern.compile("class=\"([^\"]+)\"").matcher(headerTag);
-            if(classMatcher.find()) {
-               classesFound.add(classMatcher.group(1));
-            }
-            final Matcher styleMatcher = Pattern.compile("style=\"([^\"]+)\"").matcher(headerTag);
-            if(styleMatcher.find()) {
-               stylesFound.add(styleMatcher.group(1));
-            }
-         }
+      final List<File> resultsWithH2 = new ArrayList<>();
+      final List<File> resultsWithout = new ArrayList<>();
+      for (File thisFile : allHtmlFiles) {
+         final String fileContents = FileIoUtil.readTextFile(thisFile);
+         if (fileContents.contains("generated-class-8") && fileContents.contains("<h2")) resultsWithH2.add(thisFile);
+         else if (fileContents.contains("generated-class-8")) resultsWithout.add(thisFile);
       }
 
-      System.out.println("Classes:");
-      if (classesFound.isEmpty())
+      System.out.println("With h2:");
+      if (resultsWithH2.isEmpty())
       {
          System.out.println("Not found.");
       }
-      else classesFound.forEach(System.out::println);
+      else resultsWithH2.forEach(Main::printFilePath);
 
       System.out.println();
-      System.out.println("Styles:");
-      if (stylesFound.isEmpty())
+      System.out.println("rest:");
+      if (resultsWithout.isEmpty())
       {
          System.out.println("Not found.");
       }
-      else stylesFound.forEach(System.out::println);
+      else resultsWithout.forEach(Main::printFilePath);
    }
 
    /**
