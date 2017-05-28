@@ -7,7 +7,7 @@ official colors: https://www.w3.org/TR/css3-color/
 These are all of the colors used:
 white (for font color against dark background)
 grey (for most borders)
-black (for the huge stamp border and font color to trump h3 red color)
+black (for the huge stamp border)
 
 darkred
 pink (under red)
@@ -22,38 +22,22 @@ lightskyblue (under blue. used for alt table)
 */
 
 /* ========Font reference========
-body: font-size: 16px; is default
-h1: font-size: 32px; default. currently using div: page-header-blue, page-header-red, blue-box-header
-h2: font-size: 28px;
-h3: font-size: 24px;
-h4: font-size: 16px; is default
-left side bar: font-size: 12px;
-
-black-header is smaller because the others on page should be higher h
-generated-class-5 looks like h2 but isn't
-
-would like:
-body: font-size: 16px; is default
-h1: font-size: 32px; red (for top level) or blue box. only used for page name (or for ones that should be page names)
+body: font-size: 16px (default);
+h1: font-size: 32px (default); red (for top level) or blue box. only used for page name (or for ones that should be page names)
 h2: font-size: 28px; red underline. for extras also has red top border. used for main section
-h3: font-size: 24px; black underline. used for sub section (including inside a red panel) or table name
+h3: font-size: 20px; black underline. used for sub section (including inside a red panel) or table name
 left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-redo all h tags (see font reference above)
-{
-change headers to above plan (eg h3 is black)
-   search for all header style/class again
 do something with generated-class-5
-}
-
 give the power banner to the senses page and godhood advantages
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
 */
+
 
 html,body {
    padding: 0;
@@ -223,40 +207,39 @@ div.nav-toc-content {
    padding: 5px;
 }
 
+h1 {
+   background-color: darkblue;
+   border-bottom-left-radius: 20px;
+   border-bottom-right-radius: 20px;
+   color: white;
+   margin: 0;
+   padding: 10px;
+}
+
+.page-header-red {
+   background-color: darkred;
+}
+
 h2 {
-   margin: 14px 0 8px;
-   font-size: 28px;
-   font-weight: normal;
+   border-bottom: solid thin darkred;
    color: darkred;
+   font-size: 28px;
+   margin: 0;
 }
 
 h3 {
-   font-size: 24px;
-   font-weight: normal;
-   margin-top: 16px;
-   color: darkred;
-}
-
-.black-header {
-   font-size: 16px;
-   color: black;
    border-bottom-style: solid;
    border-bottom-width: thin;
-}
-
-.red-underline-header {
-   border-bottom: solid thin darkred;
+   font-size: 20px;
+   margin: 0;
 }
 
 .power-modifier-header {
-   border-bottom: solid thin darkred;
    border-top: solid thin darkred;
 }
 
 .table-name {
    color: darkblue;
-   font-size: 24px;
-   font-weight: bold;
 }
 
 td {
@@ -376,38 +359,6 @@ body > table {
 
 .table-alt-rows tr:nth-child(even) {
    background-color: lightskyblue;
-}
-
-.page-header-blue {
-   font-weight: bold;
-   background-color: darkblue;
-   padding: 10px;
-   margin: 0 0 30px 0;
-   color: white;
-   border-bottom-left-radius: 20px;
-   border-bottom-right-radius: 20px;
-   clear: both;
-}
-
-.page-header-red {
-   font-weight: bold;
-   background-color: darkred;
-   padding: 10px;
-   margin: 0 0 30px 0;
-   color: white;
-   border-bottom-left-radius: 20px;
-   border-bottom-right-radius: 20px;
-   clear: both;
-}
-
-.blue-box-header {
-   font-weight: bold;
-   background-color: darkblue;
-   padding: 5px;
-   margin: 30px 0;
-   color: white;
-   border-radius: 10px 10px 10px 10px;
-   clear: both;
 }
 
 .stamp-top, .stamp-middle, .stamp-bottom {

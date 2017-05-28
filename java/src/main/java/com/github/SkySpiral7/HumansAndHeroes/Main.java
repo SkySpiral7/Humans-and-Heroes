@@ -30,7 +30,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         advancedSearch();
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -65,11 +65,11 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles(new File("../powers/effects/"))) {
+      for (File currentFile : getAllHtmlFiles()) {
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = StringUtil.literalReplaceAll(newContents," class=\"black-header\"", "");
+         newContents = newContents.replaceAll(" class=\"(?:blue-box-header|page-header-blue)\"", "");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
