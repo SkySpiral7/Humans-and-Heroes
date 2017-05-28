@@ -44,12 +44,11 @@ left side bar: font-size: 12px;
 redo all h tags (see font reference above)
 {
 change headers to above plan (eg h3 is black)
-   replace generated-class-8 with h2 and rename it to red-underline-header
    search for all header style/class again
 do something with generated-class-5
 }
 
-give the power banner to the senses page
+give the power banner to the senses page and godhood advantages
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
@@ -245,9 +244,19 @@ h3 {
    border-bottom-width: thin;
 }
 
+.red-underline-header {
+   border-bottom: solid thin darkred;
+}
+
 .power-modifier-header {
    border-bottom: solid thin darkred;
    border-top: solid thin darkred;
+}
+
+.table-name {
+   color: darkblue;
+   font-size: 24px;
+   font-weight: bold;
 }
 
 td {
@@ -550,12 +559,6 @@ body > table {
    font-style: italic;
 }
 
-.table-name {
-   color: darkblue;
-   font-size: 24px;
-   font-weight: bold;
-}
-
 .generated-class-2 {
    width: 50%;
 }
@@ -571,10 +574,6 @@ body > table {
    font-size: 24px;
    font-weight: bold;
    text-align: center;
-}
-
-.generated-class-8 {
-   border-bottom: solid thin darkred;
 }
 
 .generated-class-10 {
