@@ -44,7 +44,6 @@ left side bar: font-size: 12px;
 redo all h tags (see font reference above)
 {
 change headers to above plan (eg h3 is black)
-   replace generated-class-23 with generated-class-8 using clear:both as needed
    replace generated-class-8 with h2 and rename it to red-underline-header
    search for all header style/class again
 do something with generated-class-5
@@ -586,11 +585,6 @@ body > table {
    margin: 10px 0;
 }
 
-.generated-class-23 {
-   border-bottom: solid thin darkred;
-   clear: both;
-}
-
 .generated-class-26 {
    width: 40%;
    margin-top: 5px;
@@ -631,13 +625,6 @@ body > table {
    margin: 0 auto;
    border: solid medium darkred;
    padding: 10px 10px 5px 5px;
-}
-
-.generated-class-61 {
-   display: block;
-   margin: 5px auto 5px 0;
-   text-align: left;
-   width: 450px;
 }
 
 .generated-class-62 {
