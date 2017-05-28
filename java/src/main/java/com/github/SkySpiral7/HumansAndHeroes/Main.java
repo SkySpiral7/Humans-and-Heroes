@@ -69,7 +69,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceAll(" class=\"(?:blue-box-header|page-header-blue)\"", "");
+         newContents = newContents.replaceAll("<div class=\"generated-class-5\">([^<]+)</div>", "<span class=\"generated-class-5\">$1</span>");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);

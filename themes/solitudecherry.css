@@ -30,7 +30,6 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-do something with generated-class-5
 give the power banner to the senses page and godhood advantages
 I doubt the need for: clear: both; text-align: left; all padding and margin, line-height
 Look into making the character sheet a single top level class. Ignore the point counter at first.
@@ -522,6 +521,7 @@ body > table {
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-5 {
    color: darkred;
+   display: block;
    font-size: 24px;
    font-weight: bold;
    text-align: center;
