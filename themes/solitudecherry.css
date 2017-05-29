@@ -30,35 +30,23 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-I doubt the need for: clear: both; text-align: left; all padding and margin, line-height, min-width
+sort inside css blocks
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
 */
 
 
-html,body {
+body {
    padding: 0;
    margin: 0;
-}
-
-body {
-   margin: 0 auto;
-   width: 100%;
    background: url(bg-top.gif) top repeat-x;
    line-height: 1.5;
-   min-width: 90%;
-}
-
-table,th,td,img {
-   border: 0;
 }
 
 .sites-sidebar-nav li {
    list-style: none;
    list-style-image: none;
-   padding: 2px 0 0;
-   margin: 1px 0 0 0;
 }
 
 .sites-sidebar-nav .expander {
@@ -88,13 +76,7 @@ U+25BF (White down-pointing small triangle ▿)
    background: url(../images/arrow-left.gif) no-repeat;
 }
 
-.sites-embed-content {
-   text-align: left;
-}
-
 .goog-toc {
-   text-align: left;
-   line-height: 18px;
    list-style: none;
 }
 
@@ -103,16 +85,9 @@ ol.goog-toc {
    padding-left: 0;
 }
 
-.goog-toc a {
-   text-decoration: none;
-}
-
 div.goog-toc {
-   margin-bottom: 5px;
-   overflow: hidden;
    width: auto;
    background: url(bg-pattern.gif) repeat;
-   padding: 2px;
    border: 1px solid grey;
 }
 
@@ -123,19 +98,6 @@ div.goog-toc p {
    font-size: 16px;
 }
 
-.sites-embed>ul {
-   margin: 16px 0;
-}
-
-a img {
-   border: 0;
-   padding: 0;
-}
-
-th {
-   text-align: left;
-}
-
 td {
    vertical-align: top;
 }
@@ -143,28 +105,11 @@ td {
 div.sites-sidebar-nav {
    border-bottom: 0;
    padding-bottom: 0;
-   overflow: hidden;
-}
-
-.sites-sidebar-nav a {
-   display: block;
-   text-decoration: none;
-}
-
-.sites-sidebar-nav a:hover {
-   text-decoration: underline;
 }
 
 body .sites-sidebar-nav ul {
-   line-height: 21px;
    margin: 0;
    padding: 0;
-   overflow: visible;
-}
-
-.sites-sidebar-nav a,.sites-sidebar-nav .current-bg {
-   text-overflow: ellipsis;
-   overflow: hidden;
 }
 
 .sites-sidebar-nav li.closed ul {
@@ -175,30 +120,9 @@ body .sites-sidebar-nav ul {
    outline-width: 1px;
 }
 
-.sites-embed {
-   margin: 0 0 6px;
-}
-
-.sites-embed-content {
-   overflow: hidden;
-}
-
-.sites-embed-content.sites-embed-type-toc {
-   overflow: visible;
-}
-
 .sites-embed-align-left-wrapping-on {
-   display: inline;
    float: left;
    margin: 5px 20px 5px 0;
-}
-
-.sites-embed-align-left-wrapping-on .sites-embed {
-   display: table-cell;
-}
-
-div.nav-toc-content {
-   margin: 5px 0;
 }
 
 .sites-embed-content-sidebar-textbox {
@@ -238,6 +162,7 @@ h3 {
 }
 
 .table-name {
+   margin: 10px 0 10px 0;
    color: darkblue;
 }
 
@@ -251,7 +176,6 @@ a:link, a:visited {
    color: darkred;
    text-decoration: none;
    font-weight: bold;
-   padding: 2px;
 }
 
 a:hover,a:active {
@@ -270,37 +194,19 @@ ul li {
 }
 
 body .sites-layout-sidebar-left {
-   padding: 5px 0;
+   padding: 0;
    width: 170px;
-   margin: 10px 25px 10px 0;
    background: url(bg-pattern.gif) repeat;
 }
 
 .sites-layout-sidebar-left .sites-embed {
    font-size: 12px;
    padding-bottom: 10px;
-   margin-bottom: 5px;
-}
-
-body .sites-layout-sidebar-left .sites-embed-content {
-   margin: 0;
 }
 
 body .sites-layout-sidebar-left h2 {
-   font-weight: bold;
    font-size: 16px;
    border-bottom: 1px dotted darkred;
-}
-
-.sites-layout-sidebar-left .sites-sidebar-nav a,.sites-layout-sidebar-left .sites-sidebar-nav a:visited {
-   text-decoration: none;
-   color: darkred;
-}
-
-.sites-layout-sidebar-left .sites-sidebar-nav a:hover {
-   text-decoration: underline;
-   color: darkred;
-   background-color: transparent;
 }
 
 .sites-sidebar-nav .expander {
@@ -311,34 +217,21 @@ body .sites-layout-sidebar-left h2 {
    color: white;
    background-color: darkred;
    font-weight: bold;
-   padding-left: 202px;
 }
 
 th {
+   text-align: center;
    background: url(bg-pattern.gif) repeat;
-   text-align: left;
    vertical-align: top;
    padding: 3px 5px 5px;
 }
 
 .sites-sidebar-nav li.topLevel {
-   border-top: 1px solid transparent;
-   margin-top: 1px;
-   margin-bottom: 1px;
-}
-
-.sites-sidebar-nav li.topLevel {
-   border-top-color: grey;
-   border-top-style: dotted;
-}
-
-.sites-sidebar-nav a.topLevel {
-   font-weight: bold;
+   border-top: 1px grey dotted;
 }
 
 .sites-sidebar-nav li.nav-first {
    border-top-width: 0;
-   margin-top: 0;
 }
 
 /*Stuff I added*/
@@ -349,10 +242,9 @@ body {
 body > table {
    margin: 25px;
    border-spacing: 0;
-   border-width: 0;
 }
 
-.table-alt-rows tr {
+.table-alt-rows td {
    text-align: center;
 }
 
@@ -371,7 +263,6 @@ body > table {
    border-bottom-width: 0;
    background-color: darkred;
    color: white;
-   margin-top: 15px;
 }
 .stamp-middle {
    font-size: 32px;
@@ -379,7 +270,6 @@ body > table {
 .stamp-bottom {
    font-size: 16px;
    border-top-width: 0;
-   padding-top: 3px;
 }
 
 .character-sheet-defense-white > td, .character-sheet-defense-green > td {
@@ -409,7 +299,6 @@ body > table {
    padding: 5px;
    background-color: palegreen;
 }
-
 .character-sheet-hero-name, .character-sheet-power-level, .character-sheet-ability-label, .character-sheet-section-label, .character-sheet-point-totals, .generated-class-41, .generated-class-46 {
    background-color: darkgreen;
    color: white;
@@ -438,23 +327,16 @@ body > table {
    width: 100px;
    height: 80px;
    vertical-align: middle;
-   padding: 10px;
    background-color: palegreen;
    text-align: center;
    font-weight: bold;
    font-size: 28px;
-}
-.character-sheet-options {
-   padding: 5px;
-   background-color: palegreen;
-   font-weight: bold;
 }
 .character-sheet-point-totals {
    text-align: center;
    font-size: 28px;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
-   clear: both;
 }
 
 .grey-table-border,.grey-table-border th,.grey-table-border td {
@@ -464,13 +346,13 @@ body > table {
 
 .grey-table-border .blue-top-th {
    border-top: 8px solid darkblue;
-   text-align: center;
 }
 
 .right-panel {
    width: 450px;
    float: right;
-   margin: 10px;
+   margin-left: 10px;
+   margin-top: 16px;
 }
 
 .red-panel,.green-panel {
@@ -504,8 +386,7 @@ body > table {
 }
 
 .example {
-   padding: 5px;
-   margin-left: 40px;
+   margin-left: 20px;
    font-style: italic;
 }
 
@@ -537,22 +418,7 @@ body > table {
    margin: 10px;
 }
 
-.generated-class-15 {
-   margin: 10px 0;
-}
-
-.generated-class-26 {
-   width: 40%;
-   margin-top: 5px;
-}
-
-.generated-class-28 {
-   margin: 5px 0;
-   width: 100%;
-}
-
 .generated-class-31 {
-   margin: 10px 0;
    width: 100%;
 }
 
@@ -571,8 +437,6 @@ body > table {
 .generated-class-48 {
    display: block;
    text-align: center;
-   margin-right: auto;
-   margin-left: auto;
    border: solid 5px darkgreen;
 }
 
@@ -581,20 +445,6 @@ body > table {
    margin: 0 auto;
    border: solid medium darkred;
    padding: 10px 10px 5px 5px;
-}
-
-.generated-class-62 {
-   display: block;
-   margin: 5px auto 5px 0;
-   text-align: left;
-   width: 400px;
-}
-
-.generated-class-63 {
-   display: block;
-   margin: 5px auto 5px 0;
-   text-align: left;
-   width: 250px;
 }
 
 .generated-class-68 {
