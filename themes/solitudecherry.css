@@ -30,7 +30,6 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-sort inside css blocks
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
@@ -41,7 +40,7 @@ body {
    background: url(bg-top.gif) top repeat-x;
    line-height: 1.5;
    margin: 0;
-   padding: 0;
+   padding: 15px 0 0 0;
 }
 
 .sites-sidebar-nav li {
@@ -72,7 +71,7 @@ U+25B9 (White right-pointing small triangle ▹)
 U+25BF (White down-pointing small triangle ▿)
 */
 
-.sites-sidebar-nav li.closed .expander {
+.sites-sidebar-nav .closed .expander {
    background: url(../images/arrow-left.gif) no-repeat;
 }
 
@@ -88,7 +87,6 @@ ol.goog-toc {
 div.goog-toc {
    background: url(bg-pattern.gif) repeat;
    border: 1px solid grey;
-   width: auto;
 }
 
 div.goog-toc p {
@@ -96,10 +94,6 @@ div.goog-toc p {
    font-weight: bold;
    margin: 0;
    padding: 3px 5px 0;
-}
-
-td {
-   vertical-align: top;
 }
 
 div.sites-sidebar-nav {
@@ -112,12 +106,8 @@ body .sites-sidebar-nav ul {
    padding: 0;
 }
 
-.sites-sidebar-nav li.closed ul {
+.sites-sidebar-nav .closed ul {
    display: none;
-}
-
-.sites-sidebar-nav li ul .current-bg {
-   outline-width: 1px;
 }
 
 .sites-embed-align-left-wrapping-on {
@@ -226,19 +216,15 @@ th {
    vertical-align: top;
 }
 
-.sites-sidebar-nav li.topLevel {
+.sites-sidebar-nav .topLevel {
    border-top: 1px grey dotted;
 }
 
-.sites-sidebar-nav li.nav-first {
+.sites-sidebar-nav .nav-first {
    border-top-width: 0;
 }
 
 /*Stuff I added*/
-body {
-   padding: 15px 0 0 0;
-}
-
 body > table {
    border-spacing: 0;
    margin: 25px;
