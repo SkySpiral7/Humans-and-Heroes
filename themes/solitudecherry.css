@@ -157,7 +157,6 @@ h3 {
 }
 
 td {
-   padding: 1px 4px;
    vertical-align: top;
 }
 
@@ -227,7 +226,11 @@ th {
 /*Stuff I added*/
 body > table {
    border-spacing: 0;
-   margin: 25px;
+   margin: 16px;
+}
+
+body > table > tbody > tr > td:nth-child(2) {
+   padding-left: 16px;
 }
 
 .table-alt-rows td {

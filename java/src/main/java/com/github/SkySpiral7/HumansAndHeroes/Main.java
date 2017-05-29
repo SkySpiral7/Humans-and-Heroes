@@ -65,8 +65,17 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceFirst("<tr>\n" +
-                 "<tr>", "<tr>");
+         newContents = newContents.replaceFirst("<body>\n<table>\n(<tr>\n" +
+                 "<td class=\"sites-layout-sidebar-left\">\n" +
+                 "<script type=\"text/javascript\" src=\"(?:\\.\\./)*themes/sideBar\\.js\"></script>\n" +
+                 "</td>\n" +
+                 "<td>\n)" +
+                 "<div style=\"margin-left: 10px;\">\n([\\s\\S]+)</div>\n" +
+                 "</td>\n" +
+                 "</tr>\n" +
+                 "</table>\n", "<body>\n<table>\n<tbody>\n$1$2</td>\n" +
+                 "</tr>\n</tbody>\n" +
+                 "</table>\n");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
