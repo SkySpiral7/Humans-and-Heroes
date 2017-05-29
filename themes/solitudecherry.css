@@ -34,7 +34,6 @@ Look into making the character sheet a single top level class. Ignore the point 
 Look into single class for TOC
 Look into single class for side bar (except 'closed')
 Write a script to inline classes that are only used once
-and create classes for styles that are used more than once (even if small)
 */
 
 
@@ -80,13 +79,6 @@ h3 {
 .table-name {
    color: darkblue;
    margin: 10px 0 10px 0;
-}
-
-th {
-   background: url(bg-pattern.gif) repeat;
-   padding: 3px 5px 5px;
-   text-align: center;
-   vertical-align: top;
 }
 
 td {
@@ -227,8 +219,25 @@ body > table > tbody > tr > td:nth-child(2) {
    text-align: center;
 }
 
+/*All th are under .table-alt-rows*/
+th {
+   background: url(bg-pattern.gif) repeat;
+   padding: 3px 5px 5px;
+   text-align: center;
+   vertical-align: top;
+}
+
 .table-alt-rows tr:nth-child(even) {
    background-color: lightskyblue;
+}
+
+.table-alt-rows,.table-alt-rows th,.table-alt-rows td {
+   border-collapse: collapse;
+   border: 1px inset grey;
+}
+
+.table-alt-rows .blue-top-th {
+   border-top: 8px solid darkblue;
 }
 
 .stamp-top, .stamp-middle, .stamp-bottom {
@@ -318,15 +327,6 @@ body > table > tbody > tr > td:nth-child(2) {
    text-align: center;
 }
 
-.grey-table-border,.grey-table-border th,.grey-table-border td {
-   border-collapse: collapse;
-   border: 1px inset grey;
-}
-
-.grey-table-border .blue-top-th {
-   border-top: 8px solid darkblue;
-}
-
 .right-panel {
    float: right;
    margin-left: 10px;
@@ -395,10 +395,6 @@ body > table > tbody > tr > td:nth-child(2) {
 
 .generated-class-3 {
    margin: 10px;
-}
-
-.generated-class-4 {
-   width: 100%;
 }
 
 .generated-class-5 {
@@ -490,7 +486,7 @@ body > table > tbody > tr > td:nth-child(2) {
    padding: 5px 30px;
 }
 
-.generated-class-22 {
+.table-alt-rows .generated-class-22 {
    text-align: right;
 }
 
@@ -509,11 +505,7 @@ body > table > tbody > tr > td:nth-child(2) {
    padding: 5px;
 }
 
-.generated-class-26 {
-   font-size: 12px;
-}
-
-.generated-class-27 {
+.table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
    text-align: left;
 }
 
@@ -521,27 +513,10 @@ body > table > tbody > tr > td:nth-child(2) {
    width: 300px;
 }
 
-.generated-class-29 {
-   font-weight: bold;
-   padding: 5px;
-}
-
-.generated-class-30 {
-   text-align: left;
-}
-
-.generated-class-31 {
-   text-align: left;
-}
-
 .generated-class-32 {
    float: right;
    margin-top: 16px;
    width: 290px;
-}
-
-.generated-class-33 {
-   width: 100%;
 }
 
 .generated-class-34 {

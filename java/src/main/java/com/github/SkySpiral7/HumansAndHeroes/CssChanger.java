@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -57,6 +60,7 @@ public class CssChanger
          String contents = FileIoUtil.readTextFile(myFileArray[fileIndex]);
          String[] splitContents = contents.split("class=\"");
          StringBuilder strBuild = new StringBuilder();
+         if(splitContents.length <= 1) continue;
          strBuild.append(splitContents[0]).append("class=\"");
          for (int i = 1; i < splitContents.length; i++)
          {
@@ -104,14 +108,14 @@ public class CssChanger
       System.out.println("Found them.");
       List<String> styleList = new ArrayList<>(styleSet);
       //shortest first
-//      styleList.sort(Comparator.comparingInt(String::length));
-//      for (Iterator<String> iterator = styleList.iterator(); iterator.hasNext(); )
-//      {
-//         String style = iterator.next();
-//         if (!style.endsWith(";")) style += ";";
-//         if (StringUtil.countCharOccurrences(style, ';') <= 3) iterator.remove();
-//      }
-//      System.out.println("Filtered them.");
+      styleList.sort(Comparator.comparingInt(String::length));
+      for (Iterator<String> iterator = styleList.iterator(); iterator.hasNext(); )
+      {
+         String style = iterator.next();
+         if (!style.endsWith(";")) style += ";";
+         if (StringUtil.countCharOccurrences(style, ';') <= 3) iterator.remove();
+      }
+      System.out.println("Filtered them.");
       for (int i = 0; i < styleList.size(); i++)
       {
          String style = styleList.get(i).trim();
@@ -147,7 +151,7 @@ public class CssChanger
 
    public static void removedUnusedCss()
    {
-      Set<String> allCssNames = getAllCssSelectors();
+      Set<String> allCssNames = getAllCssClasses();
 
       if (allCssNames.isEmpty())
       {
@@ -161,7 +165,7 @@ public class CssChanger
       {
          index++;
          System.out.println("Searching: " + name + ". " + index + " / " + allCssNames.size());
-         if (!searchHtmlForCss(name)) unusedCss.add(name);
+         if (!searchHtmlForClass(name)) unusedCss.add(name);
       }
 
       if (unusedCss.isEmpty())
@@ -176,31 +180,27 @@ public class CssChanger
       System.out.println("Done");
    }
 
-   private static Set<String> getAllCssSelectors()
+   private static Set<String> getAllCssClasses()
    {
       String cssFileText = FileIoUtil.readTextFile(cssFile);
       Set<String> allCssNames = new HashSet<>();
-      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "");
-      //remove all text which also removes all hex colors (which would mess up finding id selectors)
-      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
-      //remove all comments which may contain a dot (which would mess up finding class selectors)
+      cssFileText = cssFileText.replaceAll("/\\*[\\s\\S]*?\\*/", "");  //remove all comments
+      cssFileText = cssFileText.replaceAll("\\{[\\s\\S]*?\\}", "");  //remove all bodies
       cssFileText = cssFileText.replace(".", " .");  //make sure all dots have a space before them
-      cssFileText = cssFileText.replace("#", " #");  //ditto even though there are none like this
-      String[] cssSplit = cssFileText.split("[^a-zA-Z0-9_.#-]");  //split by everything that isn't a name or class/id selector
+      String[] cssSplit = cssFileText.split("[^a-zA-Z0-9_.-]+");  //split by everything that isn't a tag or class
       for (String splitItem : cssSplit)
       {
          if (splitItem.isEmpty()) continue;  //if there was multiple white space etc in a row
-         if (splitItem.charAt(0) != '.' && splitItem.charAt(0) != '#') continue;  //not a class or id selector
-         //remove all that don't start with a dot or hash (* isn't used without a class)
-         allCssNames.add(splitItem.substring(1));  //chop off [.#]
+         if (splitItem.charAt(0) != '.') continue;  //not a class
+         allCssNames.add(splitItem.substring(1));  //chop off dot
       }
       return allCssNames;
    }
 
-   private static boolean searchHtmlForCss(String cssName)
+   private static boolean searchHtmlForClass(String cssName)
    {
       File[] myFileArray = Main.getAllHtmlFiles();
-      Pattern cssPattern = Pattern.compile("(?:class|id)=\"(?:|[^\"]+ )\\Q" + cssName + "\\E(?:| [^\"]+)\"");
+      Pattern cssPattern = Pattern.compile("class=\" *(?:|[^\"]+ )\\Q" + cssName + "\\E *(?:| [^\"]+) *\"");
       for (int i = 0; i < myFileArray.length; i++)
       {
          String contents = FileIoUtil.readTextFile(myFileArray[i]);
@@ -213,10 +213,8 @@ public class CssChanger
    {
       String cssFileText = FileIoUtil.readTextFile(cssFile);
       Set<String> fullCssNames = new HashSet<>();
-      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("\\{.*?\\}", Pattern.DOTALL), "\n");
-      //remove all text which also removes all hex colors
-      cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
-      //remove comments
+      cssFileText = cssFileText.replaceAll("/\\*[\\s\\S]*?\\*/", "");  //remove all comments
+      cssFileText = cssFileText.replaceAll("\\{[\\s\\S]*?\\}", "");  //remove all bodies
       String[] cssSplit = cssFileText.split("[,\n]");
       for (String splitItem : cssSplit)
       {
@@ -224,8 +222,8 @@ public class CssChanger
          if (splitItem.isEmpty()) continue;  //if there was multiple white space etc in a row
          for (String nameItem : cssNameList)
          {
-            if (Pattern.compile("[.#]" + nameItem.trim() + "[^a-zA-Z0-9_-]").matcher(splitItem).find()
-                || Pattern.compile("[.#]" + nameItem.trim() + '$').matcher(splitItem).find())
+            if (Pattern.compile("\\." + nameItem.trim() + "[^a-zA-Z0-9_-]").matcher(splitItem).find()
+                || Pattern.compile("\\." + nameItem.trim() + '$').matcher(splitItem).find())
             {
                fullCssNames.add(splitItem);
                break;

@@ -26,7 +26,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         CssChanger.combineClasses();
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -65,17 +65,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replaceFirst("<body>\n<table>\n(<tr>\n" +
-                 "<td class=\"sites-layout-sidebar-left\">\n" +
-                 "<script type=\"text/javascript\" src=\"(?:\\.\\./)*themes/sideBar\\.js\"></script>\n" +
-                 "</td>\n" +
-                 "<td>\n)" +
-                 "<div style=\"margin-left: 10px;\">\n([\\s\\S]+)</div>\n" +
-                 "</td>\n" +
-                 "</tr>\n" +
-                 "</table>\n", "<body>\n<table>\n<tbody>\n$1$2</td>\n" +
-                 "</tr>\n</tbody>\n" +
-                 "</table>\n");
+         newContents = newContents.replace(" grey-table-border", "");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
