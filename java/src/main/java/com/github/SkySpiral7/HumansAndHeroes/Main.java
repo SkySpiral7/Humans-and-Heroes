@@ -2,8 +2,6 @@ package com.github.SkySpiral7.HumansAndHeroes;
 
 import com.github.SkySpiral7.Java.pojo.FileGatherer;
 import com.github.SkySpiral7.Java.util.FileIoUtil;
-import com.github.SkySpiral7.Java.util.StringUtil;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,8 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Excuse the mess: I wrote this a long time ago.

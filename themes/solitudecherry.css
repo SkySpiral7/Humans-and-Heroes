@@ -38,10 +38,10 @@ and create classes for styles that are used more than once (even if small)
 
 
 body {
-   padding: 0;
-   margin: 0;
    background: url(bg-top.gif) top repeat-x;
    line-height: 1.5;
+   margin: 0;
+   padding: 0;
 }
 
 .sites-sidebar-nav li {
@@ -50,12 +50,12 @@ body {
 }
 
 .sites-sidebar-nav .expander {
-   float: left;
-   width: 11px;
-   height: 11px;
-   padding: 0 2px;
-   margin: 1px 0 0 4px;
    background: url(../images/arrow-down.gif) no-repeat;
+   float: left;
+   height: 11px;
+   margin: 1px 0 0 4px;
+   padding: 0 2px;
+   width: 11px;
 }
 
 /*If you want to replace the arrows with unicode:
@@ -86,16 +86,16 @@ ol.goog-toc {
 }
 
 div.goog-toc {
-   width: auto;
    background: url(bg-pattern.gif) repeat;
    border: 1px solid grey;
+   width: auto;
 }
 
 div.goog-toc p {
-   padding: 3px 5px 0;
-   margin: 0;
-   font-weight: bold;
    font-size: 16px;
+   font-weight: bold;
+   margin: 0;
+   padding: 3px 5px 0;
 }
 
 td {
@@ -162,8 +162,8 @@ h3 {
 }
 
 .table-name {
-   margin: 10px 0 10px 0;
    color: darkblue;
+   margin: 10px 0 10px 0;
 }
 
 td {
@@ -174,8 +174,8 @@ td {
 a:link, a:visited {
    /*Need to also have :visited so that the browser won't blue shift the color*/
    color: darkred;
-   text-decoration: none;
    font-weight: bold;
+   text-decoration: none;
 }
 
 a:hover,a:active {
@@ -194,9 +194,9 @@ ul li {
 }
 
 body .sites-layout-sidebar-left {
+   background: url(bg-pattern.gif) repeat;
    padding: 0;
    width: 170px;
-   background: url(bg-pattern.gif) repeat;
 }
 
 .sites-layout-sidebar-left .sites-embed {
@@ -205,8 +205,8 @@ body .sites-layout-sidebar-left {
 }
 
 body .sites-layout-sidebar-left h2 {
-   font-size: 16px;
    border-bottom: 1px dotted darkred;
+   font-size: 16px;
 }
 
 .sites-sidebar-nav .expander {
@@ -214,16 +214,16 @@ body .sites-layout-sidebar-left h2 {
 }
 
 .sites-sidebar-nav .current-bg {
-   color: white;
    background-color: darkred;
+   color: white;
    font-weight: bold;
 }
 
 th {
-   text-align: center;
    background: url(bg-pattern.gif) repeat;
-   vertical-align: top;
    padding: 3px 5px 5px;
+   text-align: center;
+   vertical-align: top;
 }
 
 .sites-sidebar-nav li.topLevel {
@@ -240,8 +240,8 @@ body {
 }
 
 body > table {
-   margin: 25px;
    border-spacing: 0;
+   margin: 25px;
 }
 
 .table-alt-rows td {
@@ -253,23 +253,23 @@ body > table {
 }
 
 .stamp-top, .stamp-middle, .stamp-bottom {
-   text-align: center;
-   font-weight: bold;
-   width: 150px;
    border: solid black 5px;
+   font-weight: bold;
+   text-align: center;
+   width: 150px;
 }
 .stamp-top {
-   font-size: 16px;
-   border-bottom-width: 0;
    background-color: darkred;
+   border-bottom-width: 0;
    color: white;
+   font-size: 16px;
 }
 .stamp-middle {
    font-size: 32px;
 }
 .stamp-bottom {
-   font-size: 16px;
    border-top-width: 0;
+   font-size: 16px;
 }
 
 .character-sheet-defense-white > td, .character-sheet-defense-green > td {
@@ -280,63 +280,63 @@ body > table {
 .character-sheet-defense-green > td {
    background-color: palegreen;
 }
-.character-sheet-defense-green > td:nth-child(odd), .character-sheet-defense-white > td:nth-child(odd){
+.character-sheet-defense-green > td:nth-child(odd), .character-sheet-defense-white > td:nth-child(odd) {
    font-weight: bold;
 }
 .character-sheet-offense-row {
-   width: 50%;
    padding: 5px;
    text-align: center;
+   width: 50%;
 }
 .character-sheet-initiative {
-   padding: 5px 0;
-   text-align: center;
-   font-weight: bold;
    background-color: palegreen;
    font-size: 24px;
+   font-weight: bold;
+   padding: 5px 0;
+   text-align: center;
 }
 .character-sheet-light-green {
-   padding: 5px;
    background-color: palegreen;
+   padding: 5px;
 }
 .character-sheet-hero-name, .character-sheet-power-level, .character-sheet-ability-label, .character-sheet-section-label, .character-sheet-point-totals, .generated-class-41, .generated-class-46 {
    background-color: darkgreen;
    color: white;
-   padding: 10px;
    font-weight: bold;
+   padding: 10px;
 }
 .character-sheet-hero-name {
-   width: 85%;
    font-size: 32px;
+   width: 85%;
 }
 .character-sheet-power-level {
-   width: 15%;
-   text-align: center;
    font-size: 28px;
+   text-align: center;
+   width: 15%;
 }
 .character-sheet-section-label {
    font-size: 28px;
 }
 .character-sheet-ability-label {
-   width: 100px;
    height: 50px;
-   vertical-align: middle;
    text-align: center;
+   vertical-align: middle;
+   width: 100px;
 }
 .character-sheet-ability-value {
-   width: 100px;
-   height: 80px;
-   vertical-align: middle;
    background-color: palegreen;
-   text-align: center;
-   font-weight: bold;
    font-size: 28px;
+   font-weight: bold;
+   height: 80px;
+   text-align: center;
+   vertical-align: middle;
+   width: 100px;
 }
 .character-sheet-point-totals {
-   text-align: center;
-   font-size: 28px;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
+   font-size: 28px;
+   text-align: center;
 }
 
 .grey-table-border,.grey-table-border th,.grey-table-border td {
@@ -349,10 +349,10 @@ body > table {
 }
 
 .right-panel {
-   width: 450px;
    float: right;
    margin-left: 10px;
    margin-top: 16px;
+   width: 450px;
 }
 
 .red-panel,.green-panel {
@@ -360,9 +360,9 @@ body > table {
 }
 
 .red-panel > div:nth-child(odd),.green-panel > div:nth-child(odd) {
+   color: white;
    font-weight: bold;
    padding: 5px;
-   color: white;
 }
 
 .red-panel > div:nth-child(even),.green-panel > div:nth-child(even) {
@@ -386,8 +386,8 @@ body > table {
 }
 
 .example {
-   margin-left: 20px;
    font-style: italic;
+   margin-left: 20px;
 }
 
 .info-banner {
@@ -423,33 +423,33 @@ body > table {
 }
 
 .generated-class-41 {
-   width: 40%;
    font-size: 32px;
+   width: 40%;
 }
 
 .generated-class-46 {
-   width: 45%;
-   text-align: center;
    font-size: 32px;
+   text-align: center;
    vertical-align: middle;
+   width: 45%;
 }
 
 .generated-class-48 {
+   border: solid 5px darkgreen;
    display: block;
    text-align: center;
-   border: solid 5px darkgreen;
 }
 
 .generated-class-55 {
-   width: 361px;
-   margin: 0 auto;
    border: solid medium darkred;
+   margin: 0 auto;
    padding: 10px 10px 5px 5px;
+   width: 361px;
 }
 
 .generated-class-68 {
-   vertical-align: middle;
    border-style: solid;
    border-width: 5px;
+   vertical-align: middle;
    width: 150px;
 }
