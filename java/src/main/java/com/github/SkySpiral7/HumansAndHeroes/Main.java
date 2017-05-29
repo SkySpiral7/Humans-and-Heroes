@@ -65,7 +65,8 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replace("generated-class-48", "generated-class-7");
+         newContents = newContents.replaceFirst("<tr>\n" +
+                 "<tr>", "<tr>");
 
          if (!newContents.equals(originalContents)) {
             FileIoUtil.writeToFile(currentFile, newContents);
