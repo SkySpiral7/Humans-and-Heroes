@@ -20,9 +20,7 @@ public class SiteMapCreator
    {
       final List<File> foldersToIgnore = Arrays.asList(new File("../.git"), new File("../java"),
             new File("../secret-origins/javascript"), new File("../secret-origins/xml"));
-      final List<Path> filesToIgnore = Stream.of("index.html", "site-map.html",
-            "powers/effects/shell power.html", "powers/effects/godhood/shell godhood power.html",
-            "powers/effects/sample-powers/shell example power.html", "powers/effects/sample-powers/Features/shell feature.html")
+      final List<Path> filesToIgnore = Stream.of("index.html", "site-map.html")
                                              .map(input -> new File("../" + input).toPath().toAbsolutePath().normalize())
                                              .collect(Collectors.toList());
       final int rootPathOffset = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath().length() + 1;

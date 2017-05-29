@@ -88,11 +88,11 @@ function allDataInfo(dataSource)
    }
     return output;
 }
-/**Prints the result of allDataInfo in the code box.
+/**Prints the result of allDataInfo in the code-box.
 See allDataInfo for more info*/
 function allDataInfoToCodeBox(dataSource)
 {
-    document.getElementById('code box').value = JSON.stringify(allDataInfo(Data.Skill));
+    document.getElementById('code-box').value = JSON.stringify(allDataInfo(Data.Skill));
 }
 
 /**This is NOT a normal bling! It only allows getting an element by id (starting with '#'). Nothing is returned in any other case (undefined not null).*/
@@ -100,7 +100,7 @@ function allDataInfoToCodeBox(dataSource)
 //I could use $('#transcendence') over document.getElementById('transcendence'); etc but why bother: the latter is more clear
 //I only use this for debugging
 
-SelectUtil.setText('saveType', 'JSON');  //not needed for Loader but when I test I always use json
+SelectUtil.setText('save-type', 'JSON');  //not needed for Loader but when I test I always use json
 var Loader = {};
 var errorList = [];  //intentionally public in order to clear it (without Loader) or to read the exact message if desired
 Loader.resetData=function()
@@ -111,7 +111,7 @@ Loader.resetData=function()
 };
 Loader.sendData=function(jsonData)
 {
-    document.getElementById('code box').value = JSON.stringify(jsonData);  //to simulate user input
+    document.getElementById('code-box').value = JSON.stringify(jsonData);  //to simulate user input
     Main.loadFromTextArea();
 };
 var Messages = {};

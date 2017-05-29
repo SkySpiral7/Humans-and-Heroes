@@ -26,9 +26,9 @@ function DefenseList()
        total = 0;
       for (var i = 0; i < defenseArray.length; i++)  //the array doesn't include toughness
       {
-          document.getElementById(Data.Defense.names[i]+' start').innerHTML = defenseArray[i].getAbilityValue();
+          document.getElementById(Data.Defense.names[i]+'-start').innerHTML = defenseArray[i].getAbilityValue();
           //input is set by user and is never out of date
-          document.getElementById(Data.Defense.names[i]+' final').innerHTML = defenseArray[i].getTotalBonus();
+          document.getElementById(Data.Defense.names[i]+'-final').innerHTML = defenseArray[i].getTotalBonus();
           total+=defenseArray[i].getRank();  //cost is 1:1
       }
        this.calculateToughness();  //split off because it is involved
@@ -97,8 +97,8 @@ function DefenseList()
 function DefenseObject(defenseName)
 {
     var defenseValue = 0;
-    /**Onchange function for changing the defense input*/
-    this.change=function(){CommonsLibrary.change.call(this, this.set, (defenseName+' input'), Main.defenseSection, false);};
+    /**Onchange function for changing the defense-input*/
+    this.change=function(){CommonsLibrary.change.call(this, this.set, (defenseName+'-input'), Main.defenseSection, false);};
     this.getRank=function(){return defenseValue;};
    /**Call this to get the initial defense value. The ability name and zeroed value is not saved.
    It asks Data.Defense for name and abilitySection for the value each time.
@@ -115,6 +115,6 @@ function DefenseObject(defenseName)
    /**Validates and sets this defense to the value given. Because there is no generate the document's value must also be set here.*/
    this.set=function(valueGiven)
    {
-       document.getElementById(defenseName+' input').value=defenseValue=sanitizeNumber(valueGiven, 0, 0);
+       document.getElementById(defenseName+'-input').value=defenseValue=sanitizeNumber(valueGiven, 0, 0);
    };
 }

@@ -24,11 +24,11 @@ public class DeadLinkDetector
       for (final File currentFile : Main.getAllHtmlFiles())
       {
          System.out.print("Looking at ");
-         Main.printFileOutput(currentFile);
+         Main.printFilePath(currentFile);
          readLinks(currentFile);
       }
       System.out.print("Looking at ");
-      Main.printFileOutput(Main.sideBar);
+      Main.printFilePath(Main.sideBar);
       readSideBar();
       if(!hasDeadLinks) System.out.println("No dead links.");
    }

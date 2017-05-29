@@ -1,17 +1,17 @@
 (function(){
 //include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantage list', 'advantage row', 'CommonsLibrary',
-    'conversions', 'defenses', 'modifier list', 'modifier row', 'power list', 'power row', 'prototypes', 'SelectUtil',
-    'skill list', 'skill row', 'Version'];
+var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
+    'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
+    'skillList', 'skillRow', 'Version'];
 //the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
-   var runnerPath = '../../../Miscellaneous/src/javascript/test runner';  //only works locally
-   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantage list',
-      'test/advantage row', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
-      'test/main', 'test/modifier list', 'test/modifier row', 'test/power list', 'test/power row',
-      'test/SelectUtil', 'test/skill list', 'test/skill row', 'test/Version',
-      'test/test tools']);
+   var runnerPath = '../../../Miscellaneous/src/main/javascript/testRunner';  //only works locally
+   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
+      'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
+      'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
+      'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
+      'test/testTools']);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
@@ -45,10 +45,10 @@ function MainObject()
     this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
     this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
     this.getTranscendence=function(){return transcendence;};
-    /**This sets the code box with the saved text.*/
-    this.saveToTextArea=function(){document.getElementById('code box').value = this.saveAsString();};
-    /**This loads the text text within the code box.*/
-    this.loadFromTextArea=function(){this.loadFromString(document.getElementById('code box').value);};
+    /**This sets the code-box with the saved text.*/
+    this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
+    /**This loads the text text within the code-box.*/
+    this.loadFromTextArea=function(){this.loadFromString(document.getElementById('code-box').value);};
     /**Set a replacement function that is called in place of the normal user messenger.*/
     this.setMockMessenger=function(mockedFun){mockMessenger = mockedFun;};
     /**Restores the default function for messaging the user*/
@@ -82,6 +82,7 @@ function MainObject()
          }
       }
        document.getElementById('ruleset').value = activeRuleset.toString();
+       //TODO: make transcendence-span be visibility:hidden when possible
    };
    /**Onchange function for changing the transcendence. Sets the document values as needed*/
    this.changeTranscendence=function()
@@ -95,27 +96,27 @@ function MainObject()
    };
 
    //public functions section
-   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The code box and file selectors are not touched.*/
+   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The code-box and file selectors are not touched.*/
    this.clear=function()
    {
-       document.getElementById('HeroName').value = 'Hero Name';
+       document.getElementById('hero-name').value = 'Hero Name';
        document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
        this.abilitySection.clear();
-       document.getElementById('imgFilePath').value='';
+       document.getElementById('img-file-path').value='';
        this.loadImageFromPath();  //after setting the images to blank this will reset the image
        this.powerSection.clear();
        this.equipmentSection.clear();
        this.advantageSection.clear();
        this.skillSection.clear();
        this.defenseSection.clear();
-       document.getElementById('bio box').value = 'Complications, background and other information';
-       //do not change ruleset and do not change the code box (just in case the user needed that)
+       document.getElementById('bio-box').value = 'Complications, background and other information';
+       //do not change ruleset and do not change the code-box (just in case the user needed that)
        //I also decided not to touch either file chooser so that the user can easily select from same folder again
    };
    /**Loads the file's data*/
    this.loadFile=function()
    {
-       var filePath=document.getElementById('fileChooser').files[0];
+       var filePath=document.getElementById('file-chooser').files[0];
        if(undefined === filePath || null === filePath) return;  //no file to load
        var oFReader=new FileReader();  //reference: https://developer.mozilla.org/en-US/docs/DOM/FileReader
        oFReader.readAsText(filePath);
@@ -124,18 +125,18 @@ function MainObject()
    /**Loads the image file*/
    this.loadImageFromFile=function()
    {
-       var filePath=document.getElementById('imgFileChooser').files[0];  //there's only ever 1 file
+       var filePath=document.getElementById('img-file-chooser').files[0];  //there's only ever 1 file
        if(undefined === filePath || null === filePath) return;  //no file to load
        var oFReader=new FileReader();  //reference: https://developer.mozilla.org/en-US/docs/DOM/FileReader
        oFReader.readAsDataURL(filePath);
-       oFReader.onload=function(oFREvent){document.getElementById('characterImage').src = oFREvent.target.result;};
+       oFReader.onload=function(oFREvent){document.getElementById('character-image').src = oFREvent.target.result;};
    };
    /**Loads the image path. If blank the image path is reset*/
    this.loadImageFromPath=function()
    {
-       if(document.getElementById('imgFilePath').value === '')  //the reason for this is because the user doesn't know this default image path
-          document.getElementById('imgFilePath').value = '../images/Sirocco.jpg';
-       document.getElementById('characterImage').src = document.getElementById('imgFilePath').value;
+       if(document.getElementById('img-file-path').value === '')  //the reason for this is because the user doesn't know this default image path
+          document.getElementById('img-file-path').value = '../images/Sirocco.jpg';
+       document.getElementById('character-image').src = document.getElementById('img-file-path').value;
    };
    /**Gets the total protection value of the sections power and equipment.*/
    this.getProtectionTotal=function()
@@ -145,27 +146,27 @@ function MainObject()
        if(this.powerSection.getProtectionRankTotal() > this.equipmentSection.getProtectionRankTotal()) return this.powerSection.getProtectionRankTotal();
        return this.equipmentSection.getProtectionRankTotal();
    };
-   /**This method passes a message to the user in some way (currently uses code box).
+   /**This method passes a message to the user in some way (currently uses code-box).
    It is abstracted for mocking and so it can easily be changed later.
    errorCode only exists to be sent to the mockMessenger*/
    this.messageUser=function(errorCode, messsageSent)
    {
        if(mockMessenger !== undefined){mockMessenger(errorCode, messsageSent); return;}
-       document.getElementById('code box').value += messsageSent + '\n';
+       document.getElementById('code-box').value += messsageSent + '\n';
    };
-   /**Onclick event for the saveToFileLink anchor link only.
+   /**Onclick event for the save-to-file-link anchor link only.
    It changes the a tag so that the link downloads the document as a saved file.*/
    this.saveToFile=function()
    {
-       var link = document.getElementById('saveToFileLink');
-      if (document.getElementById('saveType').value === 'JSON')
+       var link = document.getElementById('save-to-file-link');
+      if (document.getElementById('save-type').value === 'JSON')
       {
-          link.download = document.getElementById('HeroName').value+'.json';
+          link.download = document.getElementById('hero-name').value+'.json';
           link.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(this.saveAsString());
       }
       else
       {
-          link.download = document.getElementById('HeroName').value+'.xml';
+          link.download = document.getElementById('hero-name').value+'.xml';
           link.href = 'data:application/xml;charset=utf-8,'+encodeURIComponent(this.saveAsString());
       }
        //encodeURIComponent is called to convert end lines
@@ -196,8 +197,8 @@ function MainObject()
       if(this.advantageSection.isUsingPettyRules())
           powerLevel = this.calculatePowerLevelLimitations(powerLevel);
 
-       document.getElementById('power level').innerHTML = powerLevel;
-       document.getElementById('grand total max').innerHTML = (powerLevel*15);
+       document.getElementById('power-level').innerHTML = powerLevel;
+       document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
       if (activeRuleset.major > 1)
       {
           transcendence = Math.floor(powerLevel/20);  //gain a transcendence every 20 PL
@@ -269,7 +270,7 @@ function MainObject()
        //TODO: doesn't include skills like Swords
        //TODO: (v1.x) if Improvised Weapon advantage then use Unarmed damage
        allOffensiveRows+='</table>';
-       document.getElementById('offensive section').innerHTML = allOffensiveRows;
+       document.getElementById('offensive-section').innerHTML = allOffensiveRows;
        //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
    };
    /**Updates the document for transcendence field and might regenerate powers and advantages.*/
@@ -329,21 +330,21 @@ function MainObject()
    /**This calculates the grand total based on each section's total and sets the document.*/
    this.calculateTotal=function()
    {
-       characterPointsSpent=0;
-       document.getElementById('ability total').innerHTML=this.abilitySection.getTotal();
-       characterPointsSpent+=this.abilitySection.getTotal();
-       document.getElementById('power total').innerHTML=this.powerSection.getTotal();
-       characterPointsSpent+=this.powerSection.getTotal();
-       document.getElementById('equipment points used').innerHTML=this.equipmentSection.getTotal();
-       document.getElementById('equipment points max').innerHTML=this.advantageSection.getEquipmentMaxTotal();
+       characterPointsSpent = 0;
+       document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
+       characterPointsSpent += this.abilitySection.getTotal();
+       document.getElementById('power-total').innerHTML = this.powerSection.getTotal();
+       characterPointsSpent += this.powerSection.getTotal();
+       document.getElementById('equipment-points-used').innerHTML = this.equipmentSection.getTotal();
+       document.getElementById('equipment-points-max').innerHTML = this.advantageSection.getEquipmentMaxTotal();
        //the character points spent for equipment points is accounted for in the advantage section
-       document.getElementById('advantage total').innerHTML=this.advantageSection.getTotal();
-       characterPointsSpent+=this.advantageSection.getTotal();
-       document.getElementById('skill total').innerHTML=this.skillSection.getTotal();
-       characterPointsSpent+=this.skillSection.getTotal();
-       document.getElementById('defense total').innerHTML=this.defenseSection.getTotal();
-       characterPointsSpent+=this.defenseSection.getTotal();
-       document.getElementById('grand total used').innerHTML=characterPointsSpent;
+       document.getElementById('advantage-total').innerHTML = this.advantageSection.getTotal();
+       characterPointsSpent += this.advantageSection.getTotal();
+       document.getElementById('skill-total').innerHTML = this.skillSection.getTotal();
+       characterPointsSpent += this.skillSection.getTotal();
+       document.getElementById('defense-total').innerHTML = this.defenseSection.getTotal();
+       characterPointsSpent += this.defenseSection.getTotal();
+       document.getElementById('grand-total-used').innerHTML = characterPointsSpent;
    };
    /**Given an older json document, this function converts it to the newest document format.*/
    this.convertDocument=function(jsonDoc)
@@ -410,7 +411,7 @@ function MainObject()
    /**This function loads the json document.*/
    this.load=function(jsonDoc)
    {
-      document.getElementById('code box').value = '';
+      document.getElementById('code-box').value = '';
       location.hash = '';  //clear out so that it may change later
 
       this.determineCompatibilityIssues(jsonDoc);
@@ -421,15 +422,15 @@ function MainObject()
       document.getElementById('ruleset').value = activeRuleset.toString();
       //clear does not change activeRuleset
       this.clear();  //must clear out all other data first so not to have any remain
-      document.getElementById('HeroName').value = jsonDoc.Hero.name;
+      document.getElementById('hero-name').value = jsonDoc.Hero.name;
       if (activeRuleset.major > 1)
       {
          transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
          document.getElementById('transcendence').value = transcendence;
       }
-      document.getElementById('imgFilePath').value = jsonDoc.Hero.image;
+      document.getElementById('img-file-path').value = jsonDoc.Hero.image;
       this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
-      document.getElementById('bio box').value = jsonDoc.Information;
+      document.getElementById('bio-box').value = jsonDoc.Information;
       this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
 
       this.powerSection.load(jsonDoc.Powers);
@@ -438,9 +439,9 @@ function MainObject()
       this.advantageSection.load(jsonDoc.Advantages);
       this.skillSection.load(jsonDoc.Skills);
       this.defenseSection.load(jsonDoc.Defenses);
-      if ('' !== document.getElementById('code box').value)
+      if ('' !== document.getElementById('code-box').value)
       {
-         location.hash = '#code box';  //scroll to the code box if there's an error
+         location.hash = '#code-box';  //scroll to the code-box if there's an error
          alert('An error has occurred, see text box for details.');  //won't trigger in test because messageUser won't write to box
       }
       else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
@@ -458,14 +459,14 @@ function MainObject()
       }
       catch(e)
       {
-         document.getElementById('code box').value = '';
+         document.getElementById('code-box').value = '';
          Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
          //yeah I know the error message is completely unhelpful but there's nothing more I can do
 
          if (undefined === mockMessenger)
          {
             location.hash = '';  //clear out then set it in order to force scroll
-            location.hash = '#code box';  //scroll to the code box
+            location.hash = '#code-box';  //scroll to the code-box
             alert('Invalid document, see text box for details.');
          }
          throw e;  //stop the process and cause a console.error
@@ -496,11 +497,11 @@ function MainObject()
           //skeleton so I don't need to create these later
        jsonDoc.ruleset = activeRuleset.toString();
        jsonDoc.version = latestSchemaVersion;
-       jsonDoc.Hero.name = document.getElementById('HeroName').value;
+       jsonDoc.Hero.name = document.getElementById('hero-name').value;
        if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
-       jsonDoc.Hero.image = document.getElementById('imgFilePath').value;
-       //TODO: use jsonDoc.Hero.image = document.getElementById('characterImage').src;
-       jsonDoc.Information = document.getElementById('bio box').value;
+       jsonDoc.Hero.image = document.getElementById('img-file-path').value;
+       //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
+       jsonDoc.Information = document.getElementById('bio-box').value;
        jsonDoc.Abilities = this.abilitySection.save();
        jsonDoc.Powers = this.powerSection.save();
        jsonDoc.Equipment = this.equipmentSection.save();
@@ -514,7 +515,7 @@ function MainObject()
    {
        var jsonDoc = this.save();
        var fileString;
-       if(document.getElementById('saveType').value === 'JSON') fileString = JSON.stringify(jsonDoc);
+       if(document.getElementById('save-type').value === 'JSON') fileString = JSON.stringify(jsonDoc);
           //in this case value returns the selected text because the html attribute named value is not defined
        else fileString = jsonToXml(jsonDoc);
 
