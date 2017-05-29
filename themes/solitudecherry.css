@@ -107,6 +107,14 @@ ul li {
    list-style-type: square;
 }
 
+ol.legal-document > li {
+   list-style-type: decimal;
+}
+
+ol.legal-document > li > ol > li {
+   list-style-type: lower-alpha;
+}
+
 .sites-sidebar-nav li {
    list-style: none;
    list-style-image: none;
@@ -429,10 +437,6 @@ th {
    width: 150px;
 }
 
-.generated-class-10 {
-   padding: 5px 50px;
-}
-
 .generated-class-11 {
    border-spacing: 5px;
    margin: 0px 0px 10px 0px;
@@ -476,14 +480,6 @@ th {
 .generated-class-19 {
    margin: 0px auto 0px auto;
    width: 400px;
-}
-
-.generated-class-20 {
-   padding: 5px 0px;
-}
-
-.generated-class-21 {
-   padding: 5px 30px;
 }
 
 .table-alt-rows .generated-class-22 {
