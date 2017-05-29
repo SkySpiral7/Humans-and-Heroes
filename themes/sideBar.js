@@ -421,8 +421,7 @@ output+='<input type="text" value="" width="100%" id="searchBar" />\n';
 output+='<input type="submit" value="Search" />\n';
 output+='</form>\n';
 
-output+='<div class="sites-embed">\n';
-output+='<div class="sites-embed-content sites-sidebar-nav"><ul>\n';
+output+='<div class="sites-sidebar-nav"><ul>\n';
 
 function sideBarCreation(entry, depth)
 {
@@ -478,10 +477,9 @@ for (var i = 0; i < navigationJson.length; ++i)
    sideBarCreation(navigationJson[i], 0);
 }
 
-output+='</ul></div>\n';
+output+='</ul>\n';
 output+='</div>\n';
-output+='\n';
-output+='<div class="sites-embed"><hr/><div class="sites-embed-content sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
+output+='<hr/><div class="sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
 output+='COMICS<br />\n';
 output+='GROUP\n';
 output+='</div>\n';
@@ -490,10 +488,8 @@ output+='35&cent;\n';
 output+='</div>\n';
 output+='<div class="stamp-bottom" title="Send me an email!">\n';
 output+='<a href="mailto:rworcest@g.emporia.edu">CONTACT ME</a>\n';
-output+='</div></div></div>\n';
-output+='<div class="sites-embed">\n';
-output+='<h2>External Links</h2>\n';
-output+='<div class="sites-embed-content sites-embed-content-sidebar-textbox">\n';
+output+='</div></div>\n';
+output+='<h2>M&amp;M External Links</h2>\n';
 output+='<a href="http://www.greenronin.com/">Green Ronin</a><br />\n';
 output+='<a href="http://mutantsandmasterminds.com/">Mutants &amp; Masterminds.com</a><br />\n';
 output+='<a href="http://www.atomicthinktank.com/index.php">Mutants &amp; Masterminds Forum</a><br />\n';
@@ -505,12 +501,10 @@ output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=41685">Cond
 output+='<a href="http://stornart.com/">Hero Art by Storn Cook</a><br />\n';
 output+='<a href="http://opengameart.org/">Open Game Art</a><br />\n';
 output+='<a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>\n';
-output+='</div></div>\n';
 output+='<hr/>\n';
 output+='<div class="sites-embed-content-sidebar-textbox">\n';
 output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
 output+='</div>\n';
-output+='\n';
 
 document.write(output);
 })();

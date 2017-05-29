@@ -31,6 +31,8 @@ left side bar: font-size: 12px;
 
 /* TODO: more css clean up
 Look into making the character sheet a single top level class. Ignore the point counter at first.
+Look into single class for TOC
+Look into single class for side bar (except 'closed')
 Write a script to inline classes that are only used once
 and create classes for styles that are used more than once (even if small)
 */
@@ -41,82 +43,6 @@ body {
    line-height: 1.5;
    margin: 0;
    padding: 15px 0 0 0;
-}
-
-.sites-sidebar-nav li {
-   list-style: none;
-   list-style-image: none;
-}
-
-.sites-sidebar-nav .expander {
-   background: url(../images/arrow-down.gif) no-repeat;
-   float: left;
-   height: 11px;
-   margin: 1px 0 0 4px;
-   padding: 0 2px;
-   width: 11px;
-}
-
-/*If you want to replace the arrows with unicode:
-http://stackoverflow.com/questions/2701192/ascii-character-for-up-down-triangle-arrow-to-display-in-html/6325076#6325076
-but you'd have to mess with font size and getting them to fit on one line
-
-U+25B6 (Black right-pointing triangle ▶)
-U+25BC (Black down-pointing triangle ▼)
-U+25B7 (White right-pointing triangle ▷)
-U+25BD (White down-pointing triangle ▽)
-U+25B8 (Black right-pointing small triangle ▸)
-U+25BE (Black down-pointing small triangle ▾)
-U+25B9 (White right-pointing small triangle ▹)
-U+25BF (White down-pointing small triangle ▿)
-*/
-
-.sites-sidebar-nav .closed .expander {
-   background: url(../images/arrow-left.gif) no-repeat;
-}
-
-.goog-toc {
-   list-style: none;
-}
-
-ol.goog-toc {
-   margin-left: 10px;
-   padding-left: 0;
-}
-
-div.goog-toc {
-   background: url(bg-pattern.gif) repeat;
-   border: 1px solid grey;
-}
-
-div.goog-toc p {
-   font-size: 16px;
-   font-weight: bold;
-   margin: 0;
-   padding: 3px 5px 0;
-}
-
-div.sites-sidebar-nav {
-   border-bottom: 0;
-   padding-bottom: 0;
-}
-
-body .sites-sidebar-nav ul {
-   margin: 0;
-   padding: 0;
-}
-
-.sites-sidebar-nav .closed ul {
-   display: none;
-}
-
-.sites-embed-align-left-wrapping-on {
-   float: left;
-   margin: 5px 20px 5px 0;
-}
-
-.sites-embed-content-sidebar-textbox {
-   padding: 5px;
 }
 
 h1 {
@@ -156,6 +82,13 @@ h3 {
    margin: 10px 0 10px 0;
 }
 
+th {
+   background: url(bg-pattern.gif) repeat;
+   padding: 3px 5px 5px;
+   text-align: center;
+   vertical-align: top;
+}
+
 td {
    vertical-align: top;
 }
@@ -182,37 +115,56 @@ ul li {
    list-style-type: square;
 }
 
-body .sites-layout-sidebar-left {
-   background: url(bg-pattern.gif) repeat;
-   padding: 0;
-   width: 170px;
-}
-
-.sites-layout-sidebar-left .sites-embed {
-   font-size: 12px;
-   padding-bottom: 10px;
-}
-
-body .sites-layout-sidebar-left h2 {
-   border-bottom: 1px dotted darkred;
-   font-size: 16px;
+.sites-sidebar-nav li {
+   list-style: none;
+   list-style-image: none;
 }
 
 .sites-sidebar-nav .expander {
-   margin-top: 3px;
+   background: url(../images/arrow-down.gif) no-repeat;
+   float: left;
+   height: 11px;
+   margin: 3px 0 0 4px;
+   padding: 0 2px;
+   width: 11px;
+}
+
+/*If you want to replace the arrows with unicode:
+http://stackoverflow.com/questions/2701192/ascii-character-for-up-down-triangle-arrow-to-display-in-html/6325076#6325076
+but you'd have to mess with font size and getting them to fit on one line
+
+U+25B6 (Black right-pointing triangle ▶)
+U+25BC (Black down-pointing triangle ▼)
+U+25B7 (White right-pointing triangle ▷)
+U+25BD (White down-pointing triangle ▽)
+U+25B8 (Black right-pointing small triangle ▸)
+U+25BE (Black down-pointing small triangle ▾)
+U+25B9 (White right-pointing small triangle ▹)
+U+25BF (White down-pointing small triangle ▿)
+*/
+
+.sites-sidebar-nav .closed .expander {
+   background: url(../images/arrow-left.gif) no-repeat;
+}
+
+.sites-sidebar-nav {
+   border-bottom: 0;
+   padding-bottom: 0;
+}
+
+body .sites-sidebar-nav ul {
+   margin: 0;
+   padding: 0;
+}
+
+.sites-sidebar-nav .closed ul {
+   display: none;
 }
 
 .sites-sidebar-nav .current-bg {
    background-color: darkred;
    color: white;
    font-weight: bold;
-}
-
-th {
-   background: url(bg-pattern.gif) repeat;
-   padding: 3px 5px 5px;
-   text-align: center;
-   vertical-align: top;
 }
 
 .sites-sidebar-nav .topLevel {
@@ -223,7 +175,45 @@ th {
    border-top-width: 0;
 }
 
-/*Stuff I added*/
+ol.goog-toc {
+   list-style: none;
+   margin-left: 10px;
+   padding-left: 0;
+}
+
+div.goog-toc {
+   background: url(bg-pattern.gif) repeat;
+   border: 1px solid grey;
+}
+
+div.goog-toc p {
+   font-size: 16px;
+   font-weight: bold;
+   margin: 0;
+   padding: 3px 5px 0;
+}
+
+.sites-embed-align-left-wrapping-on {
+   float: left;
+   margin: 5px 20px 5px 0;
+}
+
+body .sites-layout-sidebar-left {
+   background: url(bg-pattern.gif) repeat;
+   padding: 0;
+   width: 170px;
+   font-size: 12px;
+}
+
+.sites-embed-content-sidebar-textbox {
+   padding: 5px;
+}
+
+body .sites-layout-sidebar-left h2 {
+   border-bottom: 1px dotted darkred;
+   font-size: 16px;
+}
+
 body > table {
    border-spacing: 0;
    margin: 16px;
