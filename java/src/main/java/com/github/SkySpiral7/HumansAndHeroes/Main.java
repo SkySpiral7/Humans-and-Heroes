@@ -26,7 +26,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         writeToFiles();
+         CssChanger.combineClasses();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))

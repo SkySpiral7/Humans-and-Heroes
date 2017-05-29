@@ -5,10 +5,10 @@ import com.github.SkySpiral7.Java.util.StringUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -38,7 +38,6 @@ public class CssChanger
             results.add(styleContents);
          }
       }
-      System.out.println("Done.\r\n");
       if (results.isEmpty())
       {
          System.out.println("None found.");
@@ -47,8 +46,7 @@ public class CssChanger
       System.out.println("Results:");
       List<String> sortedResults = new ArrayList<>(results);
       Collections.sort(sortedResults);
-      for (String style : sortedResults)
-      { System.out.println(style); }
+      sortedResults.forEach(System.out::println);
    }
 
    public static void combineClasses()
@@ -74,17 +72,17 @@ public class CssChanger
                strBuild.append(' ');
             }
          }
-         System.out.println(myFileArray[fileIndex].getAbsolutePath());
+         Main.printFilePath(myFileArray[fileIndex]);
          FileIoUtil.writeToFile(myFileArray[fileIndex], strBuild.toString());
       }
       System.out.println("Done.");
    }
 
-   public static void replaceLongStyles()
+   public static void replaceStyleWithClass()
    {
       File[] myFileArray = Main.getAllHtmlFiles();
       Set<String> styleSet = new HashSet<>();
-      final int offset = 77;
+      final int offset = 10;
 
       for (int fileIndex = 0; fileIndex < myFileArray.length; fileIndex++)
       {
@@ -94,65 +92,60 @@ public class CssChanger
          for (int i = 1; i < splitContents.length; i++)
          {
             //skipping the first because I am only interested in what comes after style=
-            String styleContents;  //only exists for readability
-            styleContents = splitContents[i].substring(1, splitContents[i].indexOf('"', 1));
+            String styleContents = splitContents[i].substring(1, splitContents[i].indexOf('"', 1));
             styleSet.add(styleContents);
          }
       }
-      System.out.println("Found them.");
       if (styleSet.isEmpty())
       {
          System.out.println("None found.");
          return;
       }
+      System.out.println("Found them.");
       List<String> styleList = new ArrayList<>(styleSet);
       //shortest first
-      Collections.sort(styleList, (a, b) -> a.length() - b.length());
-      for (Iterator<String> iterator = styleList.iterator(); iterator.hasNext(); )
-      {
-         String style = iterator.next();
-         if (!style.endsWith(";")) style += ";";
-         if (StringUtil.countCharOccurrences(style, ';') <= 3) iterator.remove();
-      }
-      System.out.println("Filtered them.");
+//      styleList.sort(Comparator.comparingInt(String::length));
+//      for (Iterator<String> iterator = styleList.iterator(); iterator.hasNext(); )
+//      {
+//         String style = iterator.next();
+//         if (!style.endsWith(";")) style += ";";
+//         if (StringUtil.countCharOccurrences(style, ';') <= 3) iterator.remove();
+//      }
+//      System.out.println("Filtered them.");
       for (int i = 0; i < styleList.size(); i++)
       {
-         String style = styleList.get(i);
-         if (!style.endsWith(";")) style += ";";
-         style = style.replaceAll("; *", ";\r\n    ").trim();
-         style = "    " + style + "\r\n";
+         String style = styleList.get(i).trim();
+         if (style.endsWith(";")) style = style.replaceFirst(";$", "");
          style = style.replaceAll(": *", ": ");
+         style = style.replaceAll("  +", " ");
 
-         StringBuilder newClass = new StringBuilder();
-         newClass.append("\r\n.generated-class-").append(i + offset).append(" {\r\n");
-         newClass.append(style);
-         newClass.append("}\r\n");
-         FileIoUtil.appendToFile(cssFile, newClass.toString());
+         final List<String> stringList = Arrays.asList(style.split("; ?"));
+         Collections.sort(stringList);
+         style = String.join(";\n   ", stringList);
+
+         style = "   " + style + ";\n";
+
+         final String newClass = "\n.generated-class-" + (i + offset) + " {\n" +
+                 style + "}\n";
+         FileIoUtil.appendToFile(cssFile, newClass);
       }
       System.out.println("Done generating.");
       for (int fileIndex = 0; fileIndex < myFileArray.length; fileIndex++)
       {
          String contents = FileIoUtil.readTextFile(myFileArray[fileIndex]);
-         StringBuilder strBuild;
-         String findText, replaceText;
          for (int i = 0; i < styleList.size(); i++)
          {
-            strBuild = new StringBuilder();
-            strBuild.append("style=\"").append(styleList.get(i)).append('"');
-            findText = strBuild.toString();
-
-            strBuild = new StringBuilder();
-            strBuild.append("class=\"generated-class-").append(i + offset).append('"');
-            replaceText = strBuild.toString();
+            final String findText = "style=\"" + styleList.get(i) + '"';
+            final String replaceText = "class=\"generated-class-" + (i + offset) + '"';
             contents = contents.replace(findText, replaceText);
          }
          FileIoUtil.writeToFile(myFileArray[fileIndex], contents);
-         System.out.println(myFileArray[fileIndex].getAbsolutePath());
+         Main.printFilePath(myFileArray[fileIndex]);
       }
       System.out.println("Done.");
    }
 
-   public static void compareAllCss()
+   public static void removedUnusedCss()
    {
       Set<String> allCssNames = getAllCssSelectors();
 
@@ -224,7 +217,7 @@ public class CssChanger
       //remove all text which also removes all hex colors
       cssFileText = StringUtil.regexReplaceAll(cssFileText, Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL), "");
       //remove comments
-      String[] cssSplit = cssFileText.split("[,\r\n]");  //split by comma and endline
+      String[] cssSplit = cssFileText.split("[,\n]");
       for (String splitItem : cssSplit)
       {
          splitItem = splitItem.trim();
@@ -240,7 +233,6 @@ public class CssChanger
          }
       }
       return fullCssNames;
-      //return Arrays.asList(fullCssNames.toArray(new String[0]));  //in order to return as a list
    }
 
    private static void blotOutCss(Collection<String> cssNameList)
