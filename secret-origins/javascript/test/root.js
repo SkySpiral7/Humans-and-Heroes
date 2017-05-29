@@ -103,7 +103,18 @@ TestSuite.test.unstableBubbleSort=function(isFirst)
    unstableBubbleSort(input, byStringLength);
 
    var expected = ['dog', 'cat', 'human'];
-   testResults.push({Expected: expected, Actual: input, Description: 'Always unstable'});
+   testResults.push({Expected: expected, Actual: input, Description: 'Does sort but unstable'});
+   } catch(e){testResults.push({Error: e, Description: 'unstableBubbleSort'});}
+
+   try {
+   var input = ['cat', 'human', 'dog'];
+   function noOpCompare(a,b) {
+      return 0;
+   }
+   unstableBubbleSort(input, noOpCompare);
+
+   var expected = ['human', 'dog', 'cat'];
+   testResults.push({Expected: expected, Actual: input, Description: 'Unstable with no op'});
    } catch(e){testResults.push({Error: e, Description: 'unstableBubbleSort'});}
 
    return TestRunner.displayResults('TestSuite.test.unstableBubbleSort', testResults, isFirst);
