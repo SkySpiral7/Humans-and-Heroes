@@ -508,7 +508,7 @@ output+='<a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>\n';
 output+='</div></div>\n';
 output+='<hr/>\n';
 output+='<div class="sites-embed-content-sidebar-textbox">\n';
-output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-68" />\n';
+output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
 output+='</div>\n';
 output+='\n';
 
