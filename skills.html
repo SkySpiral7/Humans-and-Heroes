@@ -183,7 +183,7 @@ The format for skill descriptions is given here. Items that do not apply are omi
 <tr>
 <td><a href="#TOC-CONTORTION">Contortion</a></td>
 <td>Agility</td>
-<td>Standard</td>
+<td>Full or Standard</td>
 <td>No</td>
 <td>None</td>
 </tr>
@@ -402,6 +402,7 @@ tumbling through obstacles, and so forth. The GM sets the DC. Success means you 
 means you do not, and two or more degrees of failure usually means you slip and end up prone (and may suffer additional
 effects, depending on the stunt). A successful acrobatic maneuver may provide you a circumstance bonus on certain
 follow-up actions, if the GM sees fit.</p>
+<p>Feats of flexibility fall under this category (such as doing the splits or touching your toes) and generally have very low DC.</p>
 <h3 id="TOC-STANDING">STANDING</h3>
 <p>This is a free action and can't be done untrained. You can make a DC 10 Acrobatics check to go from prone to standing as a free action
 rather than a move action. A failed check means you remain prone and can't be attempted again this turn.</p>
@@ -584,23 +585,67 @@ countering, power checks, or other uses.</p>
 option, meaning skill with unarmed strikes like punches and kicks. This bonus also applies to other forms of
 unarmed combat maneuvers such as grabbing and tripping.</p>
 <p>Here is a list of some common types of Close Combat: Unarmed, Improvised Weapons, Swords, Spears, Clubs, Daggers, Tonfa,
-Nunchaku, Sythe, Chainsaw, and Halberd.</p>
-
-
-<h1 style="background-color: red;">----------------------------------------------------------</h1>
-<h1 style="background-color: green;">Things below here haven't been looked at yet</h1>
-<h1 style="background-color: red;">----------------------------------------------------------</h1>
-
-
-<h2 id="TOC-Competition">Competition (Subtype is required)</h2>
+Nunchaku, Sythe, Chainsaw, and Halberd. Close Combat can be acquired for any close range attack and can't be used to
+make a ranged attack check. Likewise close ranges attacks exclusively use Close Combat to make attack checks.</p>
+<h2 id="TOC-COMPETITION">COMPETITION (Subtype is required)</h2>
 <span class="info-banner"><b>Ability</b>: Various &#8226; <b>Action</b>: Slow &#8226; <b>Trained Only?</b> Yes &#8226; <b>Type</b>: Various</span>
-
-<h2 id="TOC-Contortion">Contortion</h2>
-<span class="info-banner"><b>Ability</b>: Agility &#8226; <b>Action</b>: Standard &#8226; <b>Trained Only?</b> No</span>
-
-<h2 id="TOC-Craft">Craft (Subtype is required)</h2>
+<p>This is a catch-all skill used for all types of competition that have an objective winner such as board games, war games,
+actual war (eg being a military general), baseball, and archery. This skill is not used for contests with subjective winners
+(anything that requires judges to vote) such as
+a beauty contest, singing contest, or gymnastics for such things see <a href="#TOC-PERFORMANCE">Performance</a> instead.
+This skill can be used for single player games such as solitaire.</p>
+<p>Competition is trained only because a character needs to at least know the win condition and rules to be able to play.
+In the case of war a military leader needs to know how surrender and peace agreements work and what he is not allowed to
+do (as imposed by his home country or international agreement).
+The ability used and skill type depend on the competition chosen.
+Competition has little value to H&amp;H and is included for the sake of completeness and for character background.</p>
+<h2 id="TOC-CONTORTION">CONTORTION</h2>
+<span class="info-banner"><b>Ability</b>: Agility &#8226; <b>Action</b>: Full or Standard &#8226; <b>Trained Only?</b> No</span>
+<p>You can fix your body in and out of tight places such as escaping handcuffs or squeezing between 2 objects.</p>
+<h3 id="TOC-SQUEEZING">SQUEEZING</h3>
+<p>As a full turn action you can use Contortion to fit through a tight space
+wide enough for your head but too narrow for the width of your shoulders, or to reach through an opening wide enough for
+your hand, but too narrow for your arm. The base DC is 10 but may be higher depending on how tight it is. Success means you can move at your base speed -4.
+Failure means you are stuck where you are (either stuck inside or can't fit in). Moving is part of this full turn action
+therefore each movement requires a Contortion check.</p>
+<p>You can also contort your body without objects present if you'd like to fold yourself into a smaller shape for example.</p>
+<h3 id="TOC-ESCAPING">ESCAPING</h3>
+<p>As a standard action you can use Contortion to slip out of various restraints.</p>
+<h3 class="table-name">TABLE: ESCAPING DIFFICULTIES</h3>
+<table class="generated-class-3 table-alt-rows">
+<tbody>
+<tr>
+<th class="blue-top-th">DC</th>
+<th class="blue-top-th">SAMPLE RESTRAINT</th>
+</tr>
+<tr>
+<td>5</td>
+<td>Ropes</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Handcuffs</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Straightjacket</td>
+</tr>
+<tr>
+<td>5+rank</td>
+<td>Power Effect</td>
+</tr>
+<tr>
+<td>Opposed</td>
+<td>Grab</td>
+</tr>
+</tbody>
+</table>
+<h2 class="generated-class-17" id="TOC-CRAFT">CRAFT (Subtype is required)</h2>
 <span class="info-banner"><b>Ability</b>: Dexterity &#8226; <b>Action</b>: Slow &#8226; <b>Trained Only?</b> No &#8226; <b>Type</b>: Manipulation with required tools</span>
-
+<p>This skill is used to create a certain type of object such as metalworking, painting, calligraphy, sculpting, wood carving,
+or electronic construction. This can be used to both create and repair the appropriate objects (<a href="#TOC-TECHNOLOGY">Technology</a> can also repair electronics).
+However creating something original and functional should be left to <a href="#TOC-KNOWLEDGE">Knowledge</a> (creativity can
+be used for art so long as the invention's functionality isn't novel).
 <h2 id="TOC-DECEPTION">DECEPTION</h2>
 <span class="info-banner"><b>Ability</b>: Presence &#8226; <b>Action</b>: Standard &#8226; <b>Trained Only?</b> No &#8226; <b>Type</b>: Interaction</span>
 <p>Deception is the skill of getting others to believe what you want them to believe. It covers things like acting,
@@ -638,14 +683,19 @@ Deception (Int) to recognize deceptive techniques being used.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="TOC-AVOIDING-ATTENTION">AVOIDING ATTENTION</h3>
+<p>You can make a Deception check to blend into a crowd, hide guilt, or avoid suspicion. While disguise is used to prevent people
+from recognizing you this use of deception is used to prevent people from noticing you. For example while playing poker
+you can roll Deception to prevent others form reading your expression as easily (an opposed check against <a href="#TOC-INSIGHT">Insight</a>).</p>
 <h3 id="TOC-BLUFFING">BLUFFING</h3>
-<p>Make a Deception check to tell a believable lie or get someone do go along with you. Note that believability and risk
+<p>Make a Deception check to tell a believable lie or get someone to go along with you. Note that believability and risk
 are according to the character you are trying to deceive.</p>
 <p>A bluff is opposed by the target's <a href="#TOC-INSIGHT">Insight</a> check. Favorable and unfavorable circumstances
 weigh heavily on the outcome. Two circumstances can work against you: the deception is hard to believe, or what you ask
 goes against the target's self-interest, nature, or personality. Ordinary deception can only do so much, for anything
-beyond this you will need the powers of either <b>Mind Control</b> or <b>Mental Transform</b>. In the case of the last
-row on the above table even if telling the truth people might not believe you. However if the existence of super powers
+beyond this you will need the powers of either <a href="powers/effects/sample-powers/mind-control.html">Mind Control</a> or
+<a href="powers/effects/mental-transform-attack.html">Mental Transform</a>. In the case of something unbelievable,
+even if telling the truth people might not believe you. However if the existence of super powers
 is well known then there are many circumstances that might not seem so unbelievable.</p>
 <p class="example"><b>Example</b>: The sorcerer Tim leads a group of knights to
 a cave guarded by a terrible monster who has slain dozens of knights. Upon arrival Tim points to an ordinary looking bunny
@@ -657,32 +707,9 @@ demands some kind of risk, and the resistance check succeeds by 4 or less, then 
 the deception as prove reluctant to go along with it. If the target's <a href="#TOC-INSIGHT">Insight</a> check succeeds
 by 5 or more, he has seen through the deception, and would have refused even if it had not placed unusual demands on
 him (that is, even without the +4 modifier).</p>
-<h3 id="TOC-DISGUISE">DISGUISE</h3>
-<p>You can use makeup, costumes, and other props to change your appearance. Your Deception check result determines the
-effectiveness of the disguise, opposed by others' perception check results. The GM makes the Deception check secretly so
-you are not sure exactly how well your disguise holds up under scrutiny.</p>
-<p>Disguise is heavily dependent on circumstances: favorable ones include appropriate costuming and a subject resembling
-your normal appearance, while unfavorable circumstances include disguising yourself as a member of a different race or
-sex, or not having sufficient props (which can be up to a -2 modifier). If you are impersonating a particular
-individual, anyone who knows that individual gets a circumstance bonus to the <a href="#TOC-PERCEPTION">Perception</a>
-check: regular associates get a +1, while friends get a +2 and intimate loved ones a +4.</p>
-<p>Successfully acting like who you appear to be may also require a Deception check with a DC equal to the observer's <a
-href="#TOC-INSIGHT">Insight</a> check, modified by familiarity if the observer knows the subject well, as mentioned
-previously.</p>
-<p>A disguise normally requires at least 10 minutes of preparation. The GM makes Perception checks for those who
-encounter you immediately upon meeting you and each hour or day thereafter, depending on circumstances.</p>
-<h3 id="TOC-FEINTING">FEINTING</h3>
-<p>You can use Deception as a standard action to mislead an opponent in combat. Make a Deception check as a standard
-action opposed by your target's <a href="#TOC-INSIGHT">Insight</a>. If your Deception check succeeds, the target is
-vulnerable against your next attack until the end of your next turn (see <b>Vulnerable</b> condition).</p>
-<p>Not to be confused with fainting, although playing dead is a possible deception for which you'll need to fall prone regardless
-of your check and need to stay that way for a round.</p>
-<h3 id="TOC-INNUENDO">INNUENDO</h3>
-<p>You can use Deception to send covert messages using word-play and double-meanings while apparently talking about
-other things. The DC for a basic message is 0. Complex messages or messages trying to communicate new information have
-DCs of 5 or 10, respectively. The recipient of the message must make a <a href="#TOC-INSIGHT">Insight</a> check against
-the same DC to understand it.</p>
-<h3 class="table-name">TABLE: INNUENDO DIFFICULTIES</h3>
+<h3 ID="TOC-CONVEY-SECRET-MESSAGE">CONVEY SECRET MESSAGE</h3>
+<div class="right-panel">
+<h3 class="table-name">TABLE: SECRET MESSAGE DIFFICULTIES</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
 <tr>
@@ -703,74 +730,55 @@ the same DC to understand it.</p>
 </tr>
 </tbody>
 </table>
-<p>Anyone listening in on your innuendo can attempt a insight check against the message DC. If successful, the
-eavesdropper notices a message hidden in your conversation. If the eavesdropper gets at least two degrees of success, he
+</div>
+<p>You can use Deception to send covert messages using word-play and double-meanings while apparently talking about
+other things. The DC for a basic message is 0. Complex messages or messages trying to communicate new information have
+DCs of 5 or 10, respectively. The recipient of the message must make a <a href="#TOC-INSIGHT">Insight</a> check against
+the same DC to understand it.</p>
+<p>Anyone listening in on your innuendo can attempt an <a href="#TOC-INSIGHT">Insight</a> check against the message DC. If successful, the
+eavesdropper notices that there is a message hidden in your conversation. If the eavesdropper gets at least two degrees of success, he
 also understands the message. Whether trying to send or pick up on a message, more than one degree of failure on the
 check means the receiver misinterprets the message in some fashion.</p>
-<h3 id="TOC-TRICKING">TRICKING</h3>
+<p>To use another language entirely see the <a href="advantages.html#TOC-LANGUAGES">Languages advantage</a> for ciphers and
+encryption use <a href="#TOC-KNOWLEDGE">Knowledge</a>.</p>
+<h3 id="TOC-DISGUISE">DISGUISE</h3>
+<p>You can use makeup, costumes, and other props to change your appearance. Your Deception check result determines the
+effectiveness of the disguise, opposed by others' <a href="#TOC-PERCEPTION">Perception</a> check results. The GM makes the Deception check secretly so
+you are not sure exactly how well your disguise holds up under scrutiny.</p>
+<p>Disguise is heavily dependent on circumstances: favorable ones include appropriate costuming and a subject resembling
+your normal appearance, while unfavorable circumstances include disguising yourself as a member of a different race or
+sex, or not having sufficient props (which can be up to a -2 modifier). If you are impersonating a particular
+individual, anyone who knows that individual gets a circumstance bonus to the <a href="#TOC-PERCEPTION">Perception</a>
+check: regular associates get a +1, while friends get a +2 and intimate loved ones a +4.</p>
+<p>Successfully acting like who you appear to be may also require a Deception check with a DC equal to the observer's <a
+href="#TOC-INSIGHT">Insight</a> check, modified by familiarity if the observer knows the subject well, as mentioned
+previously.</p>
+<p>A disguise normally requires at least 10 minutes of preparation. The GM makes <a href="#TOC-PERCEPTION">Perception</a> checks for those who
+encounter you immediately upon meeting you and each hour or day thereafter, depending on circumstances.</p>
+<h3 id="TOC-DISTRACTION">DISTRACTION</h3>
+<p>You can use Deception to cause a distraction, hold someone's attention, or drown out a sound. You can distract either a
+group or an individual opposed by either <a href="#TOC-INSIGHT">Insight</a> to realize that this is a distraction or
+<a href="#TOC-PERCEPTION">Perception</a> to notice what is being hidden.</p>
+<h3 id="TOC-FEINTING">FEINTING</h3>
+<p>You can use Deception as a standard action to mislead an opponent in combat. Make a Deception check as a standard
+action opposed by your target's <a href="#TOC-INSIGHT">Insight</a>. If your Deception check succeeds, the target is
+vulnerable against your next attack until the end of your next turn (see <b>Vulnerable</b> <a href="the-basics/conditions.html">condition</a>).</p>
+<p>Not to be confused with fainting, although playing dead is a possible deception for which you'll need to fall prone regardless
+of your check and need to stay that way for a round.</p>
+<h3 class="generated-class-17" id="TOC-TRICKING">TRICKING</h3>
 <p>You can use Deception to mislead an opponent into taking a potentially unwise action, such as trying to hit you while
-standing in front of an electrical junction box or at the edge of a precipice. If your Deception check opposed by <a
-href="#TOC-INSIGHT">Insight</a> succeeds, your opponent is heedless of the potential danger and may hit the junction box
+standing in front of an electrical junction box or at the edge of a precipice. If your Deception check opposed by
+<a href="#TOC-INSIGHT">Insight</a> succeeds, your opponent is heedless of the potential danger and may hit the junction box
 or lose his balance and fall, if his attack against you fails. (On the other hand, if the attack succeeds, it might slam
 you into the junction box or send you flying off the edge. You're taking a risk.)</p>
 <p>More than one degree of failure on the Deception check means you put yourself in a bad position; you are vulnerable
 against the target's attacks for 1 round!</p>
-<h2 id="TOC-EXPERTISE">EXPERTISE</h2>
-<span class="info-banner">Intellect &#8226; Trained Only</span>
-<div class="right-panel">
-<div class="green-panel">
-<div>Sample Areas of Expertise</div>
-<div>
-<p>The following are examples of suitable areas of Expertise. This list is by no means exhaustive, the GM should feel
-free to add to or modify this list as needed to suit the game and the characters in it. Note that Wizardry is listed here,
-besides being an application of Knowledge: Magic it might also represent skills set such as being able to translate
-magical tomes or knowing about other planes of existence etc.</p>
-<p>Art, Boy Scouts, Business, Carpentry, Cooking, Criminal, Current Events, Dance, History, Journalism, Law, Law
-Enforcement, Medicine, Military, Music, Philosophy, Politics, Popular Culture, Psychiatry, Science, Sociology,
-Streetwise, Theology, Wizardry</p>
-</div>
-</div>
-<br />
-<div class="green-panel">
-<div>Related Areas of Expertise</div>
-<div>
-<p>The GM may decide that training in an Expertise skill provides some ability to deal with tasks covered by other,
-related, skills with a circumstance penalty to the skill check (see distance penalty at the top).</p>
-<p class="example"><b>Example</b>: Figuring out a particular clue involving a government
-conspiracy requires an Investigation or Expertise: Politics check. However, the GM allows a hero to substitute an Expertise: Law
-check with a -2 circumstance penalty, as the knowledge is related, but outside the character's specific field. Expertise:
-Journalism might suffer a -5 penalty, but could still be useful (especially if the character works a legal or political beat
-as a reporter), while Expertise: Cooking is no help at all, and cannot be used for the check.</p>
-</div>
-</div>
-</div>
-<p>Expertise is a broad skill encompassing knowledge and training in a variety of specialized fields, particularly
-professional disciplines and scholarship. The field of expertise does not need to be one that is considered a profession
-but must involve a skill set or lifestyle of some kind. Each is considered a separate skill and training in each is
-acquired separately, so a former police officer turned district attorney might have Expertise: Police Officer and
-Expertise: Law, each with their own ranks, for example.</p>
-<p>If you are trained in an Expertise, you can practice and make a living at it. You know how to use the tools of that
-trade, perform the profession's daily tasks, supervise untrained helpers, and handle common problems. For example,
-someone trained in Expertise: Sailor knows how to tie basic knots, tend and repair sails, and stand a deck watch at sea.
-The GM sets DCs for specific tasks using the guidelines provided in <a href="the-basics/index.html">The Basics</a> under
-<b>Checks</b>, keeping in mind that most job-related checks should be considered routine (see <b>Routine
-Checks</b>).</p>
-<p>You can also make Expertise checks to see if your character knows the answer to a particular question related to the
-area of expertise, such as a scientist confronted with a technical issue, or a lawyer considering a legal question. The
-DC is 0 for easy questions, 5 for basic questions, and 10 or higher for difficult questions. You can usually answer
-questions as a routine check, and the GM may make a check for you in secret, so you won't know whether or not your
-character's skill is entirely up to the task.</p>
-<p>The ability modifier for Expertise is typically Intellect, but some areas of expertise may call for different
-abilities, perhaps depending on the task involved. For example, a technical expert might rely on Intellect to answer
-questions and handle day-to-day procedures, but need Dexterity to perform the actual functions of the job. Performance
-skills, such as acting or music, may rely on Presence. The GM sets the ability modifier as needed for the specific
-Expertise check.</p>
-<p>Characters with expertise in a profession are also assumed to be licensed or certified to practice it, if necessary.
-Problems like licensing issues, professional rivalries, and so forth can be handled as complications (see
-<b>Complications</b>).</p>
-<p>The GM may allow some Expertise checks to be made untrained, especially for "unskilled" areas, measuring broad
-general knowledge and life experience, but even then an untrained Expertise check cannot be routine, and the character
-can only handle easy or basic tasks or questions (DC 0 to 5).</p>
+
+
+<h1 style="background-color: red;">----------------------------------------------------------</h1>
+<h1 style="background-color: green;">Things below here haven't been looked at yet</h1>
+<h1 style="background-color: red;">----------------------------------------------------------</h1>
+
 
 <h2 id="TOC-Handle-Animal">Handle Animal</h2>
 <span class="info-banner"><b>Ability</b>: Presence &#8226; <b>Action</b>: Standard &#8226; <b>Trained Only?</b> Yes &#8226; <b>Type</b>: None (but similar to Interaction)</span>
@@ -1243,41 +1251,6 @@ simple.</p>
 something into their drink, place a tiny radio tracer on them, and so forth. To plant the object, you must get a check
 result of 10 or higher, regardless of the opponent's check result. The opponent notices the attempt if his check result
 beats yours, whether you succeed in planting the item or not.</p>
-<h3 id="TOC-CONTORTING">CONTORTING</h3>
-<p>You can use Sleight of Hand to contort your body. Make a DC 20 Sleight of Hand check to fit through a tight space
-wide enough for your head but too narrow for the width of your shoulders, or to reach through an opening wide enough for
-your hand, but too narrow for your arm.</p>
-<h3 id="TOC-ESCAPING">ESCAPING</h3>
-<p>Make a Sleight of Hand check to slip out of various restraints. This takes at least a minute per check.</p>
-<h3 class="table-name">TABLE: ESCAPING DIFFICULTIES</h3>
-<table class="generated-class-3 table-alt-rows">
-<tbody>
-<tr>
-<th class="blue-top-th">DC</th>
-<th class="blue-top-th">SAMPLE RESTRAINT</th>
-</tr>
-<tr>
-<td>5</td>
-<td>Ropes</td>
-</tr>
-<tr>
-<td>10</td>
-<td>Handcuffs</td>
-</tr>
-<tr>
-<td>15</td>
-<td>Straightjacket</td>
-</tr>
-<tr>
-<td>5+rank</td>
-<td>Power Effect</td>
-</tr>
-<tr>
-<td>Opposed</td>
-<td>Grab</td>
-</tr>
-</tbody>
-</table>
 <h3 id="TOC-LEGERDEMAIN">LEGERDEMAIN</h3>
 <p>Minor feats of sleight of hand on a small item, such as making a coin or playing card "vanish," have a DC of 0
 unless an observer is focused on noticing what you are doing. When you perform this skill under observation, your check
