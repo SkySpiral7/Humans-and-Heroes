@@ -81,6 +81,10 @@ output+='</button>\n';
 output+='</form>\n';
 output+='</div>\n';
 
+output+='How much rules?<br />\n';
+output+='<label><input type="radio" name="complexity" id="complexity_simple" onchange="changeComplexity()" /> Keep it simple</label><br />\n';
+output+='<label><input type="radio" name="complexity" id="complexity_all" onchange="changeComplexity()" /> Show me everything</label><br />\n';
+
 //Adding a div outside of nav doesn't help the animation.
 output+='<nav class="collapse" id="top-nav"><div class="sites-sidebar-nav"><ul>\n';
 
@@ -668,3 +672,58 @@ function search()
    window.location.href = url;
    return false;
 }
+
+
+/*use
+python -m SimpleHTTPServer 8080
+to test on
+http://localhost:8080/the-basics/index.html
+*/
+function setDefaultRadioForComplexity()
+{
+   document.getElementById('complexity_' + getComplexityFromCookie()).checked = true;
+}
+function getComplexityFromCookie()
+{
+   var complexityCookie = cookiesToMap()['complexity'];
+   if ('all' !== complexityCookie)  //if undefined or invalid (also redundantly triggers when 'simple')
+   {
+      document.cookie = 'complexity=simple';
+      return 'simple';
+   }
+   return complexityCookie;
+}
+function cookiesToMap()
+{
+   var cookieMap = {};
+   var cookieArray = document.cookie.split(/;\s*/);
+   for (var i = 0; i < cookieArray.length; ++i)
+   {
+      var splitCookie = cookieArray[i].split('=');
+      cookieMap[splitCookie[0]] = splitCookie.slice(1).join('');
+   }
+   return cookieMap;
+}
+function changeComplexity()
+{
+   if (document.getElementById('complexity_simple').checked)
+   {
+      document.cookie = 'complexity=simple';
+   }
+   else
+   {
+      document.cookie = 'complexity=all';
+   }
+   changeSheet();
+}
+function changeSheet()
+{
+    var styleSheet = document.getElementById('findMe').sheet;
+  if(0 === styleSheet.cssRules.length){
+    styleSheet.insertRule('.complex{display: unset;}', 0);
+  }
+  else{
+    styleSheet.deleteRule(0);
+  }
+}
+setDefaultRadioForComplexity();
