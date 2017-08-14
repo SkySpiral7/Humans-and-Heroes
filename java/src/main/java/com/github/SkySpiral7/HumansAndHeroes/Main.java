@@ -1,14 +1,16 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import com.github.SkySpiral7.Java.pojo.FileGatherer;
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.github.SkySpiral7.Java.pojo.FileGatherer;
+import com.github.SkySpiral7.Java.util.FileIoUtil;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -19,14 +21,17 @@ public class Main
    public static final File sideBar = new File("../themes/sideBar.js");
    private static String rootFolderPath;
 
-   private enum RunCommands{DEAD, UNLINKED, MOVE, MAP}
+   private enum RunCommands
+   {
+      DEAD, UNLINKED, MOVE, MAP
+   }
 
    public static void main(String[] args) throws Exception
    {
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         DeadLinkDetector.detect();
+         SiteMapCreator.generate();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -61,16 +66,19 @@ public class Main
 
    public static void writeToFiles()
    {
-      for (File currentFile : getAllHtmlFiles()) {
+      for (File currentFile : getAllHtmlFiles())
+      {
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
          newContents = newContents.replace(" grey-table-border", "");
 
-         if (!newContents.equals(originalContents)) {
+         if (!newContents.equals(originalContents))
+         {
             FileIoUtil.writeToFile(currentFile, newContents);
             System.out.print("Changed: ");
-         } else System.out.print("Same: ");
+         }
+         else System.out.print("Same: ");
          printFilePath(currentFile);
       }
       System.out.println("Done.");
@@ -129,7 +137,8 @@ public class Main
       final File[] allHtmlFiles = getAllHtmlFiles();
       final List<File> resultsWithH2 = new ArrayList<>();
       final List<File> resultsWithout = new ArrayList<>();
-      for (File thisFile : allHtmlFiles) {
+      for (File thisFile : allHtmlFiles)
+      {
          final String fileContents = FileIoUtil.readTextFile(thisFile);
          if (fileContents.contains("generated-class-8") && fileContents.contains("<h2")) resultsWithH2.add(thisFile);
          else if (fileContents.contains("generated-class-8")) resultsWithout.add(thisFile);
@@ -185,13 +194,13 @@ public class Main
                colCount = 0;
             }
             else colCount++;
-            if (newContents.charAt(j) == '\r' || newContents.charAt(j) == '\n') {}  //there's also \t but I want that to be flagged
+            if (newContents.charAt(j) == '\r' || newContents.charAt(j) == '\n'){}  //there's also \t but I want that to be flagged
             else if (newContents.charAt(j) > '~' || newContents.charAt(j) < ' ')
             {
                results.add(newContents.charAt(j) + " = " + newContents.codePointAt(j));
                System.out.println(
-                       myFileArray[i].getAbsolutePath() + " on line " + lineCount + " column " + colCount + " (length " + j + ") has " + newContents.charAt(j)
-                               + " = " + newContents.codePointAt(j));
+                     myFileArray[i].getAbsolutePath() + " on line " + lineCount + " column " + colCount + " (length " + j + ") has "
+                     + newContents.charAt(j) + " = " + newContents.codePointAt(j));
             }
          }
       }
@@ -211,6 +220,9 @@ public class Main
 
    public static File[] getAllHtmlFiles(final File containingFolder)
    {
-      return FileGatherer.searchForFilesWithExtension(containingFolder, "html").toArray(new File[0]);
+      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html")
+                         .map(Path::toFile)
+                         .collect(Collectors.toList())
+                         .toArray(new File[0]);
    }
 }
