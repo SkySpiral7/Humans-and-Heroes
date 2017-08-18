@@ -30,6 +30,7 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
+Add double quotes to all URLs. Not sure what happened to them.
 Look into making the character sheet a single top level class. Ignore the point counter at first.
 Look into single class for TOC
 Look into single class for side bar (except 'closed')
