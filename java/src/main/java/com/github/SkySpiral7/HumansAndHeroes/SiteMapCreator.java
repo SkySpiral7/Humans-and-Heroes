@@ -1,75 +1,99 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import com.github.SkySpiral7.Java.util.StringUtil;
-
-import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.github.SkySpiral7.Java.pojo.FileGatherer;
+import com.github.SkySpiral7.Java.util.FileIoUtil;
+
 public class SiteMapCreator
 {
-   private static String previousLink;
+   private static final Comparator<Path> PATH_COMPARATOR = (a, b) ->
+   {
+      final int aFirst = -1;
+      final int bFirst = 1;
+      //files first
+      if (Files.isRegularFile(a) && Files.isDirectory(b)) return aFirst;
+      if (Files.isDirectory(a) && Files.isRegularFile(b)) return bFirst;
+
+      //there can be only 1 index.html at a time
+      if (a.toFile().getName().equals("index.html")) return aFirst;
+      if (b.toFile().getName().equals("index.html")) return bFirst;
+
+      return a.compareTo(b);
+   };
 
    public static void generate()
    {
-      final List<File> foldersToIgnore = Arrays.asList(new File("../.git"), new File("../java"),
-            new File("../secret-origins/javascript"), new File("../secret-origins/xml"));
+      final List<Path> foldersToIgnore = Stream.of(".git", "java", "secret-origins/javascript", "secret-origins/js", "secret-origins/xml")
+                                               .map(name -> Paths.get("..", name))
+                                               .map(path -> path.toAbsolutePath().normalize())
+                                               .collect(Collectors.toList());
       final List<Path> filesToIgnore = Stream.of("index.html", "site-map.html")
-                                             .map(input -> new File("../" + input).toPath().toAbsolutePath().normalize())
+                                             .map(name -> Paths.get("..", name))
+                                             .map(path -> path.toAbsolutePath().normalize())
                                              .collect(Collectors.toList());
+      final List<Path> allHtml = new FileGatherer().withRootFolder(Main.rootFolder.toPath().toAbsolutePath().normalize())
+                                                   .withPathOrder(PATH_COMPARATOR)
+                                                   .withExploreCriteria(path -> !foldersToIgnore.contains(path))
+                                                   .search()
+                                                   .filter(FileGatherer.Filters.acceptExtensions("html"))
+                                                   .map(path -> path.toAbsolutePath().normalize())
+                                                   .collect(Collectors.toList());
+      allHtml.removeAll(filesToIgnore);
       final int rootPathOffset = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath().length() + 1;
-      new LeafFirstFileWalker(foldersToIgnore, input ->
+      final int rootNameCount = Main.rootFolder.toPath().toAbsolutePath().normalize().getNameCount();
+      int previousNameCount = rootNameCount;
+      for (final Path input : allHtml)
       {
-         if (input.toString().endsWith(".html") && !filesToIgnore.contains(input))
-         {
-            final String link = input.toString().substring(rootPathOffset).replace("\\", "/");
-            if (previousLink != null) printUnorderedListTags(link);
+         final String link = input.toString().substring(rootPathOffset).replace("\\", "/");
+         int currentNameCount = input.toAbsolutePath().normalize().getNameCount();
+         if (link.endsWith("index.html")) --currentNameCount;
 
-            int depth = StringUtil.countCharOccurrences(link, '/');
-            if (link.endsWith("index.html")) --depth;
-            if (depth > 0) System.out.print("<li>");
-            System.out.print("<a href=\"" + link + "\">");
-            System.out.print(readTitle(input) + " (" + link + ")");
-            System.out.print("</a>");
-            if (depth == 0) System.out.println("<br />");
-            else System.out.println("</li>");
+         printUnorderedListTags(currentNameCount - previousNameCount, link.endsWith("index.html"));
 
-            previousLink = link;
-         }
-      }).startWalking(Main.rootFolder);
-      printUnorderedListTags("fake");
+         if (currentNameCount != rootNameCount) System.out.print("<li>");
+         System.out.print("<a href=\"" + link + "\">");
+         System.out.print(readTitle(input) + " (" + link + ")");
+         System.out.print("</a>");
+         if (currentNameCount == rootNameCount) System.out.println("<br />");
+         else if (!link.endsWith("index.html")) System.out.println("</li>");
+         else System.out.println();
+
+         previousNameCount = currentNameCount;
+      }
+      printUnorderedListTags(rootNameCount - previousNameCount, false);
    }
 
    private static String readTitle(final Path input)
    {
       final String contents = FileIoUtil.readTextFile(input.toFile());
       final Matcher matcher = Pattern.compile("<title>(.+?) - Humans &amp; Heroes").matcher(contents);
-      matcher.find();
-      return matcher.group(1);
+      matcher.find();  //this is always true but needs to be called before group
+      return matcher.group(1);  //just let this throw if find returns false
    }
 
-   private static void printUnorderedListTags(final String destinationPath)
+   private static void printUnorderedListTags(final int ulCount, final boolean isAnIndex)
    {
-      File destinationFile = new File("./" + destinationPath);
-      if (destinationPath.endsWith("index.html"))
+      if (ulCount == 0) return;
+      final String[] arr = new String[Math.abs(ulCount)];
+      if (ulCount > 0)
       {
-         destinationFile = destinationFile.getParentFile();
+         Arrays.fill(arr, "<li><ul>");
+         System.out.println(String.join("", Arrays.asList(arr)).substring("<li>".length()));
       }
-      File previousFile = new File("./" + previousLink);
-      if (previousFile.toString().endsWith("index.html"))
+      else if (ulCount < 0)
       {
-         previousFile = previousFile.getParentFile();
+         Arrays.fill(arr, "</ul></li>");
+         System.out.println(String.join("", Arrays.asList(arr)));
       }
-      final String linkBetween = FileMover.linkBetween(previousFile, destinationFile);
-      final String output = linkBetween.replaceAll("[^\\w./]", "").replaceFirst("/?[^/]*$", "").replaceAll("\\w+", "<ul>")
-                                       .replace("/", "").replaceAll("\\.\\.", "</ul>");
-      if (!output.isEmpty()) System.out.println(output);
    }
-
 }

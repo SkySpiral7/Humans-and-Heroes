@@ -38,7 +38,7 @@ Write a script to inline classes that are only used once
 
 
 body {
-   background: url(bg-top.gif) top repeat-x;
+   background: url("bg-top.gif") top repeat-x;
    line-height: 1.5;
    margin: 0;
    padding: 15px 0 0 0;
@@ -51,6 +51,7 @@ h1 {
    color: white;
    margin: 0;
    padding: 10px;
+   clear: both;  /*This can be removed (along with id=) when h1 is only a page header*/
 }
 
 .page-header-red {
@@ -121,7 +122,7 @@ ol.legal-document > li > ol > li {
 }
 
 .sites-sidebar-nav .expander {
-   background: url(../images/arrow-down.gif) no-repeat;
+   background: url("../images/arrow-down.gif") no-repeat;
    float: left;
    height: 11px;
    margin: 3px 0 0 4px;
@@ -144,7 +145,7 @@ U+25BF (White down-pointing small triangle ▿)
 */
 
 .sites-sidebar-nav .closed .expander {
-   background: url(../images/arrow-left.gif) no-repeat;
+   background: url("../images/arrow-left.gif") no-repeat;
 }
 
 .sites-sidebar-nav {
@@ -182,7 +183,7 @@ ol.goog-toc {
 }
 
 div.goog-toc {
-   background: url(bg-pattern.gif) repeat;
+   background: url("bg-pattern.gif") repeat;
    border: 1px solid grey;
 }
 
@@ -199,7 +200,7 @@ div.goog-toc p {
 }
 
 body .sites-layout-sidebar-left {
-   background: url(bg-pattern.gif) repeat;
+   background: url("bg-pattern.gif") repeat;
    padding: 0;
    width: 170px;
    font-size: 12px;
@@ -229,7 +230,7 @@ body > table > tbody > tr > td:nth-child(2) {
 
 /*All th are under .table-alt-rows*/
 th {
-   background: url(bg-pattern.gif) repeat;
+   background: url("bg-pattern.gif") repeat;
    padding: 3px 5px 5px;
    text-align: center;
    vertical-align: top;
