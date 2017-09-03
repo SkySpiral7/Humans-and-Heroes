@@ -232,8 +232,8 @@ The format for skill descriptions is given here. Items that do not apply are omi
 <tr>
 <td><a href="#TOC-MEDICAL">Medical</a></td>
 <td>Intellect</td>
-<td>Standard</td>
-<td>Yes</td>
+<td>Standard or Slow</td>
+<td>No</td>
 <td>Manipulation with required tools (where applicable)</td>
 </tr>
 <tr>
@@ -1005,35 +1005,12 @@ useful to those who directly interact with spiritual forces such as a demon hunt
 be obvious and few of them useful.</p>
 <p>Other examples include: Astronomy, Business, Culture, Current Events, Dungeoneering, Geography, Magic, Military, Music,
 Nobility, Philosophy, Politics, Science, Sociology, and Streetwise.</p>
-
-
-
-
-
-
-
-
-
-
-<h1 style="background-color: red;">----------------------------------------------------------</h1>
-<h1 style="background-color: green;">Things below here haven't been looked at yet</h1>
-<h1 style="background-color: red;">----------------------------------------------------------</h1>
-
-
-
-
-
-
-
-
-
-
 <h2 class="generated-class-17" id="TOC-Medical">Medical</h2>
-<span class="info-banner"><b>Ability</b>: Intellect &#8226; <b>Action</b>: Standard &#8226; <b>Trained Only?</b> Yes &#8226;
+<span class="info-banner"><b>Ability</b>: Intellect &#8226; <b>Action</b>: Standard or Slow &#8226; <b>Trained Only?</b> No &#8226;
 <b>Type</b>: Manipulation with required tools (where applicable)</span>
-<p>You're trained in treating injuries and ailments. Unless otherwise stated you are assumed to be trained with modern
-(and local) medical knowledge. The check DC and effect of Treatment depend on the task:</p>
-<h3 class="table-name">TABLE: TREATMENT DIFFICULTIES</h3>
+<p>You're trained in treating injuries and ailments. You must be familiar with a creature in order to treat it and therefore must
+roll a <a href="#TOC-KNOWLEDGE">Knowledge</a> check for any unusual creature. The check DC and effect depend on the task:</p>
+<h3 class="table-name">TABLE: MEDICAL DIFFICULTIES</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
 <tr>
@@ -1058,25 +1035,54 @@ Nobility, Philosophy, Politics, Science, Sociology, and Streetwise.</p>
 </tr>
 </tbody>
 </table>
-<p>If you do not have the appropriate medical equipment and supplies, you take a -2 circumstance penalty on your check.
-If your subject has a particularly unusual biology (an alien, for example) you may also suffer a circumstance
-penalty.</p>
-<p>You can use the Treatment skill on yourself, but only to diagnose, provide care, or treat disease or poison. You take
-a -2 circumstance penalty on checks when treating yourself.</p>
+<p>Drugs, poisons, and antidotes can be identified using <a href="#TOC-CRAFT">Craft: Chemistry</a> or <a href="TOC-KNOWLEDGE">Knowledge: Chemistry</a>
+(the required tools would be a chemistry set and microscope). Drugs, poisons, and antidotes can be created using <a href="#TOC-CRAFT">Craft: Chemistry</a>
+(the required tools would be a chemistry set).</p>
 <h3 id="TOC-DIAGNOSIS">DIAGNOSIS</h3>
-<p>You can diagnose injuries and ailments with an eye toward further treatment at a DC 0. This takes at least a minute.
-At the GM's discretion, a successful diagnosis provides a +1 bonus for favorable circumstances on further Treatment
-checks.</p>
+<p>You can diagnose injuries and ailments at DC 0. This takes at least a minute. Tools (such as a stethoscope or thermometer)
+are not required but provide a +1 circumstance bonus. Diagnosing yourself only incurs a -2 circumstance penalty if you can't
+effectively inspect a required area. At the GM's discretion, a successful diagnosis provides a +1 bonus for favorable
+circumstances on Medical checks to treat it.</p>
 <h3 id="TOC-PROVIDE-CARE">PROVIDE CARE</h3>
-<p>Providing care means treating an injured patient for a day or more. If successful, the patient further reduces the
-recovery time by 1 rank (see <b>Recovery</b> in <a href="action-adventure.html">Action &amp; Adventure</a>). You can
-provide care for up to your Treatment rank in patients at one time each at a DC 5.</p>
+<p>Providing care means treating an injured patient for an hour or more at DC 5. If successful, the patient doubles recovery rate
+(see <a href="action-adventure.html#TOC-RECOVERY">Recovery</a>). You can
+provide care for a number of patients (including yourself) up to your Medical rank at one time. Tools may be required depending
+on the ailment such as ice packs or splints, failing to have the required tools incurs a -2 circumstance penalty.
+You take a -2 circumstance penalty on the Medical check to treat yourself.</p>
 <h3 id="TOC-STABILIZE">STABILIZE</h3>
-<p>As a standard action, a successful DC 5 Treatment check stabilizes a dying character.</p>
+<p>As a standard action, a successful DC 5 Medical check stabilizes a dying character. This may require tools such as bandages,
+failing to have the required tools incurs a -2 circumstance penalty.
+This can't be done on yourself since you won't be able to take the standard action required.</p>
 <h3 id="TOC-TREAT-DISEASE-AND-POISON">TREAT DISEASE AND POISON</h3>
-<p>You can treat a character afflicted with a disease or poison. Each time the character makes a resistance check
-against the ailment, you make a Treatment check DC 5. 1 or 2 degrees of success provides the patient with a +1 circumstance
-bonus to the resistance check, 3 or more degrees of success provides a +2 circumstance bonus.</p>
+<p>As a standard action you can treat a character afflicted with a disease or poison. The next time this round that the patient
+makes a resistance check against the ailment, you make a Medical check at DC 5. 1 or 2 degrees of success provides the patient with a +1 circumstance
+bonus to the resistance check, 3 or more degrees of success provides a +2 circumstance bonus. Only a single Medical check can be done
+per affliction resistance check, if multiple exist only the highest rank applies. Unlike normal <a href="the-basics/index.html#TOC-TEAM-CHECKS">team checks</a>
+failing will not provide a penalty. This can be done on yourself at no penalty. The tools required are medicine or antivenom etc
+and can't be performed without tools.</p>
+
+
+
+
+
+
+
+
+
+
+<h1 style="background-color: red;">----------------------------------------------------------</h1>
+<h1 style="background-color: green;">Things below here haven't been looked at yet</h1>
+<h1 style="background-color: red;">----------------------------------------------------------</h1>
+
+
+
+
+
+
+
+
+
+
 <h2 id="TOC-PERCEPTION">PERCEPTION</h2>
 <span class="info-banner"><b>Ability</b>: Awareness &#8226; <b>Action</b>: Free &#8226; <b>Trained Only?</b> No</span>
 <p>Use this skill to notice and pick up on things. Discerning details--such as clearly hearing conversation or reading
