@@ -51,6 +51,7 @@ h1 {
    color: white;
    margin: 0;
    padding: 10px;
+   clear: both;  /*This can be removed (along with id=) when h1 is only a page header*/
 }
 
 .page-header-red {
