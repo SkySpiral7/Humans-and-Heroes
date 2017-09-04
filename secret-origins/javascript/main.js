@@ -24,6 +24,7 @@ function includeJsFile(jsName)
 {  //TODO: move this into minorVersion when possible
 var latestMinorRuleset = latestMinorVersion;
 var largestPossibleMinorRulesets = [undefined, 0, 7, latestMinorRuleset];
+//important: do not change this file except on merges (or stand alone changes) that increment latestMinorRuleset
 }
 
 /**Call List onChange
