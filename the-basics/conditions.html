@@ -32,10 +32,10 @@ row add the degrees together to determine the new condition with a maximum degre
 who is Fatigued is hit with an affliction that Fatigues then the character is Exhausted but if a Fatigued character is
 hit with Exhaustion then the character falls asleep instead.</p>
 <p>Some of these progress conditions don't have a third degree in which case second degree is the maximum. Note that
-each higher degree condition supersedes the lower ones with the exception of asleep. Asleep does not replace Exhausted
-however sleeping for an hour will remove Exhausted. Incapacitated and Asleep are the only conditions listed below that are combined
+each higher degree condition supersedes the lower ones with the exception of asleep (see entry for details).
+Incapacitated, Exhausted, and Asleep are the only conditions listed below that are combined
 conditions instead of a basic one. Impaired progresses into Disabled going from -1 to -2 but can't progress any further,
-for further penalties see Weakened.</p>
+for further penalties see <b>Weakened</b>.</p>
 <table class="generated-class-1 table-alt-rows">
 <tbody>
 <tr>
@@ -108,7 +108,7 @@ checks (see the <b>Prone</b> combined condition later in this section).</li>
 <li><b>Disabled</b>: A disabled character is at a -2 circumstance penalty on checks. If the penalty applies to specific
 checks, they are added to the name of the condition, such as Attack Disabled, Fighting Disabled, Perception Disabled, and
 so forth. If it applies to the same trait(s), disabled supersedes impaired.</li>
-<li><b>Fatigued</b>: Fatigued characters are hindered. Characters recover from a fatigued condition after an hour of rest.</li>
+<li><b>Fatigued</b>: Fatigued characters are hindered. Characters recover from a fatigued condition after 1 hour of rest.</li>
 <li><b>Hindered</b>: A hindered character moves at half normal speed (-1 speed rank). Immobile supersedes hindered.</li>
 <li><b>Immobile</b>: Immobile characters have no movement speed and cannot move from the spot they occupy, although they
 are still capable of taking actions unless prohibited by another condition. Depending on the situation an immobile character
@@ -132,8 +132,8 @@ below for the impacts of being unaware in these ways.</li>
 <li><b>Vulnerable</b>: Vulnerable characters are limited in their ability to defend themselves, halving their active defense
 results (rounded up). Note that this affects the result meaning you add together the dice, modifiers, and defense values then
 you half it. Defenseless supersedes vulnerable.</li>
-<li><b>Weakened</b>: The character has temporarily lost character points in a trait. See <b>Weaken</b> effect in
-<a href="../powers/index.html">Powers</a> for more information. Debilitated supersedes weakened.</li>
+<li><b>Weakened</b>: The character has temporarily lost character points in a trait. See the <a href="../powers/effects/weaken-attack.html">Weaken power</a>
+for more information. Debilitated supersedes weakened.</li>
 </ul>
 <h2 id="TOC-COMBINED-CONDITIONS">COMBINED CONDITIONS</h2>
 <p>Combined conditions are sets of basic conditions tied to a common descriptor. They're essentially a kind of
@@ -148,12 +148,14 @@ dazed) and hindered. Similarly, an effect that immobilizes a staggered character
 <ul>
 <li><b>Asleep</b>: While asleep, a character is defenseless, stunned, and has several perception penalties. The character
 is unaware to all visual senses and take a -5 perception penalty to all hearing, olfactory, radio, mental, and some exotic
-senses at the GM's discretion. The DC to wake up is the same as it would be to sense the source if awake, this check is made
-every hour or every time the DC decreases. Since tactile doesn't receive a perception penalty it is often strong enough to
+senses at the GM's discretion. The DC to wake up is the same as it would be to sense the source if awake, if successful the
+subject knows which sense was used but doesn't know what caused it.
+This sense check is made every hour or every time the DC decreases. Since tactile (and sense of balance) doesn't receive a perception penalty it is often strong enough to
 wake someone. If a character does not require sleep then the GM may provide a circumstance bonus to perception checks made
-to waking up. Any effect allowing a resistance check will wake you up unless you are Impervious or immune to it. After a certain
-number of hours, depending on the situation, this condition wears off automatically no check required. Nightmares and other
-circumstances can also cause someone to wake up.</li>
+to waking up. Any effect allowing a resistance check will wake you up unless it fails to affect you. Nightmares and other
+circumstances can also cause someone to wake up. Asleep does not replace Fatigued or Exhausted however sleeping for 1 hour
+will remove Fatigued and sleeping for 6 hours will remove Exhausted. Once you are no longer Fatigued or Exhausted you may
+naturally wake up after an amount of time determined by the GM with no check required.</li>
 <li><b>Blind</b>: The character cannot see. This is caused by being visually unaware: everything effectively has full visual
 concealment from him. He is hindered and defenseless, and for activities where vision is a factor may be disabled (or more)
 if able to perform the task at all.</li>
@@ -172,7 +174,7 @@ HP is still negative. Stabilized and Dying are mutually exclusive: one always re
 effect. Any obvious threat automatically breaks the trance. An ally can also shake a character free of the condition with
 an interaction skill check (DC = effect rank).</li>
 <li><b>Exhausted</b>: Exhausted characters are near collapse. They are impaired and hindered. Characters recover from an
-exhausted condition after an hour of rest in comfortable surroundings.</li>
+exhausted condition after 6 hours of sleep. Resting will cause the asleep condition with no check.</li>
 <li><b>Incapacitated</b>: An incapacitated character is defenseless, stunned, and unaware. Incapacitated characters generally
 also fall prone, unless some outside force or aid keeps them standing.</li>
 <li><b>Paralyzed</b>: A paralyzed character is defenseless, immobile, and physically stunned, frozen in place and unable to
