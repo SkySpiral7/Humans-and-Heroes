@@ -211,8 +211,8 @@ The format for skill descriptions is given here. Items that do not apply are omi
 <tr>
 <td><a href="#TOC-HANDLE-ANIMAL">Handle Animal</a></td>
 <td>Presence</td>
-<td>Standard</td>
-<td>Yes</td>
+<td>Standard or Slow</td>
+<td>Teach a trick is trained only</td>
 <td>None**</td>
 </tr>
 <tr>
@@ -790,7 +790,7 @@ than hand eye coordination (for example: psychic) would use Presence instead.</p
 at least a minute. This will allow you to determine what an unknown spell does or what's wrong with a machine.
 This does not need to be done before you can disable a device or do anything else with it therefore this application has
 very limited usefulness.</p>
-<p>An <b>Engineering</b> check can also be used to identify a device using Intellect but since that's a knowledge check
+<p>An <b>Engineering</b> check can also be used to identify a device using Intellect but since that's a <a href="#TOC-KNOWLEDGE">knowledge</a> check
 it is a free action and can only be used to recognize known devices (such as an electric can opener) rather than figure
 out the purpose of a custom made or unusual device.</p>
 <h3 id="TOC-INVENTING">INVENTING</h3>
@@ -1004,11 +1004,80 @@ structure. This requires at least a minute and a DC 0 <b>Engineering</b> check t
 a -1 toughness penalty. Failure means the explosive does not go off as planned, while more than one degree of
 failure means the charge goes off while you are setting it! In all cases, the explosive deals normal damage to all other
 targets.</p>
-<h2 id="TOC-HANDLE-ANIMAL">Handle Animal</h2>
-<span class="info-banner"><b>Ability</b>: Presence &#8226; <b>Action</b>: Standard &#8226; <b>Trained Only?</b> Yes &#8226; <b>Type</b>: None (but similar to Interaction)</span>
-<h1 style="background-color: red;">---------------------------------------------------------------------</h1>
-<h1 style="background-color: green;">Come back to later since this is the most complex skill</h1>
-<h1 style="background-color: red;">---------------------------------------------------------------------</h1>
+<h2 id="TOC-HANDLE-ANIMAL">HANDLE ANIMAL</h2>
+<span class="info-banner"><b>Ability</b>: Presence &#8226; <b>Action</b>: Standard or Slow &#8226; <b>Trained Only?</b>
+Teach a trick is trained only &#8226; <b>Type</b>: None (but similar to Interaction)</span>
+<p>You're skilled at dealing with animals. You can train them, convince them to act, or simply care for them. This is similar to <a href="#TOC-PERSUASION">Persuasion</a>
+except that <b>Handle Animal</b> only works on animals whereas <a href="#TOC-PERSUASION">Persuasion</a> only works on people.</p>
+<p>You can only use <a href="#TOC-CONVINCE-TO-ACT">Convince to act</a> and <a href="#TOC-TEACH-A-TRICK">teach a trick</a>
+on a single animal at a time but <a href="#TOC-CARE-FOR">care for</a> and <a href="#TOC-SCARE-OR-CALM-DOWN">scare or calm down</a>
+can be done on groups of animals.</p>
+<h3 id="TOC-CONVINCE-TO-ACT">CONVINCE TO ACT</h3>
+<p>As a standard action you can use <b>Handle Animal</b> to make an animal do something that it hasn't been trained for.
+The action must be simple such as retrieving and object, attacking a target, digging, coming to you, etc. The animal must
+be smart enough to figure out your intention and must be reasonably capable of doing the task (eg you can't tell a hawk
+to dig). The base DC is 15.</p>
+<h3 id="TOC-TEACH-A-TRICK">TEACH A TRICK</h3>
+<p>This can't be done untrained. You can teach a tame animal a trick so that it can perform the action on demand. This is a slow action since it involves
+having the animal repeat the action over a long period (at least time rank 17 which is a week) of time giving out reward and punishment as needed.
+The trick can be more complex than <a href="#TOC-CONVINCE-TO-ACT">Convince to act</a> since time can be spent teaching each
+step but it must still be relatively simple and the animal must still be reasonable capable both mentally and physically.
+There is no hard limit on the number of things an animal can learn but the Gamemaster should consider the animal's intellect
+and the complexity of the tricks when deciding if an animal is mentally capable of learning more.</p>
+<p>Once the animal learns the trick anyone can ask the animal to perform it (given they know the trigger word or gesture)
+without needing to make a check. An animal that knows tricks is easier to <a href="#TOC-CONVINCE-TO-ACT">Convince to act</a>
+by using the animal's name and familiar gestures/words.</p>
+<p>In addition to actions an animal can learn certain words (the animal's name, the word "no", the word "ball", etc),
+can be potty trained, and can learn certain attitudes such as staying close to a human or ignoring certain people.</p>
+<p>Over an even longer period of time (at least a year which is time rank 23) an animal can be trained with a theme in mind.
+This is really just a simplification of teaching an animal many tricks. Generally an animal can have only 1 general purpose.
+Some example purposes are: racing, being ridden, being ridden in combat, fighting in combat, guarding, heavy labor, pulling
+carts or plows, hunting, rescuing, guiding the blind, rounding up livestock, and entertainment.</p>
+<h3 id="TOC-RIDE">RIDE</h3>
+<div class="right-panel">
+<table class="generated-class-3 table-alt-rows">
+<tbody>
+<tr>
+<th class="blue-top-th">DC</th>
+<th class="blue-top-th">RIDDING MANEUVER</th>
+</tr>
+<tr>
+<td>-5</td>
+<td>Staying mounted during a low-speed ride or a simple predetermined course.</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Using a combat-trained mount in combat or using a ridding mount at higher speeds.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Staying mounted when your mount jumps or while flying.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This is a move action and uses Agility. You can use <b>Handle Animal</b> to perform riding maneuvers on an animal
+that has been trained for ridding. If the animal has not been trained for ridding then you must instead use <a href="#TOC-CONVINCE-TO-ACT">Convince to act</a>
+which limits possible actions and failure may cause you to be bucked off. An animal trained for ridding will never buck
+the rider (although it may disregard the safety of the rider) unless mount is afraid of the rider.</p>
+<p>Failing certain attempted riding maneuvers or the mount being spooked may cause the animal to attempt to buck you off
+or you may fall off on your own. In order to stay mounted you must make an <b>Handle Animal</b> (Agility) check
+opposed by either the animal's <a href="#TOC-ACROBATICS">Acrobatics</a> check (in the case of bucking) or a DC (in the
+case of falling off for other reasons).</p>
+<h3 id="TOC-CARE-FOR">CARE FOR</h3>
+<p>Being good with animals also means the ability to take care of an animal (including babies). As a slow action you can
+groom, wash, clean up after, feed, and make sure that the animal is comfortable. These actions generally don't require
+a check as long as you know what to do. Knowing what is needed is, of course, a <a href="#TOC-KNOWLEDGE">knowledge</a> check
+that uses intellect and is a free action.</p>
+<p>With the right facility it is possible to care for an animal without taming it conversely steps can be taken to adjust the animal
+to humans. An animal must be tame before you can <a href="#TOC-TEACH-A-TRICK">teach a trick</a> additionally everything else
+becomes easier.</p>
+<h3 id="TOC-SCARE-OR-CALM-DOWN">SCARE OR CALM DOWN</h3>
+<p>As a standard action you can use <b>Handle Animal</b> to either cause or relieve fear in an animal. Scaring an animal
+can be used to cause a bear to run away rather than attack you, for example. Animals are naturally spooked by storms and
+combat but special training can make them difficult to scare.</p>
+<p>While you could in theory use <b>Handle Animal</b> for other emotions, animals are not smart enough to understand such
+complex communication (also animal emotions are more simple than human emotions).</p>
 <h2 id="TOC-INSIGHT">INSIGHT</h2>
 <span class="info-banner"><b>Ability</b>: Awareness &#8226; <b>Action</b>: Free &#8226; <b>Trained Only?</b> No &#8226; <b>Type</b>: Interaction (where applicable)</span>
 <p>You can tell someone's true intentions and feelings by paying attention to things like body language, inflection, and
