@@ -259,7 +259,7 @@ The format for skill descriptions is given here. Items that do not apply are omi
 <td><a href="#TOC-MEDICAL">Medical</a></td>
 <td>Intellect</td>
 <td>Standard or Slow</td>
-<td>No</td>
+<td>Few</td>
 <td>Manipulation with required tools (where applicable)</td>
 </tr>
 <tr>
@@ -1293,7 +1293,9 @@ Gamemaster.</p>
 knowledge in each is acquired separately, so a person might have Knowledge: Nature and Knowledge: Electronics, each with
 their own ranks, for example.</p>
 <p>If the DC is 0 or less then it can be done untrained (DC 1 or more requires skill ranks). This represents common knowledge
-or common sense, things that can easily be picked up without training.</p>
+or common sense, things that can easily be picked up without training. Attempting a <b>Knowledge</b> check of DC 1+
+without training will automatically result in failure which is usually a simple "you don't know" but may provide
+misinformation at the Gamemaster's discretion.</p>
 <p>Not all knowledge can be obtained from knowledge rolls. Any knowledge that isn't spread or that your character couldn't
 have heard can't be obtained by a knowledge check. For example you can't roll Knowledge: Criminal to learn
 the combination to a personal safe if there was no way for that combination to have been spread. You also can't roll
@@ -1342,43 +1344,28 @@ be obvious and few of them useful.</p>
 <p>Other examples include: Astronomy, Business, Culture, Current Events, Dungeoneering, Geography, Magic, Military, Music,
 Nobility, Philosophy, Politics, Science, Sociology, and Streetwise.</p>
 <h2 class="generated-class-17" id="TOC-MEDICAL">Medical</h2>
-<span class="info-banner"><b>Ability</b>: Intellect &#8226; <b>Action</b>: Standard or Slow &#8226; <b>Trained Only?</b> No &#8226;
+<span class="info-banner"><b>Ability</b>: Intellect &#8226; <b>Action</b>: Standard or Slow &#8226; <b>Trained Only?</b> Few &#8226;
 <b>Type</b>: Manipulation with required tools (where applicable)</span>
 <p>You're trained in treating injuries and ailments. You must be familiar with a creature in order to treat it and therefore must
-roll a <a href="#TOC-KNOWLEDGE">Knowledge</a> check for any unusual creature. The check DC and effect depend on the task:</p>
-<h3 class="table-name">TABLE: MEDICAL DIFFICULTIES</h3>
-<table class="generated-class-3 table-alt-rows">
-<tbody>
-<tr>
-<th class="blue-top-th">DC</th>
-<th class="blue-top-th">TASK</th>
-</tr>
-<tr>
-<td>0</td>
-<td>Diagnose injuries and ailments.</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Provide long-term care.</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Stabilize dying character.</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Treat diseases or poisons.</td>
-</tr>
-</tbody>
-</table>
+roll a <a href="#TOC-KNOWLEDGE">Knowledge</a> check for any unusual creature.</p>
 <p>Drugs, poisons, and antidotes can be identified using <a href="#TOC-CRAFT">Craft: Chemistry</a> or <a href="#TOC-KNOWLEDGE">Knowledge: Chemistry</a>
 (the required tools would be a chemistry set and microscope). Drugs, poisons, and antidotes can be created using <a href="#TOC-CRAFT">Craft: Chemistry</a>
 (the required tools would be a chemistry set).</p>
 <h3 id="TOC-EXAMINATION">EXAMINATION</h3>
-<p>You can diagnose injuries and ailments at DC 0. This takes at least a minute. Tools (such as a stethoscope or thermometer)
+<p>You can diagnose injuries and ailments with a DC based on rarity of ailment and the usefulness of the symptoms.
+Training is required if the DC is at least 1, attempting such an ailment without training will automatically result in failure
+which is usually a simple "you don't know" but may provide misinformation at the Gamemaster's discretion.
+Examination takes at least a minute. Tools (such as a stethoscope or thermometer)
 are not required but provide a +1 circumstance bonus. Diagnosing yourself only incurs a -2 circumstance penalty if you can't
 effectively inspect a required area. At the GM's discretion, a successful diagnosis provides a +1 bonus for favorable
 circumstances on Medical checks to treat it.</p>
+<h3 id="TOC-OPERATION">OPERATION</h3>
+<p>This is trained only, is a slow action, uses Dexterity, and can't be done on yourself. Exceptions apply to all of those statements.
+You can perform a medical operation such as setting a bone, sewing stitches, removing organs, and performing transplants.
+Tools are always required and depend on the operation being done.</p>
+<p>Unlike <a href="#TOC-TREAT-AFFLICTION">Treat affliction</a>, <b>Operation</b> is only used for <a href="action-adventure.html#TOC-LASTING-INJURIES">lasting
+injuries</a>. Ones that can't be overcome with a few checks and will take time to recover post operation (if possible to
+recover at all). They generally can't be overcome at all without an operation.</p>
 <h3 id="TOC-PROVIDE-CARE">PROVIDE CARE</h3>
 <p>Providing care means treating an injured patient for an hour or more at DC 5. If successful, the patient doubles recovery rate
 (see <a href="action-adventure.html#TOC-RECOVERY">Recovery</a>). You can
@@ -1400,6 +1387,8 @@ bonus to the resistance check, 3 or more degrees of success provides a +2 circum
 per affliction resistance check, if multiple exist only the highest rank applies. Unlike normal <a href="the-basics/index.html#TOC-TEAM-CHECKS">team checks</a>
 failing will not provide a penalty. This can be done on yourself at no penalty. The tools required are medicine or antivenom etc
 and can't be performed without tools.</p>
+<p>Unlike <a href="#TOC-OPERATION">Operation</a>, <b>Treat affliction</b> is only used for short term problems. Ones
+that could be overcome without assistance within a day (specifically <a href="powers/effects/affliction-attack.html">Afflictions</a>).</p>
 <h2 id="TOC-PERCEPTION">PERCEPTION</h2>
 <span class="info-banner"><b>Ability</b>: Awareness &#8226; <b>Action</b>: Free &#8226; <b>Trained Only?</b> No</span>
 <p>Use this skill to perceive things with your senses. Discerning details--such as clearly hearing conversation or reading
