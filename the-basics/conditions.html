@@ -121,9 +121,6 @@ forth. If it applies to the same trait(s), disabled supersedes impaired.</li>
 effect. See <b>Mental Transform</b> and <b>Mind Switch</b> for details.</li>
 <li><b>Stunned</b>: Stunned characters cannot take any actions, including free actions. Although reaction effects may still trigger
 and all defense checks can still be made. A stunned character is also immobile since movement requires an action. Stunned supersedes dazed.</li>
-<li><b>Bruised</b>: Bruised is a special type of Impaired: Toughness. The difference being that it stacks indefinitely:
-you can receive any number of bruised penalties (each causing a -1 toughness) in addition to other conditions such as
-Impaired. Bruised penalties can only be inflicted by <a href="../powers/effects/damage-attack.html">Damage</a>.</li>
 <li><b>Unaware</b>: The character is completely unaware of his surroundings, unable to make interaction or Perception checks
 or perform any action based on them. If the condition applies to a specific sense or senses, they are added to the name of
 the condition, such as visually unaware (blind), tactilely unaware (or numb), and so forth. Subjects have full concealment
@@ -135,6 +132,41 @@ results (rounded up). Note that this affects the result meaning you add together
 you half it. Defenseless supersedes vulnerable.</li>
 <li><b>Weakened</b>: The character has temporarily lost character points in a trait. See <b>Weaken</b> effect in
 <a href="../powers/index.html">Powers</a> for more information. Debilitated supersedes weakened.</li>
+</ul>
+<h2 id="TOC-DAMAGE-CONDITIONS">DAMAGE CONDITIONS</h2>
+<p>Damage conditions (or HP conditions are conditions imposed by a <a href="../powers/effects/damage-attack.html">damage</a>
+effect. These conditions are unique because they are automatically imposed (based on <a href="../powers/effects/damage-attack.html">damage</a>,
+HP, and <a href="../action-adventure.html#TOC-ENVIRONMENTAL-HAZARDS">circumstances</a> rather than <a href="../powers/effects/affliction-attack.html">affliction</a>)
+and are not removed like other conditions. The conditions are automatically removed when HP is restored high enough.</p>
+<ul>
+<li><b>Battered</b>: A battered character is dazed and hindered. Although it is identical to staggered it doesn't replace
+any other conditions because this is an HP condition. Characters gain this condition as long as they have exactly 0 HP.</li>
+<li><b>Bent</b>: The first damage condition of objects. This state indicates damage but the object remains functional (for
+the most part). Bent is replaced by broken when damaged again.</li>
+<li><b>Broken</b>: The second damage condition of objects. This state indicates that the object no longer functions.
+Devices no longer work and structures (like bridges) collapse. Broken replaces bent and is replaced by destroyed when
+damaged again.</li>
+<li><b>Bruised</b>: Bruised is a special type of Impaired: Toughness. The difference being that it stacks indefinitely:
+you can receive any number of bruised penalties (each causing a -1 toughness) in addition to other conditions such as
+Impaired. Bruised penalties can only be inflicted by <a href="../powers/effects/damage-attack.html">Damage</a>.</li>
+<li><b>Dead</b>: The character is dead (and thus incapacitated). This is a condition because it can be removed by <a href="../powers/effects/immortality-defense.html">Immortality</a>
+and <a href="../powers/effects/healing-general.html">Healing</a>. See <a href="../action-adventure.html#TOC-DEATH">Death</a> for more info.</li>
+<li><b>Destroyed</b>: The last damage condition of objects. This state indicates being broken beyond mundane repair (the
+object does not function). Destroyed replaces broken. See <a href="../powers/effects/damage-attack.html#TOC-DAMAGING-OBJECTS">Damage</a>
+for more info.</li>
+<li><b>Dying</b>: A dying character is incapacitated (defenseless, stunned, and unaware) and near death. This is an HP
+exclusive condition while HP is negative. Dying characters make a Fortitude check (DC 5) during each of their turns until they either die
+or stabilize. If a character gains this condition during their own turn they won't need to make a check until their next turn.
+If the check succeeds exactly, nothing happens. If the check succeeds by 1 or more (not degrees but actual difference),
+the character stabilizes, removing this
+condition (see Stabilized). If the check fails, they lose 1 HP. Another character can stabilize a
+dying character with a successful Treatment check (DC 5). Gaining any amount of HP by any means causes stabilization if
+HP is still negative. If dying is imposed by circumstances (such as <a href="../action-adventure.html#TOC-SUFFOCATION">suffocation</a>)
+then HP becomes -1 (if not already negative) and becoming Stabilized isn't possible (even with <a href="../advantages.html#TOC-DIEHARD">Diehard</a>)
+until the circumstances are removed. Stabilized and Dying are mutually exclusive: one always replaces the other.</li>
+<li><b>Stabilized</b>: A stabilized character is incapacitated (defenseless, stunned, and unaware) and near death but not
+getting any closer. This is an HP exclusive condition while HP is negative. Stabilized and Dying are mutually exclusive:
+one always replaces the other. If a Stabilized character loses any HP but is still alive then they become Dying (replacing this condition).</li>
 </ul>
 <h2 id="TOC-COMBINED-CONDITIONS">COMBINED CONDITIONS</h2>
 <p>Combined conditions are sets of basic conditions tied to a common descriptor. They're essentially a kind of
@@ -158,9 +190,6 @@ to waking up. Any effect allowing a resistance check will wake you up unless it 
 circumstances can also cause someone to wake up. Asleep does not replace Fatigued or Exhausted however sleeping for 1 hour
 will remove Fatigued and sleeping for 8 hours will remove Exhausted. Once you are no longer Fatigued or Exhausted you may
 naturally wake up after an amount of time determined by the GM with no check required.</li>
-<li><b>Battered</b>: A battered character is dazed and hindered. Although it is identical to staggered it doesn't replace
-any other conditions because this is an HP condition. Characters gain this condition as long as they have exactly 0 HP.
-This condition can't be removed directly with an effect but is automatically removed whenever HP is increased or decreased.</li>
 <li><b>Blind</b>: The character cannot see. This is caused by being visually unaware: everything effectively has full visual
 concealment from him. He is hindered and defenseless, and for activities where vision is a factor may be disabled (or more)
 if able to perform the task at all.</li>
@@ -168,16 +197,6 @@ if able to perform the task at all.</li>
 <li><b>Deaf</b>: The character cannot hear. This is caused by being auditorily unaware: giving everything total auditory
 concealment from him. Interaction with other characters is limited to sign-language and lip-reading (see <b>Interaction
 Skills</b> in <a href="../abilities.html">Abilities</a> for more information).</li>
-<li><b>Dying</b>: A dying character is incapacitated (defenseless, stunned, and unaware) and near death. This is an HP
-exclusive condition while HP is negative. Dying characters make a Fortitude check (DC 5) during each of their turns until they either die
-or stabilize. If a character gains this condition during their own turn they won't need to make a check until their next turn.
-If the check succeeds exactly, nothing happens. If the check succeeds by 1 or more (not degrees but actual difference),
-the character stabilizes, removing this
-condition (see Stabilized). If the check fails, they lose 1 HP. Another character can stabilize a
-dying character with a successful Treatment check (DC 5). Gaining any amount of HP by any means causes stabilization if
-HP is still negative. If dying is imposed by circumstances (such as <a href="../action-adventure.html#TOC-SUFFOCATION">suffocation</a>)
-then HP becomes -1 (if not already negative) and becoming Stabilized isn't possible (even with <a href="../advantages.html#TOC-DIEHARD">Diehard</a>)
-until the circumstances are removed. Stabilized and Dying are mutually exclusive: one always replaces the other.</li>
 <li><b>Entranced</b>: An entranced character is stunned, taking no actions other than paying attention to the entrancing
 effect. Any obvious threat automatically breaks the trance. An ally can also shake a character free of the condition with
 an interaction skill check (DC = effect rank).</li>
@@ -194,9 +213,6 @@ a move action.</li>
 <li><b>Restrained</b>: A restrained character is hindered and vulnerable. If the restraints are anchored to an immobile
 object, the character is immobile rather than hindered. If anchored to anything else, such as another character, the restrained
 character is immobile unless the other object or character moves. Bound supersedes restrained.</li>
-<li><b>Stabilized</b>: A stabilized character is incapacitated (defenseless, stunned, and unaware) and near death but not
-getting any closer. This is an HP exclusive condition while HP is negative. Stabilized and Dying are mutually exclusive:
-one always replaces the other. If a Stabilized character loses any HP but is still alive then they become Dying (replacing this condition).</li>
 <li><b>Staggered</b>: A staggered character is dazed and hindered.</li>
 <li><b>Surprised</b>: A surprised character is vulnerable. They are caught off-guard and therefore less able to act, and less able
 to avoid attacks. The character takes a -10 penalty to initiative. This condition is removed when their turn comes or combat
