@@ -21,11 +21,6 @@ function includeJsFile(jsName)
 }
 })();
 
-{  //TODO: move this into minorVersion when possible
-var latestMinorRuleset = latestMinorVersion;
-var largestPossibleMinorRulesets = [undefined, 0, 7, latestMinorRuleset];
-}
-
 /**Call List onChange
 Hero Name: Nothing (only need to look at it when saving or loading)
 Transcendence: changeTranscendence()
