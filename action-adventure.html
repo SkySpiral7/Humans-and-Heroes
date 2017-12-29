@@ -212,6 +212,9 @@ challenge based on the challenge and the needs of the story.</p>
 <p>Not all of the hazards heroes face come from supervillains. Sometimes the environment itself
 can be a danger, particularly when villains try to use it to their advantage. Heroes end up in a lot of dangerous places
 and deal with less than ideal conditions. This section details some of the hazards heroes may face.</p>
+<p>If there are multiple reasons to need to make a Fortitude defense check (or any defense check) then perform them in order
+from highest DC to lowest. Such as suffering from both starvation and heat. The exception is forced labor which makes the
+others more difficult rather than being an additional check.</p>
 <h3 id="TOC-LIGHT-AND-DARKNESS">LIGHT AND DARKNESS</h3>
 <p>Criminals often lurk in the darkness, and many crimes take place at night. Most cities are lit
 well enough, but sometimes heroes run into areas where it's difficult to see. Poorly lit areas provide concealment.
@@ -221,14 +224,15 @@ penalties for poor lighting.</p>
 <p>Intense heat and cold wear down characters, while prolonged exposure to the elements can be
 extremely dangerous.</p>
 <p>Characters in hot or cold conditions must make Fortitude checks (DC 0, +1 per previous check)
-to avoid becoming fatigued. Fatigued characters who fail a check become exhausted, then incapacitated, at which point
-the character's condition becomes dying after another failed Fortitude check.</p>
+to avoid becoming fatigued. Fatigued characters who fail a check become exhausted, incapacitated (rather than asleep),
+then dying. When a character becomes dying in this way his HP becomes -1 (if not already negative) and can't stabilize
+(even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until returned to a comfortable temperature.</p>
 <p>How often characters have to make Fortitude checks depends on the conditions. Once an hour for
 uncomfortable heat or cold (a hot summer day or cold winter day), once per 10 minutes for intense heat or cold (a
 blazing desert or Arctic conditions), once a minute for extreme heat or cold like the edge of a volcano or an arctic
 winter storm. Checks are made at the end of each period of exposure. Truly intense heat or cold--such as a blast furnace
-or touching liquid nitrogen--inflicts direct damage like an attack.</p>
-<p>Characters with the appropriate <b>Immunity</b> do not need to make Fortitude checks for
+or touching liquid nitrogen--inflicts direct <a href="powers/effects/damage-attack.html">damage</a> and is an attack.</p>
+<p>Characters with the appropriate <a href="powers/effects/immunity-defense.html">Immunity</a> do not need to make Fortitude checks for
 natural temperatures (up to intense temperatures). Additionally there are other things that factor into the temperature
 exposure checks such as: heavy or light clothing, drinking plenty of water, physical activity, direct sunlight,
 etc. The GM will determine the DCs and how frequently the checks occur based on these kinds of things.
@@ -237,21 +241,39 @@ The Gamemaster may also assign conditions such as sunburn and frostbite as appro
 <p>Heroes can go without water for a day. After this, they need to make a Fortitude check (DC 0,
 +1 per previous check) each hour to avoid a level of fatigue. Heroes can go without food for three days. After this,
 they must make a Fortitude check (DC 0, +1 per previous check) every 4 hours to avoid fatigue. The character cannot recover
-until he gets water or food. Heroes with <b>Immunity</b> to Starvation can go an unlimited time without food or
+until he gets water or food. Heroes with <a href="powers/effects/immunity-defense.html">Immunity</a> to Starvation can go an unlimited time without food or
 water. In all other cases a character will die after either 3 days without water or 7 days without food (do not roll
 a Fortitude check since it is impossible to pass). This makes the maximum DCs that can be survived DC 48 without water
 and DC 24 without food.</p>
 <p>Factors such as heat and physical activity may affect these sustenance checks as determined by the
 GM. A character fat enough might make it 8 days without food but no more since fat can't store everything a body needs (fat
 doesn't affect dehydration time at all).
-Failing one check will affect the other since it will make you fatigued. Some food can substitute for water
-(specifically watermelon) but water can never count as food.</p>
+Failing one check (starvation or thirst) will affect the other since it will make you fatigued. Some food can substitute for water
+(specifically watermelon) and some drinks can count as both if they have enough nutrients.</p>
 <h3 id="TOC-SUFFOCATION">SUFFOCATION</h3>
 <p>Characters can hold their breath for ten rounds (one minute) plus a number of rounds equal to
 twice their Stamina. After that time they must make a Fortitude check (DC 0) each round to continue holding their
 breath. The DC increases by +1 for each previous success. Failure on the Fortitude check means the character is forced to breath
-and if he is unable then he becomes incapacitated and on the following round he is dying. A dying character cannot stabilize until able to breathe
-again. Heroes with <b>Immunity</b> to Suffocation can go an unlimited time without air.</p>
+and if he is unable then he becomes incapacitated and on the following round he is dying and his HP becomes -1 (if not
+already negative). A dying character can't stabilize (even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until
+able to breathe again. Heroes with <a href="powers/effects/immunity-defense.html">Immunity</a> to Suffocation can go an unlimited time without air.</p>
+<h3 id="TOC-FORCED-LABOR">FORCED LABOR</h3>
+<p>Characters may be forced to perform manual labor (including if the character is forcing himself). This labor may either
+be difficult or something that is forced to continue for too long. Examples of forced labor include a forced march, boat rowing
+(either fast paced or over a long time), pushing mine carts, turning a mill, pushing a plow, outrunning a stampede,
+swimming to shore, and giving birth.</p>
+<p>First make a skill check (generally <a href="skills.html#TOC-ATHLETICS">Athletics</a>) using Stamina as the ability
+or make a raw Stamina check if no skill applies. This check determines how long you can go before starting to suffer from
+the forced labor and is dependent on the difficultly of the labor being done. After that you must make a Fortitude check
+every so often (from round to hour depending on difficulty) starting at DC 1 and increasing by 1 each check to avoid becoming
+fatigued. Fatigued characters who fail a check become exhausted, then asleep. If forced awake (including forcing yourself)
+then you are dazed (in addition to exhausted). The next failed Fortitude check after that you become dying and your HP
+becomes -1 (it can't have already been negative). Since dying causes you to become incapacitated your labor will stop and
+thus you can attempt to stabilize the following round (see <a href="the-basics/conditions.html">conditions</a>).</p>
+<p>Forced labor sometimes overlaps with hot and cold environments. In such cases use the rules for <a href="#TOC-HEAT-AND-COLD">heat and cold</a>
+with the labor causing the frequency of Fortitude checks to increase. Do not use the forced labor rules with increased
+frequency because characters should become incapacitated rather than asleep. This is also true for other environmental hazards
+such as starvation and suffocation.</p>
 <h3 id="TOC-FALLING">FALLING</h3>
 <p>A fall inflicts damage rank equal to (fallen distance - your size)*2 with a maximum of 18. A
 fall with a damage rank of 0 or less, such as a fall of 6 feet or less, inflicts no damage. You are prone at the end of
@@ -484,8 +506,9 @@ or more degrees of failure impose the incapacitated condition.</p>
 the lungs. A character who attempts to hold his breath must make a Fortitude check (DC 5) every round; the DC increases
 by 1 each round, and on a successful check the character loses a rank of Stamina (from the pressure on the linings of
 his lungs). If the check fails, or when the character simply stops holding his breath, he begins to suffocate: the next
-round, he becomes incapacitated. The following round, he's dying and cannot stabilize until returned to a normal
-atmosphere.</p>
+round, he becomes incapacitated. The following round, he's dying and his HP becomes -1 (if not
+already negative). A dying character can't stabilize (even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until
+until returned to a normal atmosphere.</p>
 <p>Unfiltered radiation bombards any character trapped in the vacuum of space without protective
 gear, see <b>Radiation</b>, previously (damage 6).</p>
 <p>Heroes able to ignore the effects of deep space must have <b>Immunity</b> to suffocation and
@@ -566,13 +589,11 @@ objects (anything without HP) is explained in <a href="powers/effects/damage-att
 removed when leaving. The conditions can't be removed by any other means. Having HP greater than 1 imposes no
 conditions. If you have 1 or less HP you are subject to minion rules with an exception that if your maximum HP is greater
 than 1 then you are still able to score critical hits against non-minions and failure doesn't automatically result in the worst degree.
-If you have exactly 0 HP then you are
-staggered; this does not replace any other kind of staggered because removal is different. At HP -3 or less you are
-dead (which removes all other conditions). While in the HP range of less than 0 but not dead you have either the Dying
-or Stabilized conditions both are removed when leaving this HP range (see Conditions for more details). When first
-entering negative HP (unless already Dead) you gain Dying.</p>
-<p>Whenever a character dies for any reason, their HP becomes -3. See <a
-href="#TOC-DEATH">Death</a> for more details.</p>
+If you have exactly 0 HP then you gain the HP condition staggered. At HP -3 (which is the minimum) you are
+dead (which removes all other conditions). While your HP is -2 or -1 you have either the Dying
+or Stabilized conditions both are removed when leaving this HP range (see <a href="the-basics/conditions.html">Conditions</a>
+for more details). When first entering negative HP (unless already dead) you gain Dying.</p>
+<p>Whenever a character dies for any reason, their HP becomes -3. See <a href="#TOC-DEATH">Death</a> for more details.</p>
 <h3 id="TOC-STRENGTH-AND-DAMAGE">STRENGTH AND DAMAGE</h3>
 <p>Strength provides a "built-in" <b>Damage</b> effect: the ability to hit things! You can apply
 effect modifiers to the damage your Strength inflicts, making it Penetrating or even an Area effect! You can also have
