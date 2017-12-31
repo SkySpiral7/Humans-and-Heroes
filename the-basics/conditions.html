@@ -44,14 +44,19 @@ for further penalties see Weakened.</p>
 <th class="blue-top-th">THIRD DEGREE</th>
 </tr>
 <tr>
+<td>--</td>
+<td>Compelled</td>
+<td>Controlled</td>
+</tr>
+<tr>
 <td>Dazed</td>
 <td>Stunned</td>
 <td>Incapacitated</td>
 </tr>
 <tr>
-<td>Vulnerable</td>
-<td>Defenseless</td>
-<td>--</td>
+<td>Fatigued</td>
+<td>Exhausted</td>
+<td>Asleep*</td>
 </tr>
 <tr>
 <td>Hindered</td>
@@ -64,14 +69,9 @@ for further penalties see Weakened.</p>
 <td>--</td>
 </tr>
 <tr>
-<td>Fatigued</td>
-<td>Exhausted</td>
-<td>Asleep*</td>
-</tr>
-<tr>
+<td>Vulnerable</td>
+<td>Defenseless</td>
 <td>--</td>
-<td>Compelled</td>
-<td>Controlled</td>
 </tr>
 </tbody>
 </table>
@@ -96,7 +96,7 @@ the dazed is ignored and the compelled functions normally. Controlled supersedes
 <li><b>Controlled</b>: A controlled character has no free will; the character's actions each turn are dictated by another,
 controlling, character.</li>
 <li><b>Dazed</b>: A dazed character is limited to free actions and a single standard action per turn, although the character
-may use that action to perform a move, as usual. Stunned supersedes dazed.</li>
+may use that action to perform a move, as usual. Stunned and incapacitated both supersede dazed.</li>
 <li><b>Debilitated</b>: The character has one or more abilities lowered below -5. Debilitated supersedes weakened and disabled
 (and impaired) of the same trait. (See <b>Debilitated Abilities</b> in <a href="../abilities.html">Abilities</a> for further details.)</li>
 <li><b>Defenseless</b>: A defenseless character has active defense result of 0. Note that this affects the result not
@@ -120,7 +120,8 @@ forth. If it applies to the same trait(s), disabled supersedes impaired.</li>
 <li><b>Mental Transformed and Mind Switched</b>: These are simply placeholders to represent that the character in under that
 effect. See <b>Mental Transform</b> and <b>Mind Switch</b> for details.</li>
 <li><b>Stunned</b>: Stunned characters cannot take any actions, including free actions. Although reaction effects may still trigger
-and all defense checks can still be made. A stunned character is also immobile since movement requires an action. Stunned supersedes dazed.</li>
+and all defense checks can still be made. A stunned character is also immobile since movement requires an action. Stunned
+supersedes dazed and incapacitated supersedes stunned.</li>
 <li><b>Unaware</b>: The character is completely unaware of his surroundings, unable to make interaction or Perception checks
 or perform any action based on them. If the condition applies to a specific sense or senses, they are added to the name of
 the condition, such as visually unaware (blind), tactilely unaware (or numb), and so forth. Subjects have full concealment
@@ -203,7 +204,7 @@ an interaction skill check (DC = effect rank).</li>
 <li><b>Exhausted</b>: Exhausted characters are near collapse. They are impaired and hindered. Characters recover from an
 exhausted condition after 8 hours of sleep. Resting will cause the asleep condition with no check. Exhausted supersedes Fatigued.</li>
 <li><b>Incapacitated</b>: An incapacitated character is defenseless, stunned, and unaware. Incapacitated characters generally
-also fall prone, unless some outside force or aid keeps them standing.</li>
+also fall prone, unless some outside force or aid keeps them standing. Incapacitated supersedes both dazed and stunned.</li>
 <li><b>Paralyzed</b>: A paralyzed character is defenseless, immobile, and physically stunned, frozen in place and unable to
 move, but still aware and able to take purely mental actions, involving no physical movement whatsoever.</li>
 <li><b>Prone</b>: A prone character is lying on the ground, receiving a -1 circumstance penalty on close attack checks.
@@ -218,6 +219,257 @@ character is immobile unless the other object or character moves. Bound supersed
 to avoid attacks. The character takes a -10 penalty to initiative. This condition is removed when their turn comes or combat
 ends but can't be removed by other means.</li>
 </ul>
+<h2 id="TOC-CONDITION-CARDS">CONDITION CARDS</h2>
+<table>
+<tr>
+<td></td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Compelled</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">--</td>
+<td style="width: 33%;">&#8226; <b>Compelled</b> &#8226;</td>
+<td style="width: 33%;">Controlled</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 2.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> you are directed by an outside force, but struggling against it.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Single standard action per turn, chosen by the controlling character.</li>
+<li>Dazed is ignored (but not removed).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Controlled</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">--</td>
+<td style="width: 33%;">Compelled</td>
+<td style="width: 33%;">&#8226; <b>Controlled</b> &#8226;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 3.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> you have no free will at all. Even your thoughts are not your own.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Another character controls your every action.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Dazed</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">&#8226; <b>Dazed</b> &#8226;</td>
+<td style="width: 33%;">Stunned</td>
+<td style="width: 33%;">Incapacitated</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 1.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Stunned or Incapacitated,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> something is slowing you down such as mental distress, physical damage, or sickness. Being tired
+is possible but Fatigued would be a better fit.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Single standard action per turn.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Stunned</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">Dazed</td>
+<td style="width: 33%;">&#8226; <b>Stunned</b> &#8226;</td>
+<td style="width: 33%;">Incapacitated</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 2.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Incapacitated,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> you are barely able to act such that it takes all of your energy just to avoid attacks or maybe
+an incoming attack is the only thing strong enough for you to muster the will power to act.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Can't take any actions (not even free actions).</li>
+<li>Can't move but does not remove immobile.</li>
+<li>Defense checks can be made, reactions can still trigger.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Incapacitated</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">Dazed</td>
+<td style="width: 33%;">Stunned</td>
+<td style="width: 33%;">&#8226; <b>Incapacitated</b> &#8226;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 3.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Role-playing:</b> you are unconscious (not asleep) due to damage or disease. You may dream but not use mental abilities.</li>
+<li><b>Type:</b> Combined.</li>
+<li><b>Made of:</b> defenseless, stunned, and unaware</li>
+<li><b>Effect:</b>
+<ul>
+<li>When you become Incapacitated fall prone unless held up.</li>
+<li>Defenseless: see Defenseless card.</li>
+<li>Stunned: see Stunned card.</li>
+<li>Unaware: see Unaware card.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Template</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">&#8226; <b>Compelled</b> &#8226;</td>
+<td style="width: 33%;">Compelled</td>
+<td style="width: 33%;">Controlled</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 1.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled or Controlled,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic/Damage/Combined.</li>
+<li><b>Made of:</b> dazed, impaired.</li>
+<li><b>Role-playing:</b> asd.</li>
+<li><b>Effect:</b>
+<ul>
+<li>asd</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Template</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">Compelled</td>
+<td style="width: 33%;">&#8226; <b>Compelled</b> &#8226;</td>
+<td style="width: 33%;">Controlled</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 2.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> end of each of your turns.</li>
+<li><b>Type:</b> Basic/Damage/Combined.</li>
+<li><b>Made of:</b> dazed, impaired.</li>
+<li><b>Role-playing:</b> asd.</li>
+<li><b>Effect:</b>
+<ul>
+<li>asd.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div class="green-panel generated-class-15" style="height: 550px; display: flex;flex-direction: column;">
+<div>Template</div>
+<div style="flex-grow: 1;">
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<td style="width: 33%;">Compelled</td>
+<td style="width: 33%;">Controlled</td>
+<td style="width: 33%;">&#8226; <b>Compelled</b> &#8226;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><b><a href="../powers/effects/affliction-attack.html">Affliction</a> degree:</b> 3.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Type:</b> Basic/Damage/Combined.</li>
+<li><b>Made of:</b> dazed, impaired.</li>
+<li><b>Role-playing:</b> asd.</li>
+<li><b>Effect:</b>
+<ul>
+<li>asd</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </td>
 </tr>
 </tbody>
