@@ -386,8 +386,8 @@ th {
 
 .condition-card-table td > div {
    border: solid thin grey;
-   width: 450px;
-   height: 550px;
+   width: 500px;
+   height: 650px;
    display: flex;
    flex-direction: column;
 }
