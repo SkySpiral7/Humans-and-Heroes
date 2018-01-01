@@ -99,6 +99,9 @@ controlling, character.</li>
 may use that action to perform a move, as usual. Stunned and incapacitated both supersede dazed.</li>
 <li><b>Debilitated</b>: The character has one or more abilities lowered below -5. Debilitated supersedes weakened and disabled
 (and impaired) of the same trait. (See <a href="../abilities.html#TOC-DEBILITATED-ABILITIES">Debilitated Abilities</a>.)</li>
+<li><b>Deaf</b>: The character cannot hear. This is caused by being auditorily unaware: giving everything total auditory
+concealment from him. Interaction with other characters is limited to sign-language and lip-reading (see <b>Interaction
+Skills</b> in <a href="../abilities.html">Abilities</a> for more information).</li>
 <li><b>Defenseless</b>: A defenseless character has active defense result of 0. Note that this affects the result not
 just the defense values meaning there is no need to roll dice or add up modifiers because the sum is always 0 (which almost
 always fails). Attackers can make attacks on defenseless opponents as routine checks (see <b>Routine Checks</b>). The
@@ -108,6 +111,9 @@ checks (see the <b>Prone</b> combined condition later in this section).</li>
 <li><b>Disabled</b>: A disabled character is at a -2 circumstance penalty on checks. If the penalty applies to specific
 checks, they are added to the name of the condition, such as Attack Disabled, Fighting Disabled, Perception Disabled, and
 so forth. If it applies to the same trait(s), disabled supersedes impaired.</li>
+<li><b>Entranced</b>: An entranced character is stunned, taking no actions other than paying attention to the entrancing
+effect. Any obvious threat automatically breaks the trance. An ally can also shake a character free of the condition with
+an interaction skill check (DC = effect rank).</li>
 <li><b>Fatigued</b>: Fatigued characters are hindered. Characters recover from a fatigued condition after 1 hour of rest
 (even if awake). Exhausted supersedes Fatigued.</li>
 <li><b>Hindered</b>: A hindered character moves at half normal speed (-1 speed rank). Immobile supersedes hindered.</li>
@@ -118,10 +124,20 @@ may be moved by another character. These characters can't Dodge area attacks.</l
 checks, they are added to the name of the condition, such as Attack Impaired, Fighting Impaired, Perception Impaired, and so
 forth. If it applies to the same trait(s), disabled supersedes impaired.</li>
 <li><b>Mental Transformed and Mind Switched</b>: These are simply placeholders to represent that the character in under that
-effect. See <b>Mental Transform</b> and <b>Mind Switch</b> for details.</li>
+effect. See <a href="../powers/effects/mental-transform-attack.html">Mental Transform</a> and
+<a href="../powers/effects/mind-switch-attack.html">Mind Switch</a> for details.</li>
+<li><b>Prone</b>: A prone character is lying on the ground, receiving a -1 circumstance penalty on <a href="../skills.html#TOC-CLOSE-COMBAT">close attack</a>
+checks. Opponents receive a +1 circumstance bonus to <a href="../skills.html#TOC-CLOSE-COMBAT">close attack</a> checks but
+a -1 penalty to <a href="../skills.html#TOC-RANGED-COMBAT">ranged attack</a> checks (effectively giving the prone character
+<a href="../action-adventure.html#TOC-COVER">partial cover</a> against <a href="../skills.html#TOC-RANGED-COMBAT">ranged attacks</a>).
+Prone characters are hindered. <a href="../action-adventure.html#TOC-STAND---MOVE-ACTION">Standing up</a> from a prone
+position is a move action.</li>
 <li><b>Stunned</b>: Stunned characters cannot take any actions, including free actions. Although reaction effects may still trigger
 and all defense checks can still be made. A stunned character is also immobile since movement requires an action. Stunned
 supersedes dazed and incapacitated supersedes stunned.</li>
+<li><b>Surprised</b>: A surprised character is vulnerable. They are caught off-guard and therefore less able to act, and less able
+to avoid attacks. The character takes a -10 penalty to initiative. This condition is removed when their turn comes or combat
+ends but can't be removed by other means.</li>
 <li><b>Unaware</b>: The character is completely unaware of his surroundings, unable to make interaction or Perception checks
 or perform any action based on them. If the condition applies to a specific sense or senses, they are added to the name of
 the condition, such as visually unaware (blind), tactilely unaware (or numb), and so forth. Subjects have full concealment
@@ -133,6 +149,43 @@ results (rounded up). Note that this affects the result meaning you add together
 you half it. Defenseless supersedes vulnerable.</li>
 <li><b>Weakened</b>: The character has temporarily lost character points in a trait. See <a href="../powers/effects/weaken-attack.html">Weaken</a>.
 Debilitated supersedes weakened.</li>
+</ul>
+<h2 id="TOC-COMBINED-CONDITIONS">COMBINED CONDITIONS</h2>
+<p>Combined conditions are sets of basic conditions tied to a common descriptor. They're essentially a kind of
+"short-hand" for talking about a group of basic conditions that go together in a particular circumstance, much like a
+power is a collection of basic effects.</p>
+<p>The individual conditions making up a combined condition can be resolved individually. For example, if an effect that
+removes the dazed condition is used on a staggered character (who is dazed and hindered), then the character is no
+longer dazed, only hindered. Similarly, if an effect imposes a condition that supersedes part of the combined condition,
+only that part changes. So an effect that stuns a staggered character means the character is now stunned (superseding
+dazed) and hindered. Similarly, an effect that immobilizes a staggered character leaves the target dazed and immobile
+(superseding the hindered element of the combined condition).</p>
+<ul>
+<li><b>Asleep</b>: While asleep, a character is defenseless, stunned, and has several perception penalties. The character
+is unaware to all visual senses and take a -5 perception penalty to all hearing, olfactory, radio, mental, and some exotic
+senses at the GM's discretion. The DC to wake up is the same as it would be to sense the source if awake, if successful the
+subject knows which sense was used but doesn't know what caused it.
+This sense check is made every hour or every time the DC decreases. Since tactile (and sense of balance) doesn't receive
+a perception penalty it is often strong enough to
+wake someone. If a character does not require sleep then the GM may provide a circumstance bonus to perception checks made
+to waking up. Any effect allowing a resistance check will wake you up unless it fails to affect you. Nightmares and other
+circumstances can also cause someone to wake up. Asleep does not replace Fatigued or Exhausted however sleeping for 1 hour
+will remove Fatigued and sleeping for 8 hours will remove Exhausted. Once you are no longer Fatigued or Exhausted you may
+naturally wake up after an amount of time determined by the GM with no check required.</li>
+<li><b>Blind</b>: The character cannot see. This is caused by being visually unaware: everything effectively has full visual
+concealment from him. He is hindered and defenseless, and for activities where vision is a factor may be disabled (or more)
+if able to perform the task at all.</li>
+<li><b>Bound</b>: A bound character is defenseless, immobile, and impaired.</li>
+<li><b>Exhausted</b>: Exhausted characters are near collapse. They are impaired and hindered. Characters recover from an
+exhausted condition after 8 hours of sleep. Resting will cause the asleep condition with no check. Exhausted supersedes Fatigued.</li>
+<li><b>Incapacitated</b>: An incapacitated character is defenseless, stunned, and unaware. Incapacitated characters generally
+also fall prone, unless some outside force or aid keeps them standing. Incapacitated supersedes both dazed and stunned.</li>
+<li><b>Paralyzed</b>: A paralyzed character is defenseless, immobile, and physically stunned, frozen in place and unable to
+move, but still aware and able to take purely mental actions, involving no physical movement whatsoever.</li>
+<li><b>Restrained</b>: A restrained character is hindered and vulnerable. If the restraints are anchored to an immobile
+object, the character is immobile rather than hindered. If anchored to anything else, such as another character, the restrained
+character is immobile unless the other object or character moves. Bound supersedes restrained.</li>
+<li><b>Staggered</b>: A staggered character is dazed and hindered.</li>
 </ul>
 <h2 id="TOC-DAMAGE-CONDITIONS">DAMAGE CONDITIONS</h2>
 <p>Damage conditions (or HP conditions are conditions imposed by a <a href="../powers/effects/damage-attack.html">damage</a>
@@ -169,59 +222,12 @@ until the circumstances are removed. Stabilized and Dying are mutually exclusive
 getting any closer. This is an HP exclusive condition while HP is negative. Stabilized and Dying are mutually exclusive:
 one always replaces the other. If a Stabilized character loses any HP but is still alive then they become Dying (replacing this condition).</li>
 </ul>
-<h2 id="TOC-COMBINED-CONDITIONS">COMBINED CONDITIONS</h2>
-<p>Combined conditions are sets of basic conditions tied to a common descriptor. They're essentially a kind of
-"short-hand" for talking about a group of basic conditions that go together in a particular circumstance, much like a
-power is a collection of basic effects.</p>
-<p>The individual conditions making up a combined condition can be resolved individually. For example, if an effect that
-removes the dazed condition is used on a staggered character (who is dazed and hindered), then the character is no
-longer dazed, only hindered. Similarly, if an effect imposes a condition that supersedes part of the combined condition,
-only that part changes. So an effect that stuns a staggered character means the character is now stunned (superseding
-dazed) and hindered. Similarly, an effect that immobilizes a staggered character leaves the target dazed and immobile
-(superseding the hindered element of the combined condition).</p>
-<ul>
-<li><b>Asleep</b>: While asleep, a character is defenseless, stunned, and has several perception penalties. The character
-is unaware to all visual senses and take a -5 perception penalty to all hearing, olfactory, radio, mental, and some exotic
-senses at the GM's discretion. The DC to wake up is the same as it would be to sense the source if awake, if successful the
-subject knows which sense was used but doesn't know what caused it.
-This sense check is made every hour or every time the DC decreases. Since tactile (and sense of balance) doesn't receive
-a perception penalty it is often strong enough to
-wake someone. If a character does not require sleep then the GM may provide a circumstance bonus to perception checks made
-to waking up. Any effect allowing a resistance check will wake you up unless it fails to affect you. Nightmares and other
-circumstances can also cause someone to wake up. Asleep does not replace Fatigued or Exhausted however sleeping for 1 hour
-will remove Fatigued and sleeping for 8 hours will remove Exhausted. Once you are no longer Fatigued or Exhausted you may
-naturally wake up after an amount of time determined by the GM with no check required.</li>
-<li><b>Blind</b>: The character cannot see. This is caused by being visually unaware: everything effectively has full visual
-concealment from him. He is hindered and defenseless, and for activities where vision is a factor may be disabled (or more)
-if able to perform the task at all.</li>
-<li><b>Bound</b>: A bound character is defenseless, immobile, and impaired.</li>
-<li><b>Deaf</b>: The character cannot hear. This is caused by being auditorily unaware: giving everything total auditory
-concealment from him. Interaction with other characters is limited to sign-language and lip-reading (see <b>Interaction
-Skills</b> in <a href="../abilities.html">Abilities</a> for more information).</li>
-<li><b>Entranced</b>: An entranced character is stunned, taking no actions other than paying attention to the entrancing
-effect. Any obvious threat automatically breaks the trance. An ally can also shake a character free of the condition with
-an interaction skill check (DC = effect rank).</li>
-<li><b>Exhausted</b>: Exhausted characters are near collapse. They are impaired and hindered. Characters recover from an
-exhausted condition after 8 hours of sleep. Resting will cause the asleep condition with no check. Exhausted supersedes Fatigued.</li>
-<li><b>Incapacitated</b>: An incapacitated character is defenseless, stunned, and unaware. Incapacitated characters generally
-also fall prone, unless some outside force or aid keeps them standing. Incapacitated supersedes both dazed and stunned.</li>
-<li><b>Paralyzed</b>: A paralyzed character is defenseless, immobile, and physically stunned, frozen in place and unable to
-move, but still aware and able to take purely mental actions, involving no physical movement whatsoever.</li>
-<li><b>Prone</b>: A prone character is lying on the ground, receiving a -1 circumstance penalty on <a href="../skills.html#TOC-CLOSE-COMBAT">close attack</a>
-checks. Opponents receive a +1 circumstance bonus to <a href="../skills.html#TOC-CLOSE-COMBAT">close attack</a> checks but
-a -1 penalty to <a href="../skills.html#TOC-RANGED-COMBAT">ranged attack</a> checks (effectively giving the prone character
-<a href="../action-adventure.html#TOC-COVER">partial cover</a> against <a href="../skills.html#TOC-RANGED-COMBAT">ranged attacks</a>).
-Prone characters are hindered. <a href="../action-adventure.html#TOC-STAND---MOVE-ACTION">Standing up</a> from a prone
-position is a move action.</li>
-<li><b>Restrained</b>: A restrained character is hindered and vulnerable. If the restraints are anchored to an immobile
-object, the character is immobile rather than hindered. If anchored to anything else, such as another character, the restrained
-character is immobile unless the other object or character moves. Bound supersedes restrained.</li>
-<li><b>Staggered</b>: A staggered character is dazed and hindered.</li>
-<li><b>Surprised</b>: A surprised character is vulnerable. They are caught off-guard and therefore less able to act, and less able
-to avoid attacks. The character takes a -10 penalty to initiative. This condition is removed when their turn comes or combat
-ends but can't be removed by other means.</li>
-</ul>
 <h2 id="TOC-CONDITION-CARDS">CONDITION CARDS</h2>
+<p>The following cards contain information about each condition in a way that makes quick reference easy. Handing out these
+cards (if printed) is also an easy way to keep track of who has what condition and a reminder of the effect.</p>
+<p>Order of the cards is progressive conditions (alphabetically) with the column matching the degree. Then other basic/combined
+conditions with each row being closely related (alphabetically). Then all miscellaneous basic/combined conditions alphabetically.
+Then the object damage conditions (column matching degree). And finally character damage conditions alphabetically.</p>
 <table class="condition-card-table">
 <tr>
 <td></td>
@@ -692,6 +698,165 @@ becoming Defenseless, resistance check.</li>
 <tr>
 <td>
 <div>
+<h3>Restrained</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> being <a href="../action-adventure.html#TOC-GRAB---STANDARD-ACTION">grabbed</a> (succeeded by 1),
+circumstances such as being tied up with ropes.</li>
+<li><b>Removed by:</b> a successful <a href="../action-adventure.html#TOC-ESCAPE---MOVE-ACTION">escape</a> action,
+<a href="../skills.html#TOC-SLEIGHT-OF-HAND">sleight of hand</a> escaping.</li>
+<li><b>Type:</b> Combined.</li>
+<li><b>Made of:</b> vulnerable, hindered or immobile.</li>
+<li><b>Role-playing:</b> you are either in a grab or tied up. You can't choose to move and have difficulty defending but
+can perform other actions just fine.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Restrained is only obtained by circumstances (never <a href="../powers/effects/affliction-attack.html">Affliction</a>) therefore
+this condition can't be removed until after the circumstances end at which point Restrained is removed.</li>
+<li>Vulnerable: see Vulnerable card.</li>
+<li>Either hindered or Immobile: you can't choose to move. Whether you can be moved depends on what you are anchored to.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
+<h3>Bound</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> being <a href="../action-adventure.html#TOC-GRAB---STANDARD-ACTION">grabbed</a> (succeeded by 2
+or more), circumstances such as being tied up with ropes.</li>
+<li><b>Removed by:</b> a successful <a href="../action-adventure.html#TOC-ESCAPE---MOVE-ACTION">escape</a> action,
+<a href="../skills.html#TOC-SLEIGHT-OF-HAND">sleight of hand</a> escaping.</li>
+<li><b>Type:</b> Combined.</li>
+<li><b>Made of:</b> defenseless, immobile, and impaired.</li>
+<li><b>Role-playing:</b> you are either in a very secure grab or tied up tightly. You are unable to move and have difficulty
+acting.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Bound is only obtained by circumstances (never <a href="../powers/effects/affliction-attack.html">Affliction</a>) therefore
+this condition can't be removed until after the circumstances end at which point Bound is removed.</li>
+<li>Defenseless: see Defenseless card.</li>
+<li>Immobile: see Immobile card.</li>
+<li>Impaired: see Impaired card.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div>
+<h3>Unaware</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
+being unable to see in darkness or unable to hear in space.</li>
+<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> one of your senses isn't working or is being blocked.</li>
+<li><b>Effect:</b>
+<ul>
+<li>You are unable to use that sense for <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or other uses.
+If you are unaware for all senses then you can't make any kind of <a href="../skills.html#TOC-PERCEPTION">perception</a>
+check and are limited in possible actions.</li>
+<li>If you are visually unaware see the Blind card for more effects.</li>
+<li>If you are auditorily unaware see the Deaf card for more effects.</li>
+<li>If you are Unaware because of circumstances then this condition can't be removed until after the circumstances end
+at which point Unaware is removed.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
+<h3>Blind</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
+being unable to see in darkness.</li>
+<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Type:</b> Combined.</li>
+<li><b>Made of:</b> hindered, defenseless.</li>
+<li><b>Role-playing:</b> you are unable to see.</li>
+<li><b>Effect:</b>
+<ul>
+<li>You are unable make visual <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or use sight at all.</li>
+<li>Everything has full visual concealment from you.</li>
+<li>For activities where vision is a factor you may be disabled (or more) if able to perform the task at all.</li>
+<li>If you are Blind because of circumstances then this condition can't be removed until after the circumstances end
+at which point Blind is removed.</li>
+<li>Defenseless: see Defenseless card.</li>
+<li>Hindered: see Hindered card.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
+<h3>Deaf</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
+being unable to hear in space.</li>
+<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
+resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Type:</b> Simple.</li>
+<li><b>Role-playing:</b> you are unable to hear and thus people can't talk to you.</li>
+<li><b>Effect:</b>
+<ul>
+<li>You are unable make auditory <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or use hearing at all.</li>
+<li>Everything has full auditory concealment from you.</li>
+<li>If you are Deaf because of circumstances then this condition can't be removed until after the circumstances end
+at which point Deaf is removed.</li>
+<li>Your ability to communicate is limited since people can't talk to you. You must either use sign-language, lip-reading,
+writing, or <a href="../powers/effects/communication-sensory.html">communication</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div>
+<h3>Weakened</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/weaken-attack.html">Weaken</a>.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, recover 1 character point
+at the end of your turns until removed.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> a part of you has been weakened.</li>
+<li><b>Effect:</b>
+<ul>
+<li><a href="../powers/effects/weaken-attack.html">Weaken</a> can drain the character points of any trait.
+Abilities can be used until Debilitated, defenses can always be used, and the rest can only be used if it has at least 1
+rank. It is possible to use traits at lower ranks.</li>
+<li>When all of your character points have returned remove this condition.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
 <h3>Debilitated</h3>
 <div>
 <ul>
@@ -703,6 +868,34 @@ or normal recovery (see <a href="../powers/effects/weaken-attack.html">weaken</a
 <li><b>Effect:</b>
 <ul>
 <li>Varies by ability. See <a href="../abilities.html#TOC-DEBILITATED-ABILITIES">Debilitated Abilities</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div>
+<h3>Entranced</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 1.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check,
+sensing an obvious treat, being shaken free.</li>
+<li><b>Resistance check frequency:</b> each round.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> there is something that you can't remove your attention from (likely appealing but could also be
+horrifying or others).</li>
+<li><b>Effect:</b>
+<ul>
+<li>Stunned: you can't take any action (including free actions) except that which are required to pay attention to the
+effect. For example you may continue <a href="../powers/effects/flight-movement.html">flying</a> to watch the effect if
+that is required.</li>
+<li>You are not defenseless. Any attack or other obvious treat removes Entranced and allows you to avoid that attack.</li>
+<li>An ally can shake you free with an interaction skill check (DC = effect rank).</li>
 </ul>
 </li>
 </ul>
@@ -747,164 +940,6 @@ ended by choice (by one who can choose).</li>
 <li>This condition is given to all persons involved in the <a href="../powers/effects/mind-switch-attack.html">Mind Switch</a>.</li>
 <li>Generally you have the physical traits of the body you are in and all of your mental traits.</li>
 <li>Details are very complex. See <a href="../powers/effects/mind-switch-attack.html">Mind Switch</a>.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<div>
-<h3>Unaware</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
-being unable to see in darkness or unable to hear in space.</li>
-<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
-resistance check.</li>
-<li><b>Resistance check frequency:</b> each minute.</li>
-<li><b>Type:</b> Basic.</li>
-<li><b>Role-playing:</b> one of your senses isn't working or is being blocked.</li>
-<li><b>Effect:</b>
-<ul>
-<li>You are unable to use that sense for <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or other uses.
-If you are unaware for all senses then you can't make any kind of <a href="../skills.html#TOC-PERCEPTION">perception</a>
-check and are limited in possible actions.</li>
-<li>If you are visually unaware see the Blind card for more effects.</li>
-<li>If you are auditorily unaware see the Deaf card for more effects.</li>
-<li>If you are Unaware because of circumstances then this condition can't be removed until after the circumstances end
-at which point Unaware is removed.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-<td>
-<div>
-<h3>Weakened</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/weaken-attack.html">Weaken</a>.</li>
-<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, recover 1 character point
-at the end of your turns until removed.</li>
-<li><b>Type:</b> Basic.</li>
-<li><b>Role-playing:</b> a part of you has been weakened.</li>
-<li><b>Effect:</b>
-<ul>
-<li><a href="../powers/effects/weaken-attack.html">Weaken</a> can drain the character points of any trait.
-Abilities can be used until Debilitated, defenses can always be used, and the rest can only be used if it has at least 1
-rank. It is possible to use traits at lower ranks.</li>
-<li>When all of your character points have returned remove this condition.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-<td>
-<div>
-<h3>Blind</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
-being unable to see in darkness.</li>
-<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
-resistance check.</li>
-<li><b>Resistance check frequency:</b> each minute.</li>
-<li><b>Type:</b> Combined.</li>
-<li><b>Made of:</b> hindered, defenseless.</li>
-<li><b>Role-playing:</b> you are unable to see.</li>
-<li><b>Effect:</b>
-<ul>
-<li>You are unable make visual <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or use sight at all.</li>
-<li>Everything has full visual concealment from you.</li>
-<li>For activities where vision is a factor you may be disabled (or more) if able to perform the task at all.</li>
-<li>If you are Blind because of circumstances then this condition can't be removed until after the circumstances end
-at which point Blind is removed.</li>
-<li>Defenseless: see Defenseless card.</li>
-<li>Hindered: see Hindered card.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<div>
-<h3>Bound</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> being <a href="../action-adventure.html#TOC-GRAB---STANDARD-ACTION">grabbed</a> (succeeded by 2
-or more), circumstances such as being tied up with ropes.</li>
-<li><b>Removed by:</b> a successful <a href="../action-adventure.html#TOC-ESCAPE---MOVE-ACTION">escape</a> action,
-<a href="../skills.html#TOC-SLEIGHT-OF-HAND">sleight of hand</a> escaping.</li>
-<li><b>Type:</b> Combined.</li>
-<li><b>Made of:</b> defenseless, immobile, and impaired.</li>
-<li><b>Role-playing:</b> you are either in a very secure grab or tied up tightly. You are unable to move and have difficulty
-acting.</li>
-<li><b>Effect:</b>
-<ul>
-<li>Bound is only obtained by circumstances (never <a href="../powers/effects/affliction-attack.html">Affliction</a>) therefore
-this condition can't be removed until after the circumstances end at which point Bound is removed.</li>
-<li>Defenseless: see Defenseless card.</li>
-<li>Immobile: see Immobile card.</li>
-<li>Impaired: see Impaired card.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-<td>
-<div>
-<h3>Deaf</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3, circumstances such as
-being unable to hear in space.</li>
-<li><b>Remove <a href="../powers/effects/affliction-attack.html">Affliction</a> by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>,
-resistance check.</li>
-<li><b>Resistance check frequency:</b> each minute.</li>
-<li><b>Type:</b> Simple.</li>
-<li><b>Role-playing:</b> you are unable to hear and thus people can't talk to you.</li>
-<li><b>Effect:</b>
-<ul>
-<li>You are unable make auditory <a href="../skills.html#TOC-PERCEPTION">perception</a> checks or use hearing at all.</li>
-<li>Everything has full auditory concealment from you.</li>
-<li>If you are Deaf because of circumstances then this condition can't be removed until after the circumstances end
-at which point Deaf is removed.</li>
-<li>Your ability to communicate is limited since people can't talk to you. You must either use sign-language, lip-reading,
-writing, or <a href="../powers/effects/communication-sensory.html">communication</a>.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-<td>
-<div>
-<h3>Entranced</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 1.</li>
-<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check,
-sensing an obvious treat, being shaken free.</li>
-<li><b>Resistance check frequency:</b> each round.</li>
-<li><b>Type:</b> Basic.</li>
-<li><b>Role-playing:</b> there is something that you can't remove your attention from (likely appealing but could also be
-horrifying or others).</li>
-<li><b>Effect:</b>
-<ul>
-<li>Stunned: you can't take any action (including free actions) except that which are required to pay attention to the
-effect. For example you may continue <a href="../powers/effects/flight-movement.html">flying</a> to watch the effect if
-that is required.</li>
-<li>You are not defenseless. Any attack or other obvious treat removes Entranced and allows you to avoid that attack.</li>
-<li>An ally can shake you free with an interaction skill check (DC = effect rank).</li>
 </ul>
 </li>
 </ul>
@@ -964,33 +999,6 @@ resistance check.</li>
 </td>
 <td>
 <div>
-<h3>Restrained</h3>
-<div>
-<ul>
-<li><b>Obtained by:</b> being <a href="../action-adventure.html#TOC-GRAB---STANDARD-ACTION">grabbed</a> (succeeded by 1),
-circumstances such as being tied up with ropes.</li>
-<li><b>Removed by:</b> a successful <a href="../action-adventure.html#TOC-ESCAPE---MOVE-ACTION">escape</a> action,
-<a href="../skills.html#TOC-SLEIGHT-OF-HAND">sleight of hand</a> escaping.</li>
-<li><b>Type:</b> Combined.</li>
-<li><b>Made of:</b> vulnerable, hindered or immobile.</li>
-<li><b>Role-playing:</b> you are either in a grab or tied up. You can't choose to move and have difficulty defending but
-can perform other actions just fine.</li>
-<li><b>Effect:</b>
-<ul>
-<li>Restrained is only obtained by circumstances (never <a href="../powers/effects/affliction-attack.html">Affliction</a>) therefore
-this condition can't be removed until after the circumstances end at which point Restrained is removed.</li>
-<li>Vulnerable: see Vulnerable card.</li>
-<li>Either hindered or Immobile: you can't choose to move. Whether you can be moved depends on what you are anchored to.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<div>
 <h3>Staggered</h3>
 <div>
 <ul>
@@ -1010,6 +1018,8 @@ this condition can't be removed until after the circumstances end at which point
 </div>
 </div>
 </td>
+</tr>
+<tr>
 <td>
 <div>
 <h3>Surprised</h3>
@@ -1031,6 +1041,7 @@ check or from a trap or traitor.</li>
 </div>
 </div>
 </td>
+<td></td>
 <td></td>
 </tr>
 <tr>
