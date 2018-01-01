@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.github.SkySpiral7.Java.pojo.FileGatherer;
-import com.github.SkySpiral7.Java.util.FileIoUtil;
+import com.github.skySpiral7.java.pojo.FileGatherer;
+import com.github.skySpiral7.java.util.FileIoUtil;
 
 public class SiteMapCreator
 {

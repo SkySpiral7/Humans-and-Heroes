@@ -1,7 +1,5 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -14,6 +12,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.github.skySpiral7.java.util.FileIoUtil;
 
 public class UnlinkedFileDetector
 {
