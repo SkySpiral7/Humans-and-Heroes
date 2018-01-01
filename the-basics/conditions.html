@@ -156,8 +156,8 @@ and <a href="../powers/effects/healing-general.html">Healing</a>. See <a href=".
 object does not function). Destroyed replaces broken. See <a href="../powers/effects/damage-attack.html#TOC-DAMAGING-OBJECTS">Damage</a>
 for more info.</li>
 <li><b>Dying</b>: A dying character is incapacitated (defenseless, stunned, and unaware) and near death. This is an HP
-exclusive condition while HP is negative. Dying characters make a Fortitude check (DC 5) during each of their turns until they either die
-or stabilize. If a character gains this condition during their own turn they won't need to make a check until their next turn.
+exclusive condition while HP is negative. Dying characters make a Fortitude check (DC 5) at the start of each of their turns
+until they either die or stabilize. If a character gains this condition during their own turn they won't need to make a check until their next turn.
 If the check succeeds exactly, nothing happens. If the check succeeds by 1 or more (not degrees but actual difference),
 the character stabilizes, removing this
 condition (see Stabilized). If the check fails, they lose 1 HP. Another character can stabilize a
@@ -1174,7 +1174,7 @@ condition and can stack with Impaired: Toughness.</li>
 <h3>Dead</h3>
 <div>
 <ul>
-<li><b>Obtained by:</b> having -3 HP, or dying from circumstances.</li>
+<li><b>Obtained by:</b> having -3 HP (which is the minimum), or dying from circumstances.</li>
 <li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Resurrection Healing</a>, <a href="../powers/effects/immortality-defense.html">immortality</a>.</li>
 <li><b>Type:</b> Damage.</li>
 <li><b>Role-playing:</b> you are dead. If you are brought back to life ask the gamemaster what kind of experience you had
@@ -1201,14 +1201,24 @@ or if you are allowed to make one up. Otherwise make a new character.</li>
 <h3>Dying</h3>
 <div>
 <ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/damage-attack.html">damage</a>.</li>
-<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled or Controlled,
-resistance check.</li>
+<li><b>Obtained by:</b> going from non-negative (0 or more) HP to -1 or -2, losing HP while stabilized, <a href="../action-adventure.html#TOC-ENVIRONMENTAL-HAZARDS">environmental hazards</a>
+(which will set your HP to -1).</li>
+<li><b>Removed by:</b> having 0 or more HP, becoming Stabilized (see Stabilized card).</li>
 <li><b>Type:</b> Damage.</li>
-<li><b>Role-playing:</b> asd.</li>
+<li><b>Role-playing:</b> you are unconscious and approaching death. It is still possible you will survive.</li>
 <li><b>Effect:</b>
 <ul>
-<li>asd</li>
+<li>You are incapacitated (see Incapacitated card) but this doesn't removed incapacitated.</li>
+<li>At the start of your turn if you have <a href="../advantages.html#TOC-DIEHARD">Diehard</a> and circumstances allow you
+to become stabilized then become stabilized and remove dying. Otherwise see next line.</li>
+<li>At the start of your turn make a Fortitude check (DC 5):
+<ul>
+<li>If you succeed by 1 or more, become stabilized and remove dying.</li>
+<li>If you succeeds exactly, nothing happens.</li>
+<li>If you fail you lose 1 HP (possibly causing death).</li>
+</ul>
+</li>
+<li>Stabilized and Dying are mutually exclusive: one always replaces the other.</li>
 </ul>
 </li>
 </ul>
@@ -1220,14 +1230,17 @@ resistance check.</li>
 <h3>Stabilized</h3>
 <div>
 <ul>
-<li><b>Obtained by:</b> <a href="../powers/effects/damage-attack.html">damage</a>.</li>
-<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled,
-resistance check.</li>
+<li><b>Obtained by:</b> receiving a successful <a href="../skills.html#TOC-STABILIZE">treatment: stabilize</a> when dying,
+gaining HP when dying (but still have -1 HP), having <a href="../advantages.html#TOC-DIEHARD">diehard</a>, passing dying's
+Fortitude check by 1 or more.</li>
+<li><b>Removed by:</b> having 0 or more HP, becoming dying (see dying card).</li>
 <li><b>Type:</b> Damage.</li>
-<li><b>Role-playing:</b> asd.</li>
+<li><b>Role-playing:</b> you are unconscious but not approaching death. You will <a href="../action-adventure.html#TOC-RECOVERY">naturally recover</a>.</li>
 <li><b>Effect:</b>
 <ul>
-<li>asd.</li>
+<li>Stabilized always replaces dying, there is no other way to get it.</li>
+<li>Stabilized and Dying are mutually exclusive: one always replaces the other.</li>
+<li>You are incapacitated (see Incapacitated card) but this doesn't removed incapacitated.</li>
 </ul>
 </li>
 </ul>
