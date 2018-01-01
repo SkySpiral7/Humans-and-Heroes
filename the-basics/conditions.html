@@ -98,7 +98,7 @@ controlling, character.</li>
 <li><b>Dazed</b>: A dazed character is limited to free actions and a single standard action per turn, although the character
 may use that action to perform a move, as usual. Stunned and incapacitated both supersede dazed.</li>
 <li><b>Debilitated</b>: The character has one or more abilities lowered below -5. Debilitated supersedes weakened and disabled
-(and impaired) of the same trait. (See <b>Debilitated Abilities</b> in <a href="../abilities.html">Abilities</a> for further details.)</li>
+(and impaired) of the same trait. (See <a href="../abilities.html#TOC-DEBILITATED-ABILITIES">Debilitated Abilities</a>.)</li>
 <li><b>Defenseless</b>: A defenseless character has active defense result of 0. Note that this affects the result not
 just the defense values meaning there is no need to roll dice or add up modifiers because the sum is always 0 (which almost
 always fails). Attackers can make attacks on defenseless opponents as routine checks (see <b>Routine Checks</b>). The
@@ -131,8 +131,8 @@ below for the impacts of being unaware in these ways.</li>
 <li><b>Vulnerable</b>: Vulnerable characters are limited in their ability to defend themselves, halving their active defense
 results (rounded up). Note that this affects the result meaning you add together the dice, modifiers, and defense values then
 you half it. Defenseless supersedes vulnerable.</li>
-<li><b>Weakened</b>: The character has temporarily lost character points in a trait. See <b>Weaken</b> effect in
-<a href="../powers/index.html">Powers</a> for more information. Debilitated supersedes weakened.</li>
+<li><b>Weakened</b>: The character has temporarily lost character points in a trait. See <a href="../powers/effects/weaken-attack.html">Weaken</a>.
+Debilitated supersedes weakened.</li>
 </ul>
 <h2 id="TOC-DAMAGE-CONDITIONS">DAMAGE CONDITIONS</h2>
 <p>Damage conditions (or HP conditions are conditions imposed by a <a href="../powers/effects/damage-attack.html">damage</a>
@@ -690,17 +690,73 @@ becoming Defenseless, resistance check.</li>
 <tr>
 <td>
 <div>
+<h3>Debilitated</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/weaken-attack.html">weaken</a> reducing an ability below -5.</li>
+<li><b>Removed by:</b> having that ability return to -5 or more eg: <a href="../powers/effects/healing-general.html">Restorative Healing</a>
+or normal recovery (see <a href="../powers/effects/weaken-attack.html">weaken</a>).</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> a part of you has been weakened to the point of being completely incapable.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Varies by ability. See <a href="../abilities.html#TOC-DEBILITATED-ABILITIES">Debilitated Abilities</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
+<h3>Mental Transformed</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/mental-transform-attack.html">Mental Transform</a>.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check.</li>
+<li><b>Resistance check frequency:</b> each minute if subconscious does not match, each time you sleep if subconscious does
+not match, each time you sleep if reason to do so, with the help of a <a href="../powers/effects/mind-reading-sensory.html">mind reader</a>
+if subconscious does not match.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> you mind has been altered.</li>
+<li><b>Effect:</b>
+<ul>
+<li>Your memories, Personal thoughts, and/or Subconscious has been changed.
+See <a href="../powers/effects/mental-transform-attack.html">Mental Transform</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+<td>
+<div>
+<h3>Mind Switched</h3>
+<div>
+<ul>
+<li><b>Obtained by:</b> <a href="../powers/effects/mind-switch-attack.html">Mind Switch</a>.</li>
+<li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check, being
+ended by choice (by one who can choose).</li>
+<li><b>Resistance check frequency:</b> each minute.</li>
+<li><b>Type:</b> Basic.</li>
+<li><b>Role-playing:</b> you have switched bodies with someone.</li>
+<li><b>Effect:</b>
+<ul>
+<li>This condition is given to all persons involved in the <a href="../powers/effects/mind-switch-attack.html">Mind Switch</a>.</li>
+<li>Generally you have the physical traits of the body you are in and all of your mental traits.</li>
+<li>Details are very complex. See <a href="../powers/effects/mind-switch-attack.html">Mind Switch</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div>
 <h3>Template</h3>
 <div>
-<table>
-<tbody>
-<tr>
-<td>&#8226; <b>Compelled</b> &#8226;</td>
-<td>Compelled</td>
-<td>Controlled</td>
-</tr>
-</tbody>
-</table>
 <ul>
 <li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 1.</li>
 <li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled or Controlled,
@@ -722,15 +778,6 @@ resistance check.</li>
 <div>
 <h3>Template</h3>
 <div>
-<table>
-<tbody>
-<tr>
-<td>Compelled</td>
-<td>&#8226; <b>Compelled</b> &#8226;</td>
-<td>Controlled</td>
-</tr>
-</tbody>
-</table>
 <ul>
 <li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 2.</li>
 <li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, becoming Controlled,
@@ -752,15 +799,6 @@ resistance check.</li>
 <div>
 <h3>Template</h3>
 <div>
-<table>
-<tbody>
-<tr>
-<td>Compelled</td>
-<td>Controlled</td>
-<td>&#8226; <b>Compelled</b> &#8226;</td>
-</tr>
-</tbody>
-</table>
 <ul>
 <li><b>Obtained by:</b> <a href="../powers/effects/affliction-attack.html">Affliction</a> degree 3.</li>
 <li><b>Removed by:</b> <a href="../powers/effects/healing-general.html">Restorative Healing</a>, resistance check.</li>
