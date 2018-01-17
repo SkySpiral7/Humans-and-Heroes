@@ -1,13 +1,13 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import com.github.SkySpiral7.Java.util.StringUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.github.skySpiral7.java.util.FileIoUtil;
+import com.github.skySpiral7.java.util.StringUtil;
 
 public class FileMover
 {

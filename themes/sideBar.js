@@ -497,7 +497,6 @@ output+='<a href="http://mmconversions.wikidot.com/">Hero Conversions</a><br />\
 output+='<a href="http://wolflair.com/index.php?context=hero_lab">Hero Lab</a><br />\n';
 output+='<a href="http://grfiles.game-host.org/3e_files/MnM3_charsheet_color.pdf">Character Sheet</a><br />\n';
 output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=37265">Character Generator</a><br />\n';
-output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=41685">Condition Cards</a><br />\n';
 output+='<a href="http://stornart.com/">Hero Art by Storn Cook</a><br />\n';
 output+='<a href="http://opengameart.org/">Open Game Art</a><br />\n';
 output+='<a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>\n';

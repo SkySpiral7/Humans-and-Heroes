@@ -384,6 +384,43 @@ th {
    padding: 5px;
 }
 
+.condition-card-table td > div {
+   border: solid thin grey;
+   width: 500px;
+   height: 700px;
+   display: flex;
+   flex-direction: column;
+}
+
+.condition-card-table td > div > h3 {
+   color: white;
+   font-weight: bold;
+   padding: 5px;
+   background-color: darkgreen;
+   text-align: center;
+   text-decoration: none;
+}
+
+.condition-card-table td > div > div {
+   padding: 10px;
+   background-color: palegreen;
+   flex-grow: 1;
+}
+
+.condition-card-table td > div > div > table {
+   width: 100%;
+}
+
+.condition-card-table td > div > div > table td {
+   text-align: center;
+   width: 33%;
+}
+
+.condition-card-table td > div > div > table,.condition-card-table td > div > div > table td {
+   border-collapse: collapse;
+   border: 1px inset grey;
+}
+
 .generated-class-0 {
    width: 50%;
 }

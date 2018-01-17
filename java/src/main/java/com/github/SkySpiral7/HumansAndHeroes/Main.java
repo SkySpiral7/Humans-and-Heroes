@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.github.SkySpiral7.Java.pojo.FileGatherer;
-import com.github.SkySpiral7.Java.util.FileIoUtil;
+import com.github.skySpiral7.java.pojo.FileGatherer;
+import com.github.skySpiral7.java.util.FileIoUtil;
 
 /**
  * Excuse the mess: I wrote this a long time ago.

@@ -1,8 +1,5 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
-import com.github.SkySpiral7.Java.util.FileIoUtil;
-import com.github.SkySpiral7.Java.util.StringUtil;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import com.github.skySpiral7.java.util.FileIoUtil;
+import com.github.skySpiral7.java.util.StringUtil;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
