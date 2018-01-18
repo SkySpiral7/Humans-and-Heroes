@@ -1,6 +1,7 @@
 'use strict';
 //This file can only be tested by hand
 var queryParameters = {};
+var json;
 
 (function(){
 var allParameters = location.search.substring(1).split('&');  //"".substring(1) === "" and "".split('&') === [""]
@@ -61,6 +62,9 @@ else if (undefined !== queryParameters['includeJsCharacterFile'])
 {
    var include = decodeURIComponent(queryParameters['includeJsCharacterFile']);
    document.write('<script type="text/javascript" src="'+include+'"></script>');
-   document.write('<script type="text/javascript">Main.load(json);</script>');
+   document.write('<script type="text/javascript">' +
+      'if(undefined === json) alert(\'Failed to load character file.\');' +
+      'else Main.load(json);' +
+   '</script>');
 }
 })();
