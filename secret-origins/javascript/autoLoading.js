@@ -13,9 +13,9 @@ if(undefined === queryParameters['options']) queryParameters['options'] = [];
 else queryParameters['options'] = queryParameters['options'].split(',');
 //if there are no query parameters at all then queryParameters === {"": undefined, "options": []}
 
-if (undefined !== queryParameters['characterUrl'])
+if (undefined !== queryParameters['loadAjaxCharacterFile'])
 {
-   var url = decodeURIComponent(queryParameters['characterUrl']);
+   var url = decodeURIComponent(queryParameters['loadAjaxCharacterFile']);
    var ajaxRequest = new XMLHttpRequest();
    ajaxRequest.onreadystatechange = function()
    {
@@ -57,10 +57,10 @@ if (undefined !== queryParameters['characterUrl'])
    }
 }
 
-else if (undefined !== queryParameters['characterInclude'])
+else if (undefined !== queryParameters['includeJsCharacterFile'])
 {
-   var include = decodeURIComponent(queryParameters['characterInclude']);
-   document.write('<script type="text/javascript" src="'+include+'.js"></script>');
+   var include = decodeURIComponent(queryParameters['includeJsCharacterFile']);
+   document.write('<script type="text/javascript" src="'+include+'"></script>');
    document.write('<script type="text/javascript">Main.load(json);</script>');
 }
 })();
