@@ -54,6 +54,7 @@
 <td class="character-sheet-ability-value">0</tr>
 </tbody>
 </table>
+<form id="optionForm" onchange="adjustLink()" action="javascript:void(0);">
 <table class="generated-class-24">
 <tbody>
 <tr>
@@ -65,11 +66,11 @@
 <h3>OPTIONS</h3>
 <p><b>Choose <b>one</b> of the following &#8226; <i>20 points</i>.</b></p>
 <ul>
-<li><b>Elemental</b>: Ranged Damage 10 (Also see <a href="../powers/effects/sample-powers/energy-control.html">Energy Control</a>
-for Alternate Effect examples.)</li>
-<li><b>Soldier</b>: Ranged Damage 10 (built-in weapon)</li>
-<li><b>Undead Revenant</b>: Immortality 1, Regeneration 5</li>
-<li><b>Wraith</b>: Insubstantial 4</li>
+<li><label><input type="radio" value="1" name="mainPowerOption" checked /><b>Elemental</b>: Ranged Damage 10 (Also see <a href="../powers/effects/sample-powers/energy-control.html">Energy Control</a>
+for Alternate Effect examples.)</label></li>
+<li><label><input type="radio" value="2" name="mainPowerOption" /><b>Soldier</b>: Ranged Damage 10 (built-in weapon)</label></li>
+<li><label><input type="radio" value="3" name="mainPowerOption" /><b>Undead Revenant</b>: Immortality 1, Regeneration 5</label></li>
+<li><label><input type="radio" value="4" name="mainPowerOption" /><b>Wraith</b>: Insubstantial 4</label></li>
 </ul>
 </td>
 </tr>
@@ -78,7 +79,7 @@ for Alternate Effect examples.)</li>
 </tr>
 <tr>
 <td colspan="4" class="character-sheet-light-green">
-Ranged Combat: (Name of Ranged Attack) 5 (+8), Memory 5 (+10), Investigation 2 (+7), Perception 5 (+6), Persuasion 4 (+4), Technology 5 (+10), Vehicles 2 (+5)
+<label>Ranged Combat: <input type="text" value="(Name of Ranged Attack)" name="rangedAttackName" /> 5 (+8)</label>, Memory 5 (+10), Investigation 2 (+7), Perception 5 (+6), Persuasion 4 (+4), Technology 5 (+10), Vehicles 2 (+5)
 </td>
 </tr>
 <tr>
@@ -117,8 +118,19 @@ Ranged Combat: (Name of Ranged Attack) 5 (+8), Memory 5 (+10), Investigation 2 (
 </tr>
 </tbody>
 </table>
+</form>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 76 &#8226; POWERS 37 &#8226; ADVANTAGES 0
 &#8226; SKILLS 14 &#8226; DEFENSES 23 = 150 / 150</div>
+<script>
+function adjustLink()
+{
+   var link = document.getElementById('open-character-link');
+   var form = document.getElementById('optionForm');
+   var options = [form.elements['mainPowerOption'].value].toString();
+   var names = encodeURIComponent(JSON.stringify([form.elements['rangedAttackName'].value]));
+   link.href = 'point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FConstruct.js&options=' + options + '&names=' + names;
+}
+</script>
 <p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FConstruct.js" id="open-character-link">Click here</a>
 to load this character into the point calculator.</p>
 </td>

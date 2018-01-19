@@ -12,7 +12,9 @@ for (var i=0; i < allParameters.length; ++i)
 }
 if(undefined === queryParameters['options']) queryParameters['options'] = [];
 else queryParameters['options'] = queryParameters['options'].split(',');
-//if there are no query parameters at all then queryParameters === {"": undefined, "options": []}
+if(undefined === queryParameters['names']) queryParameters['names'] = [];
+else queryParameters['names'] = JSON.parse(decodeURIComponent(queryParameters['names']));
+//if there are no query parameters at all then queryParameters === {"": undefined, "options": [], "names": []}
 
 if (undefined !== queryParameters['loadAjaxCharacterFile'])
 {
