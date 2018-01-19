@@ -10,8 +10,8 @@
        <Awareness value="0" />
        <Stamina value="--" />
        <Dexterity value="-1" />
-       <Intellect value="0" />
-       <Presence value="0" />
+       <Intellect value="--" />
+       <Presence value="--" />
    </Abilities>
    <Powers>
       <Row effect="Protection" text="Armor" action="None" range="Personal" duration="Permanent" rank="10">
