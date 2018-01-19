@@ -1,4 +1,4 @@
-//As an end client I don't care about poluting the global scope and all of these are useful to me
+//As an end client I don't care about polluting the global scope and all of these are useful to me
 /**Returns true if this string contains the string parameter*/
 if(String.prototype.contains === undefined){String.prototype.contains=function(text) {
     return (this.indexOf(text) !== -1);
