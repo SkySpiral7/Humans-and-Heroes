@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../themes/solitudeCherry.css" />
 <link rel="shortcut icon" type="image/x-icon" href="../images/google-default.ico" />
 <title>Mimic - Humans &amp; Heroes SRD</title>
+<script type="text/javascript" src="characterForm.js"></script>
 </head>
 <body>
 <table>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="../themes/sideBar.js"></script>
 </td>
 <td>
+<form id="optionForm" onchange="adjustLink('optionForm', 'characterLink')" action="javascript:void(0);">
 <table class="generated-class-14">
 <tbody>
 <tr>
@@ -85,7 +87,8 @@ choosing the target and using the action etc. The traits on this character sheet
 </tr>
 <tr>
 <td colspan="4" class="character-sheet-light-green">
-<p>Deception 6 (+8), Expertise: (Choose One) 4 (+5), Insight 8 (+9), Perception 6 (+7)</p>
+<p>Deception 6 (+8), <label>Expertise: <input type="text" value="(Choose One)" name="name0" /> 4 (+5)</label>,
+Insight 8 (+9), Perception 6 (+7)</p>
 </td>
 </tr>
 <tr>
@@ -121,7 +124,8 @@ choosing the target and using the action etc. The traits on this character sheet
 </tbody>
 </table>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 16 &#8226; POWERS 95 &#8226; ADVANTAGES 3 &#8226; SKILLS 12 &#8226; DEFENSES 24 = 150 / 150</div>
-<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FMimic.js">Click here</a>
+</form>
+<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FMimic.js" id="characterLink">Click here</a>
 to load this character into the point calculator.</p>
 </td>
 </tr>

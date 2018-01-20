@@ -1,3 +1,6 @@
+var expertise = '(Choose One)';
+if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+
 var json = {
    "Hero": {
       "name": "Mimic",
@@ -81,7 +84,7 @@ var json = {
       },
       {
          "name": "Expertise",
-         "subtype": "(Choose One)",
+         "subtype": expertise,
          "rank": 4,
          "ability": "Intellect"
       },
