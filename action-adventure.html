@@ -233,7 +233,7 @@ then dying. When a character becomes dying in this way his HP becomes -1 (if not
 <p>How often characters have to make Fortitude checks depends on the conditions. Once an hour for
 uncomfortable heat or cold (a hot summer day or cold winter day), once per 10 minutes for intense heat or cold (a
 blazing desert or Arctic conditions), once a minute for extreme heat or cold like the edge of a volcano or an arctic
-winter storm. Checks are made at the end of each period of exposure. Truly intense heat or cold--such as a blast furnace
+winter storm. Checks are made at the end of each period of exposure. Anything beyond extreme heat or cold--such as a blast furnace
 or touching liquid nitrogen--inflicts direct <a href="powers/effects/damage-attack.html">damage</a> and is an attack.</p>
 <p>Characters with the appropriate <a href="powers/effects/immunity-defense.html">Immunity</a> do not need to make Fortitude checks for
 natural temperatures (up to intense temperatures). Additionally there are other things that factor into the temperature
@@ -322,9 +322,8 @@ additional damage, at the GM's discretion.</p>
 <h3 id="TOC-POISON">POISON</h3>
 <p>A deadly toxin introduced through a scratch, or even in the air, may be able to fell the
 strongest hero. Poisons generally have one of several effects particularly Affliction, Damage, or Weaken. Some poisons
-may even have multiple Linked effects. Heroes generally resist poisons with Fortitude.</p>
-<p>Heroes with Immunity to Poison are completely unaffected by poisons. A Treatment skill check
-can provide a bonus on resistance checks against poison.</p>
+may even have multiple Linked effects. Heroes generally resist poisons with Fortitude. A Treatment skill check can provide
+a bonus on resistance checks against poison.</p>
 <h3 class="table-name">TABLE: SAMPLE POISON RANKS</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
@@ -498,13 +497,24 @@ temporary decrease in powers).</p>
 </tr>
 </tbody>
 </table>
+<h3 id="TOC-RAPID-DECOMPRESSION">RAPID DECOMPRESSION</h3>
+<p>Going from high pressure to low pressure quickly may cause a character to experience aeroembolism (decompression sickness
+or "the bends"). This can be caused by a diver deep underwater returning to the surface too quickly or from a space suit
+rupture. If a character changes pressure slowly the body will have time to adjust additionally decompression sickness is a delayed
+effect such that a character has 2 rounds to return to the higher pressure that he is adjusted to before needing to make
+a Fortitude check. This means that if a character in space quickly returns to pressurized air there will be no side affects.</p>
+<p>On the third round exposed to low pressure, a character must succeed on a Fortitude check (DC 10)
+each round or suffer from decompression sickness. A failed check means excruciating pain as small air bubbles form
+in the creature's bloodstream; the creature is stunned until recovered. Two or more degrees of failure impose the incapacitated
+condition until recovered.</p>
+<p>Not all pressures can be adjusted to. There is a maximum high pressure and minimum low pressure that can be adjusted to.
+A vacuum (no pressure at all) can't be adjusted to. After a character is under an acceptable pressure for 1 minute
+decompression sickness (stunned or incapacitated) is removed and the character becomes adjusted to that pressure.</p>
+<p>Characters with <a href="powers/effects/immunity-defense.html">Immunity</a> to decompression sickness can tolerate any
+pressure without side effect.</p>
 <h3 id="TOC-VACUUM">VACUUM</h3>
 <p>The primary hazards of the vacuum of space are lack of air and exposure to unfiltered ionizing
-radiation.</p>
-<p>On the third round of exposure to vacuum, a character must succeed on a Fortitude check (DC 10)
-each round or suffer from aeroembolism ("the bends"). A failed check means excruciating pain as small air bubbles form
-in the creature's bloodstream; the creature is stunned and remains so until returned to normal atmospheric pressure. Two
-or more degrees of failure impose the incapacitated condition.</p>
+radiation. Additionally the lack of pressure can cause decompression sickness (see <a href="#TOC-RAPID-DECOMPRESSION">Rapid Decompression</a>).</p>
 <p>The real danger of vacuum comes from suffocation, though holding one's breath in vacuum damages
 the lungs. A character who attempts to hold his breath must make a Fortitude check (DC 5) every round; the DC increases
 by 1 each round, and on a successful check the character loses a rank of Stamina (from the pressure on the linings of
@@ -513,10 +523,10 @@ round, he becomes incapacitated. The following round, he's dying and his HP beco
 already negative). A dying character can't stabilize (even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until
 until returned to a normal atmosphere.</p>
 <p>Unfiltered radiation bombards any character trapped in the vacuum of space without protective
-gear, see <b>Radiation</b>, previously (damage 6).</p>
-<p>Heroes able to ignore the effects of deep space must have <b>Immunity</b> to suffocation and
-vacuum and <b>Resistance</b> to radiation, at a minimum. See the <b>Immunity</b> and <b>Resistance</b> effects in <a
-href="powers/index.html">Powers</a> for details.</p>
+gear, see <a href="#TOC-RADIATION">Radiation</a>, previously (damage 6).</p>
+<p>Heroes able to ignore the effects of deep space must have <a href="powers/effects/immunity-defense.html">Immunity</a> to
+suffocation, <a href="powers/effects/immunity-defense.html">Immunity</a> to decompression sickness, and <a href="powers/effects/resistance-defense.html">Resistance</a>
+to radiation.</p>
 <h2 id="TOC-RELATIVE-SIZE-RULES">RELATIVE SIZE RULES</h2>
 <p>There are many impacts of being a different size in addition to the ability changes mentioned in
 <b>Growth</b> and <b>Shrinking</b>. These impacts are listed here.</p>
