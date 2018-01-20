@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../themes/solitudeCherry.css" />
 <link rel="shortcut icon" type="image/x-icon" href="../images/google-default.ico" />
 <title>Weapon Master - Humans &amp; Heroes SRD</title>
+<script type="text/javascript" src="characterForm.js"></script>
 </head>
 <body>
 <table>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="../themes/sideBar.js"></script>
 </td>
 <td>
+<form id="optionForm" onchange="adjustLink('optionForm', 'characterLink')" action="javascript:void(0);">
 <table class="generated-class-14">
 <tbody>
 <tr>
@@ -64,14 +66,16 @@
 <td colspan="4" class="character-sheet-light-green">
 <p>Choose <b><i>two</i></b> of the following &#8226; <i>10 points</i>.</p>
 <ul>
-<li><b>Crippling Strike</b>: Affliction 7 (Resisted by Fortitude; Impaired, Hindered, Incapacitated), Easily Removable (weapon, <i>-2 points</i>)</li>
-<li><b>Fast</b>: Quickness 3, Speed 2 (8 MPH)</li>
-<li><b>Gadgets</b>: Variable 1 (5 points) anything equipment could reasonably do
-(this is a multi-purpose device not a utility belt), Easily Removable (<i>-2 points</i>).</li>
-<li><b>Healing Factor</b>: Regeneration 2, Activation: Move Action</li>
-<li><b>Super-Hearing</b>: Senses 5: Accurate (2) Normal Hearing, Danger Sense (Auditory), Extended 1 Hearing, Ultra-Hearing.</li>
-<li><b>Super-Vision</b>: Senses 5: Darkvision (2), Extended 1 Vision, Microscopic (Vision) 2</li>
-<li><b>Urban Acrobat</b>: Leaping 1, Movement: Sure-Footed 1, Movement: Swinging</li>
+<li><label><input type="checkbox" name="checkbox0" /><b>Crippling Strike</b>: Affliction 7 (Resisted by Fortitude; Impaired,
+Hindered, Incapacitated), Easily Removable (weapon, <i>-2 points</i>)</label></li>
+<li><label><input type="checkbox" name="checkbox1" /><b>Fast</b>: Quickness 3, Speed 2 (8 MPH)</label></li>
+<li><label><input type="checkbox" name="checkbox2" /><b>Gadgets</b>: Variable 1 (5 points) anything equipment could reasonably do
+(this is a multi-purpose device not a utility belt), Easily Removable (<i>-2 points</i>).</label></li>
+<li><label><input type="checkbox" name="checkbox3" /><b>Healing Factor</b>: Regeneration 2, Activation: Move Action</label></li>
+<li><label><input type="checkbox" name="checkbox4" /><b>Super-Hearing</b>: Senses 5: Accurate (2) Normal Hearing, Danger Sense (Auditory),
+Extended 1 Hearing, Ultra-Hearing.</label></li>
+<li><label><input type="checkbox" name="checkbox5" /><b>Super-Vision</b>: Senses 5: Darkvision (2), Extended 1 Vision, Microscopic (Vision) 2</label></li>
+<li><label><input type="checkbox" name="checkbox6" /><b>Urban Acrobat</b>: Leaping 1, Movement: Sure-Footed 1, Movement: Swinging</label></li>
 </ul>
 </td>
 </tr>
@@ -102,7 +106,8 @@ Improved Disarm, Improved Initiative, Improved Trip, Power Attack.</p>
 <tr>
 <td colspan="4" class="character-sheet-light-green">
 <p>Acrobatics 8 (+13), Athletics 8 (+13),
-Deception 8 (+10), Expertise: (Choose One) 6 (+6), Close Combat: Axes 5 (+12), Intimidation 6 (+8), Investigation 6 (+6),
+Deception 8 (+10), <label>Expertise: <input type="text" value="(Choose One)" name="name0" /> 6 (+6)</label>
+Close Combat: Axes 5 (+12), Intimidation 6 (+8), Investigation 6 (+6),
 Perception 8 (+9), Sleight of Hand 6 (+11), Stealth 8 (+13), Vehicles 7 (+14)</p>
 </td>
 </tr>
@@ -144,6 +149,9 @@ Perception 8 (+9), Sleight of Hand 6 (+11), Stealth 8 (+13), Vehicles 7 (+14)</p
 </table>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 58 &#8226; POWERS 10 &#8226; ADVANTAGES 12
 &#8226; SKILLS 38 &#8226; DEFENSES 32 = 150 / 150</div>
+</form>
+<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FWeapon%20Master.js" id="characterLink">Click here</a>
+to load this character into the point calculator.</p>
 </td>
 </tr>
 </tbody>
