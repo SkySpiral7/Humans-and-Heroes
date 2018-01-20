@@ -87,8 +87,6 @@ var json = {
    "Information": "Complications, background and other information"
 };
 
-
-
 if('3' === queryParameters['options'][0]) json.Powers = json.Powers.concat([
    {
       "effect": "Immortality",
