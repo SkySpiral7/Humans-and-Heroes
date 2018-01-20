@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../themes/solitudeCherry.css" />
 <link rel="shortcut icon" type="image/x-icon" href="../images/google-default.ico" />
 <title>Speedster - Humans &amp; Heroes SRD</title>
+<script type="text/javascript" src="characterForm.js"></script>
 </head>
 <body>
 <table>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="../themes/sideBar.js"></script>
 </td>
 <td>
+<form id="optionForm" onchange="adjustLink('optionForm', 'characterLink')" action="javascript:void(0);">
 <table class="generated-class-14">
 <tbody>
 <tr>
@@ -90,7 +92,7 @@ point</i>.</p>
 <tr>
 <td colspan="4" class="character-sheet-light-green">
 <p>Acrobatics 4 (+8), Athletics 8 (+10), Close Combat: Unarmed 6 (+10), Deception 3 (+5),
-Expertise: (Choose One) 6 (+6), Perception 8 (+9), Technology 3 (+3)</p>
+<label>Expertise: <input type="text" value="(Choose One)" name="name0" /> 6 (+6)</label>, Perception 8 (+9), Technology 3 (+3)</p>
 </td>
 </tr>
 <tr>
@@ -135,7 +137,8 @@ Expertise: (Choose One) 6 (+6), Perception 8 (+9), Technology 3 (+3)</p>
 </table>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 36 &#8226; POWERS 69 &#8226; ADVANTAGES 10
 &#8226; SKILLS 19 &#8226; DEFENSES 16 = 150 / 150</div>
-<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FSpeedster.js">Click here</a>
+</form>
+<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FSpeedster.js" id="characterLink">Click here</a>
 to load this character into the point calculator.</p>
 </td>
 </tr>
