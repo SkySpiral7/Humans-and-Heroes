@@ -1,3 +1,6 @@
+var expertise = 'Business';
+if(undefined !== queryParameters['options'][0]) expertise = ['Business', 'Engineering', 'Science'][queryParameters['options'][0]-1];
+
 var json = {
    "Hero": {
       "name": "Battlesuit",
@@ -169,7 +172,7 @@ var json = {
    "Skills": [
       {
          "name": "Expertise",
-         "subtype": "(Choose one of Business, Engineering, or Science)",
+         "subtype": expertise,
          "rank": 5,
          "ability": "Intellect"
       },

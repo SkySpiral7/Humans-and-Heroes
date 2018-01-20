@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../themes/solitudeCherry.css" />
 <link rel="shortcut icon" type="image/x-icon" href="../images/google-default.ico" />
 <title>Battlesuit - Humans &amp; Heroes SRD</title>
+<script type="text/javascript" src="characterForm.js"></script>
 </head>
 <body>
 <table>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="../themes/sideBar.js"></script>
 </td>
 <td>
+<form id="optionForm" onchange="adjustLink('optionForm', 'characterLink')" action="javascript:void(0);">
 <table class="generated-class-14">
 <tbody>
 <tr>
@@ -97,8 +99,11 @@ included in respective sections) &#8226; <i>23 points</i>.</p>
 <td colspan="4" class="character-sheet-section-label">SKILLS</td>
 </tr>
 <tr>
-<td colspan="4" class="character-sheet-light-green">Expertise: (Choose one of Business, Engineering, or Science) 5
-(+10), Insight 4 (+5), Perception 5 (+6), Persuasion 4 (+4), Technology 8 (+13), Inventor (Int) 8 (+13), Ranged Attack:
+<td colspan="4" class="character-sheet-light-green"><label>Expertise: <select name="option0">
+   <option value="1">Business</option>
+   <option value="2">Engineering</option>
+   <option value="3">Science</option>
+</select> 5 (+10)</label>, Insight 4 (+5), Perception 5 (+6), Persuasion 4 (+4), Technology 8 (+13), Inventor (Int) 8 (+13), Ranged Attack:
 Force Beams 6 (+8)</td>
 </tr>
 <tr>
@@ -139,7 +144,8 @@ Force Beams 6 (+8)</td>
 </table>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 16 &#8226; POWERS 104 &#8226; ADVANTAGES 1
 &#8226; SKILLS 16 &#8226; DEFENSES 13 = 150 / 150</div>
-<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FBattlesuit.js">Click here</a>
+</form>
+<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FBattlesuit.js" id="characterLink">Click here</a>
 to load this character into the point calculator.</p>
 </td>
 </tr>
