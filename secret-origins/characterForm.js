@@ -8,6 +8,13 @@ function adjustLink(formId, linkId)
       options.push(form.elements['option' + optionIndex].value);
    }
 
+   var checkboxes = [];
+   for (var checkboxIndex = 0; undefined !== form.elements['checkbox' + checkboxIndex]; ++checkboxIndex)
+   {
+      checkboxes.push(form.elements['checkbox' + checkboxIndex].checked ? '1' : '0');
+   }
+   checkboxes = checkboxes.toString().replace(/,/g, '');
+
    var names = [];
    for (var nameIndex = 0; undefined !== form.elements['name' + nameIndex]; ++nameIndex)
    {
@@ -17,5 +24,5 @@ function adjustLink(formId, linkId)
 
    var link = document.getElementById(linkId);
    if(undefined === originalLink) originalLink = link.href;
-   link.href = originalLink + '&options=' + options + '&names=' + names;
+   link.href = originalLink + '&options=' + options + '&checkboxes=' + checkboxes + '&names=' + names;
 }

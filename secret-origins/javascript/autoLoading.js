@@ -12,6 +12,16 @@ for (var i=0; i < allParameters.length; ++i)
 }
 if(undefined === queryParameters['options']) queryParameters['options'] = [];
 else queryParameters['options'] = queryParameters['options'].split(',');
+if(undefined === queryParameters['checkboxes']) queryParameters['checkboxes'] = [];
+else
+{
+   queryParameters['checkboxes'] = queryParameters['checkboxes']
+      .replace(/(.)/g, '$1,')  //add a comma after every number
+      .replace(/,$/, '')  //remove last comma
+      .replace(/0/g, 'false')  //convert 1/0 to true/false
+      .replace(/1/g, 'true');
+   queryParameters['checkboxes'] = JSON.parse('[' + queryParameters['checkboxes'] + ']');
+}
 if(undefined === queryParameters['names']) queryParameters['names'] = [];
 else queryParameters['names'] = JSON.parse(decodeURIComponent(queryParameters['names']));
 //if there are no query parameters at all then queryParameters === {"": undefined, "options": [], "names": []}
