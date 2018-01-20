@@ -7,22 +7,27 @@ function adjustLink(formId, linkId)
    {
       options.push(form.elements['option' + optionIndex].value);
    }
+   if(0 === options.length) options = '';
+   else options = '&options=' + options;  //comma separated number array
 
    var checkboxes = [];
    for (var checkboxIndex = 0; undefined !== form.elements['checkbox' + checkboxIndex]; ++checkboxIndex)
    {
+      //encode boolean array into binary (no commas etc) for compactness
       checkboxes.push(form.elements['checkbox' + checkboxIndex].checked ? '1' : '0');
    }
-   checkboxes = checkboxes.toString().replace(/,/g, '');
+   if(0 === checkboxes.length) checkboxes = '';
+   else checkboxes = '&checkboxes=' + checkboxes.toString().replace(/,/g, '');
 
    var names = [];
    for (var nameIndex = 0; undefined !== form.elements['name' + nameIndex]; ++nameIndex)
    {
       names.push(form.elements['name' + nameIndex].value);
    }
-   names = encodeURIComponent(JSON.stringify(names));
+   if(0 === names.length) names = '';
+   else names = '&names=' + encodeURIComponent(JSON.stringify(names));  //must stringify because names can contain anything
 
    var link = document.getElementById(linkId);
    if(undefined === originalLink) originalLink = link.href;
-   link.href = originalLink + '&options=' + options + '&checkboxes=' + checkboxes + '&names=' + names;
+   link.href = originalLink + options + checkboxes + names;
 }
