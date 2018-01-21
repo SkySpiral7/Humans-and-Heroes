@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../themes/solitudeCherry.css" />
 <link rel="shortcut icon" type="image/x-icon" href="../images/google-default.ico" />
 <title>Paragon - Humans &amp; Heroes SRD</title>
+<script type="text/javascript" src="characterForm.js"></script>
 </head>
 <body>
 <table>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="../themes/sideBar.js"></script>
 </td>
 <td>
+<form id="optionForm" onchange="adjustLink('optionForm', 'characterLink')" action="javascript:void(0);">
 <table class="generated-class-14">
 <tbody>
 <tr>
@@ -63,16 +65,16 @@
 <tr>
 <td colspan="4" class="character-sheet-light-green">
 <p><b>Flight</b>: Flight 8 (500 MPH)&#8226; <i>16 points</i>.</p>
-<div class="generated-class-25"><b>Invulnerability</b>: &#8226; <i>39 points</i>.
+<b>Invulnerability</b>: &#8226; <i>39 points</i>.
    <ul><li>Enhanced Stamina 10 (included in abilities above) &#8226; <i>20 points</i>.</li>
    <li>Immunity 7 (Life Support) &#8226; <i>7 points</i>.</li>
    <li>Impervious Toughness 6 &#8226; <i>12 points</i>.</li>
-   </ul></div>
+   </ul>
 <p><b>Speedy</b>: Quickness 3 &#8226; <i>3 points</i>.</p>
-<div class="generated-class-25"><b>Super-Strength</b>: &#8226; <i>22 points</i>.
+<b>Super-Strength</b>: &#8226; <i>22 points</i>.
 <ul><li>Enhanced Strength 10 (included in abilities above) &#8226; <i>20 points</i>.</li>
    <li>Enhanced Strength 2, Limited to Lifting (Lifting Str 14; 400 tons) &#8226; <i>2 points</i>.</li>
-</ul></div>
+</ul>
 </td>
 </tr>
 <tr>
@@ -88,8 +90,8 @@
 </tr>
 <tr>
 <td colspan="4" class="character-sheet-light-green">
-<p>Expertise: (Choose One) 7 (+7), Insight 8 (+9), Perception 8 (+9), Persuasion 6 (+7), Ranged
-Combat: Throwing 5 (+8)</p>
+<p><label>Expertise: <input type="text" value="(Choose One)" name="name0" /> 7 (+7)</label>, Insight 8 (+9), Perception 8 (+9),
+Persuasion 6 (+7), Ranged Combat: Throwing 5 (+8)</p>
 </td>
 </tr>
 <tr>
@@ -129,6 +131,9 @@ Combat: Throwing 5 (+8)</p>
 </tbody>
 </table>
 <div class="character-sheet-point-totals">CHARACTER POINT TOTALS: ABILITIES 40 &#8226; POWERS 80 &#8226; ADVANTAGES 1 &#8226; SKILLS 17 &#8226; DEFENSES 12 = 150 / 150</div>
+</form>
+<p><a href="point-counter.html?includeJsCharacterFile=js%2FSecret%20Origins%20Hero%20Archtypes%2FParagon.js" id="characterLink">Click here</a>
+to load this character into the point calculator.</p>
 </td>
 </tr>
 </tbody>

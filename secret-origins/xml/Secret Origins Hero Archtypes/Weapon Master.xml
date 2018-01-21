@@ -24,7 +24,7 @@
        <Row effect="Movement" cost="1" text="Ground Speed: 8 MPH" action="Free" range="Personal" duration="Sustained" rank="2" />
       <!-- Gadgets Option
       <Row effect="Variable" text="(5 points) anything equipment could reasonably do (this is a multi-purpose device not a utility belt)" action="Full" range="Personal" duration="Sustained" rank="1">
-          <Modifier name="Easily Removable" text="" />
+          <Modifier name="Easily Removable" text="hand held" />
       </Row>
       -->
       <!-- Healing Factor Option

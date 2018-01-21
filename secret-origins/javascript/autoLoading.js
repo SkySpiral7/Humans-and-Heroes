@@ -1,6 +1,7 @@
 'use strict';
 //This file can only be tested by hand
 var queryParameters = {};
+var json;
 
 (function(){
 var allParameters = location.search.substring(1).split('&');  //"".substring(1) === "" and "".split('&') === [""]
@@ -11,11 +12,23 @@ for (var i=0; i < allParameters.length; ++i)
 }
 if(undefined === queryParameters['options']) queryParameters['options'] = [];
 else queryParameters['options'] = queryParameters['options'].split(',');
-//if there are no query parameters at all then queryParameters === {"": undefined, "options": []}
-
-if (undefined !== queryParameters['characterUrl'])
+if(undefined === queryParameters['checkboxes']) queryParameters['checkboxes'] = [];
+else
 {
-   var url = decodeURIComponent(queryParameters['characterUrl']);
+   queryParameters['checkboxes'] = queryParameters['checkboxes']
+      .replace(/(.)/g, '$1,')  //add a comma after every number
+      .replace(/,$/, '')  //remove last comma
+      .replace(/0/g, 'false')  //convert 1/0 to true/false
+      .replace(/1/g, 'true');
+   queryParameters['checkboxes'] = JSON.parse('[' + queryParameters['checkboxes'] + ']');
+}
+if(undefined === queryParameters['names']) queryParameters['names'] = [];
+else queryParameters['names'] = JSON.parse(decodeURIComponent(queryParameters['names']));
+//if there are no query parameters at all then queryParameters === {"": undefined, "options": [], "names": []}
+
+if (undefined !== queryParameters['loadAjaxCharacterFile'])
+{
+   var url = decodeURIComponent(queryParameters['loadAjaxCharacterFile']);
    var ajaxRequest = new XMLHttpRequest();
    ajaxRequest.onreadystatechange = function()
    {
@@ -57,10 +70,13 @@ if (undefined !== queryParameters['characterUrl'])
    }
 }
 
-else if (undefined !== queryParameters['characterInclude'])
+else if (undefined !== queryParameters['includeJsCharacterFile'])
 {
-   var include = decodeURIComponent(queryParameters['characterInclude']);
-   document.write('<script type="text/javascript" src="'+include+'.js"></script>');
-   document.write('<script type="text/javascript">Main.load(json);</script>');
+   var include = decodeURIComponent(queryParameters['includeJsCharacterFile']);
+   document.write('<script type="text/javascript" src="'+include+'"></script>');
+   document.write('<script type="text/javascript">' +
+      'if(undefined === json) alert(\'Failed to load character file.\');' +
+      'else Main.load(json);' +
+   '</script>');
 }
 })();

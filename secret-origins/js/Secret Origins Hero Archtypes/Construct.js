@@ -1,3 +1,6 @@
+var rangedAttackName = '(Name of Ranged Attack)';
+if(undefined !== queryParameters['names'][0]) rangedAttackName = queryParameters['names'][0];
+
 var json = {
    "Hero": {
       "name": "Construct",
@@ -35,7 +38,7 @@ var json = {
    "Skills": [
       {
          "name": "Ranged Combat",
-         "subtype": "(Name of Ranged Attack)",
+         "subtype": rangedAttackName,
          "rank": 5,
          "ability": "Dexterity"
       },
@@ -84,8 +87,6 @@ var json = {
    "Information": "Complications, background and other information"
 };
 
-
-
 if('3' === queryParameters['options'][0]) json.Powers = json.Powers.concat([
    {
       "effect": "Immortality",
@@ -115,19 +116,25 @@ else if('4' === queryParameters['options'][0]) json.Powers.push({
    "Modifiers": [],
    "rank": 4
 });
-else json.Powers.push({
-   "effect": "Damage",
-   "text": "Elemental Option (See Elemental Control) or Soldier Option (built-in weapon)",
-   "action": "Standard",
-   "range": "Ranged",
-   "duration": "Instant",
-   "name": "(Name of Ranged Attack)",
-   "skill": "(Name of Ranged Attack)",
-   "Modifiers": [
-      {
-         "name": "Increased Range",
-         "applications": 1
-      }
-   ],
-   "rank": 10
-});
+else
+{
+   var text = ('2' === queryParameters['options'][0]) ?
+      'Soldier Option (built-in weapon)' :
+      'Elemental Option (See Elemental Control)';
+   json.Powers.push({
+      "effect": "Damage",
+      "text": text,
+      "action": "Standard",
+      "range": "Ranged",
+      "duration": "Instant",
+      "name": rangedAttackName,
+      "skill": rangedAttackName,
+      "Modifiers": [
+         {
+            "name": "Increased Range",
+            "applications": 1
+         }
+      ],
+      "rank": 10
+   });
+}

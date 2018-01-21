@@ -32,382 +32,382 @@ if (!currentPage.endsWith('.html'))
 
 var navigationJson = [
    {
-      "name":"Site Map",
-      "link":"site-map.html"
+      "name": "Site Map",
+      "link": "site-map.html"
    },
    {
-      "name":"The Basics",
-      "link":"the-basics/index.html",
-      "children":[
+      "name": "The Basics",
+      "link": "the-basics/index.html",
+      "children": [
          {
-            "name":"Conditions",
-            "link":"the-basics/conditions.html"
+            "name": "Conditions",
+            "link": "the-basics/conditions.html"
          },
          {
-            "name":"Glossary of Terms",
-            "link":"the-basics/glossary-of-terms.html"
+            "name": "Glossary of Terms",
+            "link": "the-basics/glossary-of-terms.html"
          },
          {
-            "name":"Ranks and Measures",
-            "link":"the-basics/ranks-and-measures.html"
+            "name": "Ranks and Measures",
+            "link": "the-basics/ranks-and-measures.html"
          }
       ]
    },
    {
-      "name":"Secret Origins",
-      "link":"secret-origins/index.html",
-      "children":[
+      "name": "Secret Origins",
+      "link": "secret-origins/index.html",
+      "children": [
          {
-            "name":"Battlesuit",
-            "link":"secret-origins/battlesuit.html"
+            "name": "Battlesuit",
+            "link": "secret-origins/battlesuit.html"
          },
          {
-            "name":"Construct",
-            "link":"secret-origins/construct.html"
+            "name": "Construct",
+            "link": "secret-origins/construct.html"
          },
          {
-            "name":"Crime Fighter",
-            "link":"secret-origins/crime-fighter.html"
+            "name": "Crime Fighter",
+            "link": "secret-origins/crime-fighter.html"
          },
          {
-            "name":"Energy Controller",
-            "link":"secret-origins/energy-controller.html"
+            "name": "Energy Controller",
+            "link": "secret-origins/energy-controller.html"
          },
          {
-            "name":"Gadgeteer",
-            "link":"secret-origins/gadgeteer.html"
+            "name": "Gadgeteer",
+            "link": "secret-origins/gadgeteer.html"
          },
          {
-            "name":"Martial Artist",
-            "link":"secret-origins/martial-artist.html"
+            "name": "Martial Artist",
+            "link": "secret-origins/martial-artist.html"
          },
          {
-            "name":"Mimic",
-            "link":"secret-origins/mimic.html"
+            "name": "Mimic",
+            "link": "secret-origins/mimic.html"
          },
          {
-            "name":"Mystic",
-            "link":"secret-origins/mystic.html"
+            "name": "Mystic",
+            "link": "secret-origins/mystic.html"
          },
          {
-            "name":"Paragon",
-            "link":"secret-origins/paragon.html"
+            "name": "Paragon",
+            "link": "secret-origins/paragon.html"
          },
          {
-            "name":"Powerhouse",
-            "link":"secret-origins/powerhouse.html"
+            "name": "Powerhouse",
+            "link": "secret-origins/powerhouse.html"
          },
          {
-            "name":"Psychic",
-            "link":"secret-origins/psychic.html"
+            "name": "Psychic",
+            "link": "secret-origins/psychic.html"
          },
          {
-            "name":"Shapeshifter",
-            "link":"secret-origins/shapeshifter.html"
+            "name": "Shapeshifter",
+            "link": "secret-origins/shapeshifter.html"
          },
          {
-            "name":"Speedster",
-            "link":"secret-origins/speedster.html"
+            "name": "Speedster",
+            "link": "secret-origins/speedster.html"
          },
          {
-            "name":"Warrior",
-            "link":"secret-origins/warrior.html"
+            "name": "Warrior",
+            "link": "secret-origins/warrior.html"
          },
          {
-            "name":"Weapon Master",
-            "link":"secret-origins/weapon-master.html"
+            "name": "Weapon Master",
+            "link": "secret-origins/weapon-master.html"
          },
          {
-            "name":"Make Your Own",
-            "link":"secret-origins/point-counter.html"
+            "name": "Make Your Own",
+            "link": "secret-origins/point-counter.html"
          }
       ]
    },
    {
-      "name":"Abilities",
-      "link":"abilities.html"
+      "name": "Abilities",
+      "link": "abilities.html"
    },
    {
-      "name":"Powers",
-      "link":"powers/index.html",
-      "children":[
+      "name": "Powers",
+      "link": "powers/index.html",
+      "children": [
          {
-            "name":"Effects",
-            "link":"powers/effects/index.html",
-            "children":[
+            "name": "Effects",
+            "link": "powers/effects/index.html",
+            "children": [
                {
-                  "name":"Affliction",
-                  "link":"powers/effects/affliction-attack.html"
+                  "name": "Affliction",
+                  "link": "powers/effects/affliction-attack.html"
                },
                {
-                  "name":"Attain Knowledge",
-                  "link":"powers/effects/attain-knowledge-general.html"
+                  "name": "Attain Knowledge",
+                  "link": "powers/effects/attain-knowledge-general.html"
                },
                {
-                  "name":"Communication",
-                  "link":"powers/effects/communication-sensory.html"
+                  "name": "Communication",
+                  "link": "powers/effects/communication-sensory.html"
                },
                {
-                  "name":"Comprehend",
-                  "link":"powers/effects/comprehend-sensory.html"
+                  "name": "Comprehend",
+                  "link": "powers/effects/comprehend-sensory.html"
                },
                {
-                  "name":"Concealment",
-                  "link":"powers/effects/concealment-sensory.html"
+                  "name": "Concealment",
+                  "link": "powers/effects/concealment-sensory.html"
                },
                {
-                  "name":"Create",
-                  "link":"powers/effects/create-control.html"
+                  "name": "Create",
+                  "link": "powers/effects/create-control.html"
                },
                {
-                  "name":"Damage",
-                  "link":"powers/effects/damage-attack.html"
+                  "name": "Damage",
+                  "link": "powers/effects/damage-attack.html"
                },
                {
-                  "name":"Enhanced Trait",
-                  "link":"powers/effects/enhanced-trait-general.html"
+                  "name": "Enhanced Trait",
+                  "link": "powers/effects/enhanced-trait-general.html"
                },
                {
-                  "name":"Environment",
-                  "link":"powers/effects/environment-control.html"
+                  "name": "Environment",
+                  "link": "powers/effects/environment-control.html"
                },
                {
-                  "name":"Feature",
-                  "link":"powers/effects/feature-general.html"
+                  "name": "Feature",
+                  "link": "powers/effects/feature-general.html"
                },
                {
-                  "name":"Flight",
-                  "link":"powers/effects/flight-movement.html"
+                  "name": "Flight",
+                  "link": "powers/effects/flight-movement.html"
                },
                {
-                  "name":"Growth",
-                  "link":"powers/effects/growth-general.html"
+                  "name": "Growth",
+                  "link": "powers/effects/growth-general.html"
                },
                {
-                  "name":"Healing",
-                  "link":"powers/effects/healing-general.html"
+                  "name": "Healing",
+                  "link": "powers/effects/healing-general.html"
                },
                {
-                  "name":"Illusion",
-                  "link":"powers/effects/illusion-control.html"
+                  "name": "Illusion",
+                  "link": "powers/effects/illusion-control.html"
                },
                {
-                  "name":"Immortality",
-                  "link":"powers/effects/immortality-defense.html"
+                  "name": "Immortality",
+                  "link": "powers/effects/immortality-defense.html"
                },
                {
-                  "name":"Immunity",
-                  "link":"powers/effects/immunity-defense.html"
+                  "name": "Immunity",
+                  "link": "powers/effects/immunity-defense.html"
                },
                {
-                  "name":"Insubstantial",
-                  "link":"powers/effects/insubstantial-general.html"
+                  "name": "Insubstantial",
+                  "link": "powers/effects/insubstantial-general.html"
                },
                {
-                  "name":"Leaping",
-                  "link":"powers/effects/leaping-movement.html"
+                  "name": "Leaping",
+                  "link": "powers/effects/leaping-movement.html"
                },
                {
-                  "name":"Luck Control",
-                  "link":"powers/effects/luck-control-control.html"
+                  "name": "Luck Control",
+                  "link": "powers/effects/luck-control-control.html"
                },
                {
-                  "name":"Mental Transform",
-                  "link":"powers/effects/mental-transform-attack.html"
+                  "name": "Mental Transform",
+                  "link": "powers/effects/mental-transform-attack.html"
                },
                {
-                  "name":"Mind Reading",
-                  "link":"powers/effects/mind-reading-sensory.html"
+                  "name": "Mind Reading",
+                  "link": "powers/effects/mind-reading-sensory.html"
                },
                {
-                  "name":"Mind Switch",
-                  "link":"powers/effects/mind-switch-attack.html"
+                  "name": "Mind Switch",
+                  "link": "powers/effects/mind-switch-attack.html"
                },
                {
-                  "name":"Morph",
-                  "link":"powers/effects/morph-general.html"
+                  "name": "Morph",
+                  "link": "powers/effects/morph-general.html"
                },
                {
-                  "name":"Move Object",
-                  "link":"powers/effects/move-object-control.html"
+                  "name": "Move Object",
+                  "link": "powers/effects/move-object-control.html"
                },
                {
-                  "name":"Movement",
-                  "link":"powers/effects/movement-movement.html"
+                  "name": "Movement",
+                  "link": "powers/effects/movement-movement.html"
                },
                {
-                  "name":"Nullify",
-                  "link":"powers/effects/nullify-attack.html"
+                  "name": "Nullify",
+                  "link": "powers/effects/nullify-attack.html"
                },
                {
-                  "name":"Permeate",
-                  "link":"powers/effects/permeate-movement.html"
+                  "name": "Permeate",
+                  "link": "powers/effects/permeate-movement.html"
                },
                {
-                  "name":"Phantom Ranks",
-                  "link":"powers/effects/phantom-ranks-general.html"
+                  "name": "Phantom Ranks",
+                  "link": "powers/effects/phantom-ranks-general.html"
                },
                {
-                  "name":"Protection",
-                  "link":"powers/effects/protection-defense.html"
+                  "name": "Protection",
+                  "link": "powers/effects/protection-defense.html"
                },
                {
-                  "name":"Quickness",
-                  "link":"powers/effects/quickness-general.html"
+                  "name": "Quickness",
+                  "link": "powers/effects/quickness-general.html"
                },
                {
-                  "name":"Regeneration",
-                  "link":"powers/effects/regeneration-defense.html"
+                  "name": "Regeneration",
+                  "link": "powers/effects/regeneration-defense.html"
                },
                {
-                  "name":"Remote Sensing",
-                  "link":"powers/effects/remote-sensing-sensory.html"
+                  "name": "Remote Sensing",
+                  "link": "powers/effects/remote-sensing-sensory.html"
                },
                {
-                  "name":"Resistance",
-                  "link":"powers/effects/resistance-defense.html"
+                  "name": "Resistance",
+                  "link": "powers/effects/resistance-defense.html"
                },
                {
-                  "name":"Senses",
-                  "link":"powers/effects/senses-sensory.html"
+                  "name": "Senses",
+                  "link": "powers/effects/senses-sensory.html"
                },
                {
-                  "name":"Shrinking",
-                  "link":"powers/effects/shrinking-general.html"
+                  "name": "Shrinking",
+                  "link": "powers/effects/shrinking-general.html"
                },
                {
-                  "name":"Summon Minion",
-                  "link":"powers/effects/summon-minion-control.html"
+                  "name": "Summon Minion",
+                  "link": "powers/effects/summon-minion-control.html"
                },
                {
-                  "name":"Summon Object",
-                  "link":"powers/effects/summon-object-control.html"
+                  "name": "Summon Object",
+                  "link": "powers/effects/summon-object-control.html"
                },
                {
-                  "name":"Teleport",
-                  "link":"powers/effects/teleport-movement.html"
+                  "name": "Teleport",
+                  "link": "powers/effects/teleport-movement.html"
                },
                {
-                  "name":"Transform",
-                  "link":"powers/effects/transform-control.html"
+                  "name": "Transform",
+                  "link": "powers/effects/transform-control.html"
                },
                {
-                  "name":"Variable",
-                  "link":"powers/effects/variable-general.html"
+                  "name": "Variable",
+                  "link": "powers/effects/variable-general.html"
                },
                {
-                  "name":"Weaken",
-                  "link":"powers/effects/weaken-attack.html"
+                  "name": "Weaken",
+                  "link": "powers/effects/weaken-attack.html"
                }
             ]
          },
          {
-            "name":"Descriptors",
-            "link":"powers/descriptors.html"
+            "name": "Descriptors",
+            "link": "powers/descriptors.html"
          },
          {
-            "name":"Modifiers",
-            "link":"powers/modifiers/index.html",
-            "children":[
+            "name": "Modifiers",
+            "link": "powers/modifiers/index.html",
+            "children": [
                {
-                  "name":"Extras",
-                  "link":"powers/modifiers/extras.html"
+                  "name": "Extras",
+                  "link": "powers/modifiers/extras.html"
                },
                {
-                  "name":"Flaws",
-                  "link":"powers/modifiers/flaws.html"
+                  "name": "Flaws",
+                  "link": "powers/modifiers/flaws.html"
                }
             ]
          }
       ]
    },
    {
-      "name":"Gadgets &amp; Gear",
-      "link":"gadgets-gear/index.html",
-      "children":[
+      "name": "Gadgets &amp; Gear",
+      "link": "gadgets-gear/index.html",
+      "children": [
          {
-            "name":"Constructs",
-            "link":"gadgets-gear/constructs/index.html",
-            "children":[
+            "name": "Constructs",
+            "link": "gadgets-gear/constructs/index.html",
+            "children": [
                {
-                  "name":"Giant Robot",
-                  "link":"gadgets-gear/constructs/giant-robot.html"
+                  "name": "Giant Robot",
+                  "link": "gadgets-gear/constructs/giant-robot.html"
                },
                {
-                  "name":"Robot",
-                  "link":"gadgets-gear/constructs/robot.html"
+                  "name": "Robot",
+                  "link": "gadgets-gear/constructs/robot.html"
                },
                {
-                  "name":"Zombie",
-                  "link":"gadgets-gear/constructs/zombie.html"
+                  "name": "Zombie",
+                  "link": "gadgets-gear/constructs/zombie.html"
                }
             ]
          },
          {
-            "name":"Headquarters",
-            "link":"gadgets-gear/headquarters.html"
+            "name": "Headquarters",
+            "link": "gadgets-gear/headquarters.html"
          },
          {
-            "name":"Vehicles",
-            "link":"gadgets-gear/vehicles.html"
+            "name": "Vehicles",
+            "link": "gadgets-gear/vehicles.html"
          }
       ]
    },
    {
-      "name":"Advantages",
-      "link":"advantages.html"
+      "name": "Advantages",
+      "link": "advantages.html"
    },
    {
-      "name":"Skills",
-      "link":"skills.html"
+      "name": "Skills",
+      "link": "skills.html"
    },
    {
-      "name":"Action &amp; Adventure",
-      "link":"action-adventure.html"
+      "name": "Action &amp; Adventure",
+      "link": "action-adventure.html"
    },
    {
-      "name":"Gamemastering",
-      "link":"gamemastering.html"
+      "name": "Gamemastering",
+      "link": "gamemastering.html"
    },
    {
-      "name":"Supplementary Rules",
-      "link":"supplementary-rules.html"
+      "name": "Supplementary Rules",
+      "link": "supplementary-rules.html"
    },
    {
-      "name":"Examples",
-      "link":"examples.html"
+      "name": "Examples",
+      "link": "examples.html"
    },
    {
-      "name":"Meta",
-      "link":"meta/index.html",
-      "children":[
+      "name": "Meta",
+      "link": "meta/index.html",
+      "children": [
          {
-            "name":"Author Commentary",
-            "link":"meta/author-commentary.html"
+            "name": "Author Commentary",
+            "link": "meta/author-commentary.html"
          },
          {
-            "name":"Change Explanation",
-            "link":"meta/change-explanation.html"
+            "name": "Change Explanation",
+            "link": "meta/change-explanation.html"
          },
          {
-            "name":"Known Issues",
-            "link":"meta/known-issues.html"
+            "name": "Known Issues",
+            "link": "meta/known-issues.html"
          },
          {
-            "name":"Open Game License",
-            "link":"meta/open-game-license.html"
+            "name": "Open Game License",
+            "link": "meta/open-game-license.html"
          },
          {
-            "name":"Statistics",
-            "link":"meta/statistics.html"
+            "name": "Statistics",
+            "link": "meta/statistics.html"
          },
          {
-            "name":"Survey",
-            "link":"meta/survey.html"
+            "name": "Survey",
+            "link": "meta/survey.html"
          },
          {
-            "name":"Versioning",
-            "link":"meta/versioning.html"
+            "name": "Versioning",
+            "link": "meta/versioning.html"
          }
       ]
    }

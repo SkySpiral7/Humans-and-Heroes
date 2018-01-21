@@ -1,3 +1,6 @@
+var energyType = 'Energy';
+if(undefined !== queryParameters['names'][0]) energyType = queryParameters['names'][0];
+
 var json = {
    "Hero": {
       "name": "Energy Controller",
@@ -17,11 +20,11 @@ var json = {
    "Powers": [
       {
          "effect": "Damage",
-         "text": "Energy Aura",
+         "text": energyType + " Aura",
          "action": "Reaction",
          "range": "Close",
          "duration": "Instant",
-         "name": "Energy Aura",
+         "name": energyType + " Aura",
          "Modifiers": [
             {
                "name": "Aura"
@@ -34,12 +37,12 @@ var json = {
       },
       {
          "effect": "Damage",
-         "text": "Energy Creation",
+         "text": energyType + " Creation",
          "action": "Standard",
          "range": "Ranged",
          "duration": "Instant",
-         "name": "Energy Creation",
-         "skill": "Energy Control",
+         "name": energyType + " Creation",
+         "skill": energyType + " Control",
          "Modifiers": [
             {
                "name": "Increased Range",
@@ -50,18 +53,18 @@ var json = {
       },
       {
          "effect": "Nullify",
-         "text": "Energy Negation of Energy type",
+         "text": energyType + " Negation",
          "action": "Standard",
          "range": "Ranged",
          "duration": "Instant",
-         "name": "Energy Negation",
-         "skill": "Energy Control",
+         "name": energyType + " Negation",
+         "skill": energyType + " Control",
          "Modifiers": [],
          "rank": 2
       },
       {
          "effect": "Resistance",
-         "text": "Energy Resistance from Energy type",
+         "text": energyType + " Resistance",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",

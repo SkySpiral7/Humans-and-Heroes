@@ -336,6 +336,35 @@ th {
    text-align: center;
 }
 
+.generated-class-14 {
+   border-spacing: 0px;
+   margin: 0px 0px 10px 0px;
+   width: 100%;
+}
+
+.generated-class-11 {
+   border-spacing: 5px;
+   margin: 0px 0px 10px 0px;
+   width: 100%;
+}
+
+.generated-class-7 {
+   border: solid 5px darkgreen;
+   display: block;
+   text-align: center;
+}
+
+.generated-class-24 {
+   border-spacing: 0px;
+   margin: 10px 0px 0px 0px;
+   width: 100%;
+}
+
+/*
+TODO: for phone scaling and easy grids use bootstrap:
+https://getbootstrap.com/docs/4.0/getting-started/introduction/
+*/
+
 .right-panel {
    float: right;
    margin-left: 10px;
@@ -455,12 +484,6 @@ th {
    width: 45%;
 }
 
-.generated-class-7 {
-   border: solid 5px darkgreen;
-   display: block;
-   text-align: center;
-}
-
 .generated-class-8 {
    border: solid medium darkred;
    margin: 0 auto;
@@ -475,12 +498,6 @@ th {
    width: 150px;
 }
 
-.generated-class-11 {
-   border-spacing: 5px;
-   margin: 0px 0px 10px 0px;
-   width: 100%;
-}
-
 .generated-class-12 {
    font-size: 12px;
 }
@@ -489,12 +506,6 @@ th {
    display: inline;
    height: 36px;
    width: 36px;
-}
-
-.generated-class-14 {
-   border-spacing: 0px;
-   margin: 0px 0px 10px 0px;
-   width: 100%;
 }
 
 .generated-class-15 {
@@ -527,16 +538,6 @@ th {
 .generated-class-23 {
    float: right;
    width: 287px;
-}
-
-.generated-class-24 {
-   border-spacing: 0px;
-   margin: 10px 0px 0px 0px;
-   width: 100%;
-}
-
-.generated-class-25 {
-   padding: 5px;
 }
 
 .table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
