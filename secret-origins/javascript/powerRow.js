@@ -252,12 +252,12 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       var htmlString = '', i;
       htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
       htmlString+='    <option>Select One</option>\n';
-      var disaplyGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
+      var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
          //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
-      for (i=0; i < Data.Power.names.length; i++)
+      for (i = 0; i < Data.Power.names.length; ++i)
       {
-         if(disaplyGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
+         if(displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
             htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
       }
       htmlString+='</select>\n';
@@ -273,7 +273,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+='      <td width="34%" style="text-align:right;">\n';
       htmlString+='          Action\n';
-      //feature has the same action as the others
+      //feature has the same action as the others (because allowReaction is true)
       if(action === 'None') htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
          //same as duration === 'Permanent'. although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
@@ -308,6 +308,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          htmlString+='             <option>Perception</option>\n';
          htmlString+='          </select>\n';
       }
+
       htmlString+='          Duration\n';
       if(duration === 'Instant' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
@@ -322,6 +323,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </td>\n';
       htmlString+='   </tr>\n';
+
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
          htmlString+='   <tr>\n';
@@ -460,6 +462,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
             effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + range + '). Using duration of ' + duration + ' instead.');
       }
 
+      //TODO: bug: validate that the action etc are allowed for this power (see generate)
       if ('None' === action && 'Permanent' !== duration)  //only Permanent duration can have action None
       {
          action = Data.Power[effect].defaultAction;
