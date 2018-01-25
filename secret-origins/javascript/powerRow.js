@@ -273,22 +273,15 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+='      <td width="34%" style="text-align:right;">\n';
       htmlString+='          Action\n';
-      //feature has the same action as the others (because allowReaction is true)
-      if(action === 'None') htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
-         //same as duration === 'Permanent'. although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
+      var possibleActions = this.getPossibleActions();
+      if(1 === possibleActions.length) htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+         //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
       {
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
-         var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
-         var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[effect].isMovement && 'Healing' !== effect));
-         var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[effect].allowReaction);
-         for (i=0; i < Data.Power.actions.length-1; i++)  //-1 to avoid 'None'
+         for (i = 0; i < possibleActions.length; ++i)
          {
-            //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
-            if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
-            if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
-            if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
-            htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';
+            htmlString+='             <option>' + possibleActions[i] + '</option>\n';
          }
          htmlString+='         </select>\n';
       }
@@ -296,29 +289,28 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+='      <td colspan="2" width="66%">\n';
       htmlString+='          Range\n';
-      var forcedCloseRange = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect);
-      if('Feature' !== effect && ('Personal' === range || forcedCloseRange))
-         htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      var possibleRanges = this.getPossibleRanges();
+      if(1 === possibleRanges.length) htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
          htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
-         if(effect === 'Feature') htmlString+='             <option>Personal</option>\n';
-         htmlString+='             <option>Close</option>\n';
-         htmlString+='             <option>Ranged</option>\n';
-         htmlString+='             <option>Perception</option>\n';
+         for (i = 0; i < possibleRanges.length; ++i)
+         {
+            htmlString+='             <option>' + possibleRanges[i] + '</option>\n';
+         }
          htmlString+='          </select>\n';
       }
 
       htmlString+='          Duration\n';
-      if(duration === 'Instant' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      var possibleDurations = this.getPossibleDurations();
+      if(1 === possibleDurations.length) htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
          htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
-         htmlString+='             <option>Concentration</option>\n';
-         htmlString+='             <option>Sustained</option>\n';
-         htmlString+='             <option>Continuous</option>\n';
-         if(range === 'Personal') htmlString+='             <option>Permanent</option>\n';
-         if(effect === 'Feature') htmlString+='             <option>Instant</option>\n';
+         for (i = 0; i < possibleDurations.length; ++i)
+         {
+            htmlString+='             <option>' + possibleDurations[i] + '</option>\n';
+         }
          htmlString+='          </select>\n';
       }
       htmlString+='      </td>\n';
@@ -518,6 +510,49 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        rank = undefined;
        total = 0;
        shouldValidateActivationInfo = true;
+   };
+   /**@returns {Array} of all actions that are possible for this power based on current state.*/
+   this.getPossibleActions=function()
+   {
+      //feature has the same action as the others (because allowReaction is true)
+      if('None' === action) return ['None'];
+      //same as 'Permanent' === duration
+
+      var possibleActions = [];
+      var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
+      var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[effect].isMovement && 'Healing' !== effect));
+      var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[effect].allowReaction);
+      for (var i = 0; i < Data.Power.actions.length - 1; ++i)  //-1 to avoid 'None'
+      {
+         //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
+         if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
+         if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
+         if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
+         possibleActions.push(Data.Power.actions[i]);
+      }
+      return possibleActions;
+   };
+   /**@returns {Array} of all durations that are possible for this power based on current state.*/
+   this.getPossibleDurations=function()
+   {
+      if('Instant' === duration && 'Feature' !== effect) return ['Instant'];
+
+      var possibleDurations = ['Concentration', 'Sustained', 'Continuous'];
+      if('Personal' === range) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration
+      if('Feature' === effect) possibleDurations.push('Instant');
+      return possibleDurations;
+   };
+   /**@returns {Array} of all ranges that are possible for this power based on current state.*/
+   this.getPossibleRanges=function()
+   {
+      var possibleRanges = [];
+      if('Feature' === effect) possibleRanges.push('Personal');
+      else
+      {
+         if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Reaction' === action && 'Luck Control' !== effect) return ['Close'];
+         if('Personal' === range) return ['Personal'];
+      }
+      return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
    };
    /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
    this.updateActionModifiers=function()
