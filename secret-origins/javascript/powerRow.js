@@ -424,8 +424,9 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       {
          Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
             effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
-         range = defaultRange;  //can't change something to personal unless it started out as that (Feature's baseRange is Personal)
+         range = defaultRange;  //can't change something to personal unless it started out as that (Feature's defaultRange is Personal)
       }
+      //TODO: bug: after modifiers are set it needs to check if range must be Personal
 
       var defaultDuration = Data.Power[effect].defaultDuration;
       if ('Instant' === defaultDuration)
@@ -434,7 +435,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          {
             Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
                effect + ' can\'t have ' + duration + ' duration. It can only be Instant.');
-            duration = 'Instant';  //can't be changed (Feature's baseDuration is Permanent)
+            duration = 'Instant';  //can't be changed (Feature's defaultDuration is Permanent)
          }
       }
       else if ('Instant' === duration && 'Feature' !== effect)
@@ -476,7 +477,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          if (!Data.Power[effect].allowReaction)
          {
             action = Data.Power[effect].defaultAction;
-            if('None' === action) action = 'Free';
+            if('None' === action) action = 'Free';  //duration is not Permanent here
             Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
                effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + action + ' instead.');
          }
@@ -515,8 +516,8 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.getPossibleActions=function()
    {
       //feature has the same action as the others (because allowReaction is true)
-      if('None' === action) return ['None'];
-      //same as 'Permanent' === duration
+      if('Permanent' === duration) return ['None'];
+      //Do not use 'None' === action because that won't work for loading
 
       var possibleActions = [];
       var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
@@ -535,7 +536,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**@returns {Array} of all durations that are possible for this power based on current state.*/
    this.getPossibleDurations=function()
    {
-      if('Instant' === duration && 'Feature' !== effect) return ['Instant'];
+      if('Instant' === Data.Power[effect].defaultDuration && 'Feature' !== effect) return ['Instant'];
 
       var possibleDurations = ['Concentration', 'Sustained', 'Continuous'];
       if('Personal' === range) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration

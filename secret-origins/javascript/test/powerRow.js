@@ -1192,6 +1192,7 @@ TestSuite.powerRow.generate=function(isFirst)
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Feature allows close range'});
    SelectUtil.changeText('powerSelectRange0', 'Personal');
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Feature allows Personal range'});
+   testResults.push({Expected: true, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.3 Personal Flight can change range'});
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerSelectAction0', 'Reaction');
@@ -1203,6 +1204,8 @@ TestSuite.powerRow.generate=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 range Luck Control default action reaction'});
    SelectUtil.changeText('powerSelectRange0', 'Close');
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Luck Control allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Luck Control allows Ranged range'});
 
    SelectUtil.changeText('powerChoices0', 'Flight');
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Flight default range personal'});
@@ -1218,6 +1221,7 @@ TestSuite.powerRow.generate=function(isFirst)
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Feature allows close range'});
    SelectUtil.changeText('powerSelectRange0', 'Personal');
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Feature allows Personal range'});
+   testResults.push({Expected: true, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.3 Personal Flight can change range'});
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerSelectAction0', 'Reaction');
@@ -1228,6 +1232,8 @@ TestSuite.powerRow.generate=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 range Luck Control default action reaction'});
    SelectUtil.changeText('powerSelectRange0', 'Close');
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Luck Control allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Luck Control allows Ranged range'});
 
    SelectUtil.changeText('powerChoices0', 'Flight');
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Flight default range personal'});
