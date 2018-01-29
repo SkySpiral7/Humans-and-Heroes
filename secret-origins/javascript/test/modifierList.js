@@ -59,6 +59,37 @@ TestSuite.modifierList.getUniqueName=function(isFirst)
 
     return TestRunner.displayResults('TestSuite.modifierList.getUniqueName', testResults, isFirst);
 };
+TestSuite.modifierList.isNonPersonalModifierPresent=function(isFirst)
+{
+   TestRunner.clearResults(isFirst);
+
+   var dataToLoad;
+   var testResults=[];
+
+   Main.setMockMessenger(Messages.errorCapture);
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
+      "Modifiers":[{"name":"Other Flat Extra"},{"name":"Affects Others Only"}],"rank":1});
+   //also note that the modifier isn't first and is last for 2 possible edge cases
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Affects Others Only'});
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
+      "Modifiers":[{"name":"Affects Others Also"}],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Affects Others Also'});
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
+      "Modifiers":[{"name":"Attack"}],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Attack'});
+
+   Main.clearMockMessenger();  //restore default behavior
+   return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
+};
 TestSuite.modifierList.load=function(isFirst)
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS

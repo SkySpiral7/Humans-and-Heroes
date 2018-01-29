@@ -58,9 +58,8 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    this.setModifier=function(nameGiven)
    {
       var wasAttack = ('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name);
-      //TODO: remove these modifiers for non-personal powers. Those would need to be Enhanced trait attack
-      if(wasAttack && 'Feature' !== this.getPower().getEffect() && 'Personal' === this.getPower().getDefaultRange())
-         this.getPower().setRange('Personal');
+      //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
+      if(wasAttack && 'Feature' !== this.getPower().getEffect()) this.getPower().setRange('Personal');
 
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, eg: 'Select One'
       {
@@ -81,8 +80,9 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       hasAutoTotal = Data.Modifier[name].hasAutoTotal;
       this.calculateTotal();
 
-      if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name) && 'Personal' === this.getPower().getRange())
-         this.getPower().setRange('Close');
+      if(('Attack' === name || 'Affects Others Only' === name || 'Affects Others Also' === name)
+         && 'Personal' === this.getPower().getRange())
+         this.getPower().setRange('Close');  //when loading this value is redundantly set then later overridden by load's setRange
       if(wasAttack || 'Attack' === name) this.getPower().generateNameAndSkill();  //create or destroy as needed
    };
    /**Used to set data independent of the document and without calling update*/

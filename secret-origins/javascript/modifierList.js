@@ -100,12 +100,24 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        //the sort order is by ascii but that doesn't matter as long as the same sort is used each time
        return nameArray;
    };
-   /**True if any modifier in the list doesHaveAutoTotal*/
+   /**@returns {boolean} true if any modifier in the list doesHaveAutoTotal*/
    this.hasAutoTotal=function()
    {
       for(var i=0; i < rowArray.length-1; i++)
           {if(rowArray[i].doesHaveAutoTotal()) return true;}
        return false;
+   };
+   /**@returns {boolean} true if there exists a modifier that changes range from being Personal*/
+   this.isNonPersonalModifierPresent=function()
+   {
+      for (var i = 0 ; i < rowArray.length; ++i)  //no -1 because the last row isn't blank while it is being created
+      {
+         if('Attack' === rowArray[i].getName() ||
+            'Affects Others Also' === rowArray[i].getName() ||
+            'Affects Others Only' === rowArray[i].getName())
+            return true;
+      }
+      return false;
    };
    /**Sets data from a json object given then updates. The row array is not cleared by this function*/
    this.load=function(jsonSection)
@@ -155,7 +167,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        //don't call CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
        var namesSoFar=[];
        var canHaveAttack=true;
-       if(powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack=false;
+       if(powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack=false;  //feature has a default range of Personal
       for (var i=0; i < rowArray.length; i++)  //last row might not be blank
       {
           if(rowArray[i].isBlank() && i < rowArray.length-1){this.removeRow(i); i--; continue;}  //remove blank row that isn't last
