@@ -109,15 +109,51 @@ TestSuite.powerList.load=function(isFirst)
     testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Custom Description: getAction'});
     } catch(e){testResults.push({Error: e, Description: 'Custom Description'});}
 
-    try{
-    dataToLoad = Loader.resetData();
-    dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Standard","range":"Ranged","duration":"Instant",
-       "Modifiers":[{"name":"Increased Range","applications":1}],"rank":1});
-    Loader.sendData(dataToLoad);
-    testResults.push({Expected: 'Healing', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Custom Range: Effect'});
-    testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Custom Range: 1 row'});
-    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Custom Range: getRange'});
-    } catch(e){testResults.push({Error: e, Description: 'Custom Range'});}
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Full","range":"Close","duration":"Instant",
+      "Modifiers":[{"name":"Slower Action"}],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: 'Healing', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Custom Action: Effect'});
+   testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Custom Action: 1 row'});
+   testResults.push({Expected: 'Full', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Custom Action: getAction'});
+   } catch(e){testResults.push({Error: e, Description: 'Custom Action'});}
+
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"invalid range","duration":"Permanent","Modifiers":[],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Range does not exist: power was loaded'});
+   testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Range does not exist: getAction'});
+   testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Range does not exist: getRange'});
+   testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Range does not exist: getDuration'});
+   testResults.push({Expected: true,
+      Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone']),
+      Description: 'Range does not exist: error'});
+   } catch(e){testResults.push({Error: e, Description: 'Range does not exist'});}
+
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"invalid range","duration":"Permanent","Modifiers":[],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: 'Feature', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Feature Range does not exist: power was loaded'});
+   testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Range does not exist: getAction'});
+   testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Range does not exist: getRange'});
+   testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
+   testResults.push({Expected: true,
+      Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone']),
+      Description: 'Feature Range does not exist: error'});
+   } catch(e){testResults.push({Error: e, Description: 'Feature Range does not exist'});}
+
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Standard","range":"Ranged","duration":"Instant",
+      "Modifiers":[{"name":"Increased Range","applications":1}],"rank":1});
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: 'Healing', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Custom Range: Effect'});
+   testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Custom Range: 1 row'});
+   testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Custom Range: getRange'});
+   } catch(e){testResults.push({Error: e, Description: 'Custom Range'});}
 
     try{
     dataToLoad = Loader.resetData();

@@ -79,7 +79,7 @@ var json = {
          "effect": "Movement",
          "cost": 1,
          "text": "Gound Speed 15: 64,000 MPH",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
@@ -89,7 +89,7 @@ var json = {
          "effect": "Movement",
          "cost": 2,
          "text": "Run On Water. Movement 1: Water Walking",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [
@@ -105,7 +105,7 @@ var json = {
          "effect": "Movement",
          "cost": 2,
          "text": "Run Up Walls. Movement 2: Wall Crawling",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [
@@ -184,7 +184,7 @@ var json = {
       "Parry": 11,
       "Will": 8
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };

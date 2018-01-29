@@ -186,7 +186,7 @@ var json = {
       "Parry": 8,
       "Will": 7
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };
@@ -221,7 +221,7 @@ if(queryParameters['checkboxes'][1]) json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 1,
       "text": "Ground Speed: 8 MPH",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],
@@ -335,7 +335,7 @@ if(queryParameters['checkboxes'][6]) json.Powers = json.Powers.concat([
    {
       "effect": "Leaping",
       "text": "",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Instant",
       "Modifiers": [],
@@ -345,7 +345,7 @@ if(queryParameters['checkboxes'][6]) json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 2,
       "text": "Sure-Footed",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],
@@ -355,7 +355,7 @@ if(queryParameters['checkboxes'][6]) json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 2,
       "text": "Swinging",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],

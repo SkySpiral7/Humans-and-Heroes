@@ -42,7 +42,7 @@ var json = {
          "effect": "Movement",
          "cost": 2,
          "text": "Grappling hook: Swinging",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
@@ -227,7 +227,7 @@ var json = {
       "Parry": 0,
       "Will": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };

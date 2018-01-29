@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Document ruleset="3.0" version="2">
+<Document ruleset="3.10" version="2">
     <Hero name="Warrior" transcendence="0" image="../images/Powerhouse.jpg" />
     <Information>Complications, background and other information</Information>
    <Abilities>
@@ -19,15 +19,15 @@
       </Row>
        <!-- Aquatic Option is pre-selected -->
        <Row effect="Immunity" text="Drowning" action="None" range="Personal" duration="Permanent" rank="1" />
-       <Row effect="Movement" cost="1" text="Swimming" action="Free" range="Personal" duration="Sustained" rank="6" />
-       <Row effect="Movement" cost="2" text="Environmental Adaptation, Aquatic" action="Free" range="Personal" duration="Sustained" rank="1" />
+       <Row effect="Movement" cost="1" text="Swimming" action="Move" range="Personal" duration="Sustained" rank="6" />
+       <Row effect="Movement" cost="2" text="Environmental Adaptation, Aquatic" action="Move" range="Personal" duration="Sustained" rank="1" />
        <Row effect="Senses" cost="1" text="Low-light Vision" action="None" range="Personal" duration="Permanent" rank="1" />
        <!-- Fast Option
        <Row effect="Quickness" text="" action="Free" range="Personal" duration="Sustained" rank="5" />
-       <Row effect="Movement" cost="1" text="Ground Speed" action="Free" range="Personal" duration="Sustained" rank="5" />
+       <Row effect="Movement" cost="1" text="Ground Speed" action="Move" range="Personal" duration="Sustained" rank="5" />
        -->
        <!-- Leaping Option
-       <Row effect="Leaping" text="" action="Free" range="Personal" duration="Instant" rank="10" />
+       <Row effect="Leaping" text="" action="Move" range="Personal" duration="Instant" rank="10" />
        -->
        <!-- Super-Senses Option
        <Row effect="Senses" cost="3" text="Accurate (2) and Analytical (1) Normal Hearing" action="None" range="Personal" duration="Permanent" rank="1" />
@@ -39,7 +39,7 @@
        <Row effect="Senses" cost="1" text="Ultra-Hearing" action="None" range="Personal" duration="Permanent" rank="1" />
        -->
        <!-- Wind-Riding Option
-       <Row effect="Flight" text="Wind Riding" action="Free" range="Personal" duration="Sustained" rank="5" />
+       <Row effect="Flight" text="Wind Riding" action="Move" range="Personal" duration="Sustained" rank="5" />
        -->
        <!--Note that you must choose one of the above options (which is why 1 is pre-selected).
        The Strong Warrior Option and Weapon Warrior Option are optional and are in addition to the above options.-->

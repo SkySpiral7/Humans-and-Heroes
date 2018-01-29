@@ -13,27 +13,27 @@ Rank: changeRank();
 function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 {
    //private variable section:
-    var effect, canSetBaseCost, baseCost, text, action, range, duration, name, skillUsed, rank, total;
-    var modifierSection = new ModifierList(this, rowIndex, sectionName);
-    var shouldValidateActivationInfo;  //used internally
+   var effect, canSetBaseCost, baseCost, text, action, range, duration, name, skillUsed, rank, total;
+   var modifierSection = new ModifierList(this, rowIndex, sectionName);
+   var shouldValidateActivationInfo;  //used internally
 
    //Basic getter section (all single line)
-    this.getAction=function(){return action;};
-    this.getBaseCost=function(){return baseCost;};
-    this.getDuration=function(){return duration;};
-    /**Get the effect name of the power*/
-    this.getEffect=function(){return effect;};
-    /**Get the user's name for the power*/
-    this.getName=function(){return name;};
-    this.getRange=function(){return range;};
-    this.getRank=function(){return rank;};
-    this.getSkillUsed=function(){return skillUsed;};
-    this.getText=function(){return text;};
-    /**The total with respect to auto changes and raw total*/
-    this.getTotal=function(){return total;};
-    //for modifierSection see this.getModifierList in the onChange section
-    this.isBaseCostSettable=function(){return canSetBaseCost;};
-    this.getSection=function(){return powerListParent;};
+   this.getAction=function(){return action;};
+   this.getBaseCost=function(){return baseCost;};
+   this.getDuration=function(){return duration;};
+   /**Get the effect name of the power*/
+   this.getEffect=function(){return effect;};
+   /**Get the user's name for the power*/
+   this.getName=function(){return name;};
+   this.getRange=function(){return range;};
+   this.getRank=function(){return rank;};
+   this.getSkillUsed=function(){return skillUsed;};
+   this.getText=function(){return text;};
+   /**The total with respect to auto changes and raw total*/
+   this.getTotal=function(){return total;};
+   //for modifierSection see this.getModifierList in the onChange section
+   this.isBaseCostSettable=function(){return canSetBaseCost;};
+   this.getSection=function(){return powerListParent;};
 
    //Single line function section (ignoring isBlank check)
    /**After this is called setAction, setRange, and setDuration will only check if the value exists.*/
@@ -118,8 +118,8 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
    {
-       if(this.isBlank()) return;
-       text = textGiven;
+      if(this.isBlank()) return;
+      text = textGiven;
    };
    /**Used to set data independent of the document and without calling update*/
    this.setAction=function(newActionName)
@@ -143,34 +143,34 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**Used to set data independent of the document and without calling update*/
    this.setRange=function(newRangeName)
    {
-       if(this.isBlank()) return;
-       if(range === newRangeName) return;  //nothing has changed (only possible when loading)
+      if(this.isBlank()) return;
+      if(range === newRangeName) return;  //nothing has changed (only possible when loading)
       if (!Data.Power.ranges.contains(newRangeName))
       {
-          //if not found (only possible when loading bad data)
-          Main.messageUser('PowerObjectAgnostic.setRange.notExist', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' + newRangeName + ' is not the name of a range.');
-          return;
+         //if not found (only possible when loading bad data)
+         Main.messageUser('PowerObjectAgnostic.setRange.notExist', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' + newRangeName + ' is not the name of a range.');
+         return;
       }
 
-       var oldRange = range;
-       range = newRangeName;
+      var oldRange = range;
+      range = newRangeName;
 
-       if(!shouldValidateActivationInfo) return;  //done
+      if(!shouldValidateActivationInfo) return;  //done
 
       //TODO: loading should make sure that skillUsed can't be set when Perception range
       this.generateNameAndSkill();
 
       if ('Personal' === oldRange && 'Permanent' === duration)
       {
-          //changing from personal must change duration to not be permanent
-          var defaultDuration = Data.Power[effect].defaultDuration;
-          if('Permanent' === defaultDuration) this.setDuration('Sustained');
-          else this.setDuration(defaultDuration);
-          //use default duration if possible. otherwise use Sustained
-          //either way it will cost 0
+         //changing from personal must change duration to not be permanent
+         var defaultDuration = Data.Power[effect].defaultDuration;
+         if('Permanent' === defaultDuration) this.setDuration('Sustained');
+         else this.setDuration(defaultDuration);
+         //use default duration if possible. otherwise use Sustained
+         //either way it will cost 0
       }
 
-       this.updateRangeModifiers();
+      this.updateRangeModifiers();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setDuration=function(newDurationName)
@@ -252,12 +252,12 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       var htmlString = '', i;
       htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
       htmlString+='    <option>Select One</option>\n';
-      var disaplyGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
+      var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
          //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
-      for (i=0; i < Data.Power.names.length; i++)
+      for (i = 0; i < Data.Power.names.length; ++i)
       {
-         if(disaplyGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
+         if(displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
             htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
       }
       htmlString+='</select>\n';
@@ -273,22 +273,15 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+='      <td width="34%" style="text-align:right;">\n';
       htmlString+='          Action\n';
-      //feature has the same action as the others
-      if(action === 'None') htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
-         //same as duration === 'Permanent'. although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
+      var possibleActions = this.validateAndGetPossibleActions();
+      if(1 === possibleActions.length) htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+         //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
       {
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
-         var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
-         var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[effect].isMovement && 'Healing' !== effect));
-         var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[effect].allowReaction);
-         for (i=0; i < Data.Power.actions.length-1; i++)  //-1 to avoid 'None'
+         for (i = 0; i < possibleActions.length; ++i)
          {
-            //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
-            if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
-            if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
-            if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
-            htmlString+='             <option>'+Data.Power.actions[i]+'</option>\n';
+            htmlString+='             <option>' + possibleActions[i] + '</option>\n';
          }
          htmlString+='         </select>\n';
       }
@@ -296,32 +289,33 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+='      <td colspan="2" width="66%">\n';
       htmlString+='          Range\n';
-      var forcedCloseRange = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect);
-      if('Feature' !== effect && ('Personal' === range || forcedCloseRange))
-         htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      var possibleRanges = this.getPossibleRanges();
+      if(1 === possibleRanges.length) htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
          htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
-         if(effect === 'Feature') htmlString+='             <option>Personal</option>\n';
-         htmlString+='             <option>Close</option>\n';
-         htmlString+='             <option>Ranged</option>\n';
-         htmlString+='             <option>Perception</option>\n';
+         for (i = 0; i < possibleRanges.length; ++i)
+         {
+            htmlString+='             <option>' + possibleRanges[i] + '</option>\n';
+         }
          htmlString+='          </select>\n';
       }
+
       htmlString+='          Duration\n';
-      if(duration === 'Instant' && effect !== 'Feature') htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      var possibleDurations = this.validateAndGetPossibleDurations();
+      if(1 === possibleDurations.length) htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
          htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
-         htmlString+='             <option>Concentration</option>\n';
-         htmlString+='             <option>Sustained</option>\n';
-         htmlString+='             <option>Continuous</option>\n';
-         if(range === 'Personal') htmlString+='             <option>Permanent</option>\n';
-         if(effect === 'Feature') htmlString+='             <option>Instant</option>\n';
+         for (i = 0; i < possibleDurations.length; ++i)
+         {
+            htmlString+='             <option>' + possibleDurations[i] + '</option>\n';
+         }
          htmlString+='          </select>\n';
       }
       htmlString+='      </td>\n';
       htmlString+='   </tr>\n';
+
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
          htmlString+='   <tr>\n';
@@ -373,7 +367,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       if(undefined === name) name = (sectionName.toTitleCase() + ' ' + (rowIndex+1) + ' ' + effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
 
-      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect);
+      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === action && 'Luck Control' !== effect && 'Feature' !== effect);
       if('Perception' === range || isAura) skillUsed = undefined;
       else if(undefined === skillUsed) skillUsed = 'Skill used for attack';
    };
@@ -418,86 +412,31 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       document.getElementById(sectionName+'FlatModifierCost'+rowIndex).innerHTML=modifierSection.getFlatTotal();
       document.getElementById(sectionName+'RowTotal'+rowIndex).innerHTML=total;
    };
-   /**Called when loading after action, range, and duration have been set. This function validates the values
-   making sure the values are possible and consistent with priority given to range then duration.
-   It will changes values to be valid. The precedence is range, duration, then action.*/
-   this.validateActivationInfo=function()
+   /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
+   this.updateActivationModifiers=function()
    {
       shouldValidateActivationInfo = true;
-
-      var defaultRange = Data.Power[effect].defaultRange;
-      if ('Personal' === range  && 'Personal' !== defaultRange)
-      {
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-            effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
-         range = defaultRange;  //can't change something to personal unless it started out as that (Feature's baseRange is Personal)
-      }
-
-      var defaultDuration = Data.Power[effect].defaultDuration;
-      if ('Instant' === defaultDuration)
-      {
-         if ('Instant' !== duration)
-         {
-            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-               effect + ' can\'t have ' + duration + ' duration. It can only be Instant.');
-            duration = 'Instant';  //can't be changed (Feature's baseDuration is Permanent)
-         }
-      }
-      else if ('Instant' === duration && 'Feature' !== effect)
-      {
-         //only Feature can change to Instant duration
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-            effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
-         duration = defaultDuration;
-      }
-      else if ('Permanent' === duration && 'Personal' !== range)  //only personal range can have Permanent duration
-      {
-         if('Permanent' === defaultDuration) duration = 'Sustained';
-         else duration = defaultDuration;
-         //use default duration if possible. otherwise use Sustained
-         //either way it will cost 0
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notPermanent', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-            effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + range + '). Using duration of ' + duration + ' instead.');
-      }
-
-      if ('None' === action && 'Permanent' !== duration)  //only Permanent duration can have action None
-      {
-         action = Data.Power[effect].defaultAction;
-         if('None' === action) action = 'Free';
-         //use default action if possible. otherwise use Free
-         //either way it will cost 0
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.notNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-            effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + duration + '). Using action of ' + action + ' instead.');
-      }
-      else if ('None' !== action && 'Permanent' === duration)
-      {
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.onlyNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-            effect + ' can\'t have an action of ' + action + '. It can only be None because the duration is Permanent.');
-         //Permanent duration can only have action None
-         action = 'None';
-      }
-      else if ('Reaction' === action && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Feature' !== effect && 'Luck Control' !== effect)
-      {
-         if (!Data.Power[effect].allowReaction)
-         {
-            action = Data.Power[effect].defaultAction;
-            if('None' === action) action = 'Free';
-            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-               effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + action + ' instead.');
-         }
-         else if ('Close' !== range)
-         {
-            action = Data.Power[effect].defaultAction;
-            if('None' === action) action = 'Free';  //dead code since there are none like this
-            Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionNotCloseRange', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
-               effect + ' can\'t have an action of Reaction because it isn\'t Close range (range is ' + range + '). Using action of ' + action + ' instead.');
-         }
-      }
-
-      //create all of the modifiers
       this.updateActionModifiers();
       this.updateRangeModifiers();
       this.updateDurationModifiers();
+   };
+   /**Called when loading after action, range, and duration have been set. This function validates the values
+   making sure the values are possible and consistent with priority given to range then duration.
+   It will changes values to be valid. This function requires modifiers to be loaded (but doesn't affect them).
+   The precedence is personal range, duration, action, reaction range, (then modifiers which aren't affected here).*/
+   this.validateActivationInfo=function()
+   {
+      this.validatePersonalRange();
+      this.validateAndGetPossibleDurations();
+      this.validateAndGetPossibleActions();
+      if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== effect && 'Feature' !== effect &&
+         'Reaction' === action && 'Close' !== range)
+      {
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' has an action of Reaction and therefore must have a range of Close.');
+         range = 'Close';
+         //TODO: confusing limitation: in 3 cases Variable is allowed to have Reaction with Personal range
+      }
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
@@ -515,6 +454,18 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        rank = undefined;
        total = 0;
        shouldValidateActivationInfo = true;
+   };
+   /**@returns {Array} of all ranges that are possible for this power based on current state.*/
+   this.getPossibleRanges=function()
+   {
+      var possibleRanges = [];
+      if('Feature' === effect) possibleRanges.push('Personal');
+      else
+      {
+         if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Reaction' === action && 'Luck Control' !== effect) return ['Close'];
+         if('Personal' === range) return ['Personal'];
+      }
+      return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
    };
    /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
    this.updateActionModifiers=function()
@@ -586,6 +537,148 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        if(rangeDifference > 0) modifierSection.createByNameRank('Increased Range', rangeDifference);
        else if(rangeDifference < 0) modifierSection.createByNameRank('Reduced Range', -rangeDifference);
    };
+   /**@returns {Array} of all actions that are possible for this power based on current state.*/
+   this.validateAndGetPossibleActions=function()
+   {
+      //feature has the same action as the others (because allowReaction is true)
+      if ('Permanent' === duration)
+      {
+         if ('None' !== action)
+         {
+            Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+               effect + ' can\'t have an action of ' + action + '. It can only be None because the duration is Permanent.');
+            action = 'None';
+         }
+         return ['None'];
+      }
+      else if ('None' === action)  //only Permanent duration can have action None
+      {
+         action = Data.Power[effect].defaultAction;
+         if('None' === action) action = 'Free';
+         //use default action if possible. otherwise use Free
+         //either way it will cost 0
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.notNone', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + duration + '). Using action of ' + action + ' instead.');
+      }
+
+      var possibleActions = [];
+      var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[effect].isAttack || 'Move Object' === effect);
+      if ('Move' === action && !allowMoveAction)
+      {
+         action = Data.Power[effect].defaultAction;
+         if('None' === action) action = 'Free';  //dead code: attacks can't have a default duration of Permanent
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have an action of Move because it is an attack type. Using action of ' + action + ' instead.');
+      }
+
+      var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[effect].isMovement && 'Healing' !== effect));
+      if ('Free' === action && !allowFreeAction)
+      {
+         if (!allowMoveAction)
+         {
+            action = Data.Power[effect].defaultAction;
+            if ('None' === action) action = 'Free';  //dead code: attacks can't have a default duration of Permanent
+            Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks', sectionName.toTitleCase() + ' #' + (rowIndex + 1) + ': ' +
+               effect + ' can\'t have an action of Free because it is an attack type. Using action of ' + action + ' instead.');
+         }
+         //attacks can't be movements so there's no overlap
+         else if (Data.Power[effect].isMovement)
+         {
+            action = Data.Power[effect].defaultAction;
+            if ('None' === action) action = 'Free';  //dead code: movements can't have a default duration of Permanent
+            Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement', sectionName.toTitleCase() + ' #' + (rowIndex + 1) + ': ' +
+               effect + ' can\'t have an action of Free because it is a movement type. Using action of ' + action + ' instead.');
+         }
+         //healing is not an attack or movement so there's no overlap
+         else //if ('Healing' === effect)
+         {
+            action = Data.Power[effect].defaultAction;
+            if ('None' === action) action = 'Free';  //dead code: Healing doesn't have a default duration of Permanent
+            Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing', sectionName.toTitleCase() + ' #' + (rowIndex + 1) + ': ' +
+               'Healing can\'t have an action of Free. Using action of ' + action + ' instead.');
+         }
+      }
+
+      var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[effect].allowReaction);
+      if ('Reaction' === action && !allowReaction)
+      {
+         action = Data.Power[effect].defaultAction;
+         if('None' === action) action = 'Free';  //duration is not Permanent here because that was checked above
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + action + ' instead.');
+         //TODO: confusing limitation: Variable is allowed to have Reaction in 3 cases
+      }
+
+      for (var i = 0; i < Data.Power.actions.length - 1; ++i)  //-1 to avoid 'None'
+      {
+         //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
+         if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
+         if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
+         if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
+         possibleActions.push(Data.Power.actions[i]);
+      }
+      return possibleActions;
+   };
+   /**@returns {Array} of all durations that are possible for this power based on current state.*/
+   this.validateAndGetPossibleDurations=function()
+   {
+      var defaultDuration = Data.Power[effect].defaultDuration;
+      if ('Instant' === defaultDuration)
+      {
+         if ('Instant' !== duration)
+         {
+            Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+               effect + ' can\'t have ' + duration + ' duration. It can only be Instant.');
+            duration = 'Instant';  //can't be changed (Feature's defaultDuration is Permanent)
+         }
+         return ['Instant'];
+      }
+
+      var possibleDurations = ['Concentration', 'Sustained', 'Continuous'];
+      if('Personal' === range) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration
+      //when loading, range may later change to Close but not Personal so this check is safe
+      else if ('Permanent' === duration)  //only personal range can have Permanent duration
+      {
+         if('Permanent' === defaultDuration) duration = 'Sustained';
+         else duration = defaultDuration;
+         //use default duration if possible. otherwise use Sustained
+         //either way it will cost 0
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + range + '). Using duration of ' + duration + ' instead.');
+      }
+      if('Feature' === effect) possibleDurations.push('Instant');
+      else if ('Instant' === duration)
+      {
+         //only Feature can change to Instant duration. defaultDuration of instant was checked above
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
+         duration = defaultDuration;
+      }
+      return possibleDurations;
+   };
+   /**This function validates range. It changes range and creates user messages as needed.*/
+   this.validatePersonalRange=function()
+   {
+      if('Feature' === effect) return;  //allow everything
+      var defaultRange = Data.Power[effect].defaultRange;
+      if ('Personal' === range  && 'Personal' !== defaultRange)
+      {
+         Main.messageUser('PowerObjectAgnostic.validatePersonalRange.notPersonal', sectionName.toTitleCase() + ' #' + (rowIndex+1) + ': ' +
+            effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
+         range = defaultRange;  //can't change something to personal unless it started out as that (Feature's defaultRange is Personal)
+      }
+      else if ('Personal' !== range  && 'Personal' === defaultRange)
+      {
+         var hasNonPersonalMod = modifierSection.isNonPersonalModifierPresent();
+         if (!hasNonPersonalMod)
+         {
+            Main.messageUser('PowerObjectAgnostic.validatePersonalRange.nonPersonalNotAllowed', sectionName.toTitleCase() + ' #' + (rowIndex + 1) + ': ' +
+               effect + ' with ' + range + ' range requires one of the following modifiers: "Affects Others Also", "Affects Others Only", or "Attack". ' +
+               'Using the default range of Personal instead.');
+            range = defaultRange;  //can't create a mod for you since there are 3 possible
+         }
+      }
+   };
    //constructor:
-    this.constructor();
+   this.constructor();
 }

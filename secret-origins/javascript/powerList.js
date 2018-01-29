@@ -73,34 +73,45 @@ function PowerListAgnostic(sectionName)
    /**Sets data from a json object given then updates*/
    this.load=function(jsonSection)
    {
-       //the row array isn't cleared in case some have been auto set
-       //Main.clear() is called at the start of Main.load()
+      //the row array isn't cleared in case some have been auto set
+      //Main.clear() is called at the start of Main.load()
       for (var i=0; i < jsonSection.length; i++)
       {
-          var nameToLoad = jsonSection[i].effect;
-          if(!Data.Power.names.contains(nameToLoad))
-             {Main.messageUser('PowerListAgnostic.load.notExist', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
-              nameToLoad + ' is not a power name.'); continue;}
-          if(Data.Power[nameToLoad].isGodhood && !Main.canUseGodhood())
-             {Main.messageUser('PowerListAgnostic.load.godhood', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
-              nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.'); continue;}
-          var rowPointer = rowArray.last();
-          rowPointer.setPower(nameToLoad);  //must be done first
-          if(undefined !== jsonSection[i].cost) rowPointer.setBaseCost(jsonSection[i].cost);
-          rowPointer.setText(jsonSection[i].text);  //they all have text because descriptors
-          rowPointer.disableValidationForActivationInfo();
-          //blindly set activation info then validate
-          rowPointer.setAction(jsonSection[i].action);  //all sets take strings
-          rowPointer.setRange(jsonSection[i].range);
-          rowPointer.setDuration(jsonSection[i].duration);
-          rowPointer.validateActivationInfo();  //also creates all faster action etc
-          if(undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
-          if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);  //skill requires name however perception range has name without skill
-          rowPointer.generateNameAndSkill();  //TODO: should give warning about removing name and skill
-          rowPointer.setRank(jsonSection[i].rank);
-          rowPointer.getModifierList().load(jsonSection[i].Modifiers);
-          //TODO: bug: loading Reaction Damage of v3.3 (Faster Action 3) into v3.4 keeps the mod
-          this.addRow();
+         var nameToLoad = jsonSection[i].effect;
+         if (!Data.Power.names.contains(nameToLoad))
+         {
+               Main.messageUser('PowerListAgnostic.load.notExist', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
+                  nameToLoad + ' is not a power name.');
+               continue;
+         }
+         if (Data.Power[nameToLoad].isGodhood && !Main.canUseGodhood())
+         {
+               Main.messageUser('PowerListAgnostic.load.godhood', sectionName.toTitleCase() + ' #' + (i+1) + ': ' +
+                  nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
+               continue;
+         }
+         var rowPointer = rowArray.last();
+         rowPointer.setPower(nameToLoad);  //must be done first
+         if(undefined !== jsonSection[i].cost) rowPointer.setBaseCost(jsonSection[i].cost);
+         rowPointer.setText(jsonSection[i].text);  //they all have text because descriptors
+
+         rowPointer.disableValidationForActivationInfo();
+         rowPointer.getModifierList().load(jsonSection[i].Modifiers);
+         //modifiers are loaded first so that I can use isNonPersonalModifierPresent and reset the activation modifiers
+
+         //blindly set activation info then validate
+         rowPointer.setAction(jsonSection[i].action);
+         rowPointer.setRange(jsonSection[i].range);
+         rowPointer.setDuration(jsonSection[i].duration);
+         rowPointer.validateActivationInfo();
+         rowPointer.updateActivationModifiers();
+
+         if(undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
+         if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);  //skill requires name however perception range has name without skill
+         rowPointer.generateNameAndSkill();  //TODO: should give warning about removing name and skill
+         rowPointer.setRank(jsonSection[i].rank);
+
+         this.addRow();
       }
        this.update();
    };

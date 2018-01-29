@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Document ruleset="3.0" version="2">
+<Document ruleset="3.10" version="2">
     <Hero name="Weapon Master" transcendence="0" image="../images/Weapon-Master.jpg" />
     <Information>Complications, background and other information</Information>
    <Abilities>
@@ -21,7 +21,7 @@
       </Row>
       <!-- Fast Option -->
        <Row effect="Quickness" text="" action="Free" range="Personal" duration="Sustained" rank="3" />
-       <Row effect="Movement" cost="1" text="Ground Speed: 8 MPH" action="Free" range="Personal" duration="Sustained" rank="2" />
+       <Row effect="Movement" cost="1" text="Ground Speed: 8 MPH" action="Move" range="Personal" duration="Sustained" rank="2" />
       <!-- Gadgets Option
       <Row effect="Variable" text="(5 points) anything equipment could reasonably do (this is a multi-purpose device not a utility belt)" action="Full" range="Personal" duration="Sustained" rank="1">
           <Modifier name="Easily Removable" text="hand held" />
@@ -44,9 +44,9 @@
        <Row effect="Senses" cost="1" text="Microscopic (Vision)" action="None" range="Personal" duration="Permanent" rank="2" />
       -->
       <!-- Urban Acrobat Option
-       <Row effect="Leaping" text="" action="Free" range="Personal" duration="Instant" rank="1" />
-       <Row effect="Movement" cost="2" text="Sure-Footed" action="Free" range="Personal" duration="Sustained" rank="1" />
-       <Row effect="Movement" cost="2" text="Swinging" action="Free" range="Personal" duration="Sustained" rank="1" />
+       <Row effect="Leaping" text="" action="Move" range="Personal" duration="Instant" rank="1" />
+       <Row effect="Movement" cost="2" text="Sure-Footed" action="Move" range="Personal" duration="Sustained" rank="1" />
+       <Row effect="Movement" cost="2" text="Swinging" action="Move" range="Personal" duration="Sustained" rank="1" />
       -->
    </Powers>
    <Equipment>

@@ -74,7 +74,7 @@ var json = {
       {
          "effect": "Leaping",
          "text": "",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Instant",
          "Modifiers": [],
@@ -181,7 +181,7 @@ var json = {
       "Parry": 0,
       "Will": 5
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };

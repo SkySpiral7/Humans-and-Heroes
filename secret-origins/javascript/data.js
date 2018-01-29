@@ -402,5 +402,5 @@ Data.change = function(major, minor)
          if(a < b) return aFirst;
          return bFirst;  //can't be a tie
       });
-   };
+   }
 };

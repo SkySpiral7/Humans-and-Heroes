@@ -138,7 +138,7 @@ var json = {
       "Parry": 0,
       "Will": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };
@@ -157,7 +157,7 @@ if('2' === queryParameters['options'][0]) json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 1,
       "text": "Ground Speed",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],
@@ -167,7 +167,7 @@ if('2' === queryParameters['options'][0]) json.Powers = json.Powers.concat([
 else if('3' === queryParameters['options'][0]) json.Powers.push({
    "effect": "Leaping",
    "text": "",
-   "action": "Free",
+   "action": "Move",
    "range": "Personal",
    "duration": "Instant",
    "Modifiers": [],
@@ -248,7 +248,7 @@ else if('4' === queryParameters['options'][0]) json.Powers = json.Powers.concat(
 else if('5' === queryParameters['options'][0]) json.Powers.push({
    "effect": "Flight",
    "text": "Wind Riding",
-   "action": "Free",
+   "action": "Move",
    "range": "Personal",
    "duration": "Sustained",
    "Modifiers": [],
@@ -268,7 +268,7 @@ else json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 1,
       "text": "Swimming",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],
@@ -278,7 +278,7 @@ else json.Powers = json.Powers.concat([
       "effect": "Movement",
       "cost": 2,
       "text": "Environmental Adaptation, Aquatic",
-      "action": "Free",
+      "action": "Move",
       "range": "Personal",
       "duration": "Sustained",
       "Modifiers": [],
