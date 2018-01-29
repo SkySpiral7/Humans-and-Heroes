@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Document ruleset="3.0" version="2">
+<Document ruleset="3.10" version="2">
     <Hero name="Battlesuit" transcendence="0" image="../images/Battlesuit.jpg" />
     <Information>Complications, background and other information</Information>
    <Abilities>
@@ -18,7 +18,7 @@
           <Modifier name="Impervious" applications="6" />
           <Modifier name="Other Flat Flaw" applications="22" text="Removable (for the whole group and Enhanced Traits)" />
       </Row>
-      <Row effect="Flight" text="Boot Jets: 500 MPH" action="Free" range="Personal" duration="Sustained" rank="8">
+      <Row effect="Flight" text="Boot Jets: 500 MPH" action="Move" range="Personal" duration="Sustained" rank="8">
           <Modifier name="Other Flat Flaw" applications="4" text="Removable (was split because the flat flaw was too big for Armor alone)" />
       </Row>
        <Row effect="Communication" text="Radio" action="Free" range="Personal" duration="Sustained" rank="2" />

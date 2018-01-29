@@ -74,7 +74,7 @@ var json = {
       {
          "effect": "Flight",
          "text": "120 MPH",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
@@ -163,7 +163,7 @@ var json = {
       "Parry": 0,
       "Will": 6
    },
-   "ruleset": "3.4",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };

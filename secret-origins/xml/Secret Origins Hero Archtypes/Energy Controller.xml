@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Document ruleset="3.4" version="2">
+<Document ruleset="3.10" version="2">
    <Hero name="Energy Controller" transcendence="0" image="../images/Energy-Controller.jpg" />
    <Information><![CDATA[Complications, background and other information]]></Information>
    <Abilities>
@@ -23,7 +23,7 @@
       </Row>
       <Row effect="Nullify" text="Energy Negation of Energy type" action="Standard" range="Ranged" duration="Instant" name="Energy Negation" skill="Energy Control" rank="2" />
       <Row effect="Resistance" text="Energy Resistance from Energy type" action="None" range="Personal" duration="Permanent" rank="2" />
-      <Row effect="Flight" text="120 MPH" action="Free" range="Personal" duration="Sustained" rank="6" />
+      <Row effect="Flight" text="120 MPH" action="Move" range="Personal" duration="Sustained" rank="6" />
       <Row effect="Protection" text="Force Field" action="Free" range="Personal" duration="Sustained" rank="10">
          <Modifier name="Decreased Duration" applications="2" />
          <Modifier name="Impervious" applications="5" />
