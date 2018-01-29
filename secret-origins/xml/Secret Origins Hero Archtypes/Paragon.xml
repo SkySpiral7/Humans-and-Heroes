@@ -15,7 +15,8 @@
    </Abilities>
    <Powers>
        <Row effect="Flight" text="500 MPH" action="Move" range="Personal" duration="Sustained" rank="8" />
-       <Row effect="Immunity" text="Life Support" action="None" range="Personal" duration="Permanent" rank="7" />
+       <Row effect="Immunity" text="Life Support" action="None" range="Personal" duration="Permanent" rank="6" />
+       <Row effect="Immunity" text="Age" action="None" range="Personal" duration="Permanent" rank="1" />
        <Row effect="Feature" cost="2" text="Impervious Toughness 6" action="None" range="Personal" duration="Permanent" rank="6" />
        <Row effect="Quickness" text="" action="Free" range="Personal" duration="Sustained" rank="3" />
       <Row effect="Enhanced Trait" cost="2" text="Lifting Str 14; 400 tons" action="Free" range="Personal" duration="Sustained" rank="2">
