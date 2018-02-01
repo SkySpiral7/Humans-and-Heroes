@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.skillRow={};
 TestSuite.skillRow.setSkill=function(isFirst)
 {
@@ -61,8 +62,8 @@ TestSuite.skillRow.generate=function(isFirst)
     var testResults=[];
     var actionTaken='Initial';
     testResults.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is blank'});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken, Description: ('Has first skill: ' + Data.Skill.names[0])});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken, Description: ('Has last skill: ' + Data.Skill.names.last())});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
     testResults.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
     testResults.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
     testResults.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});
@@ -71,20 +72,20 @@ TestSuite.skillRow.generate=function(isFirst)
     try{
     actionTaken='Set Acrobatics'; SelectUtil.changeText('skillChoices0', 'Acrobatics');
     testResults.push({Expected: false, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is not blank'});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken, Description: ('Has first skill: ' + Data.Skill.names[0])});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken, Description: ('Has last skill: ' + Data.Skill.names.last())});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
     testResults.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: actionTaken+': Text exists'});
     testResults.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: actionTaken+': Rank exists'});
     testResults.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: actionTaken+': Ability exists'});
     testResults.push({Expected: '1', Actual: document.getElementById('skill bonus 0').innerHTML, Description: actionTaken+': Bonus exists'});
 
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken, Description: ('Has first ability: ' + Data.Ability.names[0])});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken, Description: ('Has last ability: ' + Data.Ability.names.last())});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken+('Has first ability: ' + Data.Ability.names[0])});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken+('Has last ability: ' + Data.Ability.names.last())});
 
     actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select One');
     testResults.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is blank'});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken, Description: ('Has first skill: ' + Data.Skill.names[0])});
-    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken, Description: ('Has last skill: ' + Data.Skill.names.last())});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
+    testResults.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
     testResults.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
     testResults.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
     testResults.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});

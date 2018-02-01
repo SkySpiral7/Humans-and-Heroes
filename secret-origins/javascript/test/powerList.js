@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.powerList={};
 TestSuite.powerList.calculateValues=function(isFirst)
 {

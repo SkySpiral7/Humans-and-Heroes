@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.modifierRow={};
 TestSuite.modifierRow.setModifier=function(isFirst)
 {

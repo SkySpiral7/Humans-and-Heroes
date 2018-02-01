@@ -1,3 +1,4 @@
+'use strict';
 /**This function will sort input using compare but will do so in a way that is deterministically unstable.
 @param {array} input the array to be sorted
 @param {function} compare a comparison function that must return either 1, 0, or -1 for each combination of input
@@ -5,19 +6,19 @@
 */
 function unstableBubbleSort(input, compare)
 {
-   var swapped;
+   var swapped, temp;
    do {
       swapped = false;
       for (var i=0; i < input.length-1; i++) {
          var result = compare(input[i], input[i+1]);
          if (result === 1) {
-            var temp = input[i];
+            temp = input[i];
             input[i] = input[i+1];
             input[i+1] = temp;
             swapped = true;
          }
          else if (result === 0) {  //if equal then swap them anyway to make it unstable
-            var temp = input[i];
+            temp = input[i];
             input[i] = input[i+1];
             input[i+1] = temp;
             //if swapped=true then this loop will never end (if any 2 are equal)
@@ -153,7 +154,7 @@ function unlinkedNanTest()
           if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
           else testDescription+=trueTests[inputIndex];
           testDescription+=')';
-          testResults.push({Expected: true, Actual: testFunctions[functionIndex](trueTests[inputIndex]), Description: actionTaken, Description: testDescription});
+          testResults.push({Expected: true, Actual: testFunctions[functionIndex](trueTests[inputIndex]), Description: actionTaken+testDescription});
       }
        actionTaken='Number tests';
       for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -162,7 +163,7 @@ function unlinkedNanTest()
           if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
           else testDescription+=falseTests[inputIndex];
           testDescription+=')';
-          testResults.push({Expected: false, Actual: testFunctions[functionIndex](falseTests[inputIndex]), Description: actionTaken, Description: testDescription});
+          testResults.push({Expected: false, Actual: testFunctions[functionIndex](falseTests[inputIndex]), Description: actionTaken+testDescription});
       }
    }
 
@@ -194,7 +195,7 @@ function unlinkedNanTest()
        if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
        else testDescription+=trueTests[inputIndex];
        testDescription+=') vs isNotFinite';
-       testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: isNotFinite(trueTests[inputIndex]), Description: actionTaken, Description: testDescription});
+       testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: isNotFinite(trueTests[inputIndex]), Description: actionTaken+testDescription});
    }
     actionTaken='Comparing Number tests';
    for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -203,7 +204,7 @@ function unlinkedNanTest()
        if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
        else testDescription+=falseTests[inputIndex];
        testDescription+=') vs isNotFinite';
-       testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: isNotFinite(falseTests[inputIndex]), Description: actionTaken, Description: testDescription});
+       testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: isNotFinite(falseTests[inputIndex]), Description: actionTaken+testDescription});
    }
 
     actionTaken='Comparing NaN tests';
@@ -213,7 +214,7 @@ function unlinkedNanTest()
        if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
        else testDescription+=trueTests[inputIndex];
        testDescription+=') vs numberConstructorNaN';
-       testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: numberConstructorNaN(trueTests[inputIndex]), Description: actionTaken, Description: testDescription});
+       testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: numberConstructorNaN(trueTests[inputIndex]), Description: actionTaken+testDescription});
    }
     actionTaken='Comparing Number tests';
    for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -222,11 +223,11 @@ function unlinkedNanTest()
        if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
        else testDescription+=falseTests[inputIndex];
        testDescription+=') vs numberConstructorNaN';
-       testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: numberConstructorNaN(falseTests[inputIndex]), Description: actionTaken, Description: testDescription});
+       testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: numberConstructorNaN(falseTests[inputIndex]), Description: actionTaken+testDescription});
    }
 
     return TestRunner.displayResults('unlinkedNanTest', testResults, true);  //grand total is pointless but this will scroll me to the bottom
-};
+}
 /*
 Primitives and objects get the same results. The special values:
 NaN (also with optional leading +-), undefined, Infinity (also with optional leading +-)

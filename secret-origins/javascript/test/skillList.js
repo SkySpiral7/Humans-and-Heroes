@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.skillList={};
 TestSuite.skillList.calculateValues=function(isFirst)
 {

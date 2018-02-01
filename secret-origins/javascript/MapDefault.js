@@ -1,3 +1,4 @@
+'use strict';
 //thanks to hasOwnProperty the map is safe from Object.prototype tampering. assuming Object.hasOwnProperty hasn't been changed
 /**There are 2 reasons to use this over the built in object.
 1) this is strict and therefore safe

@@ -1,3 +1,4 @@
+'use strict';
 //Polyfill for IE11
 if(undefined === Number.EPSILON){Number.EPSILON = 2.220446049250313e-16;}
 if(undefined === Number.MAX_SAFE_INTEGER){Number.MAX_SAFE_INTEGER = 9007199254740991;}  //2**53-1

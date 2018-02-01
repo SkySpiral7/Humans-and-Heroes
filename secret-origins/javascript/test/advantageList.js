@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.advantageList={};
 TestSuite.advantageList.calculateEquipmentRank=function(isFirst)
 {

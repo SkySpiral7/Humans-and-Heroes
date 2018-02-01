@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.advantageRow={};
 TestSuite.advantageRow.setAdvantage=function(isFirst)
 {

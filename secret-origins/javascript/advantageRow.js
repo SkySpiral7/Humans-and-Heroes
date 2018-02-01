@@ -1,3 +1,4 @@
+'use strict';
 /**Call List onChange
 Select Advantage: select();
 Rank: changeRank();

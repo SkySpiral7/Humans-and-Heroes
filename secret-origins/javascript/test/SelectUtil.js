@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.SelectUtil={};
 TestSuite.SelectUtil.isSelect=function(isFirst)
 {

@@ -1,3 +1,4 @@
+'use strict';
 const SelectUtil={};
 /**Returns true if the element id given is of a select tag DOM element*/
 SelectUtil.isSelect=function(elementId)  //this is used by many other SelectUtils
