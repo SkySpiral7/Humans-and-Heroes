@@ -18,12 +18,12 @@
           <Modifier name="Impervious" applications="6" />
           <Modifier name="Other Flat Flaw" applications="22" text="Removable (for the whole group and Enhanced Traits)" />
       </Row>
-      <Row effect="Flight" text="Boot Jets: 500 MPH" action="Move" range="Personal" duration="Sustained" rank="8">
+      <Row effect="Flight" text="Boot Jets: 190 MPH" action="Move" range="Personal" duration="Sustained" rank="6">
           <Modifier name="Other Flat Flaw" applications="4" text="Removable (was split because the flat flaw was too big for Armor alone)" />
       </Row>
        <Row effect="Communication" text="Radio" action="Free" range="Personal" duration="Sustained" rank="2" />
        <Row effect="Immunity" text="Life Support System" action="None" range="Personal" duration="Permanent" rank="6" />
-       <Row effect="Immunity" text="Sensory Effects" action="None" range="Personal" duration="Permanent" rank="1" />
+       <Row effect="Immunity" text="Sensory Effects" action="None" range="Personal" duration="Permanent" rank="5" />
       <Row effect="Senses" cost="1" text="Sensors: radar" action="None" range="Personal" duration="Permanent" rank="1">
           <Modifier name="Other Flat Extra" applications="4" text="Accurate (2) and Extended (2)" />
       </Row>

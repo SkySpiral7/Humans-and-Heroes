@@ -39,7 +39,7 @@ var json = {
       },
       {
          "effect": "Flight",
-         "text": "Boot Jets: 500 MPH",
+         "text": "Boot Jets: 190 MPH",
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
@@ -50,7 +50,7 @@ var json = {
                "text": "Removable (was split because the flat flaw was too big for Armor alone)"
             }
          ],
-         "rank": 8
+         "rank": 6
       },
       {
          "effect": "Communication",
@@ -77,7 +77,7 @@ var json = {
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 1
+         "rank": 5
       },
       {
          "effect": "Senses",
