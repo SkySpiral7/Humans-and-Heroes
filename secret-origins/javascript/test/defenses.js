@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.defenseList={};
 TestSuite.defenseList.calculateValues=function(isFirst)
 {

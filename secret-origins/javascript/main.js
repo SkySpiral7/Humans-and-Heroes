@@ -1,3 +1,4 @@
+'use strict';
 (function(){
 //include everything else because I'm cool like that
 var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',

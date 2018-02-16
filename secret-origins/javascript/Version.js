@@ -1,3 +1,4 @@
+'use strict';
 function VersionObject(major, minor)
 {
     this.major = major;

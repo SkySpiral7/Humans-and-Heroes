@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.powerRow={};
 TestSuite.powerRow.disableValidationForActivationInfo=function(isFirst)
 {

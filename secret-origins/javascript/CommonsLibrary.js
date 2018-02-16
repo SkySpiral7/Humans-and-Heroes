@@ -1,3 +1,4 @@
+'use strict';
 const CommonsLibrary = {};
 //row onchange section
 /**Onchange function for selecting any select element*/

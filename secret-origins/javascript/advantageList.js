@@ -1,3 +1,4 @@
+'use strict';
 /**Updates:
 Main.updateInitiative();
 Main.updateOffense();

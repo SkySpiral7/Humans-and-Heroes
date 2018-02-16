@@ -166,7 +166,7 @@ that has the <a href="powers/modifiers/flaws.html#TOC-ACTIVATION">Activation</a>
 <p>At the end of your turn, you should:</p>
 <p>End any effects that last "until the end of your turn".</p>
 <p>End any Concentration or Sustained duration effects that you have not maintained (if they haven't already been ended).</p>
-<p>Make any necessary resistance checks to recover from a condition (except dying which is at the start of the turn).</p>
+<p>Make any necessary defense checks to recover from a condition (except dying which is at the start of the turn).</p>
 <p>Suffer from any harmful ongoing effects such as from a condition (except dying and the ones you recovered from)
 or from circumstances like taking damage each turn that you are standing in a fire.</p>
 <p>Inform the Gamemaster and other players that your turn is finished, allowing the next character
@@ -336,7 +336,7 @@ additional damage, at the GM's discretion.</p>
 <p>A deadly toxin introduced through a scratch, or even in the air, may be able to fell the
 strongest hero. Poisons generally have one of several effects particularly Affliction, Damage, or Weaken. Some poisons
 may even have multiple Linked effects. Heroes generally resist poisons with Fortitude. A Treatment skill check can provide
-a bonus on resistance checks against poison.</p>
+a bonus on defense checks against poison.</p>
 <h3 class="table-name">TABLE: SAMPLE POISON RANKS</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
@@ -411,7 +411,7 @@ have multiple linked effects. Potentially fatal diseases usually <a href="powers
 Stamina, in addition to their other
 effects. If the disease goes untreated for long enough, the subject's Stamina may drop below -5, in which case death
 occurs.</p>
-<p>A Treatment skill check can provide a bonus on resistance checks against disease.</p>
+<p>A Treatment skill check can provide a bonus on defense checks against disease.</p>
 <h3 class="table-name">TABLE: SAMPLE DISEASE RANKS</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
@@ -574,7 +574,7 @@ size) decreased and +1 to resist Trip attempts per mass increase.</p>
 PL). If you are much larger than the defender so that your hand is as big as they are then you can grab and hold them
 with only one hand (same as <b>Improved Grab</b>). You are not hindered or vulnerable due to grabbing a character that
 fits in one hand. If the held character isn't touching the ground (and can't <b>fly</b> etc) then they do not get a
-resistance check when you drag them.</p>
+defense check when you drag them.</p>
 <h1>CONFLICTS</h1>
 <p>A <b>conflict</b> is when two or more characters go up against each other, typically in a fight
 of some sort. Conflict between heroes and villains is a prime part of the game and a big element of the fun, just like
@@ -596,21 +596,21 @@ before attack bonuses) this causes the attack to always miss, regardless of your
 <p>A critical hit can have one of the following three effects, chosen by the player when the
 critical hit is determined:</p>
 <p><b>Increased Effect</b>: The critical hit increases the difficulty to resist the attack's
-effect by +1. Against a minion, this bypasses the resistance check entirely; the minion automatically receives the
+effect by +1. Against a minion, this bypasses the defense check entirely; the minion automatically receives the
 highest degree of the attack's effect.</p>
 <p><b>Added Effect</b>: The critical hit adds another effect onto the attack, but its effective
-rank is 0, so the resistance DC 3dF+0. The added effect can be anything the player can reasonably describe and justify
+rank is 0, so the defense DC is 3dF+0. The added effect can be anything the player can reasonably describe and justify
 as adjunct to the original effect: an <b>Affliction</b> (useful for all sorts of "gut checks," blows to the head or
 vitals, etc.), <b>Dazzle</b> (blood in the eyes, boxing the ears, etc.), or <b>Weaken</b>, to name a few. The GM decides
-if the effect suits the circumstances of the attack. The target makes resistance checks against the attack's initial and
+if the effect suits the circumstances of the attack. The target makes defense checks against the attack's initial and
 added effects separately.</p>
 <h3 id="TOC-HEALTH-POINTS">HEALTH POINTS</h3>
-<p>When damaged after resistance is rolled (see
+<p>When damaged after Toughness is rolled (see
 <a href="powers/effects/damage-attack.html">Damage</a> effect) if you
 succeeded no damage is taken otherwise you lose HP (Health Points) equal to the difference. Maximum HP for characters
 (including constructs) is always equal to 6 and can't be increased, decreased, or weakened. There is an exception for
 Minions who always have a maximum HP of 1. Battlesuits while in use act as armor in that the person inside will lose HP
-with damage even though the resistance check is based on the battlesuit's toughness. This is done so that characters who
+with damage even though the defense check is based on the battlesuit's toughness. This is done so that characters who
 put every point into a battlesuit will have no HP advantage or disadvantage during combat.</p>
 <p>Constructs have HP because they are characters but Inanimate objects do not have HP. Damaging
 objects (anything without HP) is explained in <a href="powers/effects/damage-attack.html#TOC-DAMAGING-OBJECTS">Damage: Damaging Objects</a>.</p>
@@ -750,7 +750,7 @@ or more of the target behind cover, like a narrow window, or crouched behind a w
 attack the cover itself). Even if you can see through the cover you can only attack the cover unless your attack
 can ignore cover (see <a href="powers/modifiers/extras.html">Extras</a>
 <b>Indirect</b>, <b>Ricochet</b>, and <b>Area</b>), Perception range doesn't automatically ignore cover.</p>
-<p>Cover also grants a circumstance bonus to Dodge resistance checks against area effects equal to
+<p>Cover also grants a circumstance bonus to Dodge defense checks against area effects equal to
 its penalty to attack checks, so long as the target has cover with respect to the origin point of the effect. So someone
 behind total cover also gains a +2 to Dodge checks against area effects.</p>
 <h3 id="TOC-MINION-RULES">MINION RULES</h3>
@@ -765,7 +765,7 @@ defenses not passive).</p>
 have rolled a rolled a -3 instead of rolling but this is not considered a critical failure.</p>
 <p>If a Non-minion uses <b>Nullify</b> (but not <b>Weaken</b>) against a minion they are
 considered to have rolled a +3 instead of rolling but this is not considered a critical success.</p>
-<p>If a minion fails a resistance check, the minion suffers the worst degree of the effect.
+<p>If a minion fails a defense check, the minion suffers the worst degree of the effect.
 This only applies to actual minions, not characters with 1 HP.</p>
 <h3 id="TOC-DEFENSE">DEFENSE</h3>
 <p>A successful attack has an affect on the target determined by the <a href="powers/effects/index.html">Power</a> used
@@ -776,17 +776,17 @@ power check is opposed by the target's defense check.</p>
 <p>The target of the attack makes a defense check against the <a href="powers/effects/index.html">power</a> to determine what, if
 anything, happens.</p>
 <h3 id="TOC-ONGOING-EFFECTS">ONGOING EFFECTS</h3>
-<p>Some effects are not resisted just once, but multiples times. The later resistance checks
-represent how fast the target is able to "shake off" the effect. Make a resistance check for the target of an ongoing
+<p>Some effects are not resisted just once, but multiples times. The later defense checks
+represent how fast the target is able to "shake off" the effect. Make a defense check for the target of an ongoing
 effect at the end of each of the target's turns. A successful check ends the effect and removes conditions imposed by
 it. A failure means the effect's conditions persist, as given in the effect's description.</p>
 <p class="example"><b>Example</b>: Your hero was hit by a Affliction effect,
-leaving him blinded. At the end of his turn, he makes a Fortitude resistance check against the effect's DC to try and
+leaving him blinded. At the end of his turn, he makes a Fortitude defense check against the effect's DC to try and
 shake it off, but missed the check by 2. His next turn, still blind, he stumbles and tries to strike the foe taunting
-him. At the end of his turn, he makes another resistance check. success! He ends the Affliction effect and removes the
+him. At the end of his turn, he makes another defense check. success! He ends the Affliction effect and removes the
 blinded condition. Next round, the villain had better watch out!</p>
 <h3 id="TOC-CONDITIONS">CONDITIONS</h3>
-<p>A failed resistance check against an attack imposes one or more <b>conditions</b> on the
+<p>A failed defense check against an attack imposes one or more <b>conditions</b> on the
 target, depending on the type of effect and the degree of failure. See the effect description and the <b>Conditions</b>
 section of <a href="the-basics/index.html">The Basics</a> for more on the various conditions.</p>
 <h2 id="TOC-ACTIONS">ACTIONS</h2>
@@ -849,7 +849,7 @@ actions. If you do not act before your turn would come up again then you are for
 (you may choose to do nothing). Therefore you can't delay your turn indefinitely but you can skip every other turn.</p>
 <p>Beneficial effects lasting until the end of your turn will end when you choose to delay, but harmful
 effects that last until the end of your turn will wait until after you act.
-Like-wise, you do not make resistance checks until after you have taken your turn, so delaying can draw out some effects.</p>
+Like-wise, you do not make defense checks until after you have taken your turn, so delaying can draw out some effects.</p>
 <h3 id="TOC-DISARM---STANDARD-ACTION">DISARM - STANDARD ACTION</h3>
 <p>You attempt to knock a loosely attached or held item--such as a weapon or device--off of the
 opponent or out of an opponent's grasp. You may Disarm using any attack at the Gamemaster's discretion based on
@@ -886,7 +886,7 @@ successful grab as a free action during each of your turns, but cannot perform o
 while doing so. Since maintaining a grab is a free action, you can take a standard action to inflict your Strength
 damage to a grabbed target on one of your subsequent turns after the grab is established.</p>
 <p>You can drag a restrained or bound target along with you when you move. The target gets a
-Strength resistance check against your Strength. If you win, you move and the target moves along with you but your
+Strength defense check against your Strength. If you win, you move and the target moves along with you but your
 normal ground speed is reduced by 1 rank. If the target resists, you are immobilized that turn (and lose the move action
 you attempted) unless you release your hold on the target.</p>
 <p>You can end a grab (releasing your target) as a free action. If you are unable to take the free
@@ -968,7 +968,7 @@ in the <b>Conditions</b> section of <a href="the-basics/index.html">The Basics</
 <h3 id="TOC-FINISHING-ATTACK">FINISHING ATTACK</h3>
 <p>A finishing attack is a non-routine attack against a defenseless target at close range, with
 the intent to kill. The DC is 0 and is always a critical hit (see <b>Critical Hits</b>). This generally means your attack hits
-automatically. If the target's resistance check has three or more degrees of failure, the target dies immediately.</p>
+automatically. If the target's defense check has three or more degrees of failure, the target dies immediately.</p>
 <h3 id="TOC-POWER-ATTACK">POWER ATTACK</h3>
 <p>When you make an attack you can take a -1 penalty on your attack bonus and get a +1 bonus to
 the effect rank. You can't use this if your attack bonus would be reduced to 0 or below. The changes are declared before you make the attack check
@@ -984,16 +984,16 @@ attack damage (before applying circumstance modifiers) by the series power level
 10. His unarmed damage (Strength) rank is only 2, so he uses his speed rank of 10 for the damage. Since he also moved his full
 speed to build up momentum, he increases his damage by +1 for a total damage rank of 11. If a base damage rank of 10 is too
 high for the series, the GM may impose a lower limit on his slam attack damage, reducing the damage to the maximum permissible.</p>
-<p>You suffer some of the impact of slamming into a target; make a Toughness resistance check
+<p>You suffer some of the impact of slamming into a target; make a Toughness defense check
 against half the damage rank of your attack (rounded down).</p>
 <p class="example"><b>Example</b>: Your hero hits his target with a slam attack damage
-of 11, divided by 2, equals 5.5, and rounded down is 5 which means your hero must make his own Toughness resistance check against
+of 11, divided by 2, equals 5.5, and rounded down is 5 which means your hero must make his own Toughness defense check against
 damage rank 5.</p>
 <p>Bonuses to Toughness protect against slam attack damage normally. Immunity to slam damage you
 inflict or is inflicted to you is not possible.</p>
 <h3 id="TOC-TEAM-ATTACK">TEAM ATTACK</h3>
 <p>Multiple attackers can attempt to combine their attacks in order to overwhelm an opponent's
-resistance. The attacks to be combined must have the same effect and resistance and be within 5 ranks of each other. So
+resistance. The attacks to be combined must have the same effect and defense and be within 5 ranks of each other. So
 attacks all doing Damage against Toughness can combine, but not with a Mental Blast, for example, which is a Damage
 effect, but resisted by Will rather than Toughness.</p>
 <p>The attackers must all delay to the same point in the initiative order (that of the slowest

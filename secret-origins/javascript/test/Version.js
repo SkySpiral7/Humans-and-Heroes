@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.version={};
 TestSuite.version.toString=function(isFirst)
 {

@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.CommonsLibrary={};
 TestSuite.CommonsLibrary.select=function(isFirst)
 {

@@ -1,3 +1,4 @@
+'use strict';
 TestConfig.betweenEach=function(){Main.clear(); Main.setRuleset(3, latestMinorRuleset);};
 //every test needs to clear out for the other test to start clean
 //even if slow do not disable Main generation because an error might occur (due to undefined values) in which case I need to see how Main was
@@ -93,24 +94,24 @@ TestSuite.test.unstableBubbleSort=function(isFirst)
 
    var testResults=[];
 
-   try {
    var input = ['cat', 'human', 'dog'];
    function byStringLength(a,b) {
       if(a.length > b.length) return 1;
       if(a.length < b.length) return -1;
       return 0;
    }
+   try {
    unstableBubbleSort(input, byStringLength);
 
    var expected = ['dog', 'cat', 'human'];
    testResults.push({Expected: expected, Actual: input, Description: 'Does sort but unstable'});
    } catch(e){testResults.push({Error: e, Description: 'unstableBubbleSort'});}
 
-   try {
    var input = ['cat', 'human', 'dog'];
    function noOpCompare(a,b) {
       return 0;
    }
+   try {
    unstableBubbleSort(input, noOpCompare);
 
    var expected = ['human', 'dog', 'cat'];

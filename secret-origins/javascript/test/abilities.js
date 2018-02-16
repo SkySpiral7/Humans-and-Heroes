@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.abilityList={};
 TestSuite.abilityList.calculateValues=function(isFirst)
 {

@@ -1,3 +1,4 @@
+'use strict';
 TestSuite.main={};
 TestSuite.main.changeRuleset=function(isFirst)
 {

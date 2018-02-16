@@ -1,3 +1,4 @@
+'use strict';
 function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 {
    //private variable section:

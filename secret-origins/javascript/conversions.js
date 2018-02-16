@@ -1,3 +1,4 @@
+'use strict';
 /**This function is designed to sanitize numbers given by user input and to validate the number (if it is one).
 More simply: it returns a valid integer based on the given input.
 numberGiven: null safe converted into an integer if possible, if not possible defaultValue is returned
