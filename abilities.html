@@ -245,7 +245,6 @@ You retain all other mental traits but will do as you are told (even if you don'
 during this time (neither receive or spend victory points for the ignored ones). All interaction skills used on you always
 pass. You will follow any command given to the best of your ability. The only decisions you are allowed to make are those
 involved with completing a command.</p>
-<p>TODO: should these be moved up to the individual descriptions? Yes</p>
 <h1>ABSENT ABILITIES</h1>
 <p>Player characters are not allowed to have absent abilities (see <a href="powers/effects/immunity-defense.html#TOC-FATIGUE">Immunity
 to fatigue</a> instead). Absent abilities exist to handle very unusual NPCs. Even then it is not possible to have absent
@@ -263,50 +262,52 @@ if this should be a character at all. It may be better handled as an object, obs
 <a href="powers/effects/index.html">powers</a> and the ability to die. Note that everything has Toughness (even inanimate
 objects) and with enough <a href="powers/effects/damage-attack.html">damage</a> can be destroyed. Plants and machines
 can have other traits (such as Fortitude) and need not be characters.</p>
-<p>TODO: everything below here</p>
 <h1>DEFENSES</h1>
 <p>Heroes face many hazards in their line of work, from attacks by villainous foes to traps and
-fiendish mind control. A hero's <b>defenses</b> are abilities used to avoid such things, determining the difficulty to
-affect a hero with an attack, or to make resistance checks against them. Each defense is based on a particular ability,
-modified by the hero's advantages and powers. For more on defenses in general and how you use them, see <a
-href="action-adventure.html#TOC-RESISTANCE">Action &amp; Adventure</a>.</p>
+fiendish mind control. A hero's <b>defenses</b> are traits used to avoid such things, determining the difficulty to
+affect a hero with an attack, or to make defense checks against them. Each defense is based on a particular ability,
+modified by the hero's advantages and powers. For more on when defenses are used and what happens see <a
+href="action-adventure.html#TOC-DEFENSE">Action &amp; Adventure: Defense</a>.</p>
 <p>Note that unlike ability scores, nothing special happens if a defense drops to 0 or below.
 Toughness has no lower limit because there is no maximum limit to the number of bruised penalties.
 However all other defense have an effective minimum based on the maximum possible <a href="powers/effects/weaken-attack.html">Weaken</a>
-rank which is determined by power level (also note that the related ability can be reduced to -5, combined with the disabled
-condition makes -7).</p>
+rank which is determined by power level. Although note that if the matching ability, except Stamina, is debilitated
+then the defense will automatically fail.</p>
 <p>Defenses are also used to measure the ability to overcome certain effects, involving a
-<b>resistance check</b> of the defense plus a dice roll against a difficulty class determined by the effect or hazard.
-So you might make a Parry resistance check for your hero to avoid a sword thrust by a villain, for example, or a Dodge
-resistance check to evade a trap just as it is triggered, and so on. This is referred to as "resisting," such as
-"resisted by Fortitude" or "resisted by Dodge".</p>
+<b>defense check</b> which consists of defense total plus a dice roll against a difficulty class or opposed roll as determined
+by the effect or hazard.
+So you might make a Parry defense check for your hero to avoid a sword thrust by a villain, for example, or a Dodge
+defense check to evade a trap just as it is triggered, and so on. This may be referred to by abbreviation such as "Will check"
+or by "resisting" such as "resisted by Fortitude".</p>
 <h2 id="TOC-DEFENSE-RANK">DEFENSE RANK</h2>
 <p>Your base defense ranks are equal to your ranks in their associated abilities. You can increase
-your defenses above the values granted by your ability ranks by spending character points: 1 character point grants you
-an additional rank in a defense, up to the limits imposed by power level (see <b>Power Level</b>).</p>
+your defenses (except toughness) above the values granted by your ability ranks by spending character points: 1 character point grants you
+an additional rank in a defense, up to the <a href="secret-origins/index.html#TOC-POWER-LEVEL-LIMITATIONS">limits imposed by power level</a>.</p>
 <span class="generated-class-2">Defense Cost = 1 character points per +1 rank</span>
-<p>With the Enhanced Trait effect (see <a href="powers/index.html">Powers</a>) you can also improve
-your defenses with powers at the same cost, 1 point per rank.</p>
 <h3 id="TOC-TOUGHNESS-RANK">TOUGHNESS RANK</h3>
 <p>The exception is Toughness, which can only be increased above your base Stamina rank using
 advantages and powers, not by direct spending of character points. This reflects that greater-than-normal Toughness is
-virtually always some sort of special ability. See <b>Advantages</b> and <a href="powers/index.html">Powers</a> for various
-options for improving Toughness, notably the <b>Defensive Roll</b> advantage and the <b>Protection</b> effect.</p>
+virtually always some sort of special ability. See <a href="advantages.html#TOC-DEFENSIVE-ROLL">Defensive Roll</a>,
+<a href="powers/effects/protection-defense.html">Protection</a>, and <a href="powers/effects/enhanced-trait-general.html">Enhanced Trait: Toughness</a>.</p>
 <h2 id="TOC-ACTIVE-DEFENSES">ACTIVE DEFENSES</h2>
 <p>Dodge and Parry defenses require a measure of action to be fully effective. Limits on your
 mobility, focus, and reaction time adversely affect them. The conditions vulnerable and defenseless affect your active
 defenses (see <a href="the-basics/conditions.html">Conditions</a> for description).</p>
-<h2 id="TOC-DEFENSE-DESCRIPTIONS">DEFENSE DESCRIPTIONS</h2>
 <h3 id="TOC-DODGE">DODGE</h3>
 <p>Dodge defense is based on Agility rank. It includes reaction time, quickness, nimbleness, and
 overall coordination, used to avoid ranged attacks or other hazards where reflexes and speed are important.</p>
-<h3 id="TOC-FORTITUDE">FORTITUDE</h3>
-<p>Fortitude defense is based on Stamina and measures health and resistance to threats like poison
-or disease. It incorporates constitution, ruggedness, metabolism, and immunity.</p>
 <h3 id="TOC-PARRY">PARRY</h3>
 <p>Parry defense is based on Fighting. It is the ability to counter, duck, or otherwise evade a
 foe's attempts to strike you in close combat through superior fighting ability. Note that Parry never provides a counter
 attack for balance reasons.</p>
+<h2 id="TOC-PASSIVE-DEFENSES">PASSIVE DEFENSES</h2>
+<p>Passive defenses are always present (unlike active defenses) even while unaware or incapacitated.
+Passive defense are unaffected by the conditions vulnerable and defenseless and thus are always available.
+The applicable active defense (if any) is rolled then the applicable passive defense is rolled and thus most attacks
+must overcome two defenses.</p>
+<h3 id="TOC-FORTITUDE">FORTITUDE</h3>
+<p>Fortitude defense is based on Stamina and measures health and resistance to threats like poison
+or disease. It incorporates constitution, ruggedness, metabolism, and immunity.</p>
 <h3 id="TOC-TOUGHNESS">TOUGHNESS</h3>
 <p>Toughness defense is based on Stamina and is resistance to direct damage or harm, and overall
 durability.</p>
