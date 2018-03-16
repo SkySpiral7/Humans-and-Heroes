@@ -65,7 +65,7 @@ var json = {
       "Parry": 0,
       "Will": 0
    },
-   "ruleset": "3.10",
+   "ruleset": "3.11",
    "version": 2,
    "Information": "Complications, background and other information"
 };
