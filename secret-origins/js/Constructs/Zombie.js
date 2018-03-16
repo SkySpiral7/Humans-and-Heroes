@@ -9,12 +9,21 @@ var json = {
       "Agility": -1,
       "Fighting": 1,
       "Awareness": -1,
-      "Stamina": "--",
+      "Stamina": 0,
       "Dexterity": -1,
       "Intellect": 0,
       "Presence": 0
    },
    "Powers": [
+      {
+         "effect": "Immunity",
+         "text": "Fatigue",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 30
+      },
       {
          "effect": "Protection",
          "text": "Undead",
@@ -34,7 +43,7 @@ var json = {
       "Parry": 0,
       "Will": 0
    },
-   "ruleset": "3.0",
+   "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };
