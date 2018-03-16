@@ -41,57 +41,44 @@ var json = {
          "rank": 10
       },
       {
-         "effect": "Affliction",
-         "text": "Groundstrike; Resisted by Fortitude; Vulnerable, Defenseless",
-         "action": "Standard",
-         "range": "Close",
-         "duration": "Instant",
-         "name": "Groundstrike",
-         "skill": "Unarmed",
-         "Modifiers": [
-            {
-               "name": "Area",
-               "applications": 1,
-               "text": "Burst"
-            },
-            {
-               "name": "Other Rank Flaw",
-               "applications": 2,
-               "text": "Limited Degree, Instant Recovery"
-            },
-            {
-               "name": "Limited",
-               "applications": 1,
-               "text": "Both the Powerhouse and its targets must be in contact with the ground"
-            },
-            {
-               "name": "Alternate Effect",
-               "text": "to Shockwave"
-            }
-         ],
-         "rank": 10
-      },
-      {
          "effect": "Leaping",
-         "text": "",
+         "text": "120 feet",
          "action": "Move",
          "range": "Personal",
          "duration": "Instant",
          "Modifiers": [],
-         "rank": 10
+         "rank": 4
       },
       {
-         "effect": "Immunity",
-         "text": "From natural cold, natural heat, and fatigue effects (5)",
+         "effect": "Regeneration",
+         "text": "1 HP every other round",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 7
+         "rank": 5
       },
       {
-         "effect": "Resistance",
-         "text": "High Pressure",
+         "effect": "Immunity",
+         "text": "From natural cold",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Immunity",
+         "text": "From natural heat",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Immunity",
+         "text": "Pressure",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
