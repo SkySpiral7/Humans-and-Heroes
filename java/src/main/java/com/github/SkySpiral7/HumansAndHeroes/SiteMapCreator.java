@@ -16,8 +16,7 @@ import com.github.skySpiral7.java.util.FileIoUtil;
 
 public class SiteMapCreator
 {
-   private static final Comparator<Path> PATH_COMPARATOR = (a, b) ->
-   {
+   private static final Comparator<Path> PATH_COMPARATOR = (a, b) -> {
       final int aFirst = -1;
       final int bFirst = 1;
       //files first
@@ -52,48 +51,54 @@ public class SiteMapCreator
       final int rootPathOffset = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath().length() + 1;
       final int rootNameCount = Main.rootFolder.toPath().toAbsolutePath().normalize().getNameCount();
       int previousNameCount = rootNameCount;
+      final StringBuilder stringBuilder = new StringBuilder(15000);
       for (final Path input : allHtml)
       {
          final String link = input.toString().substring(rootPathOffset).replace("\\", "/");
          int currentNameCount = input.toAbsolutePath().normalize().getNameCount();
          if (link.endsWith("index.html")) --currentNameCount;
 
-         printUnorderedListTags(currentNameCount - previousNameCount, link.endsWith("index.html"));
+         stringBuilder.append(printUnorderedListTags(currentNameCount - previousNameCount));
 
-         if (currentNameCount != rootNameCount) System.out.print("<li>");
-         System.out.print("<a href=\"" + link + "\">");
-         System.out.print(readTitle(input) + " (" + link + ")");
-         System.out.print("</a>");
-         if (currentNameCount == rootNameCount) System.out.println("<br />");
-         else if (!link.endsWith("index.html")) System.out.println("</li>");
-         else System.out.println();
+         if (currentNameCount != rootNameCount) stringBuilder.append("<li>");
+         stringBuilder.append("<a href=\"").append(link).append("\">");
+         stringBuilder.append(readTitle(input)).append(" (").append(link).append(")");
+         stringBuilder.append("</a>");
+         if (currentNameCount == rootNameCount) stringBuilder.append("<br />\n");
+         else if (!link.endsWith("index.html")) stringBuilder.append("</li>\n");
+         else stringBuilder.append('\n');
 
          previousNameCount = currentNameCount;
       }
-      printUnorderedListTags(rootNameCount - previousNameCount, false);
+      stringBuilder.append(printUnorderedListTags(rootNameCount - previousNameCount + 1));
+      stringBuilder.append("</ul>\n");
+      String siteMap = stringBuilder.toString();
+      siteMap = siteMap.replaceFirst("<ul>", "<ul class=\"tree\">");
+      System.out.print(siteMap);
    }
 
    private static String readTitle(final Path input)
    {
       final String contents = FileIoUtil.readTextFile(input.toFile());
       final Matcher matcher = Pattern.compile("<title>(.+?) - Humans &amp; Heroes").matcher(contents);
-      matcher.find();  //this is always true but needs to be called before group
-      return matcher.group(1);  //just let this throw if find returns false
+      if (!matcher.find()) throw new AssertionError("HTML without title: " + input);
+      //matcher.find is always true but needs to be called before group
+      return matcher.group(1);
    }
 
-   private static void printUnorderedListTags(final int ulCount, final boolean isAnIndex)
+   private static String printUnorderedListTags(final int ulCount)
    {
-      if (ulCount == 0) return;
+      if (ulCount == 0) return "";
       final String[] arr = new String[Math.abs(ulCount)];
       if (ulCount > 0)
       {
          Arrays.fill(arr, "<li><ul>");
-         System.out.println(String.join("", Arrays.asList(arr)).substring("<li>".length()));
+         return String.join("", Arrays.asList(arr)).substring("<li>".length()) + "\n";
       }
-      else if (ulCount < 0)
+      else //if (ulCount < 0)
       {
          Arrays.fill(arr, "</ul></li>");
-         System.out.println(String.join("", Arrays.asList(arr)));
+         return String.join("", Arrays.asList(arr)) + "\n";
       }
    }
 }
