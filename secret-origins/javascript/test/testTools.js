@@ -120,18 +120,6 @@ Messages.errorCapture=function(errorCode, amLoading)
 {
    Messages.list.push({errorCode: errorCode, amLoading: amLoading});
 };
-//TODO: stop using Messages.isValid, Messages.isOnlyErrorCodes.
-Messages.isValid=function(){return Messages.list.isEmpty();};
-Messages.isOnlyErrorCodes=function(errorCodeArray)
-{
-   if(!Array.isArray(errorCodeArray)) errorCodeArray = [errorCodeArray];
-   if(Messages.list.length !== errorCodeArray.length) return false;
-   for (var i=0; i < errorCodeArray.length; ++i)
-   {
-      if(Messages.list[i].errorCode !== errorCodeArray[i]) return false;
-   }
-   return true;
-};
 Messages.errorCodes=function()
 {
    var result = [];

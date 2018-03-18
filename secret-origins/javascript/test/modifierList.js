@@ -74,19 +74,19 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(isFirst)
       "Modifiers":[{"name":"Other Flat Extra"},{"name":"Affects Others Only"}],"rank":1});
    //also note that the modifier isn't first and is last for 2 possible edge cases
    Loader.sendData(dataToLoad);
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Affects Others Only'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'true: Affects Others Only'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
       "Modifiers":[{"name":"Affects Others Also"}],"rank":1});
    Loader.sendData(dataToLoad);
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Affects Others Also'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'true: Affects Others Also'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
       "Modifiers":[{"name":"Attack"}],"rank":1});
    Loader.sendData(dataToLoad);
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'true: Attack'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'true: Attack'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
