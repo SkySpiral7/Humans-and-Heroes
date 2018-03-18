@@ -22,7 +22,7 @@ public class UnlinkedFileDetector
    /**
     * Prints out any html file that doesn't have a hyperlink to get to it.
     */
-   public static void detect() throws IOException
+   public static void detect()
    {
       final List<String> hiddenFiles = Arrays.stream(Main.getAllHtmlFiles())
                                              .map(input -> input.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath())
@@ -65,7 +65,7 @@ public class UnlinkedFileDetector
    {
       final Set<String> results = new HashSet<>();
       final String contents = FileIoUtil.readTextFile(Main.sideBar);
-      final Matcher matcher = Pattern.compile("\"link\":\"([^\"]+)\"").matcher(contents);
+      final Matcher matcher = Pattern.compile("\"?link\"?:\\s*\"([^\"]+)\"").matcher(contents);
       while (matcher.find())
       {
          final String pathToFile = matcher.group(1);
