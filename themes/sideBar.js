@@ -378,6 +378,10 @@ var navigationJson = [
             "link": "meta/author-commentary.html"
          },
          {
+            "name": "Calculations",
+            "link": "meta/calculations.html"
+         },
+         {
             "name": "Change Explanation",
             "link": "meta/change-explanation.html"
          },
