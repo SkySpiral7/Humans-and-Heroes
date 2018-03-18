@@ -1,5 +1,5 @@
 'use strict';
-TestConfig.betweenEach=function(){Main.clear(); Main.setRuleset(3, latestMinorRuleset);};
+TestConfig.betweenEach=function(){Main.clear(); Messages.list = []; Main.setRuleset(3, latestMinorRuleset);};
 //every test needs to clear out for the other test to start clean
 //even if slow do not disable Main generation because an error might occur (due to undefined values) in which case I need to see how Main was
 

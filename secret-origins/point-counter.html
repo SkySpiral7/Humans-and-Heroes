@@ -131,9 +131,9 @@
 <br />
 <textarea id="bio-box" rows="10" cols="100">Complications, background and other information</textarea>
 <br /><br />
-<!--ruleset's value is set at the bottom of this file-->
+<!--value of ruleset and latest-ruleset are set at the bottom of this file-->
 <label>Rules: <input type="text" id="ruleset" size="4" onChange="Main.changeRuleset();" /></label>
-Note that only the <a href="../meta/versioning.html">most recent rules</a> are fully supported.
+Note that only the <a href="../meta/versioning.html">most recent rules</a> (<span id="latest-ruleset"></span>) are fully supported.
 <h2>Usage Notes</h2>
 <div>
 This page assumes you know all of the rules.<br />
@@ -202,6 +202,7 @@ Main = new MainObject();
 Object.freeze(Main);
 Main.clear();  //in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
 document.getElementById('ruleset').value = Main.getActiveRuleset().toString();
+document.getElementById('latest-ruleset').innerHTML = Main.getActiveRuleset().toString();
 </script>
 <script type="text/javascript" src="javascript/autoLoading.js"></script>
 </body>

@@ -422,53 +422,77 @@ TestSuite.main.determineCompatibilityIssues=function(isFirst)
 };
 TestSuite.main.load=function(isFirst)
 {
-   return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
    TestRunner.clearResults(isFirst);
 
    var testResults=[];
-   var actionTaken='Initial';
-   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-   try{
-   actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-   } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   var dataToLoad;
 
-   return TestRunner.displayResults('TestSuite.main.load', testResults, isFirst);
+   Main.setMockMessenger(Messages.errorCapture);
+
+   Messages.list = [];
+   TestRunner.changeValue('Stamina', '--');
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Abilities.Stamina = '--';
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true when loading'});
+
+   Main.clear();
+   Messages.list = [];
+   TestRunner.changeValue('Stamina', '--');
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading reset to false'});
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Abilities.Stamina = '--';
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true again when loading'});
+
+   //ADD TESTS. currently only tests amLoading
+
+   Main.clearMockMessenger();  //restore default behavior
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
 };
 TestSuite.main.loadFromString=function(isFirst)
 {
    TestRunner.clearResults(isFirst);
 
-   var testResults=[], actual, expected;
+   var testResults=[];
 
    Main.setMockMessenger(Messages.errorCapture);
 
-   try{
-   errorList = [];
+   Messages.list = [];
    TestRunner.changeValue('Strength', '2');
    Main.loadFromString('  \n\t');
    testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'No errors from blank input'});
-   } catch(e){testResults.push({Error: e, Description: 'Ignore blank input'});}
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'No errors from blank input'});
+
+   Messages.list = [];
+   TestRunner.changeValue('Stamina', '--');
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'ui amLoading starts false'});
 
    try{
-   errorList = [];
+   Messages.list = [];
    Main.loadFromString('<3');
    TestRunner.failedToThrow(testResults, 'XML error code');
    }
    catch(e)
    {
-      testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('MainObject.loadFromString.parsing.XML'), Description: 'XML error code'});
+      testResults.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.XML', amLoading: true}], Actual: Messages.list, Description: 'XML error code'});
    }
 
+   Messages.list = [];
+   TestRunner.changeValue('Stamina', '--');
+   testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'loading unset amLoading'});
+
    try{
-   errorList = [];
+   Messages.list = [];
    Main.loadFromString('{');
    TestRunner.failedToThrow(testResults, 'JSON error code');
    }
    catch(e)
    {
-      testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('MainObject.loadFromString.parsing.JSON'), Description: 'JSON error code'});
+      testResults.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.list, Description: 'JSON error code'});
    }
 
     Main.clearMockMessenger();  //restore default behavior
