@@ -110,14 +110,6 @@ var navigationJson = [
             "link": "secret-origins/speedster.html"
          },
          {
-            "name": "Warrior",
-            "link": "secret-origins/warrior.html"
-         },
-         {
-            "name": "Weapon Master",
-            "link": "secret-origins/weapon-master.html"
-         },
-         {
             "name": "Make Your Own",
             "link": "secret-origins/point-counter.html"
          }
@@ -384,6 +376,10 @@ var navigationJson = [
          {
             "name": "Author Commentary",
             "link": "meta/author-commentary.html"
+         },
+         {
+            "name": "Calculations",
+            "link": "meta/calculations.html"
          },
          {
             "name": "Change Explanation",

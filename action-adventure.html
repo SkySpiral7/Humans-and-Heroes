@@ -233,7 +233,7 @@ then dying. When a character becomes dying in this way his HP becomes -1 (if not
 <p>How often characters have to make Fortitude checks depends on the conditions. Once an hour for
 uncomfortable heat or cold (a hot summer day or cold winter day), once per 10 minutes for intense heat or cold (a
 blazing desert or Arctic conditions), once a minute for extreme heat or cold like the edge of a volcano or an arctic
-winter storm. Checks are made at the end of each period of exposure. Truly intense heat or cold--such as a blast furnace
+winter storm. Checks are made at the end of each period of exposure. Anything beyond extreme heat or cold--such as a blast furnace
 or touching liquid nitrogen--inflicts direct <a href="powers/effects/damage-attack.html">damage</a> and is an attack.</p>
 <p>Characters with the appropriate <a href="powers/effects/immunity-defense.html">Immunity</a> do not need to make Fortitude checks for
 natural temperatures (up to intense temperatures). Additionally there are other things that factor into the temperature
@@ -244,7 +244,8 @@ The Gamemaster may also assign conditions such as sunburn and frostbite as appro
 <p>Heroes can go without water for a day. After this, they need to make a Fortitude check (DC 0,
 +1 per previous check) each hour to avoid a level of fatigue. Heroes can go without food for three days. After this,
 they must make a Fortitude check (DC 0, +1 per previous check) every 4 hours to avoid fatigue. The character cannot recover
-until he gets water or food. Heroes with <a href="powers/effects/immunity-defense.html">Immunity</a> to Starvation can go an unlimited time without food or
+until he gets water or food. Heroes with <a href="powers/effects/immunity-defense.html#TOC-STARVATION-AND-THIRST">Immunity to Starvation</a>
+can go an unlimited time without food or
 water. In all other cases a character will die after either 3 days without water or 7 days without food (do not roll
 a Fortitude check since it is impossible to pass). This makes the maximum DCs that can be survived DC 48 without water
 and DC 24 without food.</p>
@@ -259,7 +260,17 @@ twice their Stamina. After that time they must make a Fortitude check (DC 0) eac
 breath. The DC increases by +1 for each previous success. Failure on the Fortitude check means the character is forced to breath
 and if he is unable then he becomes incapacitated and on the following round he is dying and his HP becomes -1 (if not
 already negative). A dying character can't stabilize (even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until
-able to breathe again. Heroes with <a href="powers/effects/immunity-defense.html">Immunity</a> to Suffocation can go an unlimited time without air.</p>
+able to breathe again. Heroes with <a href="powers/effects/immunity-defense.html#TOC-SUFFOCATION">Immunity to Suffocation</a>
+can go an unlimited time without air.</p>
+<h3 id="TOC-SLEEP-DEPRIVATION">SLEEP DEPRIVATION</h3>
+<p>Characters can go without sleep for 1 day without side effect. After missing sleep another time he becomes fatigued.
+After 5 days without sleep he becomes exhausted. After 10 days he becomes incapacitated and can't be woken up for 8 hours
+(unlike being asleep you are totally unaware to everything).</p>
+<p>If a lack of sleep overlaps with <a href="#TOC-FORCED-LABOR">forced labor</a> then use <a href="#TOC-FORCED-LABOR">forced labor</a>
+rules with increased difficulty rather than sleep deprivation rules (a noteworthy difference is that <a href="#TOC-FORCED-LABOR">forced labor</a>
+can kill).</p>
+<p>Characters with <a href="powers/effects/immunity-defense.html#TOC-SLEEP">Immunity to sleep</a> do not suffer these effects
+and can go an unlimited time without sleep.</p>
 <h3 id="TOC-FORCED-LABOR">FORCED LABOR</h3>
 <p>Characters may be forced to perform manual labor (including if the character is forcing himself). This labor may either
 be difficult or something that is forced to continue for too long. Examples of forced labor include a forced march, boat rowing
@@ -277,6 +288,8 @@ thus you can attempt to stabilize the following round (see <a href="the-basics/c
 with the labor causing the frequency of Fortitude checks to increase. Do not use the forced labor rules with increased
 frequency because characters should become incapacitated rather than asleep. This is also true for other environmental hazards
 such as starvation and suffocation.</p>
+<p>Characters with <a href="powers/effects/immunity-defense.html#TOC-FATIGUE">Immunity to fatigue</a> do not suffer from
+forced labor due to time but still suffer due to extreme physical difficulty.</p>
 <h3 id="TOC-FALLING">FALLING</h3>
 <p>A fall inflicts damage rank equal to (fallen distance - your size)*2 with a maximum of 18. A
 fall with a damage rank of 0 or less, such as a fall of 6 feet or less, inflicts no damage. You are prone at the end of
@@ -322,9 +335,8 @@ additional damage, at the GM's discretion.</p>
 <h3 id="TOC-POISON">POISON</h3>
 <p>A deadly toxin introduced through a scratch, or even in the air, may be able to fell the
 strongest hero. Poisons generally have one of several effects particularly Affliction, Damage, or Weaken. Some poisons
-may even have multiple Linked effects. Heroes generally resist poisons with Fortitude.</p>
-<p>Heroes with Immunity to Poison are completely unaffected by poisons. A Treatment skill check
-can provide a bonus on defense checks against poison.</p>
+may even have multiple Linked effects. Heroes generally resist poisons with Fortitude. A Treatment skill check can provide
+a bonus on defense checks against poison.</p>
 <h3 class="table-name">TABLE: SAMPLE POISON RANKS</h3>
 <table class="generated-class-3 table-alt-rows">
 <tbody>
@@ -393,8 +405,10 @@ effects, linked with Fortitude Damage.</td>
 <h3 id="TOC-DISEASE">DISEASE</h3>
 <p>When heroes come into contact with a disease they must make a Fortitude check (DC of the
 disease's rank) to avoid becoming infected. The method of infection depends on the disease: some are airborne while
-others require physical contact. Diseases are generally <b>Affliction</b> or <b>Weaken</b> effects. Some diseases may
-have multiple linked effects. Potentially fatal diseases usually <b>Weaken</b> Stamina, in addition to their other
+others require physical contact. Diseases are generally <a href="powers/effects/affliction-attack.html">Affliction</a>
+or <a href="powers/effects/weaken-attack.html">Weaken</a> effects. Some diseases may
+have multiple linked effects. Potentially fatal diseases usually <a href="powers/effects/weaken-attack.html">Weaken</a>
+Stamina, in addition to their other
 effects. If the disease goes untreated for long enough, the subject's Stamina may drop below -5, in which case death
 occurs.</p>
 <p>A Treatment skill check can provide a bonus on defense checks against disease.</p>
@@ -462,7 +476,8 @@ to it rather than simply causing radiation sickness. Exposure to radiation (espe
 an excellent opportunity for a complication.</p>
 <p>Otherwise the Gamemaster can treat radiation exposure like a disease: The victim makes an
 initial Fortitude check against (DC of the radiation's rank) and an additional check each day. Radiation sickness is
-typically a <b>Weaken</b> Stamina effect, but may include other effects, including <b>Damage</b> resisted by Fortitude.
+typically a <a href="powers/effects/weaken-attack.html">Weaken</a> Stamina effect, but may include other effects, including
+<a href="powers/effects/damage-attack.html">Damage</a> resisted by Fortitude.
 At the GM's discretion, radiation exposure can lead to other effects, such as damage to a hero's power ranks (causing a
 temporary decrease in powers).</p>
 <h3 class="table-name">TABLE: SAMPLE RADIATION RANKS</h3>
@@ -498,13 +513,24 @@ temporary decrease in powers).</p>
 </tr>
 </tbody>
 </table>
+<h3 id="TOC-RAPID-DECOMPRESSION">RAPID DECOMPRESSION</h3>
+<p>Going from high pressure to low pressure quickly may cause a character to experience aeroembolism (decompression sickness
+or "the bends"). This can be caused by a diver deep underwater returning to the surface too quickly or from a space suit
+rupture. If a character changes pressure slowly the body will have time to adjust additionally decompression sickness is a delayed
+effect such that a character has 2 rounds to return to the higher pressure that he is adjusted to before needing to make
+a Fortitude check. This means that if a character in space quickly returns to pressurized air there will be no side affects.</p>
+<p>On the third round exposed to low pressure, a character must succeed on a Fortitude check (DC 10)
+each round or suffer from decompression sickness. A failed check means excruciating pain as small air bubbles form
+in the creature's bloodstream; the creature is stunned until recovered. Two or more degrees of failure impose the incapacitated
+condition until recovered.</p>
+<p>Not all pressures can be adjusted to. There is a maximum high pressure and minimum low pressure that can be adjusted to.
+A vacuum (no pressure at all) can't be adjusted to. After a character is under an acceptable pressure for 1 minute
+decompression sickness (stunned or incapacitated) is removed and the character becomes adjusted to that pressure.</p>
+<p>Characters with <a href="powers/effects/immunity-defense.html#TOC-NATURAL-PRESSURE">Immunity to natural pressure</a> can tolerate any
+pressure without decompression sickness.</p>
 <h3 id="TOC-VACUUM">VACUUM</h3>
 <p>The primary hazards of the vacuum of space are lack of air and exposure to unfiltered ionizing
-radiation.</p>
-<p>On the third round of exposure to vacuum, a character must succeed on a Fortitude check (DC 10)
-each round or suffer from aeroembolism ("the bends"). A failed check means excruciating pain as small air bubbles form
-in the creature's bloodstream; the creature is stunned and remains so until returned to normal atmospheric pressure. Two
-or more degrees of failure impose the incapacitated condition.</p>
+radiation. Additionally the lack of pressure can cause decompression sickness (see <a href="#TOC-RAPID-DECOMPRESSION">Rapid Decompression</a>).</p>
 <p>The real danger of vacuum comes from suffocation, though holding one's breath in vacuum damages
 the lungs. A character who attempts to hold his breath must make a Fortitude check (DC 5) every round; the DC increases
 by 1 each round, and on a successful check the character loses a rank of Stamina (from the pressure on the linings of
@@ -513,11 +539,10 @@ round, he becomes incapacitated. The following round, he's dying and his HP beco
 already negative). A dying character can't stabilize (even with <a href="advantages.html#TOC-DIEHARD">Diehard</a>) until
 until returned to a normal atmosphere.</p>
 <p>Unfiltered radiation bombards any character trapped in the vacuum of space without protective
-gear, see <b>Radiation</b>, previously (damage 6).</p>
-<p>Heroes able to ignore the effects of deep space must have <b>Immunity</b> to suffocation and
-vacuum and <a href="powers/effects/resistance-defense.html">Resistance</a> to radiation, at a minimum. See the <b>Immunity</b>
-and <a href="powers/effects/resistance-defense.html">Resistance</a> effects in <a
-href="powers/index.html">Powers</a> for details.</p>
+gear, see <a href="#TOC-RADIATION">Radiation</a>, previously (<a href="powers/effects/damage-attack.html">damage</a> 6).</p>
+<p>Heroes able to ignore the effects of deep space must have <a href="powers/effects/immunity-defense.html#TOC-SUFFOCATION">Immunity to
+suffocation</a>, <a href="powers/effects/immunity-defense.html#TOC-NATURAL-PRESSURE">Immunity to natural pressure</a>, and
+<a href="powers/effects/resistance-defense.html">Resistance</a> to radiation.</p>
 <h2 id="TOC-RELATIVE-SIZE-RULES">RELATIVE SIZE RULES</h2>
 <p>There are many impacts of being a different size in addition to the ability changes mentioned in
 <b>Growth</b> and <b>Shrinking</b>. These impacts are listed here.</p>
@@ -612,18 +637,20 @@ exerting your Strength also stops you from using a Strength-based <b>Damage</b> 
 you can't swing a sword, either. On the other hand, a laser blade does the same damage whether you can exert your
 Strength with it or not.</p>
 <h3 id="TOC-RECOVERY">RECOVERY</h3>
-<p>Living targets recover 1 HP every 8 hours. Being restful (such as sleeping) doubles recovery
+<p>Characters recover 1 HP every 8 hours. Being restful (such as sleeping) doubles recovery
 rate. With a skill DC 5 Medical Treatment (Awe or Int) check someone may help you recover for that day which doubles
 recovery rate. These two circumstances can stack so that a person may recover 4 HP overnight (8 hours) or 12 HP over a
 day. Bruised penalties are removed once per hour in the same fashion and at the same time. See
 <a href="powers/effects/healing-general.html">Healing</a> and
-<a href="powers/effects/regeneration-defense.html">Regeneration</a> effects for a speedy recovery.
+<a href="powers/effects/regeneration-defense.html">Regeneration</a> effects for an even more speedy recovery.
 Lasting or more serious injuries are handled as complications (see <b>Lasting Injuries</b>).</p>
-<p>Constructs and objects, having no Stamina, do not recover from damage unless they have an
-effect like <a href="powers/effects/regeneration-defense.html">Regeneration</a>. Instead, they
-must be repaired. See the guidelines under the <b>Technology</b> skill when repairing damaged objects. For a construct
-to automatically regain HP at the same rate as a living organism is a 1 point feature, whether or not it is considered natural is
-determined by the description and the Gamemaster.</p>
+<p>Objects do not recover from <a href="powers/effects/damage-attack.html">damage</a> unless they have an effect like
+<a href="powers/effects/regeneration-defense.html">Regeneration</a>. Instead, they must be repaired (if possible). If a
+character's body is technological then it can be repaired with a <a href="skills.html#TOC-TECHNOLOGY">Technology (Int)</a>
+skill check. Technically all characters can be repaired but biological bodies are too complex to repair via a skill
+check which is why a <a href="skills.html#TOC-TREATMENT">Treatment (Int)</a> check can only improve <a href="#TOC-RECOVERY">natural
+recover</a> rate and not actually heal any HP.
+For repairing damaged objects see the guidelines under the <a href="skills.html#TOC-TECHNOLOGY">Technology (Int)</a> skill.</p>
 <h3 id="TOC-LASTING-INJURIES">LASTING INJURIES</h3>
 <p>Mutants and Masterminds was designed to emulate the superhero comic books (Humans and Heroes is
 designed for versatility), so characters generally bounce back pretty fast from taking serious beatings, and there is
@@ -743,11 +770,12 @@ considered to have rolled a +3 instead of rolling but this is not considered a c
 <p>If a minion fails a defense check, the minion suffers the worst degree of the effect.
 This only applies to actual minions, not characters with 1 HP.</p>
 <h3 id="TOC-DEFENSE">DEFENSE</h3>
-<p>A successful attack has some <b>effect</b> on the target. Typically this is an effect from the
-<a href="powers/index.html">Powers</a>, such as <b>damage</b> or <b>Affliction</b>. The effect has a rank, used to determine
-a difficulty class for the target's defense check.</p>
-<span class="generated-class-2">Defense Difficulty = power check (3dF + rank) + modifiers</span>
-<p>The target of the attack makes a defense check against the effect to determine what, if
+<p>A successful attack has an affect on the target determined by the <a href="powers/effects/index.html">Power</a> used
+(typically <a href="powers/effects/damage-attack.html">Damage</a> or <a href="powers/effects/affliction-attack.html">Affliction</a>)
+for details read the <a href="powers/effects/index.html">power's</a> description. The <a href="powers/effects/index.html">power's</a>
+power check is opposed by the target's defense check.</p>
+<span class="generated-class-2">Defense check vs. Attack's power check</span>
+<p>The target of the attack makes a defense check against the <a href="powers/effects/index.html">power</a> to determine what, if
 anything, happens.</p>
 <h3 id="TOC-ONGOING-EFFECTS">ONGOING EFFECTS</h3>
 <p>Some effects are not resisted just once, but multiples times. The later defense checks

@@ -30,11 +30,12 @@ bio box: nothing: same as hero name
 function MainObject()
 {
    //private variable section:
-    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
-    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-    var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
-    var activeRuleset = latestRuleset.clone();
-    var mockMessenger;  //used for testing
+   const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
+   var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
+   var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var activeRuleset = latestRuleset.clone();
+   var mockMessenger;  //used for testing
+   var amLoading = false;  //used by the default messenger
 
    //Single line function section
     this.canUseGodhood=function(){return (transcendence > 0);};
@@ -145,10 +146,11 @@ function MainObject()
    /**This method passes a message to the user in some way (currently uses code-box).
    It is abstracted for mocking and so it can easily be changed later.
    errorCode only exists to be sent to the mockMessenger*/
-   this.messageUser=function(errorCode, messsageSent)
+   this.messageUser=function(errorCode, messageSent)
    {
-       if(mockMessenger !== undefined){mockMessenger(errorCode, messsageSent); return;}
-       document.getElementById('code-box').value += messsageSent + '\n';
+       if(undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
+       else if(amLoading) document.getElementById('code-box').value += messageSent + '\n';
+       else alert(messageSent);
    };
    /**Onclick event for the save-to-file-link anchor link only.
    It changes the a tag so that the link downloads the document as a saved file.*/
@@ -378,6 +380,7 @@ function MainObject()
           jsonDoc.ruleset = '2.7';  //there's no way to know if the document is for 1.x or 2.x so guess the more common 2.x
              //2.x ruleset is fairly compatible so the most recent is default
              //3.x should always have a ruleset defined but user tampering may cause it to default to 2.x
+         //TODO: add window.prompt in a test safe way
           Main.messageUser('MainObject.determineCompatibilityIssues.noRuleset', 'The requested document doesn\'t have the version for the game rules defined. It might not load correctly.\n'+
              'Version 2.7 has been assumed, if this is incorrect add ruleset to the root element with value "1.1" (save a blank document for an example but don\'t add "version").');
       }
@@ -407,6 +410,7 @@ function MainObject()
    /**This function loads the json document.*/
    this.load=function(jsonDoc)
    {
+      amLoading = true;
       document.getElementById('code-box').value = '';
       location.hash = '';  //clear out so that it may change later
 
@@ -441,6 +445,7 @@ function MainObject()
          alert('An error has occurred, see text box for details.');  //won't trigger in test because messageUser won't write to box
       }
       else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
+      amLoading = false;
    };
    /**This function loads the document according to the text string given.*/
    this.loadFromString=function(fileString)
@@ -455,6 +460,7 @@ function MainObject()
       }
       catch(e)
       {
+         amLoading = true;
          document.getElementById('code-box').value = '';
          Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
          //yeah I know the error message is completely unhelpful but there's nothing more I can do
@@ -465,6 +471,7 @@ function MainObject()
             location.hash = '#code-box';  //scroll to the code-box
             alert('Invalid document, see text box for details.');
          }
+         amLoading = false;
          throw e;  //stop the process and cause a console.error
       }
 

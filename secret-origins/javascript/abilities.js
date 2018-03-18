@@ -25,12 +25,12 @@ function AbilityList()
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues=function()
    {
-       total = 0;
+      total = 0;
       for (var i=0; i < abilityArray.length; i++)
       {
-          if(Main.getActiveRuleset().major > 1 && abilityArray[i].isAbsent() && Data.Ability.names[i] === 'Stamina') total+=30;
-          else if(abilityArray[i].isAbsent()) total-=10;  //old rules no Stamina costs the same as other absent ones
-          else total+=(abilityArray[i].getValue()*2);
+         if(Main.getActiveRuleset().major > 1 && abilityArray[i].isAbsent() && Data.Ability.names[i] === 'Stamina') total+=30;
+         else if(abilityArray[i].isAbsent()) total-=10;  //v1.0 rules no Stamina costs the same as other absent ones
+         else total+=(abilityArray[i].getValue()*2);
       }
    };
    /**Resets all values then updates*/
@@ -44,9 +44,9 @@ function AbilityList()
    {
       for (var i=0; i < abilityArray.length; i++)
       {
-          abilityArray[i].set(jsonSection[Data.Ability.names[i]]);
+         abilityArray[i].set(jsonSection[Data.Ability.names[i]]);
       }
-       this.update();
+      this.update();
    };
    /**Creates a map of the zeroed abilities. This is used to reset the max skill rank map.*/
    this.createAbilityMap=function()
@@ -86,25 +86,34 @@ function AbilityList()
 }
 function AbilityObject(abilityName)
 {
-    var abilityValue = 0;
-    /**Onchange function for changing the ability value*/
-    this.change=function(){CommonsLibrary.change.call(this, this.set, abilityName, Main.abilitySection, false);};
-    /**Returns true if the ability is absent (ie is '--')*/
-    this.isAbsent=function(){return (abilityValue === '--');};  //TODO: make AbilityObject.absentValue='--';
-       //use it and isAbsent exclusively for readability. possibly remove a getter
-    /**Get the value of the ability. Will return either a number or '--'*/
-    this.getValue=function(){return abilityValue;};
+   var abilityValue = 0;
+   /**Onchange function for changing the ability value*/
+   this.change=function(){CommonsLibrary.change.call(this, this.set, abilityName, Main.abilitySection, false);};
+   /**Returns true if the ability is absent (ie is '--')*/
+   this.isAbsent=function(){return (abilityValue === '--');};  //TODO: make AbilityObject.absentValue='--';
+      //use it and isAbsent exclusively for readability. possibly remove a getter
+   /**Get the value of the ability. Will return either a number or '--'*/
+   this.getValue=function(){return abilityValue;};
    /**Get the value of the ability. If its value is absent then 0 is returned instead so that a number is always returned.*/
    this.getZeroedValue=function()
    {
-       if(this.isAbsent()) return 0;
-       return abilityValue;
+      if(this.isAbsent()) return 0;
+      return abilityValue;
    };
    /**Validates and sets this ability to the value given. Because there is no generate the document's value must also be set here.*/
    this.set=function(givenValue)
    {
-       abilityValue = (givenValue+'').trim();  //null-safe version of toString
-       if(!this.isAbsent()) abilityValue = sanitizeNumber(abilityValue, -5, 0);  //absent can't be sanitized
-       document.getElementById(abilityName).value = abilityValue;
+      var previousValue = abilityValue;  //the reason to load and possibly undo givenValue is to use isAbsent
+      abilityValue = (givenValue+'').trim();  //null-safe version of toString
+      if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,11) && 'Stamina' === abilityName && this.isAbsent())
+      {
+         Main.messageUser('AbilityObject.set.noStamina', 'It isn\'t possible to lack Stamina. Use 0 Stamina and buy Immunity to fatigue instead.');
+         abilityValue = previousValue;
+         //if this is during load the previousValue will be 0
+         document.getElementById('Stamina').value = abilityValue;
+         return;
+      }
+      if(!this.isAbsent()) abilityValue = sanitizeNumber(abilityValue, -5, 0);  //absent can't be sanitized
+      document.getElementById(abilityName).value = abilityValue;
    };
 }

@@ -32,7 +32,7 @@ TestSuite.powerList.load=function(isFirst)
     Loader.sendData(dataToLoad);
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Happy Path: Effect'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Happy Path: 1 row'});
-    testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Happy Path: no errors'});
+    testResults.push({Expected: [], Actual: Messages.list, Description: 'Happy Path: no errors'});
     testResults.push({Expected: false, Actual: Main.powerSection.getRow(0).isBaseCostSettable(), Description: 'Happy Path: isBaseCostSettable'});
     testResults.push({Expected: 'Text test', Actual: Main.powerSection.getRow(0).getText(), Description: 'Happy Path: text'});
     testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Happy Path: default action'});
@@ -61,7 +61,7 @@ TestSuite.powerList.load=function(isFirst)
     Loader.sendData(dataToLoad);
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Errors: Flight was loaded'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerListAgnostic.load.notExist'), Description: 'Errors: not found'});
+    testResults.push({Expected: ['PowerListAgnostic.load.notExist'], Actual: Messages.errorCodes(), Description: 'Errors: not found'});
     } catch(e){testResults.push({Error: e, Description: 'Errors'});}
 
     try{
@@ -72,7 +72,7 @@ TestSuite.powerList.load=function(isFirst)
     testResults.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Errors: Flight was loaded'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerListAgnostic.load.godhood'), Description: 'Errors: A God I Am was not allowed'});
+    testResults.push({Expected: ['PowerListAgnostic.load.godhood'], Actual: Messages.errorCodes(), Description: 'Errors: A God I Am was not allowed'});
     } catch(e){testResults.push({Error: e, Description: 'Errors'});}
 
     try{
@@ -87,7 +87,7 @@ TestSuite.powerList.load=function(isFirst)
     testResults.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Load Godhood: Flight was loaded'});
     testResults.push({Expected: 'A God I Am', Actual: Main.powerSection.getRow(1).getEffect(), Description: 'Load Godhood: A God I Am was loaded'});
     testResults.push({Expected: true, Actual: Main.powerSection.getRow(2).isBlank(), Description: 'Load Godhood: Nothing else was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Load godhood: No errors'});
+    testResults.push({Expected: [], Actual: Messages.list, Description: 'Load godhood: No errors'});
     } catch(e){testResults.push({Error: e, Description: 'Load godhood'});}
 
     try{
@@ -128,8 +128,8 @@ TestSuite.powerList.load=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Range does not exist: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Range does not exist: getRange'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Range does not exist: getDuration'});
-   testResults.push({Expected: true,
-      Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone']),
+   testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'],
+      Actual: Messages.errorCodes(),
       Description: 'Range does not exist: error'});
    } catch(e){testResults.push({Error: e, Description: 'Range does not exist'});}
 
@@ -141,8 +141,8 @@ TestSuite.powerList.load=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Range does not exist: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Range does not exist: getRange'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
-   testResults.push({Expected: true,
-      Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone']),
+   testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist', 'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'],
+      Actual: Messages.errorCodes(),
       Description: 'Feature Range does not exist: error'});
    } catch(e){testResults.push({Error: e, Description: 'Feature Range does not exist'});}
 

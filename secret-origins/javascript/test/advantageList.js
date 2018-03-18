@@ -119,7 +119,7 @@ TestSuite.advantageList.load=function(isFirst)
     Loader.sendData(dataToLoad);
     testResults.push({Expected: 'Seize Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Errors: Seize Initiative was loaded'});
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('AdvantageList.load.notExist'), Description: 'Errors: Die hard was not found'});
+    testResults.push({Expected: ['AdvantageList.load.notExist'], Actual: Messages.errorCodes(), Description: 'Errors: Die hard was not found'});
     testResults.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: 'Errors: Make sure update was called'});
     } catch(e){testResults.push({Error: e, Description: 'Errors'});}
 
@@ -131,7 +131,7 @@ TestSuite.advantageList.load=function(isFirst)
     testResults.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
     testResults.push({Expected: 'Seize Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Errors: Seize Initiative was loaded'});
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('AdvantageList.load.godhood'), Description: 'Errors: Beyond Mortal was not allowed'});
+    testResults.push({Expected: ['AdvantageList.load.godhood'], Actual: Messages.errorCodes(), Description: 'Errors: Beyond Mortal was not allowed'});
     testResults.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: 'Errors: Make sure update was called'});
     } catch(e){testResults.push({Error: e, Description: 'Errors'});}
 
@@ -144,7 +144,7 @@ TestSuite.advantageList.load=function(isFirst)
     testResults.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load godhood: Godhood is on'});
     testResults.push({Expected: 'Seize Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Load godhood: Seize Initiative was loaded'});
     testResults.push({Expected: 'Beyond Mortal', Actual: Main.advantageSection.getRow(1).getName(), Description: 'Load godhood: Beyond Mortal was loaded'});
-    testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Load godhood: no errors'});
+    testResults.push({Expected: [], Actual: Messages.list, Description: 'Load godhood: no errors'});
     } catch(e){testResults.push({Error: e, Description: 'Load godhood'});}
 
     try{

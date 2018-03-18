@@ -7,6 +7,7 @@ Note that the entire numberGiven is validated as a float then truncated meaning 
 */
 function sanitizeNumber(numberGiven, minimum, defaultValue)
 {
+   //TODO: use messageUser since it now has ui support. pass in errorCode, amLoading. use json
     //Number.isFinite can't simplify this because I need to pass in a string and fail on trailing text
     var value = (numberGiven+'').trim();  //null safe. convert the type to string in case it is something that isn't number or string
     if(value === '' || !isFinite(value)) return defaultValue;  //empty string is checked because isFinite('') === true

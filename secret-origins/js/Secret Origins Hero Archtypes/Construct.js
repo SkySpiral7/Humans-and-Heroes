@@ -12,24 +12,28 @@ var json = {
       "Agility": 3,
       "Fighting": 5,
       "Awareness": 1,
-      "Stamina": "--",
+      "Stamina": 0,
       "Dexterity": 3,
       "Intellect": 5,
       "Presence": 0
    },
    "Powers": [
       {
+         "effect": "Immunity",
+         "text": "Fatigue",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 30
+      },
+      {
          "effect": "Protection",
          "text": "Armored",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
-         "Modifiers": [
-            {
-               "name": "Impervious",
-               "applications": 3
-            }
-         ],
+         "Modifiers": [{"name": "Impervious", "applications": 3}],
          "rank": 11
       }
    ],
@@ -82,7 +86,7 @@ var json = {
       "Parry": 0,
       "Will": 9
    },
-   "ruleset": "3.0",
+   "ruleset": "3.11",
    "version": 2,
    "Information": "Complications, background and other information"
 };

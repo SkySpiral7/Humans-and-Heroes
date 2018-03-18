@@ -34,7 +34,16 @@ var json = {
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 7
+         "rank": 6
+      },
+      {
+         "effect": "Immunity",
+         "text": "Age",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
       },
       {
          "effect": "Feature",
@@ -114,7 +123,7 @@ var json = {
       "Parry": 0,
       "Will": 7
    },
-   "ruleset": "3.10",
+   "ruleset": "3.11",
    "version": 2,
    "Information": "Complications, background and other information"
 };

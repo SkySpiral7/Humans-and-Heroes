@@ -47,7 +47,7 @@ TestSuite.powerRow.updateActivationModifiers=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'updateActionModifiers: action'});
    testResults.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'updateActionModifiers: modifier'});
    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'updateActionModifiers: no more modifiers'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'updateActionModifiers: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'updateActionModifiers: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Close","duration":"Sustained",
@@ -56,7 +56,7 @@ TestSuite.powerRow.updateActivationModifiers=function(isFirst)
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'updateRangeModifiers: action'});
    testResults.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'updateRangeModifiers: modifier'});
    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'updateRangeModifiers: no more modifiers'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'updateRangeModifiers: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'updateRangeModifiers: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Ranged","duration":"Continuous",
@@ -65,7 +65,7 @@ TestSuite.powerRow.updateActivationModifiers=function(isFirst)
    testResults.push({Expected: 'Continuous', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'updateDurationModifiers: action'});
    testResults.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'updateDurationModifiers: modifier'});
    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'updateDurationModifiers: no more modifiers'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'updateDurationModifiers: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'updateDurationModifiers: error'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, isFirst);
@@ -83,28 +83,28 @@ TestSuite.powerRow.validateActivationInfo=function(isFirst)
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 happy reaction Damage: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.4 happy reaction Damage: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.4 happy reaction Damage: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Luck Control","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 ranged Luck Control reaction: action'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 ranged Luck Control reaction: range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.4 ranged Luck Control reaction: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.4 ranged Luck Control reaction: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 ranged Feature reaction: action'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 ranged Feature reaction: range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.4 ranged Feature reaction: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.4 ranged Feature reaction: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 ranged Damage reaction: action'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 ranged Damage reaction: range'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose'), Description: 'v3.4 ranged Damage reaction: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose'], Actual: Messages.errorCodes(), Description: 'v3.4 ranged Damage reaction: error'});
 
    Main.setRuleset(3,3);
    dataToLoad = Loader.resetData();
@@ -112,7 +112,7 @@ TestSuite.powerRow.validateActivationInfo=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 range Damage action Reaction'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Reaction Damage allows ranged range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 range Reaction Damage allows ranged range: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 range Reaction Damage allows ranged range: error'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo', testResults, isFirst);
@@ -133,7 +133,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 allows reaction: getAction'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 allows reaction: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.4 allows reaction: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.4 allows reaction: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.4 allows reaction: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
@@ -142,7 +142,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Valid 1: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Valid 1: getRange'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Valid 1: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature Valid 1: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature Valid 1: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
@@ -151,7 +151,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Valid 2: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Valid 2: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Valid 2: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature Valid 2: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature Valid 2: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Move","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
@@ -160,7 +160,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Valid 3: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Valid 3: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Valid 3: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature Valid 3: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature Valid 3: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
@@ -169,7 +169,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Valid 4: getAction'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Valid 4: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Valid 4: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature Valid 4: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature Valid 4: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Move","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
@@ -178,7 +178,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Valid 5: getAction'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Valid 5: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Valid 5: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature Valid 5: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature Valid 5: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
@@ -187,7 +187,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature v3.4 allows reaction: getAction'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature v3.4 allows reaction: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature v3.4 allows reaction: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Feature v3.4 allows reaction: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Feature v3.4 allows reaction: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Luck Control","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
@@ -196,7 +196,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Luck Control v3.4 allows reaction: getAction'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Luck Control v3.4 allows reaction: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Luck Control v3.4 allows reaction: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Luck Control v3.4 allows reaction: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Luck Control v3.4 allows reaction: no errors'});
 
    Main.setRuleset(3,3);
    //most of these tests will have modifiers because they should be ignored and recreated
@@ -208,7 +208,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Valid 1: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Valid 1: getRange'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Valid 1: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Valid 1: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Valid 1: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
@@ -217,7 +217,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Valid 2: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Valid 2: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Valid 2: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Valid 2: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Valid 2: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Move","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
@@ -226,7 +226,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Valid 3: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Valid 3: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Valid 3: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Valid 3: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Valid 3: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Close","duration":"Sustained",
@@ -236,7 +236,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Valid 4: getAction'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Valid 4: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Valid 4: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Valid 4: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Valid 4: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Move","range":"Close","duration":"Instant",
@@ -246,7 +246,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Valid 5: getAction'});
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Valid 5: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Valid 5: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Valid 5: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Valid 5: no errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Reaction","range":"Ranged","duration":"Instant",
@@ -256,7 +256,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 allows reaction: getAction'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 allows reaction: getRange'});
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.3 allows reaction: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 allows reaction: no errors'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 allows reaction: no errors'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo_valid', testResults, isFirst);
@@ -275,118 +275,118 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'None action happy: getAction'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'None action happy: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'None action happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'None action happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'None action happy Feature: getAction'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'None action happy Feature: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'None action happy Feature: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'None action happy Feature: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Change action to none: getAction'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Change action to none: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'), Description: 'Change action to none: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'], Actual: Messages.errorCodes(), Description: 'Change action to none: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'onlyNone Feature: getAction'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'onlyNone Feature: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'), Description: 'onlyNone Feature: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone'], Actual: Messages.errorCodes(), Description: 'onlyNone Feature: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'notNone: getAction'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notNone: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.notNone'), Description: 'notNone: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.notNone'], Actual: Messages.errorCodes(), Description: 'notNone: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'notNone Feature: getAction'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notNone Feature: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.notNone'), Description: 'notNone Feature: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.notNone'], Actual: Messages.errorCodes(), Description: 'notNone Feature: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Growth","text":"","action":"Move","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Move action happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Move action happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Move action happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Move","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'moveNotAllowed isAttack: action'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed'), Description: 'moveNotAllowed isAttack: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed'], Actual: Messages.errorCodes(), Description: 'moveNotAllowed isAttack: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Move Object","text":"","action":"Move","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'move action Move Object: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'move action Move Object: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'move action Move Object: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Free","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Free action happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Free action happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Free action happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'freeNotAllowedForAttacks: action'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks'), Description: 'freeNotAllowedForAttacks: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks'], Actual: Messages.errorCodes(), Description: 'freeNotAllowedForAttacks: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'freeNotAllowedForMovement: action'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement'), Description: 'freeNotAllowedForMovement: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement'], Actual: Messages.errorCodes(), Description: 'freeNotAllowedForMovement: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'freeNotAllowedForHealing: action'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing'), Description: 'freeNotAllowedForHealing: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing'], Actual: Messages.errorCodes(), Description: 'freeNotAllowedForHealing: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Move Object","text":"","action":"Free","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'free action Move Object: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'free action Move Object: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'free action Move Object: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Reaction happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Reaction happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Reaction happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Reaction","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'reactionNotAllowed: action'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed'), Description: 'reactionNotAllowed: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed'], Actual: Messages.errorCodes(), Description: 'reactionNotAllowed: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Move","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Move Feature happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Move Feature happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Move Feature happy: error'});
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Free Feature happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Free Feature happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Free Feature happy: error'});
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Reaction Feature happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Reaction Feature happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Reaction Feature happy: error'});
 
    Main.setRuleset(3,3);
 
@@ -394,31 +394,31 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Move","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 move isAttack happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 move isAttack happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 move isAttack happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 free isAttack happy: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 free isAttack happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 free isAttack happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Free isMovement: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 Free isMovement: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Free isMovement: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Free Healing: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 Free Healing: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Free Healing: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Reaction","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Reaction Flight: action'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'v3.3 Reaction Flight: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Reaction Flight: error'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleActions', testResults, isFirst);
@@ -436,44 +436,44 @@ TestSuite.powerRow.validateAndGetPossibleDurations=function(isFirst)
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Standard","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Instant happy: duration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Instant happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Instant happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Standard","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'onlyInstant: duration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant'), Description: 'onlyInstant: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant'], Actual: Messages.errorCodes(), Description: 'onlyInstant: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Ranged","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notPermanent: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'), Description: 'notPermanent: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'], Actual: Messages.errorCodes(), Description: 'notPermanent: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Immunity","text":"","action":"Standard","range":"Close","duration":"Permanent",
       "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notPermanent default Permanent: Duration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'), Description: 'notPermanent default Permanent: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'], Actual: Messages.errorCodes(), Description: 'notPermanent default Permanent: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Standard","range":"Ranged","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notPermanent Feature: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'), Description: 'notPermanent Feature: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent'], Actual: Messages.errorCodes(), Description: 'notPermanent Feature: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Standard","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Instant Feature happy: duration'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'Instant Feature happy: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Instant Feature happy: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Standard","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notInstant: Duration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant'), Description: 'notInstant: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant'], Actual: Messages.errorCodes(), Description: 'notInstant: error'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleDurations', testResults, isFirst);
@@ -491,12 +491,12 @@ TestSuite.powerRow.validatePersonalRange=function(isFirst)
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'range Feature allows close range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'range Feature allows close range: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'range Feature allows close range: error'});
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'range Feature allows Personal range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'range Feature allows Personal range: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'range Feature allows Personal range: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
@@ -505,20 +505,20 @@ TestSuite.powerRow.validatePersonalRange=function(isFirst)
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Can\'t change to personal: getAction'});
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Can\'t change to personal: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Can\'t change to personal: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validatePersonalRange.notPersonal'), Description: 'Can\'t change to personal: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validatePersonalRange.notPersonal'], Actual: Messages.errorCodes(), Description: 'Can\'t change to personal: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Flight forced to be personal range'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes('PowerObjectAgnostic.validatePersonalRange.nonPersonalNotAllowed'), Description: 'range Personal Flight can\'t change range: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.validatePersonalRange.nonPersonalNotAllowed'], Actual: Messages.errorCodes(), Description: 'range Personal Flight can\'t change range: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
       "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'ranged Flight with modifier allowed: range'});
-   testResults.push({Expected: true, Actual: Messages.isValid(), Description: 'ranged Flight with modifier allowed: error'});
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'ranged Flight with modifier allowed: error'});
 
    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
@@ -534,7 +534,7 @@ TestSuite.powerRow.setAction=function(isFirst)
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"invalid action","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Action does not exist: getAction'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setAction.notExist']), Description: 'Action does not exist: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.setAction.notExist'], Actual: Messages.errorCodes(), Description: 'Action does not exist: error'});
    Main.clearMockMessenger();  //restore default behavior
 
     try{
@@ -594,7 +594,7 @@ TestSuite.powerRow.setDuration=function(isFirst)
    dataToLoad.Powers.push({"effect":"Protection","text":"","action":"None","range":"Personal","duration":"invalid duration","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration does not exist: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setDuration.notExist']), Description: 'Duration does not exist: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.setDuration.notExist'], Actual: Messages.errorCodes(), Description: 'Duration does not exist: error'});
    Main.clearMockMessenger();  //restore default behavior
 
    SelectUtil.changeText('powerChoices0', 'Feature');
@@ -841,7 +841,7 @@ TestSuite.powerRow.setRange=function(isFirst)
    testResults.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Range does not exist: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Range does not exist: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Range does not exist: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist']), Description: 'Range does not exist: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Range does not exist: error'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"invalid range","duration":"Sustained","Modifiers":[],"rank":1});
@@ -850,7 +850,7 @@ TestSuite.powerRow.setRange=function(isFirst)
    testResults.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature Range does not exist: getAction'});
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Range does not exist: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
-   testResults.push({Expected: true, Actual: Messages.isOnlyErrorCodes(['PowerObjectAgnostic.setRange.notExist']), Description: 'Feature Range does not exist: error'});
+   testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Feature Range does not exist: error'});
 
    Main.clearMockMessenger();  //restore default behavior
 

@@ -103,33 +103,31 @@ function allDataInfoToCodeBox(dataSource)
 
 SelectUtil.setText('save-type', 'JSON');  //not needed for Loader but when I test I always use json
 var Loader = {};
-var errorList = [];  //intentionally public in order to clear it (without Loader) or to read the exact message if desired
+var Messages = {};
+Messages.list = [];  //intentionally public in order to clear it (without Loader) or to read amLoading
 Loader.resetData=function()
 {
-    errorList = [];
-    Main.clear();
-    return Main.save();  //return skeleton needed
+   Messages.list = [];
+   Main.clear();
+   return Main.save();  //return skeleton needed
 };
 Loader.sendData=function(jsonData)
 {
-    document.getElementById('code-box').value = JSON.stringify(jsonData);  //to simulate user input
-    Main.loadFromTextArea();
+   document.getElementById('code-box').value = JSON.stringify(jsonData);  //to simulate user input
+   Main.loadFromTextArea();
 };
-var Messages = {};
-Messages.errorCapture=function(errorCode, message)
+Messages.errorCapture=function(errorCode, amLoading)
 {
-    errorList.push({errorCode: errorCode, message: message});
+   Messages.list.push({errorCode: errorCode, amLoading: amLoading});
 };
-Messages.isValid=function(){return errorList.isEmpty();};
-Messages.isOnlyErrorCodes=function(errorCodeArray)
+Messages.errorCodes=function()
 {
-    if(!Array.isArray(errorCodeArray)) errorCodeArray = [errorCodeArray];
-    if(errorList.length !== errorCodeArray.length) return false;
-   for (var i=0; i < errorCodeArray.length; ++i)
+   var result = [];
+   for (var i=0; i < Messages.list.length; ++i)
    {
-       if(errorList[i].errorCode !== errorCodeArray[i]) return false;
+      result.push(Messages.list[i].errorCode);
    }
-    return true;
+   return result;
 };
 
 /**This function was made to test the difference and reliability of isNaN and isFinite. It is not included in TestSuite so that it isn't auto ran.

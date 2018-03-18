@@ -1,12 +1,13 @@
 'use strict';
-TestConfig.betweenEach=function(){Main.clear(); Main.setRuleset(3, latestMinorRuleset);};
+TestConfig.betweenEach=function(){Main.clear(); Messages.list = []; Main.setRuleset(3, latestMinorRuleset);};
 //every test needs to clear out for the other test to start clean
 //even if slow do not disable Main generation because an error might occur (due to undefined values) in which case I need to see how Main was
 
 //doesn't take as long as I thought but still leave it out of TestSuite.testAll() hence being a global function
 function confirmAllXmls()
 {
-    TestRunner.clearResults();
+   //TODO: do something about validate xml test. I could validate js.
+   TestRunner.clearResults();
     //Main.setRuleset(2, 7);  //the xmls are only saved with current rules
        //covered by clearResults and by Main.load
     SelectUtil.setText('save-type', 'XML');  //needed
@@ -14,10 +15,8 @@ function confirmAllXmls()
     var testResults=[];
     var actionTaken='Load Save Confirm';
     var basePath='xml/';  //relative is the only kind that is portable. it is relative to the .html file not the js
-    var allFolders=['', 'Constructs/', 'Secret Origins Hero Archtypes/', 'Gamemaster/Animals/', 'Gamemaster/Civilians/', 'Gamemaster/Public Servants/', 'Gamemaster/Trained Combatants/', 'Gamemaster/Underworld Archetypes/'];
+    var allFolders=['', 'Gamemaster/Animals/', 'Gamemaster/Civilians/', 'Gamemaster/Public Servants/', 'Gamemaster/Trained Combatants/', 'Gamemaster/Underworld Archetypes/'];
     var allFiles=[['All Equipment.xml'],
-       ['Gaint Robot.xml', 'Robot.xml', 'Zombie.xml'],
-       ['Battlesuit.xml', 'Construct.xml', 'Crime Fighter.xml', 'Energy Controller.xml', 'Gadgeteer.xml', 'Martial Artist.xml', 'Mimic.xml', 'Mystic.xml', 'Paragon.xml', 'Powerhouse.xml', 'Psychic.xml', 'Shapeshifter.xml', 'Speedster.xml', 'Warrior.xml', 'Weapon Master.xml'],
        ['Ape.xml', 'Dolphin.xml', 'Hawk.xml', 'Lion.xml', 'Shark.xml', 'Whale.xml', 'Wolf.xml'],
        ['Bystander.xml', 'Reporter.xml', 'Scientist.xml'],
        ['Government Agent.xml', 'Police Chief.xml', 'Police Officer.xml', 'SWAT Officer.xml'],
