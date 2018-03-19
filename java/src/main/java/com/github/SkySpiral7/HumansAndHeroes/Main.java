@@ -7,7 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.github.skySpiral7.java.pojo.FileGatherer;
 import com.github.skySpiral7.java.util.FileIoUtil;
@@ -222,7 +223,18 @@ public class Main
    {
       return FileGatherer.searchForExtensions(containingFolder.toPath(), "html")
                          .map(Path::toFile)
-                         .collect(Collectors.toList())
-                         .toArray(new File[0]);
+                         .toArray(File[]::new);
+   }
+
+   public static List<String> getAllSideBarLinks()
+   {
+      final List<String> results = new ArrayList<>();
+      final String contents = FileIoUtil.readTextFile(Main.sideBar);
+      final Matcher matcher = Pattern.compile("\"?link\"?:\\s*\"([^\"]+)\"").matcher(contents);
+      while (matcher.find())
+      {
+         results.add(matcher.group(1));
+      }
+      return results;
    }
 }

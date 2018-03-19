@@ -64,11 +64,8 @@ public class UnlinkedFileDetector
    private static Set<String> readSideBar()
    {
       final Set<String> results = new HashSet<>();
-      final String contents = FileIoUtil.readTextFile(Main.sideBar);
-      final Matcher matcher = Pattern.compile("\"?link\"?:\\s*\"([^\"]+)\"").matcher(contents);
-      while (matcher.find())
+      for (final String pathToFile : Main.getAllSideBarLinks())
       {
-         final String pathToFile = matcher.group(1);
          final File linkedFile = Paths.get(Main.rootFolder.getAbsolutePath(), pathToFile).normalize().toFile();
          results.add(linkedFile.getAbsolutePath());
       }
