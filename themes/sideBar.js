@@ -36,338 +36,366 @@ var navigationJson = [
       "link": "site-map.html"
    },
    {
-      "name": "The Basics",
-      "link": "the-basics/index.html",
+      "name": "Creating a character",
+      "link": "character-creation/index.html",
       "children": [
          {
+            "name": "Calculator",
+            "link": "character-creation/point-counter.html"
+         },
+         {
+            "name": "Abilities",
+            "link": "character-creation/abilities.html"
+         },
+         {
+            "name": "Construct Rules",
+            "link": "character-creation/constructs.html"
+         },
+         {
+            "name": "Powers",
+            "link": "character-creation/powers/index.html",
+            "children": [
+               {
+                  "name": "Effects",
+                  "link": "character-creation/powers/effects/index.html",
+                  "children": [
+                     {
+                        "name": "Affliction",
+                        "link": "character-creation/powers/effects/affliction-attack.html"
+                     },
+                     {
+                        "name": "Attain Knowledge",
+                        "link": "character-creation/powers/effects/attain-knowledge-general.html"
+                     },
+                     {
+                        "name": "Communication",
+                        "link": "character-creation/powers/effects/communication-sensory.html"
+                     },
+                     {
+                        "name": "Comprehend",
+                        "link": "character-creation/powers/effects/comprehend-sensory.html"
+                     },
+                     {
+                        "name": "Concealment",
+                        "link": "character-creation/powers/effects/concealment-sensory.html"
+                     },
+                     {
+                        "name": "Create",
+                        "link": "character-creation/powers/effects/create-control.html"
+                     },
+                     {
+                        "name": "Damage",
+                        "link": "character-creation/powers/effects/damage-attack.html"
+                     },
+                     {
+                        "name": "Enhanced Trait",
+                        "link": "character-creation/powers/effects/enhanced-trait-general.html"
+                     },
+                     {
+                        "name": "Environment",
+                        "link": "character-creation/powers/effects/environment-control.html"
+                     },
+                     {
+                        "name": "Feature",
+                        "link": "character-creation/powers/effects/feature-general.html"
+                     },
+                     {
+                        "name": "Flight",
+                        "link": "character-creation/powers/effects/flight-movement.html"
+                     },
+                     {
+                        "name": "Growth",
+                        "link": "character-creation/powers/effects/growth-general.html"
+                     },
+                     {
+                        "name": "Healing",
+                        "link": "character-creation/powers/effects/healing-general.html"
+                     },
+                     {
+                        "name": "Illusion",
+                        "link": "character-creation/powers/effects/illusion-control.html"
+                     },
+                     {
+                        "name": "Immortality",
+                        "link": "character-creation/powers/effects/immortality-defense.html"
+                     },
+                     {
+                        "name": "Immunity",
+                        "link": "character-creation/powers/effects/immunity-defense.html"
+                     },
+                     {
+                        "name": "Insubstantial",
+                        "link": "character-creation/powers/effects/insubstantial-general.html"
+                     },
+                     {
+                        "name": "Leaping",
+                        "link": "character-creation/powers/effects/leaping-movement.html"
+                     },
+                     {
+                        "name": "Luck Control",
+                        "link": "character-creation/powers/effects/luck-control-control.html"
+                     },
+                     {
+                        "name": "Mental Transform",
+                        "link": "character-creation/powers/effects/mental-transform-attack.html"
+                     },
+                     {
+                        "name": "Mind Reading",
+                        "link": "character-creation/powers/effects/mind-reading-sensory.html"
+                     },
+                     {
+                        "name": "Mind Switch",
+                        "link": "character-creation/powers/effects/mind-switch-attack.html"
+                     },
+                     {
+                        "name": "Morph",
+                        "link": "character-creation/powers/effects/morph-general.html"
+                     },
+                     {
+                        "name": "Move Object",
+                        "link": "character-creation/powers/effects/move-object-control.html"
+                     },
+                     {
+                        "name": "Movement",
+                        "link": "character-creation/powers/effects/movement-movement.html"
+                     },
+                     {
+                        "name": "Nullify",
+                        "link": "character-creation/powers/effects/nullify-attack.html"
+                     },
+                     {
+                        "name": "Permeate",
+                        "link": "character-creation/powers/effects/permeate-movement.html"
+                     },
+                     {
+                        "name": "Phantom Ranks",
+                        "link": "character-creation/powers/effects/phantom-ranks-general.html"
+                     },
+                     {
+                        "name": "Protection",
+                        "link": "character-creation/powers/effects/protection-defense.html"
+                     },
+                     {
+                        "name": "Quickness",
+                        "link": "character-creation/powers/effects/quickness-general.html"
+                     },
+                     {
+                        "name": "Regeneration",
+                        "link": "character-creation/powers/effects/regeneration-defense.html"
+                     },
+                     {
+                        "name": "Remote Sensing",
+                        "link": "character-creation/powers/effects/remote-sensing-sensory.html"
+                     },
+                     {
+                        "name": "Resistance",
+                        "link": "character-creation/powers/effects/resistance-defense.html"
+                     },
+                     {
+                        "name": "Senses",
+                        "link": "character-creation/powers/effects/senses-sensory.html"
+                     },
+                     {
+                        "name": "Shrinking",
+                        "link": "character-creation/powers/effects/shrinking-general.html"
+                     },
+                     {
+                        "name": "Summon Minion",
+                        "link": "character-creation/powers/effects/summon-minion-control.html"
+                     },
+                     {
+                        "name": "Summon Object",
+                        "link": "character-creation/powers/effects/summon-object-control.html"
+                     },
+                     {
+                        "name": "Teleport",
+                        "link": "character-creation/powers/effects/teleport-movement.html"
+                     },
+                     {
+                        "name": "Transform",
+                        "link": "character-creation/powers/effects/transform-control.html"
+                     },
+                     {
+                        "name": "Variable",
+                        "link": "character-creation/powers/effects/variable-general.html"
+                     },
+                     {
+                        "name": "Weaken",
+                        "link": "character-creation/powers/effects/weaken-attack.html"
+                     }
+                  ]
+               },
+               {
+                  "name": "Descriptors",
+                  "link": "character-creation/powers/descriptors.html"
+               },
+               {
+                  "name": "Modifiers",
+                  "link": "character-creation/powers/modifiers/index.html",
+                  "children": [
+                     {
+                        "name": "Extras",
+                        "link": "character-creation/powers/modifiers/extras.html"
+                     },
+                     {
+                        "name": "Flaws",
+                        "link": "character-creation/powers/modifiers/flaws.html"
+                     }
+                  ]
+               }
+            ]
+         },
+         {
+            "name": "Gadgets &amp; Gear",
+            "link": "character-creation/gadgets-gear/index.html",
+            "children": [
+               {
+                  "name": "Headquarters",
+                  "link": "character-creation/gadgets-gear/headquarters.html"
+               },
+               {
+                  "name": "Vehicles",
+                  "link": "character-creation/gadgets-gear/vehicles.html"
+               }
+            ]
+         },
+         {
+            "name": "Advantages",
+            "link": "character-creation/advantages.html"
+         },
+         {
+            "name": "Skills",
+            "link": "character-creation/skills.html"
+         }
+      ]
+   },
+   {
+      "name": "Playing the game",
+      "link": "gameplay/index.html",
+      "children": [
+         {
+            "name": "The Basics",
+            "link": "gameplay/the-basics.html"
+         },
+         {
             "name": "Conditions",
-            "link": "the-basics/conditions.html"
+            "link": "gameplay/conditions.html"
          },
          {
             "name": "Glossary of Terms",
-            "link": "the-basics/glossary-of-terms.html"
+            "link": "gameplay/glossary-of-terms.html"
          },
          {
             "name": "Ranks and Measures",
-            "link": "the-basics/ranks-and-measures.html"
+            "link": "gameplay/ranks-and-measures.html"
          }
       ]
    },
    {
-      "name": "Secret Origins",
-      "link": "secret-origins/index.html",
+      "name": "Running the game",
+      "link": "gamemastering/index.html",
       "children": [
          {
-            "name": "Battlesuit",
-            "link": "secret-origins/battlesuit.html"
-         },
-         {
-            "name": "Construct",
-            "link": "secret-origins/construct.html"
-         },
-         {
-            "name": "Crime Fighter",
-            "link": "secret-origins/crime-fighter.html"
-         },
-         {
-            "name": "Energy Controller",
-            "link": "secret-origins/energy-controller.html"
-         },
-         {
-            "name": "Gadgeteer",
-            "link": "secret-origins/gadgeteer.html"
-         },
-         {
-            "name": "Martial Artist",
-            "link": "secret-origins/martial-artist.html"
-         },
-         {
-            "name": "Mimic",
-            "link": "secret-origins/mimic.html"
-         },
-         {
-            "name": "Mystic",
-            "link": "secret-origins/mystic.html"
-         },
-         {
-            "name": "Paragon",
-            "link": "secret-origins/paragon.html"
-         },
-         {
-            "name": "Powerhouse",
-            "link": "secret-origins/powerhouse.html"
-         },
-         {
-            "name": "Psychic",
-            "link": "secret-origins/psychic.html"
-         },
-         {
-            "name": "Shapeshifter",
-            "link": "secret-origins/shapeshifter.html"
-         },
-         {
-            "name": "Speedster",
-            "link": "secret-origins/speedster.html"
-         },
-         {
-            "name": "Make Your Own",
-            "link": "secret-origins/point-counter.html"
+            "name": "Supplementary Rules",
+            "link": "gamemastering/supplementary-rules.html"
          }
       ]
-   },
-   {
-      "name": "Abilities",
-      "link": "abilities.html"
-   },
-   {
-      "name": "Powers",
-      "link": "powers/index.html",
-      "children": [
-         {
-            "name": "Effects",
-            "link": "powers/effects/index.html",
-            "children": [
-               {
-                  "name": "Affliction",
-                  "link": "powers/effects/affliction-attack.html"
-               },
-               {
-                  "name": "Attain Knowledge",
-                  "link": "powers/effects/attain-knowledge-general.html"
-               },
-               {
-                  "name": "Communication",
-                  "link": "powers/effects/communication-sensory.html"
-               },
-               {
-                  "name": "Comprehend",
-                  "link": "powers/effects/comprehend-sensory.html"
-               },
-               {
-                  "name": "Concealment",
-                  "link": "powers/effects/concealment-sensory.html"
-               },
-               {
-                  "name": "Create",
-                  "link": "powers/effects/create-control.html"
-               },
-               {
-                  "name": "Damage",
-                  "link": "powers/effects/damage-attack.html"
-               },
-               {
-                  "name": "Enhanced Trait",
-                  "link": "powers/effects/enhanced-trait-general.html"
-               },
-               {
-                  "name": "Environment",
-                  "link": "powers/effects/environment-control.html"
-               },
-               {
-                  "name": "Feature",
-                  "link": "powers/effects/feature-general.html"
-               },
-               {
-                  "name": "Flight",
-                  "link": "powers/effects/flight-movement.html"
-               },
-               {
-                  "name": "Growth",
-                  "link": "powers/effects/growth-general.html"
-               },
-               {
-                  "name": "Healing",
-                  "link": "powers/effects/healing-general.html"
-               },
-               {
-                  "name": "Illusion",
-                  "link": "powers/effects/illusion-control.html"
-               },
-               {
-                  "name": "Immortality",
-                  "link": "powers/effects/immortality-defense.html"
-               },
-               {
-                  "name": "Immunity",
-                  "link": "powers/effects/immunity-defense.html"
-               },
-               {
-                  "name": "Insubstantial",
-                  "link": "powers/effects/insubstantial-general.html"
-               },
-               {
-                  "name": "Leaping",
-                  "link": "powers/effects/leaping-movement.html"
-               },
-               {
-                  "name": "Luck Control",
-                  "link": "powers/effects/luck-control-control.html"
-               },
-               {
-                  "name": "Mental Transform",
-                  "link": "powers/effects/mental-transform-attack.html"
-               },
-               {
-                  "name": "Mind Reading",
-                  "link": "powers/effects/mind-reading-sensory.html"
-               },
-               {
-                  "name": "Mind Switch",
-                  "link": "powers/effects/mind-switch-attack.html"
-               },
-               {
-                  "name": "Morph",
-                  "link": "powers/effects/morph-general.html"
-               },
-               {
-                  "name": "Move Object",
-                  "link": "powers/effects/move-object-control.html"
-               },
-               {
-                  "name": "Movement",
-                  "link": "powers/effects/movement-movement.html"
-               },
-               {
-                  "name": "Nullify",
-                  "link": "powers/effects/nullify-attack.html"
-               },
-               {
-                  "name": "Permeate",
-                  "link": "powers/effects/permeate-movement.html"
-               },
-               {
-                  "name": "Phantom Ranks",
-                  "link": "powers/effects/phantom-ranks-general.html"
-               },
-               {
-                  "name": "Protection",
-                  "link": "powers/effects/protection-defense.html"
-               },
-               {
-                  "name": "Quickness",
-                  "link": "powers/effects/quickness-general.html"
-               },
-               {
-                  "name": "Regeneration",
-                  "link": "powers/effects/regeneration-defense.html"
-               },
-               {
-                  "name": "Remote Sensing",
-                  "link": "powers/effects/remote-sensing-sensory.html"
-               },
-               {
-                  "name": "Resistance",
-                  "link": "powers/effects/resistance-defense.html"
-               },
-               {
-                  "name": "Senses",
-                  "link": "powers/effects/senses-sensory.html"
-               },
-               {
-                  "name": "Shrinking",
-                  "link": "powers/effects/shrinking-general.html"
-               },
-               {
-                  "name": "Summon Minion",
-                  "link": "powers/effects/summon-minion-control.html"
-               },
-               {
-                  "name": "Summon Object",
-                  "link": "powers/effects/summon-object-control.html"
-               },
-               {
-                  "name": "Teleport",
-                  "link": "powers/effects/teleport-movement.html"
-               },
-               {
-                  "name": "Transform",
-                  "link": "powers/effects/transform-control.html"
-               },
-               {
-                  "name": "Variable",
-                  "link": "powers/effects/variable-general.html"
-               },
-               {
-                  "name": "Weaken",
-                  "link": "powers/effects/weaken-attack.html"
-               }
-            ]
-         },
-         {
-            "name": "Descriptors",
-            "link": "powers/descriptors.html"
-         },
-         {
-            "name": "Modifiers",
-            "link": "powers/modifiers/index.html",
-            "children": [
-               {
-                  "name": "Extras",
-                  "link": "powers/modifiers/extras.html"
-               },
-               {
-                  "name": "Flaws",
-                  "link": "powers/modifiers/flaws.html"
-               }
-            ]
-         }
-      ]
-   },
-   {
-      "name": "Gadgets &amp; Gear",
-      "link": "gadgets-gear/index.html",
-      "children": [
-         {
-            "name": "Constructs",
-            "link": "gadgets-gear/constructs/index.html",
-            "children": [
-               {
-                  "name": "Giant Robot",
-                  "link": "gadgets-gear/constructs/giant-robot.html"
-               },
-               {
-                  "name": "Robot",
-                  "link": "gadgets-gear/constructs/robot.html"
-               },
-               {
-                  "name": "Zombie",
-                  "link": "gadgets-gear/constructs/zombie.html"
-               }
-            ]
-         },
-         {
-            "name": "Headquarters",
-            "link": "gadgets-gear/headquarters.html"
-         },
-         {
-            "name": "Vehicles",
-            "link": "gadgets-gear/vehicles.html"
-         }
-      ]
-   },
-   {
-      "name": "Advantages",
-      "link": "advantages.html"
-   },
-   {
-      "name": "Skills",
-      "link": "skills.html"
-   },
-   {
-      "name": "Action &amp; Adventure",
-      "link": "action-adventure.html"
-   },
-   {
-      "name": "Gamemastering",
-      "link": "gamemastering.html"
-   },
-   {
-      "name": "Supplementary Rules",
-      "link": "supplementary-rules.html"
    },
    {
       "name": "Examples",
-      "link": "examples.html"
+      "link": "examples/index.html",
+      "children": [
+         {
+            "name": "Characters",
+            "link": "examples/characters/index.html",
+            "children": [
+               {
+                  "name": "Super Heroes (PL 10)",
+                  "link": "examples/characters/super-heroes/index.html",
+                  "children": [
+                     {
+                        "name": "Battlesuit",
+                        "link": "examples/characters/super-heroes/battlesuit.html"
+                     },
+                     {
+                        "name": "Construct",
+                        "link": "examples/characters/super-heroes/construct.html"
+                     },
+                     {
+                        "name": "Crime Fighter",
+                        "link": "examples/characters/super-heroes/crime-fighter.html"
+                     },
+                     {
+                        "name": "Energy Controller",
+                        "link": "examples/characters/super-heroes/energy-controller.html"
+                     },
+                     {
+                        "name": "Gadgeteer",
+                        "link": "examples/characters/super-heroes/gadgeteer.html"
+                     },
+                     {
+                        "name": "Martial Artist",
+                        "link": "examples/characters/super-heroes/martial-artist.html"
+                     },
+                     {
+                        "name": "Mimic",
+                        "link": "examples/characters/super-heroes/mimic.html"
+                     },
+                     {
+                        "name": "Mystic",
+                        "link": "examples/characters/super-heroes/mystic.html"
+                     },
+                     {
+                        "name": "Paragon",
+                        "link": "examples/characters/super-heroes/paragon.html"
+                     },
+                     {
+                        "name": "Powerhouse",
+                        "link": "examples/characters/super-heroes/powerhouse.html"
+                     },
+                     {
+                        "name": "Psychic",
+                        "link": "examples/characters/super-heroes/psychic.html"
+                     },
+                     {
+                        "name": "Shapeshifter",
+                        "link": "examples/characters/super-heroes/shapeshifter.html"
+                     },
+                     {
+                        "name": "Speedster",
+                        "link": "examples/characters/super-heroes/speedster.html"
+                     }
+                  ]
+               },
+               {
+                  "name": "Construct Characters",
+                  "link": "examples/characters/constructs/index.html",
+                  "children": [
+                     {
+                        "name": "Giant Robot",
+                        "link": "examples/characters/constructs/giant-robot.html"
+                     },
+                     {
+                        "name": "Robot",
+                        "link": "examples/characters/constructs/robot.html"
+                     },
+                     {
+                        "name": "Zombie",
+                        "link": "examples/characters/constructs/zombie.html"
+                     }
+                  ]
+               },
+               {
+                  "name": "Other Works",
+                  "link": "examples/characters/other-works/index.html"
+               }
+            ]
+         },
+         {
+            "name": "Powers",
+            "link": "examples/powers/index.html"
+         }
+      ]
    },
    {
       "name": "Meta",

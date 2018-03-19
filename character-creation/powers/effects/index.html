@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="../../../themes/solitudeCherry.css" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/google-default.ico" />
+<title>Effects - Humans &amp; Heroes SRD</title>
+</head>
+<body>
+<table>
+<tbody>
+<tr>
+<td class="sites-layout-sidebar-left">
+<script type="text/javascript" src="../../../themes/sideBar.js"></script>
+</td>
+<td>
+<h1>POWER EFFECTS</h1>
+<p>Players spend character points on various powers for their heroes, like acquiring skills or
+other traits. A power is made up of one or more <b>effects</b>, possibly with different <b>modifiers</b>, which increase
+or decrease the cost of the effects.</p>
+<p>Effects can be used to create any number of different powers. A hero with the <a
+href="concealment-sensory.html">Concealment</a> effect could use it to create a power called
+Blending, Blur, Cloak, Invisibility, Shadowmeld, or anything else appropriate to the character you wish to play. It's
+all a matter of how powerful the effect is and what modifiers have been placed on it to increase or decrease its
+performance. Another way to think of it is that this book is filled with effects, but your character sheet is filled
+with powers.</p>
+<h2 id="TOC-POWER-COSTS">POWER COSTS</h2>
+<p>Power effects are acquired in ranks, like ranks for other traits. The more ranks an effect has,
+the greater its effect. Each effect of a power has a standard cost per rank.</p>
+<h2 id="TOC-EXCLUSIVE-PURPOSE">EXCLUSIVE PURPOSE</h2>
+<p>As noted in the side bar Creative Uses of Descriptors (see <a
+href="../descriptors.html">Descriptors</a>) there is a difference between being creative to accomplish a small task and
+using a power for something it is not intended for. If there is no real impact on the game then just let it be but for
+other uses a power stunt is required through extra effort. The Rule of Exclusive Purpose states that each base power has
+a unique purpose, meaning that other base powers can't provide the same functionality without a <a
+href="../../../gameplay/the-basics.html#TOC-POWER-STUNT">power stunt</a>. Even though you could <a
+href="transform-control.html">Transform</a> air into acid, for example, you need a power
+stunt to deal damage with it because that would be the <a
+href="damage-attack.html">Damage</a> power. Also see <a
+href="../modifiers/flaws.html#TOC-ALTERNATE-EFFECT">Alternate Effect</a> for related effects that can be used more often then power
+stunts. The exception to this are catch alls like Movement: even though Flight is a type of movement, the base power
+Movement is only used to cover all other kinds of movement. Feature doesn't have much purpose. Variable is a sort of an
+exception in that its direct purpose is to provide other powers. Insubstantial can be used as Permeate without a power
+stunt, Protection has the same purpose as Enhanced Trait: Toughness, and Regeneration has the same purpose as
+healing.</p>
+<h1>EFFECT TYPES</h1>
+<p>Power effects fall into certain categories or <b>effect types</b>. Effects of the same type
+follow similar rules and provide descriptors for certain other effects. This section discusses the different effect
+types and the rules governing them.</p>
+<h2 id="TOC-ATTACK">ATTACK</h2>
+<p><b>Attack</b> effects are used offensively in combat. They require an attack check and damage,
+hinder, or otherwise harm their target in some way. Attack effects require a standard action to use. Their duration is
+usually instant although their results--whether damage or some other hindrance--may linger until the target recovers.
+Attack effects always allow for a defense check.</p>
+<h2 id="TOC-CONTROL">CONTROL</h2>
+<p><b>Control</b> effects grant the user influence over something, from the environment to the
+ability to move objects or even create them out of thin air. Control effects require a standard action to initiate, but
+can then usually be sustained. Control effects used against unwilling targets usually require an attack check and allow
+a defense check, the same for the hazards they are capable of causing, such as creating intense cold or dropping a
+heavy object on someone.</p>
+<h2 id="TOC-DEFENSE">DEFENSE</h2>
+<p><b>Defense</b> effects protect in various ways, typically offering a bonus to defense
+checks, or granting outright immunity to particular effects or conditions. Most defense effects work only on the user
+and are subtle and permanent, functioning at all times. Some are activated and sustained as a free action, meaning they
+can switch on or off, but can potentially leave the user unprotected.</p>
+<h2 id="TOC-GENERAL">GENERAL</h2>
+<p><b>General</b> effects don't fit into any other particular category. They're not governed by
+any special rules other than those given in the effect's description.</p>
+<h2 id="TOC-MOVEMENT">MOVEMENT</h2>
+<p><b>Movement</b> effects allow characters to get around in various ways. Some provide a speed
+rank with a particular form of movement--such as ground, air, or water--while others offer different modes of movement,
+like walking on walls or slithering along the ground like a snake.</p>
+<p>Although activating a movement effect is typically a free action, the character must still take
+a move action in order to actually move using the effect. So, for example, the action of the <a
+href="flight-movement.html">Flight</a> effect is "free" and activating it grants the
+character a <a href="flight-movement.html">Flight</a>speed rank equal to the effect rank.
+Moving that speed rank still requires a move action, however.</p>
+<h2 id="TOC-SENSORY">SENSORY</h2>
+<p><b>Sensory</b> effects enhance or alter the senses. Some sensory effects improve the user's
+senses while others grant entirely new senses or fool the senses in some way. Sensory effects are typically a free
+action to activate and sustain, or are permanent and always in effect.</p>
+<h3 id="TOC-SENSE-TYPES">SENSE TYPES</h3>
+<p>Senses are grouped into <b>sense types</b>, descriptors for how different sensory effects work.
+The sense types, and some of the senses included in them, are:</p>
+<p><b>Visual</b>: normal sight, darkvision, infravision, low-light vision, microscopic vision,
+ultravision, X-Ray vision</p>
+<p><b>Auditory</b>: normal hearing, sonar (accurate ultrasonic), ultrasonic hearing</p>
+<p><b>Olfactory</b>: normal smell and taste, scent</p>
+<p><b>Tactile</b>: normal touch, tremorsense</p>
+<p><b>Radio</b>: radio, radar (accurate radio)</p>
+<p><b>Mental</b>: mental awareness, Mind Reading, Precognition, Postcognition</p>
+<p><b>Exotic</b>: This is the catchall for other sensory descriptors not given above, including
+unusual senses or descriptors like cosmic, gravitic, magical, and so forth.</p>
+<h1>HOW POWERS WORK</h1>
+<p>Using powers is a fairly simple matter. Some power effects work automatically.
+Others--particularly those affecting other people--require some effort to use, like an attack check or a power check.
+Powers affecting others allow defense checks against their effects.</p>
+<h2 id="TOC-POWER-CHECKS">POWER CHECKS</h2>
+<p>In some cases, you may be required to make an <b>power check</b> to determine how well an
+effect works. A power check is just like any other check: 3dF, plus the power's rank, plus any applicable modifiers,
+against a difficulty class set by the Gamemaster. The results of various power checks are described below.</p>
+<span class="generated-class-2">Power Check = 3dF + rank + modifiers vs. difficulty class</span>
+<h3 id="TOC-ROUTINE-POWER-CHECKS">ROUTINE POWER CHECKS</h3>
+<p>Many power effects allow for routine checks involving their use, generally specified in the
+effect's description (see <b>Routine Checks</b> in <a href="../../../gameplay/the-basics.html">The Basics</a>).</p>
+<h3 id="TOC-OPPOSED-POWER-CHECKS">OPPOSED POWER CHECKS</h3>
+<p>In some cases, usually when one effect is used directly against another, or against a
+particular trait like an ability or skill, an opposed check is called for (see <b>Opposed Checks</b> in <a
+href="../../../gameplay/the-basics.html">The Basics</a>). Each player performs a power check and the higher result wins (ties go to the higher
+rank power).</p>
+<h2 id="TOC-EFFECT-PARAMETERS">EFFECT PARAMETERS</h2>
+<p>Each effect has certain <b>parameters</b> that describe the time needed to use the effect, the
+subject or target, the distance it works at, and so forth. The basic effect parameters are Action, Range, and
+Duration.</p>
+<p>For a full description see each power's page.</p>
+<h3 id="TOC-ACTION">ACTION</h3>
+<p>Using or activating an effect requires a particular amount of time. See <b>Actions</b>, for
+details about the different types of actions. Modifiers may change the action needed to use an effect.</p>
+<p><b>Slow</b>: Using the effect can't effectively be done in combat because it takes at least 10
+rounds (1 minute). Generally these tasks take at least 5 minutes.</p>
+<p><b>Full</b>: Using the effect requires a full turn action which means it takes both a standard
+action and a move action.</p>
+<p><b>Standard</b>: Using the effect requires a standard action.</p>
+<p><b>Move</b>: Using the effect requires a move action.</p>
+<p><b>Free</b>: It requires a free action to use or activate the effect. Once an effect is
+activated or deactivated, it remains so until your next turn. As with all free actions, the GM may limit the total
+number of effects a hero can turn on or off in a turn.</p>
+<p><b>Reaction</b>: It requires no action to use the effect. It operates automatically in
+response to something else, such as an attack.</p>
+<p><b>None</b>: It requires no action to use the effect. It is always active.</p>
+<h3 id="TOC-RANGE">RANGE</h3>
+<p>Each effect has a default range, which may be changed by modifiers.</p>
+<p><b>Personal</b>: The effect works only on you, the user.</p>
+<p><b>Close</b>: The effect can target anyone or anything you touch. Touching an unwilling subject
+requires an unarmed attack check against the subject's Parry.</p>
+<p><b>Ranged</b>: The effect works at a distance, limited by perception and path and requiring a
+ranged attack check against the subject's Dodge defense. A ranged effect has a short range of distance rank 0 (30 ft), a
+medium range of short range +1 (distance rank 1 = 60 ft) and a long range of short range +2 (distance rank 2 = 120 ft).
+Ranged attack checks at medium range suffer a -1 circumstance penalty, while ranged attacks at long range suffer a -2
+circumstance penalty. See <a href="../../../gameplay/index.html">Action &amp; Adventure</a> for details.</p>
+<p><b>Perception</b>: The effect works on any target you can perceive with an accurate sense,
+without any need for an attack check. If you cannot accurately perceive the target, you cannot affect it.</p>
+<h3 id="TOC-DURATION">DURATION</h3>
+<p>Each effect lasts for a particular amount of time, which may be changed by modifiers. Any
+effect that is currently active (impossible for Instant duration) can't be used again until the duration ends. To get
+around this see the Split extra.</p>
+<p><b>Instant</b>: When used, the effect occurs and ends in the same turn, although its results
+may linger.</p>
+<p><b>Concentration</b>: You can keep a concentration effect going by taking a standard action
+each round to do so. If you are incapable of taking the necessary action, or simply choose not to, the effect
+ends.</p>
+<p><b>Sustained</b>: You can keep a sustained effect going by taking a free action each round to
+do so. If you are incapable of taking the necessary action, or simply choose not to, the effect ends.</p>
+<p><b>Continuous</b>: The effect lasts as long as you wish, without any action required on your
+part. Once active, it stays that way until you choose to deactivate it (a free action).</p>
+<p><b>Permanent</b>: The effect is always active and cannot be deactivated, even if you want to. A
+permanent effect cannot be improved using extra effort. A permanent effect cannot make a power check and is considered
+to have rolled a 0 instead (like a Routine check).</p>
+<h3 id="TOC-DEFENSE-CHECK">DEFENSE CHECK</h3>
+<p>Effects targeting other characters allow a defense check. The defense used and the
+difficulty class depend on the effect and its modifiers.</p>
+<p>Willing characters can forgo their defense check against an effect, if they wish. This
+includes characters who think they're receiving a beneficial effect, even if they're not! You can't forgo Toughness
+checks, but you may choose to discontinue the use of effects with a duration of Continuous or Sustained that grant a
+Toughness bonus in order to lower your defense.</p>
+<p>The <a href="immunity-defense.html">Immunity</a> effect allows
+characters to ignore certain effects altogether, removing the need for a defense check.</p>
+<h3 id="TOC-COST">COST</h3>
+<p>How many character points the base effect costs per rank. Some powers provide options which affect how many points per
+rank a power costs (this is mechanically the same as using extras). Some example powers include a flat amount
+with the cost per rank because the example uses a set number of ranks of a trait (see description for details).</p>
+<h3 id="TOC-MODIFIERS">MODIFIERS</h3>
+<p>A listing of modifiers relevant or unique to the effect. This section may also include forbidden modifiers.
+By default it is possible to use <a href="../modifiers/index.html">any modifier</a> on any power unless otherwise stated however a Gamemaster should watch out
+for problematic or nonsensical combinations.</p>
+<h2 id="TOC-COUNTERING-EFFECTS">COUNTERING EFFECTS</h2>
+<p>In some circumstances the effects of one power may counter another, negating it. Generally for
+two effects to counter each other they must have opposed descriptors. For example, light and darkness powers can counter
+each other as can heat and cold, water and fire, and so forth. In some cases, such as magical or mental effects, powers
+of the same descriptor can also counter each other. The GM is the final arbiter as to whether or not an effect with a
+particular descriptor can counter another. The <a href="nullify-attack.html">Nullify
+effect</a> can counter any effect of a particular descriptor!</p>
+<h3 id="TOC-HOW-COUNTERING-WORKS">HOW COUNTERING WORKS</h3>
+<p>To counter an effect, you must take the <b>ready action</b>. In doing so, you wait to complete
+your action until your opponent tries to use a power. You may still move, since ready is a standard action.</p>
+<p>You must be able to use the readied effect as a standard action or less. Reaction effects
+may counter at any time without readying an action. Effects that have a slow action
+cannot counter during action rounds (although they may be able to counter ongoing effects, see the
+following section).</p>
+<p>If an opponent attempts to use a power you are able to counter, use your countering effect as
+your readied action. You and the opposing character make power checks (3dF + rank). If you win, your two powers cancel
+each other out and there is no effect from either. If the opposing character wins, your attempt to counter is
+unsuccessful. The opposing effect works normally.</p>
+<p class="example"><b>Example</b>: Thetis, goddess of the seas, is fighting the
+Silver Knight. Thetis readies an action as her player says she wants to counter Silver Knight's fire blast with her water powers
+and the GM agrees the two powers should be able to counter each other. Then the hate-mongering villain hurls a blast of
+white-hot fire (a Ranged <a href="damage-attack.html">Damage</a> effect) which Thetis tries to counter.
+The GM asks Thetis's player to make a Water Control power check, while he makes a Fire Control power
+check for Silver Knight. Thetis's player rolls a result of 10 while the GM rolls a result of 7 for Silver Knight. Thetis
+successfully counters the flame blast, which fizzles out in a gout of steam.</p>
+<h3 id="TOC-COUNTERING-ONGOING-EFFECTS">COUNTERING ONGOING EFFECTS</h3>
+<p>You can also use one power to counter the ongoing effect of another, or other lingering results
+of an instant effect (like flames ignited by a fiery <a href="damage-attack.html">Damage</a>
+effect). You must be within range of the affected target (including created object etc) not the one who caused it. This
+requires a normal use of the countering effect and an opposed check, as above. If you are successful, you negate the
+effect (although the opposing character can attempt to reestablish it normally). Poison, Disease, and Being on Fire can
+be countered like an affliction but conditions caused by physical conditions such as ropes causing Immobile or low HP
+causing incapacitation can't be countered. Conditions and effects with duration more then instant are the only ones that
+can be ended, reversible instant effects can't be reversed by countering them. Activated effects can be deactivated but
+otherwise when a permanent effect is countered it is reactivated during the next round (6 seconds later) as a
+reaction.</p>
+<p class="example"><b>Example</b>: Mindmaster has placed Johnny Comet under his
+mental control (an <a href="affliction-attack.html">Affliction</a> effect). Lady Justice has
+the power to break such bonds (the <a href="nullify-attack.html">Nullify</a> effect). She
+shines the light of liberty on her teammate and makes a power check (3dF + her <a
+href="nullify-attack.html">Nullify</a> rank). The GM makes a check of 3dF + Mindmaster's <a
+href="affliction-attack.html">Affliction</a> rank. If Lady Justice wins, Johnny is free of
+Mindmaster's control. If she fails, the Victory League will have to come up with another plan to neutralize their super-fast
+teammate without hurting him.</p>
+<p>A permanent duration power can be countered as though it had continuous duration. If such
+countering succeeds then there will be <b>Power Loss</b> of that power for 1 round at which point it is
+instantly reactivated. Note that for other ongoing effects the duration ends instead of <b>Power Loss</b>. In order to
+cause <b>Power Loss</b> of a trait that doesn't have permanent duration you must use <a
+href="weaken-attack.html">Weaken</a>.</p>
+<h3 id="TOC-INSTANT-COUNTERING">INSTANT COUNTERING</h3>
+<p>You can spend a victory point to attempt to counter another power as a reaction, without the
+need to ready an action to do so. See <b>victory points</b> for details.</p>
+<h2 id="TOC-POWER-LISTING">POWER LISTING</h2>
+<p>Below is a table of every power. All effects are built from these base powers. Also see <a href="../../../examples/powers/index.html">example powers</a>.</p>
+<h3 class="table-name" id="TOC-POWER-TABLE">TABLE: POWER EFFECTS</h3>
+<table class="generated-class-1 table-alt-rows">
+<tbody>
+<tr>
+<th class="blue-top-th">NAME</th>
+<th class="blue-top-th">TYPE</th>
+<th class="blue-top-th">ACTION</th>
+<th class="blue-top-th">RANGE</th>
+<th class="blue-top-th">DURATION</th>
+<th class="blue-top-th">RESISTANCE</th>
+<th class="blue-top-th">COST</th>
+</tr>
+<tr>
+<td><a href="affliction-attack.html">Affliction</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Instant</td>
+<td>Fort. or Will</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="attain-knowledge-general.html">Attain Knowledge</a></td>
+<td>General</td>
+<td>Standard</td>
+<td>Personal</td>
+<td>Instant</td>
+<td>--</td>
+<td>2-5 points per rank</td>
+</tr>
+<tr>
+<td><a href="communication-sensory.html">Communication</a></td>
+<td>Sensory</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>4 per rank</td>
+</tr>
+<tr>
+<td><a href="comprehend-sensory.html">Comprehend</a></td>
+<td>Sensory</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="concealment-sensory.html">Concealment</a></td>
+<td>Sensory</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>2-8 per rank</td>
+</tr>
+<tr>
+<td><a href="create-control.html">Create</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Ranged</td>
+<td>Sustained</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="damage-attack.html">Damage</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Instant</td>
+<td>Toughness</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="enhanced-trait-general.html">Enhanced Trait</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>As base trait</td>
+</tr>
+<tr>
+<td><a href="environment-control.html">Environment</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1-2 per rank</td>
+</tr>
+<tr>
+<td><a href="feature-general.html">Feature</a></td>
+<td>General</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="flight-movement.html">Flight</a></td>
+<td>Movement</td>
+<td>Move</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="growth-general.html">Growth</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>6 per rank</td>
+</tr>
+<tr>
+<td><a href="healing-general.html">Healing</a></td>
+<td>General</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Instant</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="illusion-control.html">Illusion</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Perception</td>
+<td>Sustained</td>
+<td>Will</td>
+<td>1-5 per rank</td>
+</tr>
+<tr>
+<td><a href="immortality-defense.html">Immortality</a></td>
+<td>Defense</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>5 per rank</td>
+</tr>
+<tr>
+<td><a href="immunity-defense.html">Immunity</a></td>
+<td>Defense</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="insubstantial-general.html">Insubstantial</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>5 per rank</td>
+</tr>
+<tr>
+<td><a href="leaping-movement.html">Leaping</a></td>
+<td>Movement</td>
+<td>Move</td>
+<td>Personal</td>
+<td>Instant</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="luck-control-control.html">Luck Control</a></td>
+<td>Control</td>
+<td>Reaction</td>
+<td>Perception</td>
+<td>Instant</td>
+<td>--</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="mental-transform-attack.html">Mental Transform</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Instant</td>
+<td>Will</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="mind-reading-sensory.html">Mind Reading</a></td>
+<td>Sensory</td>
+<td>Standard</td>
+<td>Perception</td>
+<td>Sustained</td>
+<td>Will</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="mind-switch-attack.html">Mind Switch</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Sustained</td>
+<td>Will</td>
+<td>8 per rank</td>
+</tr>
+<tr>
+<td><a href="morph-general.html">Morph</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="move-object-control.html">Move Object</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Ranged</td>
+<td>Sustained</td>
+<td>Strength</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="movement-movement.html">Movement</a></td>
+<td>Movement</td>
+<td>Move</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="nullify-attack.html">Nullify</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Ranged</td>
+<td>Instant</td>
+<td>Rank or Will</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="permeate-movement.html">Permeate</a></td>
+<td>Movement</td>
+<td>Move</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="phantom-ranks-general.html">Phantom Ranks</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="protection-defense.html">Protection</a></td>
+<td>Defense</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="quickness-general.html">Quickness</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="regeneration-defense.html">Regeneration</a></td>
+<td>Defense</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="remote-sensing-sensory.html">Remote Sensing</a></td>
+<td>Sensory</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1-5 per rank</td>
+</tr>
+<tr>
+<td><a href="resistance-defense.html">Resistance</a></td>
+<td>Defense</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="senses-sensory.html">Senses</a></td>
+<td>Sensory</td>
+<td>None</td>
+<td>Personal</td>
+<td>Permanent</td>
+<td>--</td>
+<td>See description</td>
+</tr>
+<tr>
+<td><a href="shrinking-general.html">Shrinking</a></td>
+<td>General</td>
+<td>Free</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>3 per rank</td>
+</tr>
+<tr>
+<td><a href="summon-minion-control.html">Summon Minion</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Sustained</td>
+<td>--</td>
+<td>5 per rank</td>
+</tr>
+<tr>
+<td><a href="summon-object-control.html">Summon Object</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Sustained</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="teleport-movement.html">Teleport</a></td>
+<td>Movement</td>
+<td>Move</td>
+<td>Personal</td>
+<td>Instant</td>
+<td>--</td>
+<td>2 per rank</td>
+</tr>
+<tr>
+<td><a href="transform-control.html">Transform</a></td>
+<td>Control</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Sustained</td>
+<td>--</td>
+<td>1 per rank</td>
+</tr>
+<tr>
+<td><a href="variable-general.html">Variable</a></td>
+<td>General</td>
+<td>Full</td>
+<td>Personal</td>
+<td>Sustained</td>
+<td>--</td>
+<td>7 per rank</td>
+</tr>
+<tr>
+<td><a href="weaken-attack.html">Weaken</a></td>
+<td>Attack</td>
+<td>Standard</td>
+<td>Close</td>
+<td>Instant</td>
+<td>Fort or Will</td>
+<td>1 per rank</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
