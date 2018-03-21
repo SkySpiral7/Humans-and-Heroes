@@ -61,167 +61,167 @@ var navigationJson = [
                   "children": [
                      {
                         "name": "Affliction",
-                        "link": "character-creation/powers/effects/affliction-attack.html"
+                        "link": "character-creation/powers/effects/affliction.html"
                      },
                      {
                         "name": "Attain Knowledge",
-                        "link": "character-creation/powers/effects/attain-knowledge-general.html"
+                        "link": "character-creation/powers/effects/attain-knowledge.html"
                      },
                      {
                         "name": "Communication",
-                        "link": "character-creation/powers/effects/communication-sensory.html"
+                        "link": "character-creation/powers/effects/communication.html"
                      },
                      {
                         "name": "Comprehend",
-                        "link": "character-creation/powers/effects/comprehend-sensory.html"
+                        "link": "character-creation/powers/effects/comprehend.html"
                      },
                      {
                         "name": "Concealment",
-                        "link": "character-creation/powers/effects/concealment-sensory.html"
+                        "link": "character-creation/powers/effects/concealment.html"
                      },
                      {
                         "name": "Create",
-                        "link": "character-creation/powers/effects/create-control.html"
+                        "link": "character-creation/powers/effects/create.html"
                      },
                      {
                         "name": "Damage",
-                        "link": "character-creation/powers/effects/damage-attack.html"
+                        "link": "character-creation/powers/effects/damage.html"
                      },
                      {
                         "name": "Enhanced Trait",
-                        "link": "character-creation/powers/effects/enhanced-trait-general.html"
+                        "link": "character-creation/powers/effects/enhanced-trait.html"
                      },
                      {
                         "name": "Environment",
-                        "link": "character-creation/powers/effects/environment-control.html"
+                        "link": "character-creation/powers/effects/environment.html"
                      },
                      {
                         "name": "Feature",
-                        "link": "character-creation/powers/effects/feature-general.html"
+                        "link": "character-creation/powers/effects/feature.html"
                      },
                      {
                         "name": "Flight",
-                        "link": "character-creation/powers/effects/flight-movement.html"
+                        "link": "character-creation/powers/effects/flight.html"
                      },
                      {
                         "name": "Growth",
-                        "link": "character-creation/powers/effects/growth-general.html"
+                        "link": "character-creation/powers/effects/growth.html"
                      },
                      {
                         "name": "Healing",
-                        "link": "character-creation/powers/effects/healing-general.html"
+                        "link": "character-creation/powers/effects/healing.html"
                      },
                      {
                         "name": "Illusion",
-                        "link": "character-creation/powers/effects/illusion-control.html"
+                        "link": "character-creation/powers/effects/illusion.html"
                      },
                      {
                         "name": "Immortality",
-                        "link": "character-creation/powers/effects/immortality-defense.html"
+                        "link": "character-creation/powers/effects/immortality.html"
                      },
                      {
                         "name": "Immunity",
-                        "link": "character-creation/powers/effects/immunity-defense.html"
+                        "link": "character-creation/powers/effects/immunity.html"
                      },
                      {
                         "name": "Insubstantial",
-                        "link": "character-creation/powers/effects/insubstantial-general.html"
+                        "link": "character-creation/powers/effects/insubstantial.html"
                      },
                      {
                         "name": "Leaping",
-                        "link": "character-creation/powers/effects/leaping-movement.html"
+                        "link": "character-creation/powers/effects/leaping.html"
                      },
                      {
                         "name": "Luck Control",
-                        "link": "character-creation/powers/effects/luck-control-control.html"
+                        "link": "character-creation/powers/effects/luck-control.html"
                      },
                      {
                         "name": "Mental Transform",
-                        "link": "character-creation/powers/effects/mental-transform-attack.html"
+                        "link": "character-creation/powers/effects/mental-transform.html"
                      },
                      {
                         "name": "Mind Reading",
-                        "link": "character-creation/powers/effects/mind-reading-sensory.html"
+                        "link": "character-creation/powers/effects/mind-reading.html"
                      },
                      {
                         "name": "Mind Switch",
-                        "link": "character-creation/powers/effects/mind-switch-attack.html"
+                        "link": "character-creation/powers/effects/mind-switch.html"
                      },
                      {
                         "name": "Morph",
-                        "link": "character-creation/powers/effects/morph-general.html"
+                        "link": "character-creation/powers/effects/morph.html"
                      },
                      {
                         "name": "Move Object",
-                        "link": "character-creation/powers/effects/move-object-control.html"
+                        "link": "character-creation/powers/effects/move-object.html"
                      },
                      {
                         "name": "Movement",
-                        "link": "character-creation/powers/effects/movement-movement.html"
+                        "link": "character-creation/powers/effects/movement.html"
                      },
                      {
                         "name": "Nullify",
-                        "link": "character-creation/powers/effects/nullify-attack.html"
+                        "link": "character-creation/powers/effects/nullify.html"
                      },
                      {
                         "name": "Permeate",
-                        "link": "character-creation/powers/effects/permeate-movement.html"
+                        "link": "character-creation/powers/effects/permeate.html"
                      },
                      {
                         "name": "Phantom Ranks",
-                        "link": "character-creation/powers/effects/phantom-ranks-general.html"
+                        "link": "character-creation/powers/effects/phantom-ranks.html"
                      },
                      {
                         "name": "Protection",
-                        "link": "character-creation/powers/effects/protection-defense.html"
+                        "link": "character-creation/powers/effects/protection.html"
                      },
                      {
                         "name": "Quickness",
-                        "link": "character-creation/powers/effects/quickness-general.html"
+                        "link": "character-creation/powers/effects/quickness.html"
                      },
                      {
                         "name": "Regeneration",
-                        "link": "character-creation/powers/effects/regeneration-defense.html"
+                        "link": "character-creation/powers/effects/regeneration.html"
                      },
                      {
                         "name": "Remote Sensing",
-                        "link": "character-creation/powers/effects/remote-sensing-sensory.html"
+                        "link": "character-creation/powers/effects/remote-sensing.html"
                      },
                      {
                         "name": "Resistance",
-                        "link": "character-creation/powers/effects/resistance-defense.html"
+                        "link": "character-creation/powers/effects/resistance.html"
                      },
                      {
                         "name": "Senses",
-                        "link": "character-creation/powers/effects/senses-sensory.html"
+                        "link": "character-creation/powers/effects/senses.html"
                      },
                      {
                         "name": "Shrinking",
-                        "link": "character-creation/powers/effects/shrinking-general.html"
+                        "link": "character-creation/powers/effects/shrinking.html"
                      },
                      {
                         "name": "Summon Minion",
-                        "link": "character-creation/powers/effects/summon-minion-control.html"
+                        "link": "character-creation/powers/effects/summon-minion.html"
                      },
                      {
                         "name": "Summon Object",
-                        "link": "character-creation/powers/effects/summon-object-control.html"
+                        "link": "character-creation/powers/effects/summon-object.html"
                      },
                      {
                         "name": "Teleport",
-                        "link": "character-creation/powers/effects/teleport-movement.html"
+                        "link": "character-creation/powers/effects/teleport.html"
                      },
                      {
                         "name": "Transform",
-                        "link": "character-creation/powers/effects/transform-control.html"
+                        "link": "character-creation/powers/effects/transform.html"
                      },
                      {
                         "name": "Variable",
-                        "link": "character-creation/powers/effects/variable-general.html"
+                        "link": "character-creation/powers/effects/variable.html"
                      },
                      {
                         "name": "Weaken",
-                        "link": "character-creation/powers/effects/weaken-attack.html"
+                        "link": "character-creation/powers/effects/weaken.html"
                      }
                   ]
                },
