@@ -266,6 +266,10 @@ var navigationJson = [
          {
             "name": "Skills",
             "link": "character-creation/skills.html"
+         },
+         {
+            "name": "Defenses",
+            "link": "character-creation/defenses.html"
          }
       ]
    },
@@ -309,6 +313,10 @@ var navigationJson = [
             "name": "Characters",
             "link": "examples/characters/index.html",
             "children": [
+               /*{
+                  "name": "High Fantasy (PL 10)",  //currently none
+                  "link not": "examples/characters/high-fantasy/index.html"
+               },*/
                {
                   "name": "Super Heroes (PL 10)",
                   "link": "examples/characters/super-heroes/index.html",
@@ -367,6 +375,14 @@ var navigationJson = [
                      }
                   ]
                },
+               /*{
+                  "name": "Animals",
+                  "link not": "examples/characters/animals/index.html"
+               },*/
+               /*{
+                  "name": "Civilians",
+                  "link not": "examples/characters/civilians/index.html"
+               },*/
                {
                   "name": "Construct Characters",
                   "link": "examples/characters/constructs/index.html",
@@ -385,16 +401,70 @@ var navigationJson = [
                      }
                   ]
                },
+               /*{
+                  "name": "Public Servants",
+                  "link not": "examples/characters/public-servants/index.html"
+               },*/
+               /*{
+                  "name": "Trained Combatants",
+                  "link not": "examples/characters/trained-combatants/index.html"
+               },*/
+               /*{
+                  "name": "Underworld Archetypes",
+                  "link not": "examples/characters/underworld-archetypes/index.html"
+               },*/
                {
                   "name": "Other Works",
                   "link": "examples/characters/other-works/index.html"
                }
             ]
          },
+         /*{
+            "name": "Complications",
+            "link not": "examples/complications.html"
+         },*/
+         /*{
+            "name": "Gadgets & Gear",
+            "link not": "examples/gadgets-gear/index.html",
+            "children": [
+               {
+                  "name": "Armor",
+                  "link not": "examples/gadgets-gear/armor.html"
+               },
+               {
+                  "name": "Devices",
+                  "link not": "examples/gadgets-gear/devices.html"
+               },
+               {
+                  "name": "General Equipment",
+                  "link not": "examples/gadgets-gear/general-equipment.html"
+               },
+               {
+                  "name": "Headquarters",
+                  "link not": "examples/gadgets-gear/headquarters.html"
+               },
+               {
+                  "name": "Vehicles",
+                  "link not": "examples/gadgets-gear/vehicles.html"
+               },
+               {
+                  "name": "Weapons",
+                  "link not": "examples/gadgets-gear/weapons.html"
+               }
+            ]
+         },*/
          {
             "name": "Powers",
             "link": "examples/powers/index.html"
          }
+         /*{
+            "name": "Templates",  //currently none. things like "to be an elf take these powers"
+            "link not": "examples/templates/index.html"
+         }*/
+         /*{
+            "name": "Series",  //use Weapon-Master.jpg here or delete it
+            "link not": "examples/series.html"
+         }*/
       ]
    },
    {
