@@ -304,6 +304,10 @@ var navigationJson = [
       "link": "gamemastering/index.html",
       "children": [
          {
+            "name": "Series Rules",
+            "link": "gamemastering/series.html"
+         },
+         {
             "name": "Supplementary Rules",
             "link": "gamemastering/supplementary-rules.html"
          }
@@ -460,15 +464,15 @@ var navigationJson = [
          {
             "name": "Powers",
             "link": "examples/powers/index.html"
-         }
+         },
          /*{
             "name": "Templates",  //currently none. things like "to be an elf take these powers"
             "link not": "examples/templates/index.html"
          }*/
-         /*{
-            "name": "Series",  //use Weapon-Master.jpg here or delete it
-            "link not": "examples/series.html"
-         }*/
+         {
+            "name": "Example Series",
+            "link": "examples/series.html"
+         }
       ]
    },
    {
