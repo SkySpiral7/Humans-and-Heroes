@@ -270,6 +270,10 @@ var navigationJson = [
          {
             "name": "Defenses",
             "link": "character-creation/defenses.html"
+         },
+         {
+            "name": "Complication Rules",
+            "link": "character-creation/complications.html"
          }
       ]
    },
@@ -419,10 +423,10 @@ var navigationJson = [
                }
             ]
          },
-         /*{
-            "name": "Complications",
-            "link not": "examples/complications.html"
-         },*/
+         {
+            "name": "Example Complications",
+            "link": "examples/complications.html"
+         },
          /*{
             "name": "Gadgets & Gear",
             "link not": "examples/gadgets-gear/index.html",
