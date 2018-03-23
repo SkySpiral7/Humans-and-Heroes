@@ -16,12 +16,7 @@ function confirmAllXmls()
     var actionTaken='Load Save Confirm';
     var basePath='xml/';  //relative is the only kind that is portable. it is relative to the .html file not the js
     var allFolders=['', 'Gamemaster/animals/', 'Gamemaster/civilians/', 'Gamemaster/public-servants/', 'Gamemaster/trained-combatants/', 'Gamemaster/underworld-archetypes/'];
-    var allFiles=[['All Equipment.xml'],
-       ['Ape.xml', 'Dolphin.xml', 'Hawk.xml', 'Lion.xml', 'Shark.xml', 'Whale.xml', 'Wolf.xml'],
-       ['Bystander.xml', 'Reporter.xml', 'Scientist.xml'],
-       ['Government Agent.xml', 'Police Chief.xml', 'Police Officer.xml', 'SWAT Officer.xml'],
-       ['Militant.xml', 'Soldier.xml'],
-       ['Crime Lord.xml', 'Criminal.xml', 'Gang Leader.xml', 'Street Informant.xml', 'Thug.xml']];
+    var allFiles=[];
 
     try{readXMLAsString(basePath+allFolders[1]+allFiles[1][2]);}
     catch(e){alert('You idiot, you can\'t run this here. I have a shortcut in the git folder.'); throw e;}  //Whoops, my bad I better turn on the flag first
