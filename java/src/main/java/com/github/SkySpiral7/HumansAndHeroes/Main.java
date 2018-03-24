@@ -74,10 +74,11 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile(">([^<>]+)(</h[1-3]>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile(">([^<>]+)(</td>)").matcher(newContents);
          while (matcher.find())
          {
             final String oldHeading = matcher.group(1);
+            if(!oldHeading.equals(oldHeading.toUpperCase())) continue;
             final String newHeading = toTitleCase(oldHeading);
             final String oldText = ">" + oldHeading + matcher.group(2);
             final String newText = ">" + newHeading + matcher.group(2);
@@ -103,7 +104,8 @@ public class Main
       for (int i = 0; i < split.length; i++)
       {
          //if (i != 0 && titleCaseBlackList.contains(split[i])) continue;
-         if(titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
+         if(split[i].length() < 2) continue;
+         else if(titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
             split[i] = split[i].toUpperCase();
          else if(split[i].equals("3df")) split[i] = "3dF";
          else if(split[i].substring(0, 1).equals("(")) split[i] = "(" + split[i].substring(1, 2).toUpperCase() + split[i].substring(2);
