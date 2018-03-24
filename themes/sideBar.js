@@ -52,7 +52,7 @@ var navigationJson = [
             "link": "character-creation/constructs.html"
          },
          {
-            "name": "Powers",
+            "name": "Power Rules",
             "link": "character-creation/powers/index.html",
             "children": [
                {
@@ -383,14 +383,14 @@ var navigationJson = [
                      }
                   ]
                },
-               /*{
+               {
                   "name": "Animals",
-                  "link not": "examples/characters/animals/index.html"
-               },*/
-               /*{
+                  "link": "examples/characters/animals/index.html"
+               },
+               {
                   "name": "Civilians",
-                  "link not": "examples/characters/civilians/index.html"
-               },*/
+                  "link": "examples/characters/civilians/index.html"
+               },
                {
                   "name": "Construct Characters",
                   "link": "examples/characters/constructs/index.html",
@@ -409,18 +409,18 @@ var navigationJson = [
                      }
                   ]
                },
-               /*{
+               {
                   "name": "Public Servants",
-                  "link not": "examples/characters/public-servants/index.html"
-               },*/
-               /*{
+                  "link": "examples/characters/public-servants/index.html"
+               },
+               {
                   "name": "Trained Combatants",
-                  "link not": "examples/characters/trained-combatants/index.html"
-               },*/
-               /*{
+                  "link": "examples/characters/trained-combatants/index.html"
+               },
+               {
                   "name": "Underworld Archetypes",
-                  "link not": "examples/characters/underworld-archetypes/index.html"
-               },*/
+                  "link": "examples/characters/underworld-archetypes/index.html"
+               },
                {
                   "name": "Other Works",
                   "link": "examples/characters/other-works/index.html"
@@ -462,7 +462,7 @@ var navigationJson = [
             ]
          },*/
          {
-            "name": "Powers",
+            "name": "Example Powers",
             "link": "examples/powers/index.html"
          },
          /*{
