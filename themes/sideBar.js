@@ -48,11 +48,11 @@ var navigationJson = [
             "link": "character-creation/abilities.html"
          },
          {
-            "name": "Construct Rules",
+            "name": "Constructs",
             "link": "character-creation/constructs.html"
          },
          {
-            "name": "Power Rules",
+            "name": "Powers",
             "link": "character-creation/powers/index.html",
             "children": [
                {
@@ -272,7 +272,7 @@ var navigationJson = [
             "link": "character-creation/defenses.html"
          },
          {
-            "name": "Complication Rules",
+            "name": "Complications",
             "link": "character-creation/complications.html"
          }
       ]
@@ -304,7 +304,7 @@ var navigationJson = [
       "link": "gamemastering/index.html",
       "children": [
          {
-            "name": "Series Rules",
+            "name": "Series",
             "link": "gamemastering/series.html"
          },
          {
@@ -392,7 +392,7 @@ var navigationJson = [
                   "link": "examples/characters/civilians/index.html"
                },
                {
-                  "name": "Construct Characters",
+                  "name": "Constructs",
                   "link": "examples/characters/constructs/index.html",
                   "children": [
                      {
@@ -428,41 +428,41 @@ var navigationJson = [
             ]
          },
          {
-            "name": "Example Complications",
+            "name": "Complications",
             "link": "examples/complications.html"
          },
-         /*{
-            "name": "Gadgets & Gear",
-            "link not": "examples/gadgets-gear/index.html",
+         {
+            "name": "Gadgets &amp; Gear",
+            "link": "examples/gadgets-gear/index.html",
             "children": [
                {
                   "name": "Armor",
-                  "link not": "examples/gadgets-gear/armor.html"
+                  "link": "examples/gadgets-gear/armor.html"
                },
                {
                   "name": "Devices",
-                  "link not": "examples/gadgets-gear/devices.html"
+                  "link": "examples/gadgets-gear/devices.html"
                },
                {
                   "name": "General Equipment",
-                  "link not": "examples/gadgets-gear/general-equipment.html"
+                  "link": "examples/gadgets-gear/general-equipment.html"
                },
                {
                   "name": "Headquarters",
-                  "link not": "examples/gadgets-gear/headquarters.html"
+                  "link": "examples/gadgets-gear/headquarters.html"
                },
                {
                   "name": "Vehicles",
-                  "link not": "examples/gadgets-gear/vehicles.html"
+                  "link": "examples/gadgets-gear/vehicles.html"
                },
                {
                   "name": "Weapons",
-                  "link not": "examples/gadgets-gear/weapons.html"
+                  "link": "examples/gadgets-gear/weapons.html"
                }
             ]
-         },*/
+         },
          {
-            "name": "Example Powers",
+            "name": "Powers",
             "link": "examples/powers/index.html"
          },
          /*{
@@ -470,7 +470,7 @@ var navigationJson = [
             "link not": "examples/templates/index.html"
          }*/
          {
-            "name": "Example Series",
+            "name": "Series",
             "link": "examples/series.html"
          }
       ]
