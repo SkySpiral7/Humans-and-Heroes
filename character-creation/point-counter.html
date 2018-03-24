@@ -185,18 +185,6 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <span>Admin Powers:</span><br />
 <input type="text" value="TestRunner.testAll();" id="command-text" /><input type="button" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
 <script>
-function confirmXml()
-{
-   Main.loadFromTextArea();
-   document.getElementById('ruleset').value = Main.getLatestRuleset().toString();
-   Main.changeRuleset();
-   if ('' === document.getElementById('code-box').value)
-   {
-      SelectUtil.setText('save-type', 'XML');
-      Main.saveToTextArea();
-   }
-   location.hash = '#code-box';
-}
 function convertToJsFile()
 {
    var jsDoc = Main.save();
@@ -208,7 +196,6 @@ function convertToJsFile()
    location.hash = '#code-box';
 }
 </script>
-<a href="javascript:confirmXml();">Confirm XML</a>
 <a href="javascript:convertToJsFile();">Convert to JS file</a><br />
 <a href="javascript:TestRunner.testAll();">Test All</a><br />
 <a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br /><br />
