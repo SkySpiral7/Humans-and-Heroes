@@ -74,15 +74,15 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile(">([^<>]+)(</td>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile("(<div class=\"character-sheet-point-totals\">)([^<>]+)(</div>)").matcher(newContents);
          while (matcher.find())
          {
-            final String oldHeading = matcher.group(1);
-            if(!oldHeading.equals(oldHeading.toUpperCase())) continue;
-            final String newHeading = toTitleCase(oldHeading);
-            final String oldText = ">" + oldHeading + matcher.group(2);
-            final String newText = ">" + newHeading + matcher.group(2);
-            newContents = StringUtil.literalReplaceFirst(newContents, oldText, newText);
+            final String oldTargetText = matcher.group(2);
+            if(!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
+            final String newTargetText = toTitleCase(oldTargetText);
+            final String oldWholeText = matcher.group(1) + oldTargetText + matcher.group(3);
+            final String newWholeText = matcher.group(1) + newTargetText + matcher.group(3);
+            newContents = StringUtil.literalReplaceFirst(newContents, oldWholeText, newWholeText);
          }
 
          if (!newContents.equals(originalContents))
