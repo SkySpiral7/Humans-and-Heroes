@@ -3,6 +3,7 @@ package com.github.SkySpiral7.HumansAndHeroes;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 
 import com.github.skySpiral7.java.pojo.FileGatherer;
 import com.github.skySpiral7.java.util.FileIoUtil;
+import com.github.skySpiral7.java.util.StringUtil;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -32,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         SiteMapCreator.generate();
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -72,16 +74,15 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("<title>(.+?) - Humans &amp; Heroes").matcher(newContents);
-         if (!matcher.find())
+         final Matcher matcher = Pattern.compile(">([^<>]+)(</h[1-3]>)").matcher(newContents);
+         while (matcher.find())
          {
-            System.out.print("HTML without title: ");
-            printFilePath(currentFile);
-            continue;
+            final String oldHeading = matcher.group(1);
+            final String newHeading = toTitleCase(oldHeading);
+            final String oldText = ">" + oldHeading + matcher.group(2);
+            final String newText = ">" + newHeading + matcher.group(2);
+            newContents = StringUtil.literalReplaceFirst(newContents, oldText, newText);
          }
-         final String originalTitle = matcher.group(1);
-         final String newTitle = toTitleCase(originalTitle);
-         newContents = newContents.replaceFirst(originalTitle, newTitle);
 
          if (!newContents.equals(originalContents))
          {
@@ -94,13 +95,19 @@ public class Main
       System.out.println("Done.");
    }
 
+   //private static final List<String> titleCaseBlackList = Arrays.asList("a", "an", "and", "the", "of", "in", "to");
+   private static final List<String> titleCaseCapsList = Arrays.asList("npc", "gm", "dc", "hp", "pc", "pl");
    private static String toTitleCase(final String original)
    {
       final String[] split = original.toLowerCase().split(" ");
       for (int i = 0; i < split.length; i++)
       {
-         if (i != 0 && (split[i].equals("a") || split[i].equals("an") || split[i].equals("the"))) continue;
-         split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
+         //if (i != 0 && titleCaseBlackList.contains(split[i])) continue;
+         if(titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
+            split[i] = split[i].toUpperCase();
+         else if(split[i].equals("3df")) split[i] = "3dF";
+         else if(split[i].substring(0, 1).equals("(")) split[i] = "(" + split[i].substring(1, 2).toUpperCase() + split[i].substring(2);
+         else split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
       }
       return String.join(" ", split);
    }
