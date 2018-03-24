@@ -480,16 +480,8 @@ var navigationJson = [
       "link": "meta/index.html",
       "children": [
          {
-            "name": "Author Commentary",
-            "link": "meta/author-commentary.html"
-         },
-         {
             "name": "Calculations",
             "link": "meta/calculations.html"
-         },
-         {
-            "name": "Change Explanation",
-            "link": "meta/change-explanation.html"
          },
          {
             "name": "Known Issues",
