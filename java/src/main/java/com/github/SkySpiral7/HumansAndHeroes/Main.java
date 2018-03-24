@@ -34,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         writeToFiles();
+         advancedSearch();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -78,7 +78,7 @@ public class Main
          while (matcher.find())
          {
             final String oldTargetText = matcher.group(2);
-            if(!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
+            if (!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
             final String newTargetText = toTitleCase(oldTargetText);
             final String oldWholeText = matcher.group(1) + oldTargetText + matcher.group(3);
             final String newWholeText = matcher.group(1) + newTargetText + matcher.group(3);
@@ -98,17 +98,18 @@ public class Main
 
    //private static final List<String> titleCaseBlackList = Arrays.asList("a", "an", "and", "the", "of", "in", "to");
    private static final List<String> titleCaseCapsList = Arrays.asList("npc", "gm", "dc", "hp", "pc", "pl");
+
    private static String toTitleCase(final String original)
    {
       final String[] split = original.toLowerCase().split(" ");
       for (int i = 0; i < split.length; i++)
       {
          //if (i != 0 && titleCaseBlackList.contains(split[i])) continue;
-         if(split[i].length() < 2) continue;
-         else if(titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
+         if (split[i].length() < 2) continue;
+         else if (titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
             split[i] = split[i].toUpperCase();
-         else if(split[i].equals("3df")) split[i] = "3dF";
-         else if(split[i].substring(0, 1).equals("(")) split[i] = "(" + split[i].substring(1, 2).toUpperCase() + split[i].substring(2);
+         else if (split[i].equals("3df")) split[i] = "3dF";
+         else if (split[i].substring(0, 1).equals("(")) split[i] = "(" + split[i].substring(1, 2).toUpperCase() + split[i].substring(2);
          else split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
       }
       return String.join(" ", split);
@@ -141,7 +142,7 @@ public class Main
       return returnValue.toString();
    }
 
-   public static void searchForText(String searchingFor, boolean ignoreCase, boolean removeTags)
+   private static void searchForText(String searchingFor, boolean ignoreCase, boolean removeTags)
    {
       File[] myFileArray = getAllHtmlFiles();
       List<File> foundList = new ArrayList<>();
@@ -162,38 +163,37 @@ public class Main
       foundList.forEach(Main::printFilePath);
    }
 
-   public static void advancedSearch()
+   private static void advancedSearch()
    {
-      final File[] allHtmlFiles = getAllHtmlFiles();
-      final List<File> resultsWithH2 = new ArrayList<>();
-      final List<File> resultsWithout = new ArrayList<>();
-      for (File thisFile : allHtmlFiles)
+      final List<String> capsBlackList = Arrays.asList("DOCTYPE", "UTF-8", "SRD", "NPC", "SCUBA", "GPS", "GURPS", "SUV", "DNA", "MPH", "-AP-",
+            "BY-SA", "SWAT", "APC", "RPG", "AIDS");
+      for (File thisFile : getAllHtmlFiles())
       {
          final String fileContents = FileIoUtil.readTextFile(thisFile);
-         if (fileContents.contains("generated-class-8") && fileContents.contains("<h2")) resultsWithH2.add(thisFile);
-         else if (fileContents.contains("generated-class-8")) resultsWithout.add(thisFile);
+         final Matcher matcher = Pattern.compile("[\\w-]{3,}").matcher(fileContents);
+         boolean hasPrintedFileName = false;
+         while (matcher.find())
+         {
+            final String capsText = matcher.group();
+            if (capsBlackList.contains(capsText) || capsText.startsWith("TOC-") ||
+                !capsText.equals(capsText.toUpperCase()) ||
+                StringUtil.regexFoundInString(capsText, "^(-|\\d|\\.)+$")
+                  || StringUtil.regexFoundInString(capsText, "^PL\\d"))
+               continue;
+            if (!hasPrintedFileName)
+            {
+               printFilePath(thisFile);
+               hasPrintedFileName = true;
+            }
+            System.out.println("   " + capsText);
+         }
       }
-
-      System.out.println("With h2:");
-      if (resultsWithH2.isEmpty())
-      {
-         System.out.println("Not found.");
-      }
-      else resultsWithH2.forEach(Main::printFilePath);
-
-      System.out.println();
-      System.out.println("rest:");
-      if (resultsWithout.isEmpty())
-      {
-         System.out.println("Not found.");
-      }
-      else resultsWithout.forEach(Main::printFilePath);
    }
 
    /**
     * I'd like to use HTML entities with ASCII. The HTML meta is UTF-8 but this method finds ones that aren't ASCII.
     */
-   public static void searchForSymbols()
+   private static void searchForSymbols()
    {
       File[] myFileArray = getAllHtmlFiles();
       //		FileGatherer.Builder builder = new FileGatherer.Builder();
