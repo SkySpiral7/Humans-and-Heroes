@@ -318,6 +318,10 @@ var navigationJson = [
       "link": "examples/index.html",
       "children": [
          {
+            "name": "Complications",
+            "link": "examples/complications.html"
+         },
+         {
             "name": "Characters",
             "link": "examples/characters/index.html",
             "children": [
@@ -426,10 +430,6 @@ var navigationJson = [
                   "link": "examples/characters/other-works/index.html"
                }
             ]
-         },
-         {
-            "name": "Complications",
-            "link": "examples/complications.html"
          },
          {
             "name": "Gadgets &amp; Gear",
