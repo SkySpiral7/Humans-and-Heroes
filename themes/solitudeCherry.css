@@ -30,10 +30,12 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
+for phone scaling and easy grids use bootstrap: https://getbootstrap.com/docs/4.0/getting-started/introduction/
 Look into making the character sheet a single top level class. Ignore the point counter at first.
-Look into single class for TOC
-Look into single class for side bar (except 'closed')
-Write a script to inline classes that are only used once
+Look into single class for TOC (might be in bootstrap)
+bootstrap should have a single sidebar class (even for 'closed')
+probably don't: Write a script to inline classes that are only used once
+Write a script to remove TOC from ids (if not used by bootstrap TOC)
 */
 
 
@@ -51,10 +53,15 @@ h1 {
    color: white;
    margin: 0;
    padding: 10px;
-   clear: both;  /*This can be removed (along with id=) when h1 is only a page header*/
+   clear: both;  /*This can be removed (along with some id=) when h1 is only a page header*/
 }
 
-.page-header-red {
+/**This is only applied to h1 at the top of page and only for index.html.
+An index.html that is the only html (deeply) in a folder is considered a leaf (blue)
+h1 that is not at the top of page is considered a leaf (blue)
+site-map.html is considered the folder of the website (red)
+*/
+.page-header-folder {
    background-color: darkred;
 }
 
@@ -71,12 +78,14 @@ h3 {
    text-decoration: underline;
 }
 
+/**Used for h2 Extras, Free Modifiers, and Flaws on power pages*/
 .power-modifier-header {
    border-bottom: solid thin darkred;
    border-top: solid thin darkred;
    text-decoration: none;
 }
 
+/**All of them are h3*/
 .table-name {
    color: darkblue;
    margin: 10px 0 10px 0;
@@ -337,14 +346,14 @@ th {
 }
 
 .generated-class-14 {
-   border-spacing: 0px;
-   margin: 0px 0px 10px 0px;
+   border-spacing: 0;
+   margin: 0 0 10px 0;
    width: 100%;
 }
 
 .generated-class-11 {
    border-spacing: 5px;
-   margin: 0px 0px 10px 0px;
+   margin: 0 0 10px 0;
    width: 100%;
 }
 
@@ -355,15 +364,10 @@ th {
 }
 
 .generated-class-24 {
-   border-spacing: 0px;
-   margin: 10px 0px 0px 0px;
+   border-spacing: 0;
+   margin: 10px 0 0 0;
    width: 100%;
 }
-
-/*
-TODO: for phone scaling and easy grids use bootstrap:
-https://getbootstrap.com/docs/4.0/getting-started/introduction/
-*/
 
 .right-panel {
    float: right;
@@ -527,7 +531,7 @@ https://getbootstrap.com/docs/4.0/getting-started/introduction/
 }
 
 .generated-class-19 {
-   margin: 0px auto 0px auto;
+   margin: 0 auto 0 auto;
    width: 400px;
 }
 
