@@ -65,14 +65,23 @@ public class Main
       printFilePath(new File(filePath));
    }
 
-   public static void writeToFiles()
+   private static void writeToFiles()
    {
       for (File currentFile : getAllHtmlFiles())
       {
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replace(" grey-table-border", "");
+         final Matcher matcher = Pattern.compile("<title>(.+?) - Humans &amp; Heroes").matcher(newContents);
+         if (!matcher.find())
+         {
+            System.out.print("HTML without title: ");
+            printFilePath(currentFile);
+            continue;
+         }
+         final String originalTitle = matcher.group(1);
+         final String newTitle = toTitleCase(originalTitle);
+         newContents = newContents.replaceFirst(originalTitle, newTitle);
 
          if (!newContents.equals(originalContents))
          {
@@ -83,6 +92,17 @@ public class Main
          printFilePath(currentFile);
       }
       System.out.println("Done.");
+   }
+
+   private static String toTitleCase(final String original)
+   {
+      final String[] split = original.toLowerCase().split(" ");
+      for (int i = 0; i < split.length; i++)
+      {
+         if (i != 0 && (split[i].equals("a") || split[i].equals("an") || split[i].equals("the"))) continue;
+         split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
+      }
+      return String.join(" ", split);
    }
 
    /**
@@ -221,9 +241,7 @@ public class Main
 
    public static File[] getAllHtmlFiles(final File containingFolder)
    {
-      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html")
-                         .map(Path::toFile)
-                         .toArray(File[]::new);
+      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html").map(Path::toFile).toArray(File[]::new);
    }
 
    public static List<String> getAllSideBarLinks()
