@@ -171,6 +171,7 @@ public class Main
       {
          final String fileContents = FileIoUtil.readTextFile(thisFile);
          final Matcher matcher = Pattern.compile("[\\w-]{3,}").matcher(fileContents);
+         //use .+ and check if thing is in href or id
          boolean hasPrintedFileName = false;
          while (matcher.find())
          {

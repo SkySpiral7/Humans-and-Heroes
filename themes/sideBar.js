@@ -599,7 +599,8 @@ output+='<div class="sites-embed-content-sidebar-textbox">\n';
 output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
 output+='</div>\n';
 
-document.write(output);
+document.getElementsByClassName('sites-layout-sidebar-left')[0].innerHTML = output;
+//There will only be 1. Doing this because chrome complained about document.write(output);
 })();
 
 function toggleMe(elementId)

@@ -19,6 +19,7 @@ function includeJsFile(jsName)
 {
     document.write('<script type="text/javascript" src="javascript/'+jsName+'.js"></script>');
     //document write is not a problem since this is ran only once
+    //insertAdjacentHTML etc won't work for script. RequireJS (http://requirejs.org/docs/api.html) might work if I used modules.
 }
 })();
 
