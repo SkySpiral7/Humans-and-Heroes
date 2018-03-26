@@ -10,7 +10,7 @@ Also this file name isn't wrong because major version isn't defined in here.
 
 /**This uses var rather than const because the value is only used once and (unlike point counter)
 the front page needs to be easy for any browser to load.*/
-var latestMinorRuleset = 10;
+var latestMinorRuleset = 11;
 
 /**For a ruleset, given a major version number this returns the highest existing minor version number.
 Since there is no major version 0 it is marked as undefined so I can use a normal array.*/

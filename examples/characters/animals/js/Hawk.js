@@ -1,0 +1,93 @@
+var json = {
+   "Hero": {
+      "name": "Hawk",
+      "transcendence": 0,
+      "image": "../images/Sirocco.jpg"
+   },
+   "Abilities": {
+      "Strength": 0,
+      "Agility": 3,
+      "Fighting": 3,
+      "Awareness": 2,
+      "Stamina": 0,
+      "Dexterity": 0,
+      "Intellect": -4,
+      "Presence": 0
+   },
+   "Powers": [
+      {
+         "effect": "Flight",
+         "text": "30 MPH",
+         "action": "Move",
+         "range": "Personal",
+         "duration": "Sustained",
+         "Modifiers": [
+            {
+               "name": "Other Rank Flaw",
+               "applications": 1,
+               "text": "Wings"
+            }
+         ],
+         "rank": 4
+      },
+      {
+         "effect": "Senses",
+         "cost": 1,
+         "text": "Extended Vision",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Senses",
+         "cost": 1,
+         "text": "Low-light Vision",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Shrinking",
+         "text": "-2 strength and -2 stamina not included above",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [
+            {
+               "name": "Increased Duration",
+               "applications": 2
+            },
+            {"name": "Innate"}
+         ],
+         "rank": 2
+      }
+   ],
+   "Equipment": [],
+   "Advantages": [],
+   "Skills": [
+      {
+         "name": "Close Combat",
+         "subtype": "Unarmed",
+         "rank": 4,
+         "ability": "Fighting"
+      },
+      {
+         "name": "Perception",
+         "rank": 6,
+         "ability": "Awareness"
+      }
+   ],
+   "Defenses": {
+      "Dodge": 2,
+      "Fortitude": 4,
+      "Parry": 2,
+      "Will": 2
+   },
+   "ruleset": "3.11",
+   "version": 2,
+   "Information": ""
+};

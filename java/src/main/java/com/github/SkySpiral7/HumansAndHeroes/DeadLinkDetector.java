@@ -19,7 +19,7 @@ public class DeadLinkDetector
    /**
     * Prints out each broken hyperlink (ones that are 404).
     */
-   public static void detect() throws IOException
+   public static void detect()
    {
       for (final File currentFile : Main.getAllHtmlFiles())
       {
@@ -35,11 +35,8 @@ public class DeadLinkDetector
 
    private static void readSideBar()
    {
-      final String contents = FileIoUtil.readTextFile(Main.sideBar);
-      final Matcher matcher = Pattern.compile("\"link\":\"([^\"]+)\"").matcher(contents);
-      while (matcher.find())
+      for (final String pathToFile : Main.getAllSideBarLinks())
       {
-         final String pathToFile = matcher.group(1);
          final File linkedFile = Paths.get(Main.rootFolder.getAbsolutePath(), pathToFile).toFile();
          if (!linkedFile.exists()){System.out.println("   Broken link to: " + pathToFile); hasDeadLinks=true;}
       }

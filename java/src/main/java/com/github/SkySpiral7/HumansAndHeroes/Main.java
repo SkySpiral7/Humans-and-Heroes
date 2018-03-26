@@ -3,14 +3,17 @@ package com.github.SkySpiral7.HumansAndHeroes;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.github.skySpiral7.java.pojo.FileGatherer;
 import com.github.skySpiral7.java.util.FileIoUtil;
+import com.github.skySpiral7.java.util.StringUtil;
 
 /**
  * Excuse the mess: I wrote this a long time ago.
@@ -31,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         SiteMapCreator.generate();
+         advancedSearch();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -64,14 +67,23 @@ public class Main
       printFilePath(new File(filePath));
    }
 
-   public static void writeToFiles()
+   private static void writeToFiles()
    {
       for (File currentFile : getAllHtmlFiles())
       {
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         newContents = newContents.replace(" grey-table-border", "");
+         final Matcher matcher = Pattern.compile("(>)<strong>[^<>]+</strong>([^<>]+)(</a>)").matcher(newContents);
+         while (matcher.find())
+         {
+            final String oldTargetText = matcher.group(2);
+            if (!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
+            final String newTargetText = toTitleCase(oldTargetText);
+            final String oldWholeText = matcher.group(1) + oldTargetText + matcher.group(3);
+            final String newWholeText = matcher.group(1) + newTargetText + matcher.group(3);
+            newContents = StringUtil.literalReplaceFirst(newContents, oldWholeText, newWholeText);
+         }
 
          if (!newContents.equals(originalContents))
          {
@@ -82,6 +94,25 @@ public class Main
          printFilePath(currentFile);
       }
       System.out.println("Done.");
+   }
+
+   //private static final List<String> titleCaseBlackList = Arrays.asList("a", "an", "and", "the", "of", "in", "to");
+   private static final List<String> titleCaseCapsList = Arrays.asList("npc", "gm", "dc", "hp", "pc", "pl");
+
+   private static String toTitleCase(final String original)
+   {
+      final String[] split = original.toLowerCase().split(" ");
+      for (int i = 0; i < split.length; i++)
+      {
+         //if (i != 0 && titleCaseBlackList.contains(split[i])) continue;
+         if (split[i].length() < 2) continue;
+         else if (titleCaseCapsList.contains(split[i]) || StringUtil.regexFoundInString(split[i], "^pl\\d"))
+            split[i] = split[i].toUpperCase();
+         else if (split[i].equals("3df")) split[i] = "3dF";
+         else if (split[i].substring(0, 1).equals("(")) split[i] = "(" + split[i].substring(1, 2).toUpperCase() + split[i].substring(2);
+         else split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
+      }
+      return String.join(" ", split);
    }
 
    /**
@@ -111,7 +142,7 @@ public class Main
       return returnValue.toString();
    }
 
-   public static void searchForText(String searchingFor, boolean ignoreCase, boolean removeTags)
+   private static void searchForText(String searchingFor, boolean ignoreCase, boolean removeTags)
    {
       File[] myFileArray = getAllHtmlFiles();
       List<File> foundList = new ArrayList<>();
@@ -132,38 +163,38 @@ public class Main
       foundList.forEach(Main::printFilePath);
    }
 
-   public static void advancedSearch()
+   private static void advancedSearch()
    {
-      final File[] allHtmlFiles = getAllHtmlFiles();
-      final List<File> resultsWithH2 = new ArrayList<>();
-      final List<File> resultsWithout = new ArrayList<>();
-      for (File thisFile : allHtmlFiles)
+      final List<String> capsBlackList = Arrays.asList("DOCTYPE", "UTF-8", "SRD", "NPC", "SCUBA", "GPS", "GURPS", "SUV", "DNA", "MPH", "-AP-",
+            "BY-SA", "SWAT", "APC", "RPG", "AIDS");
+      for (File thisFile : getAllHtmlFiles())
       {
          final String fileContents = FileIoUtil.readTextFile(thisFile);
-         if (fileContents.contains("generated-class-8") && fileContents.contains("<h2")) resultsWithH2.add(thisFile);
-         else if (fileContents.contains("generated-class-8")) resultsWithout.add(thisFile);
+         final Matcher matcher = Pattern.compile("[\\w-]{3,}").matcher(fileContents);
+         //use .+ and check if thing is in href or id
+         boolean hasPrintedFileName = false;
+         while (matcher.find())
+         {
+            final String capsText = matcher.group();
+            if (capsBlackList.contains(capsText) || capsText.startsWith("TOC-") ||
+                !capsText.equals(capsText.toUpperCase()) ||
+                StringUtil.regexFoundInString(capsText, "^(-|\\d|\\.)+$")
+                  || StringUtil.regexFoundInString(capsText, "^PL\\d"))
+               continue;
+            if (!hasPrintedFileName)
+            {
+               printFilePath(thisFile);
+               hasPrintedFileName = true;
+            }
+            System.out.println("   " + capsText);
+         }
       }
-
-      System.out.println("With h2:");
-      if (resultsWithH2.isEmpty())
-      {
-         System.out.println("Not found.");
-      }
-      else resultsWithH2.forEach(Main::printFilePath);
-
-      System.out.println();
-      System.out.println("rest:");
-      if (resultsWithout.isEmpty())
-      {
-         System.out.println("Not found.");
-      }
-      else resultsWithout.forEach(Main::printFilePath);
    }
 
    /**
     * I'd like to use HTML entities with ASCII. The HTML meta is UTF-8 but this method finds ones that aren't ASCII.
     */
-   public static void searchForSymbols()
+   private static void searchForSymbols()
    {
       File[] myFileArray = getAllHtmlFiles();
       //		FileGatherer.Builder builder = new FileGatherer.Builder();
@@ -220,9 +251,18 @@ public class Main
 
    public static File[] getAllHtmlFiles(final File containingFolder)
    {
-      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html")
-                         .map(Path::toFile)
-                         .collect(Collectors.toList())
-                         .toArray(new File[0]);
+      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html").map(Path::toFile).toArray(File[]::new);
+   }
+
+   public static List<String> getAllSideBarLinks()
+   {
+      final List<String> results = new ArrayList<>();
+      final String contents = FileIoUtil.readTextFile(Main.sideBar);
+      final Matcher matcher = Pattern.compile("\"?link\"?:\\s*\"([^\"]+)\"").matcher(contents);
+      while (matcher.find())
+      {
+         results.add(matcher.group(1));
+      }
+      return results;
    }
 }

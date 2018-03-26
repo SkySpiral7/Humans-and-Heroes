@@ -1,0 +1,70 @@
+var json = {
+   "Hero": {
+      "name": "Wolf",
+      "transcendence": 0,
+      "image": "../images/Sirocco.jpg"
+   },
+   "Abilities": {
+      "Strength": 2,
+      "Agility": 2,
+      "Fighting": 3,
+      "Awareness": 2,
+      "Stamina": 2,
+      "Dexterity": 0,
+      "Intellect": -4,
+      "Presence": -2
+   },
+   "Powers": [
+      {
+         "effect": "Senses",
+         "cost": 1,
+         "text": "Low-light Vision",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Senses",
+         "cost": 2,
+         "text": "Acute (2) All Olfactory",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      }
+   ],
+   "Equipment": [],
+   "Advantages": [
+      {"name": "Improved Trip"}
+   ],
+   "Skills": [
+      {
+         "name": "Perception",
+         "rank": 4,
+         "ability": "Awareness"
+      },
+      {
+         "name": "Stealth",
+         "subtype": "",
+         "rank": 4,
+         "ability": "Agility"
+      },
+      {
+         "name": "Tracking",
+         "rank": 2,
+         "ability": "Awareness"
+      }
+   ],
+   "Defenses": {
+      "Dodge": 2,
+      "Fortitude": 2,
+      "Parry": 1,
+      "Will": 4
+   },
+   "ruleset": "3.11",
+   "version": 2,
+   "Information": ""
+};
