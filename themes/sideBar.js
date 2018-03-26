@@ -30,6 +30,15 @@ if (!currentPage.endsWith('.html'))
    currentPage += 'index.html';
 }
 
+var output = '';
+
+output+='<form action="javascript:search();">\n';
+output+='<input type="text" value="" width="100%" id="searchBar" />\n';
+output+='<input type="submit" value="Search" />\n';
+output+='</form>\n';
+
+output+='<div class="sites-sidebar-nav"><ul>\n';
+
 var navigationJson = [
    {
       "name": "Site Map",
@@ -508,14 +517,6 @@ var navigationJson = [
 ];
 
 var expandIndex = 0;
-var output = '';
-
-output+='<form action="javascript:search();">\n';
-output+='<input type="text" value="" width="100%" id="searchBar" />\n';
-output+='<input type="submit" value="Search" />\n';
-output+='</form>\n';
-
-output+='<div class="sites-sidebar-nav"><ul>\n';
 
 function sideBarCreation(entry, depth)
 {
