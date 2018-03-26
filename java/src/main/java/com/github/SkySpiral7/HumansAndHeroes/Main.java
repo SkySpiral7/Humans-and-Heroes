@@ -34,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         writeToFiles();
+         advancedSearch();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -74,11 +74,11 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("(>)([^<>]+)(</t[dh]>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile("(>)([^<>]+)(</h[1-3]>)").matcher(newContents);
          while (matcher.find())
          {
             final String oldTargetText = matcher.group(2);
-            if (!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
+            if (!oldTargetText.equals(oldTargetText.toUpperCase()) && !oldTargetText.endsWith(" (Subtype is required)")) continue;
             final String newTargetText = toTitleCase(oldTargetText);
             final String oldWholeText = matcher.group(1) + oldTargetText + matcher.group(3);
             final String newWholeText = matcher.group(1) + newTargetText + matcher.group(3);
