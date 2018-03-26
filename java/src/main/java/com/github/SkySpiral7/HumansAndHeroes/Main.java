@@ -34,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         advancedSearch();
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -74,7 +74,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("(>)([^<>]+)(</th>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile("(>)<strong>[^<>]+</strong>([^<>]+)(</a>)").matcher(newContents);
          while (matcher.find())
          {
             final String oldTargetText = matcher.group(2);
