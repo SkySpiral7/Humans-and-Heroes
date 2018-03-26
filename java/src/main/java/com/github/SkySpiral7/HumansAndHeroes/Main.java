@@ -74,7 +74,7 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("(>)([^<>]+)(</h[1-3]>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile("(>)([^<>]+)(</t[dh]>)").matcher(newContents);
          while (matcher.find())
          {
             final String oldTargetText = matcher.group(2);
