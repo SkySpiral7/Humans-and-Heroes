@@ -211,3 +211,112 @@ function jsonToXml(jsonDoc)
        return fileString;
    }
 }
+
+/**This function converts a json object (of valid internal data) into plain text as markdown and returns it
+This is used to export as plain text since json is used internally*/
+function jsonToMarkdown(jsonDoc, powerLevel, totals)
+{
+   var i;  //loop variable used throughout
+   var markdownString='# ' + jsonDoc.Hero.name + '\n';
+   markdownString+='A character for Humans and Heroes v' + jsonDoc.ruleset+'\n';
+   markdownString+='PL ' + powerLevel;
+   if(undefined !== jsonDoc.Hero.transcendence) markdownString+=' (transcendence ' + jsonDoc.Hero.transcendence + ')';
+   markdownString+='\n\n';
+
+   markdownString+='## Abilities\n';
+   for (i=0; i < Data.Ability.names.length; i++)
+   {
+      markdownString+='* ' + Data.Ability.names[i] + ': ' + jsonDoc.Abilities[Data.Ability.names[i]] + '\n';
+   }
+   markdownString+='\n';
+
+   markdownString+= convertJsonPowersBothToMarkdown(jsonDoc.Powers, 'Powers');
+   markdownString+= convertJsonPowersBothToMarkdown(jsonDoc.Equipment, 'Equipment');
+
+   if (!jsonDoc.Advantages.isEmpty())
+   {
+      markdownString+='## Advantages\n';
+      for (i=0; i < jsonDoc.Advantages.length; i++)
+      {
+         var thisRow = jsonDoc.Advantages[i];
+         markdownString+='* '+thisRow.name;
+         if(thisRow.rank !== undefined) markdownString+=' '+thisRow.rank;
+         if(thisRow.text !== undefined) markdownString+='. '+thisRow.text;
+         markdownString+='\n';
+      }
+      markdownString+='\n';
+   }
+
+   if (!jsonDoc.Skills.isEmpty())
+   {
+      markdownString+='## Skills\n';
+      for (i=0; i < jsonDoc.Skills.length; i++)
+      {
+         var skillRow = jsonDoc.Skills[i];
+         markdownString+='* '+skillRow.name;
+         if(undefined !== skillRow.subtype && '' !== skillRow.subtype) markdownString+=': '+skillRow.subtype;
+         markdownString+=' ('+skillRow.ability+') ';
+         markdownString+=skillRow.rank;
+         markdownString+='\n';
+      }
+      markdownString+='\n';
+   }
+
+   markdownString+='## Defenses\n';
+   for (i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
+   {
+      markdownString+='* ' + Data.Defense.names[i]+' ranks: '+jsonDoc.Defenses[Data.Defense.names[i]]+'\n';
+   }
+   markdownString+='\n';
+
+   markdownString+='## Point Totals\n';
+   if(0 !== totals.ability) markdownString+='* Ability: '+totals.ability+'\n';
+   if(0 !== totals.power) markdownString+='* Power: '+totals.power+'\n';
+   if(0 !== totals.advantage) markdownString+='* Advantage: '+totals.advantage+'\n';
+   if(0 !== totals.skill) markdownString+='* Skill: '+totals.skill+'\n';
+   if(0 !== totals.defense) markdownString+='* Defense: '+totals.defense+'\n';
+   if(0 !== totals.grand) markdownString+='\n';
+   markdownString+='Grand Total: '+totals.grand+'/'+totals.maxGrand+'\n';
+   markdownString+='Equipment Points: '+totals.equipment+'/'+totals.maxEquipment+'\n\n\n';
+
+   markdownString+='## More Info\n';
+   markdownString+='![Character Image]('+jsonDoc.Hero.image+')\n';
+   markdownString+=jsonDoc.Information + '\n';
+   return markdownString;
+
+   /**This function converts the json section into a markdown string and returns it. The name of the section is used to
+    create the header. This function is nested so that it is private*/
+   function convertJsonPowersBothToMarkdown(jsonSection, sectionName)
+   {
+      if(jsonSection.isEmpty()) return '';
+      var sectionString = '## ' + sectionName + '\n';
+      for (var i=0; i < jsonSection.length; i++)
+      {
+         sectionString+='* ';
+         if (jsonSection[i].name !== undefined)
+         {
+            sectionString+=jsonSection[i].name;
+            if(jsonSection[i].skill !== undefined) sectionString+=' ('+jsonSection[i].skill+')';
+            sectionString+=': ';
+         }
+
+         sectionString+=jsonSection[i].effect + ' ';
+         sectionString+=jsonSection[i].rank;
+         if(jsonSection[i].cost !== undefined) sectionString+=' (base cost '+jsonSection[i].cost+')';
+         sectionString+=', ' + jsonSection[i].action+', ';
+         sectionString+=jsonSection[i].range+', ';
+         sectionString+=jsonSection[i].duration+'. ';
+         sectionString+=jsonSection[i].text+'\n';
+
+         for (var j=0; j < jsonSection[i].Modifiers.length; j++)
+         {
+            var thisModifier=jsonSection[i].Modifiers[j];
+            sectionString+='   - ' + thisModifier.name;
+            if(thisModifier.applications !== undefined) sectionString+=' '+thisModifier.applications;
+            if(thisModifier.text !== undefined) sectionString+='. '+thisModifier.text;
+            sectionString+='\n';
+         }
+      }
+      return sectionString + '\n';
+   }
+}

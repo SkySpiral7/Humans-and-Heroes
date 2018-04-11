@@ -111,6 +111,39 @@ function MainObject()
        //do not change ruleset and do not change the code-box (just in case the user needed that)
        //I also decided not to touch either file chooser so that the user can easily select from same folder again
    };
+   /**Used to save the character in a mostly human readable plain text.*/
+   this.exportToMarkdown=function()
+   {
+      var powerLevel=0;
+
+      //start by looking at character points which can't be negative
+      powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
+
+      //if you are no longer limited by power level limitations that changes the minimum possible power level:
+      if(this.advantageSection.isUsingPettyRules())
+         powerLevel = this.calculatePowerLevelLimitations(powerLevel);
+
+      //TODO: store all calculated values so that export doesn't need to calculate again
+      var totals = {};
+      characterPointsSpent = 0;
+      totals.ability = this.abilitySection.getTotal();
+      characterPointsSpent += this.abilitySection.getTotal();
+      totals.power = this.powerSection.getTotal();
+      characterPointsSpent += this.powerSection.getTotal();
+      totals.equipment = this.equipmentSection.getTotal();
+      totals.maxEquipment = this.advantageSection.getEquipmentMaxTotal();
+      //the character points spent for equipment points is accounted for in the advantage section
+      totals.advantage = this.advantageSection.getTotal();
+      characterPointsSpent += this.advantageSection.getTotal();
+      totals.skill = this.skillSection.getTotal();
+      characterPointsSpent += this.skillSection.getTotal();
+      totals.defense = this.defenseSection.getTotal();
+      characterPointsSpent += this.defenseSection.getTotal();
+      totals.grand = characterPointsSpent;
+      totals.maxGrand = (powerLevel * 15);
+
+      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, totals);
+   };
    /**Loads the file's data*/
    this.loadFile=function()
    {
