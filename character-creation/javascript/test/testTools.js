@@ -29,6 +29,7 @@ function unstableBubbleSort(input, compare)
    return input;
 }
 
+//TODO: remove most of these tools, get unstableSort from misc repo
 /**Given the relative (might also allow absolute) path to the xml this method returns a string of the contents.
 None of my browsers allow this by default for security reasons. In order to run this in chrome: first close all chrome then run:
 C:\Program Files (x86)\Google\Chrome\Application>chrome.exe --allow-file-access-from-files

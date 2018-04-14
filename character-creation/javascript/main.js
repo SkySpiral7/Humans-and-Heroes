@@ -33,7 +33,7 @@ function MainObject()
    //private variable section:
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
@@ -94,55 +94,29 @@ function MainObject()
    };
 
    //public functions section
-   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The code-box and file selectors are not touched.*/
+   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
-       document.getElementById('hero-name').value = 'Hero Name';
-       document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
-       this.abilitySection.clear();
-       document.getElementById('img-file-path').value='';
-       this.loadImageFromPath();  //after setting the images to blank this will reset the image
-       this.powerSection.clear();
-       this.equipmentSection.clear();
-       this.advantageSection.clear();
-       this.skillSection.clear();
-       this.defenseSection.clear();
-       document.getElementById('bio-box').value = 'Complications, background and other information';
-       //do not change ruleset and do not change the code-box (just in case the user needed that)
-       //I also decided not to touch either file chooser so that the user can easily select from same folder again
+      document.getElementById('hero-name').value = 'Hero Name';
+      document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
+      this.abilitySection.clear();
+      document.getElementById('img-file-path').value='';
+      this.loadImageFromPath();  //after setting the image path to blank this will reset the image
+      this.powerSection.clear();
+      this.equipmentSection.clear();
+      this.advantageSection.clear();
+      this.skillSection.clear();
+      this.defenseSection.clear();
+      document.getElementById('bio-box').value = 'Complications, background and other information';
+      document.getElementById('code-box').value = '';
+      //do not change ruleset
+      //I also decided not to touch either file chooser so that the user can easily select from same folder again
+      this.update();
    };
    /**Used to save the character in a mostly human readable plain text.*/
    this.exportToMarkdown=function()
    {
-      var powerLevel=0;
-
-      //start by looking at character points which can't be negative
-      powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
-
-      //if you are no longer limited by power level limitations that changes the minimum possible power level:
-      if(this.advantageSection.isUsingPettyRules())
-         powerLevel = this.calculatePowerLevelLimitations(powerLevel);
-
-      //TODO: store all calculated values so that export doesn't need to calculate again
-      var totals = {};
-      characterPointsSpent = 0;
-      totals.ability = this.abilitySection.getTotal();
-      characterPointsSpent += this.abilitySection.getTotal();
-      totals.power = this.powerSection.getTotal();
-      characterPointsSpent += this.powerSection.getTotal();
-      totals.equipment = this.equipmentSection.getTotal();
-      totals.maxEquipment = this.advantageSection.getEquipmentMaxTotal();
-      //the character points spent for equipment points is accounted for in the advantage section
-      totals.advantage = this.advantageSection.getTotal();
-      characterPointsSpent += this.advantageSection.getTotal();
-      totals.skill = this.skillSection.getTotal();
-      characterPointsSpent += this.skillSection.getTotal();
-      totals.defense = this.defenseSection.getTotal();
-      characterPointsSpent += this.defenseSection.getTotal();
-      totals.grand = characterPointsSpent;
-      totals.maxGrand = (powerLevel * 15);
-
-      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, totals);
+      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, characterPointsSpent);
    };
    /**Loads the file's data*/
    this.loadFile=function()
@@ -220,14 +194,13 @@ function MainObject()
    this.update=function()
    {
        this.calculateTotal();
-       var powerLevel=0;
 
        //start by looking at character points which can't be negative
        powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
       if(this.advantageSection.isUsingPettyRules())
-          powerLevel = this.calculatePowerLevelLimitations(powerLevel);
+          this.calculatePowerLevelLimitations();
 
        document.getElementById('power-level').innerHTML = powerLevel;
        document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
@@ -318,7 +291,7 @@ function MainObject()
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
-   this.calculatePowerLevelLimitations=function(powerLevel)
+   this.calculatePowerLevelLimitations=function()
    {
        var compareTo;
        //Skills and Abilities
@@ -356,8 +329,6 @@ function MainObject()
        compareTo+= this.defenseSection.getByName('Will').getTotalBonus();
        compareTo/=2;
        if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
-
-       return powerLevel;
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this.calculateTotal=function()

@@ -214,7 +214,7 @@ function jsonToXml(jsonDoc)
 
 /**This function converts a json object (of valid internal data) into plain text as markdown and returns it
 This is used to export as plain text since json is used internally*/
-function jsonToMarkdown(jsonDoc, powerLevel, totals)
+function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
 {
    var i;  //loop variable used throughout
    var markdownString='# ' + jsonDoc.Hero.name + '\n';
@@ -270,14 +270,17 @@ function jsonToMarkdown(jsonDoc, powerLevel, totals)
    markdownString+='\n';
 
    markdownString+='## Point Totals\n';
-   if(0 !== totals.ability) markdownString+='* Ability: '+totals.ability+'\n';
-   if(0 !== totals.power) markdownString+='* Power: '+totals.power+'\n';
-   if(0 !== totals.advantage) markdownString+='* Advantage: '+totals.advantage+'\n';
-   if(0 !== totals.skill) markdownString+='* Skill: '+totals.skill+'\n';
-   if(0 !== totals.defense) markdownString+='* Defense: '+totals.defense+'\n';
-   if(0 !== totals.grand) markdownString+='\n';
-   markdownString+='Grand Total: '+totals.grand+'/'+totals.maxGrand+'\n';
-   markdownString+='Equipment Points: '+totals.equipment+'/'+totals.maxEquipment+'\n\n\n';
+   if(0 !== Main.abilitySection.getTotal()) markdownString+='* Ability: '+Main.abilitySection.getTotal()+'\n';
+   if(0 !== Main.powerSection.getTotal()) markdownString+='* Power: '+Main.powerSection.getTotal()+'\n';
+   if(0 !== Main.advantageSection.getTotal()) markdownString+='* Advantage: '+Main.advantageSection.getTotal()+'\n';
+   if(0 !== Main.skillSection.getTotal()) markdownString+='* Skill: '+Math.ceil(Main.skillSection.getTotal())+'\n';
+   if(0 !== Main.defenseSection.getTotal()) markdownString+='* Defense: '+Main.defenseSection.getTotal()+'\n';
+   if(0 !== characterPointsSpent) markdownString+='\n';
+   markdownString+='Grand Total: '+Math.ceil(characterPointsSpent)+'/'+(powerLevel * 15)+'\n';
+   markdownString+='Equipment Points: '+Main.equipmentSection.getTotal()+'/'+Main.advantageSection.getEquipmentMaxTotal()+'\n';
+   //if skill total contains a half point
+   if(0 !== Main.skillSection.getTotal() % 1) markdownString+='Unused skill rank: 1\n';  //it can only be 1 or 0
+   markdownString+='\n\n';
 
    markdownString+='## More Info\n';
    markdownString+='![Character Image]('+jsonDoc.Hero.image+')\n';
@@ -305,8 +308,9 @@ function jsonToMarkdown(jsonDoc, powerLevel, totals)
          if(jsonSection[i].cost !== undefined) sectionString+=' (base cost '+jsonSection[i].cost+')';
          sectionString+=', ' + jsonSection[i].action+', ';
          sectionString+=jsonSection[i].range+', ';
-         sectionString+=jsonSection[i].duration+'. ';
-         sectionString+=jsonSection[i].text+'\n';
+         sectionString+=jsonSection[i].duration;
+         if('' !== jsonSection[i].text) sectionString+='. ' + jsonSection[i].text;
+         sectionString+='\n';
 
          for (var j=0; j < jsonSection[i].Modifiers.length; j++)
          {
