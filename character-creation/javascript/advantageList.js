@@ -122,7 +122,7 @@ function AdvantageList()
        return bFirst;
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   this.testSortStability=function(){unstableBubbleSort(rowArray, this.sortOrder);};  //throws if unstableBubbleSort doesn't exist
+   this.testSortStability=function(){unstableSort(rowArray, this.sortOrder);};  //throws if unstableSort doesn't exist
    /**Updates other sections which depend on advantage section*/
    this.notifyDependent=function()
    {

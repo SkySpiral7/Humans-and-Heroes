@@ -7,12 +7,14 @@ var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantage
 //the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
-   var runnerPath = '../../../Miscellaneous/src/main/javascript/testRunner';  //only works locally
+   var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
+   var runnerPath = miscRepo + 'testRunner';
+   var unstableSortPath = miscRepo + 'unstableSort';
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
       'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
       'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
-      'test/testTools']);
+      'test/testTools', unstableSortPath]);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
