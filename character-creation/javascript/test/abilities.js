@@ -38,9 +38,6 @@ TestSuite.abilityObject.set=function(testState={})
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Stamina', '3');
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: 3, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'absent Stamina ui: reset'});

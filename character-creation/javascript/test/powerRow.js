@@ -38,8 +38,6 @@ TestSuite.powerRow.updateActivationModifiers=function(testState={})
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"Move","range":"Ranged","duration":"Sustained",
       "Modifiers":[{"name":"Slower Action"}],"rank":1});
@@ -75,8 +73,6 @@ TestSuite.powerRow.validateActivationInfo=function(testState={})
 
    var dataToLoad;
    var testResults=[];
-
-   Main.setMockMessenger(Messages.errorCapture);
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
@@ -121,8 +117,6 @@ TestSuite.powerRow.validateActivationInfo_valid=function(testState={})
 
    var dataToLoad;
    var testResults=[];
-
-   Main.setMockMessenger(Messages.errorCapture);
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
@@ -264,8 +258,6 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
 
    var dataToLoad;
    var testResults=[];
-
-   Main.setMockMessenger(Messages.errorCapture);
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
@@ -426,8 +418,6 @@ TestSuite.powerRow.validateAndGetPossibleDurations=function(testState={})
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Standard","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
@@ -480,8 +470,6 @@ TestSuite.powerRow.validatePersonalRange=function(testState={})
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
@@ -523,7 +511,6 @@ TestSuite.powerRow.setAction=function(testState={})
 
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
    var dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Create","text":"","action":"invalid action","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
@@ -582,7 +569,6 @@ TestSuite.powerRow.setDuration=function(testState={})
 
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
    var dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Protection","text":"","action":"None","range":"Personal","duration":"invalid duration","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
@@ -823,8 +809,6 @@ TestSuite.powerRow.setRange=function(testState={})
 
    var dataToLoad;
    var testResults=[];
-
-   Main.setMockMessenger(Messages.errorCapture);
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"invalid range","duration":"Sustained","Modifiers":[],"rank":1});

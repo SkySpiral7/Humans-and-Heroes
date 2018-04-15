@@ -23,7 +23,6 @@ TestSuite.powerList.load=function(testState={})
     var testResults=[];
 
     Main.setRuleset(3,3);
-    Main.setMockMessenger(Messages.errorCapture);
 
     try{
     dataToLoad = Loader.resetData();

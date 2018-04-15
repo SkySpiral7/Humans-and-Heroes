@@ -67,8 +67,6 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(testState={})
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
       "Modifiers":[{"name":"Other Flat Extra"},{"name":"Affects Others Only"}],"rank":1});

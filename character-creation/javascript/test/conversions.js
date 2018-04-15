@@ -76,7 +76,6 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
    var testResults=[], dataToLoad, expected, actual;
 
    //loading is the fastest way to set bulk data
-   Main.setMockMessenger(Messages.errorCapture);
 
    //blank character (no need to load)
    expected = '# Hero Name\n' +

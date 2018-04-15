@@ -29,7 +29,6 @@ TestSuite.modifierRow.setModifier=function(testState={})
    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'Removing Attack removes name'});
    testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Removing Attack removes skill'});
 
-   Main.setMockMessenger(Messages.errorCapture);
    var dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Personal","duration":"Sustained",
       "Modifiers":[{"name":"Affects Others Also"}],"rank":1});

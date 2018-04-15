@@ -99,8 +99,6 @@ TestSuite.advantageList.load=function(testState={})
     var dataToLoad;
     var testResults=[];
 
-    Main.setMockMessenger(Messages.errorCapture);
-
     try{
     dataToLoad = Loader.resetData();
     dataToLoad.Advantages.push({name: 'Seize Initiative'});

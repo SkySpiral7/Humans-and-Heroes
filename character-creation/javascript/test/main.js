@@ -424,12 +424,8 @@ TestSuite.main.load=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var testResults=[];
-   var dataToLoad;
+   var testResults=[], dataToLoad;
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
 
@@ -458,9 +454,6 @@ TestSuite.main.loadFromString=function(testState={})
 
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Strength', '2');
    Main.loadFromString('  \n\t');
    testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});

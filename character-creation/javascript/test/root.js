@@ -1,10 +1,18 @@
 'use strict';
+TestConfig.beforeFirst=function()
+{
+   TestConfig.betweenEach();
+   Main.setMockMessenger(Messages.errorCapture);
+};
 TestConfig.betweenEach=function()
 {
    Main.clear();
    Messages.list = [];
-   Main.clearMockMessenger();  //TODO: why not set before first and clear after last?
    Main.setRuleset(3, latestMinorRuleset);
+};
+TestConfig.afterLast=function()
+{
+   Main.clearMockMessenger();
 };
 //every test needs to clear out for the other test to start clean
 //even if slow do not disable Main generation because an error might occur (due to undefined values) in which case I need to see how Main was

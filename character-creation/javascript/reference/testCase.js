@@ -5,8 +5,6 @@ TestSuite.test.stringDiffDisplay=function(testState={})
 
    var testResults=[], dataToLoad;
 
-   Main.setMockMessenger(Messages.errorCapture);
-
    dataToLoad = Loader.resetData();
    dataToLoad.Skills = [{"name": "Perception", "rank": 2, "ability": "Awareness"}];
    Loader.sendData(dataToLoad);
