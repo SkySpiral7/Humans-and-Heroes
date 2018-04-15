@@ -36,7 +36,6 @@ TestSuite.modifierRow.setModifier=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'range trumps modifiers: range'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'range trumps modifiers: error'});
-   Main.clearMockMessenger();  //restore default behavior
 
    //ADD TESTS small ones for the rest
 

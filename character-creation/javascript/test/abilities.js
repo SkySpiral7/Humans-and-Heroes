@@ -80,6 +80,5 @@ TestSuite.abilityObject.set=function(isFirst)
    testResults.push({Expected: true, Actual: Main.abilitySection.getByName('Stamina').isAbsent(), Description: 'absent Stamina v3.10: set'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'absent Stamina v3.10: no Errors'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.abilityObject.set', testResults, isFirst);
 };

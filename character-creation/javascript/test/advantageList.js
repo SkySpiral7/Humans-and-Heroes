@@ -167,7 +167,6 @@ TestSuite.advantageList.load=function(isFirst)
     testResults.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Rank: getRank'});
     } catch(e){testResults.push({Error: e, Description: 'Rank'});}
 
-    Main.clearMockMessenger();  //restore default behavior
     return TestRunner.displayResults('TestSuite.advantageList.load', testResults, isFirst);
 };
 TestSuite.advantageList.sortOrder=function(isFirst)

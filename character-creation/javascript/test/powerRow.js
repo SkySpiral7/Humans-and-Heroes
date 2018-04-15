@@ -67,7 +67,6 @@ TestSuite.powerRow.updateActivationModifiers=function(isFirst)
    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'updateDurationModifiers: no more modifiers'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'updateDurationModifiers: error'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, isFirst);
 };
 TestSuite.powerRow.validateActivationInfo=function(isFirst)
@@ -114,7 +113,6 @@ TestSuite.powerRow.validateActivationInfo=function(isFirst)
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Reaction Damage allows ranged range'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 range Reaction Damage allows ranged range: error'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo', testResults, isFirst);
 };
 TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
@@ -258,7 +256,6 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.3 allows reaction: getDuration'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 allows reaction: no errors'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo_valid', testResults, isFirst);
 };
 TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
@@ -420,7 +417,6 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Reaction Flight: action'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Reaction Flight: error'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleActions', testResults, isFirst);
 };
 TestSuite.powerRow.validateAndGetPossibleDurations=function(isFirst)
@@ -475,7 +471,6 @@ TestSuite.powerRow.validateAndGetPossibleDurations=function(isFirst)
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notInstant: Duration'});
    testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant'], Actual: Messages.errorCodes(), Description: 'notInstant: error'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleDurations', testResults, isFirst);
 };
 TestSuite.powerRow.validatePersonalRange=function(isFirst)
@@ -520,7 +515,6 @@ TestSuite.powerRow.validatePersonalRange=function(isFirst)
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'ranged Flight with modifier allowed: range'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'ranged Flight with modifier allowed: error'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
 };
 TestSuite.powerRow.setAction=function(isFirst)
@@ -535,7 +529,6 @@ TestSuite.powerRow.setAction=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Action does not exist: getAction'});
    testResults.push({Expected: ['PowerObjectAgnostic.setAction.notExist'], Actual: Messages.errorCodes(), Description: 'Action does not exist: error'});
-   Main.clearMockMessenger();  //restore default behavior
 
     try{
     Main.setRuleset(3, 3);
@@ -595,7 +588,6 @@ TestSuite.powerRow.setDuration=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration does not exist: getDuration'});
    testResults.push({Expected: ['PowerObjectAgnostic.setDuration.notExist'], Actual: Messages.errorCodes(), Description: 'Duration does not exist: error'});
-   Main.clearMockMessenger();  //restore default behavior
 
    SelectUtil.changeText('powerChoices0', 'Feature');
    SelectUtil.changeText('powerSelectDuration0', 'Instant');
@@ -851,8 +843,6 @@ TestSuite.powerRow.setRange=function(isFirst)
    testResults.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Feature Range does not exist: getRange'});
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
    testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Feature Range does not exist: error'});
-
-   Main.clearMockMessenger();  //restore default behavior
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    testResults.push({Expected: 'Damage', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Change to Perception: power'});

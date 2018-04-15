@@ -12,7 +12,7 @@ Loader.resetData=function()
 Loader.sendData=function(jsonData)
 {
    document.getElementById('code-box').value = JSON.stringify(jsonData);  //to simulate user input
-   Main.loadFromTextArea();
+   document.getElementById('load-text-button').onclick();
 };
 Messages.errorCapture=function(errorCode, amLoading)
 {

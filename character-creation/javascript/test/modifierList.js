@@ -88,7 +88,6 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: [], Actual: Messages.list, Description: 'true: Attack'});
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
 };
 TestSuite.modifierList.load=function(isFirst)

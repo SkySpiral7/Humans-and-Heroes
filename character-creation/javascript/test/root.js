@@ -3,7 +3,7 @@ TestConfig.betweenEach=function()
 {
    Main.clear();
    Messages.list = [];
-   Main.clearMockMessenger();  //TODO: don't need to call this everywhere. TODO: why not set before first and clear after last?
+   Main.clearMockMessenger();  //TODO: why not set before first and clear after last?
    Main.setRuleset(3, latestMinorRuleset);
 };
 //every test needs to clear out for the other test to start clean

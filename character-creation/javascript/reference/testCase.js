@@ -1,16 +1,23 @@
-Tester.test.stringDiffDisplay=function(isFirst)
+TestSuite.test.stringDiffDisplay=function(isFirst)
 {
-    return;  //remove this when actual tests exist. ADD TESTS
-    TesterUtility.clearResults(isFirst);
+   return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+   TestRunner.clearResults(isFirst);
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Action: actionTaken, Description: 'Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TesterUtility.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Action: actionTaken, Description: 'Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Action: actionTaken});}
+   var testResults=[], dataToLoad;
 
-    //be sure to copy the name here:
-    TesterUtility.displayResults('Tester.test.stringDiffDisplay', testResults, isFirst);
+   Main.setMockMessenger(Messages.errorCapture);
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Skills = [{"name": "Perception", "rank": 2, "ability": "Awareness"}];
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
+   testResults.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Feature Range does not exist: error'});
+
+   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   TestRunner.changeValue('equipmentRank0', 5);
+   testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
+
+   //be sure to copy the name here:
+   return TestRunner.displayResults('TestSuite.test.stringDiffDisplay', testResults, isFirst);
 };

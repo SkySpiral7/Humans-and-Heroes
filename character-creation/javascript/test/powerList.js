@@ -188,7 +188,6 @@ TestSuite.powerList.load=function(isFirst)
     testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Name only: getSkillUsed'});
     } catch(e){testResults.push({Error: e, Description: 'Name only'});}
 
-    Main.clearMockMessenger();  //restore default behavior
     return TestRunner.displayResults('TestSuite.powerList.load', testResults, isFirst);
 };
 TestSuite.powerList.save=function(isFirst)

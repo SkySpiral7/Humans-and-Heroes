@@ -450,7 +450,6 @@ TestSuite.main.load=function(isFirst)
 
    //ADD TESTS. currently only tests amLoading
 
-   Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
 };
 TestSuite.main.loadFromString=function(isFirst)
@@ -495,7 +494,6 @@ TestSuite.main.loadFromString=function(isFirst)
       testResults.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.list, Description: 'JSON error code'});
    }
 
-    Main.clearMockMessenger();  //restore default behavior
    return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
 };
 TestSuite.main.makeOffenseRow=function(isFirst)
