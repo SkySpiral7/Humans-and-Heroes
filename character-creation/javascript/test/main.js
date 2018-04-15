@@ -324,86 +324,78 @@ TestSuite.main.calculateTotal=function(testState={})
 };
 TestSuite.main.convertDocument=function(testState={})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var testResults=[];
-    var actionTaken, input, expected;
+   var testResults=[], dataToLoad, expected;
 
-    Main.clear(); Main.setRuleset(2, 7);
-    SelectUtil.setText('save-type', 'JSON');
-    const blankDoc = JSON.stringify(Main.save());
-   function useLoadButton(input)
-   {
-       document.getElementById('code-box').value = input;
-       document.getElementById('load-text-button').onclick();
-   }
+   var blankDoc = JSON.stringify(Main.save());
    function useSaveButton()
    {
-       document.getElementById('save-text-button').onclick();
-       return document.getElementById('code-box').value;
+      document.getElementById('save-text-button').onclick();
+      return document.getElementById('code-box').value;
    }
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    input.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-       "Modifiers":[{"name":"Selective"}],"rank":3}];
-    actionTaken = 'Simple';
-    useLoadButton(JSON.stringify(input));
-    expected = JSON.parse(blankDoc);
-    expected.Powers = [{"effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-       "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[{"name":"Selective"}],"rank":3}];
-    testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: actionTaken+': Convert a Power'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   dataToLoad.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+      "Modifiers":[{"name":"Selective"}],"rank":3}];
+   Loader.sendData(dataToLoad);
+   expected = JSON.parse(blankDoc);
+   expected.Powers = [{"effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+      "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[{"name":"Selective"}],"rank":3}];
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert a Power: errors'});
+   testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert a Power: doc'});
+   } catch(e){testResults.push({Error: e, Description: 'Convert a Power'});}
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    useLoadButton(JSON.stringify(input));
-    testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert old nothing'});
-    useLoadButton(blankDoc);
-    testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert new nothing'});
-    } catch(e){testResults.push({Error: e, Description: 'Convert nothing'});}
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert old nothing: errors'});
+   testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert old nothing: doc'});
+   dataToLoad = Loader.resetData();
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert new nothing: errors'});
+   testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert new nothing: doc'});
+   } catch(e){testResults.push({Error: e, Description: 'Convert nothing'});}
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    input.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":3},
-       {"name":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":2}];
-    input.Equipment = [{"name":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1},
-       {"name":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1}];
-    input.Advantages = [{"name":"Equipment","rank":1}];
-    actionTaken = '2 Each';
-    useLoadButton(JSON.stringify(input));
-    expected = JSON.parse(blankDoc);
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   dataToLoad.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":3},
+      {"name":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":2}];
+   dataToLoad.Equipment = [{"name":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1},
+      {"name":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1}];
+   dataToLoad.Advantages = [{"name":"Equipment","rank":1}];
+   Loader.sendData(dataToLoad);
+   expected = JSON.parse(blankDoc);
    expected.Powers = [
       {
-          "effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[],"rank":3
+         "effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[],"rank":3
       },
       {
-          "effect":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Power 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":2
+         "effect":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Power 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":2
       }
    ];
    expected.Equipment = [
       {
-          "effect":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Equipment 1 Affliction","skill":"Skill used for attack","Modifiers":[],"rank":1
+         "effect":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Equipment 1 Affliction","skill":"Skill used for attack","Modifiers":[],"rank":1
       },
       {
-          "effect":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Equipment 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":1
+         "effect":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Equipment 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":1
       }
    ];
-    expected.Advantages = [{"name":"Equipment","rank":1}];
-    testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: actionTaken+': Convert 2 Powers and 2 equipments'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   expected.Advantages = [{"name":"Equipment","rank":1}];
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert 2 Powers and 2 equipments: errors'});
+   testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert 2 Powers and 2 equipments: doc'});
+   } catch(e){testResults.push({Error: e, Description: '2 each'});}
 
-    //minor clean up:
-    document.getElementById('code-box').value = '';
-
-    return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, testState);
+   return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, testState);
 };
 TestSuite.main.determineCompatibilityIssues=function(testState={})
 {
@@ -434,7 +426,7 @@ TestSuite.main.load=function(testState={})
    Loader.sendData(dataToLoad);
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true when loading'});
 
-   Main.clear();
+   Main.clear();  //I could Loader.resetData() but I don't need to save
    Messages.list = [];
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading reset to false'});
