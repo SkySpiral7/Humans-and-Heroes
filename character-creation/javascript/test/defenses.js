@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.defenseList={};
-TestSuite.defenseList.calculateValues=function(isFirst)
+TestSuite.defenseList.calculateValues=function(testState={})
 {
-    TestRunner.clearResults(isFirst);  //this also sets old rules to false
+    TestRunner.clearResults(testState);  //this also sets old rules to false
 
     var testResults=[];
     var actionTaken='Initial';
@@ -60,12 +60,12 @@ TestSuite.defenseList.calculateValues=function(isFirst)
     testResults.push({Expected: 1, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 1'});
     Main.setRuleset(2, 7);
 
-    return TestRunner.displayResults('TestSuite.defenseList.calculateValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.defenseList.calculateValues', testResults, testState);
 };
-TestSuite.defenseList.load=function(isFirst)
+TestSuite.defenseList.load=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -75,12 +75,12 @@ TestSuite.defenseList.load=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.defenseList.load', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.defenseList.load', testResults, testState);
 };
-TestSuite.defenseList.calculateToughness=function(isFirst)
+TestSuite.defenseList.calculateToughness=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -90,5 +90,5 @@ TestSuite.defenseList.calculateToughness=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.defenseList.calculateToughness', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.defenseList.calculateToughness', testResults, testState);
 };

@@ -1,7 +1,7 @@
-TestSuite.test.stringDiffDisplay=function(isFirst)
+TestSuite.test.stringDiffDisplay=function(testState={})
 {
    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], dataToLoad;
 
@@ -19,5 +19,5 @@ TestSuite.test.stringDiffDisplay=function(isFirst)
    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
 
    //be sure to copy the name here:
-   return TestRunner.displayResults('TestSuite.test.stringDiffDisplay', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.test.stringDiffDisplay', testResults, testState);
 };

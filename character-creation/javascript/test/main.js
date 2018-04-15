@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.main={};
-TestSuite.main.changeRuleset=function(isFirst)
+TestSuite.main.changeRuleset=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var rulesetElement = document.getElementById('ruleset');
@@ -131,12 +131,12 @@ TestSuite.main.changeRuleset=function(isFirst)
     testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Maintains document on version change'});
     } catch(e){testResults.push({Error: e, Description: 'Maintains document on version change'});}
 
-    return TestRunner.displayResults('TestSuite.main.changeRuleset', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.changeRuleset', testResults, testState);
 };
-TestSuite.main.changeTranscendence=function(isFirst)
+TestSuite.main.changeTranscendence=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -146,12 +146,12 @@ TestSuite.main.changeTranscendence=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.changeTranscendence', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.changeTranscendence', testResults, testState);
 };
-TestSuite.main.clear=function(isFirst)
+TestSuite.main.clear=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -161,11 +161,11 @@ TestSuite.main.clear=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.clear', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.clear', testResults, testState);
 };
-TestSuite.main.loadFile=function(isFirst)
+TestSuite.main.loadFile=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -177,11 +177,11 @@ TestSuite.main.loadFile=function(isFirst)
 
     //this test is complete since I can't set the file chooser to anything else
 
-    return TestRunner.displayResults('TestSuite.main.loadFile', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.loadFile', testResults, testState);
 };
-TestSuite.main.loadImageFromFile=function(isFirst)
+TestSuite.main.loadImageFromFile=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -194,12 +194,12 @@ TestSuite.main.loadImageFromFile=function(isFirst)
 
     //this test is complete since I can't set the file chooser to anything else
 
-    return TestRunner.displayResults('TestSuite.main.loadImageFromFile', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.loadImageFromFile', testResults, testState);
 };
-TestSuite.main.getProtectionTotal=function(isFirst)
+TestSuite.main.getProtectionTotal=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -209,15 +209,15 @@ TestSuite.main.getProtectionTotal=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', testResults, testState);
 
     //be sure to call Main.setRuleset(1, 1); inside tests and:
-    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), testResults, isFirst);
+    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), testResults, testState);
 };
-TestSuite.main.update=function(isFirst)
+TestSuite.main.update=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -227,11 +227,11 @@ TestSuite.main.update=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.update', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.update', testResults, testState);
 };
-TestSuite.main.updateInitiative=function(isFirst)
+TestSuite.main.updateInitiative=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var initiativeElement = document.getElementById('initiative');
@@ -275,12 +275,12 @@ TestSuite.main.updateInitiative=function(isFirst)
     testResults.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0 Improved Initiative 4'});
     } catch(e){testResults.push({Error: e, Description: '3.0 Improved Initiative 4'});}
 
-    return TestRunner.displayResults('TestSuite.main.updateInitiative', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.updateInitiative', testResults, testState);
 };
-TestSuite.main.updateOffense=function(isFirst)
+TestSuite.main.updateOffense=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -290,12 +290,12 @@ TestSuite.main.updateOffense=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.updateOffense', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.updateOffense', testResults, testState);
 };
-TestSuite.main.calculatePowerLevelLimitations=function(isFirst)
+TestSuite.main.calculatePowerLevelLimitations=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -305,12 +305,12 @@ TestSuite.main.calculatePowerLevelLimitations=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', testResults, testState);
 };
-TestSuite.main.calculateTotal=function(isFirst)
+TestSuite.main.calculateTotal=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -320,11 +320,11 @@ TestSuite.main.calculateTotal=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.calculateTotal', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.calculateTotal', testResults, testState);
 };
-TestSuite.main.convertDocument=function(isFirst)
+TestSuite.main.convertDocument=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken, input, expected;
@@ -403,12 +403,12 @@ TestSuite.main.convertDocument=function(isFirst)
     //minor clean up:
     document.getElementById('code-box').value = '';
 
-    return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, testState);
 };
-TestSuite.main.determineCompatibilityIssues=function(isFirst)
+TestSuite.main.determineCompatibilityIssues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -418,11 +418,11 @@ TestSuite.main.determineCompatibilityIssues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.determineCompatibilityIssues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.determineCompatibilityIssues', testResults, testState);
 };
-TestSuite.main.load=function(isFirst)
+TestSuite.main.load=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
    var dataToLoad;
@@ -450,11 +450,11 @@ TestSuite.main.load=function(isFirst)
 
    //ADD TESTS. currently only tests amLoading
 
-   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, testState);
 };
-TestSuite.main.loadFromString=function(isFirst)
+TestSuite.main.loadFromString=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
 
@@ -494,12 +494,12 @@ TestSuite.main.loadFromString=function(isFirst)
       testResults.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.list, Description: 'JSON error code'});
    }
 
-   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, testState);
 };
-TestSuite.main.makeOffenseRow=function(isFirst)
+TestSuite.main.makeOffenseRow=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -509,5 +509,5 @@ TestSuite.main.makeOffenseRow=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.makeOffenseRow', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.makeOffenseRow', testResults, testState);
 };

@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.advantageList={};
-TestSuite.advantageList.calculateEquipmentRank=function(isFirst)
+TestSuite.advantageList.calculateEquipmentRank=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -34,11 +34,11 @@ TestSuite.advantageList.calculateEquipmentRank=function(isFirst)
     testResults.push({Expected: 0, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken+': Equipment Max Total is now 0'});
     testResults.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage Total is now 0'});
 
-    return TestRunner.displayResults('TestSuite.advantageList.calculateEquipmentRank', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageList.calculateEquipmentRank', testResults, testState);
 };
-TestSuite.advantageList.calculateValues=function(isFirst)
+TestSuite.advantageList.calculateValues=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -90,11 +90,11 @@ TestSuite.advantageList.calculateValues=function(isFirst)
     testResults.push({Expected: 13, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage total is 13'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.advantageList.calculateValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageList.calculateValues', testResults, testState);
 };
-TestSuite.advantageList.load=function(isFirst)
+TestSuite.advantageList.load=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var dataToLoad;
     var testResults=[];
@@ -167,11 +167,11 @@ TestSuite.advantageList.load=function(isFirst)
     testResults.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Rank: getRank'});
     } catch(e){testResults.push({Error: e, Description: 'Rank'});}
 
-    return TestRunner.displayResults('TestSuite.advantageList.load', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageList.load', testResults, testState);
 };
-TestSuite.advantageList.sortOrder=function(isFirst)
+TestSuite.advantageList.sortOrder=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
 
@@ -189,5 +189,5 @@ TestSuite.advantageList.sortOrder=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(3).isBlank(), Description: 'No more Advantages'});
     } catch(e){testResults.push({Error: e, Description: 'sortOrder'});}
 
-    return TestRunner.displayResults('TestSuite.advantageList.sortOrder', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageList.sortOrder', testResults, testState);
 };

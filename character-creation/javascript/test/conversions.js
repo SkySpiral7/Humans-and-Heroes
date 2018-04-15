@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.conversions={};
-TestSuite.conversions.sanitizeNumber=function(isFirst)
+TestSuite.conversions.sanitizeNumber=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -37,12 +37,12 @@ TestSuite.conversions.sanitizeNumber=function(isFirst)
     testResults.push({Expected: -5, Actual: result, Description: actionTaken+': -500 string to number (min of -5)'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.conversions.sanitizeNumber', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.conversions.sanitizeNumber', testResults, testState);
 };
-TestSuite.conversions.xmlToJson=function(isFirst)
+TestSuite.conversions.xmlToJson=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -52,12 +52,12 @@ TestSuite.conversions.xmlToJson=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.conversions.xmlToJson', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.conversions.xmlToJson', testResults, testState);
 };
-TestSuite.conversions.jsonToXml=function(isFirst)
+TestSuite.conversions.jsonToXml=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -67,11 +67,11 @@ TestSuite.conversions.jsonToXml=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.conversions.jsonToXml', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.conversions.jsonToXml', testResults, testState);
 };
-TestSuite.conversions.jsonToMarkdown=function(isFirst)
+TestSuite.conversions.jsonToMarkdown=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], dataToLoad, expected, actual;
 
@@ -298,5 +298,5 @@ TestSuite.conversions.jsonToMarkdown=function(isFirst)
    testResults.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
    testResults.push({Expected: expected, Actual: actual, Description: 'transcendence, no extra skill: value'});
 
-   return TestRunner.displayResults('TestSuite.conversions.jsonToMarkdown', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.conversions.jsonToMarkdown', testResults, testState);
 };

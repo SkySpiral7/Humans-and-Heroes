@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.powerRow={};
-TestSuite.powerRow.disableValidationForActivationInfo=function(isFirst)
+TestSuite.powerRow.disableValidationForActivationInfo=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -29,11 +29,11 @@ TestSuite.powerRow.disableValidationForActivationInfo=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Action None: getAction'});
    } catch(e){testResults.push({Error: e, Description: 'Action None'});}
 
-   return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, testState);
 };
-TestSuite.powerRow.updateActivationModifiers=function(isFirst)
+TestSuite.powerRow.updateActivationModifiers=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -67,11 +67,11 @@ TestSuite.powerRow.updateActivationModifiers=function(isFirst)
    testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'updateDurationModifiers: no more modifiers'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'updateDurationModifiers: error'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', testResults, testState);
 };
-TestSuite.powerRow.validateActivationInfo=function(isFirst)
+TestSuite.powerRow.validateActivationInfo=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -113,11 +113,11 @@ TestSuite.powerRow.validateActivationInfo=function(isFirst)
    testResults.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Reaction Damage allows ranged range'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 range Reaction Damage allows ranged range: error'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo', testResults, testState);
 };
-TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
+TestSuite.powerRow.validateActivationInfo_valid=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -256,11 +256,11 @@ TestSuite.powerRow.validateActivationInfo_valid=function(isFirst)
    testResults.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.3 allows reaction: getDuration'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 allows reaction: no errors'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo_valid', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo_valid', testResults, testState);
 };
-TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
+TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -417,11 +417,11 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(isFirst)
    testResults.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Reaction Flight: action'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Reaction Flight: error'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleActions', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleActions', testResults, testState);
 };
-TestSuite.powerRow.validateAndGetPossibleDurations=function(isFirst)
+TestSuite.powerRow.validateAndGetPossibleDurations=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -471,11 +471,11 @@ TestSuite.powerRow.validateAndGetPossibleDurations=function(isFirst)
    testResults.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'notInstant: Duration'});
    testResults.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant'], Actual: Messages.errorCodes(), Description: 'notInstant: error'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleDurations', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleDurations', testResults, testState);
 };
-TestSuite.powerRow.validatePersonalRange=function(isFirst)
+TestSuite.powerRow.validatePersonalRange=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -515,11 +515,11 @@ TestSuite.powerRow.validatePersonalRange=function(isFirst)
    testResults.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'ranged Flight with modifier allowed: range'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'ranged Flight with modifier allowed: error'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, testState);
 };
-TestSuite.powerRow.setAction=function(isFirst)
+TestSuite.powerRow.setAction=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
 
@@ -574,11 +574,11 @@ TestSuite.powerRow.setAction=function(isFirst)
     testResults.push({Expected: 'Perception', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 Luck Control doesn\'t become close range: getRange'});
     } catch(e){testResults.push({Error: e, Description: 'v3.4 Luck Control not close range'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.setAction', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.setAction', testResults, testState);
 };
-TestSuite.powerRow.setDuration=function(isFirst)
+TestSuite.powerRow.setDuration=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
 
@@ -624,11 +624,11 @@ TestSuite.powerRow.setDuration=function(isFirst)
    testResults.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Change to permanent (permanent default): getAction'});
    testResults.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Change to permanent (permanent default): getDuration'});
 
-   return TestRunner.displayResults('TestSuite.powerRow.setDuration', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.setDuration', testResults, testState);
 };
-TestSuite.powerRow.updateDurationModifiers=function(isFirst)
+TestSuite.powerRow.updateDurationModifiers=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
 
@@ -684,12 +684,12 @@ TestSuite.powerRow.updateDurationModifiers=function(isFirst)
     testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Decreased Duration: was in fact removed'});
     } catch(e){testResults.push({Error: e, Description: 'Decreased Duration'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.updateDurationModifiers', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.updateDurationModifiers', testResults, testState);
 };
-TestSuite.powerRow.setPower=function(isFirst)
+TestSuite.powerRow.setPower=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
@@ -698,11 +698,11 @@ TestSuite.powerRow.setPower=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: 'Equipment Row is not created'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.setPower', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.setPower', testResults, testState);
 };
-TestSuite.powerRow.updateActionModifiers=function(isFirst)
+TestSuite.powerRow.updateActionModifiers=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     //testing for setting to None exists in setDuration tests
     var testResults=[];
@@ -815,11 +815,11 @@ TestSuite.powerRow.updateActionModifiers=function(isFirst)
     testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Luck Control doesn\'t have Aura: no modifiers'});
     } catch(e){testResults.push({Error: e, Description: 'Luck Control doesn\'t have Aura'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.updateActionModifiers', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.updateActionModifiers', testResults, testState);
 };
-TestSuite.powerRow.setRange=function(isFirst)
+TestSuite.powerRow.setRange=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
@@ -911,11 +911,11 @@ TestSuite.powerRow.setRange=function(isFirst)
    testResults.push({Expected: 'Concentration', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature change to personal changes nothing: getDuration'});
    } catch(e){testResults.push({Error: e, Description: 'Feature change to personal changes nothing'});}
 
-   return TestRunner.displayResults('TestSuite.powerRow.setRange', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.setRange', testResults, testState);
 };
-TestSuite.powerRow.updateRangeModifiers=function(isFirst)
+TestSuite.powerRow.updateRangeModifiers=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
 
@@ -960,11 +960,11 @@ TestSuite.powerRow.updateRangeModifiers=function(isFirst)
     testResults.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Reduced Range: was in fact removed'});
     } catch(e){testResults.push({Error: e, Description: 'Reduced Range'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.updateRangeModifiers', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.updateRangeModifiers', testResults, testState);
 };
-TestSuite.powerRow.calculateValues=function(isFirst)
+TestSuite.powerRow.calculateValues=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -1049,11 +1049,11 @@ TestSuite.powerRow.calculateValues=function(isFirst)
     testResults.push({Expected: 85, Actual: Main.powerSection.getRow(0).getTotal(), Description: '2 ranks: Reality Warp'});
     } catch(e){testResults.push({Error: e, Description: 'Odd first rank values'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.calculateValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.calculateValues', testResults, testState);
 };
-TestSuite.powerRow.generate=function(isFirst)
+TestSuite.powerRow.generate=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults = [];
 
@@ -1271,11 +1271,11 @@ TestSuite.powerRow.generate=function(isFirst)
    //ADD TESTS: Data.Power[effect].isAttack
    //TODO: TestSuite sections should exist for generate and set all so that the gui logic is tested
 
-   return TestRunner.displayResults('TestSuite.powerRow.generate', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.generate', testResults, testState);
 };
-TestSuite.powerRow.generateNameAndSkill=function(isFirst)
+TestSuite.powerRow.generateNameAndSkill=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -1305,11 +1305,11 @@ TestSuite.powerRow.generateNameAndSkill=function(isFirst)
     testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Perception has no skill'});
     } catch(e){testResults.push({Error: e, Description: 'No name or skill'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', testResults, testState);
 };
-TestSuite.powerRow.setValues=function(isFirst)
+TestSuite.powerRow.setValues=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     //ADD TESTS
     var testResults=[];
@@ -1344,5 +1344,5 @@ TestSuite.powerRow.setValues=function(isFirst)
     testResults.push({Expected: '5', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.5 Variable has a min cost of 5/rank'});
     } catch(e){testResults.push({Error: e, Description: 'Variable min cost'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.setValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerRow.setValues', testResults, testState);
 };
