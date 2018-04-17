@@ -263,11 +263,18 @@ function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
    }
 
    markdownString+='## Defenses\n';
+   var defenseCalculations = Main.defenseSection.getCalculations();
    for (i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
    {
-      markdownString+='* ' + Data.Defense.names[i]+' ranks: '+jsonDoc.Defenses[Data.Defense.names[i]]+'\n';
+      var defenseName = Data.Defense.names[i];
+      markdownString+='* ' + defenseName + ': ' + defenseCalculations[defenseName].totalBonus +' ('
+         + jsonDoc.Defenses[defenseName] + ' ranks + '
+         + defenseCalculations[defenseName].abilityValue + ' ' + Data.Defense[defenseName].ability + ')\n';
    }
-   markdownString+='\n';
+   markdownString+='* Toughness: ' + defenseCalculations.Toughness.totalBonus;
+   if(undefined !== defenseCalculations.Toughness.withoutDefensiveRoll)
+      markdownString+=' ('+defenseCalculations.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
+   markdownString+='\n\n';
 
    markdownString+='## Point Totals\n';
    if(0 !== Main.abilitySection.getTotal()) markdownString+='* Ability: '+Main.abilitySection.getTotal()+'\n';

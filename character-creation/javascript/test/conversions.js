@@ -93,10 +93,11 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Presence: 0\n' +
       '\n' +
       '## Defenses\n' +
-      '* Dodge ranks: 0\n' +
-      '* Fortitude ranks: 0\n' +
-      '* Parry ranks: 0\n' +
-      '* Will ranks: 0\n' +
+      '* Dodge: 0 (0 ranks + 0 Agility)\n' +
+      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
+      '* Parry: 0 (0 ranks + 0 Fighting)\n' +
+      '* Will: 0 (0 ranks + 0 Presence)\n' +
+      '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +
       'Grand Total: 0/0\n' +
@@ -178,7 +179,8 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
                "rank": 2,
                "text": "benefit text"
             },
-            {"name": "Ultimate Effort", "text": "ultimate text"}
+            {"name": "Ultimate Effort", "text": "ultimate text"},
+            {"name": "Defensive Roll", "rank": 1}
          ],
          "Skills": [
             {"name": "Perception", "rank": 2, "ability": "Awareness"},
@@ -224,25 +226,27 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Equipment 2\n' +
       '* Benefit 2. benefit text\n' +
       '* Ultimate Effort. ultimate text\n' +
+      '* Defensive Roll 1\n' +
       '\n' +
       '## Skills\n' +
       '* Perception (Awareness) 2\n' +
       '* Close Combat: close combat text (Fighting) 1\n' +
       '\n' +
       '## Defenses\n' +
-      '* Dodge ranks: 2\n' +
-      '* Fortitude ranks: 4\n' +
-      '* Parry ranks: 1\n' +
-      '* Will ranks: 3\n' +
+      '* Dodge: 4 (2 ranks + 2 Agility)\n' +
+      '* Fortitude: 9 (4 ranks + 5 Stamina)\n' +
+      '* Parry: 4 (1 ranks + 3 Fighting)\n' +
+      '* Will: 11 (3 ranks + 8 Presence)\n' +
+      '* Toughness: 6 (5 without Defensive Roll)\n' +
       '\n' +
       '## Point Totals\n' +
       '* Ability: 72\n' +
       '* Power: 5\n' +
-      '* Advantage: 5\n' +
+      '* Advantage: 6\n' +
       '* Skill: 2\n' +
       '* Defense: 10\n' +
       '\n' +
-      'Grand Total: 94/150\n' +
+      'Grand Total: 95/150\n' +
       'Equipment Points: 6/10\n' +
       'Unused skill rank: 1\n' +
       '\n' +
@@ -277,10 +281,11 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Perception (Awareness) 2\n' +
       '\n' +
       '## Defenses\n' +
-      '* Dodge ranks: 0\n' +
-      '* Fortitude ranks: 0\n' +
-      '* Parry ranks: 0\n' +
-      '* Will ranks: 0\n' +
+      '* Dodge: 0 (0 ranks + 0 Agility)\n' +
+      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
+      '* Parry: 0 (0 ranks + 0 Fighting)\n' +
+      '* Will: 0 (0 ranks + 0 Presence)\n' +
+      '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +
       '* Skill: 1\n' +

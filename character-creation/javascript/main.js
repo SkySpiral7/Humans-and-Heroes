@@ -118,6 +118,7 @@ function MainObject()
    /**Used to save the character in a mostly human readable plain text.*/
    this.exportToMarkdown=function()
    {
+      //TODO: store all UI values after calc so that they can be exported or at least defense, skills, offense
       document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, characterPointsSpent);
    };
    /**Loads the file's data*/
