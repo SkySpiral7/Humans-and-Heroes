@@ -214,7 +214,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        return bFirst;
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   this.testSortStability=function(){unstableBubbleSort(rowArray, this.sortOrder);};  //throws if unstableBubbleSort doesn't exist
+   this.testSortStability=function(){unstableSort(rowArray, this.sortOrder);};  //throws if unstableSort doesn't exist
    /**This will re-index all modifier rows. PowerRowIndex is not affected.*/
    this.reindex=function()
    {

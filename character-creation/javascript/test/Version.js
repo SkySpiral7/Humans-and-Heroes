@@ -1,19 +1,19 @@
 'use strict';
 TestSuite.version={};
-TestSuite.version.toString=function(isFirst)
+TestSuite.version.toString=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
    try{
    testResults.push({Expected: '5.6', Actual: new VersionObject(5, 6).toString(), Description: '5.6 toString'});
    } catch(e){testResults.push({Error: e, Description: '5.6 toString'});}
 
-   return TestRunner.displayResults('TestSuite.version.toString', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.toString', testResults, testState);
 };
-TestSuite.version.clone=function(isFirst)
+TestSuite.version.clone=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
    try{
@@ -26,11 +26,11 @@ TestSuite.version.clone=function(isFirst)
    testResults.push({Expected: 6, Actual: cloned.minor, Description: 'clone was not'});
    } catch(e){testResults.push({Error: e, Description: 'clone'});}
 
-   return TestRunner.displayResults('TestSuite.version.clone', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.clone', testResults, testState);
 };
-TestSuite.version.isGreaterThan=function(isFirst)
+TestSuite.version.isGreaterThan=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], initial = new VersionObject(2, 4);
 
@@ -50,11 +50,11 @@ TestSuite.version.isGreaterThan=function(isFirst)
    testResults.push({Expected: false, Actual: initial.isGreaterThan(2, 4), Description: 'are equal'});
    } catch(e){testResults.push({Error: e, Description: 'Comparisons'});}
 
-   return TestRunner.displayResults('TestSuite.version.isGreaterThan', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.isGreaterThan', testResults, testState);
 };
-TestSuite.version.isLessThan=function(isFirst)
+TestSuite.version.isLessThan=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], initial = new VersionObject(2, 4);
 
@@ -74,11 +74,11 @@ TestSuite.version.isLessThan=function(isFirst)
    testResults.push({Expected: false, Actual: initial.isLessThan(2, 4), Description: 'are equal'});
    } catch(e){testResults.push({Error: e, Description: 'Comparisons'});}
 
-   return TestRunner.displayResults('TestSuite.version.isLessThan', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.isLessThan', testResults, testState);
 };
-TestSuite.version.equals=function(isFirst)
+TestSuite.version.equals=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], initial = new VersionObject(2, 4);
 
@@ -96,11 +96,11 @@ TestSuite.version.equals=function(isFirst)
    testResults.push({Expected: false, Actual: initial.equals(2, 1), Description: 'minor is different'});
    } catch(e){testResults.push({Error: e, Description: 'Comparisons'});}
 
-   return TestRunner.displayResults('TestSuite.version.equals', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.equals', testResults, testState);
 };
-TestSuite.version.isGreaterThanOrEqualTo=function(isFirst)
+TestSuite.version.isGreaterThanOrEqualTo=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], initial = new VersionObject(2, 4);
 
@@ -117,5 +117,5 @@ TestSuite.version.isGreaterThanOrEqualTo=function(isFirst)
    testResults.push({Expected: true, Actual: initial.isGreaterThanOrEqualTo(2, 4), Description: 'equals'});
    } catch(e){testResults.push({Error: e, Description: 'equals'});}
 
-   return TestRunner.displayResults('TestSuite.version.isGreaterThanOrEqualTo', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.version.isGreaterThanOrEqualTo', testResults, testState);
 };

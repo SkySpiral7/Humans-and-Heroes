@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.data={};
-TestSuite.data.allVersions=function(isFirst)
+TestSuite.data.allVersions=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], expected;
 
@@ -27,11 +27,11 @@ TestSuite.data.allVersions=function(isFirst)
    testResults.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
-   return TestRunner.displayResults('TestSuite.data.allVersions', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.data.allVersions', testResults, testState);
 };
-TestSuite.data.v1=function(isFirst)
+TestSuite.data.v1=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], expected;
 
@@ -2208,11 +2208,11 @@ TestSuite.data.v1=function(isFirst)
    testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
-   return TestRunner.displayResults('TestSuite.data.v1', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.data.v1', testResults, testState);
 };
-TestSuite.data.v2=function(isFirst)
+TestSuite.data.v2=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], expected;
 
@@ -4229,11 +4229,11 @@ TestSuite.data.v2=function(isFirst)
    testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
-   return TestRunner.displayResults('TestSuite.data.v2', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.data.v2', testResults, testState);
 };
-TestSuite.data.v3=function(isFirst)
+TestSuite.data.v3=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[], expected;
 
@@ -4324,5 +4324,5 @@ TestSuite.data.v3=function(isFirst)
    testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.9 Same data'});}
 
-   return TestRunner.displayResults('TestSuite.data.v3', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.data.v3', testResults, testState);
 };

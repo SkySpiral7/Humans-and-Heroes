@@ -1,9 +1,9 @@
 'use strict';
 TestSuite.powerList={};
-TestSuite.powerList.calculateValues=function(isFirst)
+TestSuite.powerList.calculateValues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -13,17 +13,16 @@ TestSuite.powerList.calculateValues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.powerList.calculateValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerList.calculateValues', testResults, testState);
 };
-TestSuite.powerList.load=function(isFirst)
+TestSuite.powerList.load=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var dataToLoad;
     var testResults=[];
 
     Main.setRuleset(3,3);
-    Main.setMockMessenger(Messages.errorCapture);
 
     try{
     dataToLoad = Loader.resetData();
@@ -188,13 +187,12 @@ TestSuite.powerList.load=function(isFirst)
     testResults.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Name only: getSkillUsed'});
     } catch(e){testResults.push({Error: e, Description: 'Name only'});}
 
-    Main.clearMockMessenger();  //restore default behavior
-    return TestRunner.displayResults('TestSuite.powerList.load', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerList.load', testResults, testState);
 };
-TestSuite.powerList.save=function(isFirst)
+TestSuite.powerList.save=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -204,12 +202,12 @@ TestSuite.powerList.save=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.powerList.save', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerList.save', testResults, testState);
 };
-TestSuite.powerList.notifyDependent=function(isFirst)
+TestSuite.powerList.notifyDependent=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -219,5 +217,5 @@ TestSuite.powerList.notifyDependent=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.powerList.notifyDependent', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.powerList.notifyDependent', testResults, testState);
 };

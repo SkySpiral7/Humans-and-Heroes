@@ -1,10 +1,10 @@
 'use strict';
 TestSuite.advantageRow={};
-TestSuite.advantageRow.setAdvantage=function(isFirst)
+TestSuite.advantageRow.setAdvantage=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
     //testResults.push({Expected: Data.Advantage['Benefit'].defaultText, Actual: Main.advantageSection.getRow(0).getText(), Description: actionTaken+': of default text'});
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -15,11 +15,11 @@ TestSuite.advantageRow.setAdvantage=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', testResults, testState);
 };
-TestSuite.advantageRow.setRank=function(isFirst)
+TestSuite.advantageRow.setRank=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var dataToLoad;
     var testResults=[];
@@ -72,11 +72,11 @@ TestSuite.advantageRow.setRank=function(isFirst)
     testResults.push({Expected: 10, Actual: Main.advantageSection.getRow(0).getTotal(), Description: 'Lucky total cost'});
     } catch(e){testResults.push({Error: e, Description: 'Lucky'});}
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setRank', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageRow.setRank', testResults, testState);
 };
-TestSuite.advantageRow.setText=function(isFirst)
+TestSuite.advantageRow.setText=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var dataToLoad;
     var testResults=[];
@@ -108,11 +108,11 @@ TestSuite.advantageRow.setText=function(isFirst)
     testResults.push({Expected: undefined, Actual: Main.advantageSection.getRow(0).getText(), Description: 'Load Lucky: Text not set'});
     } catch(e){testResults.push({Error: e, Description: 'Load Lucky'});}
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setText', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageRow.setText', testResults, testState);
 };
-TestSuite.advantageRow.generate=function(isFirst)
+TestSuite.advantageRow.generate=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -188,12 +188,12 @@ TestSuite.advantageRow.generate=function(isFirst)
     testResults.push({Expected: null, Actual: document.getElementById('advantageRowTotal0'), Description: actionTaken+': Advantage row total was removed'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.advantageRow.generate', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageRow.generate', testResults, testState);
 };
-TestSuite.advantageRow.setValues=function(isFirst)
+TestSuite.advantageRow.setValues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -203,5 +203,5 @@ TestSuite.advantageRow.setValues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.advantageRow.setValues', testResults, testState);
 };
