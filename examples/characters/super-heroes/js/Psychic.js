@@ -50,7 +50,7 @@ var json = {
             {
                "name": "Other Flat Extra",
                "applications": 1,
-               "text": "Flying. 190 MPH if you are rank 2 mass"
+               "text": "Flying. speed rank 6 if you are rank 2 mass"
             }
          ],
          "rank": 8
