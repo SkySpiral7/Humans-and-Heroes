@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.abilityList={};
-TestSuite.abilityList.calculateValues=function(isFirst)
+TestSuite.abilityList.calculateValues=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
    var testResults=[];
 
    testResults.push({Expected: '0', Actual: document.getElementById('Strength').value, Description: 'Strength says 0'});
@@ -29,18 +29,15 @@ TestSuite.abilityList.calculateValues=function(isFirst)
    testResults.push({Expected: true, Actual: Main.abilitySection.getByName('Stamina').isAbsent(), Description: 'absent Stamina v3.10: set'});
    testResults.push({Expected: 30, Actual: Main.abilitySection.getTotal(), Description: 'absent Stamina v3.10: ability section total = 30'});
 
-   return TestRunner.displayResults('TestSuite.abilityList.calculateValues', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.abilityList.calculateValues', testResults, testState);
 };
 TestSuite.abilityObject={};
-TestSuite.abilityObject.set=function(isFirst)
+TestSuite.abilityObject.set=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
    var dataToLoad;
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Stamina', '3');
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: 3, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'absent Stamina ui: reset'});
@@ -80,6 +77,5 @@ TestSuite.abilityObject.set=function(isFirst)
    testResults.push({Expected: true, Actual: Main.abilitySection.getByName('Stamina').isAbsent(), Description: 'absent Stamina v3.10: set'});
    testResults.push({Expected: [], Actual: Messages.list, Description: 'absent Stamina v3.10: no Errors'});
 
-   Main.clearMockMessenger();  //restore default behavior
-   return TestRunner.displayResults('TestSuite.abilityObject.set', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.abilityObject.set', testResults, testState);
 };

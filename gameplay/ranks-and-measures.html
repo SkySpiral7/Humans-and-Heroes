@@ -21,7 +21,6 @@ Every quantifiable trait in the game has a rank assigned to it.</p>
 <p>The game also uses a system of <b>measures</b>, real world values like pounds, seconds, minutes, hours, feet, yards,
 and miles, to name a few. There is a direct relationship between rank and measure, as shown on the <b>Measurements
 Table</b>.</p>
-<h2 id="TOC-USING-THE-MEASUREMENTS-TABLE">Using The Measurements Table</h2>
 <div class="right-panel green-panel">
 <div>Things to Know About Measurements</div>
 <div>
@@ -31,9 +30,9 @@ time rank 16 is everything between 2.3 and 4.6 days! So if you're looking for a 
 the next highest one that is; so 12 hours is a time rank of 13 (more than 6.8 hours, but less than 14), and 6 miles is a
 distance rank of 11 (more than 5.8 miles, but less than 12).</p>
 <p><b>Like abilities, measures can have negative ranks</b>. In the time rank example, the time it takes a Speed 14 hero
-to cover 30 miles is rank -1, or 3 seconds. You can extend the negative side the Measurement Table just like you can the
-positive side, with each lower rank halving the previous measurement. So rank -6 is 0.75 pounds, 1/8th of a second,
-and 5.6 inches, for example.</p>
+to cover 30 miles (distance 13) is rank -1, or 3 seconds. You can extend the negative side the Measurement Table just like you can the
+positive side, with each lower rank halving the previous measurement. So rank -6 is 0.8 pounds, 0.095 seconds,
+and 5.625 inches, for example.</p>
 <p><b>Don't directly add ranks</b>. Putting rank 4 distance together with rank 6 distance is not rank 10 distance! Rank
 4 is a distance measurement of 480 feet. Rank 6 is 1,900 feet. Adding the measurements, you get about 2,400
 feet. 2,400 feet is distance rank 7 but rank 10 distance is 4 miles! If you have different ranks, it is best
@@ -45,33 +44,47 @@ an idea of how things work in the context of the game. Don't focus too heavily o
 for general guidelines.</p>
 </div>
 </div>
+<h2 id="TOC-MASS-WEIGHT-FORCE-AND-STRENGTH">Mass, Weight, Force, and Strength</h2>
+<p>Weight is the amount of force an object applies based on its mass and the amount of gravity it is under. Strength is the ability
+to exert force. Weight and strength ranks are equal to force ranks. Mass can be easily converted to weight (if under
+Earth's gravity then the value is equal) however they are not the same thing since mass is the amount of substance that makes
+up an object (the number of neutrons, protons, and electrons). In order to lift an object you must be able to exert more
+force than the object's weight. Examples involving heavy objects will generally use the object's weight (rather than mass)
+in order to remind everyone that objects may be under different amounts of gravity (particularly in space where nothing has weight).</p>
+<h2 id="TOC-USING-THE-MEASUREMENTS-TABLE">Using The Measurements Table</h2>
 <p>The relationship between rank and measure has a number of uses in this game.</p>
 <p>First, the capabilities of many traits are translated from their rank into a measurement. So the amount of weight a
-Strength rank of 3 can lift is determined by finding the equivalent weight measurement on the table, or 400 lbs.
+Strength rank of 3 can lift is determined by finding the equivalent weight measurement (force rank) on the table, or 400 lbf.
 Similarly, the mass, distance, or time affected by various other traits, especially powers, is determined on the
 Measurements Table.</p>
 <p>Also, because the measurements on the table operate at the same scale (roughly doubling every rank), it is possible
 to use it to quickly figure out relationships between things like mass, distance, speed, and time:</p>
 <span class="generated-class-2">Distance Rank = Time Rank + Speed Rank</span>
 <p>To determine the distance a hero covers in a given amount of time, add the rank of the time to the rank of the hero's
-speed, with normal human ground speed being rank 0. So a normal person can cover 2 miles in an hour (time 9 + speed 0 =
-9, the rank for 2 miles). In fact, with normal human speeds, you can just directly compare the time and distance columns
-of the table! As another example, a hero with Flight 12 can cover 8,000 miles in an hour! That's 12 (speed) + 9 (time) =
-21, the rank for 8,000 miles. The same character can go an amazing 16 miles in just 6 seconds (the time of one action
+speed, with normal human ground speed being rank 0. So a normal person can cover 3 miles in an hour (time 9 + speed 0 =
+9, the rank for 2.9 miles). In fact, with normal human speeds, you can just directly compare the time and distance columns
+of the table! As another example, a hero with Flight 12 can cover 12,000 miles in an hour! That's 12 (speed) + 9 (time) =
+21, the rank for 12,000 miles. The same character can go an amazing 23 miles in just 6 seconds (the time of one action
 round)!</p>
 <span class="generated-class-2">Time Rank = Distance Rank - Speed Rank</span>
 <p>Reversing the previous formula, we can also figure out how long it takes someone at a particular speed to cover a
 given distance, by subtracting the speed rank from the distance rank to get a time rank. So a normal human (speed 0)
-walking 30 miles (distance 13) takes about 16 hours. A hero with Speed 14 covers the same distance in (13 - 14 = -1)
+walking 47 miles (distance 13) takes about 14 hours. A hero with Speed 14 covers the same distance in (13 - 14 = -1)
 just 3 seconds!</p>
-<span class="generated-class-2">Throwing Distance Rank = Strength Rank - Mass Rank</span>
-<p>As another example, the distance rank a hero can throw something equals the hero's Strength rank minus the mass rank
-of the object. So a hero with Strength 10 (able to lift 25 tons), picks up a 10-ton truck (mass rank 8). Since 10 - 8 =
+<span class="generated-class-2">Mass Rank = Force Rank for weight under Earth's gravity</span>
+<p>To make things easy the mass and force ranks match so that any object's weight rank when on Earth is equal to its
+mass rank. Calculating the weight of objects under different amounts of gravity is more complex than it's worth.
+Instead decide how many times stronger the gravity is compared to Earth, if it is twice as strong then add 1 to the weight
+rank etc.</p>
+<span class="generated-class-2">Throwing Distance Rank = Strength Rank (force rank) - Weight Rank (force rank)</span>
+<p>As another example, the distance rank a hero can throw something equals the hero's Strength rank minus the weight rank
+of the object. So a hero with Strength 10 (able to exert 26 tons-force), picks up a 5 ton-force weight truck (force rank 8). Since 10 - 8 =
 2, the hero can then toss the truck rank 2 distance (120 feet)!</p>
 <h2 id="TOC-UNITS-AND-ACCURACY">Units And Accuracy</h2>
 <p>The first table below uses United States customary units and the one below that uses the Metric system. <strong>
 WARNING: the two tables are incompatible.</strong> All positive and negative ranks are based on rank 0 values and usually
-have 2 significant digits. But as described in the side bar above they are not supposed to be accurate. They are designed
+have 2 significant digits. The cubic feet and inches values are based on 10 gallons rather than 1.3 cubic feet.
+But as described in the side bar above they are not supposed to be accurate. They are designed
 to be convenient and to counteract the law of diminishing return.</p>
 <!--TODO: add an advanced rounding thing--
 <div>
@@ -82,11 +95,12 @@ to be convenient and to counteract the law of diminishing return.</p>
 paste in the script here
 </script>
 <!---->
-<h2 class="generated-class-17" id="TOC-MEASUREMENTS-TABLE">Measurements Table (Us Customary Units)</h2>
+<h2 class="generated-class-17" id="TOC-MEASUREMENTS-TABLE">Measurements Table (US Customary Units)</h2>
 <table class="generated-class-1 table-alt-rows">
 <tbody>
 <tr>
 <th class="blue-top-th">Rank</th>
+<th class="blue-top-th">Force</th>
 <th class="blue-top-th">Mass</th>
 <th class="blue-top-th">Time</th>
 <th class="blue-top-th">Distance</th>
@@ -94,6 +108,7 @@ paste in the script here
 </tr>
 <tr>
 <td>Rank - 1</td>
+<td>Force / 2</td>
 <td>Mass / 2</td>
 <td>Time / 2</td>
 <td>Distance / 2</td>
@@ -101,41 +116,47 @@ paste in the script here
 </tr>
 <tr>
 <td>-5</td>
-<td>1.5 lbs.</td>
-<td>1/4 second</td>
+<td>1.6 lbf</td>
+<td>1.6 lb</td>
+<td>0.19 seconds</td>
 <td>11.25 inches</td>
-<td>5 cups (73 in<sup>3</sup>)</td>
+<td>5 cups (72 in<sup>3</sup>)</td>
 </tr>
 <tr>
 <td>-4</td>
-<td>3 lbs.</td>
-<td>1/2 second</td>
+<td>3.1 lbf</td>
+<td>3.1 lb</td>
+<td>0.37 seconds</td>
 <td>1.9 feet</td>
 <td>10 cups</td>
 </tr>
 <tr>
 <td>-3</td>
-<td>6.25 lbs.</td>
-<td>3/4 second</td>
+<td>6.25 lbf</td>
+<td>6.25 lb</td>
+<td>0.75 seconds</td>
 <td>3.75 feet</td>
 <td>1.25 gallons</td>
 </tr>
 <tr>
 <td>-2</td>
-<td>12.5 lbs.</td>
+<td>12.5 lbf</td>
+<td>12.5 lb</td>
 <td>1.5 seconds</td>
 <td>7.5 feet</td>
 <td>2.5 gallons</td>
 </tr>
 <tr>
 <td>-1</td>
-<td>25 lbs.</td>
+<td>25 lbf</td>
+<td>25 lb</td>
 <td>3 seconds</td>
 <td>15 feet</td>
 <td>5 gallons</td>
 </tr>
 <tr>
 <td>0</td>
+<td>50 pounds of force</td>
 <td>50 pounds</td>
 <td>6 seconds</td>
 <td>30 feet</td>
@@ -143,55 +164,63 @@ paste in the script here
 </tr>
 <tr>
 <td>1</td>
-<td>100 lbs.</td>
+<td>100 lbf</td>
+<td>100 lb</td>
 <td>12 seconds</td>
 <td>60 feet</td>
 <td>20 gallons</td>
 </tr>
 <tr>
 <td>2</td>
-<td>200 lbs.</td>
+<td>200 lbf</td>
+<td>200 lb</td>
 <td>24 seconds</td>
 <td>120 feet</td>
 <td>40 gallons</td>
 </tr>
 <tr>
 <td>3</td>
-<td>400 lbs.</td>
+<td>400 lbf</td>
+<td>400 lb</td>
 <td>0.8 minutes</td>
 <td>240 feet</td>
 <td>80 gallons</td>
 </tr>
 <tr>
 <td>4</td>
-<td>800 lbs.</td>
+<td>800 lbf</td>
+<td>800 lb</td>
 <td>1.6 minutes</td>
 <td>480 feet</td>
 <td>160 gallons</td>
 </tr>
 <tr>
 <td>5</td>
-<td>1,600 lbs.</td>
+<td>1,600 lbf</td>
+<td>1,600 lb</td>
 <td>3.2 minutes</td>
 <td>960 feet</td>
 <td>320 gallons</td>
 </tr>
 <tr>
 <td>6</td>
-<td>3,200 lbs.</td>
+<td>3,200 lbf</td>
+<td>3,200 lb</td>
 <td>6.4 minutes</td>
 <td>1,900 feet</td>
 <td>640 gallons</td>
 </tr>
 <tr>
 <td>7</td>
-<td>3.2 tons</td>
+<td>3.2 short tons-force</td>
+<td>3.2 tons (short ton)</td>
 <td>13 minutes</td>
-<td>0.7 miles</td>
+<td>0.73 miles</td>
 <td>1,300 gallons</td>
 </tr>
 <tr>
 <td>8</td>
+<td>6.4 tons-force</td>
 <td>6.4 tons</td>
 <td>26 minutes</td>
 <td>1.5 miles</td>
@@ -199,6 +228,7 @@ paste in the script here
 </tr>
 <tr>
 <td>9</td>
+<td>13 tons-force</td>
 <td>13 tons</td>
 <td>0.85 hours</td>
 <td>2.9 miles</td>
@@ -206,13 +236,15 @@ paste in the script here
 </tr>
 <tr>
 <td>10</td>
+<td>26 tons-force</td>
 <td>26 tons</td>
 <td>1.7 hours</td>
 <td>5.8 miles</td>
-<td>10,000 gallons (1,300 ft<sup>3</sup>)</td>
+<td>10,000 gallons (1,400 ft<sup>3</sup>)</td>
 </tr>
 <tr>
 <td>11</td>
+<td>51 tons-force</td>
 <td>51 tons</td>
 <td>3.4 hours</td>
 <td>12 miles</td>
@@ -220,6 +252,7 @@ paste in the script here
 </tr>
 <tr>
 <td>12</td>
+<td>102 tons-force</td>
 <td>102 tons</td>
 <td>6.8 hours</td>
 <td>23 miles</td>
@@ -227,6 +260,7 @@ paste in the script here
 </tr>
 <tr>
 <td>13</td>
+<td>205 tons-force</td>
 <td>205 tons</td>
 <td>14 hours</td>
 <td>47 miles</td>
@@ -234,6 +268,7 @@ paste in the script here
 </tr>
 <tr>
 <td>14</td>
+<td>410 tons-force</td>
 <td>410 tons</td>
 <td>1.1 days</td>
 <td>93 miles</td>
@@ -241,6 +276,7 @@ paste in the script here
 </tr>
 <tr>
 <td>15</td>
+<td>820 tons-force</td>
 <td>820 tons</td>
 <td>2.3 days</td>
 <td>190 miles</td>
@@ -248,6 +284,7 @@ paste in the script here
 </tr>
 <tr>
 <td>16</td>
+<td>1,600 tons-force</td>
 <td>1,600 tons</td>
 <td>4.6 days</td>
 <td>370 miles</td>
@@ -255,104 +292,119 @@ paste in the script here
 </tr>
 <tr>
 <td>17</td>
-<td>3.3 ktons</td>
+<td>3.3 million tons-force</td>
+<td>3.3 million tons</td>
 <td>1.3 weeks</td>
 <td>740 miles</td>
 <td>1.3 million gallons (170,000 ft<sup>3</sup>)</td>
 </tr>
 <tr>
 <td>18</td>
-<td>6.5 ktons</td>
+<td>6.5 million tons-force</td>
+<td>6.5 million tons</td>
 <td>2.6 weeks</td>
 <td>1,500 miles</td>
 <td>2.6 million gallons</td>
 </tr>
 <tr>
 <td>19</td>
-<td>13 ktons</td>
+<td>13 million tons-force</td>
+<td>13 million tons</td>
 <td>1.2 months</td>
 <td>3,000 miles</td>
 <td>5.25 million gallons</td>
 </tr>
 <tr>
 <td>20</td>
-<td>26 ktons</td>
+<td>26 million tons-force</td>
+<td>26 million tons</td>
 <td>2.4 months</td>
 <td>6,000 miles</td>
 <td>10.5 million gallons</td>
 </tr>
 <tr>
 <td>21</td>
-<td>52 ktons</td>
+<td>52 million tons-force</td>
+<td>52 million tons</td>
 <td>4.8 months</td>
 <td>12,000 miles</td>
 <td>21 million gallons</td>
 </tr>
 <tr>
 <td>22</td>
-<td>105 ktons</td>
+<td>105 million tons-force</td>
+<td>105 million tons</td>
 <td>9.6 months</td>
 <td>24,000 miles</td>
 <td>42 million gallons</td>
 </tr>
 <tr>
 <td>23</td>
-<td>210 ktons</td>
+<td>210 million tons-force</td>
+<td>210 million tons</td>
 <td>1.6 years</td>
 <td>48,000 miles</td>
 <td>84 million gallons</td>
 </tr>
 <tr>
 <td>24</td>
-<td>420 ktons</td>
+<td>420 million tons-force</td>
+<td>420 million tons</td>
 <td>3.2 years</td>
 <td>95,000 miles</td>
 <td>170 million gallons</td>
 </tr>
 <tr>
 <td>25</td>
-<td>840 ktons</td>
+<td>840 million tons-force</td>
+<td>840 million tons</td>
 <td>6.4 years</td>
 <td>190,000 miles</td>
 <td>340 million gallons</td>
 </tr>
 <tr>
 <td>26</td>
-<td>1,700 ktons</td>
+<td>1.7 billion tons-force</td>
+<td>1.7 billion tons</td>
 <td>13 years</td>
 <td>380,000 miles</td>
 <td>670 million gallons</td>
 </tr>
 <tr>
 <td>27</td>
-<td>3,400 ktons</td>
+<td>3.4 billion tons-force</td>
+<td>3.4 billion tons</td>
 <td>26 years</td>
 <td>760,000 miles</td>
-<td>1.3 billion gallons (170,000,000 ft<sup>3</sup>)</td>
+<td>1.3 billion gallons (180 million ft<sup>3</sup>)</td>
 </tr>
 <tr>
 <td>28</td>
-<td>6,700 ktons</td>
+<td>6.7 billion tons-force</td>
+<td>6.7 billion tons</td>
 <td>51 years</td>
 <td>1.5 million miles</td>
 <td>2.7 billion gallons</td>
 </tr>
 <tr>
 <td>29</td>
-<td>13,000 ktons</td>
+<td>13 billion tons-force</td>
+<td>13 billion tons</td>
 <td>102 years</td>
 <td>3 million miles</td>
 <td>5.4 billion gallons</td>
 </tr>
 <tr>
 <td>30</td>
-<td>27,000 ktons</td>
+<td>27 billion tons-force</td>
+<td>27 billion tons</td>
 <td>205 years</td>
 <td>6.1 million miles</td>
-<td>10 billion gallons</td>
+<td>11 billion gallons</td>
 </tr>
 <tr>
 <td>Rank + 1</td>
+<td>Force * 2</td>
 <td>Mass * 2</td>
 <td>Time * 2</td>
 <td>Distance * 2</td>
@@ -366,6 +418,7 @@ paste in the script here
 <tbody>
 <tr>
 <th class="blue-top-th">Rank</th>
+<th class="blue-top-th">Force</th>
 <th class="blue-top-th">Mass</th>
 <th class="blue-top-th">Time</th>
 <th class="blue-top-th">Distance</th>
@@ -373,6 +426,7 @@ paste in the script here
 </tr>
 <tr>
 <td>Rank - 1</td>
+<td>Force / 2</td>
 <td>Mass / 2</td>
 <td>Time / 2</td>
 <td>Distance / 2</td>
@@ -380,27 +434,31 @@ paste in the script here
 </tr>
 <tr>
 <td>-5</td>
+<td>6.25 N</td>
 <td>625 g</td>
-<td>1/4 seconds</td>
+<td>0.19 seconds</td>
 <td>31.25 cm</td>
 <td>1.25 L (1,200 cm<sup>3</sup>)</td>
 </tr>
 <tr>
 <td>-4</td>
+<td>12.5 N</td>
 <td>1.25 kg</td>
-<td>1/2 seconds</td>
+<td>0.37 seconds</td>
 <td>62.5 cm</td>
 <td>2.5 L</td>
 </tr>
 <tr>
 <td>-3</td>
+<td>25 N</td>
 <td>2.5 kg</td>
-<td>3/4 seconds</td>
+<td>0.75 seconds</td>
 <td>125 cm</td>
 <td>5 L</td>
 </tr>
 <tr>
 <td>-2</td>
+<td>50 N</td>
 <td>5 kg</td>
 <td>1.5 seconds</td>
 <td>2.5 m</td>
@@ -408,6 +466,7 @@ paste in the script here
 </tr>
 <tr>
 <td>-1</td>
+<td>100 N</td>
 <td>10 kg</td>
 <td>3 seconds</td>
 <td>5 m</td>
@@ -415,6 +474,7 @@ paste in the script here
 </tr>
 <tr>
 <td>0</td>
+<td>200 Newtons</td>
 <td>20 kilograms</td>
 <td>6 seconds</td>
 <td>10 meters</td>
@@ -422,6 +482,7 @@ paste in the script here
 </tr>
 <tr>
 <td>1</td>
+<td>400 N</td>
 <td>40 kg</td>
 <td>12 seconds</td>
 <td>20 m</td>
@@ -429,6 +490,7 @@ paste in the script here
 </tr>
 <tr>
 <td>2</td>
+<td>800 N</td>
 <td>80 kg</td>
 <td>24 seconds</td>
 <td>40 m</td>
@@ -436,6 +498,7 @@ paste in the script here
 </tr>
 <tr>
 <td>3</td>
+<td>1.6 kN</td>
 <td>160 kg</td>
 <td>0.8 minutes</td>
 <td>80 m</td>
@@ -443,6 +506,7 @@ paste in the script here
 </tr>
 <tr>
 <td>4</td>
+<td>3.2 kN</td>
 <td>320 kg</td>
 <td>1.6 minutes</td>
 <td>160 m</td>
@@ -450,6 +514,7 @@ paste in the script here
 </tr>
 <tr>
 <td>5</td>
+<td>6.4 kN</td>
 <td>640 kg</td>
 <td>3.2 minutes</td>
 <td>320 m</td>
@@ -457,27 +522,31 @@ paste in the script here
 </tr>
 <tr>
 <td>6</td>
-<td>1,300 kg</td>
+<td>13 kN</td>
+<td>1.3 Mg</td>
 <td>6.4 minutes</td>
 <td>640 m</td>
 <td>2.6 kL</td>
 </tr>
 <tr>
 <td>7</td>
-<td>2,600 kg</td>
+<td>26 kN</td>
+<td>2.6 Mg</td>
 <td>13 minutes</td>
 <td>1.3 km</td>
 <td>5.1 kL</td>
 </tr>
 <tr>
 <td>8</td>
-<td>5,100 kg</td>
+<td>51 kN</td>
+<td>5.1 Mg</td>
 <td>26 minutes</td>
 <td>2.6 km</td>
 <td>10.25 kL</td>
 </tr>
 <tr>
 <td>9</td>
+<td>102 kN</td>
 <td>10.2 Mg</td>
 <td>0.85 hours</td>
 <td>5.1 km</td>
@@ -485,6 +554,7 @@ paste in the script here
 </tr>
 <tr>
 <td>10</td>
+<td>205 kN</td>
 <td>20.5 Mg</td>
 <td>1.7 hours</td>
 <td>10.2 km</td>
@@ -492,6 +562,7 @@ paste in the script here
 </tr>
 <tr>
 <td>11</td>
+<td>410 kN</td>
 <td>41 Mg</td>
 <td>3.4 hours</td>
 <td>20.5 km</td>
@@ -499,6 +570,7 @@ paste in the script here
 </tr>
 <tr>
 <td>12</td>
+<td>820 kN</td>
 <td>82 Mg</td>
 <td>6.8 hours</td>
 <td>41 km</td>
@@ -506,6 +578,7 @@ paste in the script here
 </tr>
 <tr>
 <td>13</td>
+<td>1.6 MN</td>
 <td>160 Mg</td>
 <td>14 hours</td>
 <td>82 km</td>
@@ -513,6 +586,7 @@ paste in the script here
 </tr>
 <tr>
 <td>14</td>
+<td>3.3 MN</td>
 <td>330 Mg</td>
 <td>1.1 days</td>
 <td>160 km</td>
@@ -520,6 +594,7 @@ paste in the script here
 </tr>
 <tr>
 <td>15</td>
+<td>6.6 MN</td>
 <td>660 Mg</td>
 <td>2.3 days</td>
 <td>330 km</td>
@@ -527,6 +602,7 @@ paste in the script here
 </tr>
 <tr>
 <td>16</td>
+<td>13 MN</td>
 <td>1.3 Gg</td>
 <td>4.6 days</td>
 <td>660 km</td>
@@ -534,6 +610,7 @@ paste in the script here
 </tr>
 <tr>
 <td>17</td>
+<td>26 MN</td>
 <td>2.6 Gg</td>
 <td>1.3 weeks</td>
 <td>1.3 Mm</td>
@@ -541,6 +618,7 @@ paste in the script here
 </tr>
 <tr>
 <td>18</td>
+<td>52 MN</td>
 <td>5.2 Gg</td>
 <td>2.6 weeks</td>
 <td>2.6 Mm</td>
@@ -548,6 +626,7 @@ paste in the script here
 </tr>
 <tr>
 <td>19</td>
+<td>105 MN</td>
 <td>10.5 Gg</td>
 <td>1.2 months</td>
 <td>5.2 Mm</td>
@@ -555,6 +634,7 @@ paste in the script here
 </tr>
 <tr>
 <td>20</td>
+<td>210 MN</td>
 <td>21 Gg</td>
 <td>2.4 months</td>
 <td>10.5 Mm</td>
@@ -562,6 +642,7 @@ paste in the script here
 </tr>
 <tr>
 <td>21</td>
+<td>420 MN</td>
 <td>42 Gg</td>
 <td>4.8 months</td>
 <td>21 Mm</td>
@@ -569,6 +650,7 @@ paste in the script here
 </tr>
 <tr>
 <td>22</td>
+<td>840 MN</td>
 <td>84 Gg</td>
 <td>9.6 months</td>
 <td>42 Mm</td>
@@ -576,6 +658,7 @@ paste in the script here
 </tr>
 <tr>
 <td>23</td>
+<td>1.7 GN</td>
 <td>170 Gg</td>
 <td>1.6 years</td>
 <td>84 Mm</td>
@@ -583,6 +666,7 @@ paste in the script here
 </tr>
 <tr>
 <td>24</td>
+<td>3.4 GN</td>
 <td>340 Gg</td>
 <td>3.2 years</td>
 <td>170 Mm</td>
@@ -590,6 +674,7 @@ paste in the script here
 </tr>
 <tr>
 <td>25</td>
+<td>6.7 GN</td>
 <td>670 Gg</td>
 <td>6.4 years</td>
 <td>340 Mm</td>
@@ -597,6 +682,7 @@ paste in the script here
 </tr>
 <tr>
 <td>26</td>
+<td>13 GN</td>
 <td>1.3 Tg</td>
 <td>13 years</td>
 <td>670 Mm</td>
@@ -604,6 +690,7 @@ paste in the script here
 </tr>
 <tr>
 <td>27</td>
+<td>27 GN</td>
 <td>2.7 Tg</td>
 <td>26 years</td>
 <td>1.3 Gm</td>
@@ -611,6 +698,7 @@ paste in the script here
 </tr>
 <tr>
 <td>28</td>
+<td>54 GN</td>
 <td>5.4 Tg</td>
 <td>51 years</td>
 <td>2.7 Gm</td>
@@ -618,6 +706,7 @@ paste in the script here
 </tr>
 <tr>
 <td>29</td>
+<td>107 GN</td>
 <td>10.7 Tg</td>
 <td>102 years</td>
 <td>5.4 Gm</td>
@@ -625,6 +714,7 @@ paste in the script here
 </tr>
 <tr>
 <td>30</td>
+<td>210 GN</td>
 <td>21 Tg</td>
 <td>205 years</td>
 <td>10.7 Gm</td>
@@ -632,6 +722,7 @@ paste in the script here
 </tr>
 <tr>
 <td>Rank + 1</td>
+<td>Force * 2</td>
 <td>Mass * 2</td>
 <td>Time * 2</td>
 <td>Distance * 2</td>

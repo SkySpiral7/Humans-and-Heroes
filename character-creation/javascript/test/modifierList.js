@@ -1,9 +1,9 @@
 'use strict';
 TestSuite.modifierList={};
-TestSuite.modifierList.calculateGrandTotal=function(isFirst)
+TestSuite.modifierList.calculateGrandTotal=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -13,12 +13,12 @@ TestSuite.modifierList.calculateGrandTotal=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.calculateGrandTotal', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.calculateGrandTotal', testResults, testState);
 };
-TestSuite.modifierList.calculateValues=function(isFirst)
+TestSuite.modifierList.calculateValues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -28,12 +28,12 @@ TestSuite.modifierList.calculateValues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.calculateValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.calculateValues', testResults, testState);
 };
-TestSuite.modifierList.createByNameRank=function(isFirst)
+TestSuite.modifierList.createByNameRank=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -43,12 +43,12 @@ TestSuite.modifierList.createByNameRank=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.createByNameRank', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.createByNameRank', testResults, testState);
 };
-TestSuite.modifierList.getUniqueName=function(isFirst)
+TestSuite.modifierList.getUniqueName=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -58,16 +58,14 @@ TestSuite.modifierList.getUniqueName=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.getUniqueName', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.getUniqueName', testResults, testState);
 };
-TestSuite.modifierList.isNonPersonalModifierPresent=function(isFirst)
+TestSuite.modifierList.isNonPersonalModifierPresent=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var dataToLoad;
    var testResults=[];
-
-   Main.setMockMessenger(Messages.errorCapture);
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Close","duration":"Sustained",
@@ -88,13 +86,12 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: [], Actual: Messages.list, Description: 'true: Attack'});
 
-   Main.clearMockMessenger();  //restore default behavior
-   return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', testResults, testState);
 };
-TestSuite.modifierList.load=function(isFirst)
+TestSuite.modifierList.load=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -104,12 +101,12 @@ TestSuite.modifierList.load=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.load', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.load', testResults, testState);
 };
-TestSuite.modifierList.sanitizeRows=function(isFirst)
+TestSuite.modifierList.sanitizeRows=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -119,11 +116,11 @@ TestSuite.modifierList.sanitizeRows=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.sanitizeRows', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.sanitizeRows', testResults, testState);
 };
-TestSuite.modifierList.sortOrder=function(isFirst)
+TestSuite.modifierList.sortOrder=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
 
@@ -203,5 +200,5 @@ TestSuite.modifierList.sortOrder=function(isFirst)
     testResults.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Selective non-span retains order: Selective'});
     } catch(e){testResults.push({Error: e, Description: 'Selective non-span retains order'});}
 
-    return TestRunner.displayResults('TestSuite.modifierList.sortOrder', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.modifierList.sortOrder', testResults, testState);
 };

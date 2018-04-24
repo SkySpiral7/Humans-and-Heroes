@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.main={};
-TestSuite.main.changeRuleset=function(isFirst)
+TestSuite.main.changeRuleset=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var rulesetElement = document.getElementById('ruleset');
@@ -131,12 +131,12 @@ TestSuite.main.changeRuleset=function(isFirst)
     testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Maintains document on version change'});
     } catch(e){testResults.push({Error: e, Description: 'Maintains document on version change'});}
 
-    return TestRunner.displayResults('TestSuite.main.changeRuleset', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.changeRuleset', testResults, testState);
 };
-TestSuite.main.changeTranscendence=function(isFirst)
+TestSuite.main.changeTranscendence=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -146,12 +146,12 @@ TestSuite.main.changeTranscendence=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.changeTranscendence', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.changeTranscendence', testResults, testState);
 };
-TestSuite.main.clear=function(isFirst)
+TestSuite.main.clear=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -161,11 +161,11 @@ TestSuite.main.clear=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.clear', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.clear', testResults, testState);
 };
-TestSuite.main.loadFile=function(isFirst)
+TestSuite.main.loadFile=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -177,11 +177,11 @@ TestSuite.main.loadFile=function(isFirst)
 
     //this test is complete since I can't set the file chooser to anything else
 
-    return TestRunner.displayResults('TestSuite.main.loadFile', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.loadFile', testResults, testState);
 };
-TestSuite.main.loadImageFromFile=function(isFirst)
+TestSuite.main.loadImageFromFile=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     try{
@@ -194,12 +194,12 @@ TestSuite.main.loadImageFromFile=function(isFirst)
 
     //this test is complete since I can't set the file chooser to anything else
 
-    return TestRunner.displayResults('TestSuite.main.loadImageFromFile', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.loadImageFromFile', testResults, testState);
 };
-TestSuite.main.getProtectionTotal=function(isFirst)
+TestSuite.main.getProtectionTotal=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -209,15 +209,15 @@ TestSuite.main.getProtectionTotal=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', testResults, testState);
 
     //be sure to call Main.setRuleset(1, 1); inside tests and:
-    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), testResults, isFirst);
+    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), testResults, testState);
 };
-TestSuite.main.update=function(isFirst)
+TestSuite.main.update=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -227,11 +227,11 @@ TestSuite.main.update=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.update', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.update', testResults, testState);
 };
-TestSuite.main.updateInitiative=function(isFirst)
+TestSuite.main.updateInitiative=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var initiativeElement = document.getElementById('initiative');
@@ -275,12 +275,12 @@ TestSuite.main.updateInitiative=function(isFirst)
     testResults.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0 Improved Initiative 4'});
     } catch(e){testResults.push({Error: e, Description: '3.0 Improved Initiative 4'});}
 
-    return TestRunner.displayResults('TestSuite.main.updateInitiative', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.updateInitiative', testResults, testState);
 };
-TestSuite.main.updateOffense=function(isFirst)
+TestSuite.main.updateOffense=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -290,12 +290,12 @@ TestSuite.main.updateOffense=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.updateOffense', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.updateOffense', testResults, testState);
 };
-TestSuite.main.calculatePowerLevelLimitations=function(isFirst)
+TestSuite.main.calculatePowerLevelLimitations=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -305,12 +305,12 @@ TestSuite.main.calculatePowerLevelLimitations=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', testResults, testState);
 };
-TestSuite.main.calculateTotal=function(isFirst)
+TestSuite.main.calculateTotal=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -320,95 +320,87 @@ TestSuite.main.calculateTotal=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.calculateTotal', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.calculateTotal', testResults, testState);
 };
-TestSuite.main.convertDocument=function(isFirst)
+TestSuite.main.convertDocument=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
-    var testResults=[];
-    var actionTaken, input, expected;
+   var testResults=[], dataToLoad, expected;
 
-    Main.clear(); Main.setRuleset(2, 7);
-    SelectUtil.setText('save-type', 'JSON');
-    const blankDoc = JSON.stringify(Main.save());
-   function useLoadButton(input)
-   {
-       document.getElementById('code-box').value = input;
-       document.getElementById('load-text-button').onclick();
-   }
+   var blankDoc = JSON.stringify(Main.save());
    function useSaveButton()
    {
-       document.getElementById('save-text-button').onclick();
-       return document.getElementById('code-box').value;
+      document.getElementById('save-text-button').onclick();
+      return document.getElementById('code-box').value;
    }
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    input.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-       "Modifiers":[{"name":"Selective"}],"rank":3}];
-    actionTaken = 'Simple';
-    useLoadButton(JSON.stringify(input));
-    expected = JSON.parse(blankDoc);
-    expected.Powers = [{"effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-       "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[{"name":"Selective"}],"rank":3}];
-    testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: actionTaken+': Convert a Power'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   dataToLoad.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+      "Modifiers":[{"name":"Selective"}],"rank":3}];
+   Loader.sendData(dataToLoad);
+   expected = JSON.parse(blankDoc);
+   expected.Powers = [{"effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+      "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[{"name":"Selective"}],"rank":3}];
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert a Power: errors'});
+   testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert a Power: doc'});
+   } catch(e){testResults.push({Error: e, Description: 'Convert a Power'});}
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    useLoadButton(JSON.stringify(input));
-    testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert old nothing'});
-    useLoadButton(blankDoc);
-    testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert new nothing'});
-    } catch(e){testResults.push({Error: e, Description: 'Convert nothing'});}
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert old nothing: errors'});
+   testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert old nothing: doc'});
+   dataToLoad = Loader.resetData();
+   Loader.sendData(dataToLoad);
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert new nothing: errors'});
+   testResults.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert new nothing: doc'});
+   } catch(e){testResults.push({Error: e, Description: 'Convert nothing'});}
 
-    try{
-    input = JSON.parse(blankDoc);
-    input.version = 1;
-    input.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":3},
-       {"name":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":2}];
-    input.Equipment = [{"name":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1},
-       {"name":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1}];
-    input.Advantages = [{"name":"Equipment","rank":1}];
-    actionTaken = '2 Each';
-    useLoadButton(JSON.stringify(input));
-    expected = JSON.parse(blankDoc);
+   try{
+   dataToLoad = Loader.resetData();
+   dataToLoad.version = 1;
+   dataToLoad.Powers = [{"name":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":3},
+      {"name":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":2}];
+   dataToLoad.Equipment = [{"name":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1},
+      {"name":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant","Modifiers":[],"rank":1}];
+   dataToLoad.Advantages = [{"name":"Equipment","rank":1}];
+   Loader.sendData(dataToLoad);
+   expected = JSON.parse(blankDoc);
    expected.Powers = [
       {
-          "effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[],"rank":3
+         "effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[],"rank":3
       },
       {
-          "effect":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Power 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":2
+         "effect":"Damage","text":"Damage 2","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Power 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":2
       }
    ];
    expected.Equipment = [
       {
-          "effect":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Equipment 1 Affliction","skill":"Skill used for attack","Modifiers":[],"rank":1
+         "effect":"Affliction","text":"a","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Equipment 1 Affliction","skill":"Skill used for attack","Modifiers":[],"rank":1
       },
       {
-          "effect":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant",
-          "name":"Equipment 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":1
+         "effect":"Damage","text":"b","action":"Standard","range":"Close","duration":"Instant",
+         "name":"Equipment 2 Damage","skill":"Skill used for attack","Modifiers":[],"rank":1
       }
    ];
-    expected.Advantages = [{"name":"Equipment","rank":1}];
-    testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: actionTaken+': Convert 2 Powers and 2 equipments'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   expected.Advantages = [{"name":"Equipment","rank":1}];
+   testResults.push({Expected: [], Actual: Messages.list, Description: 'Convert 2 Powers and 2 equipments: errors'});
+   testResults.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert 2 Powers and 2 equipments: doc'});
+   } catch(e){testResults.push({Error: e, Description: '2 each'});}
 
-    //minor clean up:
-    document.getElementById('code-box').value = '';
-
-    return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.main.convertDocument', testResults, testState);
 };
-TestSuite.main.determineCompatibilityIssues=function(isFirst)
+TestSuite.main.determineCompatibilityIssues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -418,18 +410,14 @@ TestSuite.main.determineCompatibilityIssues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.determineCompatibilityIssues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.determineCompatibilityIssues', testResults, testState);
 };
-TestSuite.main.load=function(isFirst)
+TestSuite.main.load=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
-   var testResults=[];
-   var dataToLoad;
+   var testResults=[], dataToLoad;
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
 
@@ -438,7 +426,7 @@ TestSuite.main.load=function(isFirst)
    Loader.sendData(dataToLoad);
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true when loading'});
 
-   Main.clear();
+   Main.clear();  //I could Loader.resetData() but I don't need to save
    Messages.list = [];
    TestRunner.changeValue('Stamina', '--');
    testResults.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading reset to false'});
@@ -450,18 +438,14 @@ TestSuite.main.load=function(isFirst)
 
    //ADD TESTS. currently only tests amLoading
 
-   Main.clearMockMessenger();  //restore default behavior
-   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, testState);
 };
-TestSuite.main.loadFromString=function(isFirst)
+TestSuite.main.loadFromString=function(testState={})
 {
-   TestRunner.clearResults(isFirst);
+   TestRunner.clearResults(testState);
 
    var testResults=[];
 
-   Main.setMockMessenger(Messages.errorCapture);
-
-   Messages.list = [];
    TestRunner.changeValue('Strength', '2');
    Main.loadFromString('  \n\t');
    testResults.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});
@@ -495,13 +479,12 @@ TestSuite.main.loadFromString=function(isFirst)
       testResults.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.list, Description: 'JSON error code'});
    }
 
-    Main.clearMockMessenger();  //restore default behavior
-   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, isFirst);
+   return TestRunner.displayResults('TestSuite.main.loadFromString', testResults, testState);
 };
-TestSuite.main.makeOffenseRow=function(isFirst)
+TestSuite.main.makeOffenseRow=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -511,5 +494,5 @@ TestSuite.main.makeOffenseRow=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.main.makeOffenseRow', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.main.makeOffenseRow', testResults, testState);
 };

@@ -1,9 +1,9 @@
 'use strict';
 TestSuite.SelectUtil={};
-TestSuite.SelectUtil.isSelect=function(isFirst)
+TestSuite.SelectUtil.isSelect=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -13,12 +13,12 @@ TestSuite.SelectUtil.isSelect=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.SelectUtil.isSelect', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.SelectUtil.isSelect', testResults, testState);
 };
-TestSuite.SelectUtil.getTextById=function(isFirst)
+TestSuite.SelectUtil.getTextById=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -28,12 +28,12 @@ TestSuite.SelectUtil.getTextById=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.SelectUtil.getTextById', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.SelectUtil.getTextById', testResults, testState);
 };
-TestSuite.SelectUtil.containsText=function(isFirst)
+TestSuite.SelectUtil.containsText=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -43,12 +43,12 @@ TestSuite.SelectUtil.containsText=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.SelectUtil.containsText', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.SelectUtil.containsText', testResults, testState);
 };
-TestSuite.SelectUtil.setText=function(isFirst)
+TestSuite.SelectUtil.setText=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -58,12 +58,12 @@ TestSuite.SelectUtil.setText=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.SelectUtil.setText', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.SelectUtil.setText', testResults, testState);
 };
-TestSuite.SelectUtil.changeText=function(isFirst)
+TestSuite.SelectUtil.changeText=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -73,5 +73,5 @@ TestSuite.SelectUtil.changeText=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.SelectUtil.changeText', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.SelectUtil.changeText', testResults, testState);
 };

@@ -1,5 +1,19 @@
 'use strict';
-TestConfig.betweenEach=function(){Main.clear(); Messages.list = []; Main.setRuleset(3, latestMinorRuleset);};
+TestConfig.beforeFirst=function()
+{
+   TestConfig.betweenEach();
+   Main.setMockMessenger(Messages.errorCapture);
+};
+TestConfig.betweenEach=function()
+{
+   Main.clear();
+   Messages.list = [];
+   Main.setRuleset(3, latestMinorRuleset);
+};
+TestConfig.afterLast=function()
+{
+   Main.clearMockMessenger();
+};
 //every test needs to clear out for the other test to start clean
 //even if slow do not disable Main generation because an error might occur (due to undefined values) in which case I need to see how Main was
 
@@ -44,8 +58,6 @@ function confirmAllXmls()
           Main.saveToTextArea();
           var newContents=document.getElementById('code-box').value;
           testResults.push({Expected: originalContents, Actual: newContents, Description: actionTaken+allFolders[folderIndex]+allFiles[folderIndex][fileIndex]});
-          //document.getElementById('code-box').value=originalContents;
-          //document.getElementById('code-box').value+=stringDiffDisplay(originalContents, newContents);
           //break;
       }
        //break;
@@ -80,128 +92,163 @@ http://www.slant.co/topics/1686/~javascript-ides-and-editors
 //TODO: make a test for loading quirks (per section) to test for things that onChange wouldn't allow
     //for example: loading action is based on duration which is based on range which is based on duration... range is also based on modifiers
     //try: load effect name (and other power stuff), power rank, then all modifiers, then range, then duration, then action
-
-TestSuite.test={};
-TestSuite.test.unstableBubbleSort=function(isFirst)
-{
-   TestRunner.clearResults(isFirst);
-
-   var testResults=[];
-
-   var input = ['cat', 'human', 'dog'];
-   function byStringLength(a,b) {
-      if(a.length > b.length) return 1;
-      if(a.length < b.length) return -1;
-      return 0;
-   }
-   try {
-   unstableBubbleSort(input, byStringLength);
-
-   var expected = ['dog', 'cat', 'human'];
-   testResults.push({Expected: expected, Actual: input, Description: 'Does sort but unstable'});
-   } catch(e){testResults.push({Error: e, Description: 'unstableBubbleSort'});}
-
-   var input = ['cat', 'human', 'dog'];
-   function noOpCompare(a,b) {
-      return 0;
-   }
-   try {
-   unstableBubbleSort(input, noOpCompare);
-
-   var expected = ['human', 'dog', 'cat'];
-   testResults.push({Expected: expected, Actual: input, Description: 'Unstable with no op'});
-   } catch(e){testResults.push({Error: e, Description: 'unstableBubbleSort'});}
-
-   return TestRunner.displayResults('TestSuite.test.unstableBubbleSort', testResults, isFirst);
-};
-TestSuite.test.readXMLAsString=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.readXMLAsString', testResults, isFirst);
-};
-TestSuite.test.stringDiffIndex=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.stringDiffIndex', testResults, isFirst);
-};
-TestSuite.test.stringDiffDisplay=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.stringDiffDisplay', testResults, isFirst);
-};
-TestSuite.test.dataInfo=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.dataInfo', testResults, isFirst);
-};
-TestSuite.test.allDataInfo=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.allDataInfo', testResults, isFirst);
-};
-TestSuite.test.allDataInfoToCodeBox=function(isFirst)
-{
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
-
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.test.allDataInfoToCodeBox', testResults, isFirst);
-};
 //TODO: make all tests (search for ADD TESTS)
+
+/**This function was made to test the difference and reliability of isNaN and isFinite. It is not included in TestSuite so that it isn't auto ran.
+ Unlike confirmAllXmls this test suite is not in any way related to the project which is why is isn't hidden in TestSuite.*/
+function unlinkedNanTest()
+{
+   var testResults=[], actionTaken, testDescription;
+   var trueTests=['NaN', NaN, 'Text', 'x123', '#FF00FF', 'null', null, 'undefined', undefined, '', '     \t\n  ', '1Text', 'Text1', '12,345', '1.2.3', '-', '+', true, false, new Date(2009,1,1), {}, function(){}, [], '+-1', '++1', '1+', '1e', 'e', 'e1'];
+   var falseTests=['123', '+123', 123, new Number(123), '0x123', '+0x123', '-0x123', '0', '-1.2', '.12', '+.12', '-1.2e-3', '1.2e+3', '+1.2e3', Number.MAX_VALUE, Number.MAX_SAFE_INTEGER, Number.MIN_VALUE, Number.MIN_SAFE_INTEGER, '09'];
+   var testFunctions=[isNaN, isNotFinite, numberConstructorNaN];
+   function numberConstructorNaN(num){return (Number(num).toString() === 'NaN');}  //this works
+   function isNotFinite(num){return (!isFinite(num));}
+
+   TestRunner.clearResults();
+
+   for (var functionIndex=0; functionIndex < testFunctions.length; functionIndex++)
+   {
+      actionTaken='NaN tests';
+      for (var inputIndex=0; inputIndex < trueTests.length; inputIndex++)
+      {
+         testDescription=testFunctions[functionIndex].name+'(';
+         if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
+         else testDescription+=trueTests[inputIndex];
+         testDescription+=')';
+         testResults.push({Expected: true, Actual: testFunctions[functionIndex](trueTests[inputIndex]), Description: actionTaken+testDescription});
+      }
+      actionTaken='Number tests';
+      for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
+      {
+         testDescription=testFunctions[functionIndex].name+'(';
+         if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
+         else testDescription+=falseTests[inputIndex];
+         testDescription+=')';
+         testResults.push({Expected: false, Actual: testFunctions[functionIndex](falseTests[inputIndex]), Description: actionTaken+testDescription});
+      }
+   }
+
+   actionTaken='Infinity tests';
+   testResults.push({Expected: false, Actual: isNaN('Infinity'), Description: actionTaken+': isNaN("Infinity")'});
+   testResults.push({Expected: false, Actual: isNaN(Infinity), Description: actionTaken+': isNaN(Infinity)'});
+   testResults.push({Expected: false, Actual: isNaN('-Infinity'), Description: actionTaken+': isNaN("-Infinity")'});
+   testResults.push({Expected: false, Actual: isNaN(-Infinity), Description: actionTaken+': isNaN(-Infinity)'});
+
+   testResults.push({Expected: true, Actual: !isFinite('Infinity'), Description: actionTaken+': !isFinite("Infinity")'});
+   testResults.push({Expected: true, Actual: !isFinite(Infinity), Description: actionTaken+': !isFinite(Infinity)'});
+   testResults.push({Expected: true, Actual: !isFinite('-Infinity'), Description: actionTaken+': !isFinite("-Infinity")'});
+   testResults.push({Expected: true, Actual: !isFinite(-Infinity), Description: actionTaken+': !isFinite(-Infinity)'});
+
+   testResults.push({Expected: true, Actual: !numberConstructorNaN('Infinity'), Description: actionTaken+': !numberConstructorNaN("Infinity")'});
+   testResults.push({Expected: true, Actual: !numberConstructorNaN(Infinity), Description: actionTaken+': !numberConstructorNaN(Infinity)'});
+   testResults.push({Expected: true, Actual: !numberConstructorNaN('-Infinity'), Description: actionTaken+': !numberConstructorNaN("-Infinity")'});
+   testResults.push({Expected: true, Actual: !numberConstructorNaN(-Infinity), Description: actionTaken+': !numberConstructorNaN(-Infinity)'});
+
+   actionTaken='No Parameter tests';
+   testResults.push({Expected: true, Actual: isNaN(), Description: actionTaken+': isNaN()'});
+   testResults.push({Expected: true, Actual: !isFinite(), Description: actionTaken+': !isFinite()'});
+   testResults.push({Expected: true, Actual: !numberConstructorNaN(), Description: actionTaken+': !numberConstructorNaN()'});
+
+   actionTaken='Comparing NaN tests';
+   for (var inputIndex=0; inputIndex < trueTests.length; inputIndex++)
+   {
+      testDescription='isNaN(';
+      if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
+      else testDescription+=trueTests[inputIndex];
+      testDescription+=') vs isNotFinite';
+      testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: isNotFinite(trueTests[inputIndex]), Description: actionTaken+testDescription});
+   }
+   actionTaken='Comparing Number tests';
+   for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
+   {
+      testDescription='isNaN(';
+      if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
+      else testDescription+=falseTests[inputIndex];
+      testDescription+=') vs isNotFinite';
+      testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: isNotFinite(falseTests[inputIndex]), Description: actionTaken+testDescription});
+   }
+
+   actionTaken='Comparing NaN tests';
+   for (var inputIndex=0; inputIndex < trueTests.length; inputIndex++)
+   {
+      testDescription='isNaN(';
+      if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
+      else testDescription+=trueTests[inputIndex];
+      testDescription+=') vs numberConstructorNaN';
+      testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: numberConstructorNaN(trueTests[inputIndex]), Description: actionTaken+testDescription});
+   }
+   actionTaken='Comparing Number tests';
+   for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
+   {
+      testDescription='isNaN(';
+      if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
+      else testDescription+=falseTests[inputIndex];
+      testDescription+=') vs numberConstructorNaN';
+      testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: numberConstructorNaN(falseTests[inputIndex]), Description: actionTaken+testDescription});
+   }
+
+   return TestRunner.displayResults('unlinkedNanTest', testResults, true);  //grand total is pointless but this will scroll me to the bottom
+}
+/*
+Primitives and objects get the same results. The special values:
+NaN (also with optional leading +-), undefined, Infinity (also with optional leading +-)
+all get the same results as is or with the string version. Except null
+
+The following are NaN:
+NaN (duh), 'Text', 'x123', '#FF00FF', 'null', undefined (and obviously passing in nothing is the same),
+'1Text', 'Text1', '12,345', '1.2.3'
+
+The following are numbers:
+Infinity, -Infinity, '123', 123 (obviously anything that typeof() === 'number' or is a Number object), '0x123', null
+
+Problem: isNaN(null) returns false (meaning isNaN thinks null is a number)
+
+Failed tests:
+isNaN(null), empty string, white space only string, primitive booleans, Date object, [], '+0x123'
+
+so here's the code for isFinite:
+function isFinite(num)
+{
+    if(isNaN(num)) return false;
+    num=Math.abs(Number(num));
+    if(num === Infinity) return false;
+    return true;
+}
+
+WTF JS moments:
+isNaN(null) === false
+numberConstructorNaN() === true but numberConstructorNaN(undefined) === false
+    which is only possible if it checks the number of parameters even though it only uses the first
+NaN !== NaN
+    there used to be a reason for this. javascript being old obeyed it by convention.
+    currently the rational behind it is obsolete and some modern languages have fixed this logical contradiction
+(new Number(1)) !== 1 and (new Number(1)) !== (new Number(1))
+    They are the same type and value
+    This makes sense in Java where == compares if they are pointing to the same object but that's not what === does in js
+    unless they are both objects in which case that's exactly how they behave (=== and == are the same in such cases)
+    ({}) !== ({}) so comparing objects is never possible yet Object.prototype.equals (or even Object.equals) doesn't exist
+(new Number(1)) < (new Number(2))
+    so it probably just calls valueOf but then why doesn't it do that for equality?
+    but 'as' < 'asd' compares by ascii despite valueOf returning the same thing as toString (both return itself)
+typeof(new Number(1)) !== typeof(Number(1))
+    returns: 'object' and 'number'
+typeof(new String(1)) === 'object' but typeof('1') === 'string'
+    Why is there a primitive string? That doesn't even make sense. The reason for it is so that strings can be compared with any numeric comparison
+    here's something confusing: since there is no character class all strings are arrays of strings, with string length 1 containing only itself
+typeof(/a/) === 'object' despite being first class it has no primitive value and is considered an object
+    the same is true for functions partially: typeof(function(){}) === 'function' but also has a wrapper object and primitive function compares like objects
+function outerFun()
+{
+   console.log('outerFun '+(this === window || this === undefined));  //prints false
+   innerFun();
+   function innerFun()
+   {
+       console.log('innerFun '+(this === window || this === undefined));  //prints true
+   }
+}; new outerFun();
+    innerFun is a private function that only exists within outerFun and can only be called from within outerFun.
+    outerFun is constructed and exists as an object yet innerFun has global scope?
+    global: { outerFun:{ innerFun:{} } } in definition and scope, yet this pointer does: global: { outerFun:{}, innerFun:{} }
+    this is the reason why I made all my functions public
+*/

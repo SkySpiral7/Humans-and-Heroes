@@ -1,8 +1,8 @@
 'use strict';
 TestSuite.skillRow={};
-TestSuite.skillRow.setSkill=function(isFirst)
+TestSuite.skillRow.setSkill=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -53,11 +53,11 @@ TestSuite.skillRow.setSkill=function(isFirst)
     testResults.push({Expected: true, Actual: firstRow.isBlank(), Description: actionTaken+': First row is now blank'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.skillRow.setSkill', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.skillRow.setSkill', testResults, testState);
 };
-TestSuite.skillRow.generate=function(isFirst)
+TestSuite.skillRow.generate=function(testState={})
 {
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -92,12 +92,12 @@ TestSuite.skillRow.generate=function(isFirst)
     testResults.push({Expected: null, Actual: document.getElementById('skill bonus 0'), Description: actionTaken+': Bonus doesn\'t exist'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.skillRow.generate', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.skillRow.generate', testResults, testState);
 };
-TestSuite.skillRow.setValues=function(isFirst)
+TestSuite.skillRow.setValues=function(testState={})
 {
     return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(isFirst);
+    TestRunner.clearResults(testState);
 
     var testResults=[];
     var actionTaken='Initial';
@@ -107,5 +107,5 @@ TestSuite.skillRow.setValues=function(isFirst)
     testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
     } catch(e){testResults.push({Error: e, Description: actionTaken});}
 
-    return TestRunner.displayResults('TestSuite.skillRow.setValues', testResults, isFirst);
+    return TestRunner.displayResults('TestSuite.skillRow.setValues', testResults, testState);
 };

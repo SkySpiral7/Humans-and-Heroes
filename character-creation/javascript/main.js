@@ -7,12 +7,14 @@ var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantage
 //the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
-   var runnerPath = '../../../Miscellaneous/src/main/javascript/testRunner';  //only works locally
+   var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
+   var runnerPath = miscRepo + 'testRunner';
+   var unstableSortPath = miscRepo + 'unstableSort';
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
       'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
       'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
-      'test/testTools']);
+      'test/testTools', unstableSortPath]);
 }
 for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
 function includeJsFile(jsName)
@@ -33,7 +35,7 @@ function MainObject()
    //private variable section:
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
@@ -94,22 +96,30 @@ function MainObject()
    };
 
    //public functions section
-   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The code-box and file selectors are not touched.*/
+   /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
-       document.getElementById('hero-name').value = 'Hero Name';
-       document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
-       this.abilitySection.clear();
-       document.getElementById('img-file-path').value='';
-       this.loadImageFromPath();  //after setting the images to blank this will reset the image
-       this.powerSection.clear();
-       this.equipmentSection.clear();
-       this.advantageSection.clear();
-       this.skillSection.clear();
-       this.defenseSection.clear();
-       document.getElementById('bio-box').value = 'Complications, background and other information';
-       //do not change ruleset and do not change the code-box (just in case the user needed that)
-       //I also decided not to touch either file chooser so that the user can easily select from same folder again
+      document.getElementById('hero-name').value = 'Hero Name';
+      document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
+      this.abilitySection.clear();
+      document.getElementById('img-file-path').value='';
+      this.loadImageFromPath();  //after setting the image path to blank this will reset the image
+      this.powerSection.clear();
+      this.equipmentSection.clear();
+      this.advantageSection.clear();
+      this.skillSection.clear();
+      this.defenseSection.clear();
+      document.getElementById('bio-box').value = 'Complications, background and other information';
+      document.getElementById('code-box').value = '';
+      //do not change ruleset
+      //I also decided not to touch either file chooser so that the user can easily select from same folder again
+      this.update();
+   };
+   /**Used to save the character in a mostly human readable plain text.*/
+   this.exportToMarkdown=function()
+   {
+      //TODO: store all UI values after calc so that they can be exported or at least defense, skills, offense
+      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, characterPointsSpent);
    };
    /**Loads the file's data*/
    this.loadFile=function()
@@ -187,14 +197,13 @@ function MainObject()
    this.update=function()
    {
        this.calculateTotal();
-       var powerLevel=0;
 
        //start by looking at character points which can't be negative
        powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
       if(this.advantageSection.isUsingPettyRules())
-          powerLevel = this.calculatePowerLevelLimitations(powerLevel);
+          this.calculatePowerLevelLimitations();
 
        document.getElementById('power-level').innerHTML = powerLevel;
        document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
@@ -285,7 +294,7 @@ function MainObject()
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
-   this.calculatePowerLevelLimitations=function(powerLevel)
+   this.calculatePowerLevelLimitations=function()
    {
        var compareTo;
        //Skills and Abilities
@@ -323,8 +332,6 @@ function MainObject()
        compareTo+= this.defenseSection.getByName('Will').getTotalBonus();
        compareTo/=2;
        if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
-
-       return powerLevel;
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this.calculateTotal=function()
