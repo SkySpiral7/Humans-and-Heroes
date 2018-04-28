@@ -542,6 +542,7 @@ function sideBarCreation(entry, depth)
    output+='<li';
    if (isParent || 0 === depth)
    {
+      //TODO: get CSS to work
       output+=' class="';
       if(0 === depth) output+='topLevel';
       if(navigationJson[0] === entry) output+=' nav-first';
@@ -570,6 +571,7 @@ function sideBarCreation(entry, depth)
    if (isParent)
    {
       ++expandIndex;
+      //div is supported. use that when possible
       output+='<button data-toggle="collapse" data-target="#expand' + expandIndex + '" onclick="changeArrow(\'arrow' + expandIndex + '\');">';
       output+='<img src="' + absolutePrefix + 'images/arrow-';
       if(shouldShow) output+='down';
