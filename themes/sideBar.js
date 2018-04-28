@@ -616,7 +616,7 @@ function toggleMe(elementId)
 function search()
 {
    var searchText = document.getElementById('searchBar').value;
-   var url = 'https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fskyspiral7.github.io%20' + encodeURIComponent(searchText);
+   var url = 'https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fskyspiral7.github.io%2FHumans-and-Heroes%20' + encodeURIComponent(searchText);
    window.location.href = url;
    return false;
 }
