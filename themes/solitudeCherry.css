@@ -165,7 +165,7 @@ U+25B9 (White right-pointing small triangle ▹)
 U+25BF (White down-pointing small triangle ▿)
 */
 
-.sites-sidebar-nav .closed .expander {
+.sites-sidebar-nav .expander.collapsed {
    background: url("../images/arrow-left.gif") no-repeat;
 }
 

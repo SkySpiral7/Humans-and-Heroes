@@ -54,7 +54,7 @@ output+='</button>\n';
 output+='</form>\n';
 output+='</div>\n';
 
-output+='<nav class="collapse bd-links" id="top-nav"><div class="bd-sidenav"><ul>\n';
+output+='<nav class="collapse bd-links" id="top-nav"><div class="bd-sidenav sites-sidebar-nav"><ul>\n';
 
 var navigationJson = [
    {
@@ -542,7 +542,6 @@ function sideBarCreation(entry, depth)
    output+='<li';
    if (isParent || 0 === depth)
    {
-      //TODO: get CSS to work
       output+=' class="';
       if(0 === depth) output+='topLevel';
       if(navigationJson[0] === entry) output+=' nav-first';
@@ -571,12 +570,9 @@ function sideBarCreation(entry, depth)
    if (isParent)
    {
       ++expandIndex;
-      //div is supported. use that when possible
-      output+='<button data-toggle="collapse" data-target="#expand' + expandIndex + '" onclick="changeArrow(\'arrow' + expandIndex + '\');">';
-      output+='<img src="' + absolutePrefix + 'images/arrow-';
-      if(shouldShow) output+='down';
-      else output+='left';
-      output+='.gif" id="arrow' + expandIndex + '" /></button>\n';
+      output+='<a href="javascript:void(0);//expand or collapse" class="expander';
+      if(!shouldShow) output+=' collapsed';
+      output+='" data-toggle="collapse" data-target="#expand' + expandIndex + '"></a>';
    }
    if(entry.link === currentPage) output+=entry.name + '\n';
    else output+='<a href="' + absolutePrefix + entry.link + '">' + entry.name + '</a>\n';
@@ -632,13 +628,6 @@ document.getElementsByClassName('col-12 bd-sidebar sites-layout-sidebar-left')[0
 //There will only be 1. Doing this because chrome complained about document.write(output);
 })();
 
-function changeArrow(elementId)
-{
-   var element = document.getElementById(elementId);
-   if(element.src.endsWith('down.gif')) element.src = element.src.replace('down.gif', 'left.gif');
-   else element.src = element.src.replace('left.gif', 'down.gif');
-   return true;
-}
 function search()
 {
    var searchText = document.getElementById('searchBar').value;
