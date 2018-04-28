@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8"/>
+   <title>Navbar from Bootstrap</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+   <link rel="shortcut icon" type="image/x-icon" href="images/google-default.ico"/>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+   <link rel="stylesheet" type="text/css" href="themes/solitudeCherry.css"/>
+
+   <style>
+      .bd-sidenav {
+         display: block
+      }
+
+      /* Extra small and Small devices*/
+      @media (max-width: 767px) {
+         .bd-links {
+            display: none
+         }
+      }
+
+      /* Medium+ devices*/
+      @media (min-width: 768px) {
+         .bd-links {
+            display: block
+         }
+
+         @supports (position:sticky) {
+            .bd-sidebar {
+               position: sticky;
+               top: 1rem;
+               height: calc(100vh - 1rem)
+            }
+
+            .bd-links {
+               max-height: calc(100vh - 4rem);
+               overflow-y: auto
+            }
+         }
+      }
+
+      /* Extra large devices*/
+      @media (min-width: 1200px) {
+         .bd-sidebar {
+            flex: 0 1 320px
+         }
+      }
+   </style>
+</head>
+<body>
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-12 bd-sidebar sites-layout-sidebar-left">
+         <script type="text/javascript" src="themes/sideBar.js"></script>
+      </div>
+
+      <div>
+         <pre>
+         ACT I
+         SCENE I. Elsinore. A platform before the castle.
+         FRANCISCO at his post. Enter to him BERNARDO
+         BERNARDO
+         Who's there?
+         FRANCISCO
+         Nay, answer me: stand, and unfold yourself.
+         BERNARDO
+         Long live the king!
+         FRANCISCO
+         Bernardo?
+         BERNARDO
+         He.
+         FRANCISCO
+         You come most carefully upon your hour.
+         BERNARDO
+         'Tis now struck twelve; get thee to bed, Francisco.
+         FRANCISCO
+         For this relief much thanks: 'tis bitter cold,
+         And I am sick at heart.
+         BERNARDO
+         Have you had quiet guard?
+         FRANCISCO
+         Not a mouse stirring.
+         BERNARDO
+         Well, good night.
+         If you do meet Horatio and Marcellus,
+         The rivals of my watch, bid them make haste.
+         FRANCISCO
+         I think I hear them. Stand, ho! Who's there?
+         Enter HORATIO and MARCELLUS
+
+         HORATIO
+         Friends to this ground.
+         MARCELLUS
+         And liegemen to the Dane.
+         FRANCISCO
+         Give you good night.
+         MARCELLUS
+         O, farewell, honest soldier:
+         Who hath relieved you?
+         FRANCISCO
+         Bernardo has my place.
+         Give you good night.
+         Exit
+
+         MARCELLUS
+         Holla! Bernardo!
+         BERNARDO
+         Say,
+         What, is Horatio there?
+         HORATIO
+         A piece of him.
+         BERNARDO
+         ACT I
+         SCENE I. Elsinore. A platform before the castle.
+         FRANCISCO at his post. Enter to him BERNARDO
+         BERNARDO
+         </pre>
+      </div>
+   </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

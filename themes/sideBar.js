@@ -32,12 +32,29 @@ if (!currentPage.endsWith('.html'))
 
 var output = '';
 
-output+='<form action="javascript:search();">\n';
-output+='<input type="text" value="" width="100%" id="searchBar" />\n';
-output+='<input type="submit" value="Search" />\n';
+output+='<div>\n';
+output+='<form class="d-flex align-items-center" action="javascript:search();">\n';
+output+='<input type="search" value="" class="form-control" placeholder="Search..." id="searchBar" />\n';
+output+='<button class="btn btn-link" type="submit">\n';
+output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12 13">\n';
+output+='<g fill="none" stroke="#54595d" stroke-width="2">\n';
+output+='<path d="M11.29 11.71l-4-4"></path>\n';
+output+='<circle cx="5" cy="5" r="4"></circle>\n';
+output+='</g>\n';
+output+='</svg>\n';
+output+='</button>\n';
+output+='<button class="btn btn-link d-md-none" type="button" data-toggle="collapse"\n';
+output+='data-target="#top-nav">\n';
+output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" focusable="false">\n';
+output+='<title>Menu</title>\n';
+output+='<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
+output+='d="M4 7h22M4 15h22M4 23h22"></path>\n';
+output+='</svg>\n';
+output+='</button>\n';
 output+='</form>\n';
+output+='</div>\n';
 
-output+='<div class="sites-sidebar-nav"><ul>\n';
+output+='<nav class="collapse bd-links" id="top-nav"><div class="bd-sidenav"><ul>\n';
 
 var navigationJson = [
    {
@@ -532,9 +549,6 @@ function sideBarCreation(entry, depth)
       {
          if(0 === depth) output+=' ';
          output+='parent';
-         var containingFolderOfLink = entry.link.replace(/\/[^\/]*?$/, '/');
-         if(depth > 0 && !currentPage.startsWith(containingFolderOfLink)) output+=' closed';
-         output+='" id="expand' + expandIndex;
       }
       output+='"';
    }
@@ -549,16 +563,28 @@ function sideBarCreation(entry, depth)
    padding += (19 * depth);
    output+=''+ padding;
 
+   var containingFolderOfLink = entry.link.replace(/\/[^\/]*?$/, '/');
+   var shouldShow = (depth === 0 || currentPage.startsWith(containingFolderOfLink));
+
    output+='px;">\n';
-   if(isParent) output+='<div class="expander" onClick="return toggleMe(\'expand' + expandIndex + '\');"></div>\n';
+   if (isParent)
+   {
+      ++expandIndex;
+      output+='<button data-toggle="collapse" data-target="#expand' + expandIndex + '" onclick="changeArrow(\'arrow' + expandIndex + '\');">';
+      output+='<img src="' + absolutePrefix + 'images/arrow-';
+      if(shouldShow) output+='down';
+      else output+='left';
+      output+='.gif" id="arrow' + expandIndex + '" /></button>\n';
+   }
    if(entry.link === currentPage) output+=entry.name + '\n';
    else output+='<a href="' + absolutePrefix + entry.link + '">' + entry.name + '</a>\n';
    output+='</div>\n';
 
    if (isParent)
    {
-      ++expandIndex;
-      output+='<ul>\n';
+      output+='<ul class="collapse';
+      if(shouldShow) output+=' show';
+      output+='" id="expand' + expandIndex + '">\n';
       for (var i = 0; i < entry.children.length; ++i)
       {
          sideBarCreation(entry.children[i], (depth+1));
@@ -572,8 +598,7 @@ for (var i = 0; i < navigationJson.length; ++i)
    sideBarCreation(navigationJson[i], 0);
 }
 
-output+='</ul>\n';
-output+='</div>\n';
+output+='</ul></div>\n';
 output+='<hr/><div class="sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
 output+='COMICS<br />\n';
 output+='GROUP\n';
@@ -599,18 +624,17 @@ output+='<hr/>\n';
 output+='<div class="sites-embed-content-sidebar-textbox">\n';
 output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
 output+='</div>\n';
+output+='</nav>\n';
 
-document.getElementsByClassName('sites-layout-sidebar-left')[0].innerHTML = output;
+document.getElementsByClassName('col-12 bd-sidebar sites-layout-sidebar-left')[0].innerHTML = output;
 //There will only be 1. Doing this because chrome complained about document.write(output);
 })();
 
-function toggleMe(elementId)
+function changeArrow(elementId)
 {
    var element = document.getElementById(elementId);
-   if(null === element) return true;
-
-   if(element.className.endsWith(' closed')) element.className = element.className.replace(' closed', '');
-   else element.className += ' closed';
+   if(element.src.endsWith('down.gif')) element.src = element.src.replace('down.gif', 'left.gif');
+   else element.src = element.src.replace('left.gif', 'down.gif');
    return true;
 }
 function search()
