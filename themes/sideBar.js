@@ -50,7 +50,7 @@ https://www.html5rocks.com/en/tutorials/webcomponents/customelements/
 
 then tell google to reindex:
 https://stackoverflow.com/questions/9466360/how-to-request-google-to-re-crawl-my-website
-https://www.google.com/webmasters/verification/verification?hl=en&authuser=0&theme=wmt&siteUrl=http://skyspiral7.github.io/Humans-and-Heroes/&continue=https://www.google.com/webmasters/tools/dashboard?hl%3Den%26authuser%3D0%26siteUrl%3Dhttp://skyspiral7.github.io/Humans-and-Heroes/%26sig%3DALjLGbPJLwmacYbrPs1ZnEm8mnMvlFe8dQ&pli=1
+https://www.google.com/webmasters/tools/googlebot-fetch?hl=en&authuser=0&siteUrl=http://skyspiral7.github.io/Humans-and-Heroes/
 
 then compare custom search with normal google again:
 https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes#gsc.tab=0&gsc.q=flight&gsc.page=1
