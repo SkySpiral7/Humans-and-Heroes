@@ -32,6 +32,33 @@ if (!currentPage.endsWith('.html'))
 
 var output = '';
 
+//TODO: be aggressive at removing sidebar from spiders:
+/*
+<!--googleoff: all-->
+<!--noindex-->
+<noindex>
+<div class="robots-noindex robots-nofollow robots-nocontent noindex nofollow">
+Sidebar.
+</div>
+</noindex>
+<!--/noindex-->
+<!--googleon: all-->
+
+might be able to include an html file if I tried (and have that be noindex):
+https://stackoverflow.com/questions/35016709/how-to-access-elements-of-imported-html-from-script-inside-imported-html
+https://www.html5rocks.com/en/tutorials/webcomponents/customelements/
+
+then tell google to reindex:
+https://stackoverflow.com/questions/9466360/how-to-request-google-to-re-crawl-my-website
+https://www.google.com/webmasters/verification/verification?hl=en&authuser=0&theme=wmt&siteUrl=http://skyspiral7.github.io/Humans-and-Heroes/&continue=https://www.google.com/webmasters/tools/dashboard?hl%3Den%26authuser%3D0%26siteUrl%3Dhttp://skyspiral7.github.io/Humans-and-Heroes/%26sig%3DALjLGbPJLwmacYbrPs1ZnEm8mnMvlFe8dQ&pli=1
+
+then compare custom search with normal google again:
+https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes#gsc.tab=0&gsc.q=flight&gsc.page=1
+https://cse.google.com/cse/setup/basic?cx=002064182061922770744:f-jonz3baes
+
+if still sucks:
+I am the owner of http://skyspiral7.github.io/Humans-and-Heroes/ and currently have a search bar that simply makes a calls directly google such as https://www.google.com/search?q=site:http://skyspiral7.github.io/Humans-and-Heroes+flight and I have been satisfied with the results. I just found out about Google custom searches and created one. However I noticed that doing a custom search for the exact same search term returns 2 fewer results, one of which is the most relevant result (https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes doesn't include a result of http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/effects/flight.html)
+*/
 output+='<form action="javascript:search();">\n';
 output+='<input type="text" value="" width="100%" id="searchBar" />\n';
 output+='<input type="submit" value="Search" />\n';
