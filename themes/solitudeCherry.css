@@ -236,6 +236,38 @@ body .sites-layout-sidebar-left h2 {
    font-size: 16px;
 }
 
+.sites-sidebar-nav {
+   display: block
+}
+
+/* Extra small and Small devices*/
+@media (max-width: 767px) {
+   #top-nav:not(.collapse) {
+      display: none
+   }
+}
+
+/* Medium+ devices*/
+@media (min-width: 768px) {
+   /*this is used to show the element despite not having .show*/
+   #top-nav.collapse {
+      display: block
+   }
+
+   @supports (position:sticky) {
+      .sites-layout-sidebar-left {
+         position: sticky;
+         top: 1rem;
+         height: 100vh
+      }
+
+      #top-nav {
+         max-height: calc(100vh - 4rem);
+         overflow-y: auto
+      }
+   }
+}
+
 body > table {
    border-spacing: 0;
    margin: 16px;

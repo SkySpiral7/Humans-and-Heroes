@@ -54,7 +54,7 @@ output+='</button>\n';
 output+='</form>\n';
 output+='</div>\n';
 
-output+='<nav class="collapse bd-links" id="top-nav"><div class="bd-sidenav sites-sidebar-nav"><ul>\n';
+output+='<nav class="collapse" id="top-nav"><div class="sites-sidebar-nav"><ul>\n';
 
 var navigationJson = [
    {
@@ -597,16 +597,18 @@ for (var i = 0; i < navigationJson.length; ++i)
 }
 
 output+='</ul></div>\n';
-output+='<hr/><div class="sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
-output+='COMICS<br />\n';
-output+='GROUP\n';
+output+='<hr/><div class="sites-embed-content-sidebar-textbox d-none d-md-block"><div class="stamp-top">\n';
+output+='Comics<br />\n';
+output+='Group\n';
 output+='</div>\n';
 output+='<div class="stamp-middle">\n';
 output+='35&cent;\n';
 output+='</div>\n';
-output+='<div class="stamp-bottom" title="Send me an email!">\n';
-output+='<a href="mailto:rworcest@g.emporia.edu">CONTACT ME</a>\n';
+output+='<div class="stamp-bottom">\n';
+output+='<a href="mailto:rworcest@g.emporia.edu" title="Send me an email!">Contact Me</a>\n';
 output+='</div></div>\n';
+output+='<h3 class="d-block d-md-none"><a href="mailto:rworcest@g.emporia.edu" title="Send me an email!">Contact Me</a></h3>\n';
+output+='<hr/>\n';
 output+='<h2>M&amp;M External Links</h2>\n';
 output+='<a href="http://www.greenronin.com/">Green Ronin</a><br />\n';
 output+='<a href="http://mutantsandmasterminds.com/">Mutants &amp; Masterminds.com</a><br />\n';
@@ -614,17 +616,17 @@ output+='<a href="http://www.atomicthinktank.com/index.php">Mutants &amp; Master
 output+='<a href="http://mmconversions.wikidot.com/">Hero Conversions</a><br />\n';
 output+='<a href="http://wolflair.com/index.php?context=hero_lab">Hero Lab</a><br />\n';
 output+='<a href="http://grfiles.game-host.org/3e_files/MnM3_charsheet_color.pdf">Character Sheet</a><br />\n';
-output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=37265">Character Generator</a><br />\n';
+output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=37265">Excel Character Generator</a><br />\n';
 output+='<a href="http://stornart.com/">Hero Art by Storn Cook</a><br />\n';
 output+='<a href="http://opengameart.org/">Open Game Art</a><br />\n';
 output+='<a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>\n';
 output+='<hr/>\n';
-output+='<div class="sites-embed-content-sidebar-textbox">\n';
+output+='<div class="sites-embed-content-sidebar-textbox d-none d-md-block">\n';
 output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
 output+='</div>\n';
 output+='</nav>\n';
 
-document.getElementsByClassName('col-12 bd-sidebar sites-layout-sidebar-left')[0].innerHTML = output;
+document.getElementsByClassName('sites-layout-sidebar-left')[0].innerHTML = output;
 //There will only be 1. Doing this because chrome complained about document.write(output);
 })();
 
