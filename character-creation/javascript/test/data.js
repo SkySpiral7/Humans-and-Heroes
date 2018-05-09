@@ -2208,6 +2208,9 @@ TestSuite.data.v1=function(testState={})
    testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
+   //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
+   Data.change(3, latestMinorRuleset);
+
    return TestRunner.displayResults('TestSuite.data.v1', testResults, testState);
 };
 TestSuite.data.v2=function(testState={})
@@ -4229,6 +4232,9 @@ TestSuite.data.v2=function(testState={})
    testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
    } catch(e){testResults.push({Error: e, Description: 'Same data'});}
 
+   //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
+   Data.change(3, latestMinorRuleset);
+
    return TestRunner.displayResults('TestSuite.data.v2', testResults, testState);
 };
 TestSuite.data.v3=function(testState={})
@@ -4323,6 +4329,9 @@ TestSuite.data.v3=function(testState={})
    testResults.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
    testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
    } catch(e){testResults.push({Error: e, Description: 'v3.9 Same data'});}
+
+   //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
+   Data.change(3, latestMinorRuleset);
 
    return TestRunner.displayResults('TestSuite.data.v3', testResults, testState);
 };
