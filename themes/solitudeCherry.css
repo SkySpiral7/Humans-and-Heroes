@@ -498,10 +498,6 @@ th {
    border: 1px inset grey;
 }
 
-.generated-class-1 {
-   width: 100%;
-}
-
 /*used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
