@@ -30,16 +30,6 @@ left side bar: font-size: 12px;
 */
 
 /* TODO: more css clean up
-for phone scaling and easy grids use bootstrap: https://getbootstrap.com/docs/4.1/getting-started/introduction/
-convert tables: https://getbootstrap.com/docs/4.1/content/tables/
-   some tables (eg base powers) should stay (because word wrap) but check if there's any table that should horizontal scroll
-      .table-responsive for horizontal scrolling but I can't think of any use case
-      https://getbootstrap.com/docs/4.1/layout/grid/ for layout tables
-      wrap tables are unchanged
-   conditions needs to be fixed (table is defined width)
-convert right-panels: https://getbootstrap.com/docs/4.1/utilities/float/
-   right-panel can't have px width
-   recall the abilities has a non-float thing
 max image width ~500 to not break sidebar at certain sizes
    adding div.table-responsive causes image scroll which may help
    better: https://getbootstrap.com/docs/4.1/content/images/
@@ -548,18 +538,8 @@ th {
    width: 36px;
 }
 
-.generated-class-16 {
-   display: inline;
-   float: right;
-}
-
 .generated-class-17 {
    clear: both;
-}
-
-.generated-class-18 {
-   float: right;
-   width: 400px;
 }
 
 .generated-class-19 {
@@ -571,11 +551,6 @@ th {
    text-align: right;
 }
 
-.generated-class-23 {
-   float: right;
-   width: 287px;
-}
-
 .table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
    text-align: left;
 }
@@ -584,20 +559,8 @@ th {
    width: 300px;
 }
 
-.generated-class-32 {
-   float: right;
-   margin-top: 16px;
-   width: 290px;
-}
-
 .generated-class-34 {
    width: 250px;
-}
-
-.generated-class-35 {
-   float: right;
-   margin-top: 20px;
-   width: 284px;
 }
 
 .generated-class-36 {
