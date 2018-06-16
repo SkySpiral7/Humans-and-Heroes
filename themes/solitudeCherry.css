@@ -465,15 +465,11 @@ th {
    padding: 5px;
 }
 
-.condition-card-table td > div {
+.condition-card-bootstrap > .row > .col-xl-4 > div {
    border: solid thin grey;
-   width: 500px;
-   height: 700px;
-   display: flex;
-   flex-direction: column;
 }
 
-.condition-card-table td > div > h3 {
+.condition-card-bootstrap > .row > .col-xl-4 > div > h3 {
    color: white;
    font-weight: bold;
    padding: 5px;
@@ -482,22 +478,22 @@ th {
    text-decoration: none;
 }
 
-.condition-card-table td > div > div {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div {
    padding: 10px;
    background-color: palegreen;
    flex-grow: 1;
 }
 
-.condition-card-table td > div > div > table {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table {
    width: 100%;
 }
 
-.condition-card-table td > div > div > table td {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
    text-align: center;
    width: 33%;
 }
 
-.condition-card-table td > div > div > table,.condition-card-table td > div > div > table td {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table,.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
    border-collapse: collapse;
    border: 1px inset grey;
 }
