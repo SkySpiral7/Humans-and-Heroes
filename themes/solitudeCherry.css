@@ -116,10 +116,6 @@ h3 {
    margin: 10px 0 10px 0;
 }
 
-td {
-   vertical-align: top;
-}
-
 a:link, a:visited {
    /*Need to also have :visited so that the browser won't blue shift the color*/
    color: darkred;
@@ -281,8 +277,16 @@ body .sites-layout-sidebar-left h2 {
    }
 }
 
+.table-alt-rows {
+   margin: 10px;
+}
+
 .table-alt-rows td {
    text-align: center;
+}
+
+td {
+   vertical-align: top;
 }
 
 /*All th are under .table-alt-rows*/
@@ -506,10 +510,6 @@ th {
    font-size: 24px;
    font-weight: bold;
    text-align: center;
-}
-
-.generated-class-3 {
-   margin: 10px;
 }
 
 .generated-class-5 {
