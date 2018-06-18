@@ -64,7 +64,7 @@ TestSuite.defenseList.calculateValues=function(testState={})
 };
 TestSuite.defenseList.load=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -79,7 +79,7 @@ TestSuite.defenseList.load=function(testState={})
 };
 TestSuite.defenseList.calculateToughness=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

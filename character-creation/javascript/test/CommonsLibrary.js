@@ -2,7 +2,7 @@
 TestSuite.CommonsLibrary={};
 TestSuite.CommonsLibrary.select=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -17,7 +17,7 @@ TestSuite.CommonsLibrary.select=function(testState={})
 };
 TestSuite.CommonsLibrary.change=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -32,7 +32,7 @@ TestSuite.CommonsLibrary.change=function(testState={})
 };
 TestSuite.CommonsLibrary.clear=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -47,7 +47,7 @@ TestSuite.CommonsLibrary.clear=function(testState={})
 };
 TestSuite.CommonsLibrary.getRow=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -62,7 +62,7 @@ TestSuite.CommonsLibrary.getRow=function(testState={})
 };
 TestSuite.CommonsLibrary.update=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -77,7 +77,7 @@ TestSuite.CommonsLibrary.update=function(testState={})
 };
 TestSuite.CommonsLibrary.generate=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -92,7 +92,7 @@ TestSuite.CommonsLibrary.generate=function(testState={})
 };
 TestSuite.CommonsLibrary.removeRow=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -107,7 +107,7 @@ TestSuite.CommonsLibrary.removeRow=function(testState={})
 };
 TestSuite.CommonsLibrary.sanitizeRows=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -122,7 +122,7 @@ TestSuite.CommonsLibrary.sanitizeRows=function(testState={})
 };
 TestSuite.CommonsLibrary.setAll=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -137,7 +137,7 @@ TestSuite.CommonsLibrary.setAll=function(testState={})
 };
 TestSuite.CommonsLibrary.initializeRows=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

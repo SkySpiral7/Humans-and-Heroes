@@ -674,7 +674,7 @@ TestSuite.powerRow.updateDurationModifiers=function(testState={})
 };
 TestSuite.powerRow.setPower=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

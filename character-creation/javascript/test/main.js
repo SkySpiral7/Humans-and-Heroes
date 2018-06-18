@@ -135,7 +135,7 @@ TestSuite.main.changeRuleset=function(testState={})
 };
 TestSuite.main.changeTranscendence=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -150,7 +150,7 @@ TestSuite.main.changeTranscendence=function(testState={})
 };
 TestSuite.main.clear=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -198,7 +198,7 @@ TestSuite.main.loadImageFromFile=function(testState={})
 };
 TestSuite.main.getProtectionTotal=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -216,7 +216,7 @@ TestSuite.main.getProtectionTotal=function(testState={})
 };
 TestSuite.main.update=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -279,7 +279,7 @@ TestSuite.main.updateInitiative=function(testState={})
 };
 TestSuite.main.updateOffense=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -294,7 +294,7 @@ TestSuite.main.updateOffense=function(testState={})
 };
 TestSuite.main.calculatePowerLevelLimitations=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -309,7 +309,7 @@ TestSuite.main.calculatePowerLevelLimitations=function(testState={})
 };
 TestSuite.main.calculateTotal=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -399,7 +399,7 @@ TestSuite.main.convertDocument=function(testState={})
 };
 TestSuite.main.determineCompatibilityIssues=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -483,7 +483,7 @@ TestSuite.main.loadFromString=function(testState={})
 };
 TestSuite.main.makeOffenseRow=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

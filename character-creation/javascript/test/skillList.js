@@ -2,7 +2,7 @@
 TestSuite.skillList={};
 TestSuite.skillList.calculateValues=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -17,7 +17,7 @@ TestSuite.skillList.calculateValues=function(testState={})
 };
 TestSuite.skillList.load=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

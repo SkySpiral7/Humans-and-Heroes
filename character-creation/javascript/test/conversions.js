@@ -41,7 +41,7 @@ TestSuite.conversions.sanitizeNumber=function(testState={})
 };
 TestSuite.conversions.xmlToJson=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -56,7 +56,7 @@ TestSuite.conversions.xmlToJson=function(testState={})
 };
 TestSuite.conversions.jsonToXml=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
     TestRunner.clearResults(testState);
 
     var testResults=[];

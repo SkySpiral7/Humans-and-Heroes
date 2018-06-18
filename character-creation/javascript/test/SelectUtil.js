@@ -2,7 +2,7 @@
 TestSuite.SelectUtil={};
 TestSuite.SelectUtil.isSelect=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -17,7 +17,7 @@ TestSuite.SelectUtil.isSelect=function(testState={})
 };
 TestSuite.SelectUtil.getTextById=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -32,7 +32,7 @@ TestSuite.SelectUtil.getTextById=function(testState={})
 };
 TestSuite.SelectUtil.containsText=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -47,7 +47,7 @@ TestSuite.SelectUtil.containsText=function(testState={})
 };
 TestSuite.SelectUtil.setText=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -62,7 +62,7 @@ TestSuite.SelectUtil.setText=function(testState={})
 };
 TestSuite.SelectUtil.changeText=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

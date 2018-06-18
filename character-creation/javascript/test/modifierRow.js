@@ -42,7 +42,7 @@ TestSuite.modifierRow.setModifier=function(testState={})
 };
 TestSuite.modifierRow.setRank=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -57,7 +57,7 @@ TestSuite.modifierRow.setRank=function(testState={})
 };
 TestSuite.modifierRow.calculateTotal=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
        //old modifier tests: *) changing from sustained to permanent is free *) changing from permanent to sustained is free
     TestRunner.clearResults(testState);
 
@@ -73,7 +73,7 @@ TestSuite.modifierRow.calculateTotal=function(testState={})
 };
 TestSuite.modifierRow.generate=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -226,7 +226,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
 };
 TestSuite.modifierRow.setValues=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

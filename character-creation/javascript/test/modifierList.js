@@ -2,7 +2,7 @@
 TestSuite.modifierList={};
 TestSuite.modifierList.calculateGrandTotal=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -17,7 +17,7 @@ TestSuite.modifierList.calculateGrandTotal=function(testState={})
 };
 TestSuite.modifierList.calculateValues=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -32,7 +32,7 @@ TestSuite.modifierList.calculateValues=function(testState={})
 };
 TestSuite.modifierList.createByNameRank=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -47,7 +47,7 @@ TestSuite.modifierList.createByNameRank=function(testState={})
 };
 TestSuite.modifierList.getUniqueName=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -90,7 +90,7 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(testState={})
 };
 TestSuite.modifierList.load=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
@@ -105,7 +105,7 @@ TestSuite.modifierList.load=function(testState={})
 };
 TestSuite.modifierList.sanitizeRows=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];

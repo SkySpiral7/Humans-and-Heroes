@@ -2,7 +2,7 @@
 TestSuite.advantageRow={};
 TestSuite.advantageRow.setAdvantage=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     //testResults.push({Expected: Data.Advantage['Benefit'].defaultText, Actual: Main.advantageSection.getRow(0).getText(), Description: actionTaken+': of default text'});
     TestRunner.clearResults(testState);
 
@@ -192,7 +192,7 @@ TestSuite.advantageRow.generate=function(testState={})
 };
 TestSuite.advantageRow.setValues=function(testState={})
 {
-    return {tableName: 'unmade', testResults: []};  //remove this when actual tests exist. ADD TESTS
+    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
     TestRunner.clearResults(testState);
 
     var testResults=[];
