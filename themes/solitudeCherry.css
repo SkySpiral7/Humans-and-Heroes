@@ -340,8 +340,14 @@ th {
    font-size: 16px;
 }
 
+.character-sheet button, .character-sheet input, .character-sheet select, .character-sheet textarea {
+   font-size: 16px;
+}
+.character-sheet input[type="file"] {
+   background-color: white;
+}
 .character-sheet {
-   max-width: 900px;
+   max-width: 950px;
 }
 .character-sheet-defense-white > div, .character-sheet-defense-green > div {
    padding: 10px;
