@@ -1,0 +1,5 @@
+#I know this is in the wrong location (under the repo name) but I can't put it under root and spiders should (but don't) look in each folder
+User-agent: *
+Disallow: /google122b9bf962559bcf.html
+Disallow: /index.html
+Sitemap: sitemap.txt
