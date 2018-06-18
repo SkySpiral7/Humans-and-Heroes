@@ -3,18 +3,18 @@ TestSuite.skillList={};
 TestSuite.skillList.calculateValues=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.skillList.calculateValues', testResults, testState);
+   return TestRunner.displayResults('TestSuite.skillList.calculateValues', assertions, testState);
 };
 TestSuite.skillList.load=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.skillList.load', testResults, testState);
+   return TestRunner.displayResults('TestSuite.skillList.load', assertions, testState);
 };

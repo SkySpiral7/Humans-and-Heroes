@@ -3,45 +3,45 @@ TestSuite.SelectUtil={};
 TestSuite.SelectUtil.isSelect=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.SelectUtil.isSelect', testResults, testState);
+   return TestRunner.displayResults('TestSuite.SelectUtil.isSelect', assertions, testState);
 };
 TestSuite.SelectUtil.getTextById=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.SelectUtil.getTextById', testResults, testState);
+   return TestRunner.displayResults('TestSuite.SelectUtil.getTextById', assertions, testState);
 };
 TestSuite.SelectUtil.containsText=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.SelectUtil.containsText', testResults, testState);
+   return TestRunner.displayResults('TestSuite.SelectUtil.containsText', assertions, testState);
 };
 TestSuite.SelectUtil.setText=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.SelectUtil.setText', testResults, testState);
+   return TestRunner.displayResults('TestSuite.SelectUtil.setText', assertions, testState);
 };
 TestSuite.SelectUtil.changeText=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.SelectUtil.changeText', testResults, testState);
+   return TestRunner.displayResults('TestSuite.SelectUtil.changeText', assertions, testState);
 };

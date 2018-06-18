@@ -4,7 +4,7 @@ TestSuite.data.allVersions=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var testResults=[], expected;
+   var assertions=[], expected;
 
    try {
    expected = {
@@ -19,21 +19,21 @@ TestSuite.data.allVersions=function(testState={})
          "Presence"
       ]
    };
-   testResults.push({Expected: expected, Actual: Data.Ability, Description: 'Data.Ability'});
+   assertions.push({Expected: expected, Actual: Data.Ability, Description: 'Data.Ability'});
 
    expected = '          Name <input type="text" size="20" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" />\n';
-   testResults.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5), Description: 'Data.SharedHtml.powerName'});
+   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5), Description: 'Data.SharedHtml.powerName'});
    expected = '          Skill <input type="text" size="20" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" />\n';
-   testResults.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
-   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
+   } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
-   return TestRunner.displayResults('TestSuite.data.allVersions', testResults, testState);
+   return TestRunner.displayResults('TestSuite.data.allVersions', assertions, testState);
 };
 TestSuite.data.v1=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var testResults=[], expected;
+   var assertions=[], expected;
 
    try {
    Data.change(1, 0);
@@ -716,7 +716,7 @@ TestSuite.data.v1=function(testState={})
          "maxRank": 1
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
+   assertions.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
    expected = {
       "names": [
@@ -747,7 +747,7 @@ TestSuite.data.v1=function(testState={})
          "name": "Toughness"
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
+   assertions.push({Expected: expected, Actual: Data.Defense, Description: 'Data.Defense'});
 
    expected = {
       "names": [
@@ -1637,7 +1637,7 @@ TestSuite.data.v1=function(testState={})
          "type": "Rank"
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
+   assertions.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
 
    expected = {
       "actions": [
@@ -2103,7 +2103,7 @@ TestSuite.data.v1=function(testState={})
          "isGodhood": false
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
+   assertions.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
 
    expected = {
       "names": [
@@ -2205,19 +2205,19 @@ TestSuite.data.v1=function(testState={})
          "hasText": false
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
-   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+   assertions.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
+   } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
    Data.change(3, latestMinorRuleset);
 
-   return TestRunner.displayResults('TestSuite.data.v1', testResults, testState);
+   return TestRunner.displayResults('TestSuite.data.v1', assertions, testState);
 };
 TestSuite.data.v2=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var testResults=[], expected;
+   var assertions=[], expected;
 
    try {
    Data.change(2, 7);
@@ -2684,9 +2684,9 @@ TestSuite.data.v2=function(testState={})
          "maxRank": 1
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
+   assertions.push({Expected: expected, Actual: Data.Advantage, Description: 'Data.Advantage'});
 
-   testResults.push({Expected: 'Presence', Actual: Data.Defense['Will'].ability, Description: 'Data.Defense[Will].ability = Presence'});
+   assertions.push({Expected: 'Presence', Actual: Data.Defense['Will'].ability, Description: 'Data.Defense[Will].ability = Presence'});
 
    expected = {
       "names": [
@@ -3589,7 +3589,7 @@ TestSuite.data.v2=function(testState={})
          "type": "Rank"
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
+   assertions.push({Expected: expected, Actual: Data.Modifier, Description: 'Data.Modifier'});
 
    expected = {
       "actions": [
@@ -4091,7 +4091,7 @@ TestSuite.data.v2=function(testState={})
          "isGodhood": true
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
+   assertions.push({Expected: expected, Actual: Data.Power, Description: 'Data.Power'});
 
    expected = {
       "names": [
@@ -4229,25 +4229,25 @@ TestSuite.data.v2=function(testState={})
          "hasText": true
       }
    };
-   testResults.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
-   } catch(e){testResults.push({Error: e, Description: 'Same data'});}
+   assertions.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
+   } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
    Data.change(3, latestMinorRuleset);
 
-   return TestRunner.displayResults('TestSuite.data.v2', testResults, testState);
+   return TestRunner.displayResults('TestSuite.data.v2', assertions, testState);
 };
 TestSuite.data.v3=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var testResults=[], expected;
+   var assertions=[], expected;
 
    try {
    Data.change(3, 0);
 
-   testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
-   testResults.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
+   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
+   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
    expected = {
       "name": "Persistent Information",
       "costPerRank": 1,
@@ -4256,8 +4256,8 @@ TestSuite.data.v3=function(testState={})
       "isGodhood": false,
       "maxRank": 1
    };
-   testResults.push({Expected: expected, Actual: Data.Advantage['Persistent Information'], Description: 'Added Data.Advantage[Persistent Information]'});
-   testResults.push({Expected: 1, Actual: Data.Advantage['Inspire'].maxRank, Description: 'Data.Advantage[Inspire] no longer ranked'});
+   assertions.push({Expected: expected, Actual: Data.Advantage['Persistent Information'], Description: 'Added Data.Advantage[Persistent Information]'});
+   assertions.push({Expected: 1, Actual: Data.Advantage['Inspire'].maxRank, Description: 'Data.Advantage[Inspire] no longer ranked'});
    expected = {
       "name": "Uncontrollable Activation",
       "cost": 1,
@@ -4270,20 +4270,20 @@ TestSuite.data.v3=function(testState={})
       "maxRank": 1,
       "type": "Rank"
    };
-   testResults.push({Expected: expected, Actual: Data.Modifier['Uncontrollable Activation'], Description: 'Added Data.Modifier[Uncontrollable Activation]'});
-   } catch(e){testResults.push({Error: e, Description: 'v3.0 Same data'});}
+   assertions.push({Expected: expected, Actual: Data.Modifier['Uncontrollable Activation'], Description: 'Added Data.Modifier[Uncontrollable Activation]'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.0 Same data'});}
 
    try {
    Data.change(3, 4);
 
-   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier[Uncontrollable Activation]'});
-   testResults.push({Expected: false, Actual: Data.Power.actions.contains('Triggered'), Description: 'Removed Data.Power.actions[Triggered]'});
-   testResults.push({Expected: 'Free', Actual: Data.Power['A God I Am'].defaultAction, Description: 'Data.Power[A God I Am].defaultAction = Free'});
-   testResults.push({Expected: 'Move', Actual: Data.Power['Flight'].defaultAction, Description: 'Data.Power[Flight].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data.Power['Leaping'].defaultAction, Description: 'Data.Power[Leaping].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data.Power['Movement'].defaultAction, Description: 'Data.Power[Movement].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data.Power['Permeate'].defaultAction, Description: 'Data.Power[Permeate].defaultAction = Move'});
-   testResults.push({Expected: 'Move', Actual: Data.Power['Teleport'].defaultAction, Description: 'Data.Power[Teleport].defaultAction = Move'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier[Uncontrollable Activation]'});
+   assertions.push({Expected: false, Actual: Data.Power.actions.contains('Triggered'), Description: 'Removed Data.Power.actions[Triggered]'});
+   assertions.push({Expected: 'Free', Actual: Data.Power['A God I Am'].defaultAction, Description: 'Data.Power[A God I Am].defaultAction = Free'});
+   assertions.push({Expected: 'Move', Actual: Data.Power['Flight'].defaultAction, Description: 'Data.Power[Flight].defaultAction = Move'});
+   assertions.push({Expected: 'Move', Actual: Data.Power['Leaping'].defaultAction, Description: 'Data.Power[Leaping].defaultAction = Move'});
+   assertions.push({Expected: 'Move', Actual: Data.Power['Movement'].defaultAction, Description: 'Data.Power[Movement].defaultAction = Move'});
+   assertions.push({Expected: 'Move', Actual: Data.Power['Permeate'].defaultAction, Description: 'Data.Power[Permeate].defaultAction = Move'});
+   assertions.push({Expected: 'Move', Actual: Data.Power['Teleport'].defaultAction, Description: 'Data.Power[Teleport].defaultAction = Move'});
 
    var actualAllowReaction=[], actualIsMovement=[];
    for (var i = 0; i < Data.Power.names.length; ++i)
@@ -4295,9 +4295,9 @@ TestSuite.data.v3=function(testState={})
    actualAllowReaction.sort();
    actualIsMovement.sort();
    expected = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
-   testResults.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data.Power[*].allowReaction'});
+   assertions.push({Expected: expected, Actual: actualAllowReaction, Description: 'Data.Power[*].allowReaction'});
    expected = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
-   testResults.push({Expected: expected, Actual: actualIsMovement, Description: 'Data.Power[*].isMovement'});
+   assertions.push({Expected: expected, Actual: actualIsMovement, Description: 'Data.Power[*].isMovement'});
 
    expected = {
       "name": "Aura",
@@ -4311,27 +4311,27 @@ TestSuite.data.v3=function(testState={})
       "maxRank": 1,
       "type": "Rank"
    };
-   testResults.push({Expected: expected, Actual: Data.Modifier['Aura'], Description: 'Added Data.Modifier[Aura]'});
-   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
-   testResults.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
-   } catch(e){testResults.push({Error: e, Description: 'v3.4 Same data'});}
+   assertions.push({Expected: expected, Actual: Data.Modifier['Aura'], Description: 'Added Data.Modifier[Aura]'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
+   assertions.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.4 Same data'});}
 
    try {
    Data.change(3, 5);
 
-   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
-   } catch(e){testResults.push({Error: e, Description: 'v3.5 Same data'});}
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.5 Same data'});}
 
    try {
    Data.change(3, 9);
 
-   testResults.push({Expected: 1, Actual: Data.Power['Transform'].baseCost, Description: 'Data.Power[Transform].baseCost = 1'});
-   testResults.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
-   testResults.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
-   } catch(e){testResults.push({Error: e, Description: 'v3.9 Same data'});}
+   assertions.push({Expected: 1, Actual: Data.Power['Transform'].baseCost, Description: 'Data.Power[Transform].baseCost = 1'});
+   assertions.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.9 Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
    Data.change(3, latestMinorRuleset);
 
-   return TestRunner.displayResults('TestSuite.data.v3', testResults, testState);
+   return TestRunner.displayResults('TestSuite.data.v3', assertions, testState);
 };

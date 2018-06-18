@@ -3,90 +3,90 @@ TestSuite.CommonsLibrary={};
 TestSuite.CommonsLibrary.select=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.select', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.select', assertions, testState);
 };
 TestSuite.CommonsLibrary.change=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.change', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.change', assertions, testState);
 };
 TestSuite.CommonsLibrary.clear=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.clear', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.clear', assertions, testState);
 };
 TestSuite.CommonsLibrary.getRow=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.getRow', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.getRow', assertions, testState);
 };
 TestSuite.CommonsLibrary.update=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.update', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.update', assertions, testState);
 };
 TestSuite.CommonsLibrary.generate=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.generate', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.generate', assertions, testState);
 };
 TestSuite.CommonsLibrary.removeRow=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.removeRow', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.removeRow', assertions, testState);
 };
 TestSuite.CommonsLibrary.sanitizeRows=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.sanitizeRows', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.sanitizeRows', assertions, testState);
 };
 TestSuite.CommonsLibrary.setAll=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.setAll', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.setAll', assertions, testState);
 };
 TestSuite.CommonsLibrary.initializeRows=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var testResults=[];
+   var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.initializeRows', testResults, testState);
+   return TestRunner.displayResults('TestSuite.CommonsLibrary.initializeRows', assertions, testState);
 };
