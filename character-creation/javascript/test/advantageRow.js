@@ -2,20 +2,12 @@
 TestSuite.advantageRow={};
 TestSuite.advantageRow.setAdvantage=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    //testResults.push({Expected: Data.Advantage['Benefit'].defaultText, Actual: Main.advantageSection.getRow(0).getText(), Description: actionTaken+': of default text'});
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    //TODO: plan: make sure all the data for normal and godhood are set (with useNewData) with and without text then without useNewData
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', testResults, testState);
+   return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', testResults, testState);
 };
 TestSuite.advantageRow.setRank=function(testState={})
 {
@@ -192,16 +184,10 @@ TestSuite.advantageRow.generate=function(testState={})
 };
 TestSuite.advantageRow.setValues=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.advantageRow.setValues', testResults, testState);
+   return TestRunner.displayResults('TestSuite.advantageRow.setValues', testResults, testState);
 };

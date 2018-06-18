@@ -41,33 +41,21 @@ TestSuite.conversions.sanitizeNumber=function(testState={})
 };
 TestSuite.conversions.xmlToJson=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.conversions.xmlToJson', testResults, testState);
+   return TestRunner.displayResults('TestSuite.conversions.xmlToJson', testResults, testState);
 };
 TestSuite.conversions.jsonToXml=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS. mostly just make sure it doesn't crash from invalid data
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.conversions.jsonToXml', testResults, testState);
+   return TestRunner.displayResults('TestSuite.conversions.jsonToXml', testResults, testState);
 };
 TestSuite.conversions.jsonToMarkdown=function(testState={})
 {

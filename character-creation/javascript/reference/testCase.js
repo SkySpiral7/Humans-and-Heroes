@@ -1,8 +1,6 @@
-TestSuite.test.stringDiffDisplay=function(testState={})
+TestSuite.test.example=function(testState={})
 {
-   return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
    TestRunner.clearResults(testState);
-
    var testResults=[], dataToLoad;
 
    dataToLoad = Loader.resetData();
@@ -17,5 +15,15 @@ TestSuite.test.stringDiffDisplay=function(testState={})
    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
 
    //be sure to copy the name here:
-   return TestRunner.displayResults('TestSuite.test.stringDiffDisplay', testResults, testState);
+   return TestRunner.displayResults('TestSuite.test.example', testResults, testState);
+};
+TestSuite.test.unmade=function(testState={})
+{
+   TestRunner.clearResults(testState);
+   var testResults=[];
+
+   //ADD TESTS
+
+   //be sure to copy the name here:
+   return TestRunner.displayResults('TestSuite.test.unmade', testResults, testState);
 };

@@ -42,49 +42,30 @@ TestSuite.modifierRow.setModifier=function(testState={})
 };
 TestSuite.modifierRow.setRank=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.modifierRow.setRank', testResults, testState);
+   return TestRunner.displayResults('TestSuite.modifierRow.setRank', testResults, testState);
 };
 TestSuite.modifierRow.calculateTotal=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-       //old modifier tests: *) changing from sustained to permanent is free *) changing from permanent to sustained is free
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.modifierRow.calculateTotal', testResults, testState);
+   return TestRunner.displayResults('TestSuite.modifierRow.calculateTotal', testResults, testState);
 };
 TestSuite.modifierRow.generate=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.modifierRow.generate', testResults, testState);
+   return TestRunner.displayResults('TestSuite.modifierRow.generate', testResults, testState);
 };
 TestSuite.modifierRow.setAutoRank=function(testState={})
 {
@@ -226,16 +207,10 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
 };
 TestSuite.modifierRow.setValues=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    var actionTaken='Initial';
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    try{
-    actionTaken='Set Concentration'; SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: actionTaken});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.modifierRow.setValues', testResults, testState);
+   return TestRunner.displayResults('TestSuite.modifierRow.setValues', testResults, testState);
 };

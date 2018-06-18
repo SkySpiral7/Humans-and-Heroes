@@ -674,17 +674,12 @@ TestSuite.powerRow.updateDurationModifiers=function(testState={})
 };
 TestSuite.powerRow.setPower=function(testState={})
 {
-    return {name: 'unmade', assertions: []};  //remove this when actual tests exist. ADD TESTS
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var testResults=[];
 
-    var testResults=[];
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
-    try{
-    SelectUtil.changeText('powerChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 5);
-    testResults.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
-    } catch(e){testResults.push({Error: e, Description: 'Equipment Row is not created'});}
+   //ADD TESTS
 
-    return TestRunner.displayResults('TestSuite.powerRow.setPower', testResults, testState);
+   return TestRunner.displayResults('TestSuite.powerRow.setPower', testResults, testState);
 };
 TestSuite.powerRow.updateActionModifiers=function(testState={})
 {
