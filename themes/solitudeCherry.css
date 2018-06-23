@@ -33,11 +33,10 @@ left side bar: font-size: 12px;
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
 my phone: 555x412. small breakpoint: 576px
+add &nbsp; in totals (all pages)
 convert point counter
-   add &nbsp; in totals (all pages)
-   skills: text=14 full ability fits for sm+. 3 letter xs
-   powers: creates a table
-   all generated use <br>
+   powers: creates a table, uses <br>
+   advantages: uses <br>, input text could be larger for a couple but meh
    textarea and input can be made width=100%
 bootstrap all
    make sure nothing has fixed width/height (all are in CSS)
