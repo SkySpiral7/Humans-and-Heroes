@@ -34,6 +34,11 @@ h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
 my phone: 555x412. small breakpoint: 576px
 convert point counter
+   add &nbsp; in totals (all pages)
+   skills: text=14 full ability fits for sm+. 3 letter xs
+   powers: creates a table
+   all generated use <br>
+   textarea and input can be made width=100%
 bootstrap all
    make sure nothing has fixed width/height (all are in CSS)
 printing
@@ -62,6 +67,7 @@ body {
 main {
    background: url("bg-top.gif") top repeat-x;
    padding-top: 50px;
+   padding-bottom: 50px;
 }
 
 h1 {
@@ -340,14 +346,24 @@ th {
    font-size: 16px;
 }
 
-.character-sheet button, .character-sheet input, .character-sheet select, .character-sheet textarea {
+.character-sheet input, .character-sheet select {
    font-size: 16px;
 }
 .character-sheet input[type="file"] {
    background-color: white;
 }
-.character-sheet {
+.character-sheet, .character-sheet-explanation {
    max-width: 950px;
+}
+textarea {
+   resize: both;
+   width: 100%;
+   max-width: 100%;
+   height: 246px;
+}
+#testResults {
+   width: 950px;
+   height: 500px;
 }
 .character-sheet-defense-white > div, .character-sheet-defense-green > div {
    padding: 10px;
@@ -398,6 +414,7 @@ th {
    border-bottom-right-radius: 20px;
    font-size: 28px;
    text-align: center;
+   display: block;  /*This is needed for point-counter since it contains spans.*/
 }
 .character-sheet-ability-section > .row > .green-panel-2 > div {
    font-size: 28px;

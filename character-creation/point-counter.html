@@ -143,8 +143,9 @@ Equipment <input type="button" value="Clear Equipment" onClick="Main.equipmentSe
 <span id="power-total">0</span> &#8226; Advantages <span id="advantage-total">0</span> &#8226; Skills <span id="skill-total">0</span> &#8226;
 Defenses <span id="defense-total">0</span> = <span id="grand-total-used">0</span> / <span id="grand-total-max">0</span></div>
 </div>
+<div class="character-sheet-explanation">
 <br />
-<textarea id="bio-box" rows="10" cols="100">Complications, background and other information</textarea>
+<textarea id="bio-box">Complications, background and other information</textarea>
 <br /><br />
 <!--value of ruleset and latest-ruleset are set at the bottom of this file-->
 <label>Rules: <input type="text" id="ruleset" size="4" onChange="Main.changeRuleset();" /></label>
@@ -195,10 +196,12 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <input type="button" value="Load from File" onClick="Main.loadFile();" />
 <input type="button" value="Load from Text Area" onClick="Main.loadFromTextArea();" id="load-text-button" /><br />
 <br />
-<textarea id="code-box" rows="30" cols="120"></textarea>
+<textarea id="code-box"></textarea>
 <br /><br />
+</div>
 <!----
-<span>Admin Powers:</span><br />
+<h2>Admin Powers</h2>
+<br />
 <input type="text" value="TestRunner.testAll();" id="command-text" />
 <input type="button" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
 <script>
@@ -216,9 +219,9 @@ function convertToJsFile()
 <a href="javascript:convertToJsFile();">Convert to JS file</a><br />
 <a href="javascript:TestRunner.testAll();">Test All</a><br />
 <a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br /><br />
-<textarea id="testResults" rows="20" cols="100"></textarea>
+<textarea id="testResults"></textarea>
+<br /><br /><br /><br /><br /><br /><br /><br />
 <!---->
-<br /><br />
 </main>
 </div>
 </div>
