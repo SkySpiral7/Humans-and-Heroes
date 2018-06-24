@@ -35,9 +35,12 @@ red-panel/green-panel should really have an h3 for their first element and be ce
 my phone: 555x412. small breakpoint: 576px
 add &nbsp; in totals (all pages)
 convert point counter
-   powers: creates a table, uses <br>
+   powers: needs correct cols, and scalable input text
+   why do my rows need to have width: 100%? and some of them container-fluid?
    advantages: uses <br>, input text could be larger for a couple but meh
-   textarea and input can be made width=100%
+   not sure if advantages or skills should use "= total"
+   should these inputs have proper labels?
+   textarea and input can be made style="width: 100%"
 bootstrap all
    make sure nothing has fixed width/height (all are in CSS)
 printing

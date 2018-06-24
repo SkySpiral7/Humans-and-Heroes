@@ -2,8 +2,8 @@
 const Data = {};
 Data.Ability = {names: ['Strength', 'Agility', 'Fighting', 'Awareness', 'Stamina', 'Dexterity', 'Intellect', 'Presence']};
 Data.SharedHtml = {
-    powerName: function(sectionName, rowIndex){ return '          Name <input type="text" size="20" id="'+sectionName+ 'Name'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex +').changeName();" />\n';},
-   powerSkill: function(sectionName, rowIndex){return '          Skill <input type="text" size="20" id="'+sectionName+'Skill'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeSkill();" />\n';}
+    powerName: function(sectionName, rowIndex){ return '          Name <input type="text" id="'+sectionName+ 'Name'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex +').changeName();" />\n';},
+   powerSkill: function(sectionName, rowIndex){return '          Skill <input type="text" id="'+sectionName+'Skill'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeSkill();" />\n';}
 };
 //freeze the only ones that are never changed so that I don't accidentally change them
 Object.freeze(Data.Ability);
