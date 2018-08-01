@@ -32,7 +32,17 @@ left side bar: font-size: 12px;
 /* TODO: more css clean up
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
-my phone: 555x412. small breakpoint: 576px
+breakpoints
+   xs: 0+ (chrome min 353px)
+      Nexus 5X: (555px height) 412px width
+      Moto G7: (541px height) 360px width
+   sm: 576px+
+      mid: 672px
+   md: 768px+
+      mid: 880px
+   lg: 992px+
+      mid: 1096px
+   xl: 1200px+
 add &nbsp; in totals (all pages)
 convert point counter
    powers: needs correct cols, and scalable input text
@@ -41,6 +51,7 @@ convert point counter
    not sure if advantages or skills should use "= total"
    should these inputs have proper labels?
    textarea and input can be made style="width: 100%"
+      textarea rows/cols is em, I assume the same for input size
 bootstrap all
    make sure nothing has fixed width/height (all are in CSS)
 printing
@@ -61,6 +72,10 @@ single class character sheet. Ignore the point counter at first.
 probably don't: Write a script to inline classes that are only used once
 */
 
+* {
+   max-width: 100%;
+   max-height: 100%;
+}
 
 body {
    line-height: 1.5;
