@@ -32,10 +32,11 @@ left side bar: font-size: 12px;
 /* TODO: more css clean up
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
-breakpoints
-   xs: 0+ (chrome min 353px)
-      Nexus 5X: (555px height) 412px width
-      Moto G7: (541px height) 360px width
+breakpoints: https://getbootstrap.com/docs/4.1/layout/overview/
+   use: https://www.webpagefx.com/tools/whats-my-browser-size/
+   (xs): 0+ (min window 361px but chrome device screen emulator allows smaller)
+      Nexus 5X: 412px width (555px height)
+      Moto G7: 360px width (541px height)
    sm: 576px+
       mid: 672px
    md: 768px+
@@ -45,6 +46,9 @@ breakpoints
    xl: 1200px+
 add &nbsp; in totals (all pages)
 convert point counter
+   all pages should not have right margin/padding blank white space (when small at least)
+   skills: drop down/input col-xs-12
+   defense: col-xs-6
    powers: needs correct cols, and scalable input text
    why do my rows need to have width: 100%? and some of them container-fluid?
    advantages: uses <br>, input text could be larger for a couple but meh

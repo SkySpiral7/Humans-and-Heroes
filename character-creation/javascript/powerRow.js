@@ -250,8 +250,8 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
    {
-      var htmlString = '<div class="row container-fluid"><div class="row" style="width: 100%">\n', i;
-      htmlString+='<div class="col"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
+      var htmlString = '<div class="container-fluid"><div class="row">\n', i;
+      htmlString+='<div class="col-12 col-sm-6"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
       htmlString+='    <option>Select One</option>\n';
       var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
@@ -267,11 +267,11 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='<div class="col">Base Cost per Rank:\n';
       if(canSetBaseCost) htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
       else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
-      htmlString+='</div><div class="col"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
-      htmlString+='</div>\n';
+      htmlString+='</div></div>\n';  //end col, row
+      htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
       htmlString+='<div class="row justify-content-center" style="width:100%">\n';
 
-      htmlString+='<div class="col-3">\n';
+      htmlString+='<div class="col-12 col-sm-4 col-xl-3">\n';
       htmlString+='          Action\n';
       var possibleActions = this.validateAndGetPossibleActions();
       if(1 === possibleActions.length) htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
@@ -287,7 +287,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </div>\n';
 
-      htmlString+='      <div class="col-3">\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
       htmlString+='          Range\n';
       var possibleRanges = this.getPossibleRanges();
       if(1 === possibleRanges.length) htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
@@ -302,7 +302,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </div>\n';
 
-      htmlString+='      <div class="col-3">\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
       htmlString+='          Duration\n';
       var possibleDurations = this.validateAndGetPossibleDurations();
       if(1 === possibleDurations.length) htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
@@ -321,27 +321,27 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
          htmlString+='   <div class="row justify-content-end" style="width:100%">\n';
-         htmlString+='      <div class="col-4">\n';
+         htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
          htmlString+='      </div>\n';
-         if(undefined !== skillUsed) htmlString+='<div class="col-4">' + Data.SharedHtml.powerSkill(sectionName, rowIndex) + '</div>';
+         if(undefined !== skillUsed) htmlString+='<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' + Data.SharedHtml.powerSkill(sectionName, rowIndex) + '</div>';
          htmlString+='   </div>\n';
       }
 
       htmlString+=modifierSection.generate();
 
       htmlString+='<div class="row" style="width:100%">\n';
-      htmlString+='<div class="col">Ranks:\n';
+      htmlString+='<div class="col-12 col-sm-6 col-md-4">Ranks:\n';
       htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></div>\n';
-      htmlString+='<div class="col">Total Cost Per Rank:\n';
+      htmlString+='<div class="col-12 col-sm-6 col-md-4">Total Cost Per Rank:\n';
       htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
-      htmlString+='<div class="col">Total Flat Modifier Cost:\n';
+      htmlString+='<div class="col-12 col-md-4">Total Flat Modifier Cost:\n';
       htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
       htmlString+='<div class="row" style="width:100%"><div class="col">Grand total for ' + sectionName.toTitleCase() + ':';
       htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
-      htmlString+='</div>\n\n';
+      htmlString+='</div><hr />\n\n';
       return htmlString;
    };
    /**Returns a json object of this row's data*/
