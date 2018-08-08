@@ -32,32 +32,32 @@ left side bar: font-size: 12px;
 /* TODO: more css clean up
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
-breakpoints: https://getbootstrap.com/docs/4.1/layout/overview/
-   use: https://www.webpagefx.com/tools/whats-my-browser-size/
-   (xs): 0+ (min window 361px but chrome device screen emulator allows smaller)
-      Nexus 5X: 412px width (555px height)
-      Moto G7: 360px width (541px height)
-   sm: 576px+
-      mid: 672px
-   md: 768px+
-      mid: 880px
-   lg: 992px+
-      mid: 1096px
-   xl: 1200px+
-add &nbsp; in totals (all pages)
-convert point counter
-   all pages should not have right margin/padding blank white space (when small at least)
-   skills: drop down/input col-xs-12
-   defense: col-xs-6
-   powers: needs correct cols, and scalable input text
-   why do my rows need to have width: 100%? and some of them container-fluid?
-   advantages: uses <br>, input text could be larger for a couple but meh
-   not sure if advantages or skills should use "= total"
-   should these inputs have proper labels?
-   textarea and input can be made style="width: 100%"
-      textarea rows/cols is em, I assume the same for input size
 bootstrap all
-   make sure nothing has fixed width/height (all are in CSS)
+   breakpoints: https://getbootstrap.com/docs/4.1/layout/overview/
+      use: https://www.webpagefx.com/tools/whats-my-browser-size/
+      (xs): 0+ (min window 361px but chrome device screen emulator allows smaller)
+         Nexus 5X: 412px width (555px height)
+         Moto G7: 360px width (541px height)
+      sm: 576px+
+         mid: 672px
+      md: 768px+
+         mid: 880px
+      lg: 992px+
+         mid: 1096px
+      xl: 1200px+
+   add &nbsp; in totals (all characters)
+   all pages should not have right margin/padding blank white space (when small at least)
+   convert point counter
+      mods: rank/text should be different rows when small, select should be col-3 maybe
+      defense: col-xs-6
+      powers: needs correct cols, and scalable input text
+      why do my rows need to have width: 100%? and some of them container-fluid?
+      advantages: uses <br>, input text could be larger for a couple but meh
+      not sure if advantages or skills should use "= total"
+      should these inputs have proper labels?
+      textarea and input can be made style="width: 100%"
+         textarea rows/cols is em, I assume the same for input size
+   make sure nothing has fixed width/height (all are in CSS. recently added some 100% width in js)
 printing
    https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
    https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after

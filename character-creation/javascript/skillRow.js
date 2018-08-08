@@ -79,7 +79,7 @@ function SkillObject(rowIndex)
    this.generate=function()
    {
       var htmlString = '<div class="row">\n';
-      htmlString+='<div class="col-6 col-sm-4 col-lg-3">';
+      htmlString+='<div class="col-12 col-sm-4 col-lg-3">';
       htmlString+='<select id="skillChoices'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').select();">\n';
       htmlString+='   <option>Select One</option>\n';
       for (var i=0; i < Data.Skill.names.length; i++)
@@ -91,7 +91,7 @@ function SkillObject(rowIndex)
 
       if (hasText)
       {
-         htmlString += '<div class="col-6 col-sm-8 col-md-5">';
+         htmlString += '<div class="col-12 col-sm-8 col-md-5">';
          htmlString += '<input type="text" style="width: 100%" id="skillText' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeText();" />';
          htmlString += '</div>\n';
          htmlString += '<div class="col-12 col-md-3 col-lg-4">';
