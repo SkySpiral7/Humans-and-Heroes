@@ -269,7 +269,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
       htmlString+='</div></div>\n';  //end col, row
       htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
-      htmlString+='<div class="row justify-content-center" style="width:100%">\n';
+      htmlString+='<div class="row justify-content-center">\n';
 
       htmlString+='<div class="col-12 col-sm-4 col-xl-3">\n';
       htmlString+='          Action\n';
@@ -320,7 +320,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
-         htmlString+='   <div class="row justify-content-end" style="width:100%">\n';
+         htmlString+='   <div class="row justify-content-end">\n';
          htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
          htmlString+='      </div>\n';
@@ -330,7 +330,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       htmlString+=modifierSection.generate();
 
-      htmlString+='<div class="row" style="width:100%">\n';
+      htmlString+='<div class="row">\n';
       htmlString+='<div class="col-12 col-sm-6 col-md-4">Ranks:\n';
       htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></div>\n';
       htmlString+='<div class="col-12 col-sm-6 col-md-4">Total Cost Per Rank:\n';
@@ -338,7 +338,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='<div class="col-12 col-md-4">Total Flat Modifier Cost:\n';
       htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
-      htmlString+='<div class="row" style="width:100%"><div class="col">Grand total for ' + sectionName.toTitleCase() + ':';
+      htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ':';
       htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
       htmlString+='</div><hr />\n\n';

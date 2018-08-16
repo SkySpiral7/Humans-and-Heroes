@@ -123,7 +123,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    {
       var totalIndex = powerRowIndex+'.'+modifierRowIndex;
       var htmlString='';
-      htmlString+='   <div class="row" style="width:100%">\n';  //TODO: confirm html
+      htmlString+='   <div class="row">\n';  //TODO: confirm html
       htmlString+='      <div class="col">\n';
       var amReadOnly = ('Selective' === name && 'Triggered' === this.getPower().getAction());  //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
       if(undefined !== name && !amReadOnly) amReadOnly = Data.Modifier[name].isReadOnly;

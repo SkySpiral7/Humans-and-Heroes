@@ -50,7 +50,6 @@ bootstrap all
    convert point counter
       mods: rank/text should be different rows when small, select should be col-3 maybe
       powers: needs correct cols, and scalable input text
-      why do my rows need to have width: 100%? and some of them container-fluid?
       advantages: uses <br>, input text could be larger for a couple but meh
       not sure if advantages or skills should use "= total"
       should these inputs have proper labels?
