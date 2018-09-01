@@ -252,7 +252,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    {
       var htmlString = '<div class="container-fluid"><div class="row">\n', i;
       htmlString+='<div class="col-12 col-sm-6"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
-      htmlString+='    <option>Select One</option>\n';
+      htmlString+='    <option>Select Power</option>\n';
       var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
          //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync

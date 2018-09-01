@@ -859,7 +859,7 @@ TestSuite.powerRow.setRange=function(testState={})
    try{
    SelectUtil.changeText('powerSelectAction0', 'Move');
    SelectUtil.changeText('powerSelectDuration0', 'Concentration');
-   SelectUtil.changeText('powerModifierChoices0.2', 'Select One');  //removes Affects Others (first 2 are for action and duration)
+   SelectUtil.changeText('powerModifierChoices0.2', 'Select Modifier');  //removes Affects Others (first 2 are for action and duration)
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Change to personal changes nothing: getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Change to personal changes nothing: getRange'});
    assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Change to personal changes nothing: getDuration'});

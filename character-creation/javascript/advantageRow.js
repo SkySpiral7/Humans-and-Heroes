@@ -78,7 +78,7 @@ function AdvantageObject(rowIndex)
       else
       {
           htmlString+='<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
-          htmlString+='    <option>Select One</option>\n';
+          htmlString+='    <option>Select Advantage</option>\n';
           var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
              //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
          for (i=0; i < Data.Advantage.names.length; i++)

@@ -62,7 +62,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
       if(wasAttack && 'Feature' !== this.getPower().getEffect()) this.getPower().setRange('Personal');
 
-      if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, eg: 'Select One'
+      if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, ie: 'Select Modifier'
       {
          this.constructor();  //reset row
          if(wasAttack) this.getPower().generateNameAndSkill();  //technically only necessary if 'Attack' === name
@@ -132,7 +132,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       {
          htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" ' +
             'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
-         htmlString+='             <option>Select One</option>\n';
+         htmlString+='             <option>Select Modifier</option>\n';
          for (var i=0; i < Data.Modifier.names.length; i++)
          {
             if(this.getPower().getSection() === Main.equipmentSection &&

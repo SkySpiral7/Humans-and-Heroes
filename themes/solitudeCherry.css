@@ -48,9 +48,8 @@ bootstrap all
    add &nbsp; in totals (all characters)
    all pages should not have right margin/padding blank white space (when small at least)
    convert point counter
-      rename selects to say "Select Power" etc
       why is calc pic on new row even xl?
-      advantages: uses <br>, input text could be larger for a couple but meh
+      advantages: uses <br>, test that godhood fits, input text could be larger for a couple but meh
       not sure if advantages or skills should use "= total"
       should these inputs have proper labels?
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex

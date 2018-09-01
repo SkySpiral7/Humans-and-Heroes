@@ -81,7 +81,7 @@ function SkillObject(rowIndex)
       var htmlString = '<div class="row">\n';
       htmlString+='<div class="col-12 col-sm-4 col-lg-3">';
       htmlString+='<select id="skillChoices'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').select();">\n';
-      htmlString+='   <option>Select One</option>\n';
+      htmlString+='   <option>Select Skill</option>\n';
       for (var i=0; i < Data.Skill.names.length; i++)
       {
          htmlString+='   <option>'+Data.Skill.names[i]+'</option>\n';

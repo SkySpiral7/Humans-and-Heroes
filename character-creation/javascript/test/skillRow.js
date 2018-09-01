@@ -49,7 +49,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
-    actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select One');
+    actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select Skill');
     assertions.push({Expected: true, Actual: firstRow.isBlank(), Description: actionTaken+': First row is now blank'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
@@ -82,7 +82,7 @@ TestSuite.skillRow.generate=function(testState={})
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken+('Has first ability: ' + Data.Ability.names[0])});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken+('Has last ability: ' + Data.Ability.names.last())});
 
-    actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select One');
+    actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select Skill');
     assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is blank'});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
