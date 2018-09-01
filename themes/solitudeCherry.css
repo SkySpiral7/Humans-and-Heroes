@@ -44,16 +44,16 @@ bootstrap all
          mid: 880px
       lg: 992px+
          mid: 1096px
-      xl: 1200px+
+      xl: 1200px+ (1835px maximized window)
    add &nbsp; in totals (all characters)
    all pages should not have right margin/padding blank white space (when small at least)
    convert point counter
-      mods: rank/text should be different rows when small, select should be col-3 maybe
-      powers: needs correct cols, and scalable input text
+      rename selects to say "Select Power" etc
+      why is calc pic on new row even xl?
       advantages: uses <br>, input text could be larger for a couple but meh
       not sure if advantages or skills should use "= total"
       should these inputs have proper labels?
-      textarea and input can be made style="width: 100%"
+      textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
          textarea rows/cols is em, I assume the same for input size
    make sure nothing has fixed width/height (all are in CSS. recently added some px width in js)
 printing

@@ -124,12 +124,14 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       var totalIndex = powerRowIndex+'.'+modifierRowIndex;
       var htmlString='';
       htmlString+='   <div class="row">\n';  //TODO: confirm html
-      htmlString+='      <div class="col">\n';
-      var amReadOnly = ('Selective' === name && 'Triggered' === this.getPower().getAction());  //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
+      htmlString+='      <div class="col-12 col-sm-5 col-lg-4">\n';
+      var amReadOnly = ('Selective' === name && 'Triggered' === this.getPower().getAction());
+         //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
       if(undefined !== name && !amReadOnly) amReadOnly = Data.Modifier[name].isReadOnly;
       if (this.getPower().getEffect() === 'Feature' || !amReadOnly)
       {
-         htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
+         htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" ' +
+            'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
          htmlString+='             <option>Select One</option>\n';
          for (var i=0; i < Data.Modifier.names.length; i++)
          {
@@ -143,32 +145,40 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       }
       else htmlString+='          <b><span id="'+sectionName+'ModifierName'+totalIndex+'"></span></b>\n';  //I know I could have the b tag with the id but I don't like that
       htmlString+='      </div>\n';
-      htmlString+='      <div class="col">\n';
+      if(this.isBlank()) return htmlString + '   </div>\n';  //done
+
       if (name === 'Attack')
       {
+         htmlString+='      <div class="col-12 col-sm-6 col-lg-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, powerRowIndex);
-         if(this.getPower().getRange() !== 'Perception') htmlString+=Data.SharedHtml.powerSkill(sectionName, powerRowIndex);
+         htmlString+='      </div>\n';
+         if(this.getPower().getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
+            Data.SharedHtml.powerSkill(sectionName, powerRowIndex) + '</div>';
       }
-      else if (!this.isBlank())  //do not add anything else except the closing divs
+      else  //attack doesn't have anything in this block so I might as well use else here
       {
          //if hasAutoTotal then hasRank is false
          if (hasRank)
          {
-            if(this.getPower().getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='          Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span>\n';
+            if(this.getPower().getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3">' +
+               'Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span></div>\n';
                //only Feature can change the ranks of these
             else
             {
-               htmlString+='          Applications ';
-               htmlString+='<input type="text" size="1" id="'+sectionName+'ModifierRank'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeRank()" />\n';
+               htmlString+='<div class="col-8 col-sm-5 col-md-4 col-lg-3">Applications ';
+               htmlString+='<input type="text" size="1" id="'+sectionName+'ModifierRank'+totalIndex+'" ' +
+                  'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeRank()" />';
+               htmlString+='</div>\n';
             }
          }
-         if(hasText) htmlString+='          Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" />\n';
-         if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='          = <span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span>\n';
+         if(hasText) htmlString+='<div class="col-12 col-sm-6 col-lg-4">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
+            'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></div>\n';
+         if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-3 col-sm-2 col-lg-1">' +
+            '= <span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
          //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,
          //if total doesn't match then it has had some cost quirk so show the total
          //yes I know if hasAutoTotal then rawTotal !== (costPerRank*rank) but checking hasAutoTotal is fast and more clear
       }
-      htmlString+='      </div>\n';
       htmlString+='   </div>\n';
       return htmlString;
    };
@@ -184,7 +194,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        else if(name === 'Dynamic Alternate Effect') nameToUse='Alternate Effect';
        else if(name === 'Inaccurate') nameToUse='Accurate';
        else if(name === 'Extended Range' || name === 'Diminished Range') nameToUse='Extended/Diminished Range';
-       //TODO: is uncontrolable entirely a unique modifer?
+       //TODO: is uncontrollable entirely a unique modifier?
        else nameToUse=name;
        //TODO: so I noticed that text should not be used most of the time for uniqueness (check required is only maybe)
 
