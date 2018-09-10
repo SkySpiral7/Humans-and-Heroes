@@ -46,7 +46,6 @@ bootstrap all
          mid: 1096px
       xl: 1200px+ (1835px maximized window)
    add &nbsp; in totals (all characters)
-   all pages should not have right margin/padding blank white space (when small at least)
    convert point counter
       why is calc pic on new row even xl?
       not sure if advantages or skills should use "= total"
@@ -79,6 +78,8 @@ single class character sheet. Ignore the point counter at first.
 probably don't: Write a script to inline classes that are only used once
 */
 
+/**Telling everyone to stay within bounds seems like the right thing to do
+although for some reason it prevents disabling the page's right margin (see below).*/
 * {
    max-width: 100%;
    max-height: 100%;
@@ -86,6 +87,18 @@ probably don't: Write a script to inline classes that are only used once
 
 body {
    line-height: 1.5;
+}
+
+/**This is to disable the page's right padding. Bootstrap requires container-fluid to exist.*/
+body > div.container-fluid {
+   padding-right: 0;
+}
+
+/**This is to disable the page's right margin.
+For some reason max-width being set causes Chrome to ignore margin-right: 0*/
+body > div.container-fluid > div.row {
+   max-width: unset;
+   margin-right: 0;
 }
 
 main {
