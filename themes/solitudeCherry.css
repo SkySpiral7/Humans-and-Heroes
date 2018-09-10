@@ -47,7 +47,6 @@ bootstrap all
       xl: 1200px+ (1835px maximized window)
    add &nbsp; in totals (all characters)
    all pages should not have right margin/padding blank white space (when small at least)
-   <br> is (shouldn't be) used in some tables
    convert point counter
       why is calc pic on new row even xl?
       not sure if advantages or skills should use "= total"
@@ -171,7 +170,7 @@ ol.legal-document > li > ol > li {
    list-style-type: lower-alpha;
 }
 
-.sites-sidebar-nav li {
+.sites-sidebar-nav li, .external-links li {
    list-style: none;
    list-style-image: none;
 }
@@ -208,7 +207,7 @@ U+25BF (White down-pointing small triangle ▿)
    padding-bottom: 0;
 }
 
-body .sites-sidebar-nav ul {
+.sites-sidebar-nav ul, .external-links {
    margin: 0;
    padding: 0;
 }
@@ -254,7 +253,7 @@ div.goog-toc p {
    margin: 5px 20px 5px 0;
 }
 
-body .sites-layout-sidebar-left {
+.sites-layout-sidebar-left {
    background: url("bg-pattern.gif") repeat;
    padding: 0;
    width: 170px;
@@ -265,7 +264,7 @@ body .sites-layout-sidebar-left {
    padding: 5px;
 }
 
-body .sites-layout-sidebar-left h2 {
+.sites-layout-sidebar-left h2 {
    border-bottom: 1px dotted darkred;
    font-size: 16px;
 }
