@@ -113,6 +113,7 @@ function AdvantageList()
        const aFirst = -1;
        const bFirst = 1;
 
+       //TODO: bug: when first adding equipment the new advantage is placed last without sorting
        if('Equipment' === a.getName()) return aFirst;
        if('Equipment' === b.getName()) return bFirst;
 

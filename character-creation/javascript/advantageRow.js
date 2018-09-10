@@ -73,30 +73,33 @@ function AdvantageObject(rowIndex)
    /**This creates the page's html (for the row). called by advantage section only*/
    this.generate=function()
    {
-       var htmlString = '', i;
-       if(name === 'Equipment') htmlString+='      <b id="advantageEquipment">Equipment</b>\n';
+      var htmlString = '<div class="row">', i;
+      if(name === 'Equipment') htmlString+='<div class="col-6 col-xl-4"><b id="advantageEquipment">Equipment</b></div>\n';
       else
       {
-          htmlString+='<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
-          htmlString+='    <option>Select Advantage</option>\n';
-          var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
-             //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
+         htmlString+='<div class="col-12 col-sm-6 col-xl-4">' +
+            '<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
+         htmlString+='    <option>Select Advantage</option>\n';
+         var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
+            //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
          for (i=0; i < Data.Advantage.names.length; i++)
          {
-             if('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
-                htmlString+='    <option>'+Data.Advantage.names[i]+'</option>\n';
+            if('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
+               htmlString+='    <option>'+Data.Advantage.names[i]+'</option>\n';
          }
-          htmlString+='</select>\n';
+         htmlString+='</select></div>\n';
       }
-       if(this.isBlank()) return htmlString;  //done
+      if(this.isBlank()) return htmlString + '</div>';  //done
 
-       if(name === 'Equipment') htmlString+='      Cost <span id="advantageEquipmentRankSpan"></span>\n';
-       else if(hasRank) htmlString+='Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" />\n';
+      if(name === 'Equipment') htmlString+='<div class="col-6 col-sm-3 col-xl-2">Cost <span id="advantageEquipmentRankSpan"></span></div>\n';
+      else if(hasRank) htmlString+='<div class="col-5 col-sm-3 col-xl-2">Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" ' +
+         'onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" /></div>\n';
 
-       if(hasText) htmlString+='<input type="text" id="advantageText'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" />\n';
-       if(costPerRank > 1) htmlString+='= <span id="advantageRowTotal'+rowIndex+'"></span>\n';
-       htmlString+='<br />\n';
-       return htmlString;
+      if(hasText) htmlString+='<div class="col-12 col-sm-6"><input type="text" style="width: 100%" id="advantageText'+rowIndex+'" ' +
+         'onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" /></div>\n';
+      if(costPerRank > 1) htmlString+='<div class="col-3 col-sm-2 col-xl-1">= <span id="advantageRowTotal'+rowIndex+'"></span></div>\n';
+      htmlString+='</div>\n';
+      return htmlString;
    };
    /**Get the name of the advantage appended with text to determine redundancy*/
    this.getUniqueName=function()
