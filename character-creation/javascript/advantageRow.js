@@ -97,7 +97,7 @@ function AdvantageObject(rowIndex)
 
       if(hasText) htmlString+='<div class="col-12 col-sm-6"><input type="text" style="width: 100%" id="advantageText'+rowIndex+'" ' +
          'onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" /></div>\n';
-      if(costPerRank > 1) htmlString+='<div class="col-3 col-sm-2 col-xl-1">= <span id="advantageRowTotal'+rowIndex+'"></span></div>\n';
+      if(costPerRank > 1) htmlString+='<div class="col-3 col-sm-2 col-xl-1">=&nbsp;<span id="advantageRowTotal'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
       return htmlString;
    };

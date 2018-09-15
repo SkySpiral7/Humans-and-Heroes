@@ -98,8 +98,7 @@ function SkillObject(rowIndex)
       }
       else htmlString+='<div class="col-12 col-sm-8">';
       htmlString+='Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" />\n';
-      htmlString+='+\n';
-      htmlString+='<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
+      htmlString+='+&nbsp;<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
       htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
       htmlString+='   <option>Agility</option>\n';
       htmlString+='   <option>Fighting</option>\n';
@@ -109,8 +108,7 @@ function SkillObject(rowIndex)
       htmlString+='   <option>Intellect</option>\n';
       htmlString+='   <option>Presence</option>\n';
       htmlString+='</select>\n';
-      htmlString+='=\n';
-      htmlString+='<span id="skill bonus '+rowIndex+'">0</span>\n';
+      htmlString+='=&nbsp;<span id="skill bonus '+rowIndex+'"></span>\n';
       htmlString+='</div>\n';
       htmlString+='</div>\n';
       return htmlString;

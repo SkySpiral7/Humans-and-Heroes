@@ -174,7 +174,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
          if(hasText) htmlString+='<div class="col-12 col-sm-6 col-lg-4">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
             'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></div>\n';
          if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-3 col-sm-2 col-lg-1">' +
-            '= <span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
+            '=&nbsp;<span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
          //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,
          //if total doesn't match then it has had some cost quirk so show the total
          //yes I know if hasAutoTotal then rawTotal !== (costPerRank*rank) but checking hasAutoTotal is fast and more clear
