@@ -24,7 +24,6 @@ function confirmAllXmls()
    TestRunner.clearResults();
     //Main.setRuleset(2, 7);  //the xmls are only saved with current rules
        //covered by clearResults and by Main.load
-    SelectUtil.setText('save-type', 'XML');  //needed
 
     var assertions=[];
     var actionTaken='Load Save Confirm';

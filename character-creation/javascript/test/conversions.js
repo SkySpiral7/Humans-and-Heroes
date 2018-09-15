@@ -48,15 +48,6 @@ TestSuite.conversions.xmlToJson=function(testState={})
 
    return TestRunner.displayResults('TestSuite.conversions.xmlToJson', assertions, testState);
 };
-TestSuite.conversions.jsonToXml=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.conversions.jsonToXml', assertions, testState);
-};
 TestSuite.conversions.jsonToMarkdown=function(testState={})
 {
    TestRunner.clearResults(testState);
