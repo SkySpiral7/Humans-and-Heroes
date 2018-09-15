@@ -47,9 +47,9 @@ bootstrap all
       xl: 1200px+ (1835px maximized window)
    convert point counter
       add a warning at the top saying that this doesn't work well on small screens
+         hide for lg, xl
+         Warning this page is confusing for small screens and inconvenient without a keyboard.
       why is calc (and most supers) pic on new row even xl?
-      Image Path: form
-      labels: &nbsp;
       add headers and explanation for save/load
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
          textarea rows/cols is em, I assume the same for input size

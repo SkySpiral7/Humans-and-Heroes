@@ -72,8 +72,10 @@
 <div class="character-sheet-image-section">
 <img src="../images/Sirocco.jpg" id="character-image" />
 <br />
+<form action="javascript:void(0);">
 <label>Image Path: <input type="text" value="../images/Sirocco.jpg" id="img-file-path" /></label>
-<input type="button" value="Load Image From Path" onClick="Main.loadImageFromPath();" /><br />
+<input type="submit" value="Load Image From Path" onClick="Main.loadImageFromPath();" />
+</form><br />
 <input type="file" accept="image/*" id="img-file-chooser" /><input type="button" value="Load Image From File" onClick="Main.loadImageFromFile();" />
 </div>
 </div>
