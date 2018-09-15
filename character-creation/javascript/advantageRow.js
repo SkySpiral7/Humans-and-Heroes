@@ -92,8 +92,8 @@ function AdvantageObject(rowIndex)
       if(this.isBlank()) return htmlString + '</div>';  //done
 
       if(name === 'Equipment') htmlString+='<div class="col-6 col-sm-3 col-xl-2">Cost <span id="advantageEquipmentRankSpan"></span></div>\n';
-      else if(hasRank) htmlString+='<div class="col-5 col-sm-3 col-xl-2">Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" ' +
-         'onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" /></div>\n';
+      else if(hasRank) htmlString+='<label class="col-5 col-sm-3 col-xl-2">Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" ' +
+         'onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" /></label>\n';
 
       if(hasText) htmlString+='<div class="col-12 col-sm-6"><input type="text" style="width: 100%" id="advantageText'+rowIndex+'" ' +
          'onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" /></div>\n';

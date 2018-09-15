@@ -165,14 +165,14 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
                //only Feature can change the ranks of these
             else
             {
-               htmlString+='<div class="col-8 col-sm-5 col-md-4 col-lg-3">Applications ';
+               htmlString+='<label class="col-8 col-sm-5 col-md-4 col-lg-3">Applications ';
                htmlString+='<input type="text" size="1" id="'+sectionName+'ModifierRank'+totalIndex+'" ' +
                   'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeRank()" />';
-               htmlString+='</div>\n';
+               htmlString+='</label>\n';
             }
          }
-         if(hasText) htmlString+='<div class="col-12 col-sm-6 col-lg-4">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
-            'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></div>\n';
+         if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
+            'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></label>\n';
          if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-3 col-sm-2 col-lg-1">' +
             '=&nbsp;<span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
          //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,

@@ -264,56 +264,65 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='</select></div>\n';
       if(this.isBlank()) return htmlString + '</div></div>';  //done
 
-      htmlString+='<div class="col">Base Cost per Rank:\n';
-      if(canSetBaseCost) htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
-      else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
-      htmlString+='</div></div>\n';  //end col, row
+      if (canSetBaseCost)
+      {
+         htmlString+='<label class="col">Base Cost per Rank:\n';
+         htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
+         htmlString+='</label>\n';  //end col
+      }
+      else
+      {
+         htmlString+='<div class="col">Base Cost per Rank:\n';
+         htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
+         htmlString+='</div>\n';  //end col
+      }
+      htmlString+='</div>\n';  //end row
       htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
       htmlString+='<div class="row justify-content-center">\n';
 
       htmlString+='<div class="col-12 col-sm-4 col-xl-3">\n';
-      htmlString+='          Action\n';
       var possibleActions = this.validateAndGetPossibleActions();
-      if(1 === possibleActions.length) htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+      if(1 === possibleActions.length) htmlString+='Action <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
          //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
       {
+         htmlString+='<label>Action';
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
          for (i = 0; i < possibleActions.length; ++i)
          {
             htmlString+='             <option>' + possibleActions[i] + '</option>\n';
          }
-         htmlString+='         </select>\n';
+         htmlString+='         </select></label>\n';
       }
       htmlString+='      </div>\n';
 
       htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
-      htmlString+='          Range\n';
       var possibleRanges = this.getPossibleRanges();
-      if(1 === possibleRanges.length) htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      if(1 === possibleRanges.length) htmlString+='Range <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
+         htmlString+='<label>Range';
          htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
          for (i = 0; i < possibleRanges.length; ++i)
          {
             htmlString+='             <option>' + possibleRanges[i] + '</option>\n';
          }
-         htmlString+='          </select>\n';
+         htmlString+='         </select></label>\n';
       }
       htmlString+='      </div>\n';
 
       htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
-      htmlString+='          Duration\n';
       var possibleDurations = this.validateAndGetPossibleDurations();
-      if(1 === possibleDurations.length) htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      if(1 === possibleDurations.length) htmlString+='Duration <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
+         htmlString+='<label>Duration';
          htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
          for (i = 0; i < possibleDurations.length; ++i)
          {
             htmlString+='             <option>' + possibleDurations[i] + '</option>\n';
          }
-         htmlString+='          </select>\n';
+         htmlString+='         </select></label>\n';
       }
       htmlString+='      </div>\n';
       htmlString+='   </div>\n';  //row
@@ -331,14 +340,14 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+=modifierSection.generate();
 
       htmlString+='<div class="row">\n';
-      htmlString+='<div class="col-12 col-sm-6 col-md-4">Ranks:\n';
-      htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></div>\n';
+      htmlString+='<label class="col-12 col-sm-6 col-md-4">Ranks: ';
+      htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></label>\n';
       htmlString+='<div class="col-12 col-sm-6 col-md-4">Total Cost Per Rank:\n';
       htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
       htmlString+='<div class="col-12 col-md-4">Total Flat Modifier Cost:\n';
       htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
-      htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ':';
+      htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ': ';
       htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
       htmlString+='</div><hr />\n\n';

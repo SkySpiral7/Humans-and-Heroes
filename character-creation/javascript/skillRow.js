@@ -97,7 +97,7 @@ function SkillObject(rowIndex)
          htmlString += '<div class="col-12 col-md-3 col-lg-4">';
       }
       else htmlString+='<div class="col-12 col-sm-8">';
-      htmlString+='Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" />\n';
+      htmlString+='<label>Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" /></label>\n';
       htmlString+='+&nbsp;<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
       htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
       htmlString+='   <option>Agility</option>\n';
