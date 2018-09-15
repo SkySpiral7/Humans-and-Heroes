@@ -108,7 +108,7 @@ function SkillObject(rowIndex)
       htmlString+='   <option>Intellect</option>\n';
       htmlString+='   <option>Presence</option>\n';
       htmlString+='</select>\n';
-      htmlString+='=&nbsp;<span id="skill bonus '+rowIndex+'"></span>\n';
+      htmlString+='(+<span id="skill bonus '+rowIndex+'"></span>)\n';
       htmlString+='</div>\n';
       htmlString+='</div>\n';
       return htmlString;
