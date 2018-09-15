@@ -45,9 +45,8 @@ bootstrap all
       lg: 992px+
          mid: 1096px
       xl: 1200px+ (1835px maximized window)
-   add &nbsp; in totals (all characters)
    convert point counter
-      why is calc pic on new row even xl?
+      why is calc (and most supers) pic on new row even xl?
       not sure if advantages or skills should use "= total"
       should these inputs have proper labels?
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
