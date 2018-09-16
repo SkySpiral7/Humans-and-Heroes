@@ -1,5 +1,4 @@
 'use strict';
-SelectUtil.setText('save-type', 'JSON');  //not needed for Loader but when I test I always use json
 var Loader = {};
 var Messages = {};
 Messages.list = [];  //intentionally public in order to clear it (without Loader) or to read amLoading

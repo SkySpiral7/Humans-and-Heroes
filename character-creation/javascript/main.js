@@ -167,21 +167,14 @@ function MainObject()
    It changes the a tag so that the link downloads the document as a saved file.*/
    this.saveToFile=function()
    {
-       var link = document.getElementById('save-to-file-link');
-      if (document.getElementById('save-type').value === 'JSON')
-      {
-          link.download = document.getElementById('hero-name').value+'.json';
-          link.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(this.saveAsString());
-      }
-      else
-      {
-          link.download = document.getElementById('hero-name').value+'.xml';
-          link.href = 'data:application/xml;charset=utf-8,'+encodeURIComponent(this.saveAsString());
-      }
-       //encodeURIComponent is called to convert end lines
-       //there is no way to clear out the link info right after the save as prompt. So just ignore the huge href
-       //assigning window.location doesn't work because it just takes you to the page instead of save prompt
-       //an iframe form submit might work but this is better
+      var link = document.getElementById('save-to-file-link');
+      link.download = document.getElementById('hero-name').value+'.json';
+      link.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(this.saveAsString());
+      //encodeURIComponent is called to convert end lines etc
+      //there is no way to clear out the link info right after the save as prompt. So just ignore the huge href
+      //assigning window.location doesn't work because it just takes you to the page instead of save prompt
+      //an iframe form submit might work but this is better except that it doesn't work in IE (even 12)
+      //TODO: test if iframe form submit can be done in all browsers
    };
    /**This function handles all changes needed when switching between rules. Main.clear() is called unless no change is needed.*/
    this.setRuleset=function(major, minor)
@@ -523,13 +516,9 @@ function MainObject()
    /**This returns the document's data as a string*/
    this.saveAsString=function()
    {
-       var jsonDoc = this.save();
-       var fileString;
-       if(document.getElementById('save-type').value === 'JSON') fileString = JSON.stringify(jsonDoc);
-          //in this case value returns the selected text because the html attribute named value is not defined
-       else fileString = jsonToXml(jsonDoc);
-
-       return fileString;
+      var jsonDoc = this.save();
+      var fileString = JSON.stringify(jsonDoc);
+      return fileString;
    };
    this.constructor=function()
    {
