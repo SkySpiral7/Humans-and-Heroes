@@ -32,6 +32,7 @@ left side bar: font-size: 12px;
 /* TODO: more css clean up
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
+calc: add headers and explanation for save/load
 bootstrap all
    breakpoints: https://getbootstrap.com/docs/4.1/layout/overview/
       use: https://www.webpagefx.com/tools/whats-my-browser-size/
@@ -47,11 +48,25 @@ bootstrap all
       xl: 1200px+ (1835px maximized window)
    convert point counter
       why is calc (and most supers) pic on new row even xl?
-      add headers and explanation for save/load
+         the image is too wide (if the 50vh doesn't shrink it)
+         can only fit 4/row if row is col-7+ which is only possible for xl
+         2/row looks pretty good (3/row doesn't) if I adjust the image max size for characters (character-sheet-image-section > img)
+         only adjust image size for lg and xl (since smaller has own row)
+         can group 2 ability into box so that always even
+         .character-sheet max-width: 950px; is to make it look like a printed sheet
+            the color makes it look fine without it: remove size
+            the calc stretches weird without it: look into
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
          textarea rows/cols is em, I assume the same for input size
          already max: power text, skill text, advantages, not: mods any, power name/skill
    make sure nothing has fixed width/height (all are in CSS. recently added some px width in js)
+      width
+         characters
+            normal characters look fine without max-width (except pic row)
+            calc xl is too stretched out but lg looks fine
+      height
+         fine
+   basics toc doesn't scale but is small
 make characters look like a character sheet (see M&M 3e)
 printing
    https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
@@ -82,10 +97,6 @@ although for some reason it prevents disabling the page's right margin (see belo
 * {
    max-width: 100%;
    max-height: 100%;
-}
-
-body {
-   line-height: 1.5;
 }
 
 /**This is to disable the page's right padding. Bootstrap requires container-fluid to exist.*/
@@ -170,8 +181,7 @@ hr {
 }
 
 ul li {
-   list-style-position: outside;
-   list-style-type: square;
+   list-style: square outside;
 }
 
 ol.legal-document > li {
@@ -184,7 +194,6 @@ ol.legal-document > li > ol > li {
 
 .sites-sidebar-nav li, .external-links li {
    list-style: none;
-   list-style-image: none;
 }
 
 .sites-sidebar-nav .expander {
@@ -268,7 +277,6 @@ div.goog-toc p {
 .sites-layout-sidebar-left {
    background: url("bg-pattern.gif") repeat;
    padding: 0;
-   width: 170px;
    font-size: 12px;
 }
 
@@ -381,6 +389,9 @@ th {
    border-top-width: 0;
    font-size: 16px;
 }
+.bar-code-border {
+   border: 5px solid;
+}
 
 .character-sheet input, .character-sheet select {
    font-size: 16px;
@@ -390,6 +401,7 @@ th {
 }
 .character-sheet, .character-sheet-explanation {
    max-width: 950px;
+   /*TODO: does not scale*/
 }
 textarea {
    resize: both;
@@ -470,7 +482,7 @@ textarea {
    float: right;
    margin-left: 10px;
    margin-top: 16px;
-   max-width: 450px;
+   max-width: 50%;
 }
 
 .red-panel,.green-panel {
@@ -562,6 +574,11 @@ textarea {
    padding: 5px;
 }
 
+.horizontal-center-image {
+   margin: 0 auto 0 auto;
+   display: block;
+}
+
 /*used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
@@ -584,18 +601,11 @@ textarea {
    width: 45%;
 }
 
-.generated-class-9 {
-   border-style: solid;
-   border-width: 5px;
-   vertical-align: middle;
-   width: 150px;
-}
-
 .generated-class-12 {
    font-size: 12px;
 }
 
-.generated-class-13 {
+.fudge-dice-img {
    display: inline;
    height: 36px;
    width: 36px;
@@ -605,25 +615,12 @@ textarea {
    clear: both;
 }
 
-.generated-class-19 {
-   margin: 0 auto 0 auto;
-   width: 400px;
-}
-
 .table-alt-rows .generated-class-22 {
    text-align: right;
 }
 
 .table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
    text-align: left;
-}
-
-.generated-class-28 {
-   width: 300px;
-}
-
-.generated-class-34 {
-   width: 250px;
 }
 
 .generated-class-36 {

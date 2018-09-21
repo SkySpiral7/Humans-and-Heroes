@@ -651,7 +651,7 @@ output+='<li><a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>
 output+='</ul>\n';
 output+='<hr/>\n';
 output+='<div class="sites-embed-content-sidebar-textbox d-none d-md-block">\n';
-output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
+output+='<img src="' + absolutePrefix + 'images/upc.png" class="bar-code-border" />\n';
 output+='</div>\n';
 output+='</nav>\n';
 
