@@ -280,7 +280,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
       htmlString+='<div class="row justify-content-center">\n';
 
-      htmlString+='<div class="col-12 col-sm-4 col-xl-3">\n';
+      htmlString+='<div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleActions = this.validateAndGetPossibleActions();
       if(1 === possibleActions.length) htmlString+='Action <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
          //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
@@ -296,7 +296,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </div>\n';
 
-      htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleRanges = this.getPossibleRanges();
       if(1 === possibleRanges.length) htmlString+='Range <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
@@ -311,7 +311,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
       htmlString+='      </div>\n';
 
-      htmlString+='      <div class="col-12 col-sm-4 col-xl-3">\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleDurations = this.validateAndGetPossibleDurations();
       if(1 === possibleDurations.length) htmlString+='Duration <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else

@@ -64,6 +64,9 @@ bootstrap all
          characters
             normal characters look fine without max-width (except pic row)
             calc xl is too stretched out but lg looks fine
+               power name/skill: justify-content-xl-center
+               most of power, advantage, skill: col-xl-auto
+               can I use auto for all? is that the same as col?
       height
          fine
    basics toc doesn't scale but is small
