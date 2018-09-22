@@ -71,6 +71,9 @@ bootstrap all
          fine
    basics toc doesn't scale but is small
 make characters look like a character sheet (see M&M 3e)
+   really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
+   it would just have cols and max-width
+   try it on a non-calc first
 printing
    https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
    https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
@@ -125,7 +128,6 @@ h1 {
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
    color: white;
-   margin: 0;
    padding: 10px;
    font-size: 32px;
    clear: both;  /*This can be removed (along with some id=) when h1 is only a page header*/
@@ -143,13 +145,11 @@ site-map.html is considered the folder of the website (red)
 h2 {
    color: darkred;
    font-size: 28px;
-   margin: 0;
    text-decoration: underline;
 }
 
 h3 {
    font-size: 20px;
-   margin: 0;
    text-decoration: underline;
 }
 
@@ -163,7 +163,6 @@ h3 {
 /**All of them are h3*/
 .table-name {
    color: darkblue;
-   margin: 10px 0 10px 0;
 }
 
 a:link, a:visited {
@@ -204,7 +203,6 @@ ol.legal-document > li > ol > li {
    float: left;
    height: 11px;
    margin: 3px 0 0 4px;
-   padding: 0 2px;
    width: 11px;
 }
 
@@ -232,7 +230,6 @@ U+25BF (White down-pointing small triangle ▿)
 }
 
 .sites-sidebar-nav ul, .external-links {
-   margin: 0;
    padding: 0;
 }
 
@@ -338,10 +335,6 @@ img {
 .graph-row > div {
    display: inline-block;
    vertical-align: top;  /*This is here for what seems to be a bug: without it the height of graph-row is larger than it should be.*/
-}
-
-.table-alt-rows {
-   margin: 10px;
 }
 
 .table-alt-rows td {
@@ -474,7 +467,6 @@ textarea {
 }
 .character-sheet-ability-section {
    display: inline-block;
-   margin-right: 10px;
 }
 .character-sheet-image-section {
    border: solid 5px darkgreen;
@@ -530,7 +522,7 @@ textarea {
 
 .example {
    font-style: italic;
-   margin-left: 20px;
+   padding-left: 20px;
 }
 
 .info-banner {
