@@ -81,6 +81,7 @@ output+='</button>\n';
 output+='</form>\n';
 output+='</div>\n';
 
+//Adding a div outside of nav doesn't help the animation.
 output+='<nav class="collapse" id="top-nav"><div class="sites-sidebar-nav"><ul>\n';
 
 var navigationJson = [
@@ -607,14 +608,15 @@ function sideBarCreation(entry, depth)
 
    if (isParent)
    {
-      output+='<ul class="collapse';
+      //The div is required for a smooth animation.
+      output+='<div class="collapse';
       if(shouldShow) output+=' show';
-      output+='" id="expand' + expandIndex + '">\n';
+      output+='" id="expand' + expandIndex + '"><ul>\n';
       for (var i = 0; i < entry.children.length; ++i)
       {
          sideBarCreation(entry.children[i], (depth+1));
       }
-      output+='</ul>\n';
+      output+='</ul></div>\n';
    }
    output+='</li>\n';
 }
