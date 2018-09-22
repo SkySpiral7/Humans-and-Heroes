@@ -45,7 +45,6 @@ xl: 1200px+ (1835px maximized window)
 */
 
 /* TODO: more css clean up
-main needs to be col-12 col-md-9 col-xl-10 to prevent 100% problems (text area)
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
 calc: add headers and explanation for save/load (should come before usage)
