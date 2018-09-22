@@ -46,29 +46,20 @@ bootstrap all
       lg: 992px+
          mid: 1096px
       xl: 1200px+ (1835px maximized window)
+   odd ability rows
+      can only fit 4/row if row is col-7+ which is only possible for xl
+      2/row looks pretty good (3/row doesn't)
+      can group 2 ability into box so that always even
    convert point counter
-      why is calc (and most supers) pic on new row even xl?
-         the image is too wide (if the 50vh doesn't shrink it)
-         can only fit 4/row if row is col-7+ which is only possible for xl
-         2/row looks pretty good (3/row doesn't) if I adjust the image max size for characters (character-sheet-image-section > img)
-         only adjust image size for lg and xl (since smaller has own row)
-         can group 2 ability into box so that always even
-         .character-sheet max-width: 950px; is to make it look like a printed sheet
-            the color makes it look fine without it: remove size
-            the calc stretches weird without it: look into
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
          textarea rows/cols is em, I assume the same for input size
          already max: power text, skill text, advantages, not: mods any, power name/skill
-   make sure nothing has fixed width/height (all are in CSS. recently added some px width in js)
-      width
-         characters
-            normal characters look fine without max-width (except pic row)
-            calc xl is too stretched out but lg looks fine
-               power name/skill: justify-content-xl-center
-               most of power, advantage, skill: col-xl-auto
-               can I use auto for all? is that the same as col?
-      height
-         fine
+   make sure nothing has fixed width (height already addressed)
+      normal characters look fine without max-width
+      calc xl is too stretched out but lg looks fine
+         power name/skill: justify-content-xl-center
+         most of power, advantage, skill: col-xl-auto
+         can I use auto for all? is that the same as col?
    basics toc doesn't scale but is small
 make characters look like a character sheet (see M&M 3e)
    really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
@@ -323,12 +314,17 @@ div.goog-toc p {
 
 img {
    max-height: 50vh;
-   max-width: 100%;
+}
+
+/* Large+ devices*/
+@media (min-width: 992px) {
+   img {
+      max-height: none;
+   }
 }
 
 .graph-row > img {
    min-width: 300px;
-   max-width: 100%;
    max-height: none;
 }
 
@@ -466,10 +462,6 @@ textarea {
    text-align: center;
 }
 .character-sheet-ability-section {
-   display: inline-block;
-}
-.character-sheet-image-section {
-   border: solid 5px darkgreen;
    display: inline-block;
 }
 
