@@ -45,16 +45,7 @@ xl: 1200px+ (1835px maximized window)
 */
 
 /* TODO: more css clean up
-bootstrap all
-   convert point counter
-      textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
-         textarea rows/cols is em, I assume the same for input size
-         already max: power text, skill text, advantages, not: mods any, power name/skill
-   odd ability rows
-      can only fit 4/row if row is col-7+ which is only possible for xl
-      2/row looks pretty good (3/row doesn't)
-      can group 2 ability into box so that always even
-   basics toc doesn't scale but is small
+main needs to be col-12 col-md-9 col-xl-10 to prevent 100% problems (text area)
 h1 should only be 1 per page
 red-panel/green-panel should really have an h3 for their first element and be centered
 calc: add headers and explanation for save/load (should come before usage)
@@ -67,6 +58,14 @@ printing
    https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
    https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
    it would be nice to be able to print condition cards (9 per page) and character sheets (somehow)
+unfortunate bootstrap wrapping for certain width (usually fine)
+   odd ability rows
+      can only fit 4/row if row is col-7+ which is only possible for xl
+      2/row looks pretty good (3/row doesn't)
+      can group 2 ability into box so that always even
+      an inline-block col can have 2 inline-block abilities
+         but there seems to be a rounding error with % width and Awareness gets cut
+   basics first p gets squashed between toc and image. usually still readable
 have point-counter switch between view and edit modes
    have all characters use view mode if possible
       the character page would have only an iframe with ?readonly=true (to disable edit) hide internal sidebar with hideSidebar=true
@@ -388,6 +387,12 @@ th {
 }
 .character-sheet input[type="file"] {
    background-color: white;
+}
+.fill-remaining {
+   display: flex;
+}
+.fill-remaining > input {
+   flex-grow: 1;
 }
 textarea {
    resize: both;

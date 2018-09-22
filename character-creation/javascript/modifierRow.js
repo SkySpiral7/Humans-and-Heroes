@@ -149,10 +149,10 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
 
       if (name === 'Attack')
       {
-         htmlString+='      <div class="col-12 col-sm-6 col-lg-4 col-xl-auto">\n';
+         htmlString+='      <div class="col-12 col-sm-6 col-lg-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, powerRowIndex);
          htmlString+='      </div>\n';
-         if(this.getPower().getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+         if(this.getPower().getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
             Data.SharedHtml.powerSkill(sectionName, powerRowIndex) + '</div>';
       }
       else  //attack doesn't have anything in this block so I might as well use else here
@@ -171,7 +171,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
                htmlString+='</label>\n';
             }
          }
-         if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-auto">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
+         if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;<input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
             'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></label>\n';
          if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-auto">' +
             '=&nbsp;<span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
