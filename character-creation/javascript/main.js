@@ -228,7 +228,7 @@ function MainObject()
    {
        powerLevelAttackEffect=0; powerLevelPerceptionEffect=0;
        var attackBonus;
-       var allOffensiveRows = '<table width="100%">';
+       var allOffensiveRows = '';
        var closeSkillMap = this.skillSection.getCloseCombatMap();
        var rangeSkillMap = this.skillSection.getRangedCombatMap();
        var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.x. will be 0 otherwise
@@ -270,7 +270,6 @@ function MainObject()
 
        //TODO: doesn't include skills like Swords
        //TODO: (v1.x) if Improvised Weapon advantage then use Unarmed damage
-       allOffensiveRows+='</table>';
        document.getElementById('offensive-section').innerHTML = allOffensiveRows;
        //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
    };
@@ -481,9 +480,9 @@ function MainObject()
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
    this.makeOffenseRow=function(skillName, attackBonus, range, effect, damage)
    {
-       var thisOffensiveRow = '<tr><td class="character-sheet-offense-row">' + skillName + ' ';
+       var thisOffensiveRow = '<div class="row"><div class="character-sheet-offense-row col">' + skillName + ' ';
        if(attackBonus !== '--' && attackBonus >= 0) thisOffensiveRow+='+';  //add leading plus. checking for '--' is unneeded but more clear
-       thisOffensiveRow+=attackBonus+'</td><td class="character-sheet-offense-row">' + range + ', ' + effect + ' ' + damage;
+       thisOffensiveRow+=attackBonus+'</div><div class="character-sheet-offense-row col">' + range + ', ' + effect + ' ' + damage;
 
        var minCritNum = (20 - this.advantageSection.getRankMap().get('Improved Critical: '+skillName));
        if(minCritNum < 20) thisOffensiveRow+=', Crit. '+minCritNum+'-20';  //the '-20' is a range through 20
@@ -491,7 +490,7 @@ function MainObject()
        if(attackBonus === '--' && powerLevelPerceptionEffect < damage) powerLevelPerceptionEffect = damage;
        else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus+damage)) powerLevelAttackEffect = (attackBonus+damage);
 
-       thisOffensiveRow+='</td></tr>\n';
+       thisOffensiveRow+='</div></div>\n';
        return thisOffensiveRow;
    };
    /**This returns the document's data as a json object*/
