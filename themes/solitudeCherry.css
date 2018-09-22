@@ -302,7 +302,8 @@ div.goog-toc p {
       }
 
       #top-nav {
-         max-height: calc(100vh - 3.5rem);
+         /*The search box above this has height 52px. Bootstrap uses rem so that makes 3.25rem.*/
+         max-height: calc(100vh - 3.25rem);
          overflow-y: auto
       }
    }
