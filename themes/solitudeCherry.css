@@ -169,8 +169,22 @@ hr {
    height: 3px;
 }
 
+ul {
+   /*This is Chrome's default. Setting here for consistent size with enough room for bullets.*/
+   padding-left: 40px;
+}
+
+ul.radio-ul {
+   /*The radio buttons are the inside bullets therefore have half padding in order to make them line up with other ul.*/
+   padding-left: 20px;
+}
+
 ul li {
    list-style: square outside;
+}
+
+ul.radio-ul li {
+   list-style: none;
 }
 
 ol.legal-document > li {
