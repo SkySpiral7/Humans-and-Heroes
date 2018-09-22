@@ -32,12 +32,56 @@ if (!currentPage.endsWith('.html'))
 
 var output = '';
 
-output+='<form action="javascript:search();">\n';
-output+='<input type="text" value="" width="100%" id="searchBar" />\n';
-output+='<input type="submit" value="Search" />\n';
-output+='</form>\n';
+//TODO: be aggressive at removing sidebar from spiders:
+/*
+<!--googleoff: all-->
+<!--noindex-->
+<noindex>
+<div class="robots-noindex robots-nofollow robots-nocontent noindex nofollow">
+Sidebar.
+</div>
+</noindex>
+<!--/noindex-->
+<!--googleon: all-->
 
-output+='<div class="sites-sidebar-nav"><ul>\n';
+might be able to include an html file if I tried (and have that be noindex):
+https://stackoverflow.com/questions/35016709/how-to-access-elements-of-imported-html-from-script-inside-imported-html
+https://www.html5rocks.com/en/tutorials/webcomponents/customelements/
+
+then tell google to reindex:
+https://stackoverflow.com/questions/9466360/how-to-request-google-to-re-crawl-my-website
+https://www.google.com/webmasters/tools/googlebot-fetch?hl=en&authuser=0&siteUrl=http://skyspiral7.github.io/Humans-and-Heroes/
+
+then compare custom search with normal google again:
+https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes#gsc.tab=0&gsc.q=flight&gsc.page=1
+https://cse.google.com/cse/setup/basic?cx=002064182061922770744:f-jonz3baes
+
+if still sucks:
+I am the owner of http://skyspiral7.github.io/Humans-and-Heroes/ and currently have a search bar that simply makes a calls directly google such as https://www.google.com/search?q=site:http://skyspiral7.github.io/Humans-and-Heroes+flight and I have been satisfied with the results. I just found out about Google custom searches and created one. However I noticed that doing a custom search for the exact same search term returns 2 fewer results, one of which is the most relevant result (https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes doesn't include a result of http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/effects/flight.html)
+*/
+output+='<div>\n';
+output+='<form class="d-flex align-items-center" action="javascript:search();">\n';
+output+='<input type="search" value="" class="form-control" placeholder="Search..." id="searchBar" />\n';
+output+='<button class="btn btn-link" type="submit">\n';
+output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12 13">\n';
+output+='<g fill="none" stroke="#54595d" stroke-width="2">\n';
+output+='<path d="M11.29 11.71l-4-4"></path>\n';
+output+='<circle cx="5" cy="5" r="4"></circle>\n';
+output+='</g>\n';
+output+='</svg>\n';
+output+='</button>\n';
+output+='<button class="btn btn-link d-md-none" type="button" data-toggle="collapse"\n';
+output+='data-target="#top-nav">\n';
+output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" focusable="false">\n';
+output+='<title>Menu</title>\n';
+output+='<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
+output+='d="M4 7h22M4 15h22M4 23h22"></path>\n';
+output+='</svg>\n';
+output+='</button>\n';
+output+='</form>\n';
+output+='</div>\n';
+
+output+='<nav class="collapse" id="top-nav"><div class="sites-sidebar-nav"><ul>\n';
 
 var navigationJson = [
    {
@@ -532,9 +576,6 @@ function sideBarCreation(entry, depth)
       {
          if(0 === depth) output+=' ';
          output+='parent';
-         var containingFolderOfLink = entry.link.replace(/\/[^\/]*?$/, '/');
-         if(depth > 0 && !currentPage.startsWith(containingFolderOfLink)) output+=' closed';
-         output+='" id="expand' + expandIndex;
       }
       output+='"';
    }
@@ -549,16 +590,26 @@ function sideBarCreation(entry, depth)
    padding += (19 * depth);
    output+=''+ padding;
 
+   var containingFolderOfLink = entry.link.replace(/\/[^\/]*?$/, '/');
+   var shouldShow = (depth === 0 || currentPage.startsWith(containingFolderOfLink));
+
    output+='px;">\n';
-   if(isParent) output+='<div class="expander" onClick="return toggleMe(\'expand' + expandIndex + '\');"></div>\n';
+   if (isParent)
+   {
+      ++expandIndex;
+      output+='<a href="javascript:void(0);//expand or collapse" class="expander';
+      if(!shouldShow) output+=' collapsed';
+      output+='" data-toggle="collapse" data-target="#expand' + expandIndex + '"></a>';
+   }
    if(entry.link === currentPage) output+=entry.name + '\n';
    else output+='<a href="' + absolutePrefix + entry.link + '">' + entry.name + '</a>\n';
    output+='</div>\n';
 
    if (isParent)
    {
-      ++expandIndex;
-      output+='<ul>\n';
+      output+='<ul class="collapse';
+      if(shouldShow) output+=' show';
+      output+='" id="expand' + expandIndex + '">\n';
       for (var i = 0; i < entry.children.length; ++i)
       {
          sideBarCreation(entry.children[i], (depth+1));
@@ -572,51 +623,46 @@ for (var i = 0; i < navigationJson.length; ++i)
    sideBarCreation(navigationJson[i], 0);
 }
 
-output+='</ul>\n';
-output+='</div>\n';
-output+='<hr/><div class="sites-embed-content-sidebar-textbox"><div class="stamp-top">\n';
-output+='COMICS<br />\n';
-output+='GROUP\n';
+output+='</ul></div>\n';
+output+='<hr/><div class="sites-embed-content-sidebar-textbox d-none d-md-block"><div class="stamp-top">\n';
+output+='Comics<br />\n';
+output+='Group\n';
 output+='</div>\n';
 output+='<div class="stamp-middle">\n';
 output+='35&cent;\n';
 output+='</div>\n';
-output+='<div class="stamp-bottom" title="Send me an email!">\n';
-output+='<a href="mailto:rworcest@g.emporia.edu">CONTACT ME</a>\n';
+output+='<div class="stamp-bottom">\n';
+output+='<a href="mailto:rworcest@g.emporia.edu" title="Send me an email!">Contact Me</a>\n';
 output+='</div></div>\n';
-output+='<h2>M&amp;M External Links</h2>\n';
-output+='<a href="http://www.greenronin.com/">Green Ronin</a><br />\n';
-output+='<a href="http://mutantsandmasterminds.com/">Mutants &amp; Masterminds.com</a><br />\n';
-output+='<a href="http://www.atomicthinktank.com/index.php">Mutants &amp; Masterminds Forum</a><br />\n';
-output+='<a href="http://mmconversions.wikidot.com/">Hero Conversions</a><br />\n';
-output+='<a href="http://wolflair.com/index.php?context=hero_lab">Hero Lab</a><br />\n';
-output+='<a href="http://grfiles.game-host.org/3e_files/MnM3_charsheet_color.pdf">Character Sheet</a><br />\n';
-output+='<a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=37265">Character Generator</a><br />\n';
-output+='<a href="http://stornart.com/">Hero Art by Storn Cook</a><br />\n';
-output+='<a href="http://opengameart.org/">Open Game Art</a><br />\n';
-output+='<a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a>\n';
+output+='<h3 class="d-block d-md-none"><a href="mailto:rworcest@g.emporia.edu" title="Send me an email!">Contact Me</a></h3>\n';
 output+='<hr/>\n';
-output+='<div class="sites-embed-content-sidebar-textbox">\n';
-output+='<img src="' + absolutePrefix + 'images/upc.png" class="generated-class-9" />\n';
+output+='<h2>M&amp;M External Links</h2>\n';
+output+='<ul class="external-links">\n';
+output+='<li><a href="http://www.greenronin.com/">Green Ronin</a></li>\n';
+output+='<li><a href="http://mutantsandmasterminds.com/">Mutants &amp; Masterminds.com</a></li>\n';
+output+='<li><a href="http://www.atomicthinktank.com/index.php">Mutants &amp; Masterminds Forum</a></li>\n';
+output+='<li><a href="http://mmconversions.wikidot.com/">Hero Conversions</a></li>\n';
+output+='<li><a href="http://wolflair.com/index.php?context=hero_lab">Hero Lab</a></li>\n';
+output+='<li><a href="http://grfiles.game-host.org/3e_files/MnM3_charsheet_color.pdf">Character Sheet</a></li>\n';
+output+='<li><a href="http://www.atomicthinktank.com/viewtopic.php?f=1&t=37265">Excel Character Generator</a></li>\n';
+output+='<li><a href="http://stornart.com/">Hero Art by Storn Cook</a></li>\n';
+output+='<li><a href="http://opengameart.org/">Open Game Art</a></li>\n';
+output+='<li><a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a></li>';
+output+='</ul>\n';
+output+='<hr/>\n';
+output+='<div class="sites-embed-content-sidebar-textbox d-none d-md-block">\n';
+output+='<img src="' + absolutePrefix + 'images/upc.png" class="bar-code-border" />\n';
 output+='</div>\n';
+output+='</nav>\n';
 
 document.getElementsByClassName('sites-layout-sidebar-left')[0].innerHTML = output;
 //There will only be 1. Doing this because chrome complained about document.write(output);
 })();
 
-function toggleMe(elementId)
-{
-   var element = document.getElementById(elementId);
-   if(null === element) return true;
-
-   if(element.className.endsWith(' closed')) element.className = element.className.replace(' closed', '');
-   else element.className += ' closed';
-   return true;
-}
 function search()
 {
    var searchText = document.getElementById('searchBar').value;
-   var url = 'https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fskyspiral7.github.io%20' + encodeURIComponent(searchText);
+   var url = 'https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fskyspiral7.github.io%2FHumans-and-Heroes%20' + encodeURIComponent(searchText);
    window.location.href = url;
    return false;
 }

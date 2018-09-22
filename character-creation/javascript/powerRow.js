@@ -250,9 +250,9 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
    {
-      var htmlString = '', i;
-      htmlString+='<select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
-      htmlString+='    <option>Select One</option>\n';
+      var htmlString = '<div class="container-fluid"><div class="row">\n', i;
+      htmlString+='<div class="col-12 col-sm-6 col-xl-auto"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
+      htmlString+='    <option>Select Power</option>\n';
       var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
          //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
@@ -261,85 +261,96 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          if(displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
             htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
       }
-      htmlString+='</select>\n';
-      if(this.isBlank()) return htmlString;  //done
+      htmlString+='</select></div>\n';
+      if(this.isBlank()) return htmlString + '</div></div>';  //done
 
-      htmlString+='Base Cost per Rank:\n';
-      if(canSetBaseCost) htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
-      else htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
-      htmlString+='<input type="text" size="90" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" />\n';
-      htmlString+='<br />\n';
-      htmlString+='<table width="100%">\n';
-      htmlString+='   <tr>\n';
+      if (canSetBaseCost)
+      {
+         htmlString+='<label class="col">Base Cost per Rank:\n';
+         htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
+         htmlString+='</label>\n';  //end col
+      }
+      else
+      {
+         htmlString+='<div class="col">Base Cost per Rank:\n';
+         htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
+         htmlString+='</div>\n';  //end col
+      }
+      htmlString+='</div>\n';  //end row
+      htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
+      htmlString+='<div class="row justify-content-center">\n';
 
-      htmlString+='      <td width="34%" style="text-align:right;">\n';
-      htmlString+='          Action\n';
+      htmlString+='<div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleActions = this.validateAndGetPossibleActions();
-      if(1 === possibleActions.length) htmlString+='          <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+      if(1 === possibleActions.length) htmlString+='Action <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
          //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
       {
+         htmlString+='<label>Action';
          htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
          for (i = 0; i < possibleActions.length; ++i)
          {
             htmlString+='             <option>' + possibleActions[i] + '</option>\n';
          }
-         htmlString+='         </select>\n';
+         htmlString+='         </select></label>\n';
       }
-      htmlString+='      </td>\n';
+      htmlString+='      </div>\n';
 
-      htmlString+='      <td colspan="2" width="66%">\n';
-      htmlString+='          Range\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleRanges = this.getPossibleRanges();
-      if(1 === possibleRanges.length) htmlString+='          <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      if(1 === possibleRanges.length) htmlString+='Range <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
+         htmlString+='<label>Range';
          htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
          for (i = 0; i < possibleRanges.length; ++i)
          {
             htmlString+='             <option>' + possibleRanges[i] + '</option>\n';
          }
-         htmlString+='          </select>\n';
+         htmlString+='         </select></label>\n';
       }
+      htmlString+='      </div>\n';
 
-      htmlString+='          Duration\n';
+      htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
       var possibleDurations = this.validateAndGetPossibleDurations();
-      if(1 === possibleDurations.length) htmlString+='          <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      if(1 === possibleDurations.length) htmlString+='Duration <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
+         htmlString+='<label>Duration';
          htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
          for (i = 0; i < possibleDurations.length; ++i)
          {
             htmlString+='             <option>' + possibleDurations[i] + '</option>\n';
          }
-         htmlString+='          </select>\n';
+         htmlString+='         </select></label>\n';
       }
-      htmlString+='      </td>\n';
-      htmlString+='   </tr>\n';
+      htmlString+='      </div>\n';
+      htmlString+='   </div>\n';  //row
 
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
-         htmlString+='   <tr>\n';
-         htmlString+='       <td width="34%" style="text-align:right;"></td>\n';
-         htmlString+='      <td colspan="2" width="66%">\n';
+         htmlString+='   <div class="row justify-content-end justify-content-xl-center">\n';
+         htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
-         if(undefined !== skillUsed) htmlString+=Data.SharedHtml.powerSkill(sectionName, rowIndex);
-         htmlString+='      </td>\n';
-         htmlString+='   </tr>\n';
+         htmlString+='      </div>\n';
+         if(undefined !== skillUsed) htmlString+='<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' + Data.SharedHtml.powerSkill(sectionName, rowIndex) + '</div>';
+         htmlString+='   </div>\n';
       }
 
       htmlString+=modifierSection.generate();
 
-      htmlString+='</table>\n';
-      htmlString+='Ranks:\n';
-      htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" />\n';
-      htmlString+='Total Cost Per Rank:\n';
-      htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span>.\n';
-      htmlString+='Total Flat Modifier Cost:\n';
-      htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span>\n';
-      htmlString+='=\n';
-      htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span>\n';
-      htmlString+='<br /><br />\n\n';
+      htmlString+='<div class="row">\n';
+      htmlString+='<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
+      htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></label>\n';
+      htmlString+='<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
+      htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
+      htmlString+='<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
+      htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
+      htmlString+='</div>\n';
+      htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ': ';
+      htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span></div>\n';
+      htmlString+='</div>\n';
+      htmlString+='</div><hr />\n\n';
       return htmlString;
    };
    /**Returns a json object of this row's data*/

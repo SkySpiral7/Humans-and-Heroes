@@ -24,9 +24,8 @@ function confirmAllXmls()
    TestRunner.clearResults();
     //Main.setRuleset(2, 7);  //the xmls are only saved with current rules
        //covered by clearResults and by Main.load
-    SelectUtil.setText('save-type', 'XML');  //needed
 
-    var testResults=[];
+    var assertions=[];
     var actionTaken='Load Save Confirm';
     var basePath='xml/';  //relative is the only kind that is portable. it is relative to the .html file not the js
     var allFolders=['', 'Gamemaster/animals/', 'Gamemaster/civilians/', 'Gamemaster/public-servants/', 'Gamemaster/trained-combatants/', 'Gamemaster/underworld-archetypes/'];
@@ -57,13 +56,13 @@ function confirmAllXmls()
           Main.loadFromTextArea();
           Main.saveToTextArea();
           var newContents=document.getElementById('code-box').value;
-          testResults.push({Expected: originalContents, Actual: newContents, Description: actionTaken+allFolders[folderIndex]+allFiles[folderIndex][fileIndex]});
+          assertions.push({Expected: originalContents, Actual: newContents, Description: actionTaken+allFolders[folderIndex]+allFiles[folderIndex][fileIndex]});
           //break;
       }
        //break;
    }
 
-    return TestRunner.displayResults('confirmAllXmls', testResults, true);
+    return TestRunner.displayResults('confirmAllXmls', assertions, true);
 }
 /*
 What I want: rename, goto anything, goto definition, find all usages, stuff from np++
@@ -98,7 +97,7 @@ http://www.slant.co/topics/1686/~javascript-ides-and-editors
  Unlike confirmAllXmls this test suite is not in any way related to the project which is why is isn't hidden in TestSuite.*/
 function unlinkedNanTest()
 {
-   var testResults=[], actionTaken, testDescription;
+   var assertions=[], actionTaken, testDescription;
    var trueTests=['NaN', NaN, 'Text', 'x123', '#FF00FF', 'null', null, 'undefined', undefined, '', '     \t\n  ', '1Text', 'Text1', '12,345', '1.2.3', '-', '+', true, false, new Date(2009,1,1), {}, function(){}, [], '+-1', '++1', '1+', '1e', 'e', 'e1'];
    var falseTests=['123', '+123', 123, new Number(123), '0x123', '+0x123', '-0x123', '0', '-1.2', '.12', '+.12', '-1.2e-3', '1.2e+3', '+1.2e3', Number.MAX_VALUE, Number.MAX_SAFE_INTEGER, Number.MIN_VALUE, Number.MIN_SAFE_INTEGER, '09'];
    var testFunctions=[isNaN, isNotFinite, numberConstructorNaN];
@@ -116,7 +115,7 @@ function unlinkedNanTest()
          if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
          else testDescription+=trueTests[inputIndex];
          testDescription+=')';
-         testResults.push({Expected: true, Actual: testFunctions[functionIndex](trueTests[inputIndex]), Description: actionTaken+testDescription});
+         assertions.push({Expected: true, Actual: testFunctions[functionIndex](trueTests[inputIndex]), Description: actionTaken+testDescription});
       }
       actionTaken='Number tests';
       for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -125,30 +124,30 @@ function unlinkedNanTest()
          if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
          else testDescription+=falseTests[inputIndex];
          testDescription+=')';
-         testResults.push({Expected: false, Actual: testFunctions[functionIndex](falseTests[inputIndex]), Description: actionTaken+testDescription});
+         assertions.push({Expected: false, Actual: testFunctions[functionIndex](falseTests[inputIndex]), Description: actionTaken+testDescription});
       }
    }
 
    actionTaken='Infinity tests';
-   testResults.push({Expected: false, Actual: isNaN('Infinity'), Description: actionTaken+': isNaN("Infinity")'});
-   testResults.push({Expected: false, Actual: isNaN(Infinity), Description: actionTaken+': isNaN(Infinity)'});
-   testResults.push({Expected: false, Actual: isNaN('-Infinity'), Description: actionTaken+': isNaN("-Infinity")'});
-   testResults.push({Expected: false, Actual: isNaN(-Infinity), Description: actionTaken+': isNaN(-Infinity)'});
+   assertions.push({Expected: false, Actual: isNaN('Infinity'), Description: actionTaken+': isNaN("Infinity")'});
+   assertions.push({Expected: false, Actual: isNaN(Infinity), Description: actionTaken+': isNaN(Infinity)'});
+   assertions.push({Expected: false, Actual: isNaN('-Infinity'), Description: actionTaken+': isNaN("-Infinity")'});
+   assertions.push({Expected: false, Actual: isNaN(-Infinity), Description: actionTaken+': isNaN(-Infinity)'});
 
-   testResults.push({Expected: true, Actual: !isFinite('Infinity'), Description: actionTaken+': !isFinite("Infinity")'});
-   testResults.push({Expected: true, Actual: !isFinite(Infinity), Description: actionTaken+': !isFinite(Infinity)'});
-   testResults.push({Expected: true, Actual: !isFinite('-Infinity'), Description: actionTaken+': !isFinite("-Infinity")'});
-   testResults.push({Expected: true, Actual: !isFinite(-Infinity), Description: actionTaken+': !isFinite(-Infinity)'});
+   assertions.push({Expected: true, Actual: !isFinite('Infinity'), Description: actionTaken+': !isFinite("Infinity")'});
+   assertions.push({Expected: true, Actual: !isFinite(Infinity), Description: actionTaken+': !isFinite(Infinity)'});
+   assertions.push({Expected: true, Actual: !isFinite('-Infinity'), Description: actionTaken+': !isFinite("-Infinity")'});
+   assertions.push({Expected: true, Actual: !isFinite(-Infinity), Description: actionTaken+': !isFinite(-Infinity)'});
 
-   testResults.push({Expected: true, Actual: !numberConstructorNaN('Infinity'), Description: actionTaken+': !numberConstructorNaN("Infinity")'});
-   testResults.push({Expected: true, Actual: !numberConstructorNaN(Infinity), Description: actionTaken+': !numberConstructorNaN(Infinity)'});
-   testResults.push({Expected: true, Actual: !numberConstructorNaN('-Infinity'), Description: actionTaken+': !numberConstructorNaN("-Infinity")'});
-   testResults.push({Expected: true, Actual: !numberConstructorNaN(-Infinity), Description: actionTaken+': !numberConstructorNaN(-Infinity)'});
+   assertions.push({Expected: true, Actual: !numberConstructorNaN('Infinity'), Description: actionTaken+': !numberConstructorNaN("Infinity")'});
+   assertions.push({Expected: true, Actual: !numberConstructorNaN(Infinity), Description: actionTaken+': !numberConstructorNaN(Infinity)'});
+   assertions.push({Expected: true, Actual: !numberConstructorNaN('-Infinity'), Description: actionTaken+': !numberConstructorNaN("-Infinity")'});
+   assertions.push({Expected: true, Actual: !numberConstructorNaN(-Infinity), Description: actionTaken+': !numberConstructorNaN(-Infinity)'});
 
    actionTaken='No Parameter tests';
-   testResults.push({Expected: true, Actual: isNaN(), Description: actionTaken+': isNaN()'});
-   testResults.push({Expected: true, Actual: !isFinite(), Description: actionTaken+': !isFinite()'});
-   testResults.push({Expected: true, Actual: !numberConstructorNaN(), Description: actionTaken+': !numberConstructorNaN()'});
+   assertions.push({Expected: true, Actual: isNaN(), Description: actionTaken+': isNaN()'});
+   assertions.push({Expected: true, Actual: !isFinite(), Description: actionTaken+': !isFinite()'});
+   assertions.push({Expected: true, Actual: !numberConstructorNaN(), Description: actionTaken+': !numberConstructorNaN()'});
 
    actionTaken='Comparing NaN tests';
    for (var inputIndex=0; inputIndex < trueTests.length; inputIndex++)
@@ -157,7 +156,7 @@ function unlinkedNanTest()
       if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
       else testDescription+=trueTests[inputIndex];
       testDescription+=') vs isNotFinite';
-      testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: isNotFinite(trueTests[inputIndex]), Description: actionTaken+testDescription});
+      assertions.push({Expected: isNaN(trueTests[inputIndex]), Actual: isNotFinite(trueTests[inputIndex]), Description: actionTaken+testDescription});
    }
    actionTaken='Comparing Number tests';
    for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -166,7 +165,7 @@ function unlinkedNanTest()
       if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
       else testDescription+=falseTests[inputIndex];
       testDescription+=') vs isNotFinite';
-      testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: isNotFinite(falseTests[inputIndex]), Description: actionTaken+testDescription});
+      assertions.push({Expected: isNaN(falseTests[inputIndex]), Actual: isNotFinite(falseTests[inputIndex]), Description: actionTaken+testDescription});
    }
 
    actionTaken='Comparing NaN tests';
@@ -176,7 +175,7 @@ function unlinkedNanTest()
       if(typeof(trueTests[inputIndex]) === 'string') testDescription+='"'+trueTests[inputIndex]+'"';
       else testDescription+=trueTests[inputIndex];
       testDescription+=') vs numberConstructorNaN';
-      testResults.push({Expected: isNaN(trueTests[inputIndex]), Actual: numberConstructorNaN(trueTests[inputIndex]), Description: actionTaken+testDescription});
+      assertions.push({Expected: isNaN(trueTests[inputIndex]), Actual: numberConstructorNaN(trueTests[inputIndex]), Description: actionTaken+testDescription});
    }
    actionTaken='Comparing Number tests';
    for (var inputIndex=0; inputIndex < falseTests.length; inputIndex++)
@@ -185,10 +184,10 @@ function unlinkedNanTest()
       if(typeof(falseTests[inputIndex]) === 'string') testDescription+='"'+falseTests[inputIndex]+'"';
       else testDescription+=falseTests[inputIndex];
       testDescription+=') vs numberConstructorNaN';
-      testResults.push({Expected: isNaN(falseTests[inputIndex]), Actual: numberConstructorNaN(falseTests[inputIndex]), Description: actionTaken+testDescription});
+      assertions.push({Expected: isNaN(falseTests[inputIndex]), Actual: numberConstructorNaN(falseTests[inputIndex]), Description: actionTaken+testDescription});
    }
 
-   return TestRunner.displayResults('unlinkedNanTest', testResults, true);  //grand total is pointless but this will scroll me to the bottom
+   return TestRunner.displayResults('unlinkedNanTest', assertions, true);  //grand total is pointless but this will scroll me to the bottom
 }
 /*
 Primitives and objects get the same results. The special values:

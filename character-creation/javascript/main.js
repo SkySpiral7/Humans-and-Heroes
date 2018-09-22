@@ -167,21 +167,14 @@ function MainObject()
    It changes the a tag so that the link downloads the document as a saved file.*/
    this.saveToFile=function()
    {
-       var link = document.getElementById('save-to-file-link');
-      if (document.getElementById('save-type').value === 'JSON')
-      {
-          link.download = document.getElementById('hero-name').value+'.json';
-          link.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(this.saveAsString());
-      }
-      else
-      {
-          link.download = document.getElementById('hero-name').value+'.xml';
-          link.href = 'data:application/xml;charset=utf-8,'+encodeURIComponent(this.saveAsString());
-      }
-       //encodeURIComponent is called to convert end lines
-       //there is no way to clear out the link info right after the save as prompt. So just ignore the huge href
-       //assigning window.location doesn't work because it just takes you to the page instead of save prompt
-       //an iframe form submit might work but this is better
+      var link = document.getElementById('save-to-file-link');
+      link.download = document.getElementById('hero-name').value+'.json';
+      link.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(this.saveAsString());
+      //encodeURIComponent is called to convert end lines etc
+      //there is no way to clear out the link info right after the save as prompt. So just ignore the huge href
+      //assigning window.location doesn't work because it just takes you to the page instead of save prompt
+      //This doesn't work in IE (even 12)
+      //TODO: use a form internet submit because it works in all browsers and the data is small
    };
    /**This function handles all changes needed when switching between rules. Main.clear() is called unless no change is needed.*/
    this.setRuleset=function(major, minor)
@@ -235,7 +228,7 @@ function MainObject()
    {
        powerLevelAttackEffect=0; powerLevelPerceptionEffect=0;
        var attackBonus;
-       var allOffensiveRows = '<table width="100%">';
+       var allOffensiveRows = '';
        var closeSkillMap = this.skillSection.getCloseCombatMap();
        var rangeSkillMap = this.skillSection.getRangedCombatMap();
        var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.x. will be 0 otherwise
@@ -277,7 +270,6 @@ function MainObject()
 
        //TODO: doesn't include skills like Swords
        //TODO: (v1.x) if Improvised Weapon advantage then use Unarmed damage
-       allOffensiveRows+='</table>';
        document.getElementById('offensive-section').innerHTML = allOffensiveRows;
        //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
    };
@@ -488,9 +480,9 @@ function MainObject()
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
    this.makeOffenseRow=function(skillName, attackBonus, range, effect, damage)
    {
-       var thisOffensiveRow = '<tr><td class="character-sheet-offense-row">' + skillName + ' ';
+       var thisOffensiveRow = '<div class="row"><div class="character-sheet-offense-row col">' + skillName + ' ';
        if(attackBonus !== '--' && attackBonus >= 0) thisOffensiveRow+='+';  //add leading plus. checking for '--' is unneeded but more clear
-       thisOffensiveRow+=attackBonus+'</td><td class="character-sheet-offense-row">' + range + ', ' + effect + ' ' + damage;
+       thisOffensiveRow+=attackBonus+'</div><div class="character-sheet-offense-row col">' + range + ', ' + effect + ' ' + damage;
 
        var minCritNum = (20 - this.advantageSection.getRankMap().get('Improved Critical: '+skillName));
        if(minCritNum < 20) thisOffensiveRow+=', Crit. '+minCritNum+'-20';  //the '-20' is a range through 20
@@ -498,7 +490,7 @@ function MainObject()
        if(attackBonus === '--' && powerLevelPerceptionEffect < damage) powerLevelPerceptionEffect = damage;
        else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus+damage)) powerLevelAttackEffect = (attackBonus+damage);
 
-       thisOffensiveRow+='</td></tr>\n';
+       thisOffensiveRow+='</div></div>\n';
        return thisOffensiveRow;
    };
    /**This returns the document's data as a json object*/
@@ -524,13 +516,9 @@ function MainObject()
    /**This returns the document's data as a string*/
    this.saveAsString=function()
    {
-       var jsonDoc = this.save();
-       var fileString;
-       if(document.getElementById('save-type').value === 'JSON') fileString = JSON.stringify(jsonDoc);
-          //in this case value returns the selected text because the html attribute named value is not defined
-       else fileString = jsonToXml(jsonDoc);
-
-       return fileString;
+      var jsonDoc = this.save();
+      var fileString = JSON.stringify(jsonDoc);
+      return fileString;
    };
    this.constructor=function()
    {

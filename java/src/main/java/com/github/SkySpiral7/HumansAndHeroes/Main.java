@@ -34,7 +34,14 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         advancedSearch();
+         Arrays.stream(getAllHtmlFiles()).forEach(file -> {
+            //TODO: have the site map generator write to the txt file
+            //more advanced: could make an xml sitemap and ask git for last updated: git log -1 --format="%aI" -- :/$filepath
+            final String outputAbsolutePath = file.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+            final String outputRelativePath = outputAbsolutePath.replace(rootFolderPath, "");
+            final String outputOnlinePath = "http://skyspiral7.github.io/Humans-and-Heroes" + outputRelativePath;
+            System.out.println(outputOnlinePath);
+         });
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -165,8 +172,8 @@ public class Main
 
    private static void advancedSearch()
    {
-      final List<String> capsBlackList = Arrays.asList("DOCTYPE", "UTF-8", "SRD", "NPC", "SCUBA", "GPS", "GURPS", "SUV", "DNA", "MPH", "-AP-",
-            "BY-SA", "SWAT", "APC", "RPG", "AIDS");
+      final List<String> capsBlackList = Arrays.asList("DOCTYPE", "UTF-8", "SRD", "NPC", "SCUBA", "GPS", "GURPS", "SUV", "DNA", "MPH",
+            "-AP-", "BY-SA", "SWAT", "APC", "RPG", "AIDS");
       for (File thisFile : getAllHtmlFiles())
       {
          final String fileContents = FileIoUtil.readTextFile(thisFile);
@@ -176,11 +183,8 @@ public class Main
          while (matcher.find())
          {
             final String capsText = matcher.group();
-            if (capsBlackList.contains(capsText) || capsText.startsWith("TOC-") ||
-                !capsText.equals(capsText.toUpperCase()) ||
-                StringUtil.regexFoundInString(capsText, "^(-|\\d|\\.)+$")
-                  || StringUtil.regexFoundInString(capsText, "^PL\\d"))
-               continue;
+            if (capsBlackList.contains(capsText) || capsText.startsWith("TOC-") || !capsText.equals(capsText.toUpperCase())
+                || StringUtil.regexFoundInString(capsText, "^(-|\\d|\\.)+$") || StringUtil.regexFoundInString(capsText, "^PL\\d")) continue;
             if (!hasPrintedFileName)
             {
                printFilePath(thisFile);
