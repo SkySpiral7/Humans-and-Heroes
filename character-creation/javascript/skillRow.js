@@ -79,7 +79,7 @@ function SkillObject(rowIndex)
    this.generate=function()
    {
       var htmlString = '<div class="row">\n';
-      htmlString+='<div class="col-12 col-sm-4 col-lg-3">';
+      htmlString+='<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">';
       htmlString+='<select id="skillChoices'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').select();">\n';
       htmlString+='   <option>Select Skill</option>\n';
       for (var i=0; i < Data.Skill.names.length; i++)
@@ -94,9 +94,9 @@ function SkillObject(rowIndex)
          htmlString += '<div class="col-12 col-sm-8 col-md-5">';
          htmlString += '<input type="text" style="width: 100%" id="skillText' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeText();" />';
          htmlString += '</div>\n';
-         htmlString += '<div class="col-12 col-md-3 col-lg-4">';
+         htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
       }
-      else htmlString+='<div class="col-12 col-sm-8">';
+      else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
       htmlString+='<label>Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" /></label>\n';
       htmlString+='+&nbsp;<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
       htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change

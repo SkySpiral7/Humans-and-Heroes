@@ -124,7 +124,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
       var totalIndex = powerRowIndex+'.'+modifierRowIndex;
       var htmlString='';
       htmlString+='   <div class="row">\n';  //TODO: confirm html
-      htmlString+='      <div class="col-12 col-sm-5 col-lg-4">\n';
+      htmlString+='      <div class="col-12 col-sm-5 col-lg-4 col-xl-auto">\n';
       var amReadOnly = ('Selective' === name && 'Triggered' === this.getPower().getAction());
          //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
       if(undefined !== name && !amReadOnly) amReadOnly = Data.Modifier[name].isReadOnly;
@@ -149,10 +149,10 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
 
       if (name === 'Attack')
       {
-         htmlString+='      <div class="col-12 col-sm-6 col-lg-4">\n';
+         htmlString+='      <div class="col-12 col-sm-6 col-lg-4 col-xl-auto">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, powerRowIndex);
          htmlString+='      </div>\n';
-         if(this.getPower().getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
+         if(this.getPower().getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
             Data.SharedHtml.powerSkill(sectionName, powerRowIndex) + '</div>';
       }
       else  //attack doesn't have anything in this block so I might as well use else here
@@ -160,20 +160,20 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
          //if hasAutoTotal then hasRank is false
          if (hasRank)
          {
-            if(this.getPower().getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3">' +
+            if(this.getPower().getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3 col-xl-auto">' +
                'Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span></div>\n';
                //only Feature can change the ranks of these
             else
             {
-               htmlString+='<label class="col-8 col-sm-5 col-md-4 col-lg-3">Applications ';
+               htmlString+='<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications ';
                htmlString+='<input type="text" size="1" id="'+sectionName+'ModifierRank'+totalIndex+'" ' +
                   'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeRank()" />';
                htmlString+='</label>\n';
             }
          }
-         if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
+         if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-auto">Text <input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
             'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></label>\n';
-         if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-3 col-sm-2 col-lg-1">' +
+         if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-auto">' +
             '=&nbsp;<span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
          //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,
          //if total doesn't match then it has had some cost quirk so show the total

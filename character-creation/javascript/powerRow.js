@@ -251,7 +251,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.generate=function()
    {
       var htmlString = '<div class="container-fluid"><div class="row">\n', i;
-      htmlString+='<div class="col-12 col-sm-6"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
+      htmlString+='<div class="col-12 col-sm-6 col-xl-auto"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
       htmlString+='    <option>Select Power</option>\n';
       var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
       //equipment can't be god-like so I only need to check power section's switch
@@ -329,7 +329,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
 
       if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
       {
-         htmlString+='   <div class="row justify-content-end">\n';
+         htmlString+='   <div class="row justify-content-end justify-content-xl-center">\n';
          htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
          htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
          htmlString+='      </div>\n';
@@ -340,11 +340,11 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+=modifierSection.generate();
 
       htmlString+='<div class="row">\n';
-      htmlString+='<label class="col-12 col-sm-6 col-md-4">Ranks: ';
+      htmlString+='<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
       htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></label>\n';
-      htmlString+='<div class="col-12 col-sm-6 col-md-4">Total Cost Per Rank:\n';
+      htmlString+='<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
       htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
-      htmlString+='<div class="col-12 col-md-4">Total Flat Modifier Cost:\n';
+      htmlString+='<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
       htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
       htmlString+='</div>\n';
       htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ': ';

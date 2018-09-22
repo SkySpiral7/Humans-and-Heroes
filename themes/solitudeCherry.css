@@ -29,42 +29,40 @@ h3: font-size: 20px; black underline. used for sub section (including inside a r
 left side bar: font-size: 12px;
 */
 
+/* ========Bootstrap breakpoints reference========
+doc: https://getbootstrap.com/docs/4.1/layout/overview/
+can use: https://www.webpagefx.com/tools/whats-my-browser-size/
+(xs): 0+ (min window 361px but chrome device screen emulator allows smaller)
+   Nexus 5X: 412px width (555px height)
+   Moto G7: 360px width (541px height)
+sm: 576px+
+   mid: 672px
+md: 768px+
+   mid: 880px
+lg: 992px+
+   mid: 1096px
+xl: 1200px+ (1835px maximized window)
+*/
+
 /* TODO: more css clean up
-h1 should only be 1 per page
-red-panel/green-panel should really have an h3 for their first element and be centered
-calc: add headers and explanation for save/load
 bootstrap all
-   breakpoints: https://getbootstrap.com/docs/4.1/layout/overview/
-      use: https://www.webpagefx.com/tools/whats-my-browser-size/
-      (xs): 0+ (min window 361px but chrome device screen emulator allows smaller)
-         Nexus 5X: 412px width (555px height)
-         Moto G7: 360px width (541px height)
-      sm: 576px+
-         mid: 672px
-      md: 768px+
-         mid: 880px
-      lg: 992px+
-         mid: 1096px
-      xl: 1200px+ (1835px maximized window)
-   odd ability rows
-      can only fit 4/row if row is col-7+ which is only possible for xl
-      2/row looks pretty good (3/row doesn't)
-      can group 2 ability into box so that always even
    convert point counter
       textarea and input can be made style="width: 100%". power attack and mod text needs remaining width which I think is flex
          textarea rows/cols is em, I assume the same for input size
          already max: power text, skill text, advantages, not: mods any, power name/skill
-   make sure nothing has fixed width (height already addressed)
-      normal characters look fine without max-width
-      calc xl is too stretched out but lg looks fine
-         power name/skill: justify-content-xl-center
-         most of power, advantage, skill: col-xl-auto
-         can I use auto for all? is that the same as col?
+   odd ability rows
+      can only fit 4/row if row is col-7+ which is only possible for xl
+      2/row looks pretty good (3/row doesn't)
+      can group 2 ability into box so that always even
    basics toc doesn't scale but is small
+h1 should only be 1 per page
+red-panel/green-panel should really have an h3 for their first element and be centered
+calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
    really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
-   it would just have cols and max-width
+   it would just have cols
    try it on a non-calc first
+   if looks good try to guess if calc would look good
 printing
    https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
    https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
@@ -390,10 +388,6 @@ th {
 }
 .character-sheet input[type="file"] {
    background-color: white;
-}
-.character-sheet, .character-sheet-explanation {
-   max-width: 950px;
-   /*TODO: does not scale*/
 }
 textarea {
    resize: both;
