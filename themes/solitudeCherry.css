@@ -201,10 +201,11 @@ ol.legal-document > li > ol > li {
 
 .sites-sidebar-nav .expander {
    background: url("../images/arrow-down.gif") no-repeat;
+   background-size: 15px 15px;
    float: left;
-   height: 11px;
+   height: 15px;
    margin: 3px 0 0 4px;
-   width: 11px;
+   width: 15px;
 }
 
 /*If you want to replace the arrows with unicode:
@@ -223,6 +224,7 @@ U+25BF (White down-pointing small triangle ▿)
 
 .sites-sidebar-nav .expander.collapsed {
    background: url("../images/arrow-left.gif") no-repeat;
+   background-size: 15px 15px;
 }
 
 .sites-sidebar-nav {
@@ -278,7 +280,6 @@ div.goog-toc p {
 .sites-layout-sidebar-left {
    background: url("bg-pattern.gif") repeat;
    padding: 0;
-   font-size: 12px;
 }
 
 .sites-embed-content-sidebar-textbox {
@@ -287,7 +288,6 @@ div.goog-toc p {
 
 .sites-layout-sidebar-left h2 {
    border-bottom: 1px dotted darkred;
-   font-size: 16px;
 }
 
 .sites-sidebar-nav {
@@ -383,14 +383,12 @@ th {
    background-color: darkred;
    border-bottom-width: 0;
    color: white;
-   font-size: 16px;
 }
 .stamp-middle {
    font-size: 32px;
 }
 .stamp-bottom {
    border-top-width: 0;
-   font-size: 16px;
 }
 .bar-code-border {
    border: 5px solid;
