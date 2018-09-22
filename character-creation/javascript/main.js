@@ -173,8 +173,8 @@ function MainObject()
       //encodeURIComponent is called to convert end lines etc
       //there is no way to clear out the link info right after the save as prompt. So just ignore the huge href
       //assigning window.location doesn't work because it just takes you to the page instead of save prompt
-      //an iframe form submit might work but this is better except that it doesn't work in IE (even 12)
-      //TODO: test if iframe form submit can be done in all browsers
+      //This doesn't work in IE (even 12)
+      //TODO: use a form internet submit because it works in all browsers and the data is small
    };
    /**This function handles all changes needed when switching between rules. Main.clear() is called unless no change is needed.*/
    this.setRuleset=function(major, minor)
