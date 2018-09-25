@@ -46,7 +46,7 @@ xl: 1200px+ (1835px maximized window)
 
 /* TODO: more css clean up
 h1 should only be 1 per page
-red-panel/green-panel should really have an h3 for their first element and be centered
+red-panel/green-panel should be centered
 calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
    really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
@@ -489,37 +489,37 @@ textarea {
 
 .green-panel-2 > h3 {
    text-align: center;
-   border: none;
 }
 
 .green-panel-2 > h3 > label {
    margin-bottom: 0;
 }
 
-.red-panel > div:nth-child(odd),.green-panel > div:nth-child(odd),.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.red-panel > h3,.green-panel > h3,.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
    color: white;
    font-weight: bold;
    padding: 5px;
    text-decoration: none;
+   margin-bottom: 0;
 }
 
-.red-panel > div:nth-child(even),.green-panel > div:nth-child(even),.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.red-panel > div,.green-panel > div,.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
    padding: 10px;
 }
 
-.red-panel > div:nth-child(odd) {
+.red-panel > h3 {
    background-color: darkred;
 }
 
-.red-panel > div:nth-child(even) {
+.red-panel > div {
    background-color: pink;
 }
 
-.green-panel > div:nth-child(odd),.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.green-panel > h3,.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
    background-color: darkgreen;
 }
 
-.green-panel > div:nth-child(even),.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.green-panel > div,.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
    background-color: palegreen;
 }
 
