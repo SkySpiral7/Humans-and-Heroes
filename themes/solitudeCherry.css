@@ -46,7 +46,6 @@ xl: 1200px+ (1835px maximized window)
 
 /* TODO: more css clean up
 h1 should only be 1 per page
-red-panel/green-panel should be centered
 calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
    really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
@@ -467,7 +466,7 @@ textarea {
    text-align: center;
    display: block;  /*This is needed for point-counter since it contains spans.*/
 }
-.character-sheet-ability-section > .row > .green-panel-2 > div {
+.character-sheet-ability-section > .row > .green-panel > div {
    font-size: 28px;
    font-weight: bold;
    text-align: center;
@@ -486,24 +485,25 @@ textarea {
 .red-panel,.green-panel {
    border: solid thin grey;
 }
-
-.green-panel-2 > h3 {
-   text-align: center;
+.character-sheet-ability-section > .row > .green-panel {
+   border: none;
 }
 
-.green-panel-2 > h3 > label {
+.green-panel > h3 > label {
+   /*This is used by the point-counter so that clicking an ability focuses the input.*/
    margin-bottom: 0;
 }
 
-.red-panel > h3,.green-panel > h3,.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.red-panel > h3,.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
    color: white;
    font-weight: bold;
    padding: 5px;
+   text-align: center;
    text-decoration: none;
    margin-bottom: 0;
 }
 
-.red-panel > div,.green-panel > div,.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.red-panel > div,.green-panel > div,.character-sheet-top > div:nth-child(even) {
    padding: 10px;
 }
 
@@ -515,11 +515,11 @@ textarea {
    background-color: pink;
 }
 
-.green-panel > h3,.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
    background-color: darkgreen;
 }
 
-.green-panel > div,.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.green-panel > div,.character-sheet-top > div:nth-child(even) {
    background-color: palegreen;
 }
 
