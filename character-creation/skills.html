@@ -291,7 +291,7 @@ The format for skill descriptions is given here. Items that do not apply are omi
 <td>Presence</td>
 <td>Slow</td>
 <td>No</td>
-<td>Manipulation with required tools (where applicable)</td>
+<td>Various</td>
 </tr>
 <tr>
 <td><a href="#TOC-PERSUASION">Persuasion</a></td>
@@ -1029,8 +1029,8 @@ with the DC determined by how foreign or unusual the device is, from simple (DC 
 <p>This includes the operation of vehicles, from ground vehicles like cars to boats, planes, or even spaceships! See
 <a href="gadgets-gear/vehicles.html">Vehicles in Gadgets &amp; Gear</a> for details.</p>
 <p>Operating vehicles is a likely operation that will be necessary in a stressful or dramatic situation like being chased
-or attacked or trying to reach a destination in a limited amount of time. Additionally there are more advanced driving maneuvers
-such that a routine check may not be sufficient:</p>
+or attacked or trying to reach a destination in a limited amount of time. In these cases a routine check is not normally
+possible. Additionally there are more advanced driving maneuvers such that a routine check may not be sufficient (see table).</p>
 <p>For riding an animal see <a href="#TOC-RIDE-MOUNT">Acrobatics: Ride mount</a> instead.</p>
 <h3 class="generated-class-17" id="TOC-REPAIRING">Repairing</h3>
 <p>You can also use <b>Engineering</b> to repair damaged items, using the <a href="#TOC-BUILDING">building rules</a> with
@@ -1110,7 +1110,7 @@ doesn't require an <b>Engineering</b> check instead use normal combat rules (<a 
 or <a href="#TOC-RANGED-COMBAT">Ranged Combat</a> followed by <a href="powers/effects/damage.html">Damage</a>).</p>
 <p>Alternatively you can sabotage a device so that it falls apart or destroys itself upon next use so that it appears to
 remain functional. Sabotage only applies to traps and devices that can be operated (it doesn't apply for locks and prisons).
-Simple cases can be done untrained but sabotage isn't simple.</p>
+Simple disassembling can be done untrained but sabotage isn't simple (and therefore requires training).</p>
 <h3 id="TOC-DEMOLITION">Demolition</h3>
 <p>Careful placement of explosives (or other weapons) against a structure can maximize damage by exploiting vulnerabilities in the
 structure. This requires at least a minute and a DC 0 <b>Engineering</b> check that uses Intellect. For every degree of success, the structure takes
@@ -1202,9 +1202,8 @@ or if he has ulterior motives.</p>
 <p>Some things can also be done on groups evaluating the social situation to get a feel for the overall mood, prevailing attitudes,
 and topic of conversation.</p>
 <h2 id="TOC-INVESTIGATION">Investigation</h2>
-<span class="info-banner"><b>Group or Skill?</b> Skill &#8226; <b>Ability</b>: Intellect &#8226; <b>Action</b>: Slow
-&#8226; <b>Trained Only?</b> Analyze Evidence
-is trained only</span>
+<span class="info-banner"><b>Group or Skill?</b> Skill &#8226; <b>Ability</b>: Intellect, Presence, Awareness &#8226;
+<b>Action</b>: Slow &#8226; <b>Trained Only?</b> Analyze Evidence is trained only</span>
 <p>You know how to search for and study clues, gather information through interviews and surveillance, and analyze
 evidence to help solve crimes. The GM may make investigation checks for you in secret, so you do not know exactly what
 you have found, or if you may have missed something.</p>
@@ -1240,7 +1239,7 @@ you have found, or if you may have missed something.</p>
 </tbody>
 </table>
 </div>
-<p>This is trained only. You can make an Investigation check to apply forensic knowledge to evidence. This function of Investigation does not
+<p>This is trained only and uses Intellect. You can make an Investigation check to apply forensic knowledge to evidence. This function of Investigation does not
 give you clues where none exist. It simply allows you to extract useful information from evidence and clues you have
 found. This check covers both the collection and analysis of evidence.</p>
 <p>The base DC 5, modified by the time elapsed since the evidence was left, and whether or not the scene was disturbed.
@@ -1308,7 +1307,7 @@ means you also alert someone who may be interested in your inquiries, perhaps ev
 </tbody>
 </table>
 </div>
-<p>You can search an area for clues, hidden items, traps, and other details. <a href="#TOC-PERCEPTION">Perception</a>
+<p>Using Awareness you can search an area for clues, hidden items, traps, and other details. <a href="#TOC-PERCEPTION">Perception</a>
 allows you to immediately notice things, while an Investigation check allows you to pick up on details with some
 effort.</p>
 <p>To determine how long it takes to search a given area, take the total area measurement (in square feet, yards, or
@@ -1418,7 +1417,7 @@ circumstances on Medical checks to treat it.</p>
 <h3 id="TOC-OPERATION">Operation</h3>
 <p>This is trained only, is a slow action, uses Dexterity, and can't be done on yourself. Exceptions apply to all of those statements.
 You can perform a medical operation such as setting a bone, sewing stitches, removing organs, and performing transplants.
-Tools are always required and depend on the operation being done.</p>
+Tools are usually required and depend on the operation being done.</p>
 <p>Unlike <a href="#TOC-TREAT-AFFLICTION">Treat affliction</a>, <b>Operation</b> is only used for <a href="../gameplay/index.html#TOC-LASTING-INJURIES">lasting
 injuries</a>. Ones that can't be overcome with a few checks and will take time to recover post operation (if possible to
 recover at all). They generally can't be overcome at all without an operation.</p>
@@ -1436,6 +1435,8 @@ This can't be done on yourself since you won't be able to take the standard acti
 <p>You can use your Medical knowledge to inflict pain while keeping the victim alive. This is simply noting an application
 of a Medical check rather than a different kind of roll. To actually do this you would roll <a href="#TOC-EXAMINATION">Examination</a>,
 <a href="#TOC-STABILIZE">Stabilize</a>, and Medical knowledge (see <a href="#TOC-KNOWLEDGE">Knowledge</a>) as needed.</p>
+<p>Some forms of torture require tools and some are possible to perform on yourself (for example while under the influence of
+<a href="../examples/powers/mind-control.html">Mind Control</a>).</p>
 <h3 id="TOC-TREAT-AFFLICTION">Treat Affliction</h3>
 <p>As a standard action you can treat a character afflicted with a disease or poison. The next time this round that the patient
 makes a resistance check against the ailment, you make a Medical check at DC 5. 1 or 2 degrees of success provides the patient with a +1 circumstance
@@ -1765,23 +1766,24 @@ to believe if possible at all.</p>
 Someone who is actively controlling the security cameras in order to search for you, on the other hand, rolls <a href="#TOC-PERCEPTION">Perception</a>
 with applicable circumstance modifiers (positive or negative, if any).</p>
 <h2 id="TOC-SURVIVAL">Survival</h2>
-<span class="info-banner"><b>Group or Skill?</b> Skill &#8226; <b>Ability</b>: Intellect &#8226; <b>Action</b>: Standard
-or Slow &#8226; <b>Trained Only?</b>
-Tracking is trained only</span>
+<span class="info-banner"><b>Group or Skill?</b> Skill &#8226; <b>Ability</b>: Awareness, Intellect, Strength &#8226;
+<b>Action</b>: Standard or Slow &#8226; <b>Trained Only?</b> Tracking is trained only</span>
 <p><b>Survival</b> is the ability to survive in an environment. While mainly intended for rural areas such as a forest or tundra
 it can also be used in urban and inhabited areas.</p>
 <h3 id="TOC-AVOID-HAZARDS">Avoid Hazards</h3>
-<p>As a free action you can make a <b>Survival</b> check to recall or identify hazards such as recognizing poisonous berries.
-As with all <a href="#TOC-KNOWLEDGE">Knowledge</a> checks it must be possible for you to know this information.</p>
+<p>As a free action you can make a <b>Survival</b> (Awareness) check to identify and avoid hazards such as poisonous berries,
+quicksand, flame spurts, unsafe footing, or a beehive.
+As with all checks that involve <a href="#TOC-KNOWLEDGE">Knowledge</a> it must be possible for you to know this information.</p>
 <p>Additionally as a standard action you can make a <b>Survival</b> check to escape from a hazard such as quicksand. This
 will likely use Strength or Stamina depending on the hazard.</p>
 <h3 id="TOC-GATHERING">Gathering</h3>
-<p>As a slow action you can use <b>Survival</b> to obtain resources such as fruit, water, or firewood. This can be used in
-an urban environment such as to pick up trash or search an abandoned warehouse but can't be used to "acquire" anything that
-is owned such as attempting to "gather" from someone's pocket. For such activities instead use <a href="#TOC-SLEIGHT-OF-HAND">Sleight of hand</a>
-and <a href="#TOC-STEALTH">Stealth</a>.</p>
+<p>As a slow action you can use <b>Survival</b> to obtain resources such as fruit, water, or firewood. Searching for resources
+would use Awareness but some cases such as cutting firewood might use other abilities (in this case Stamina).</p>
+<P>This can be used in an urban environment such as to pick up trash or search an abandoned warehouse but can't be
+used to "acquire" anything that is owned such as attempting to "gather" from someone's pocket. For such activities
+instead use <a href="#TOC-SLEIGHT-OF-HAND">Sleight of hand</a> and <a href="#TOC-STEALTH">Stealth</a>.</p>
 <h3 id="TOC-HUNTING">Hunting</h3>
-<p>You may use <b>Survival</b> to find, catch, kill, and make use of an animal body. In this way <b>Survival</b> can be
+<p>You may use <b>Survival</b> (Intellect) to find, catch, kill, and make use of an animal body. In this way <b>Survival</b> can be
 used to prepare/cook animal meat, make fur clothing, catching a live animal, make a hunting weapon, make traps, lay traps,
 go fishing (of any kind), or other applications. Although hunting will generally involve multiple steps it should be a
 single roll when the details are unimportant.</p>
@@ -1799,11 +1801,11 @@ of with a single roll without the player's permission.</p>
 <p>As a slow action that generally uses Strength you can use <b>Survival</b> to make a shelter. This check includes gathering
 the material such as leaves and wood. No check is required in areas that have already existing shelters such as caves or buildings.</p>
 <h3 id="TOC-NAVIGATION">Navigation</h3>
-<p>As a standard action you can make a <b>Survival</b> check to avoid getting lost, determine which way is north, determine
+<p>As a standard action you can make a <b>Survival</b> check using Awareness to avoid getting lost, determine which way is north, determine
 your location, predict weather short-term, determine the current time, or measure passage of time. This check may involve
 using the sun, the stars, landmarks or a map.</p>
 <h3 id="TOC-TRACKING">Tracking</h3>
-<p>This can't be done untrained. As a slow action you can follow a trail by looking for clues such as an overturned
+<p>This can't be done untrained and uses Awareness. As a slow action you can follow a trail by looking for clues such as an overturned
 trash can, dropped cigarette, and broken twigs. Use <a href="#TOC-PERCEPTION">Perception</a> to follow obvious trails
 such as foot prints, blood trail, or scent trail, rather than clues. Also see <a href="#TOC-STEALTH">Stealth</a> to secretly
 follow someone.</p>
