@@ -46,7 +46,6 @@ xl: 1200px+ (1835px maximized window)
 
 /* TODO: more css clean up
 h1 should only be 1 per page
-red-panel/green-panel should really have an h3 for their first element and be centered
 calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
    really wouldn't look that different: http://freeronin.com/3e_files/MnM3_charsheet_color.pdf
@@ -169,8 +168,22 @@ hr {
    height: 3px;
 }
 
+ul {
+   /*This is Chrome's default. Setting here for consistent size with enough room for bullets.*/
+   padding-left: 40px;
+}
+
+ul.radio-ul {
+   /*The radio buttons are the inside bullets therefore have half padding in order to make them line up with other ul.*/
+   padding-left: 20px;
+}
+
 ul li {
    list-style: square outside;
+}
+
+ul.radio-ul li {
+   list-style: none;
 }
 
 ol.legal-document > li {
@@ -187,10 +200,11 @@ ol.legal-document > li > ol > li {
 
 .sites-sidebar-nav .expander {
    background: url("../images/arrow-down.gif") no-repeat;
+   background-size: 15px 15px;
    float: left;
-   height: 11px;
+   height: 15px;
    margin: 3px 0 0 4px;
-   width: 11px;
+   width: 15px;
 }
 
 /*If you want to replace the arrows with unicode:
@@ -209,6 +223,7 @@ U+25BF (White down-pointing small triangle ▿)
 
 .sites-sidebar-nav .expander.collapsed {
    background: url("../images/arrow-left.gif") no-repeat;
+   background-size: 15px 15px;
 }
 
 .sites-sidebar-nav {
@@ -264,7 +279,6 @@ div.goog-toc p {
 .sites-layout-sidebar-left {
    background: url("bg-pattern.gif") repeat;
    padding: 0;
-   font-size: 12px;
 }
 
 .sites-embed-content-sidebar-textbox {
@@ -273,7 +287,6 @@ div.goog-toc p {
 
 .sites-layout-sidebar-left h2 {
    border-bottom: 1px dotted darkred;
-   font-size: 16px;
 }
 
 .sites-sidebar-nav {
@@ -369,14 +382,12 @@ th {
    background-color: darkred;
    border-bottom-width: 0;
    color: white;
-   font-size: 16px;
 }
 .stamp-middle {
    font-size: 32px;
 }
 .stamp-bottom {
    border-top-width: 0;
-   font-size: 16px;
 }
 .bar-code-border {
    border: 5px solid;
@@ -455,7 +466,7 @@ textarea {
    text-align: center;
    display: block;  /*This is needed for point-counter since it contains spans.*/
 }
-.character-sheet-ability-section > .row > .green-panel-2 > div {
+.character-sheet-ability-section > .row > .green-panel > div {
    font-size: 28px;
    font-weight: bold;
    text-align: center;
@@ -474,40 +485,41 @@ textarea {
 .red-panel,.green-panel {
    border: solid thin grey;
 }
-
-.green-panel-2 > h3 {
-   text-align: center;
+.character-sheet-ability-section > .row > .green-panel {
    border: none;
 }
 
-.green-panel-2 > h3 > label {
+.green-panel > h3 > label {
+   /*This is used by the point-counter so that clicking an ability focuses the input.*/
    margin-bottom: 0;
 }
 
-.red-panel > div:nth-child(odd),.green-panel > div:nth-child(odd),.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.red-panel > h3,.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
    color: white;
    font-weight: bold;
    padding: 5px;
+   text-align: center;
    text-decoration: none;
+   margin-bottom: 0;
 }
 
-.red-panel > div:nth-child(even),.green-panel > div:nth-child(even),.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.red-panel > div,.green-panel > div,.character-sheet-top > div:nth-child(even) {
    padding: 10px;
 }
 
-.red-panel > div:nth-child(odd) {
+.red-panel > h3 {
    background-color: darkred;
 }
 
-.red-panel > div:nth-child(even) {
+.red-panel > div {
    background-color: pink;
 }
 
-.green-panel > div:nth-child(odd),.green-panel-2 > h3,.character-sheet-top > div:nth-child(odd) {
+.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
    background-color: darkgreen;
 }
 
-.green-panel > div:nth-child(even),.green-panel-2 > div,.character-sheet-top > div:nth-child(even) {
+.green-panel > div,.character-sheet-top > div:nth-child(even) {
    background-color: palegreen;
 }
 
