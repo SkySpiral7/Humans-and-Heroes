@@ -113,8 +113,9 @@ skill) giving you instructions or following instructions from a book.</p>
 Interaction skills allow you to influence the attitudes of others and get them to cooperate with you in one way or
 another. Since interaction skills are intended for dealing with others socially, they have certain requirements.</p>
 <p>First, you must be able to interact with the subject(s) of the skill. They must be aware of you and able to understand
-you. If they can't hear or understand you for some reason, you have a -2 circumstance penalty to your skill check (see
-<b>Circumstance Modifiers</b> in <a href="../gameplay/the-basics.html">The Basics</a>).</p>
+you. For most cases if they can't hear or understand you for some reason (such as not sharing a language) then you can't
+use the skill at all (automatically fails). In some cases of simple interaction you'll instead get a -2 circumstance penalty
+to your skill check (see <b>Circumstance Modifiers</b> in <a href="../gameplay/the-basics.html">The Basics</a>).</p>
 <p>Interaction skills work best on intelligent subjects, ones with an Intellect rank of -3 or better. You can use them
 on creatures with less Int, but again with a -2 circumstance penalty: they're just too dumb to get the subtleties of your
 point. You can't use interaction skills at all on subjects lacking one or more mental abilities such as trying to
@@ -1130,10 +1131,15 @@ except that <b>Handle Animal</b> only works on animals whereas <a href="#TOC-PER
 on a single animal at a time but <a href="#TOC-CARE-FOR">care for</a> and <a href="#TOC-SCARE-OR-CALM-DOWN">scare or calm down</a>
 can be done on groups of animals.</p>
 <h3 id="TOC-CONVINCE-TO-ACT">Convince To Act</h3>
-<p>As a standard action you can use <b>Handle Animal</b> to make an animal do something that it hasn't been trained for.
+<p>As a standard action you can use <b>Handle Animal</b> to tell an animal do something that it hasn't been trained for.
 The action must be simple such as retrieving and object, attacking a target, digging, coming to you, etc. The animal must
-be smart enough to figure out your intention and must be reasonably capable of doing the task (eg you can't tell a hawk
-to dig). The base DC is 15.</p>
+be smart enough to figure out your intention, animals with more <a href="abilities.html#TOC-INTELLECT-INT-">intellect</a>
+can figure out more. No matter how smart the animal, the task requested must still be simple enough to communicate without
+using language (to use language see <a href="#TOC-CONVINCE">Persuasion: Convince</a>).
+The animal must also be reasonably capable of doing the task (eg you can't tell a hawk to dig).</p>
+<p>The base DC is 15. If an animal has learned a trick anyone can ask the animal to perform it (given they know the
+trigger word or gesture) without needing to make a check. An animal that knows tricks is easier to
+Convince to act to do other things by using the animal's name and familiar gestures/words in that case you get a +1 bonus.</p>
 <h3 id="TOC-TEACH-A-TRICK">Teach a Trick</h3>
 <p>This can't be done untrained. You can teach a tame animal a trick so that it can perform the action on demand. This is a slow action since it involves
 having the animal repeat the action over a long period (at least time rank 17 which is a week) of time giving out reward and punishment as needed.
@@ -1141,13 +1147,11 @@ The trick can be more complex than <a href="#TOC-CONVINCE-TO-ACT">Convince to ac
 step but it must still be relatively simple and the animal must still be reasonable capable both mentally and physically.
 There is no hard limit on the number of things an animal can learn but the Gamemaster should consider the animal's intellect
 and the complexity of the tricks when deciding if an animal is mentally capable of learning more.</p>
-<p>Once the animal learns the trick anyone can ask the animal to perform it (given they know the trigger word or gesture)
-without needing to make a check. An animal that knows tricks is easier to <a href="#TOC-CONVINCE-TO-ACT">Convince to act</a>
-by using the animal's name and familiar gestures/words.</p>
 <p>In addition to actions an animal can learn certain words (the animal's name, the word "no", the word "ball", etc),
 can be potty trained, and can learn certain attitudes such as staying close to a human or ignoring certain people.</p>
-<p>Over an even longer period of time (at least a year which is time rank 23) an animal can be trained with a theme in mind.
-This is really just a simplification of teaching an animal many tricks. Generally an animal can have only 1 general purpose.
+<p>Over an even longer period of time (at least a year which is time rank 23) an animal can be trained for a general purpose.
+This is really just a simplification of teaching an animal many tricks with a theme in mind. Since a general purpose involves
+many tricks most animals are not smart enough to have more than 1 general purpose.
 Some example purposes are: racing, being ridden, being ridden in combat, fighting in combat, guarding, heavy labor, pulling
 carts or plows, hunting, rescuing, guiding the blind, rounding up livestock, and entertainment.</p>
 <h3 id="TOC-CARE-FOR">Care For</h3>
@@ -1355,7 +1359,8 @@ have heard can't be obtained by a knowledge check. For example you can't roll Kn
 the combination to a personal safe if there was no way for that combination to have been spread. You also can't roll
 Knowledge: History to learn about past events of a planet you've never heard of. Also see the <a href="powers/effects/attain-knowledge.html">Attain Knowledge</a> power.</p>
 <p>Knowledge checks can't use any other ability and therefore Knowledge ranks can at best provide a circumstance bonus when
-attempting the application of the Knowledge. However every other skill can be used as an appropriate Knowledge check by using Intelligence as
+attempting the application of the Knowledge. However every other skill can be used as an appropriate Knowledge check by
+using <a href="abilities.html#TOC-INTELLECT-INT-">Intellect</a> as
 the ability. For example Athletics (Str) can be used as Knowledge: Sports (Int) to answer
 the question "what is a butterfly stroke?" but on the other hand Knowledge: Sports (Int) can't be used as Athletics
 (Str). For another example Knowledge: Criminal can represent experience in the Investigation field and thus a successful roll can name
