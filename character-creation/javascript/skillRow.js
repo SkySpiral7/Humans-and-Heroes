@@ -102,10 +102,10 @@ function SkillObject(rowIndex)
       htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
       htmlString+='   <option>Agility</option>\n';
       htmlString+='   <option>Fighting</option>\n';
-      htmlString+='   <option>Awareness</option>\n';
-      htmlString+='   <option>Stamina</option>\n';
       htmlString+='   <option>Dexterity</option>\n';
+      htmlString+='   <option>Stamina</option>\n';
       htmlString+='   <option>Intellect</option>\n';
+      htmlString+='   <option>Awareness</option>\n';
       htmlString+='   <option>Presence</option>\n';
       htmlString+='</select>\n';
       htmlString+='(+<span id="skill bonus '+rowIndex+'"></span>)\n';
