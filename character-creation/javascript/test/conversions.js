@@ -98,10 +98,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
             "Strength": 1,
             "Agility": 2,
             "Fighting": 3,
-            "Awareness": 4,
-            "Stamina": 5,
             "Dexterity": 6,
+            "Stamina": 5,
             "Intellect": 7,
+            "Awareness": 4,
             "Presence": 8
          },
          "Powers": [{

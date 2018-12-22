@@ -11,10 +11,10 @@ var json = {
       "Strength": 1,
       "Agility": 4,
       "Fighting": 4,
-      "Awareness": 2,
-      "Stamina": 2,
       "Dexterity": 3,
+      "Stamina": 2,
       "Intellect": 0,
+      "Awareness": 2,
       "Presence": 2
    },
    "Powers": [
