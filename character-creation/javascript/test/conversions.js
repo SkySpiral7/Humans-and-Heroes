@@ -65,10 +65,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 0\n' +
       '* Agility: 0\n' +
       '* Fighting: 0\n' +
-      '* Awareness: 0\n' +
-      '* Stamina: 0\n' +
       '* Dexterity: 0\n' +
+      '* Stamina: 0\n' +
       '* Intellect: 0\n' +
+      '* Awareness: 0\n' +
       '* Presence: 0\n' +
       '\n' +
       '## Defenses\n' +
@@ -184,10 +184,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 1\n' +
       '* Agility: 2\n' +
       '* Fighting: 3\n' +
-      '* Awareness: 4\n' +
-      '* Stamina: 5\n' +
       '* Dexterity: 6\n' +
+      '* Stamina: 5\n' +
       '* Intellect: 7\n' +
+      '* Awareness: 4\n' +
       '* Presence: 8\n' +
       '\n' +
       '## Powers\n' +
@@ -250,10 +250,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 0\n' +
       '* Agility: 0\n' +
       '* Fighting: 0\n' +
-      '* Awareness: 0\n' +
-      '* Stamina: 0\n' +
       '* Dexterity: 0\n' +
+      '* Stamina: 0\n' +
       '* Intellect: 0\n' +
+      '* Awareness: 0\n' +
       '* Presence: 0\n' +
       '\n' +
       '## Skills\n' +

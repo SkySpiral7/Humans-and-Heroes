@@ -1,6 +1,6 @@
 'use strict';
 const Data = {};
-Data.Ability = {names: ['Strength', 'Agility', 'Fighting', 'Awareness', 'Stamina', 'Dexterity', 'Intellect', 'Presence']};
+Data.Ability = {names: ['Strength', 'Agility', 'Fighting', 'Dexterity', 'Stamina', 'Intellect', 'Awareness', 'Presence']};
 Data.SharedHtml = {
     powerName: function(sectionName, rowIndex){ return '<label class="fill-remaining">Name&nbsp;<input type="text" id="'+sectionName+ 'Name'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex +').changeName();" /></label>\n';},
    powerSkill: function(sectionName, rowIndex){return '<label class="fill-remaining">Skill&nbsp;<input type="text" id="'+sectionName+'Skill'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeSkill();" /></label>\n';}
