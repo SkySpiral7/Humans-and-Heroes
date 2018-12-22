@@ -408,9 +408,9 @@ var json = {
    "Skills": [],
    "Defenses": {
       "Dodge": 0,
-      "Fortitude": 0,
       "Parry": 0,
-      "Will": 0
+      "Will": 0,
+      "Fortitude": 0
    },
    "ruleset": "3.11",
    "version": 2,

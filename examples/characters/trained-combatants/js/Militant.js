@@ -101,9 +101,9 @@ var json = {
    ],
    "Defenses": {
       "Dodge": 3,
-      "Fortitude": 3,
       "Parry": 3,
-      "Will": 1
+      "Will": 1,
+      "Fortitude": 3
    },
    "ruleset": "3.11",
    "version": 2,

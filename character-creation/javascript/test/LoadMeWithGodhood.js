@@ -81,9 +81,9 @@ var json = {
    "Skills": [{"name": "Common Knowledge", "subtype": "Skill Subtype", "rank": 1, "ability": "Fighting"}],
    "Defenses": {
       "Dodge": 0,
-      "Fortitude": 0,
       "Parry": 0,
-      "Will": 0
+      "Will": 0,
+      "Fortitude": 0
    },
    "ruleset": "3.13",
    "version": 2,
