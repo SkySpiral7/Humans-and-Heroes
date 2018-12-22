@@ -721,18 +721,14 @@ TestSuite.data.v1=function(testState={})
    expected = {
       "names": [
          "Dodge",
-         "Fortitude",
          "Parry",
          "Will",
+         "Fortitude",
          "Toughness"
       ],
       "Dodge": {
          "ability": "Agility",
          "name": "Dodge"
-      },
-      "Fortitude": {
-         "ability": "Stamina",
-         "name": "Fortitude"
       },
       "Parry": {
          "ability": "Fighting",
@@ -741,6 +737,10 @@ TestSuite.data.v1=function(testState={})
       "Will": {
          "ability": "Awareness",
          "name": "Will"
+      },
+      "Fortitude": {
+         "ability": "Stamina",
+         "name": "Fortitude"
       },
       "Toughness": {
          "ability": "Stamina",

@@ -40,11 +40,11 @@ Data.change = function(major, minor)
    advantageLookup.hasText = advantageLookup.defaultText.getAllKeys().concat(['Benefit', 'Improved Critical', 'Precise Attack', 'Second Chance', 'Skill Mastery', 'Ultimate Effort']);
 
    Data.Defense = {
-      names: ['Dodge', 'Fortitude', 'Parry', 'Will', 'Toughness'],
+      names: ['Dodge', 'Parry', 'Will', 'Fortitude', 'Toughness'],
       Dodge: {ability: 'Agility', name: 'Dodge'},  //name is defined because all other data does this
-      Fortitude: {ability: 'Stamina', name: 'Fortitude'},
       Parry: {ability: 'Fighting', name: 'Parry'},
       Will: {ability: 'Awareness', name: 'Will'},
+      Fortitude: {ability: 'Stamina', name: 'Fortitude'},
       Toughness: {ability: 'Stamina', name: 'Toughness'}  //Toughness is listed for completeness (it isn't used)
    };
 
