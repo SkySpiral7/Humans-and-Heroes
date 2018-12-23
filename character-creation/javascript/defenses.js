@@ -82,6 +82,7 @@ function DefenseList()
       else toughnessWithoutDefensiveRoll = staminaValue;
       toughnessMaxValue = toughnessWithoutDefensiveRoll + defensiveRollValue;  //defensive Roll stacks
 
+      //TODO: bug: crime fighter toughness doesn't include protection
       calculations.Toughness = {totalBonus: toughnessMaxValue};
       if(toughnessWithoutDefensiveRoll !== toughnessMaxValue) calculations.Toughness.withoutDefensiveRoll = toughnessWithoutDefensiveRoll;
    };
