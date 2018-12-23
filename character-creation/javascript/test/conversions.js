@@ -65,17 +65,17 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 0\n' +
       '* Agility: 0\n' +
       '* Fighting: 0\n' +
-      '* Awareness: 0\n' +
-      '* Stamina: 0\n' +
       '* Dexterity: 0\n' +
+      '* Stamina: 0\n' +
       '* Intellect: 0\n' +
+      '* Awareness: 0\n' +
       '* Presence: 0\n' +
       '\n' +
       '## Defenses\n' +
       '* Dodge: 0 (0 ranks + 0 Agility)\n' +
-      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
       '* Parry: 0 (0 ranks + 0 Fighting)\n' +
       '* Will: 0 (0 ranks + 0 Presence)\n' +
+      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
       '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +
@@ -98,10 +98,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
             "Strength": 1,
             "Agility": 2,
             "Fighting": 3,
-            "Awareness": 4,
-            "Stamina": 5,
             "Dexterity": 6,
+            "Stamina": 5,
             "Intellect": 7,
+            "Awareness": 4,
             "Presence": 8
          },
          "Powers": [{
@@ -170,7 +170,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
                "ability": "Fighting"
             }
          ],
-         "Defenses": {"Dodge": 2, "Fortitude": 4, "Parry": 1, "Will": 3},
+         "Defenses": {"Dodge": 2, "Parry": 1, "Will": 3, "Fortitude": 4},
          "ruleset": "3." + latestMinorRuleset,
          "version": 2,
          "Information": "my bio"
@@ -184,10 +184,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 1\n' +
       '* Agility: 2\n' +
       '* Fighting: 3\n' +
-      '* Awareness: 4\n' +
-      '* Stamina: 5\n' +
       '* Dexterity: 6\n' +
+      '* Stamina: 5\n' +
       '* Intellect: 7\n' +
+      '* Awareness: 4\n' +
       '* Presence: 8\n' +
       '\n' +
       '## Powers\n' +
@@ -213,9 +213,9 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '\n' +
       '## Defenses\n' +
       '* Dodge: 4 (2 ranks + 2 Agility)\n' +
-      '* Fortitude: 9 (4 ranks + 5 Stamina)\n' +
       '* Parry: 4 (1 ranks + 3 Fighting)\n' +
       '* Will: 11 (3 ranks + 8 Presence)\n' +
+      '* Fortitude: 9 (4 ranks + 5 Stamina)\n' +
       '* Toughness: 6 (5 without Defensive Roll)\n' +
       '\n' +
       '## Point Totals\n' +
@@ -250,10 +250,10 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Strength: 0\n' +
       '* Agility: 0\n' +
       '* Fighting: 0\n' +
-      '* Awareness: 0\n' +
-      '* Stamina: 0\n' +
       '* Dexterity: 0\n' +
+      '* Stamina: 0\n' +
       '* Intellect: 0\n' +
+      '* Awareness: 0\n' +
       '* Presence: 0\n' +
       '\n' +
       '## Skills\n' +
@@ -261,9 +261,9 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '\n' +
       '## Defenses\n' +
       '* Dodge: 0 (0 ranks + 0 Agility)\n' +
-      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
       '* Parry: 0 (0 ranks + 0 Fighting)\n' +
       '* Will: 0 (0 ranks + 0 Presence)\n' +
+      '* Fortitude: 0 (0 ranks + 0 Stamina)\n' +
       '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +

@@ -12,18 +12,18 @@ TestSuite.data.allVersions=function(testState={})
          "Strength",
          "Agility",
          "Fighting",
-         "Awareness",
-         "Stamina",
          "Dexterity",
+         "Stamina",
          "Intellect",
+         "Awareness",
          "Presence"
       ]
    };
    assertions.push({Expected: expected, Actual: Data.Ability, Description: 'Data.Ability'});
 
-   expected = '          Name <input type="text" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" />\n';
+   expected = '<label class="fill-remaining">Name&nbsp;<input type="text" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" /></label>\n';
    assertions.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5), Description: 'Data.SharedHtml.powerName'});
-   expected = '          Skill <input type="text" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" />\n';
+   expected = '<label class="fill-remaining">Skill&nbsp;<input type="text" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" /></label>\n';
    assertions.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
@@ -721,18 +721,14 @@ TestSuite.data.v1=function(testState={})
    expected = {
       "names": [
          "Dodge",
-         "Fortitude",
          "Parry",
          "Will",
+         "Fortitude",
          "Toughness"
       ],
       "Dodge": {
          "ability": "Agility",
          "name": "Dodge"
-      },
-      "Fortitude": {
-         "ability": "Stamina",
-         "name": "Fortitude"
       },
       "Parry": {
          "ability": "Fighting",
@@ -741,6 +737,10 @@ TestSuite.data.v1=function(testState={})
       "Will": {
          "ability": "Awareness",
          "name": "Will"
+      },
+      "Fortitude": {
+         "ability": "Stamina",
+         "name": "Fortitude"
       },
       "Toughness": {
          "ability": "Stamina",
