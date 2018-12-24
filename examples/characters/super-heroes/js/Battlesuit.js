@@ -11,10 +11,10 @@ var json = {
       "Strength": 8,
       "Agility": 0,
       "Fighting": 6,
-      "Awareness": 1,
-      "Stamina": 0,
       "Dexterity": 2,
+      "Stamina": 0,
       "Intellect": 5,
+      "Awareness": 1,
       "Presence": 0
    },
    "Powers": [
@@ -222,9 +222,9 @@ var json = {
    ],
    "Defenses": {
       "Dodge": 7,
-      "Fortitude": 5,
       "Parry": 0,
-      "Will": 8
+      "Will": 8,
+      "Fortitude": 5
    },
    "ruleset": "3.11",
    "version": 2,
