@@ -294,16 +294,16 @@ div.goog-toc p {
    display: block
 }
 
-/* Extra small and Small devices*/
+/** Extra small and Small devices*/
 @media (max-width: 767px) {
    #top-nav:not(.collapse) {
       display: none
    }
 }
 
-/* Medium+ devices*/
+/** Medium+ devices*/
 @media (min-width: 768px) {
-   /*this is used to show the element despite not having .show*/
+   /**this is used to show the element despite not having .show*/
    #top-nav.collapse {
       display: block
    }
@@ -327,7 +327,7 @@ img {
    max-height: 50vh;
 }
 
-/* Large+ devices*/
+/** Large+ devices*/
 @media (min-width: 992px) {
    img {
       max-height: none;
@@ -352,7 +352,8 @@ img {
    text-align: left;
 }
 
-.table-percent tr :nth-last-child(1), .table-2-percent tr :nth-last-child(1), .table-2-percent tr :nth-last-child(2) {
+/**This is used to right align the percents of the last column of table-percent and the last 2 columns of table-2-percent.*/
+.table-percent tr :last-child, .table-2-percent tr :last-child, .table-2-percent tr :nth-last-child(2) {
    text-align: right;
 }
 
@@ -360,7 +361,7 @@ td {
    vertical-align: top;
 }
 
-/*All th are under .table-alt-rows*/
+/**All th are under .table-alt-rows*/
 th {
    background: url("bg-pattern.gif") repeat;
    padding: 3px 5px 5px;
@@ -368,7 +369,7 @@ th {
    vertical-align: top;
 }
 
-/*This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
+/**This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
 .table-alt-rows tr:nth-child(odd) {
    background-color: white;
 }
@@ -598,7 +599,7 @@ textarea {
    width: 36px;
 }
 
-/*used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
+/**used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
    color: darkred;
