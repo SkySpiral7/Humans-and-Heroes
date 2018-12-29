@@ -294,16 +294,16 @@ div.goog-toc p {
    display: block
 }
 
-/* Extra small and Small devices*/
+/** Extra small and Small devices*/
 @media (max-width: 767px) {
    #top-nav:not(.collapse) {
       display: none
    }
 }
 
-/* Medium+ devices*/
+/** Medium+ devices*/
 @media (min-width: 768px) {
-   /*this is used to show the element despite not having .show*/
+   /**this is used to show the element despite not having .show*/
    #top-nav.collapse {
       display: block
    }
@@ -327,7 +327,7 @@ img {
    max-height: 50vh;
 }
 
-/* Large+ devices*/
+/** Large+ devices*/
 @media (min-width: 992px) {
    img {
       max-height: none;
@@ -348,11 +348,20 @@ img {
    text-align: center;
 }
 
+.table-long-text tr :last-child {
+   text-align: left;
+}
+
+/**This is used to right align the percents of the last column of table-percent and the last 2 columns of table-2-percent.*/
+.table-percent tr :last-child, .table-2-percent tr :last-child, .table-2-percent tr :nth-last-child(2) {
+   text-align: right;
+}
+
 td {
    vertical-align: top;
 }
 
-/*All th are under .table-alt-rows*/
+/**All th are under .table-alt-rows*/
 th {
    background: url("bg-pattern.gif") repeat;
    padding: 3px 5px 5px;
@@ -360,7 +369,7 @@ th {
    vertical-align: top;
 }
 
-/*This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
+/**This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
 .table-alt-rows tr:nth-child(odd) {
    background-color: white;
 }
@@ -446,7 +455,7 @@ textarea {
    background-color: palegreen;
    padding: 5px;
 }
-.character-sheet-section-label, .character-sheet-point-totals, .generated-class-5, .generated-class-6 {
+.character-sheet-section-label, .character-sheet-point-totals {
    background-color: darkgreen;
    color: white;
    font-weight: bold;
@@ -584,7 +593,13 @@ textarea {
    display: block;
 }
 
-/*used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
+.fudge-dice-img {
+   display: inline;
+   height: 36px;
+   width: 36px;
+}
+
+/**used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
    color: darkred;
@@ -594,38 +609,12 @@ textarea {
    text-align: center;
 }
 
-.generated-class-5 {
-   font-size: 32px;
-   width: 40%;
-}
-
-.generated-class-6 {
-   font-size: 32px;
-   text-align: center;
-   vertical-align: middle;
-   width: 45%;
-}
-
 .generated-class-12 {
    font-size: 12px;
 }
 
-.fudge-dice-img {
-   display: inline;
-   height: 36px;
-   width: 36px;
-}
-
 .generated-class-17 {
    clear: both;
-}
-
-.table-alt-rows .generated-class-22 {
-   text-align: right;
-}
-
-.table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
-   text-align: left;
 }
 
 .generated-class-36 {
