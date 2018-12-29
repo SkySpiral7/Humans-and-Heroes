@@ -348,6 +348,10 @@ img {
    text-align: center;
 }
 
+.table-long-text tr :last-child {
+   text-align: left;
+}
+
 td {
    vertical-align: top;
 }
@@ -612,11 +616,6 @@ textarea {
 TODO: use nth-last-child() instead*/
 .table-alt-rows .generated-class-22 {
    text-align: right;
-}
-
-/*TODO: Use tr:last-child() instead*/
-.table-alt-rows .generated-class-27, .blue-top-th.generated-class-27 {
-   text-align: left;
 }
 
 .generated-class-36 {
