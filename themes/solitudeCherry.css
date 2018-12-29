@@ -352,6 +352,10 @@ img {
    text-align: left;
 }
 
+.table-percent tr :nth-last-child(1), .table-2-percent tr :nth-last-child(1), .table-2-percent tr :nth-last-child(2) {
+   text-align: right;
+}
+
 td {
    vertical-align: top;
 }
@@ -610,12 +614,6 @@ textarea {
 
 .generated-class-17 {
    clear: both;
-}
-
-/*Only used in statistics.html for table percents
-TODO: use nth-last-child() instead*/
-.table-alt-rows .generated-class-22 {
-   text-align: right;
 }
 
 .generated-class-36 {
