@@ -158,50 +158,50 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 2 Easily Removable power total'});
     } catch(e){assertions.push({Error: e, Description: 'Damage 2 Easily Removable'});}
 
-    Main.clear(); Main.setRuleset(1, 1);
+    Main.clear(); Main.setRuleset(1, 0);
     SelectUtil.changeText('powerChoices0', 'Damage');
     TestRunner.changeValue('powerRank0', 100);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Dynamic Alternate Effect');
-    assertions.push({Expected: '-98', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 100 Dynamic Alternate Effect modifier total'});
-    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 100 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 100 Dynamic Alternate Effect'});}
+    assertions.push({Expected: '-98', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 100 Dynamic Alternate Effect modifier total'});
+    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 100 Dynamic Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Dynamic Alternate Effect'});}
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Alternate Effect');
-    assertions.push({Expected: '-99', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 100 Alternate Effect modifier total'});
-    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 100 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 100 Alternate Effect'});}
+    assertions.push({Expected: '-99', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 100 Alternate Effect modifier total'});
+    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 100 Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Alternate Effect'});}
 
     TestRunner.changeValue('powerRank0', 99);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Dynamic Alternate Effect');
-    assertions.push({Expected: '-97', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 99 Dynamic Alternate Effect modifier total'});
-    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 99 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 99 Dynamic Alternate Effect'});}
+    assertions.push({Expected: '-97', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 99 Dynamic Alternate Effect modifier total'});
+    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 99 Dynamic Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Dynamic Alternate Effect'});}
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Alternate Effect');
-    assertions.push({Expected: '-98', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 99 Alternate Effect modifier total'});
-    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 99 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 99 Alternate Effect'});}
+    assertions.push({Expected: '-98', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 99 Alternate Effect modifier total'});
+    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 99 Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Alternate Effect'});}
 
     TestRunner.changeValue('powerRank0', 1);
 
     //TODO: look at changing 1.0 alt effects into an extra
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Dynamic Alternate Effect');
-    assertions.push({Expected: '1', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 1 Dynamic Alternate Effect modifier total'});
-    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 1 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 1 Dynamic Alternate Effect'});}
+    assertions.push({Expected: '1', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 1 Dynamic Alternate Effect modifier total'});
+    assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 1 Dynamic Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Dynamic Alternate Effect'});}
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Alternate Effect');
-    assertions.push({Expected: '0', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.1 Damage 1 Alternate Effect modifier total'});
-    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.1 Damage 1 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Damage 1 Alternate Effect'});}
+    assertions.push({Expected: '0', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: '1.0 Damage 1 Alternate Effect modifier total'});
+    assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 1 Alternate Effect power total'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Alternate Effect'});}
 
     return TestRunner.displayResults('TestSuite.modifierRow.setAutoRank', assertions, testState);
 };

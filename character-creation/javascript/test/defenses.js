@@ -35,7 +35,7 @@ TestSuite.defenseList.calculateValues=function(testState={})
     //abilitySection and defenseSection are both cleared by Main.setRuleset
 
    //test old rule functionality
-    actionTaken='Set Old Rules'; Main.setRuleset(1, 1);
+    actionTaken='Set Old Rules'; Main.setRuleset(1, 0);
     assertions.push({Expected: '0', Actual: document.getElementById('Will-start').innerHTML, Description: actionTaken+': Will defense inital says 0'});
     assertions.push({Expected: 0, Actual: Main.defenseSection.getByName('Will').getAbilityValue(), Description: actionTaken+': And it is 0'});
     assertions.push({Expected: '0', Actual: document.getElementById('Will-final').innerHTML, Description: actionTaken+': Will defense bonus says 0'});

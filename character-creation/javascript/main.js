@@ -383,7 +383,7 @@ function MainObject()
              //3.x should always have a ruleset defined but user tampering may cause it to default to 2.x
          //TODO: add window.prompt in a test safe way
           Main.messageUser('MainObject.determineCompatibilityIssues.noRuleset', 'The requested document doesn\'t have the version for the game rules defined. It might not load correctly.\n'+
-             'Version 2.7 has been assumed, if this is incorrect add ruleset to the root element with value "1.1" (save a blank document for an example but don\'t add "version").');
+             'Version 2.7 has been assumed, if this is incorrect add ruleset to the root element with value "1.0" (save a blank document for an example but don\'t add "version").');
       }
        jsonDoc.ruleset = jsonDoc.ruleset.split('.');
        //major needs special treatment so only use Number.parseInt
