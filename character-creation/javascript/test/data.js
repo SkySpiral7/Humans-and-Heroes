@@ -36,7 +36,7 @@ TestSuite.data.v1=function(testState={})
    var assertions=[], expected;
 
    try {
-   Data.change(1, 0);
+   Data.change(new VersionObject(1, 0));
 
    expected = {
       "mapThese": [
@@ -2209,7 +2209,7 @@ TestSuite.data.v1=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(3, latestMinorRuleset);
+   Data.change(new VersionObject(3, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v1', assertions, testState);
 };
@@ -2220,7 +2220,7 @@ TestSuite.data.v2=function(testState={})
    var assertions=[], expected;
 
    try {
-   Data.change(2, 7);
+   Data.change(new VersionObject(2, 7));
 
    expected = {
       "mapThese": [
@@ -4233,7 +4233,7 @@ TestSuite.data.v2=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(3, latestMinorRuleset);
+   Data.change(new VersionObject(3, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v2', assertions, testState);
 };
@@ -4244,7 +4244,7 @@ TestSuite.data.v3=function(testState={})
    var assertions=[], expected;
 
    try {
-   Data.change(3, 0);
+   Data.change(new VersionObject(3, 0));
 
    assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
    assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
@@ -4274,7 +4274,7 @@ TestSuite.data.v3=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'v3.0 Same data'});}
 
    try {
-   Data.change(3, 4);
+   Data.change(new VersionObject(3, 4));
 
    assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier[Uncontrollable Activation]'});
    assertions.push({Expected: false, Actual: Data.Power.actions.contains('Triggered'), Description: 'Removed Data.Power.actions[Triggered]'});
@@ -4317,13 +4317,13 @@ TestSuite.data.v3=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'v3.4 Same data'});}
 
    try {
-   Data.change(3, 5);
+   Data.change(new VersionObject(3, 5));
 
    assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
    } catch(e){assertions.push({Error: e, Description: 'v3.5 Same data'});}
 
    try {
-   Data.change(3, 9);
+   Data.change(new VersionObject(3, 9));
 
    assertions.push({Expected: 1, Actual: Data.Power['Transform'].baseCost, Description: 'Data.Power[Transform].baseCost = 1'});
    assertions.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
@@ -4331,7 +4331,7 @@ TestSuite.data.v3=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'v3.9 Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(3, latestMinorRuleset);
+   Data.change(new VersionObject(3, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v3', assertions, testState);
 };

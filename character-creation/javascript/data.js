@@ -9,8 +9,9 @@ Data.SharedHtml = {
 Object.freeze(Data.Ability);
 Object.freeze(Data.SharedHtml);
 
-/**This method changes all of the data to the major, minor ruleset passed in. The constructor of Main also calls this to initialize the rule dependant data.*/
-Data.change = function(major, minor)
+/**This method changes all of the data to the version passed in.
+The constructor of Main also calls this to initialize the rule dependant data.*/
+Data.change = function(version)
 {
    Data.Advantage = {
       mapThese: ['Close Attack', 'Defensive Roll', 'Improved Critical', 'Improved Initiative', 'Ranged Attack', 'Seize Initiative'],
@@ -159,8 +160,8 @@ Data.change = function(major, minor)
       addSkill(Data.Skill.names[i]);
    }
 
-   //if(1 === major) ;  //v1.x is already done (no delta)
-   if (major >= 2)
+   //if(1 === version.major) ;  //v1.x is already done (no delta). only thing left is sorting
+   if (version.major >= 2)
    {
       //v1.x has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
       Data.Advantage = {mapThese: Data.Advantage.mapThese};  //keep the value for mapThese
@@ -250,15 +251,15 @@ Data.change = function(major, minor)
       }
    }
 
-   if (major >= 3)
+   if (version.major >= 3)
    {
       remove(Data.Advantage, 'Improved Critical');
       remove(Data.Advantage, 'Trance');  //moved to feature
       addAdvantage('Persistent Information');
       Data.Advantage.Inspire.maxRank = 1;
 
-      if(minor < 4) addModifier('Uncontrollable Activation');  //v3.0 added it then v3.4 removed it
-      if (minor >= 4)
+      if(version.isLessThan(3, 4)) addModifier('Uncontrollable Activation');  //v3.0 added it then v3.4 removed it
+      if (version.isGreaterThanOrEqualTo(3, 4))
       {
          Data.Power.actions.removeByValue('Triggered');  //Reaction is still here but is only sometimes a choice
          Data.Power['A God I Am'].defaultAction = 'Free';
@@ -281,8 +282,8 @@ Data.change = function(major, minor)
          Data.Modifier.Aura.isReadOnly = true;
          remove(Data.Modifier, 'Grab-Based');
       }
-      if(minor >= 5) remove(Data.Modifier, 'Secondary Effect');
-      if (minor >= 9)
+      if(version.isGreaterThanOrEqualTo(3, 5)) remove(Data.Modifier, 'Secondary Effect');
+      if (version.isGreaterThanOrEqualTo(3, 9))
       {
          Data.Power.Transform.baseCost = 1;
          Data.Power.Transform.hasInputBaseCost = false;

@@ -1,10 +1,11 @@
 'use strict';
 (function(){
 //include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
+var jsFileNamesUsed = ['polyfill', 'MapDefault', 'Version', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
     'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
-    'skillList', 'skillRow', 'Version'];
-//the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
+    'skillList', 'skillRow'];
+//the first few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
+//everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
    var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
@@ -183,7 +184,7 @@ function MainObject()
        activeRuleset.major = major;
        activeRuleset.minor = minor;
 
-       Data.change(major, minor);
+       Data.change(activeRuleset);
        this.clear();  //needed to regenerate advantages etc
    };
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
@@ -522,7 +523,7 @@ function MainObject()
    };
    this.constructor=function()
    {
-       Data.change(activeRuleset.major, activeRuleset.minor);  //needed to initialize some data
+       Data.change(activeRuleset);  //needed to initialize some data
        this.abilitySection = new AbilityList();
        this.powerSection = new PowerListAgnostic('power');
        //Object.freeze(this.powerSection);  //TODO: what should and shouldn't be frozen? Main and data only (and commons etc?). freeze isn't deep. maybe screw it because tests
