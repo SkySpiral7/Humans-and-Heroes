@@ -160,10 +160,10 @@ Data.change = function(version)
       addSkill(Data.Skill.names[i]);
    }
 
-   //if(1 === version.major) ;  //v1.x is already done (no delta). only thing left is sorting
+   //if(1 === version.major) ;  //v1.0 is already done (no delta). only thing left is sorting
    if (version.major >= 2)
    {
-      //v1.x has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
+      //v1.0 has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
       Data.Advantage = {mapThese: Data.Advantage.mapThese};  //keep the value for mapThese
       Data.Advantage.names = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
          'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',

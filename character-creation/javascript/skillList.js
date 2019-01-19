@@ -53,7 +53,7 @@ function SkillList()
           var bonusValue;
 
           if(abilityValue === '--' && abilityNameUsed === 'Stamina' && Main.getActiveRuleset().major > 1) bonusValue = 'Always Pass';
-          else if(abilityValue === '--') bonusValue = 'Always Fail';  //in ruleset 1.x having no stamina means always fails
+          else if(abilityValue === '--') bonusValue = 'Always Fail';  //in ruleset 1.0 having no stamina means always fails
           else bonusValue = rowArray[i].getRank() + abilityValue;
           rowArray[i].setTotalBonus(bonusValue);
           //neither -- affects power levels so it isn't added to max skill map
