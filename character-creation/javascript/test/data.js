@@ -2209,7 +2209,7 @@ TestSuite.data.v1=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(new VersionObject(3, latestMinorRuleset));
+   Data.change(new VersionObject(4, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v1', assertions, testState);
 };
@@ -4233,7 +4233,7 @@ TestSuite.data.v2=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(new VersionObject(3, latestMinorRuleset));
+   Data.change(new VersionObject(4, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v2', assertions, testState);
 };
@@ -4331,7 +4331,7 @@ TestSuite.data.v3=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'v3.9 Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
-   Data.change(new VersionObject(3, latestMinorRuleset));
+   Data.change(new VersionObject(4, latestMinorRuleset));
 
    return TestRunner.displayResults('TestSuite.data.v3', assertions, testState);
 };

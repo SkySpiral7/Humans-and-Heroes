@@ -26,6 +26,9 @@ function includeJsFile(jsName)
 }
 })();
 
+var latestMinorRuleset = 0;
+var largestPossibleMinorRulesets = [undefined, 0, 7, 14, latestMinorRuleset];
+
 /**Call List onChange
 Hero Name: Nothing (only need to look at it when saving or loading)
 Transcendence: changeTranscendence()
@@ -34,7 +37,7 @@ bio box: nothing: same as hero name
 function MainObject()
 {
    //private variable section:
-   const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
+   const latestRuleset = new VersionObject(4, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
    var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();

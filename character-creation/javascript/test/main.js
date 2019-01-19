@@ -75,10 +75,16 @@ TestSuite.main.changeRuleset=function(testState={})
     } catch(e){assertions.push({Error: e, Description: '2.x Minor too large'});}
 
     try{
-    TestRunner.changeValue('ruleset', '3.999');
-    assertions.push({Expected: Main.getLatestRuleset(), Actual: Main.getActiveRuleset(), Description: '3.x Minor too large: ActiveRuleset 3.999 -> latest'});
-    assertions.push({Expected: Main.getLatestRuleset().toString(), Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.999 -> latest'});
+    TestRunner.changeValue('ruleset', '3.20');
+    assertions.push({Expected: '3.14', Actual: Main.getActiveRuleset().toString(), Description: '3.x Minor too large: ActiveRuleset 3.20 -> 14'});
+    assertions.push({Expected: '3.14', Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.20 -> 14'});
     } catch(e){assertions.push({Error: e, Description: '3.x Minor too large'});}
+
+    try{
+    TestRunner.changeValue('ruleset', '4.999');
+    assertions.push({Expected: Main.getLatestRuleset(), Actual: Main.getActiveRuleset(), Description: '4.x Minor too large: ActiveRuleset 3.999 -> latest'});
+    assertions.push({Expected: Main.getLatestRuleset().toString(), Actual: rulesetElement.value, Description: '4.x Minor too large: Element 3.999 -> latest'});
+    } catch(e){assertions.push({Error: e, Description: '4.x Minor too large'});}
 
     try{
     TestRunner.changeValue('ruleset', '2');

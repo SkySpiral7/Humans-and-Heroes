@@ -58,7 +58,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
 
    //blank character (no need to load)
    expected = '# Hero Name\n' +
-      'A character for Humans and Heroes v3.' + latestMinorRuleset + '\n' +
+      'A character for Humans and Heroes v4.' + latestMinorRuleset + '\n' +
       'PL 0 (transcendence 0)\n' +
       '\n' +
       '## Abilities\n' +
