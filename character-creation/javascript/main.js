@@ -1,10 +1,11 @@
 'use strict';
 (function(){
 //include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
+var jsFileNamesUsed = ['polyfill', 'MapDefault', 'Version', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
     'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
-    'skillList', 'skillRow', 'Version'];
-//the first few are first because everything depends on data which depends on MapDefault (polyfill is first for safety). everything else is alphabetical
+    'skillList', 'skillRow'];
+//the first few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
+//everything else is alphabetical
 if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
 {
    var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
@@ -87,7 +88,7 @@ function MainObject()
    /**Onchange function for changing the transcendence. Sets the document values as needed*/
    this.changeTranscendence=function()
    {
-       if(1 === activeRuleset.major){transcendence = 0; return;}  //1.x doesn't have transcendence
+       if(1 === activeRuleset.major){transcendence = 0; return;}  //1.0 doesn't have transcendence
        transcendence = sanitizeNumber(document.getElementById('transcendence').value, -1, 0);
        if((this.powerSection.isUsingGodhoodPowers() || this.advantageSection.hasGodhoodAdvantages()) && transcendence <= 0)
           transcendence = 1;  //must raise the minimum due to currently using god-like powers
@@ -150,7 +151,7 @@ function MainObject()
    this.getProtectionTotal=function()
    {
        if(1 === activeRuleset.major) return (this.powerSection.getProtectionRankTotal() + this.equipmentSection.getProtectionRankTotal());
-       //protection stacks only in v1.x
+       //protection stacks only in v1.0
        if(this.powerSection.getProtectionRankTotal() > this.equipmentSection.getProtectionRankTotal()) return this.powerSection.getProtectionRankTotal();
        return this.equipmentSection.getProtectionRankTotal();
    };
@@ -183,7 +184,7 @@ function MainObject()
        activeRuleset.major = major;
        activeRuleset.minor = minor;
 
-       Data.change(major, minor);
+       Data.change(activeRuleset);
        this.clear();  //needed to regenerate advantages etc
    };
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
@@ -231,7 +232,7 @@ function MainObject()
        var allOffensiveRows = '';
        var closeSkillMap = this.skillSection.getCloseCombatMap();
        var rangeSkillMap = this.skillSection.getRangedCombatMap();
-       var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.x. will be 0 otherwise
+       var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.0. will be 0 otherwise
        var rangedAttackBonus = this.advantageSection.getRankMap().get('Ranged Attack');
 
        //if Unarmed is possible then it will be the first row
@@ -269,7 +270,7 @@ function MainObject()
       }
 
        //TODO: doesn't include skills like Swords
-       //TODO: (v1.x) if Improvised Weapon advantage then use Unarmed damage
+       //TODO: (v1.0) if Improvised Weapon advantage then use Unarmed damage
        document.getElementById('offensive-section').innerHTML = allOffensiveRows;
        //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
    };
@@ -290,7 +291,7 @@ function MainObject()
    {
        var compareTo;
        //Skills and Abilities
-       //TODO: ruleset 1.x has advantages I need to include: Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
+       //TODO: ruleset 1.0 has advantages I need to include: Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
       for (var i=0; i < Data.Ability.names.length; i++)
       {
           compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
@@ -377,12 +378,12 @@ function MainObject()
 
       if (undefined === jsonDoc.ruleset)
       {
-          jsonDoc.ruleset = '2.7';  //there's no way to know if the document is for 1.x or 2.x so guess the more common 2.x
+          jsonDoc.ruleset = '2.7';  //there's no way to know if the document is for 1.0 or 2.x so guess the more common 2.x
              //2.x ruleset is fairly compatible so the most recent is default
              //3.x should always have a ruleset defined but user tampering may cause it to default to 2.x
          //TODO: add window.prompt in a test safe way
           Main.messageUser('MainObject.determineCompatibilityIssues.noRuleset', 'The requested document doesn\'t have the version for the game rules defined. It might not load correctly.\n'+
-             'Version 2.7 has been assumed, if this is incorrect add ruleset to the root element with value "1.1" (save a blank document for an example but don\'t add "version").');
+             'Version 2.7 has been assumed, if this is incorrect add ruleset to the root element with value "1.0" (save a blank document for an example but don\'t add "version").');
       }
        jsonDoc.ruleset = jsonDoc.ruleset.split('.');
        //major needs special treatment so only use Number.parseInt
@@ -522,7 +523,7 @@ function MainObject()
    };
    this.constructor=function()
    {
-       Data.change(activeRuleset.major, activeRuleset.minor);  //needed to initialize some data
+       Data.change(activeRuleset);  //needed to initialize some data
        this.abilitySection = new AbilityList();
        this.powerSection = new PowerListAgnostic('power');
        //Object.freeze(this.powerSection);  //TODO: what should and shouldn't be frozen? Main and data only (and commons etc?). freeze isn't deep. maybe screw it because tests

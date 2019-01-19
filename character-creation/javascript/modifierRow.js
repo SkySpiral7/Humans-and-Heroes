@@ -216,10 +216,10 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        if(this.isBlank() || !hasAutoTotal) return powerRowRawTotal;
 
        //these autoTotals can be negative, 0, or 1 because they always cost 2 and 1
-       if('Dynamic Alternate Effect' === name){autoTotal = 2 - powerRowRawTotal; return 2;}  //only exists in ruleset 1.x
+       if('Dynamic Alternate Effect' === name){autoTotal = 2 - powerRowRawTotal; return 2;}  //only exists in ruleset 1.0
        if('Alternate Effect' === name && 1 === Main.getActiveRuleset().major){autoTotal = 1 - powerRowRawTotal; return 1;}
-       //Alternate Effect in ruleset 1.x forced the power to be worth a total of 1 (or 2 for Dynamic). the the flaw is all but 1
-       //technically 1.x Alternate Effect was an extra to spent 1 point on a whole other sub-power
+       //Alternate Effect in ruleset 1.0 forced the power to be worth a total of 1 (or 2 for Dynamic). the the flaw is all but 1
+       //technically 1.0 Alternate Effect was an extra to spent 1 point on a whole other sub-power
 
        //name can't be both alt and removable
        if('Alternate Effect' === name) autoTotal = -Math.floor(powerRowRawTotal / 2);

@@ -128,7 +128,7 @@ function AdvantageList()
    this.notifyDependent=function()
    {
        Main.updateInitiative();
-       Main.updateOffense();  //some 1.x advantages might affect this so it needs to be updated
+       Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
        Main.defenseSection.calculateValues();
    };
    //constructor:
