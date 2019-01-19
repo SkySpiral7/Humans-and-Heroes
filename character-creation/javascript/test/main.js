@@ -193,7 +193,7 @@ TestSuite.main.getProtectionTotal=function(testState={})
 
    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', assertions, testState);
 
-    //be sure to call Main.setRuleset(1, 1); inside tests and:
+    //be sure to call Main.setRuleset(1, 0); inside tests and:
     //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), assertions, testState);
 };
 TestSuite.main.update=function(testState={})
@@ -231,25 +231,25 @@ TestSuite.main.updateInitiative=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Add Seize Initiative'});}
 
     try{
-    Main.clear(); Main.setRuleset(2,7);
-    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank0', 2);
-    assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative 2'});
-    } catch(e){assertions.push({Error: e, Description: '2.7 Improved Initiative 2'});}
-
-    try{
-    Main.setRuleset(1, 1);
-    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank0', 3);
-    assertions.push({Expected: '+12', Actual: initiativeElement.innerHTML, Description: '1.1 Improved Initiative 3'});
-    } catch(e){assertions.push({Error: e, Description: '1.1 Improved Initiative 3'});}
-
-    try{
-    Main.setRuleset(3, 0);
+    Main.clear();
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
     TestRunner.changeValue('advantageRank0', 4);
-    assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0 Improved Initiative 4'});
-    } catch(e){assertions.push({Error: e, Description: '3.0 Improved Initiative 4'});}
+    assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0+ Improved Initiative *1'});
+    } catch(e){assertions.push({Error: e, Description: '3.0+ Improved Initiative *1'});}
+
+    try{
+    Main.setRuleset(1, 0);
+    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
+    TestRunner.changeValue('advantageRank0', 3);
+    assertions.push({Expected: '+12', Actual: initiativeElement.innerHTML, Description: '1.0 Improved Initiative *4'});
+    } catch(e){assertions.push({Error: e, Description: '1.0 Improved Initiative *4'});}
+
+    try{
+    Main.setRuleset(2,7);
+    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
+    TestRunner.changeValue('advantageRank0', 2);
+    assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative *2'});
+    } catch(e){assertions.push({Error: e, Description: '2.7 Improved Initiative *2'});}
 
     return TestRunner.displayResults('TestSuite.main.updateInitiative', assertions, testState);
 };
