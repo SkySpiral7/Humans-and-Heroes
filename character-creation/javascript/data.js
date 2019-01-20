@@ -166,7 +166,7 @@ Data.change = function(version)
    //if(1 === version.major) ;  //v1.0 is already done (no delta). only thing left is sorting
    if (version.major >= 2)
    {
-      //v1.0 has 74 advantages -36 +12 = 50
+      //v1.0 has 74 advantages -36 +12 = 50. not redefining so you can see the diff
       remove(Data.Advantage, 'Agile Feint');
       remove(Data.Advantage, 'Animal Empathy');
       remove(Data.Advantage, 'Artificer');

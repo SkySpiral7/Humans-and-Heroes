@@ -4246,8 +4246,10 @@ TestSuite.data.v3=function(testState={})
    try {
    Data.change(new VersionObject(3, 0));
 
-   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage[Improved Critical]'});
-   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage[Trance]'});
+   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Improved Critical'), Description: 'Removed Data.Advantage name Improved Critical'});
+   assertions.push({Expected: undefined, Actual: Data.Advantage['Improved Critical'], Description: 'Removed Data.Advantage[Improved Critical]'});
+   assertions.push({Expected: false, Actual: Data.Advantage.names.contains('Trance'), Description: 'Removed Data.Advantage name Trance'});
+   assertions.push({Expected: undefined, Actual: Data.Advantage['Trance'], Description: 'Removed Data.Advantage[Trance]'});
    expected = {
       "name": "Persistent Information",
       "costPerRank": 1,
@@ -4276,7 +4278,8 @@ TestSuite.data.v3=function(testState={})
    try {
    Data.change(new VersionObject(3, 4));
 
-   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier[Uncontrollable Activation]'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Uncontrollable Activation'), Description: 'Removed Data.Modifier name Uncontrollable Activation'});
+   assertions.push({Expected: undefined, Actual: Data.Modifier['Uncontrollable Activation'], Description: 'Removed Data.Skill[Uncontrollable Activation]'});
    assertions.push({Expected: false, Actual: Data.Power.actions.contains('Triggered'), Description: 'Removed Data.Power.actions[Triggered]'});
    assertions.push({Expected: 'Free', Actual: Data.Power['A God I Am'].defaultAction, Description: 'Data.Power[A God I Am].defaultAction = Free'});
    assertions.push({Expected: 'Move', Actual: Data.Power['Flight'].defaultAction, Description: 'Data.Power[Flight].defaultAction = Move'});
@@ -4312,14 +4315,16 @@ TestSuite.data.v3=function(testState={})
       "type": "Rank"
    };
    assertions.push({Expected: expected, Actual: Data.Modifier['Aura'], Description: 'Added Data.Modifier[Aura]'});
-   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier[Grab-Based]'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Grab-Based'), Description: 'Removed Data.Modifier name Grab-Based'});
+   assertions.push({Expected: undefined, Actual: Data.Modifier['Grab-Based'], Description: 'Removed Data.Modifier[Grab-Based]'});
    assertions.push({Expected: true, Actual: Data.Modifier['Aura'].isReadOnly, Description: 'Data.Modifier[Aura].isReadOnly = true'});
    } catch(e){assertions.push({Error: e, Description: 'v3.4 Same data'});}
 
    try {
    Data.change(new VersionObject(3, 5));
 
-   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier[Secondary Effect]'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Secondary Effect'), Description: 'Removed Data.Modifier name Secondary Effect'});
+   assertions.push({Expected: undefined, Actual: Data.Modifier['Secondary Effect'], Description: 'Removed Data.Modifier[Secondary Effect]'});
    } catch(e){assertions.push({Error: e, Description: 'v3.5 Same data'});}
 
    try {
@@ -4327,7 +4332,8 @@ TestSuite.data.v3=function(testState={})
 
    assertions.push({Expected: 1, Actual: Data.Power['Transform'].baseCost, Description: 'Data.Power[Transform].baseCost = 1'});
    assertions.push({Expected: false, Actual: Data.Power['Transform'].hasInputBaseCost, Description: 'Data.Power[Transform].hasInputBaseCost = false'});
-   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier[Increased Mass]'});
+   assertions.push({Expected: false, Actual: Data.Modifier.names.contains('Increased Mass'), Description: 'Removed Data.Modifier name Increased Mass'});
+   assertions.push({Expected: undefined, Actual: Data.Modifier['Increased Mass'], Description: 'Removed Data.Modifier[Increased Mass]'});
    } catch(e){assertions.push({Error: e, Description: 'v3.9 Same data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
