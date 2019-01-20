@@ -15,15 +15,7 @@ Data.change = function(version)
 {
    Data.Advantage = {
       mapThese: ['Close Attack', 'Defensive Roll', 'Improved Critical', 'Improved Initiative', 'Ranged Attack', 'Seize Initiative'],
-      names: ['Accurate Attack', 'Agile Feint', 'All-out Attack', 'Animal Empathy', 'Artificer', 'Assessment', 'Attractive', 'Beginner\'s Luck',
-         'Benefit',  'Chokehold', 'Close Attack', 'Connected', 'Contacts', 'Daze', 'Defensive Attack', 'Defensive Roll', 'Diehard', 'Eidetic Memory',
-         'Equipment', 'Evasion', 'Extraordinary Effort', 'Fascinate', 'Fast Grab', 'Favored Environment', 'Favored Foe', 'Fearless', 'Grabbing Finesse',
-         'Great Endurance', 'Hide in Plain Sight', 'Improved Aim', 'Improved Critical', 'Improved Defense', 'Improved Disarm', 'Improved Grab',
-         'Improved Hold', 'Improved Initiative', 'Improved Smash', 'Improved Trip', 'Improvised Tools', 'Improvised Weapon', 'Inspire', 'Instant Up',
-         'Interpose', 'Inventor', 'Jack of All Trades', 'Languages', 'Leadership', 'Luck', 'Minion', 'Move-by Action', 'Power Attack', 'Precise Attack',
-         'Prone Fighting', 'Quick Draw', 'Ranged Attack', 'Redirect', 'Ritualist', 'Second Chance', 'Seize Initiative', 'Set-up', 'Sidekick', 'Skill Mastery',
-         'Startle', 'Takedown', 'Taunt', 'Teamwork', 'Throwing Mastery', 'Tracking', 'Trance', 'Ultimate Effort', 'Uncanny Dodge', 'Weapon Bind',
-         'Weapon Break', 'Well-informed']
+      names: []
    };
    var advantageLookup = {
       costPerRank: new MapDefault({'Beyond Mortal': 50, 'Let There Be': 40, 'Luck of the Gods': 5, 'Lucky': 5, 'Omnipresent': 5, 'Omniscient': 5,
@@ -36,7 +28,16 @@ Data.change = function(version)
          'Equipment': Infinity, 'Evasion': 2, 'Fascinate': Infinity, 'Improved Critical': 4, 'Improved Initiative': Infinity,
          'Improvised Weapon': Infinity, 'Inspire': 5, 'Languages': Infinity, 'Luck': Infinity, 'Lucky': 3, 'Minion': Infinity,
          'Omnipresent': 3, 'Omniscient': 5, 'Precise Attack': 4, 'Ranged Attack': Infinity, 'Second Chance': Infinity, 'Set-up': Infinity,
-         'Sidekick': Infinity, 'Supreme': Infinity, 'Takedown': 2, 'Throwing Mastery': Infinity}, 1)
+         'Sidekick': Infinity, 'Supreme': Infinity, 'Takedown': 2, 'Throwing Mastery': Infinity}, 1),
+      names: ['Accurate Attack', 'Agile Feint', 'All-out Attack', 'Animal Empathy', 'Artificer', 'Assessment', 'Attractive', 'Beginner\'s Luck',
+         'Benefit',  'Chokehold', 'Close Attack', 'Connected', 'Contacts', 'Daze', 'Defensive Attack', 'Defensive Roll', 'Diehard', 'Eidetic Memory',
+         'Equipment', 'Evasion', 'Extraordinary Effort', 'Fascinate', 'Fast Grab', 'Favored Environment', 'Favored Foe', 'Fearless', 'Grabbing Finesse',
+         'Great Endurance', 'Hide in Plain Sight', 'Improved Aim', 'Improved Critical', 'Improved Defense', 'Improved Disarm', 'Improved Grab',
+         'Improved Hold', 'Improved Initiative', 'Improved Smash', 'Improved Trip', 'Improvised Tools', 'Improvised Weapon', 'Inspire', 'Instant Up',
+         'Interpose', 'Inventor', 'Jack of All Trades', 'Languages', 'Leadership', 'Luck', 'Minion', 'Move-by Action', 'Power Attack', 'Precise Attack',
+         'Prone Fighting', 'Quick Draw', 'Ranged Attack', 'Redirect', 'Ritualist', 'Second Chance', 'Seize Initiative', 'Set-up', 'Sidekick', 'Skill Mastery',
+         'Startle', 'Takedown', 'Taunt', 'Teamwork', 'Throwing Mastery', 'Tracking', 'Trance', 'Ultimate Effort', 'Uncanny Dodge', 'Weapon Bind',
+         'Weapon Break', 'Well-informed']
    };
    advantageLookup.hasText = advantageLookup.defaultText.getAllKeys().concat(['Benefit', 'Improved Critical', 'Precise Attack', 'Second Chance', 'Skill Mastery', 'Ultimate Effort']);
 
@@ -89,7 +90,7 @@ Data.change = function(version)
    modifierLookup.hasAutoRank = modifierLookup.hasAutoTotal.concat(modifierLookup.actionRangeDuration);
    modifierLookup.hasText = modifierLookup.defaultText.getAllKeys().concat(['Feature', 'Limited', 'Noticeable', 'Quirk', 'Side Effect', 'Subtle', 'Triggered']).
       concat(otherModifierNames);
-   Data.Modifier = {names: []};  //populated later
+   Data.Modifier = {names: []};
 
    var powerLookup = {
       baseCost: new MapDefault({'A God I Am': 5, 'Attain Knowledge': 2, 'Communication': 4, 'Comprehend': 2, 'Concealment': 2, 'Create': 2,
@@ -115,15 +116,16 @@ Data.change = function(version)
       godhoodNames: ['A God I Am', 'Reality Warp'],
       hasInputBaseCost: ['Attain Knowledge', 'Concealment', 'Enhanced Trait', 'Environment', 'Feature', 'Illusion',
          'Remote Sensing', 'Senses', 'Transform'],
-      isAttack: ['Affliction', 'Damage', 'Illusion', 'Mental Transform', 'Mind Reading', 'Mind Switch', 'Move Object', 'Nullify', 'Weaken']
-   };
-   Data.Power = {
-      actions: ['Standard', 'Move', 'Free', 'Reaction', 'None'],  //None isn't a choice
-      durations: ['Concentration', 'Sustained', 'Continuous', 'Permanent', 'Instant'],  //Instant isn't a choice and Permanent cost weird
+      isAttack: ['Affliction', 'Damage', 'Illusion', 'Mental Transform', 'Mind Reading', 'Mind Switch', 'Move Object', 'Nullify', 'Weaken'],
       names: ['Affliction', 'Burrowing', 'Communication', 'Comprehend', 'Concealment', 'Create', 'Damage', 'Deflect', 'Elongation', 'Enhanced Trait',
          'Environment', 'Extra Limbs', 'Feature', 'Flight', 'Growth', 'Healing', 'Illusion', 'Immortality', 'Immunity', 'Insubstantial', 'Leaping',
          'Luck Control', 'Mind Reading', 'Morph', 'Move Object', 'Movement', 'Nullify', 'Protection', 'Quickness', 'Regeneration', 'Remote Sensing',
          'Senses', 'Shrinking', 'Speed', 'Summon', 'Swimming', 'Teleport', 'Transform', 'Variable', 'Weaken'],
+   };
+   Data.Power = {
+      actions: ['Standard', 'Move', 'Free', 'Reaction', 'None'],  //None isn't a choice
+      durations: ['Concentration', 'Sustained', 'Continuous', 'Permanent', 'Instant'],  //Instant isn't a choice and Permanent cost weird
+      names: [],
       ranges: ['Close', 'Ranged', 'Perception', 'Personal']  //Personal isn't a choice
    };
 
@@ -133,16 +135,14 @@ Data.change = function(version)
          'Memory': 'Intellect', 'Perception': 'Awareness', 'Persuasion': 'Presence', 'Ranged Combat': 'Dexterity', 'Sleight of Hand': 'Dexterity',
          'Stealth': 'Agility', 'Strategy': 'Intellect', 'Technology': 'Intellect', 'Tracking': 'Awareness', 'Treatment': 'Intellect', 'Vehicles': 'Dexterity'},
          'Strength'),
-      hasText: ['Close Combat', 'Expertise', 'Ranged Combat']
-   };
-   Data.Skill = {
+      hasText: ['Close Combat', 'Expertise', 'Ranged Combat'],
       names: ['Acrobatics', 'Athletics', 'Close Combat', 'Deception', 'Expertise', 'Insight', 'Intimidation', 'Investigation', 'Perception', 'Persuasion',
          'Ranged Combat', 'Sleight of Hand', 'Stealth', 'Technology', 'Treatment', 'Vehicles']
    };
+   Data.Skill = {names: []};
 
    var i, newNames;
-   newNames = Data.Advantage.names;
-   Data.Advantage.names = [];
+   newNames = advantageLookup.names;
    for (i = 0; i < newNames.length; ++i)
    {
       addAdvantage(newNames[i]);
@@ -152,14 +152,12 @@ Data.change = function(version)
    {
       addModifier(newNames[i]);
    }
-   newNames = Data.Power.names;
-   Data.Power.names = [];
+   newNames = powerLookup.names;
    for (i = 0; i < newNames.length; ++i)
    {
       addPower(newNames[i]);
    }
-   newNames = Data.Skill.names;
-   Data.Skill.names = [];
+   newNames = skillLookup.names;
    for (i = 0; i < newNames.length; ++i)
    {
       addSkill(newNames[i]);
