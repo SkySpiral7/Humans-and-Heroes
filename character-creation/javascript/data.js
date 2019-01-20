@@ -166,18 +166,55 @@ Data.change = function(version)
    //if(1 === version.major) ;  //v1.0 is already done (no delta). only thing left is sorting
    if (version.major >= 2)
    {
-      //v1.0 has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
-      Data.Advantage = {mapThese: Data.Advantage.mapThese};  //keep the value for mapThese
-      Data.Advantage.names = [];
-      newNames = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
-         'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',
-         'Improved Disarm', 'Improved Grab', 'Improved Hold', 'Improved Initiative', 'Improved Trip', 'Improvised Tools', 'Inspire', 'Instant Up',
-         'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
-         'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'].concat(advantageLookup.godhoodNames);
-      for (i = 0; i < newNames.length; ++i)
-      {
-         addAdvantage(newNames[i]);
-      }
+      //v1.0 has 74 advantages -36 +12 = 50
+      remove(Data.Advantage, 'Agile Feint');
+      remove(Data.Advantage, 'Animal Empathy');
+      remove(Data.Advantage, 'Artificer');
+      remove(Data.Advantage, 'Assessment');
+      remove(Data.Advantage, 'Chokehold');
+      remove(Data.Advantage, 'Close Attack');
+      remove(Data.Advantage, 'Contacts');
+      remove(Data.Advantage, 'Daze');
+      remove(Data.Advantage, 'Eidetic Memory');
+      remove(Data.Advantage, 'Fascinate');
+      remove(Data.Advantage, 'Favored Environment');
+      remove(Data.Advantage, 'Favored Foe');
+      remove(Data.Advantage, 'Fearless');
+      remove(Data.Advantage, 'Grabbing Finesse');
+      remove(Data.Advantage, 'Great Endurance');
+      remove(Data.Advantage, 'Hide in Plain Sight');
+      remove(Data.Advantage, 'Improved Smash');
+      remove(Data.Advantage, 'Improvised Weapon');
+      remove(Data.Advantage, 'Inventor');
+      remove(Data.Advantage, 'Leadership');
+      remove(Data.Advantage, 'Luck');
+      remove(Data.Advantage, 'Precise Attack');
+      remove(Data.Advantage, 'Ranged Attack');
+      remove(Data.Advantage, 'Redirect');
+      remove(Data.Advantage, 'Ritualist');
+      remove(Data.Advantage, 'Second Chance');
+      remove(Data.Advantage, 'Set-up');
+      remove(Data.Advantage, 'Startle');
+      remove(Data.Advantage, 'Takedown');
+      remove(Data.Advantage, 'Taunt');
+      remove(Data.Advantage, 'Throwing Mastery');
+      remove(Data.Advantage, 'Tracking');
+      remove(Data.Advantage, 'Uncanny Dodge');
+      remove(Data.Advantage, 'Weapon Bind');
+      remove(Data.Advantage, 'Weapon Break');
+      remove(Data.Advantage, 'Well-informed');
+      addAdvantage('Beyond Mortal');
+      addAdvantage('Let There Be');
+      addAdvantage('Luck of the Gods');
+      addAdvantage('Lucky');
+      addAdvantage('Meekness');
+      addAdvantage('Omnipresent');
+      addAdvantage('Omniscient');
+      addAdvantage('Perfect Focus');
+      addAdvantage('Stay Like That');
+      addAdvantage('Supreme');
+      addAdvantage('Variable Modifier');
+      addAdvantage('Your Petty Rules Don\'t Apply to Me');
       Data.Advantage.Sidekick.costPerRank = 2;
       Data.Advantage['Improved Initiative'].maxRank = 5;
 
