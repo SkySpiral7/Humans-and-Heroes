@@ -89,6 +89,7 @@ Data.change = function(version)
    modifierLookup.hasAutoRank = modifierLookup.hasAutoTotal.concat(modifierLookup.actionRangeDuration);
    modifierLookup.hasText = modifierLookup.defaultText.getAllKeys().concat(['Feature', 'Limited', 'Noticeable', 'Quirk', 'Side Effect', 'Subtle', 'Triggered']).
       concat(otherModifierNames);
+   Data.Modifier = {names: []};  //populated later
 
    var powerLookup = {
       baseCost: new MapDefault({'A God I Am': 5, 'Attain Knowledge': 2, 'Communication': 4, 'Comprehend': 2, 'Concealment': 2, 'Create': 2,
@@ -139,25 +140,29 @@ Data.change = function(version)
          'Ranged Combat', 'Sleight of Hand', 'Stealth', 'Technology', 'Treatment', 'Vehicles']
    };
 
-   var i, name;
-   for (i = 0; i < Data.Advantage.names.length; ++i)
+   var i, newNames;
+   newNames = Data.Advantage.names;
+   Data.Advantage.names = [];
+   for (i = 0; i < newNames.length; ++i)
    {
-      addAdvantage(Data.Advantage.names[i]);
+      addAdvantage(newNames[i]);
    }
-   Data.Modifier = {
-      names: extraNames.concat(flawNames).concat(otherModifierNames)
-   };
-   for (i = 0; i < Data.Modifier.names.length; ++i)
+   newNames = extraNames.concat(flawNames).concat(otherModifierNames);
+   for (i = 0; i < newNames.length; ++i)
    {
-      addModifier(Data.Modifier.names[i]);
+      addModifier(newNames[i]);
    }
-   for (i = 0; i < Data.Power.names.length; ++i)
+   newNames = Data.Power.names;
+   Data.Power.names = [];
+   for (i = 0; i < newNames.length; ++i)
    {
-      addPower(Data.Power.names[i]);
+      addPower(newNames[i]);
    }
-   for (i = 0; i < Data.Skill.names.length; ++i)
+   newNames = Data.Skill.names;
+   Data.Skill.names = [];
+   for (i = 0; i < newNames.length; ++i)
    {
-      addSkill(Data.Skill.names[i]);
+      addSkill(newNames[i]);
    }
 
    //if(1 === version.major) ;  //v1.0 is already done (no delta). only thing left is sorting
@@ -165,14 +170,15 @@ Data.change = function(version)
    {
       //v1.0 has 74 advantages but 36 of them are removed so I might as well redefine Data.Advantage
       Data.Advantage = {mapThese: Data.Advantage.mapThese};  //keep the value for mapThese
-      Data.Advantage.names = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
+      Data.Advantage.names = [];
+      newNames = ['Accurate Attack', 'All-out Attack', 'Attractive', 'Beginner\'s Luck', 'Benefit', 'Connected', 'Defensive Attack',
          'Defensive Roll', 'Diehard', 'Equipment', 'Evasion', 'Extraordinary Effort', 'Fast Grab', 'Improved Aim', 'Improved Critical', 'Improved Defense',
          'Improved Disarm', 'Improved Grab', 'Improved Hold', 'Improved Initiative', 'Improved Trip', 'Improvised Tools', 'Inspire', 'Instant Up',
          'Interpose', 'Jack of All Trades', 'Languages', 'Lucky', 'Meekness', 'Minion', 'Move-by Action', 'Power Attack', 'Prone Fighting', 'Quick Draw',
          'Seize Initiative', 'Sidekick', 'Skill Mastery', 'Teamwork', 'Trance', 'Ultimate Effort'].concat(advantageLookup.godhoodNames);
-      for (i = 0; i < Data.Advantage.names.length; ++i)
+      for (i = 0; i < newNames.length; ++i)
       {
-         addAdvantage(Data.Advantage.names[i]);
+         addAdvantage(newNames[i]);
       }
       Data.Advantage.Sidekick.costPerRank = 2;
       Data.Advantage['Improved Initiative'].maxRank = 5;
@@ -184,7 +190,6 @@ Data.change = function(version)
       remove(Data.Modifier, 'Incurable');
       remove(Data.Modifier, 'Sleep');
       remove(Data.Modifier, 'Triggered');
-      addModifier('Existence Dependent');
       remove(Data.Modifier, 'Uncontrolled');
       addModifier('Existence Dependent');
       addModifier('Ammunition');
@@ -271,6 +276,7 @@ Data.change = function(version)
 
          var allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
          var isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
+         var name;
          for (i = 0; i < Data.Power.names.length; ++i)
          {
             name = Data.Power.names[i];
@@ -291,11 +297,13 @@ Data.change = function(version)
          remove(Data.Modifier, 'Increased Mass');  //moved into the specific pages
       }
    }
+
    sortData();
 
    function addAdvantage(nameToAdd)
    {
-      if(!Data.Advantage.names.contains(nameToAdd)) Data.Advantage.names.push(nameToAdd);
+      if(Data.Advantage[nameToAdd] !== undefined || Data.Advantage.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already an Advantage');
+      Data.Advantage.names.push(nameToAdd);
       Data.Advantage[nameToAdd] = {
          name: nameToAdd,
          costPerRank: advantageLookup.costPerRank.get(nameToAdd),
@@ -307,7 +315,8 @@ Data.change = function(version)
    }
    function addPower(nameToAdd)
    {
-      if(!Data.Power.names.contains(nameToAdd)) Data.Power.names.push(nameToAdd);
+      if(Data.Power[nameToAdd] !== undefined || Data.Power.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Power');
+      Data.Power.names.push(nameToAdd);
       Data.Power[nameToAdd] = {
          name: nameToAdd,
          baseCost: powerLookup.baseCost.get(nameToAdd),
@@ -321,7 +330,8 @@ Data.change = function(version)
    }
    function addModifier(nameToAdd)
    {
-      if(!Data.Modifier.names.contains(nameToAdd)) Data.Modifier.names.push(nameToAdd);
+      if(Data.Modifier[nameToAdd] !== undefined || Data.Modifier.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Modifier');
+      Data.Modifier.names.push(nameToAdd);
       Data.Modifier[nameToAdd] = {
          name: nameToAdd,
          cost: modifierLookup.cost.get(nameToAdd),
@@ -343,7 +353,8 @@ Data.change = function(version)
    }
    function addSkill(nameToAdd)
    {
-      if(!Data.Skill.names.contains(nameToAdd)) Data.Skill.names.push(nameToAdd);
+      if(Data.Skill[nameToAdd] !== undefined || Data.Skill.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Skill');
+      Data.Skill.names.push(nameToAdd);
       Data.Skill[nameToAdd] = {
          name: nameToAdd,
          ability: skillLookup.abilityMap.get(nameToAdd),
@@ -352,6 +363,7 @@ Data.change = function(version)
    }
    function remove(objectToModify, nameToRemove)
    {
+      if(objectToModify[nameToRemove] === undefined || !objectToModify.names.contains(nameToRemove)) throw new Error(nameToRemove + ' is not here');
       delete objectToModify[nameToRemove];
       objectToModify.names.removeByValue(nameToRemove);
    }
