@@ -4335,3 +4335,125 @@ TestSuite.data.v3=function(testState={})
 
    return TestRunner.displayResults('TestSuite.data.v3', assertions, testState);
 };
+TestSuite.data.v4=function(testState={})
+{
+   TestRunner.clearResults(testState);
+
+   var assertions=[], expected;
+
+   try {
+   Data.change(new VersionObject(4, 0));
+
+   //redefined all skills because a lot changed, I want to assert the hasText on all, and assert that none have abilities
+   expected = {
+      "names": [
+         "Acrobatics",
+         "Athletics",
+         "Close Combat",
+         "Competition",
+         "Contortion",
+         "Craft",
+         "Deception",
+         "Engineering",
+         "Handle Animal",
+         "Insight",
+         "Investigation",
+         "Knowledge",
+         "Medical",
+         "Perception",
+         "Performance",
+         "Persuasion",
+         "Ranged Combat",
+         "Sleight of Hand",
+         "Stealth",
+         "Survival"
+      ],
+      "Acrobatics": {
+         "name": "Acrobatics",
+         "hasText": false
+      },
+      "Athletics": {
+         "name": "Athletics",
+         "hasText": false
+      },
+      "Close Combat": {
+         "name": "Close Combat",
+         "hasText": true
+      },
+      "Deception": {
+         "name": "Deception",
+         "hasText": false
+      },
+      "Insight": {
+         "name": "Insight",
+         "hasText": false
+      },
+      "Investigation": {
+         "name": "Investigation",
+         "hasText": false
+      },
+      "Perception": {
+         "name": "Perception",
+         "hasText": false
+      },
+      "Persuasion": {
+         "name": "Persuasion",
+         "hasText": false
+      },
+      "Ranged Combat": {
+         "name": "Ranged Combat",
+         "hasText": true
+      },
+      "Sleight of Hand": {
+         "name": "Sleight of Hand",
+         "hasText": false
+      },
+      "Stealth": {
+         "name": "Stealth",
+         "hasText": false
+      },
+      "Knowledge": {
+         "name": "Knowledge",
+         "hasText": true
+      },
+      "Competition": {
+         "name": "Competition",
+         "hasText": true
+      },
+      "Contortion": {
+         "name": "Contortion",
+         "hasText": false
+      },
+      "Craft": {
+         "name": "Craft",
+         "hasText": true
+      },
+      "Engineering": {
+         "name": "Engineering",
+         "hasText": true
+      },
+      "Handle Animal": {
+         "name": "Handle Animal",
+         "hasText": false
+      },
+      "Medical": {
+         "name": "Medical",
+         "hasText": false
+      },
+      "Performance": {
+         "name": "Performance",
+         "hasText": true
+      },
+      "Survival": {
+         "name": "Survival",
+         "hasText": false
+      }
+   };
+   assertions.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
+   } catch(e){assertions.push({Error: e, Description: 'v4.0 Some data'});}
+
+   //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync
+   Data.change(new VersionObject(4, latestMinorRuleset));
+
+   return TestRunner.displayResults('TestSuite.data.v4', assertions, testState);
+};

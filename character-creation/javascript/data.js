@@ -296,6 +296,37 @@ Data.change = function(version)
       }
    }
 
+   if (version.major >= 4)
+   {
+      //v3.x has 22 skills -10 +8 = 20. half of them replaced. not redefining so you can see the diff
+      remove(Data.Skill, 'Common Knowledge');
+      remove(Data.Skill, 'Expertise');
+      remove(Data.Skill, 'Intimidation');
+      remove(Data.Skill, 'Memory');
+      remove(Data.Skill, 'Strategy');
+      remove(Data.Skill, 'Technology');
+      remove(Data.Skill, 'Tracking');
+      remove(Data.Skill, 'Treatment');
+      remove(Data.Skill, 'Vehicles');
+      remove(Data.Skill, 'Other');
+      addSkill('Competition');  //addSkill adds the unused ability property. some will have bad defaults for now.
+      addSkill('Contortion');
+      addSkill('Craft');
+      addSkill('Engineering');
+      addSkill('Handle Animal');
+      addSkill('Medical');
+      addSkill('Performance');
+      addSkill('Survival');
+      //will need to update all skill's hasText (not just ones added)
+      skillLookup.hasText = ['Close Combat', 'Competition', 'Craft', 'Engineering', 'Knowledge', 'Performance', 'Ranged Combat'];
+      for (i = 0; i < Data.Skill.names.length; ++i)
+      {
+         Data.Skill[Data.Skill.names[i]].hasText = skillLookup.hasText.contains(Data.Skill.names[i]);
+         //ability isn't used by 4.0 calc so delete it
+         delete Data.Skill[Data.Skill.names[i]].ability;
+      }
+   }
+
    sortData();
 
    function addAdvantage(nameToAdd)
