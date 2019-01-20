@@ -26,6 +26,14 @@ function includeJsFile(jsName)
 }
 })();
 
+//TODO: move to minorVersion
+/*
+var latestMajorRuleset = 3;
+Not defined because it is intentionally difficult to increment (every page should be examined for implications)
+after that see fb92aba0816064835aba374519045b5e5bd1ab35 for what needs to update.
+The variable isn't very useful anyway.
+Also this file name isn't wrong because major version isn't defined in here.
+*/
 var latestMinorRuleset = 0;
 var largestPossibleMinorRulesets = [undefined, 0, 7, 14, latestMinorRuleset];
 
