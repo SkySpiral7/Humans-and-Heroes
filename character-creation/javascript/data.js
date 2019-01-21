@@ -61,6 +61,7 @@ Data.change = function(version)
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
+      //cost could be a normal object but use MapDefault because everything else is
       cost: new MapDefault({'Ammunition': -1, 'Aura': 2, 'Fragile': -1, 'Other Flat Flaw': -1, 'Other Rank Flaw': -1, 'System Dependent': -2,
          'Uncontrollable Entirely': -5, 'Uncontrollable Result': -1, 'Uncontrollable Target': -1}, undefined),
       defaultText: new MapDefault({'Activation': 'Action Required', 'Alternate Effect': 'To What', 'Alternate Resistance (Cost)': 'Name of Resistance',
@@ -298,7 +299,7 @@ Data.change = function(version)
 
    if (version.major >= 4)
    {
-      //v3.x has 22 skills -10 +8 = 20. half of them replaced. not redefining so you can see the diff
+      //v3.x has 22 skills -10 +8 = 20. not redefining so you can see the diff
       remove(Data.Skill, 'Common Knowledge');
       remove(Data.Skill, 'Expertise');
       remove(Data.Skill, 'Intimidation');

@@ -48,6 +48,7 @@ function SkillList()
        total = 0;
       for (var i=0; i < rowArray.length-1; i++)  //the last row is blank
       {
+          //TODO: remove assumptions of ability
           var abilityNameUsed = rowArray[i].getAbilityName();
           var abilityValue = Main.abilitySection.getByName(abilityNameUsed).getValue();  //non-zeroed for below
           var bonusValue;

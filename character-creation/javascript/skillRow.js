@@ -94,23 +94,34 @@ function SkillObject(rowIndex)
          htmlString += '<div class="col-12 col-sm-8 col-md-5">';
          htmlString += '<input type="text" style="width: 100%" id="skillText' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeText();" />';
          htmlString += '</div>\n';
-         htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
       }
-      else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
-      htmlString+='<label>Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" /></label>\n';
-      htmlString+='+&nbsp;<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
-      htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
-      htmlString+='   <option>Agility</option>\n';
-      htmlString+='   <option>Fighting</option>\n';
-      htmlString+='   <option>Dexterity</option>\n';
-      htmlString+='   <option>Stamina</option>\n';
-      htmlString+='   <option>Intellect</option>\n';
-      htmlString+='   <option>Awareness</option>\n';
-      htmlString+='   <option>Presence</option>\n';
-      htmlString+='</select>\n';
-      htmlString+='(+<span id="skill bonus '+rowIndex+'"></span>)\n';
-      htmlString+='</div>\n';
-      htmlString+='</div>\n';
+      if (Main.getActiveRuleset().isLessThan(4,0))
+      {
+         if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
+         else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
+         htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
+         htmlString += '+&nbsp;<select id="skillAbility' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').selectAbility();">\n';
+         htmlString += '   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
+         htmlString += '   <option>Agility</option>\n';
+         htmlString += '   <option>Fighting</option>\n';
+         htmlString += '   <option>Dexterity</option>\n';
+         htmlString += '   <option>Stamina</option>\n';
+         htmlString += '   <option>Intellect</option>\n';
+         htmlString += '   <option>Awareness</option>\n';
+         htmlString += '   <option>Presence</option>\n';
+         htmlString += '</select>\n';
+         htmlString += '(+<span id="skillBonus' + rowIndex + '"></span>)\n';
+         htmlString += '</div>\n';
+      }
+      else  //v4.0+
+      {
+         //TODO: format this for rankless only
+         if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
+         else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
+         htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
+         htmlString += '</div>\n';
+      }
+      htmlString += '</div>\n';  //end row
       return htmlString;
    };
    /**Get the name of the skill appended with text to determine redundancy*/
@@ -135,12 +146,12 @@ function SkillObject(rowIndex)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-       if(this.isBlank()) return;  //already set (to default)
-       SelectUtil.setText(('skillChoices'+rowIndex), name);
-       if(hasText) document.getElementById('skillText'+rowIndex).value=text;
-       document.getElementById('skillRank'+rowIndex).value = rank;
-       SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
-       document.getElementById('skill bonus '+rowIndex).innerHTML = totalBonus;
+      if(this.isBlank()) return;  //already set (to default)
+      SelectUtil.setText(('skillChoices'+rowIndex), name);
+      if(hasText) document.getElementById('skillText'+rowIndex).value=text;
+      document.getElementById('skillRank'+rowIndex).value = rank;
+      if(null !== document.getElementById('skillAbility'+rowIndex)) SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
+      if(null !== document.getElementById('skillBonus'+rowIndex)) document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;
    };
    this.constructor=function()
    {
