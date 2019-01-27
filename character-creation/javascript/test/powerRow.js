@@ -948,7 +948,7 @@ TestSuite.powerRow.calculateValues=function(testState={})
     var assertions=[];
     try{
     SelectUtil.changeText('powerChoices0', 'Variable');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     SelectUtil.changeText('powerModifierChoices0.0', 'Area');
     assertions.push({Expected: 16, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank extras increase cost/rank'});
     } catch(e){assertions.push({Error: e, Description: 'Rank extras'});}
@@ -956,21 +956,21 @@ TestSuite.powerRow.calculateValues=function(testState={})
     try{
     Main.powerSection.clear();
     SelectUtil.changeText('powerChoices0', 'Variable');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
     assertions.push({Expected: 12, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws reduce cost/rank'});
 
     SelectUtil.changeText('powerChoices0', 'Damage');
-    TestRunner.changeValue('powerRank0', 4);
+    DomUtil.changeValue('powerRank0', 4);
     SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
     assertions.push({Expected: 2, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws can reduce to fraction'});
 
-    TestRunner.changeValue('powerRank0', 3);
+    DomUtil.changeValue('powerRank0', 3);
     assertions.push({Expected: 2, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Total cost rounds up'});
 
-    TestRunner.changeValue('powerRank0', 100);
+    DomUtil.changeValue('powerRank0', 100);
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 100);
+    DomUtil.changeValue('powerModifierRank0.0', 100);
     assertions.push({Expected: 20, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Rank flaws min of 1/5'});
     } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
 
@@ -979,21 +979,21 @@ TestSuite.powerRow.calculateValues=function(testState={})
     Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 6);
+    DomUtil.changeValue('powerModifierRank0.0', 6);
     assertions.push({Expected: 1, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'v3.4 Variable has no min cost'});
 
     Main.powerSection.clear();
     Main.setRuleset(3,5);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 6);
+    DomUtil.changeValue('powerModifierRank0.0', 6);
     assertions.push({Expected: 5, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'v3.5 Variable has a min cost of 5/rank'});
     } catch(e){assertions.push({Error: e, Description: 'Variable min cost'});}
 
     try{
     Main.powerSection.clear();
     SelectUtil.changeText('powerChoices0', 'Damage');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     SelectUtil.changeText('powerModifierChoices0.0', 'Area');
     SelectUtil.changeText('powerModifierChoices0.1', 'Accurate');
     assertions.push({Expected: 5, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat Extras add to cost after ranks'});
@@ -1002,7 +1002,7 @@ TestSuite.powerRow.calculateValues=function(testState={})
     try{
     Main.powerSection.clear();
     SelectUtil.changeText('powerChoices0', 'Damage');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     SelectUtil.changeText('powerModifierChoices0.0', 'Area');
     SelectUtil.changeText('powerModifierChoices0.1', 'Inaccurate');
     assertions.push({Expected: 3, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat flaws reduce cost after ranks'});
@@ -1010,7 +1010,7 @@ TestSuite.powerRow.calculateValues=function(testState={})
     Main.powerSection.clear();
     SelectUtil.changeText('powerChoices0', 'Damage');
     SelectUtil.changeText('powerModifierChoices0.0', 'Inaccurate');
-    TestRunner.changeValue('powerModifierRank0.0', 3);
+    DomUtil.changeValue('powerModifierRank0.0', 3);
     assertions.push({Expected: 4, Actual: Main.powerSection.getRow(0).getRank(), Description: 'Flat flaws may increase ranks'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'Flat flaws retains total of 1'});
     } catch(e){assertions.push({Error: e, Description: 'Flat flaws'});}
@@ -1018,13 +1018,13 @@ TestSuite.powerRow.calculateValues=function(testState={})
     try{
     Main.powerSection.clear();
     //Main.setRuleset(3,5);
-    TestRunner.changeValue('Strength', 100);
+    DomUtil.changeValue('Strength', 100);
     SelectUtil.changeText('powerChoices0', 'A God I Am');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     assertions.push({Expected: 155, Actual: Main.powerSection.getRow(0).getTotal(), Description: '2 ranks: A God I Am'});
 
     SelectUtil.changeText('powerChoices0', 'Reality Warp');
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     assertions.push({Expected: 85, Actual: Main.powerSection.getRow(0).getTotal(), Description: '2 ranks: Reality Warp'});
     } catch(e){assertions.push({Error: e, Description: 'Odd first rank values'});}
 
@@ -1303,7 +1303,7 @@ TestSuite.powerRow.setValues=function(testState={})
     assertions.push({Expected: '(1/2)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Displays fractional Rank flaws'});
 
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 100);
+    DomUtil.changeValue('powerModifierRank0.0', 100);
     assertions.push({Expected: '(1/5)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Rank flaws min of 1/5'});
     } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
 
@@ -1312,14 +1312,14 @@ TestSuite.powerRow.setValues=function(testState={})
     Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 6);
+    DomUtil.changeValue('powerModifierRank0.0', 6);
     assertions.push({Expected: '1', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.4 Variable has no min cost'});
 
     Main.powerSection.clear();
     Main.setRuleset(3,5);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    TestRunner.changeValue('powerModifierRank0.0', 6);
+    DomUtil.changeValue('powerModifierRank0.0', 6);
     assertions.push({Expected: '5', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.5 Variable has a min cost of 5/rank'});
     } catch(e){assertions.push({Error: e, Description: 'Variable min cost'});}
 

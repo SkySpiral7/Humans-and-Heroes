@@ -25,7 +25,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Skill Subtype', Actual: firstRow.getText(), Description: actionTaken+': Text'});
     assertions.push({Expected: 1, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
 
-    actionTaken='Set Some Values'; TestRunner.changeValue('skillText0', 'Text value'); TestRunner.changeValue('skillRank0', 2); SelectUtil.changeText('skillAbility0', 'Strength');
+    actionTaken='Set Some Values'; DomUtil.changeValue('skillText0', 'Text value'); DomUtil.changeValue('skillRank0', 2); SelectUtil.changeText('skillAbility0', 'Strength');
     actionTaken='Set Perception'; SelectUtil.changeText('skillChoices0', 'Perception');
     assertions.push({Expected: false, Actual: firstRow.isBlank(), Description: actionTaken+': First row is not blank'});
     assertions.push({Expected: false, Actual: firstRow.doesHaveText(), Description: actionTaken+': And data: hasText'});
@@ -37,7 +37,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
-    actionTaken='Set Other with value'; TestRunner.changeValue('Strength', 2); SelectUtil.changeText('skillChoices0', 'Other');
+    actionTaken='Set Other with value'; DomUtil.changeValue('Strength', 2); SelectUtil.changeText('skillChoices0', 'Other');
     //TODO: how can I make sure all of the relationships work? I'll need to draw a map...
     assertions.push({Expected: false, Actual: firstRow.isBlank(), Description: actionTaken+': First row is not blank'});
     assertions.push({Expected: true, Actual: firstRow.doesHaveText(), Description: actionTaken+': And has data: hasText'});

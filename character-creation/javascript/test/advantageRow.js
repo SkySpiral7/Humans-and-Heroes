@@ -28,7 +28,7 @@ TestSuite.advantageRow.setRank=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Load Benefit'});}
 
     try{
-    TestRunner.changeValue('advantageRank0', 5);
+    DomUtil.changeValue('advantageRank0', 5);
     assertions.push({Expected: 5, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Change Benefit rank'});
     } catch(e){assertions.push({Error: e, Description: 'Change Benefit rank'});}
 
@@ -49,17 +49,17 @@ TestSuite.advantageRow.setRank=function(testState={})
     assertions.push({Expected: 'Lucky', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Change to Lucky'});
     assertions.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getmaxRank(), Description: 'Lucky getmaxRank'});
 
-    TestRunner.changeValue('advantageRank0', 5);
+    DomUtil.changeValue('advantageRank0', 5);
     assertions.push({Expected: 3, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Lucky max rank enforced'});
 
-    TestRunner.changeValue('advantageRank0', -5);
+    DomUtil.changeValue('advantageRank0', -5);
     assertions.push({Expected: 1, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Lucky min rank enforced'});
 
-    TestRunner.changeValue('advantageRank0', 2);
-    TestRunner.changeValue('advantageRank0', 'invalid');
+    DomUtil.changeValue('advantageRank0', 2);
+    DomUtil.changeValue('advantageRank0', 'invalid');
     assertions.push({Expected: 1, Actual: Main.advantageSection.getRow(0).getRank(), Description: 'Lucky rank defaults to 1'});
 
-    TestRunner.changeValue('advantageRank0', 2);
+    DomUtil.changeValue('advantageRank0', 2);
     assertions.push({Expected: 5, Actual: Main.advantageSection.getRow(0).getCostPerRank(), Description: 'Lucky getCostPerRank'});
     assertions.push({Expected: 10, Actual: Main.advantageSection.getRow(0).getTotal(), Description: 'Lucky total cost'});
     } catch(e){assertions.push({Error: e, Description: 'Lucky'});}
@@ -85,7 +85,7 @@ TestSuite.advantageRow.setText=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Load Benefit'});}
 
     try{
-    TestRunner.changeValue('advantageText0', '\tchanged text: trimmed \n');
+    DomUtil.changeValue('advantageText0', '\tchanged text: trimmed \n');
     assertions.push({Expected: 'changed text: trimmed', Actual: Main.advantageSection.getRow(0).getText(), Description: 'Change Benefit text'});
     } catch(e){assertions.push({Error: e, Description: 'Change Benefit text'});}
 
@@ -114,15 +114,15 @@ TestSuite.advantageRow.generate=function(testState={})
     assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row doesn\'t have (first Godhood) Beyond Mortal'});
 
     try{
-    actionTaken='Set Godhood'; TestRunner.changeValue('Strength', 100);
+    actionTaken='Set Godhood'; DomUtil.changeValue('Strength', 100);
     assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row now has (first) Beyond Mortal'});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me'), Description: actionTaken+': And has (last) Your Petty Rules Don\'t Apply to Me'});
-    actionTaken='Clear Godhood'; TestRunner.changeValue('Strength', 0);
+    actionTaken='Clear Godhood'; DomUtil.changeValue('Strength', 0);
     assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row Godhood removed'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
-    actionTaken='Padded Equipment Row Test'; SelectUtil.changeText('advantageChoices0', 'Ultimate Effort'); SelectUtil.changeText('equipmentChoices0', 'Feature'); TestRunner.changeValue('equipmentRank0', 10); SelectUtil.changeText('advantageChoices2', Data.Advantage.names[0]);
+    actionTaken='Padded Equipment Row Test'; SelectUtil.changeText('advantageChoices0', 'Ultimate Effort'); SelectUtil.changeText('equipmentChoices0', 'Feature'); DomUtil.changeValue('equipmentRank0', 10); SelectUtil.changeText('advantageChoices2', Data.Advantage.names[0]);
     assertions.push({Expected: 'Equipment', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is Equipment'});
     assertions.push({Expected: 'Ultimate Effort', Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then Ultimate Effort'});
     assertions.push({Expected: Data.Advantage.names[0], Actual: Main.advantageSection.getRow(2).getName(), Description: actionTaken+': Then '+Data.Advantage.names[0]});

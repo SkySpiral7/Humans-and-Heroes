@@ -11,7 +11,7 @@ TestSuite.test.example=function(testState={})
 
    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
    SelectUtil.changeText('powerChoices0', 'Feature');
-   TestRunner.changeValue('equipmentRank0', 5);
+   DomUtil.changeValue('equipmentRank0', 5);
    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: 'Equipment Row is not created'});
 
    //be sure to copy the name here:

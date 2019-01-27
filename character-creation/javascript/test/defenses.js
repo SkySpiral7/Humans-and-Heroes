@@ -16,7 +16,7 @@ TestSuite.defenseList.calculateValues=function(testState={})
     assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Presence').getValue(), Description: actionTaken+': Presence is 0'});
 
    //test new rule functionality
-    actionTaken='Set Presence'; TestRunner.changeValue('Presence', 2);
+    actionTaken='Set Presence'; DomUtil.changeValue('Presence', 2);
     assertions.push({Expected: 2, Actual: Main.abilitySection.getByName('Presence').getValue(), Description: actionTaken+': Presence was set to 2'});
     assertions.push({Expected: '2', Actual: document.getElementById('Will-start').innerHTML, Description: actionTaken+': Will defense inital says 2'});
     assertions.push({Expected: 2, Actual: Main.defenseSection.getByName('Will').getAbilityValue(), Description: actionTaken+': And it is 2'});
@@ -24,11 +24,11 @@ TestSuite.defenseList.calculateValues=function(testState={})
     assertions.push({Expected: 2, Actual: Main.defenseSection.getByName('Will').getTotalBonus(), Description: actionTaken+': And it is 2'});
     assertions.push({Expected: 0, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 0'});
 
-    actionTaken='Change Will'; TestRunner.changeValue('Will-input', 1);
+    actionTaken='Change Will'; DomUtil.changeValue('Will-input', 1);
     assertions.push({Expected: '2', Actual: document.getElementById('Will-start').innerHTML, Description: actionTaken+': Will defense inital says 2'});
     assertions.push({Expected: 2, Actual: Main.defenseSection.getByName('Will').getAbilityValue(), Description: actionTaken+': And it is 2'});
     assertions.push({Expected: 1, Actual: Main.defenseSection.getByName('Will').getRank(), Description: actionTaken+': Will defense input is 1'});
-    //document.getElementById('Will-input').value is always valid (as long as TestRunner.changeValue works)
+    //document.getElementById('Will-input').value is always valid (as long as DomUtil.changeValue works)
     assertions.push({Expected: '3', Actual: document.getElementById('Will-final').innerHTML, Description: actionTaken+': Will defense bonus says 3'});
     assertions.push({Expected: 3, Actual: Main.defenseSection.getByName('Will').getTotalBonus(), Description: actionTaken+': And it is 3'});
     assertions.push({Expected: 1, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 1'});
@@ -43,7 +43,7 @@ TestSuite.defenseList.calculateValues=function(testState={})
     assertions.push({Expected: 0, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 0'});
     assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Awareness').getValue(), Description: actionTaken+': Awareness is 0'});
 
-    actionTaken='Set Awareness'; TestRunner.changeValue('Awareness', 3);
+    actionTaken='Set Awareness'; DomUtil.changeValue('Awareness', 3);
     assertions.push({Expected: 3, Actual: Main.abilitySection.getByName('Awareness').getValue(), Description: actionTaken+': Awareness was set to 3'});
     assertions.push({Expected: '3', Actual: document.getElementById('Will-start').innerHTML, Description: actionTaken+': Will defense inital says 3'});
     assertions.push({Expected: 3, Actual: Main.defenseSection.getByName('Will').getAbilityValue(), Description: actionTaken+': And it is 3'});
@@ -51,7 +51,7 @@ TestSuite.defenseList.calculateValues=function(testState={})
     assertions.push({Expected: 3, Actual: Main.defenseSection.getByName('Will').getTotalBonus(), Description: actionTaken+': And it is 3'});
     assertions.push({Expected: 0, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 0'});
 
-    actionTaken='Change Will'; TestRunner.changeValue('Will-input', 1);
+    actionTaken='Change Will'; DomUtil.changeValue('Will-input', 1);
     assertions.push({Expected: '3', Actual: document.getElementById('Will-start').innerHTML, Description: actionTaken+': Will defense inital says 3'});
     assertions.push({Expected: 3, Actual: Main.defenseSection.getByName('Will').getAbilityValue(), Description: actionTaken+': And it is 3'});
     assertions.push({Expected: 1, Actual: Main.defenseSection.getByName('Will').getRank(), Description: actionTaken+': Will defense input is 1'});
