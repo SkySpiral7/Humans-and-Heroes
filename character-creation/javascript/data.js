@@ -439,6 +439,7 @@ Data.change = function(version)
       });
       Data.Skill.names.sort(function(a, b)
       {
+         //"Other" is last. This exists in 2.x and 3.x.
          if('Other' === a) return bFirst;
          if('Other' === b) return aFirst;
 

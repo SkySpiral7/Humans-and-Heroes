@@ -16,8 +16,6 @@ TestSuite.powerList.load=function(testState={})
     var dataToLoad;
     var assertions=[];
 
-    Main.setRuleset(3,3);
-
     try{
     dataToLoad = Loader.resetData();
     dataToLoad.Powers.push({"effect":"Flight","text":"Text test","action":"Free","range":"Personal","duration":"Sustained",

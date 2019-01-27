@@ -91,38 +91,38 @@ function SkillList()
    /**Sets data from a json object given then updates*/
    this.load=function(jsonSection)
    {
-       //rowArray=[new SkillObject(0)];
+      //rowArray=[new SkillObject(0)];
       for (var i=0; i < jsonSection.length; i++)
       {
          if (!Data.Skill.names.contains(jsonSection[i].name))
          {
-             var errorEnding;
-             if(1 === Main.getActiveRuleset().major) errorEnding = 'In M&M 3e no other skills exist.';
-             else errorEnding = 'Did you mean "Other" with a subtype?';
+            var errorEnding;
+            if(1 === Main.getActiveRuleset().major) errorEnding = 'In M&M 3e no other skills exist.';
+            else if(Main.getActiveRuleset().isLessThan(4,0)) errorEnding = 'Did you mean "Other" with a subtype?';
+            else errorEnding = 'In H&H ' + Main.getActiveRuleset() + ' no other skills exist. Did you mean to use a subtype?';
 
-             Main.messageUser('SkillList.load.notExist', 'Skill #' + (i+1) + ': ' +
-                jsonSection[i].name + ' is not a basic skill name. ' + errorEnding);
-             continue;
+            Main.messageUser('SkillList.load.notExist', 'Skill #' + (i+1) + ': ' +
+               jsonSection[i].name + ' is not a basic skill name. ' + errorEnding);
+            continue;
          }
-          var rowPointer = rowArray.last();
-          rowPointer.setSkill(jsonSection[i].name);
-          if(undefined !== jsonSection[i].subtype) rowPointer.setText(jsonSection[i].subtype);
-          rowPointer.setRank(jsonSection[i].rank);
-          //TODO: add tests
-          if(Main.getActiveRuleset().isLessThan(4,0)) rowPointer.setAbility(jsonSection[i].ability);
-          this.addRow();  //add new blank data row
+         var rowPointer = rowArray.last();
+         rowPointer.setSkill(jsonSection[i].name);
+         if(undefined !== jsonSection[i].subtype) rowPointer.setText(jsonSection[i].subtype);
+         rowPointer.setRank(jsonSection[i].rank);
+         if(Main.getActiveRuleset().isLessThan(4,0)) rowPointer.setAbility(jsonSection[i].ability);
+         this.addRow();  //add new blank data row
       }
-       this.update();
+      this.update();
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-    /**Creates a new row at the end of the array*/
-    this.addRow=function(){rowArray.push(new SkillObject(rowArray.length));};
+   /**Creates a new row at the end of the array*/
+   this.addRow=function(){rowArray.push(new SkillObject(rowArray.length));};
    /**Updates other sections which depend on skill section*/
    this.notifyDependent=function()
    {
-       Main.updateOffense();
+      Main.updateOffense();
    };
    //constructor:
-    CommonsLibrary.initializeRows.call(this);
+   CommonsLibrary.initializeRows.call(this);
 }

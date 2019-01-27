@@ -49,7 +49,7 @@ function SkillObject(rowIndex)
        rank = 1;
        abilityName = Data.Skill[name].ability;
        hasText = Data.Skill[name].hasText;
-       if(name === 'Other') text = 'Skill Name and Subtype';  //doesn't exist in v1
+       if('Other' === name) text = 'Skill Name and Subtype';  //doesn't exist in v1.0
        else if(hasText) text = 'Skill Subtype';
        else text = undefined;
    };
