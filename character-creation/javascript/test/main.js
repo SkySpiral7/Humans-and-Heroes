@@ -8,132 +8,132 @@ TestSuite.main.changeRuleset=function(testState={})
     var rulesetElement = document.getElementById('ruleset');
     var latestRuleString = Main.getLatestRuleset().toString();
 
-    TestRunner.changeValue('ruleset', latestRuleString);
+    DomUtil.changeValue('ruleset', latestRuleString);
     //unfortunately I can't test the default values because by test runner resets the version every test
     //it needs to do this so that a test for 1.0 doesn't mess up a test for 2.7
     //assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Default ActiveRuleset is LatestRuleset'});
     //assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Default value of element'});
 
     try{
-    TestRunner.changeValue('ruleset', '');
+    DomUtil.changeValue('ruleset', '');
     assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Empty: ActiveRuleset not changed'});
     assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Empty: Element not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Empty'});}
 
     try{
-    TestRunner.changeValue('ruleset', '   ');
+    DomUtil.changeValue('ruleset', '   ');
     assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Blank: ActiveRuleset not changed'});
     assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Blank: Element not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Blank'});}
 
     try{
-    TestRunner.changeValue('ruleset', 'zasduiasdhui');
+    DomUtil.changeValue('ruleset', 'zasduiasdhui');
     assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Invalid: ActiveRuleset not changed'});
     assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Invalid: Element not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Invalid'});}
 
     try{
-    TestRunner.changeValue('ruleset', 'v2.0');
+    DomUtil.changeValue('ruleset', 'v2.0');
     assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Typo v2.0: ActiveRuleset not changed'});
     assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Typo v2.0: Element not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Typo v2.0'});}
 
     try{
-    TestRunner.changeValue('ruleset', '0');
+    DomUtil.changeValue('ruleset', '0');
     assertions.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: 'Zero: ActiveRuleset 0 -> 1.0'});
     assertions.push({Expected: '1.0', Actual: rulesetElement.value, Description: 'Zero: Element 0 -> 1.0'});
     } catch(e){assertions.push({Error: e, Description: 'Zero'});}
 
     try{
-    TestRunner.changeValue('ruleset', '-2.0');
+    DomUtil.changeValue('ruleset', '-2.0');
     assertions.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: 'Negative: ActiveRuleset -2.0 -> 1.0'});
     assertions.push({Expected: '1.0', Actual: rulesetElement.value, Description: 'Negative: Element -2.0 -> 1.0'});
     } catch(e){assertions.push({Error: e, Description: 'Negative'});}
 
     try{
-    TestRunner.changeValue('ruleset', '999');
+    DomUtil.changeValue('ruleset', '999');
     assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Huge: ActiveRuleset 999 -> latest'});
     assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Huge: Element 999 -> latest'});
     } catch(e){assertions.push({Error: e, Description: 'Huge'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.5');
+    DomUtil.changeValue('ruleset', '2.5');
     assertions.push({Expected: '2.5', Actual: Main.getActiveRuleset().toString(), Description: 'Normal: ActiveRuleset 2.5 -> 2.5'});
     assertions.push({Expected: '2.5', Actual: rulesetElement.value, Description: 'Normal: Element 2.5 -> 2.5'});
     } catch(e){assertions.push({Error: e, Description: 'Normal'});}
 
     try{
-    TestRunner.changeValue('ruleset', '1.5');
+    DomUtil.changeValue('ruleset', '1.5');
     assertions.push({Expected: '1.0', Actual: Main.getActiveRuleset().toString(), Description: '1.x Minor too large: ActiveRuleset 1.5 -> 1.0'});
     assertions.push({Expected: '1.0', Actual: rulesetElement.value, Description: '1.x Minor too large: Element 1.5 -> 1.0'});
     } catch(e){assertions.push({Error: e, Description: '1.x Minor too large'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.55');
+    DomUtil.changeValue('ruleset', '2.55');
     assertions.push({Expected: '2.7', Actual: Main.getActiveRuleset().toString(), Description: '2.x Minor too large: ActiveRuleset 2.55 -> 2.7'});
     assertions.push({Expected: '2.7', Actual: rulesetElement.value, Description: '2.x Minor too large: Element 2.55 -> 2.7'});
     } catch(e){assertions.push({Error: e, Description: '2.x Minor too large'});}
 
     try{
-    TestRunner.changeValue('ruleset', '3.20');
+    DomUtil.changeValue('ruleset', '3.20');
     assertions.push({Expected: '3.14', Actual: Main.getActiveRuleset().toString(), Description: '3.x Minor too large: ActiveRuleset 3.20 -> 14'});
     assertions.push({Expected: '3.14', Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.20 -> 14'});
     } catch(e){assertions.push({Error: e, Description: '3.x Minor too large'});}
 
     try{
-    TestRunner.changeValue('ruleset', '4.999');
+    DomUtil.changeValue('ruleset', '4.999');
     assertions.push({Expected: Main.getLatestRuleset(), Actual: Main.getActiveRuleset(), Description: '4.x Minor too large: ActiveRuleset 3.999 -> latest'});
     assertions.push({Expected: Main.getLatestRuleset().toString(), Actual: rulesetElement.value, Description: '4.x Minor too large: Element 3.999 -> latest'});
     } catch(e){assertions.push({Error: e, Description: '4.x Minor too large'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2');
+    DomUtil.changeValue('ruleset', '2');
     assertions.push({Expected: '2.0', Actual: Main.getActiveRuleset().toString(), Description: 'No minor: ActiveRuleset 2 -> 2.0'});
     assertions.push({Expected: '2.0', Actual: rulesetElement.value, Description: 'No minor: Element 2 -> 2.0'});
     } catch(e){assertions.push({Error: e, Description: 'No minor'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.7.0184e9a');
+    DomUtil.changeValue('ruleset', '2.7.0184e9a');
     assertions.push({Expected: '2.7', Actual: Main.getActiveRuleset().toString(), Description: 'Ignore micro: ActiveRuleset 2.7.0184e9a -> 2.7'});
     assertions.push({Expected: '2.7', Actual: rulesetElement.value, Description: 'Ignore micro: Element 2.7.0184e9a -> 2.7'});
     } catch(e){assertions.push({Error: e, Description: 'Ignore micro'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.invalid');
+    DomUtil.changeValue('ruleset', '2.invalid');
     assertions.push({Expected: '2.0', Actual: Main.getActiveRuleset().toString(), Description: 'Minor defaults: ActiveRuleset 2.invalid -> 2.0'});
     assertions.push({Expected: '2.0', Actual: rulesetElement.value, Description: 'Minor defaults: Element 2.invalid -> 2.0'});
     } catch(e){assertions.push({Error: e, Description: 'Minor defaults'});}
 
     try{
-    TestRunner.changeValue('ruleset', 'invalid.5');
+    DomUtil.changeValue('ruleset', 'invalid.5');
     assertions.push({Expected: '2.0', Actual: Main.getActiveRuleset().toString(), Description: 'Major doesn\'t default: ActiveRuleset invalid.5 -> not changed'});
     assertions.push({Expected: '2.0', Actual: rulesetElement.value, Description: 'Major doesn\'t default: Element invalid.5 -> not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Major doesn\'t default'});}
 
     try{
-    TestRunner.changeValue('ruleset', '3,3');
+    DomUtil.changeValue('ruleset', '3,3');
     assertions.push({Expected: '3.0', Actual: Main.getActiveRuleset().toString(), Description: 'Typo 3,3: ActiveRuleset minor not changed'});
     assertions.push({Expected: '3.0', Actual: rulesetElement.value, Description: 'Typo 3,3: Element minor not changed'});
     } catch(e){assertions.push({Error: e, Description: 'Typo 3,3'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.5');  //this will work if above tests pass. so don't assert
-    TestRunner.changeValue('ruleset', '2.-5.2');
+    DomUtil.changeValue('ruleset', '2.5');  //this will work if above tests pass. so don't assert
+    DomUtil.changeValue('ruleset', '2.-5.2');
     assertions.push({Expected: '2.0', Actual: Main.getActiveRuleset().toString(), Description: 'Edge case, negative minor: ActiveRuleset 2.-5.2 -> 2.0'});
     assertions.push({Expected: '2.0', Actual: rulesetElement.value, Description: 'Edge case, negative minor: Element 2.-5.2 -> 2.0'});
     } catch(e){assertions.push({Error: e, Description: 'Edge case, negative minor'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.4');
-    TestRunner.changeValue('ruleset', '2.5.2.1.7.8');
+    DomUtil.changeValue('ruleset', '2.4');
+    DomUtil.changeValue('ruleset', '2.5.2.1.7.8');
     assertions.push({Expected: '2.5', Actual: Main.getActiveRuleset().toString(), Description: 'Edge case, numbers and dots: ActiveRuleset 2.5.2.1.7.8 -> 2.5'});
     assertions.push({Expected: '2.5', Actual: rulesetElement.value, Description: 'Edge case, numbers and dots: Element 2.5.2.1.7.8 -> 2.5'});
     } catch(e){assertions.push({Error: e, Description: 'Edge case, numbers and dots'});}
 
     try{
-    TestRunner.changeValue('ruleset', '2.6');
-    TestRunner.changeValue('Strength', '2');
-    TestRunner.changeValue('ruleset', '2.7');
+    DomUtil.changeValue('ruleset', '2.6');
+    DomUtil.changeValue('Strength', '2');
+    DomUtil.changeValue('ruleset', '2.7');
     assertions.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Maintains document on version change'});
     } catch(e){assertions.push({Error: e, Description: 'Maintains document on version change'});}
 
@@ -222,12 +222,12 @@ TestSuite.main.updateInitiative=function(testState={})
     assertions.push({Expected: '+0', Actual: initiativeElement.innerHTML, Description: 'Initial Initiative'});
 
     try{
-    TestRunner.changeValue('Agility', 2);
+    DomUtil.changeValue('Agility', 2);
     assertions.push({Expected: '+2', Actual: initiativeElement.innerHTML, Description: 'Set Agility 2'});
     } catch(e){assertions.push({Error: e, Description: 'Set Agility 2'});}
 
     try{
-    TestRunner.changeValue('Agility', -3);
+    DomUtil.changeValue('Agility', -3);
     assertions.push({Expected: '-3', Actual: initiativeElement.innerHTML, Description: 'Set Agility -3'});
     } catch(e){assertions.push({Error: e, Description: 'Set Agility -3'});}
 
@@ -239,21 +239,21 @@ TestSuite.main.updateInitiative=function(testState={})
     try{
     Main.clear();
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank0', 4);
+    DomUtil.changeValue('advantageRank0', 4);
     assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0+ Improved Initiative *1'});
     } catch(e){assertions.push({Error: e, Description: '3.0+ Improved Initiative *1'});}
 
     try{
     Main.setRuleset(1, 0);
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank0', 3);
+    DomUtil.changeValue('advantageRank0', 3);
     assertions.push({Expected: '+12', Actual: initiativeElement.innerHTML, Description: '1.0 Improved Initiative *4'});
     } catch(e){assertions.push({Error: e, Description: '1.0 Improved Initiative *4'});}
 
     try{
     Main.setRuleset(2,7);
     SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    TestRunner.changeValue('advantageRank0', 2);
+    DomUtil.changeValue('advantageRank0', 2);
     assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative *2'});
     } catch(e){assertions.push({Error: e, Description: '2.7 Improved Initiative *2'});}
 
@@ -376,7 +376,7 @@ TestSuite.main.load=function(testState={})
 
    var assertions=[], dataToLoad;
 
-   TestRunner.changeValue('Stamina', '--');
+   DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
 
    dataToLoad = Loader.resetData();
@@ -386,7 +386,7 @@ TestSuite.main.load=function(testState={})
 
    Main.clear();  //I could Loader.resetData() but I don't need to save
    Messages.list = [];
-   TestRunner.changeValue('Stamina', '--');
+   DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading reset to false'});
 
    dataToLoad = Loader.resetData();
@@ -404,13 +404,13 @@ TestSuite.main.loadFromString=function(testState={})
 
    var assertions=[];
 
-   TestRunner.changeValue('Strength', '2');
+   DomUtil.changeValue('Strength', '2');
    Main.loadFromString('  \n\t');
    assertions.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'No errors from blank input'});
 
    Messages.list = [];
-   TestRunner.changeValue('Stamina', '--');
+   DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'ui amLoading starts false'});
 
    try{
@@ -424,7 +424,7 @@ TestSuite.main.loadFromString=function(testState={})
    }
 
    Messages.list = [];
-   TestRunner.changeValue('Stamina', '--');
+   DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'loading unset amLoading'});
 
    try{

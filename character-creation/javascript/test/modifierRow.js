@@ -75,7 +75,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     //can't save var to powerRowTotal0 and powerModifierRowTotal0.0 because they keep getting recreated
 
     SelectUtil.changeText('powerChoices0', 'Damage');
-    TestRunner.changeValue('powerRank0', 99);
+    DomUtil.changeValue('powerRank0', 99);
     assertions.push({Expected: '99', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 99 initial total'});
     //TODO: tests (except generate and setAll) should not check the DOM
 
@@ -98,13 +98,13 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Damage 99 Alternate Effect'});}
 
     try{
-    TestRunner.changeValue('powerRank0', 4);
+    DomUtil.changeValue('powerRank0', 4);
     SelectUtil.changeText('powerModifierChoices0.0', 'Easily Removable');
     assertions.push({Expected: '-1', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: 'Damage 4 Easily Removable modifier total'});
     assertions.push({Expected: '3', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 4 Easily Removable power total'});
     } catch(e){assertions.push({Error: e, Description: 'Damage 4 Easily Removable'});}
 
-    TestRunner.changeValue('powerRank0', 100);
+    DomUtil.changeValue('powerRank0', 100);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Removable');
@@ -124,7 +124,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     assertions.push({Expected: '50', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 100 Alternate Effect power total'});
     } catch(e){assertions.push({Error: e, Description: 'Damage 100 Alternate Effect'});}
 
-    TestRunner.changeValue('powerRank0', 1);
+    DomUtil.changeValue('powerRank0', 1);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Removable');
@@ -145,14 +145,14 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Damage 1 Alternate Effect'});}
 
     try{
-    TestRunner.changeValue('powerRank0', 4);
+    DomUtil.changeValue('powerRank0', 4);
     SelectUtil.changeText('powerModifierChoices0.0', 'Removable');
     assertions.push({Expected: '0', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: 'Damage 4 Removable modifier total'});
     assertions.push({Expected: '4', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 4 Removable power total'});
     } catch(e){assertions.push({Error: e, Description: 'Damage 4 Removable'});}
 
     try{
-    TestRunner.changeValue('powerRank0', 2);
+    DomUtil.changeValue('powerRank0', 2);
     SelectUtil.changeText('powerModifierChoices0.0', 'Easily Removable');
     assertions.push({Expected: '0', Actual: document.getElementById('powerModifierRowTotal0.0').innerHTML, Description: 'Damage 2 Easily Removable modifier total'});
     assertions.push({Expected: '2', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: 'Damage 2 Easily Removable power total'});
@@ -160,7 +160,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
 
     Main.clear(); Main.setRuleset(1, 0);
     SelectUtil.changeText('powerChoices0', 'Damage');
-    TestRunner.changeValue('powerRank0', 100);
+    DomUtil.changeValue('powerRank0', 100);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Dynamic Alternate Effect');
@@ -174,7 +174,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 100 Alternate Effect power total'});
     } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Alternate Effect'});}
 
-    TestRunner.changeValue('powerRank0', 99);
+    DomUtil.changeValue('powerRank0', 99);
 
     try{
     SelectUtil.changeText('powerModifierChoices0.0', 'Dynamic Alternate Effect');
@@ -188,7 +188,7 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
     assertions.push({Expected: '1', Actual: document.getElementById('powerRowTotal0').innerHTML, Description: '1.0 Damage 99 Alternate Effect power total'});
     } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Alternate Effect'});}
 
-    TestRunner.changeValue('powerRank0', 1);
+    DomUtil.changeValue('powerRank0', 1);
 
     //TODO: look at changing 1.0 alt effects into an extra
     try{

@@ -17,13 +17,13 @@ TestSuite.advantageList.calculateEquipmentRank=function(testState={})
     assertions.push({Expected: 5, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken+': Equipment Max Total is now the minimum'});
     assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage Total is now 1'});
 
-    actionTaken='Damage Rank 5'; TestRunner.changeValue('equipmentRank0', 5);
+    actionTaken='Damage Rank 5'; DomUtil.changeValue('equipmentRank0', 5);
     assertions.push({Expected: 5, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken+': Equipment Max Total is the maximum of 5'});
     assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage Total is still 1'});
-    actionTaken='Damage Rank 6'; TestRunner.changeValue('equipmentRank0', 6);
+    actionTaken='Damage Rank 6'; DomUtil.changeValue('equipmentRank0', 6);
     assertions.push({Expected: 10, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken+': Equipment Max Total is now 10'});
     assertions.push({Expected: 2, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage Total is now 2'});
-    actionTaken='Damage Rank 5'; TestRunner.changeValue('equipmentRank0', 5);
+    actionTaken='Damage Rank 5'; DomUtil.changeValue('equipmentRank0', 5);
     assertions.push({Expected: 5, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken+': Equipment Max Total is back to the maximum of 5'});
     assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage Total is back to 1'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
@@ -50,7 +50,7 @@ TestSuite.advantageList.calculateValues=function(testState={})
 
    //test non petty godhood
     try{
-    actionTaken='Set Godhood'; TestRunner.changeValue('Strength', 30);
+    actionTaken='Set Godhood'; DomUtil.changeValue('Strength', 30);
     assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: actionTaken+': Godhood is usable'});
     actionTaken='Set Beyond Mortal'; SelectUtil.changeText('advantageChoices0', 'Beyond Mortal');
     assertions.push({Expected: 'Beyond Mortal', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': Beyond Mortal is set'});
@@ -72,7 +72,7 @@ TestSuite.advantageList.calculateValues=function(testState={})
     assertions.push({Expected: 'Improved Initiative', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': Improved Initiative is set'});
     assertions.push({Expected: false, Actual: Main.advantageSection.hasGodhoodAdvantages(), Description: actionTaken+': Advantage section has no godhood'});
     assertions.push({Expected: true, Actual: Main.advantageSection.isUsingPettyRules(), Description: actionTaken+': And petty rules do apply'});
-    actionTaken='Set rank to 2'; TestRunner.changeValue('advantageRank0', 2);
+    actionTaken='Set rank to 2'; DomUtil.changeValue('advantageRank0', 2);
     assertions.push({Expected: true, Actual: Main.advantageSection.getRankMap().containsKey('Improved Initiative'), Description: actionTaken+': RankMap has Improved Initiative'});
     assertions.push({Expected: 2, Actual: Main.advantageSection.getRankMap().get('Improved Initiative'), Description: actionTaken+': with rank of 2'});
     assertions.push({Expected: false, Actual: Main.advantageSection.getRankMap().containsKey('Defensive Roll'), Description: actionTaken+': RankMap doesn\'t have Defensive Roll'});
@@ -81,10 +81,10 @@ TestSuite.advantageList.calculateValues=function(testState={})
 
    //test total
     try{
-    actionTaken='Set Lucky 2'; SelectUtil.changeText('advantageChoices0', 'Lucky'); TestRunner.changeValue('advantageRank0', 2);
+    actionTaken='Set Lucky 2'; SelectUtil.changeText('advantageChoices0', 'Lucky'); DomUtil.changeValue('advantageRank0', 2);
     assertions.push({Expected: 'Lucky', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': Lucky is set'});
     assertions.push({Expected: 2, Actual: Main.advantageSection.getRow(0).getRank(), Description: actionTaken+': with rank of 2'});
-    actionTaken='Set Defensive Roll 3'; SelectUtil.changeText('advantageChoices1', 'Defensive Roll'); TestRunner.changeValue('advantageRank1', 3);
+    actionTaken='Set Defensive Roll 3'; SelectUtil.changeText('advantageChoices1', 'Defensive Roll'); DomUtil.changeValue('advantageRank1', 3);
     assertions.push({Expected: 'Defensive Roll', Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Defensive Roll is set'});
     assertions.push({Expected: 3, Actual: Main.advantageSection.getRow(1).getRank(), Description: actionTaken+': with rank of 3'});
     assertions.push({Expected: 13, Actual: Main.advantageSection.getTotal(), Description: actionTaken+': Advantage total is 13'});
