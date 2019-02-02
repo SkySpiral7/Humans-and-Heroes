@@ -5,6 +5,7 @@ TestSuite.skillList.calculateValues=function(testState={})
    TestRunner.clearResults(testState);
    var assertions=[];
 
+   Main.setRuleset(3, 14);
    DomUtil.changeValue('Strength', '--');
    SelectUtil.changeText('skillChoices0', 'Athletics');
    assertions.push({Expected: 'Always Fail', Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Missing ability always fail'});
@@ -63,7 +64,7 @@ TestSuite.skillList.load=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Ignores Text/Ability'});}
 
    try{
-      Main.clear();  //TODO: this shouldn't be needed but is because otherwise setRuleset fails: clear ability, update skill
+      Main.skillSection.clear();  //TODO: this shouldn't be needed but is because otherwise setRuleset fails: clear ability, update skill
       Main.setRuleset(3, 14);
       dataToLoad = Loader.resetData();
       dataToLoad.Skills.push({"name":"Insight","subtype":"Reading faces","rank":2,"ability":"Strength"});
@@ -74,7 +75,7 @@ TestSuite.skillList.load=function(testState={})
       assertions.push({Expected: 'Reading faces', Actual: Main.skillSection.getRow(0).getText(), Description: 'Happy Path 3.14: getText'});
       assertions.push({Expected: 2, Actual: Main.skillSection.getRow(0).getRank(), Description: 'Happy Path 3.14: getRank'});
       assertions.push({Expected: 'Strength', Actual: Main.skillSection.getRow(0).getAbilityName(), Description: 'Happy Path 3.14: getAbilityName'});
-      assertions.push({Expected: 2, Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Happy Path 3.14: getTotalBonus'});
+      assertions.push({Expected: '+2', Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Happy Path 3.14: getTotalBonus'});
       assertions.push({Expected: 1, Actual: Main.skillSection.getTotal(), Description: 'Happy Path 3.14: Make sure update was called'});
    } catch(e){assertions.push({Error: e, Description: 'Happy Path 3.14'});}
 
