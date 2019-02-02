@@ -23,7 +23,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Sleight of Hand', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: 'Skill Subtype', Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 1, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+1', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
 
     actionTaken='Set Some Values'; DomUtil.changeValue('skillText0', 'Text value'); DomUtil.changeValue('skillRank0', 2); SelectUtil.changeText('skillAbility0', 'Strength');
     actionTaken='Set Perception'; SelectUtil.changeText('skillChoices0', 'Perception');
@@ -33,7 +33,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Perception', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: undefined, Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 1, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+1', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
@@ -45,7 +45,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Other', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: 'Skill Name and Subtype', Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 3, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+3', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
@@ -67,7 +67,7 @@ TestSuite.skillRow.generate=function(testState={})
     assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
     assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
     assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skill bonus 0'), Description: actionTaken+': Bonus doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: actionTaken+': Bonus doesn\'t exist'});
 
     try{
     actionTaken='Set Acrobatics'; SelectUtil.changeText('skillChoices0', 'Acrobatics');
@@ -77,7 +77,7 @@ TestSuite.skillRow.generate=function(testState={})
     assertions.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: actionTaken+': Text exists'});
     assertions.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: actionTaken+': Rank exists'});
     assertions.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: actionTaken+': Ability exists'});
-    assertions.push({Expected: '1', Actual: document.getElementById('skill bonus 0').innerHTML, Description: actionTaken+': Bonus exists'});
+    assertions.push({Expected: '+1', Actual: document.getElementById('skillBonus0').innerHTML, Description: actionTaken+': Bonus exists'});
 
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken+('Has first ability: ' + Data.Ability.names[0])});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken+('Has last ability: ' + Data.Ability.names.last())});
@@ -89,7 +89,7 @@ TestSuite.skillRow.generate=function(testState={})
     assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
     assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
     assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skill bonus 0'), Description: actionTaken+': Bonus doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: actionTaken+': Bonus doesn\'t exist'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     return TestRunner.displayResults('TestSuite.skillRow.generate', assertions, testState);

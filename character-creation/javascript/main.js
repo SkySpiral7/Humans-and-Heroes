@@ -255,6 +255,7 @@ function MainObject()
           var sectionPointer = sectionArray[sectionIndex];
           var damageKeys = sectionPointer.getAttackEffectRanks().getAllKeys();
 
+         //TODO: bug: missing ability messes up offense section
          for (var i=0; i < damageKeys.length; i++)
          {
              var rowPointer = sectionPointer.getRow(sectionPointer.getAttackEffectRanks().get(damageKeys[i]));

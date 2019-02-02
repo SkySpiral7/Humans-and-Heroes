@@ -16,7 +16,7 @@ TestSuite.powerList.load=function(testState={})
     var dataToLoad;
     var assertions=[];
 
-    Main.setRuleset(3,3);
+    Main.setRuleset(3,3);  //TODO: need modern tests
 
     try{
     dataToLoad = Loader.resetData();

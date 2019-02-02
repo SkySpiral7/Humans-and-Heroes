@@ -41,31 +41,48 @@ function SkillList()
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues=function()
    {
-       this.sanitizeRows();
-       closeCombatMap.clear();
-       rangedCombatMap.clear();
-       maxSkillRanks = Main.abilitySection.createAbilityMap();  //reset the map to the ability values
-       total = 0;
+      this.sanitizeRows();
+      closeCombatMap.clear();
+      rangedCombatMap.clear();
+      maxSkillRanks = Main.abilitySection.createAbilityMap();  //reset the map to the ability values
+      total = 0;
       for (var i=0; i < rowArray.length-1; i++)  //the last row is blank
       {
-          var abilityNameUsed = rowArray[i].getAbilityName();
-          var abilityValue = Main.abilitySection.getByName(abilityNameUsed).getValue();  //non-zeroed for below
-          var bonusValue;
+         var abilityNameUsed = rowArray[i].getAbilityName();
+         var abilityValue = Main.abilitySection.getByName(abilityNameUsed).getValue();  //non-zeroed for below
+         var bonusValue, bonusDisplay;
 
-          if(abilityValue === '--' && abilityNameUsed === 'Stamina' && Main.getActiveRuleset().major > 1) bonusValue = 'Always Pass';
-          else if(abilityValue === '--') bonusValue = 'Always Fail';  //in ruleset 1.0 having no stamina means always fails
-          else bonusValue = rowArray[i].getRank() + abilityValue;
-          rowArray[i].setTotalBonus(bonusValue);
-          //neither -- affects power levels so it isn't added to max skill map
-          if(abilityValue !== '--' && bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
+         //in v1.0 having no stamina means always fails
+         if ('--' === abilityValue && 'Stamina' === abilityNameUsed && Main.getActiveRuleset().major > 1)
+         {
+            bonusValue = Infinity;  //value not used
+            bonusDisplay = 'Always Pass';
+         }
+         else if ('--' === abilityValue)
+         {
+            bonusValue = -Infinity;  //value not used
+            bonusDisplay = 'Always Fail';
+         }
+         else
+         {
+            bonusValue = rowArray[i].getRank() + abilityValue;
+            bonusDisplay = '+' + bonusValue;
+         }
+         rowArray[i].setTotalBonus(bonusDisplay);
 
-          if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
-          else if(rowArray[i].getName() === 'Ranged Combat') rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
+         if ('--' !== abilityValue)
+         {
+            //missing doesn't affect power levels so it isn't added to max skill map
+            if(bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
 
-          total+=rowArray[i].getRank();
+            if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
+            else if(rowArray[i].getName() === 'Ranged Combat') rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
+         }
+
+         total+=rowArray[i].getRank();
       }
-       total/=2;  //do not round
-       //no need to add Unarmed. either it was added above or is calculated by Main
+      total/=2;  //do not round
+      //no need to add Unarmed. either it was added above or is calculated by Main
    };
    /**Sets data from a json object given then updates*/
    this.load=function(jsonSection)

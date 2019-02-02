@@ -108,7 +108,7 @@ function SkillObject(rowIndex)
       htmlString+='   <option>Awareness</option>\n';
       htmlString+='   <option>Presence</option>\n';
       htmlString+='</select>\n';
-      htmlString+='(+<span id="skill bonus '+rowIndex+'"></span>)\n';
+      htmlString+='(<span id="skillBonus'+rowIndex+'"></span>)\n';
       htmlString+='</div>\n';
       htmlString+='</div>\n';
       return htmlString;
@@ -140,7 +140,7 @@ function SkillObject(rowIndex)
        if(hasText) document.getElementById('skillText'+rowIndex).value=text;
        document.getElementById('skillRank'+rowIndex).value = rank;
        SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
-       document.getElementById('skill bonus '+rowIndex).innerHTML = totalBonus;
+       document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;
    };
    this.constructor=function()
    {

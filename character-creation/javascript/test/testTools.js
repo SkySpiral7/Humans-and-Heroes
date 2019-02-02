@@ -15,6 +15,7 @@ Loader.sendData=function(jsonData)
 };
 Messages.errorCapture=function(errorCode, amLoading)
 {
+   //TODO: why not assert message?
    Messages.list.push({errorCode: errorCode, amLoading: amLoading});
 };
 Messages.errorCodes=function()
