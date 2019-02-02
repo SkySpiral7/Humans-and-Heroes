@@ -1,4 +1,4 @@
-//this file is currently not used
+//other than documentation this doesn't seem to accomplish anything
 function UpdateMediator(sectionPointer, fieldName)
 {
    switch (sectionPointer)
@@ -46,6 +46,7 @@ function UpdateMediator(sectionPointer, fieldName)
          {
              Main.powerSection.update();  //transcendence changed so update these
              Main.advantageSection.update();
+             break;
          }
           throw new Error('Main default bug: '+fieldName);
           //break;

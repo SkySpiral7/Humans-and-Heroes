@@ -48,23 +48,38 @@ function SkillList()
       total = 0;
       for (var i=0; i < rowArray.length-1; i++)  //the last row is blank
       {
-         var abilityValue, bonusValue;
+         var abilityValue, bonusValue, bonusDisplay;
          if (Main.getActiveRuleset().isLessThan(4,0))
          {
             var abilityNameUsed = rowArray[i].getAbilityName();
             abilityValue = Main.abilitySection.getByName(abilityNameUsed).getValue();  //non-zeroed for below
 
-            if (abilityValue === '--' && abilityNameUsed === 'Stamina' && Main.getActiveRuleset().major > 1) bonusValue = 'Always Pass';
-            else if (abilityValue === '--') bonusValue = 'Always Fail';  //in ruleset 1.0 having no stamina means always fails
-            else bonusValue = rowArray[i].getRank() + abilityValue;
-            //TODO: bug: shouldn't say "+Always Fail"
-            rowArray[i].setTotalBonus(bonusValue);
-            //neither -- affects power levels so it isn't added to max skill map
-            if (abilityValue !== '--' && bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
+            //in v1.0 having no stamina means always fails
+            if ('--' === abilityValue && 'Stamina' === abilityNameUsed && Main.getActiveRuleset().major > 1)
+            {
+               bonusValue = Infinity;  //value not used
+               bonusDisplay = 'Always Pass';
+            }
+            else if ('--' === abilityValue)
+            {
+               bonusValue = -Infinity;  //value not used
+               bonusDisplay = 'Always Fail';
+            }
+            else
+            {
+               bonusValue = rowArray[i].getRank() + abilityValue;
+               bonusDisplay = '+' + bonusValue;
+            }
+            rowArray[i].setTotalBonus(bonusDisplay);
 
-            //TODO: bug: missing ability messes up offense section
-            if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
-            else if(rowArray[i].getName() === 'Ranged Combat') rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
+            if ('--' !== abilityValue)
+            {
+               //missing doesn't affect power levels so it isn't added to max skill map
+               if(bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
+
+               if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
+               else if(rowArray[i].getName() === 'Ranged Combat') rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
+            }
          }
          else  //v4.0+
          {

@@ -25,7 +25,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Sleight of Hand', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: 'Skill Subtype', Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 1, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+1', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
 
     actionTaken='Set Some Values'; DomUtil.changeValue('skillText0', 'Text value'); DomUtil.changeValue('skillRank0', 2); SelectUtil.changeText('skillAbility0', 'Strength');
     actionTaken='Set Perception'; SelectUtil.changeText('skillChoices0', 'Perception');
@@ -35,7 +35,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Perception', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: undefined, Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 1, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+1', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
@@ -47,7 +47,7 @@ TestSuite.skillRow.setSkill=function(testState={})
     assertions.push({Expected: 'Other', Actual: firstRow.getName(), Description: actionTaken+': Name'});
     assertions.push({Expected: 1, Actual: firstRow.getRank(), Description: actionTaken+': Rank'});
     assertions.push({Expected: 'Skill Name and Subtype', Actual: firstRow.getText(), Description: actionTaken+': Text'});
-    assertions.push({Expected: 3, Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
+    assertions.push({Expected: '+3', Actual: firstRow.getTotalBonus(), Description: actionTaken+': TotalBonus'});
     } catch(e){assertions.push({Error: e, Description: actionTaken});}
 
     try{
@@ -64,6 +64,7 @@ TestSuite.skillRow.generate=function(testState={})
     //TODO: make 4.0 tests
     Main.setRuleset(3, 14);
     var assertions=[];
+
     assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Initial: First Row is blank'});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Initial Has first skill: ' + Data.Skill.names[0])});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Initial Has last skill: ' + Data.Skill.names.last())});
@@ -81,7 +82,7 @@ TestSuite.skillRow.generate=function(testState={})
     assertions.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: actionTaken+': Text exists'});
     assertions.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: actionTaken+': Rank exists'});
     assertions.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: actionTaken+': Ability exists'});
-    assertions.push({Expected: '1', Actual: document.getElementById('skillBonus0').innerHTML, Description: actionTaken+': Bonus exists'});
+    assertions.push({Expected: '+1', Actual: document.getElementById('skillBonus0').innerHTML, Description: actionTaken+': Bonus exists'});
 
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken+('Has first ability: ' + Data.Ability.names[0])});
     assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken+('Has last ability: ' + Data.Ability.names.last())});
