@@ -121,3 +121,4 @@ function SkillList()
    //constructor:
    CommonsLibrary.initializeRows.call(this);
 }
+Main.register(new SkillList(), "Skills", ["Abilities"]);

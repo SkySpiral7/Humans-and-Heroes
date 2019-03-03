@@ -117,3 +117,4 @@ function AbilityObject(abilityName)
       document.getElementById(abilityName).value = abilityValue;
    };
 }
+Main.register(new AbilityList(), "Abilities", []);
