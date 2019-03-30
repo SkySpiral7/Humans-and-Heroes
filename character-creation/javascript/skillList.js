@@ -88,7 +88,7 @@ function SkillList()
             {
                abilityValue = Main.abilitySection.getByName('Fighting').getValue();
                bonusValue = rowArray[i].getRank() + abilityValue;
-               closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
+               //closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
             }
             else if (rowArray[i].getName() === 'Ranged Combat')
             {

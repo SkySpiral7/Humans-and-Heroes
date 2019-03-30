@@ -253,6 +253,7 @@ function MainObject()
       var effectRank;
 
       //if Unarmed is possible then it will be the first row
+      //TODO: rankless needs to update offense
       if (closeSkillMap.containsKey('Unarmed') || this.abilitySection.getByName('Fighting').getValue() !== '--')
       {
          var strengthValue = this.abilitySection.getByName('Strength').getValue();

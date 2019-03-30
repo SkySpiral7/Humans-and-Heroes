@@ -268,6 +268,8 @@ TestSuite.main.updateOffense=function(testState={})
    expected = {Offense: [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}]};
    assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy: Unarmed only by default'});
 
+   Main.setRuleset(3, 14);
+
    DomUtil.changeValue('Strength', 4);
    DomUtil.changeValue('Fighting', 2);
    expected = {Offense: [{skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 4}]};

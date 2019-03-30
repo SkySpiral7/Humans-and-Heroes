@@ -116,6 +116,7 @@ function SkillObject(rowIndex)
       }
       else  //v4.0+
       {
+         //skills in 4.0 still use ability but it's misleading to associate them
          //TODO: format this for rankless only
          if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
          else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
