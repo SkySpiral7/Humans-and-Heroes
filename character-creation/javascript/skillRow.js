@@ -44,14 +44,16 @@ function SkillObject(rowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setSkill=function(nameGiven)
    {
-       if(!Data.Skill.names.contains(nameGiven)){this.constructor(); return;}
-       name = nameGiven;
-       rank = 1;
-       abilityName = Data.Skill[name].ability;
-       hasText = Data.Skill[name].hasText;
-       if('Other' === name) text = 'Skill Name and Subtype';  //doesn't exist in v1.0
-       else if(hasText) text = 'Skill Subtype';
-       else text = undefined;
+      if(!Data.Skill.names.contains(nameGiven)){this.constructor(); return;}
+      name = nameGiven;
+      //TODO: update v4.0 tests?
+      if(Main.getActiveRuleset().isLessThan(4,0)) rank = 1;
+      else rank = 'Trained';
+      abilityName = Data.Skill[name].ability;
+      hasText = Data.Skill[name].hasText;
+      if('Other' === name) text = 'Skill Name and Subtype';  //doesn't exist in v1.0
+      else if(hasText) text = 'Skill Subtype';
+      else text = undefined;
    };
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
@@ -63,8 +65,10 @@ function SkillObject(rowIndex)
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
    {
-       if(this.isBlank()) return;
-       rank = sanitizeNumber(rankGiven, 1, 1);
+      if(this.isBlank()) return;
+      if(Main.getActiveRuleset().isLessThan(4,0)) rank = sanitizeNumber(rankGiven, 1, 1);
+      else rank = rankGiven;  //string
+      //TODO: update v4.0 tests?
    };
    /**Used to set data independent of the document and without calling update. This function takes the ability's name*/
    this.setAbility=function(abilityNameGiven)
@@ -120,7 +124,10 @@ function SkillObject(rowIndex)
          //TODO: format this for rankless only
          if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
          else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
-         htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
+         htmlString += '<select id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();">\n';
+         htmlString += '   <option>Trained</option>\n';
+         htmlString += '   <option>Mastered</option>\n';
+         htmlString += '</select>\n';
          htmlString += '</div>\n';
       }
       htmlString += '</div>\n';  //end row
@@ -151,6 +158,7 @@ function SkillObject(rowIndex)
       if(this.isBlank()) return;  //already set (to default)
       SelectUtil.setText(('skillChoices'+rowIndex), name);
       if(hasText) document.getElementById('skillText'+rowIndex).value=text;
+      //setting value works for 1.0-4.0+ since the select has no value the text is used by default
       document.getElementById('skillRank'+rowIndex).value = rank;
       if(null !== document.getElementById('skillAbility'+rowIndex)) SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
       if(null !== document.getElementById('skillBonus'+rowIndex)) document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;

@@ -80,28 +80,18 @@ function SkillList()
                if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
                else if(rowArray[i].getName() === 'Ranged Combat') rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
             }
+            total+=rowArray[i].getRank();
          }
          else  //v4.0+
          {
-            //TODO: add tests
-            if (rowArray[i].getName() === 'Close Combat')
-            {
-               abilityValue = Main.abilitySection.getByName('Fighting').getValue();
-               bonusValue = rowArray[i].getRank() + abilityValue;
-               //closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy
-            }
-            else if (rowArray[i].getName() === 'Ranged Combat')
-            {
-               abilityValue = Main.abilitySection.getByName('Dexterity').getValue();
-               bonusValue = rowArray[i].getRank() + abilityValue;
-               rangedCombatMap.add(rowArray[i].getText(), bonusValue);  //only use the subtype for the map
-            }
+            //TODO: ignore v4.0 attack PL until accurate mod is tracked. add tests
+            if('Trained' === rowArray[i].getRank()) ++total;
+            else total+=2;  //Mastered
+            //TODO: v4.0 test total and offense
          }
-
-         total+=rowArray[i].getRank();
       }
-      total/=2;  //do not round
-      //no need to add Unarmed. either it was added above or is calculated by Main
+      if(Main.getActiveRuleset().isLessThan(4,0)) total/=2;  //do not round
+      //no need to add Unarmed to combat map. either it was added above or is calculated by Main
    };
    /**Sets data from a json object given then updates*/
    this.load=function(jsonSection)
@@ -123,6 +113,8 @@ function SkillList()
          var rowPointer = rowArray.last();
          rowPointer.setSkill(jsonSection[i].name);
          if(undefined !== jsonSection[i].subtype) rowPointer.setText(jsonSection[i].subtype);
+         //TODO: v4.0 validate rank on load
+         //TODO: v4.0 tests for save/load
          rowPointer.setRank(jsonSection[i].rank);
          if(Main.getActiveRuleset().isLessThan(4,0)) rowPointer.setAbility(jsonSection[i].ability);
          this.addRow();  //add new blank data row
