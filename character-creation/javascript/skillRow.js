@@ -100,6 +100,7 @@ function SkillObject(rowIndex)
          if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
          else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
          htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
+         //v1 Expertise can use any ability but PL sounds like Int only. Also sounds like the rest are set
          htmlString += '+&nbsp;<select id="skillAbility' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').selectAbility();">\n';
          htmlString += '   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
          htmlString += '   <option>Agility</option>\n';

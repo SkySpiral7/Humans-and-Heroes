@@ -61,6 +61,7 @@ function PowerListAgnostic(sectionName)
           if(Data.Power[powerEffect].isGodhood) usingGodhoodPowers = true;
           else if(powerEffect === 'Protection' && rank > protectionRankTotal) protectionRankTotal = rank;
              //protection doesn't stack and may have more than 1
+         //TODO: bug? what if there's multiple of same skill? why not just return [] of indexes?
           if(rowArray[i].getName() !== undefined) attackEffectRanks.add(rowArray[i].getSkillUsed(), i);
           total+=rowArray[i].getTotal();
       }

@@ -263,8 +263,133 @@ TestSuite.main.updateOffense=function(testState={})
 {
    TestRunner.clearResults(testState);
    var assertions=[];
+   var expected;
 
-   //ADD TESTS
+   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy: Unarmed only by default'});
+
+   DomUtil.changeValue('Strength', 4);
+   DomUtil.changeValue('Fighting', 2);
+   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 4}]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Default Unarmed uses abilities'});
+
+   Main.clear();
+   DomUtil.changeValue('Fighting', '--');
+   expected = {Offense: []};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Absent Fighting: no Unarmed by default'});
+
+   SelectUtil.changeText('skillChoices0', 'Close Combat');
+   DomUtil.changeValue('skillText0', 'Unarmed');
+   //because Unarmed defaults to Fighting
+   expected = {Offense: []};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Absent Fighting with Unarmed: still no Unarmed'});
+
+   DomUtil.changeValue('skillAbility0', 'Awareness');
+   DomUtil.changeValue('Strength', 4);
+   DomUtil.changeValue('Awareness', 2);
+   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 3, range: 'Close', effect: 'Damage', rank: 4}]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'No Fgt, Awe Unarmed: has Unarmed with attack/rank'});
+
+   DomUtil.changeValue('Strength', '--');
+   expected = {Offense: []};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'No Str, Awe Unarmed: no Unarmed'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerName0', 'Sword 1');
+   DomUtil.changeValue('powerSkill0', 'Sword');
+   SelectUtil.changeText('equipmentChoices0', 'Affliction');
+   DomUtil.changeValue('equipmentName0', 'Sword 2');
+   DomUtil.changeValue('equipmentSkill0', 'Sword');
+   DomUtil.changeValue('equipmentRank0', 2);
+   DomUtil.changeValue('Fighting', 2);
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Sword 1', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 1},
+      {skillName: 'Sword 2', attackBonus: 2, range: 'Close', effect: 'Affliction', rank: 2}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy Power, Equip, no skill: has attack/rank using ability'});
+
+   SelectUtil.changeText('skillChoices0', 'Close Combat');
+   DomUtil.changeValue('skillText0', 'Sword');
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Sword 1', attackBonus: 3, range: 'Close', effect: 'Damage', rank: 1},
+      {skillName: 'Sword 2', attackBonus: 3, range: 'Close', effect: 'Affliction', rank: 2}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Power/Equip with skill'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerSelectRange0', 'Perception');
+   DomUtil.changeValue('powerName0', 'Attack 1');
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Attack 1', attackBonus: '--', range: 'Perception', effect: 'Damage', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Perception attack'});
+
+   DomUtil.changeValue('powerSelectRange0', 'Ranged');
+   DomUtil.changeValue('powerSkill0', 'Gun');
+   DomUtil.changeValue('Dexterity', 5);
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Attack 1', attackBonus: 5, range: 'Ranged', effect: 'Damage', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged attack no skill'});
+
+   SelectUtil.changeText('skillChoices0', 'Ranged Combat');
+   DomUtil.changeValue('skillText0', 'Gun');
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Attack 1', attackBonus: 6, range: 'Ranged', effect: 'Damage', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged attack with skill'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerName0', 'Sword 1');
+   DomUtil.changeValue('powerModifierChoices0.0', 'Accurate');
+   DomUtil.changeValue('powerModifierRank0.0', 2);
+   DomUtil.changeValue('Fighting', 1);
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 1, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Sword 1', attackBonus: 5, range: 'Close', effect: 'Damage', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Accurate attack'});
+
+   Main.setRuleset(1, 0);
+   SelectUtil.changeText('advantageChoices0', 'Close Attack');
+   DomUtil.changeValue('Fighting', 1);
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerName0', 'Sword 1');
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Sword 1', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Close Attack advantage'});
+
+   Main.clear();
+   SelectUtil.changeText('advantageChoices0', 'Ranged Attack');
+   DomUtil.changeValue('advantageRank0', 2);
+   DomUtil.changeValue('Dexterity', 1);
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerName0', 'Attack 1');
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   DomUtil.changeValue('powerSkill0', 'Gun 1');
+   //TODO: bug: skill shouldn't be required here. don't know why/how it removes the row
+
+   SelectUtil.changeText('powerChoices1', 'Affliction');
+   DomUtil.changeValue('powerName1', 'Attack 2');
+   SelectUtil.changeText('powerSelectRange1', 'Ranged');
+
+   expected = {Offense: [
+      {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
+      {skillName: 'Attack 1', attackBonus: 3, range: 'Ranged', effect: 'Damage', rank: 1},
+      {skillName: 'Attack 2', attackBonus: 3, range: 'Ranged', effect: 'Affliction', rank: 1}
+   ]};
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged Attack advantage'});
 
    return TestRunner.displayResults('TestSuite.main.updateOffense', assertions, testState);
 };

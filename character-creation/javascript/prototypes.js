@@ -37,3 +37,5 @@ Array.prototype.removeByValue=function(value)
     if(-1 === index) return;  //not found
     this.remove(index);
 };
+
+if(undefined === JSON.clone){JSON.clone = function(obj){return JSON.parse(JSON.stringify(obj));};}
