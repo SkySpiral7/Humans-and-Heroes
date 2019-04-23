@@ -7,50 +7,50 @@ Text: changeText();
 function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sectionName)
 {
    //private variable section:
-    var name, modifierType, costPerRank, hasRank, maxRank, rank, hasText, text, hasAutoTotal, rawTotal, autoTotal;
+   var name, modifierType, costPerRank, hasRank, maxRank, rank, hasText, text, hasAutoTotal, rawTotal, autoTotal;
 
    //Basic getter section (all single line)
-    /**If true then getAutoTotal must be called*/
-    this.doesHaveAutoTotal=function(){return hasAutoTotal;};
-    this.doesHaveRank=function(){return hasRank;};
-    this.doesHaveText=function(){return hasText;};
-    /**Should be used only for testing not point calculations*/
-    this.getAutoTotal=function(){return autoTotal;};
-    this.getCostPerRank=function(){return costPerRank;};
-    this.getMaxRank=function(){return maxRank;};
-    this.getModifierType=function(){return modifierType;};
-    /**Get the name of the modifier*/
-    this.getName=function(){return name;};
-    this.getRank=function(){return rank;};
-    /**This total will be either flat or rank (or 0). If hasAutoTotal then the total is 0.*/
-    this.getRawTotal=function(){return rawTotal;};
-    this.getText=function(){return text;};
+   /**If true then getAutoTotal must be called*/
+   this.doesHaveAutoTotal=function(){return hasAutoTotal;};
+   this.doesHaveRank=function(){return hasRank;};
+   this.doesHaveText=function(){return hasText;};
+   /**Should be used only for testing not point calculations*/
+   this.getAutoTotal=function(){return autoTotal;};
+   this.getCostPerRank=function(){return costPerRank;};
+   this.getMaxRank=function(){return maxRank;};
+   this.getModifierType=function(){return modifierType;};
+   /**Get the name of the modifier*/
+   this.getName=function(){return name;};
+   this.getRank=function(){return rank;};
+   /**This total will be either flat or rank (or 0). If hasAutoTotal then the total is 0.*/
+   this.getRawTotal=function(){return rawTotal;};
+   this.getText=function(){return text;};
 
    //Single line function section
-    this.getModifierRowIndex=function(){return modifierRowIndex;};
-    this.getPower=function(){return modifierListParent.getPower();};
-    /**True if this row has no data*/
-    this.isBlank=function(){return (name === undefined);};
-    /**True if this modifier increases the total power cost in any way*/
-    this.isExtra=function(){return (costPerRank > 0);};
-    /**True if this modifier changes the total power cost but not cost per rank*/
-    this.isFlat=function(){return (modifierType === 'Flat');};
-    /**True if this modifier reduces the total power cost in any way*/
-    this.isFlaw=function(){return (costPerRank < 0);};
-    /**True if this modifier doesn't change any totals*/
-    this.isFree=function(){return (modifierType === 'Free');};
-    /**True if this modifier changes the cost per rank*/
-    this.isRank=function(){return (modifierType === 'Rank');};
-    this.setPowerRowIndex=function(newPowerRowIndex){powerRowIndex=newPowerRowIndex;};
-    this.setModifierRowIndex=function(newModifierRowIndex){modifierRowIndex=newModifierRowIndex;};
+   this.getModifierRowIndex=function(){return modifierRowIndex;};
+   this.getPower=function(){return modifierListParent.getPower();};
+   /**True if this row has no data*/
+   this.isBlank=function(){return (name === undefined);};
+   /**True if this modifier increases the total power cost in any way*/
+   this.isExtra=function(){return (costPerRank > 0);};
+   /**True if this modifier changes the total power cost but not cost per rank*/
+   this.isFlat=function(){return (modifierType === 'Flat');};
+   /**True if this modifier reduces the total power cost in any way*/
+   this.isFlaw=function(){return (costPerRank < 0);};
+   /**True if this modifier doesn't change any totals*/
+   this.isFree=function(){return (modifierType === 'Free');};
+   /**True if this modifier changes the cost per rank*/
+   this.isRank=function(){return (modifierType === 'Rank');};
+   this.setPowerRowIndex=function(newPowerRowIndex){powerRowIndex=newPowerRowIndex;};
+   this.setModifierRowIndex=function(newModifierRowIndex){modifierRowIndex=newModifierRowIndex;};
 
    //Onchange section
-    /**Onchange function for selecting a modifier*/
-    this.select=function(){CommonsLibrary.select.call(this, this.setModifier, (sectionName+'ModifierChoices'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
-    /**Onchange function for changing the rank*/
-    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, (sectionName+'ModifierRank'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
-    /**Onchange function for changing the text*/
-    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, (sectionName+'ModifierText'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
+   /**Onchange function for selecting a modifier*/
+   this.select=function(){CommonsLibrary.select.call(this, this.setModifier, (sectionName+'ModifierChoices'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
+   /**Onchange function for changing the rank*/
+   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, (sectionName+'ModifierRank'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
+   /**Onchange function for changing the text*/
+   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, (sectionName+'ModifierText'+powerRowIndex+'.'+modifierRowIndex), modifierListParent);};
 
    //Value setting section
    /**Populates data of the modifier by using the name (which is validated).
@@ -64,7 +64,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
 
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, ie: 'Select Modifier'
       {
-         this.constructor();  //reset row
+         this._constructor();  //reset row
          if(wasAttack) this.getPower().generateNameAndSkill();  //technically only necessary if 'Attack' === name
          return;
       }
@@ -247,7 +247,7 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   this.constructor=function()
+   this._constructor=function()
    {
        name = undefined;
        modifierType = undefined;
@@ -262,5 +262,5 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
        autoTotal = undefined;
    };
    //constructor:
-    this.constructor();
+   this._constructor();
 }

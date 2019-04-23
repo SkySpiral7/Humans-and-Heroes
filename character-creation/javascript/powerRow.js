@@ -96,7 +96,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.setPower=function(effectNameGiven)
    {
        modifierSection.clear();  //always clear them out on select
-       if(!Data.Power.names.contains(effectNameGiven)){this.constructor(); return;}  //reset values
+       if(!Data.Power.names.contains(effectNameGiven)){this._constructor(); return;}  //reset values
           //this is only reachable if you select the default value in the drop down
 
        effect = effectNameGiven;
@@ -137,7 +137,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       action = newActionName;
 
       if(!shouldValidateActivationInfo) return;  //done
-      this.updateActionModifiers();
+      this._updateActionModifiers();
       if('Reaction' === action && 'Feature' !== effect && 'Luck Control' !== effect && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4)) this.setRange('Close');
       this.generateNameAndSkill();
    };
@@ -171,7 +171,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
          //either way it will cost 0
       }
 
-      this.updateRangeModifiers();
+      this._updateRangeModifiers();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setDuration=function(newDurationName)
@@ -202,7 +202,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
           //either way it will cost 0
       }
 
-       this.updateDurationModifiers();
+       this._updateDurationModifiers();
    };
    /**Used to set data independent of the document and without calling update*/
    this.setName=function(nameGiven)
@@ -281,7 +281,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='<div class="row justify-content-center">\n';
 
       htmlString+='<div class="col-12 col-sm-4 col-lg-3">\n';
-      var possibleActions = this.validateAndGetPossibleActions();
+      var possibleActions = this._validateAndGetPossibleActions();
       if(1 === possibleActions.length) htmlString+='Action <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
          //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
       else
@@ -297,7 +297,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='      </div>\n';
 
       htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
-      var possibleRanges = this.getPossibleRanges();
+      var possibleRanges = this._getPossibleRanges();
       if(1 === possibleRanges.length) htmlString+='Range <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
       else
       {
@@ -312,7 +312,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='      </div>\n';
 
       htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
-      var possibleDurations = this.validateAndGetPossibleDurations();
+      var possibleDurations = this._validateAndGetPossibleDurations();
       if(1 === possibleDurations.length) htmlString+='Duration <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
       else
       {
@@ -428,9 +428,9 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    this.updateActivationModifiers=function()
    {
       shouldValidateActivationInfo = true;
-      this.updateActionModifiers();
-      this.updateRangeModifiers();
-      this.updateDurationModifiers();
+      this._updateActionModifiers();
+      this._updateRangeModifiers();
+      this._updateDurationModifiers();
    };
    /**Called when loading after action, range, and duration have been set. This function validates the values
    making sure the values are possible and consistent with priority given to range then duration.
@@ -438,9 +438,9 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    The precedence is personal range, duration, action, reaction range, (then modifiers which aren't affected here).*/
    this.validateActivationInfo=function()
    {
-      this.validatePersonalRange();
-      this.validateAndGetPossibleDurations();
-      this.validateAndGetPossibleActions();
+      this._validatePersonalRange();
+      this._validateAndGetPossibleDurations();
+      this._validateAndGetPossibleActions();
       if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== effect && 'Feature' !== effect &&
          'Reaction' === action && 'Close' !== range)
       {
@@ -452,7 +452,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   this.constructor=function()
+   this._constructor=function()
    {
        effect = undefined;
        canSetBaseCost = undefined;
@@ -468,7 +468,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        shouldValidateActivationInfo = true;
    };
    /**@returns {Array} of all ranges that are possible for this power based on current state.*/
-   this.getPossibleRanges=function()
+   this._getPossibleRanges=function()
    {
       var possibleRanges = [];
       if('Feature' === effect) possibleRanges.push('Personal');
@@ -480,7 +480,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
    };
    /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
-   this.updateActionModifiers=function()
+   this._updateActionModifiers=function()
    {
       if('Triggered' === action) modifierSection.createByNameRank('Selective', 1);  //Triggered must also be selective so it auto adds but doesn't remove
 
@@ -508,7 +508,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       else if(actionDifference < 0) modifierSection.createByNameRank('Slower Action', -actionDifference);
    };
    /**This function recreates Increased/Decreased Duration as needed.*/
-   this.updateDurationModifiers=function()
+   this._updateDurationModifiers=function()
    {
        if('Feature' === effect) return;  //Feature doesn't change modifiers
 
@@ -526,7 +526,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        else if(durationDifference < 0) modifierSection.createByNameRank('Decreased Duration', -durationDifference);
    };
    /**This function recreates Increased/Reduced Range as needed.*/
-   this.updateRangeModifiers=function()
+   this._updateRangeModifiers=function()
    {
        //when changing to personal nothing else needs to change
        if('Personal' === range) return;  //only possible (for feature or) when removing a modifier
@@ -550,7 +550,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
        else if(rangeDifference < 0) modifierSection.createByNameRank('Reduced Range', -rangeDifference);
    };
    /**@returns {Array} of all actions that are possible for this power based on current state.*/
-   this.validateAndGetPossibleActions=function()
+   this._validateAndGetPossibleActions=function()
    {
       //feature has the same action as the others (because allowReaction is true)
       if ('Permanent' === duration)
@@ -632,7 +632,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       return possibleActions;
    };
    /**@returns {Array} of all durations that are possible for this power based on current state.*/
-   this.validateAndGetPossibleDurations=function()
+   this._validateAndGetPossibleDurations=function()
    {
       var defaultDuration = Data.Power[effect].defaultDuration;
       if ('Instant' === defaultDuration)
@@ -669,7 +669,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       return possibleDurations;
    };
    /**This function validates range. It changes range and creates user messages as needed.*/
-   this.validatePersonalRange=function()
+   this._validatePersonalRange=function()
    {
       if('Feature' === effect) return;  //allow everything
       var defaultRange = Data.Power[effect].defaultRange;
@@ -692,5 +692,5 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       }
    };
    //constructor:
-   this.constructor();
+   this._constructor();
 }

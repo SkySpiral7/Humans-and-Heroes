@@ -8,35 +8,35 @@ Select Ability: selectAbility(rowIndex);  //needs to be saved for generating rea
 function SkillObject(rowIndex)
 {
    //private variable section:
-    var name, rank, hasText, text, abilityName, totalBonus;
+   var name, rank, hasText, text, abilityName, totalBonus;
 
    //Basic getter section (all single line)
-    this.doesHaveText=function(){return hasText;};
-    this.getAbilityName=function(){return abilityName;};
-    this.getName=function(){return name;};
-    this.getRank=function(){return rank;};
-    this.getText=function(){return text;};
-    this.getTotalBonus=function(){return totalBonus;};
+   this.doesHaveText=function(){return hasText;};
+   this.getAbilityName=function(){return abilityName;};
+   this.getName=function(){return name;};
+   this.getRank=function(){return rank;};
+   this.getText=function(){return text;};
+   this.getTotalBonus=function(){return totalBonus;};
 
    //Single line function section (ignoring isBlank check)
-    this.isBlank=function(){return (name === undefined);};
+   this.isBlank=function(){return (name === undefined);};
    /**Simple setter for totalBonus which is the sum of the ability value and skill rank. Or a string indicator if the ability is --.*/
    this.setTotalBonus=function(bonusGiven)
    {
        if(this.isBlank()) return;
        totalBonus = bonusGiven;  //number or string
    };
-    this.setRowIndex=function(indexGiven){rowIndex=indexGiven;};
+   this.setRowIndex=function(indexGiven){rowIndex=indexGiven;};
 
    //Onchange section
-    /**Onchange function for selecting a skill*/
-    this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+rowIndex), Main.skillSection);};
-    /**Onchange function for changing the text*/
-    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+rowIndex), Main.skillSection);};
-    /**Onchange function for changing the rank*/
-    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+rowIndex), Main.skillSection);};
-    /**Onchange function for selecting an ability*/
-    this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+rowIndex), Main.skillSection);};
+   /**Onchange function for selecting a skill*/
+   this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+rowIndex), Main.skillSection);};
+   /**Onchange function for changing the text*/
+   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+rowIndex), Main.skillSection);};
+   /**Onchange function for changing the rank*/
+   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+rowIndex), Main.skillSection);};
+   /**Onchange function for selecting an ability*/
+   this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+rowIndex), Main.skillSection);};
 
    //Value setting section
    /**Populates data of the skill by using the name (which is validated).
@@ -142,7 +142,7 @@ function SkillObject(rowIndex)
        SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
        document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;
    };
-   this.constructor=function()
+   this._constructor=function()
    {
        name=undefined;
        rank=undefined;
@@ -152,5 +152,5 @@ function SkillObject(rowIndex)
        totalBonus=undefined;
    };
    //constructor:
-    this.constructor();
+   this._constructor();
 }

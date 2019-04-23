@@ -13,36 +13,36 @@ Main.defenseSection.calculateValues();
 function PowerListAgnostic(sectionName)
 {
    //private variable section:
-    var total=0, protectionRankTotal=0, usingGodhoodPowers=false;
-    var rowArray=[];
-    var attackEffectRanks=new MapDefault({}, 0);
+   var total=0, protectionRankTotal=0, usingGodhoodPowers=false;
+   var rowArray=[];
+   var attackEffectRanks=new MapDefault({}, 0);
 
    //Single line function section
-    this.getAttackEffectRanks=function(){return attackEffectRanks;};
-    this.getProtectionRankTotal=function(){return protectionRankTotal;};
-    this.getTotal=function(){return total;};
-    this.isUsingGodhoodPowers=function(){return usingGodhoodPowers;};
+   this.getAttackEffectRanks=function(){return attackEffectRanks;};
+   this.getProtectionRankTotal=function(){return protectionRankTotal;};
+   this.getTotal=function(){return total;};
+   this.isUsingGodhoodPowers=function(){return usingGodhoodPowers;};
 
    //public common section
-    /**Removes all rows then updates*/
-    this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
-    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-    this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
-    /**Returns an array of json objects for this section's data*/
-    this.save=function(){return CommonsLibrary.saveRows(rowArray);};
-    /**Does each step for an onChange*/
-    this.update=function(){CommonsLibrary.update.call(this);};
+   /**Removes all rows then updates*/
+   this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
+   /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
+   this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
+   /**Returns an array of json objects for this section's data*/
+   this.save=function(){return CommonsLibrary.saveRows(rowArray);};
+   /**Does each step for an onChange*/
+   this.update=function(){CommonsLibrary.update.call(this);};
 
    //'private' commons section. Although all public none of these should be called from outside of this object
-    /**This creates the page's html (for the section)*/
-    this.generate=function(){CommonsLibrary.generate.call(this, rowArray, sectionName);};
-    /**Removes the row from the array and updates the index of all others in the list.*/
-    this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
-    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
-    this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
-       //getUniqueName includes all modifiers since you may have the same power with different modifiers
-    /**This set the page's data. called only by generate*/
-    this.setAll=function(){CommonsLibrary.setAll(rowArray);};
+   /**This creates the page's html (for the section)*/
+   this.generate=function(){CommonsLibrary.generate.call(this, rowArray, sectionName);};
+   /**Removes the row from the array and updates the index of all others in the list.*/
+   this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
+   /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
+   this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
+      //getUniqueName includes all modifiers since you may have the same power with different modifiers
+   /**This set the page's data. called only by generate*/
+   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Counts totals etc. All values that are not user set or final are created by this method*/
@@ -118,8 +118,8 @@ function PowerListAgnostic(sectionName)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-    /**Creates a new row at the end of the array*/
-    this.addRow=function(){rowArray.push(new PowerObjectAgnostic(this, rowArray.length, sectionName));};
+   /**Creates a new row at the end of the array*/
+   this.addRow=function(){rowArray.push(new PowerObjectAgnostic(this, rowArray.length, sectionName));};
    /**Updates other sections which depend on power section*/
    this.notifyDependent=function()
    {
@@ -133,5 +133,5 @@ function PowerListAgnostic(sectionName)
        Main.defenseSection.calculateValues();
    };
    //constructor:
-    CommonsLibrary.initializeRows.call(this);
+   CommonsLibrary.initializeRows.call(this);
 }

@@ -81,8 +81,8 @@ function AbilityList()
        Main.update();  //updates totals and power level
    };
    //constructor:
-    for(var i=0; i < Data.Ability.names.length; i++){abilityArray.push(new AbilityObject(Data.Ability.names[i]));}
-    Object.freeze(abilityArray);
+   for(var i=0; i < Data.Ability.names.length; i++){abilityArray.push(new AbilityObject(Data.Ability.names[i]));}
+   Object.freeze(abilityArray);
 }
 function AbilityObject(abilityName)
 {

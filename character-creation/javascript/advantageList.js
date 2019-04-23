@@ -44,12 +44,12 @@ function AdvantageList()
    this.calculateValues=function()
    {
        this.sanitizeRows();
-       rowArray.sort(this.sortOrder);  //this messes up the indexing which is fixed below
+       rowArray.sort(this._sortOrder);  //this messes up the indexing which is fixed below
        rankMap.clear();
        usingGodhoodAdvantages = false;
        pettyRulesApply = true;
        total = 0;  //reset all these then recount them
-       this.calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
+       this._calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
 
       for (var i=0; i < rowArray.length-1; i++)  //last row is blank
       {
@@ -85,30 +85,30 @@ function AdvantageList()
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-    /**Creates a new row at the end of the array*/
-    this.addRow=function(){rowArray.push(new AdvantageObject(rowArray.length));};
+   /**Creates a new row at the end of the array*/
+   this.addRow=function(){rowArray.push(new AdvantageObject(rowArray.length));};
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
-   this.calculateEquipmentRank=function()
+   this._calculateEquipmentRank=function()
    {
-       var equipmentRow;
+      var equipmentRow;
       for (var i=0; i < rowArray.length-1; i++)  //last row is blank
       {
-          if(rowArray[i].getName() === 'Equipment'){equipmentRow = i; break;}
+         if(rowArray[i].getName() === 'Equipment'){equipmentRow = i; break;}
       }
       if (equipmentRow === undefined)  //if there is no equipment advantage
       {
-          if(Main.equipmentSection.getTotal() === 0){equipmentMaxTotal=0; return;}  //I don't need to add a row
-          equipmentRow = rowArray.length-1;  //index is at last existing row (which was blank)
-          rowArray[equipmentRow].setAdvantage('Equipment');
-          this.addRow();  //add a new blank row
+         if(Main.equipmentSection.getTotal() === 0){equipmentMaxTotal=0; return;}  //I don't need to add a row
+         equipmentRow = rowArray.length-1;  //index is at last existing row (which was blank)
+         rowArray[equipmentRow].setAdvantage('Equipment');
+         this.addRow();  //add a new blank row
       }
-       var newEquipmentRank = Math.ceil(Main.equipmentSection.getTotal()/5);
-       equipmentMaxTotal = newEquipmentRank*5;  //rounded up to nearest 5
-       if(newEquipmentRank === 0) this.removeRow(equipmentRow);  //don't need the row any more
-       else rowArray[equipmentRow].setRank(newEquipmentRank);
+      var newEquipmentRank = Math.ceil(Main.equipmentSection.getTotal()/5);
+      equipmentMaxTotal = newEquipmentRank*5;  //rounded up to nearest 5
+      if(newEquipmentRank === 0) this.removeRow(equipmentRow);  //don't need the row any more
+      else rowArray[equipmentRow].setRank(newEquipmentRank);
    };
    /**Pass into Array.prototype.sort so that the automatic advantages come first (equipment then the rest).*/
-   this.sortOrder=function(a, b)
+   this._sortOrder=function(a, b)
    {
        const aFirst = -1;
        const bFirst = 1;
@@ -123,7 +123,7 @@ function AdvantageList()
        return bFirst;
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   this.testSortStability=function(){unstableSort(rowArray, this.sortOrder);};  //throws if unstableSort doesn't exist
+   this._testSortStability=function(){unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
    /**Updates other sections which depend on advantage section*/
    this.notifyDependent=function()
    {
@@ -132,5 +132,5 @@ function AdvantageList()
        Main.defenseSection.calculateValues();
    };
    //constructor:
-    CommonsLibrary.initializeRows.call(this);
+   CommonsLibrary.initializeRows.call(this);
 }

@@ -190,14 +190,14 @@ function MainObject()
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
    this.update=function()
    {
-       this.calculateTotal();
+       this._calculateTotal();
 
        //start by looking at character points which can't be negative
        powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
       if(this.advantageSection.isUsingPettyRules())
-          this.calculatePowerLevelLimitations();
+          this._calculatePowerLevelLimitations();
 
        document.getElementById('power-level').innerHTML = powerLevel;
        document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
@@ -245,7 +245,7 @@ function MainObject()
              attackBonus = closeAttackBonus;
              if(closeSkillMap.containsKey('Unarmed')) attackBonus+=closeSkillMap.get('Unarmed');
              else attackBonus+=this.abilitySection.getByName('Fighting').getValue();  //Fighting is the default for unarmed
-             allOffensiveRows+=this.makeOffenseRow('Unarmed', attackBonus, 'Close', 'Damage', strengthValue);
+             allOffensiveRows+=this._makeOffenseRow('Unarmed', attackBonus, 'Close', 'Damage', strengthValue);
          }
       }
 
@@ -266,7 +266,7 @@ function MainObject()
              if(undefined === skillUsed) attackBonus = '--';  //can't miss
              else if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
              else attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);  //if(range === 'Ranged')
-             allOffensiveRows+=this.makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), rowPointer.getRank());
+             allOffensiveRows+=this._makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), rowPointer.getRank());
          }
       }
 
@@ -288,7 +288,7 @@ function MainObject()
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
-   this.calculatePowerLevelLimitations=function()
+   this._calculatePowerLevelLimitations=function()
    {
        var compareTo;
        //Skills and Abilities
@@ -328,7 +328,7 @@ function MainObject()
        if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
-   this.calculateTotal=function()
+   this._calculateTotal=function()
    {
        characterPointsSpent = 0;
        document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
@@ -347,7 +347,7 @@ function MainObject()
        document.getElementById('grand-total-used').innerHTML = characterPointsSpent;
    };
    /**Given an older json document, this function converts it to the newest document format.*/
-   this.convertDocument=function(jsonDoc)
+   this._convertDocument=function(jsonDoc)
    {
       if (1 === jsonDoc.version)
       {
@@ -369,7 +369,7 @@ function MainObject()
        //if(2 ===) convert it; ++; repeat until it is the most recent version
    };
    /**Given the json, this compares the version and rule set then alerts the user with a message if necessary.*/
-   this.determineCompatibilityIssues=function(jsonDoc)
+   this._determineCompatibilityIssues=function(jsonDoc)
    {
        //the ruleset is for game rules. The version is to inform the user of possible incompatibility
        var version, ruleset;
@@ -416,8 +416,8 @@ function MainObject()
       document.getElementById('code-box').value = '';
       location.hash = '';  //clear out so that it may change later
 
-      this.determineCompatibilityIssues(jsonDoc);
-      if(jsonDoc.version < latestSchemaVersion) this.convertDocument(jsonDoc);
+      this._determineCompatibilityIssues(jsonDoc);
+      if(jsonDoc.version < latestSchemaVersion) this._convertDocument(jsonDoc);
       //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
 
       this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
@@ -480,7 +480,7 @@ function MainObject()
       this.load(jsonDoc);
    };
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
-   this.makeOffenseRow=function(skillName, attackBonus, range, effect, damage)
+   this._makeOffenseRow=function(skillName, attackBonus, range, effect, damage)
    {
        var thisOffensiveRow = '<div class="row"><div class="character-sheet-offense-row col">' + skillName + ' ';
        if(attackBonus !== '--' && attackBonus >= 0) thisOffensiveRow+='+';  //add leading plus. checking for '--' is unneeded but more clear
@@ -522,7 +522,7 @@ function MainObject()
       var fileString = JSON.stringify(jsonDoc);
       return fileString;
    };
-   this.constructor=function()
+   this._constructor=function()
    {
        Data.change(activeRuleset);  //needed to initialize some data
        this.abilitySection = new AbilityList();
@@ -538,7 +538,7 @@ function MainObject()
        this.updateOffense();  //for the default damage
    };
    //constructor:
-    this.constructor();
+   this._constructor();
 }
 
 /*Map of objects that update others:

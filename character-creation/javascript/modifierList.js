@@ -2,32 +2,32 @@
 function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 {
    //private variable section:
-    var autoModifierNameToRowIndex = new MapDefault({}, undefined);
-    var rowArray = [];
-    var rankTotal, flatTotal;  //undefined by default
+   var autoModifierNameToRowIndex = new MapDefault({}, undefined);
+   var rowArray = [];
+   var rankTotal, flatTotal;  //undefined by default
 
    //Single line function section
-    /**This total will be the sum of all flat modifiers*/
-    this.getFlatTotal=function(){return flatTotal;};  //TODO: make sure these are not called before they are defined
-    /**This total will be the sum of all rank modifiers*/
-    this.getRankTotal=function(){return rankTotal;};
-    this.getPower=function(){return powerRowParent;};
+   /**This total will be the sum of all flat modifiers*/
+   this.getFlatTotal=function(){return flatTotal;};  //TODO: make sure these are not called before they are defined
+   /**This total will be the sum of all rank modifiers*/
+   this.getRankTotal=function(){return rankTotal;};
+   this.getPower=function(){return powerRowParent;};
 
    //public common section
-    /**Removes all rows then updates*/
-    this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
-    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-    this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
-    /**Returns an array of json objects for this section's data*/
-    this.save=function(){return CommonsLibrary.saveRows(rowArray);};
-    //don't use CommonsLibrary.update.call(this); because update is very different
+   /**Removes all rows then updates*/
+   this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
+   /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
+   this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
+   /**Returns an array of json objects for this section's data*/
+   this.save=function(){return CommonsLibrary.saveRows(rowArray);};
+   //don't use CommonsLibrary.update.call(this); because update is very different
 
    //'private' commons section. Although all public none of these should be called from outside of this object
-    //don't use CommonsLibrary.generate.call(this, rowArray, 'modifier'); because this isn't a section and the generate must return a string
-    //don't use CommonsLibrary.removeRow(rowArray, rowIndex); because the way index is updated is different
-    //don't use CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
-    /**This set the page's data. called only by power row generate*/
-    this.setAll=function(){CommonsLibrary.setAll(rowArray);};
+   //don't use CommonsLibrary.generate.call(this, rowArray, 'modifier'); because this isn't a section and the generate must return a string
+   //don't use CommonsLibrary.removeRow(rowArray, rowIndex); because the way index is updated is different
+   //don't use CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
+   /**This set the page's data. called only by power row generate*/
+   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
@@ -49,9 +49,9 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues=function()
    {
-       this.sanitizeRows();
-       rowArray.sort(this.sortOrder);
-       this.reindex();
+       this._sanitizeRows();
+       rowArray.sort(this._sortOrder);
+       this._reindex();
        autoModifierNameToRowIndex.clear();
        rankTotal=0; flatTotal=0;
       for (var i=0; i < rowArray.length-1; i++)  //the last row is always blank
@@ -143,7 +143,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    this.removeByName=function(rowName)
    {
        var rowIndex=this.findRowByName(rowName);
-       if(rowIndex !== undefined) this.removeRow(rowIndex);
+       if(rowIndex !== undefined) this._removeRow(rowIndex);
    };
    /**Needs to be updated for document reasons. This will update all dependent indexing*/
    this.setSectionRowIndex=function(sectionRowIndexGiven)
@@ -163,7 +163,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    /**Creates a new row at the end of the array*/
    this.addRow=function(){rowArray.push(new ModifierObject(this, sectionRowIndex, rowArray.length, sectionName));};
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
-   this.sanitizeRows=function()
+   this._sanitizeRows=function()
    {
        //don't call CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
        var namesSoFar=[];
@@ -171,18 +171,18 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        if(powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack=false;  //feature has a default range of Personal
       for (var i=0; i < rowArray.length; i++)  //last row might not be blank
       {
-          if(rowArray[i].isBlank() && i < rowArray.length-1){this.removeRow(i); i--; continue;}  //remove blank row that isn't last
+          if(rowArray[i].isBlank() && i < rowArray.length-1){this._removeRow(i); i--; continue;}  //remove blank row that isn't last
           else if(rowArray[i].isBlank()) continue;  //do nothing if last row is blank
 
           if(powerRowParent.getSection() === Main.equipmentSection &&
-             (rowArray[i].getName() === 'Removable' || rowArray[i].getName() === 'Easily Removable')){this.removeRow(i); i--; continue;}
+             (rowArray[i].getName() === 'Removable' || rowArray[i].getName() === 'Easily Removable')){this._removeRow(i); i--; continue;}
           //equipment has removable built in and can't have the modifiers
 
           var modifierName=rowArray[i].getUniqueName(false);
-          if(namesSoFar.contains(modifierName)){this.removeRow(i); i--; continue;}  //redundant modifier
+          if(namesSoFar.contains(modifierName)){this._removeRow(i); i--; continue;}  //redundant modifier
          if (modifierName === 'Attack' || modifierName === 'Affects Others')  //Affects Others Also and Affects Others Only return same name
          {
-             if(!canHaveAttack){this.removeRow(i); i--; continue;}  //redundant or invalid modifier
+             if(!canHaveAttack){this._removeRow(i); i--; continue;}  //redundant or invalid modifier
              canHaveAttack=false;
          }
           namesSoFar.push(modifierName);
@@ -191,7 +191,7 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
           this.addRow();  //if last row isn't blank add one
    };
    /**Pass into Array.prototype.sort so that the automatic modifiers come first. With action, range, duration, then others.*/
-   this.sortOrder=function(a, b)
+   this._sortOrder=function(a, b)
    {
        const aFirst = -1;
        const bFirst = 1;
@@ -214,20 +214,20 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
        return bFirst;
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   this.testSortStability=function(){unstableSort(rowArray, this.sortOrder);};  //throws if unstableSort doesn't exist
+   this._testSortStability=function(){unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
    /**This will re-index all modifier rows. PowerRowIndex is not affected.*/
-   this.reindex=function()
+   this._reindex=function()
    {
       for(var i=0; i < rowArray.length; i++)  //even blank row
          {rowArray[i].setModifierRowIndex(i);}  //correct all indexing. PowerRowIndex is still correct
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
-   this.removeRow=function(rowIndexToRemove)
+   this._removeRow=function(rowIndexToRemove)
    {
        rowArray.remove(rowIndexToRemove);
-       this.reindex();
+       this._reindex();
    };
    //constructor:
-    this.addRow();
-    //don't use CommonsLibrary.initializeRows because the constructor doesn't need to call generate (which would do nothing)
+   this.addRow();
+   //don't use CommonsLibrary.initializeRows because the constructor doesn't need to call generate (which would do nothing)
 }
