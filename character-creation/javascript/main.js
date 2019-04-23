@@ -40,20 +40,22 @@ function MainObject()
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
+   var derivedValues = {};  //will be used by html, exists for testing
 
    //Single line function section
-    this.canUseGodhood=function(){return (transcendence > 0);};
-    this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
-    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
-    this.getTranscendence=function(){return transcendence;};
-    /**This sets the code-box with the saved text.*/
-    this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
-    /**This loads the text text within the code-box.*/
-    this.loadFromTextArea=function(){this.loadFromString(document.getElementById('code-box').value);};
-    /**Set a replacement function that is called in place of the normal user messenger.*/
-    this.setMockMessenger=function(mockedFun){mockMessenger = mockedFun;};
-    /**Restores the default function for messaging the user*/
-    this.clearMockMessenger=function(){mockMessenger = undefined;};
+   this.canUseGodhood=function(){return (transcendence > 0);};
+   this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
+   this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
+   this.getTranscendence=function(){return transcendence;};
+   this.getDerivedValues=function(){return JSON.clone(derivedValues);};
+   /**This sets the code-box with the saved text.*/
+   this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
+   /**This loads the text text within the code-box.*/
+   this.loadFromTextArea=function(){this.loadFromString(document.getElementById('code-box').value);};
+   /**Set a replacement function that is called in place of the normal user messenger.*/
+   this.setMockMessenger=function(mockedFun){mockMessenger = mockedFun;};
+   /**Restores the default function for messaging the user*/
+   this.clearMockMessenger=function(){mockMessenger = undefined;};
 
    //Onchange section
    /**Onchange function for changing the ruleset. Sets the document values as needed*/
@@ -100,6 +102,7 @@ function MainObject()
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
+      derivedValues = {};
       document.getElementById('hero-name').value = 'Hero Name';
       document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
       this.abilitySection.clear();
@@ -227,53 +230,95 @@ function MainObject()
    /**Calculates and creates the offense section of the document.*/
    this.updateOffense=function()
    {
-       powerLevelAttackEffect=0; powerLevelPerceptionEffect=0;
-       var attackBonus;
-       var allOffensiveRows = '';
-       var closeSkillMap = this.skillSection.getCloseCombatMap();
-       var rangeSkillMap = this.skillSection.getRangedCombatMap();
-       var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.0. will be 0 otherwise
-       var rangedAttackBonus = this.advantageSection.getRankMap().get('Ranged Attack');
+      powerLevelAttackEffect = 0;
+      powerLevelPerceptionEffect = 0;
+      var attackBonus;
+      var allOffensiveRows = '';
+      derivedValues.Offense = [];
+      var closeSkillMap = this.skillSection.getCloseCombatMap();
+      var rangeSkillMap = this.skillSection.getRangedCombatMap();
+      var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.0. will be 0 otherwise
+      var rangedAttackBonus = this.advantageSection.getRankMap().get('Ranged Attack');
+      var effectRank;
 
-       //if Unarmed is possible then it will be the first row
+      //if Unarmed is possible then it will be the first row
       if (closeSkillMap.containsKey('Unarmed') || this.abilitySection.getByName('Fighting').getValue() !== '--')
       {
-          var strengthValue = this.abilitySection.getByName('Strength').getValue();
+         var strengthValue = this.abilitySection.getByName('Strength').getValue();
          if (strengthValue !== '--')
          {
-             //if can deal unarmed damage
-             attackBonus = closeAttackBonus;
-             if(closeSkillMap.containsKey('Unarmed')) attackBonus+=closeSkillMap.get('Unarmed');
-             else attackBonus+=this.abilitySection.getByName('Fighting').getValue();  //Fighting is the default for unarmed
-             allOffensiveRows+=this._makeOffenseRow('Unarmed', attackBonus, 'Close', 'Damage', strengthValue);
+            //if can deal unarmed damage
+            attackBonus = closeAttackBonus;
+            if(closeSkillMap.containsKey('Unarmed')) attackBonus += closeSkillMap.get('Unarmed');
+            else attackBonus += this.abilitySection.getByName('Fighting').getValue();  //Fighting is the default for unarmed
+
+            //attackBonus can't be -- so don't need to check powerLevelPerceptionEffect
+            if(powerLevelAttackEffect < (attackBonus + strengthValue))
+               powerLevelAttackEffect = (attackBonus + strengthValue);
+
+            derivedValues.Offense.push({skillName: 'Unarmed', attackBonus: attackBonus, range: 'Close',
+               effect: 'Damage', rank: strengthValue});
+            allOffensiveRows += this._makeOffenseRow('Unarmed', attackBonus, 'Close', 'Damage', strengthValue);
          }
       }
 
-       var sectionArray = [this.powerSection, this.equipmentSection];
+      //TODO: bug: this allows the same attack name for power and equipment
+      var sectionArray = [this.powerSection, this.equipmentSection];
       for (var sectionIndex=0; sectionIndex < sectionArray.length; sectionIndex++)
       {
-          var sectionPointer = sectionArray[sectionIndex];
-          var damageKeys = sectionPointer.getAttackEffectRanks().getAllKeys();
+         var sectionPointer = sectionArray[sectionIndex];
+         var damageKeys = sectionPointer.getAttackEffectRanks().getAllKeys();
 
          //TODO: bug: missing ability messes up offense section
          for (var i=0; i < damageKeys.length; i++)
          {
-             var rowPointer = sectionPointer.getRow(sectionPointer.getAttackEffectRanks().get(damageKeys[i]));
-             var range = rowPointer.getRange();
-             var skillUsed = rowPointer.getSkillUsed();
+            var rowPointer = sectionPointer.getRow(sectionPointer.getAttackEffectRanks().get(damageKeys[i]));
+            var range = rowPointer.getRange();
+            var skillUsed = rowPointer.getSkillUsed();
 
-             //TODO: probably won't work for Feature
-             if(undefined === skillUsed) attackBonus = '--';  //can't miss
-             else if(range === 'Close') attackBonus = (closeSkillMap.get(skillUsed) + closeAttackBonus);
-             else attackBonus = (rangeSkillMap.get(skillUsed) + rangedAttackBonus);  //if(range === 'Ranged')
-             allOffensiveRows+=this._makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), rowPointer.getRank());
+            //TODO: probably won't work for Feature
+            if (undefined === skillUsed) attackBonus = '--';  //can't miss
+            else
+            {
+               if ('Close' === range)
+               {
+                  attackBonus = closeAttackBonus;
+                  if(closeSkillMap.containsKey(skillUsed)) attackBonus += closeSkillMap.get(skillUsed);
+                  else attackBonus += this.abilitySection.getByName('Fighting').getValue();  //Fighting is the default for close range
+               }
+               else  //if('Ranged' === range)
+               {
+                  attackBonus = rangedAttackBonus;
+                  if(rangeSkillMap.containsKey(skillUsed)) attackBonus += rangeSkillMap.get(skillUsed);
+                  else attackBonus += this.abilitySection.getByName('Dexterity').getValue();  //Dexterity is the default for close range
+               }
+
+               var modifierList = rowPointer.getModifierList();
+               var accurateIndex = modifierList.findRowByName('Accurate');
+               if (undefined !== accurateIndex)
+               {
+                  var accurateApplications = modifierList.getRow(accurateIndex).getRank();
+                  //in all versions accurate is +2 attack/rank
+                  attackBonus += accurateApplications * 2;
+               }
+            }
+            //keep track of the highest values for PL
+            //TODO: test for PL?
+            effectRank = rowPointer.getRank();
+            if(attackBonus === '--' && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
+            else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus + effectRank))
+               powerLevelAttackEffect = (attackBonus + effectRank);
+
+            derivedValues.Offense.push({skillName: rowPointer.getName(), attackBonus: attackBonus, range: range,
+               effect: rowPointer.getEffect(), rank: effectRank});
+            allOffensiveRows+=this._makeOffenseRow(rowPointer.getName(), attackBonus, range, rowPointer.getEffect(), effectRank);
          }
       }
 
-       //TODO: doesn't include skills like Swords
-       //TODO: (v1.0) if Improvised Weapon advantage then use Unarmed damage
-       document.getElementById('offensive-section').innerHTML = allOffensiveRows;
-       //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
+      //TODO: doesn't include skills like Swords
+      //TODO: (v1.0) if Improvised Weapon advantage then use Unarmed damage
+      document.getElementById('offensive-section').innerHTML = allOffensiveRows;
+      //offense example: Close, Weaken 4, Crit. 19-20 |or| Perception, Flight 3, Crit. 16-20
    };
    /**Updates the document for transcendence field and might regenerate powers and advantages.*/
    this.updateTranscendence=function()
@@ -480,20 +525,20 @@ function MainObject()
       this.load(jsonDoc);
    };
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
-   this._makeOffenseRow=function(skillName, attackBonus, range, effect, damage)
+   this._makeOffenseRow=function(skillName, attackBonus, range, effect, rank)
    {
-       var thisOffensiveRow = '<div class="row"><div class="character-sheet-offense-row col">' + skillName + ' ';
-       if(attackBonus !== '--' && attackBonus >= 0) thisOffensiveRow+='+';  //add leading plus. checking for '--' is unneeded but more clear
-       thisOffensiveRow+=attackBonus+'</div><div class="character-sheet-offense-row col">' + range + ', ' + effect + ' ' + damage;
+      //TODO: move makeOffenseRow to GenerateHtml.js file
+      var thisOffensiveRow = '<div class="row"><div class="character-sheet-offense-row col">' + skillName + ' ';
+      if(attackBonus !== '--' && attackBonus >= 0) thisOffensiveRow+='+';  //add leading plus. checking for '--' is unneeded but more clear
+      thisOffensiveRow+=attackBonus+'</div><div class="character-sheet-offense-row col">' + range + ', ' + effect + ' ' + rank;
 
-       var minCritNum = (20 - this.advantageSection.getRankMap().get('Improved Critical: '+skillName));
-       if(minCritNum < 20) thisOffensiveRow+=', Crit. '+minCritNum+'-20';  //the '-20' is a range through 20
+      //Improved Critical only exists when it was d20
+      //TODO: move crit range to arg
+      var minCritNum = (20 - this.advantageSection.getRankMap().get('Improved Critical: '+skillName));
+      if(minCritNum < 20) thisOffensiveRow+=', Crit. '+minCritNum+'-20';  //the '-20' is a range through 20
 
-       if(attackBonus === '--' && powerLevelPerceptionEffect < damage) powerLevelPerceptionEffect = damage;
-       else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus+damage)) powerLevelAttackEffect = (attackBonus+damage);
-
-       thisOffensiveRow+='</div></div>\n';
-       return thisOffensiveRow;
+      thisOffensiveRow+='</div></div>\n';
+      return thisOffensiveRow;
    };
    /**This returns the document's data as a json object*/
    this.save=function()
