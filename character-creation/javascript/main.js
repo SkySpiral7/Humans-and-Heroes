@@ -1,31 +1,4 @@
 'use strict';
-(function(){
-//include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'Version', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
-    'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
-    'skillList', 'skillRow'];
-//the first few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
-//everything else is alphabetical
-if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
-{
-   var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
-   var runnerPath = miscRepo + 'testRunner';
-   var unstableSortPath = miscRepo + 'unstableSort';
-   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
-      'test/advantageRow', 'test/characterForm', 'test/characterFormParsing', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
-      'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
-      'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
-      'test/testTools', unstableSortPath]);
-}
-for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
-function includeJsFile(jsName)
-{
-    document.write('<script type="text/javascript" src="javascript/'+jsName+'.js"></script>');
-    //document write is not a problem since this is ran only once
-    //insertAdjacentHTML etc won't work for script. RequireJS (http://requirejs.org/docs/api.html) might work if I used modules.
-}
-})();
-
 /**Call List onChange
 Hero Name: Nothing (only need to look at it when saving or loading)
 Transcendence: changeTranscendence()
