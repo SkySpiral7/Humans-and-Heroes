@@ -13,7 +13,7 @@ function AdvantageObject(rowIndex)
     this.doesHaveRank=function(){return hasRank;};
     this.doesHaveText=function(){return hasText;};
     this.getCostPerRank=function(){return costPerRank;};
-    this.getmaxRank=function(){return maxRank;};
+    this.getMaxRank=function(){return maxRank;};
     this.getName=function(){return name;};
     this.getRank=function(){return rank;};
     this.getText=function(){return text;};
@@ -73,33 +73,9 @@ function AdvantageObject(rowIndex)
    /**This creates the page's html (for the row). called by advantage section only*/
    this.generate=function()
    {
-      var htmlString = '<div class="row">', i;
-      if(name === 'Equipment') htmlString+='<div class="col-6 col-lg-4 col-xl-auto"><b id="advantageEquipment">Equipment</b></div>\n';
-      else
-      {
-         htmlString+='<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-            '<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
-         htmlString+='    <option>Select Advantage</option>\n';
-         var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
-            //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
-         for (i=0; i < Data.Advantage.names.length; i++)
-         {
-            if('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
-               htmlString+='    <option>'+Data.Advantage.names[i]+'</option>\n';
-         }
-         htmlString+='</select></div>\n';
-      }
-      if(this.isBlank()) return htmlString + '</div>';  //done
-
-      if(name === 'Equipment') htmlString+='<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost <span id="advantageEquipmentRankSpan"></span></div>\n';
-      else if(hasRank) htmlString+='<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" ' +
-         'onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" /></label>\n';
-
-      if(hasText) htmlString+='<div class="col-12 col-sm-6"><input type="text" style="width: 100%" id="advantageText'+rowIndex+'" ' +
-         'onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" /></div>\n';
-      if(costPerRank > 1) htmlString+='<div class="col-auto">=&nbsp;<span id="advantageRowTotal'+rowIndex+'"></span></div>\n';
-      htmlString+='</div>\n';
-      return htmlString;
+      //TODO: passing in isBlank is stupid.
+      //TODO: should this take in a single advantage row from save file?
+      return HtmlGenerator.advantageRow(rowIndex, this.isBlank(), name, costPerRank, hasRank, hasText);
    };
    /**Get the name of the advantage appended with text to determine redundancy*/
    this.getUniqueName=function()
@@ -121,6 +97,8 @@ function AdvantageObject(rowIndex)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
+       //TODO: should setValues exist at all? could have generate populate the values as it creates
+       //TODO: should setValues be in html generator file?
        if(this.isBlank()) return;  //already set (to default)
        if(name !== 'Equipment') SelectUtil.setText(('advantageChoices'+rowIndex), name);
 
