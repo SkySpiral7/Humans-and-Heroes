@@ -58,15 +58,6 @@ TestSuite.modifierRow.calculateTotal=function(testState={})
 
    return TestRunner.displayResults('TestSuite.modifierRow.calculateTotal', assertions, testState);
 };
-TestSuite.modifierRow.generate=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierRow.generate', assertions, testState);
-};
 TestSuite.modifierRow.setAutoRank=function(testState={})
 {
     TestRunner.clearResults(testState);

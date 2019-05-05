@@ -81,3 +81,12 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
 
     return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };
+TestSuite.HtmlGenerator.modifierRow=function(testState={})
+{
+   TestRunner.clearResults(testState);
+   var assertions=[];
+
+   //ADD TESTS
+
+   return TestRunner.displayResults('TestSuite.HtmlGenerator.modifierRow', assertions, testState);
+};
