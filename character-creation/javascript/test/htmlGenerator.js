@@ -90,3 +90,225 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.modifierRow', assertions, testState);
 };
+TestSuite.HtmlGenerator.powerRow=function(testState={})
+{
+   TestRunner.clearResults(testState);
+
+   var assertions = [];
+
+   //ADD TESTS: for power options specifically godhood
+   //ADD TESTS: non-if statements
+   //ADD TESTS: blank row
+
+   try{
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({Expected: 'SPAN', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'Fixed base cost for flight'});
+
+   SelectUtil.changeText('powerChoices0', 'Movement');
+   assertions.push({Expected: 'INPUT', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'input base cost for movement'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   assertions.push({Expected: 'INPUT', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'input base cost for feature'});
+   } catch(e){assertions.push({Error: e, Description: 'input base cost'});}
+
+   try{
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'None action: duration = permanent'});
+   assertions.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'None action: action = none'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectAction0'), Description: 'None action: The user can\'t change the action'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Feature None action: duration = permanent'});
+   assertions.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Feature None action: action = none'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectAction0'), Description: 'Feature None action: The user can\'t change the action'});
+   } catch(e){assertions.push({Error: e, Description: 'None action'});}
+
+   try{
+   Main.setRuleset(3,3);
+   SelectUtil.changeText('powerChoices0', 'Damage');  //isAttack
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows move Damage'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows free Damage'});
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Reaction Damage'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');  //isMovement
+   SelectUtil.changeText('powerSelectAction0', 'Standard');  //only here for onchange which isn't important
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Move Flight'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Free Flight'});
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Reaction Flight'});
+
+   SelectUtil.changeText('powerChoices0', 'Move Object');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows move Move Object'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows free Move Object'});
+
+   SelectUtil.changeText('powerChoices0', 'Healing');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows move Healing'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Free Healing'});
+
+   SelectUtil.changeText('powerChoices0', 'Growth');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Move Growth'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Free Growth'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.3 action Feature duration Sustained'});
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Move Feature'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Free Feature'});
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 action allows Reaction Feature'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.3 action'});}
+
+   try{
+   Main.setRuleset(3,4);
+   SelectUtil.changeText('powerChoices0', 'Damage');  //isAttack
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'v3.4 action prevents move Damage'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 action prevents free Damage'});
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Reaction Damage'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');  //isMovement
+   SelectUtil.changeText('powerSelectAction0', 'Standard');  //only here for onchange which isn't important
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Move Flight'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 action prevents Free Flight'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Reaction'), Description: 'v3.4 action prevents Reaction Flight'});
+
+   SelectUtil.changeText('powerChoices0', 'Move Object');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows move Move Object'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows free Move Object'});
+
+   SelectUtil.changeText('powerChoices0', 'Healing');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows move Healing'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Free'), Description: 'v3.4 action prevents free Healing'});
+
+   SelectUtil.changeText('powerChoices0', 'Growth');
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Move Growth'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Free Growth'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.4 action Feature duration Sustained'});
+   SelectUtil.changeText('powerSelectAction0', 'Move');
+   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Move Feature'});
+   SelectUtil.changeText('powerSelectAction0', 'Free');
+   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Free Feature'});
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 action allows Reaction Feature'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.4 action'});}
+
+   try{
+   Main.setRuleset(3,3);
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.3 range Feature duration Sustained'});
+   SelectUtil.changeText('powerSelectRange0', 'Close');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Feature allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Personal');
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Feature allows Personal range'});
+   assertions.push({Expected: true, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.3 Personal Flight can change range'});
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 range Damage action Reaction'});
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Reaction Damage allows ranged range'});
+
+   SelectUtil.changeText('powerChoices0', 'Luck Control');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 range Luck Control default action reaction'});
+   SelectUtil.changeText('powerSelectRange0', 'Close');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Luck Control allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Luck Control allows Ranged range'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.3 range Flight default range personal'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.3 range Personal Flight can\'t change range'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.3 range'});}
+
+   try{
+   Main.setRuleset(3,4);
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'v3.4 range Feature duration Sustained'});
+   SelectUtil.changeText('powerSelectRange0', 'Close');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Feature allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Personal');
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Feature allows Personal range'});
+   assertions.push({Expected: true, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.3 Personal Flight can change range'});
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectAction0', 'Reaction');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 range Damage action Reaction'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.4 range Damage requires close range'});
+
+   SelectUtil.changeText('powerChoices0', 'Luck Control');
+   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.4 range Luck Control default action reaction'});
+   SelectUtil.changeText('powerSelectRange0', 'Close');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Luck Control allows close range'});
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Luck Control allows Ranged range'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'v3.4 range Flight default range personal'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectRange0'), Description: 'v3.4 range Personal Flight can\'t change range'});
+   } catch(e){assertions.push({Error: e, Description: 'v3.4 range'});}
+
+   try{
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: Damage default duration Instant'});
+   assertions.push({Expected: false, Actual: SelectUtil.isSelect('powerSelectDuration0'), Description: 'Duration: can\'t change duration'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: feature can change to Sustained'});
+   SelectUtil.changeText('powerSelectDuration0', 'Instant');
+   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: feature can change to Instant'});
+   assertions.push({Expected: true, Actual: SelectUtil.isSelect('powerSelectDuration0'), Description: 'Duration: Instant feature can change back'});
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Duration: Feature default range personal'});
+   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: personal feature can change to Permanent'});
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: feature change back'});
+   SelectUtil.changeText('powerSelectRange0', 'Close');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Duration: feature set close range'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Duration: close feature can\'t be Permanent'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Duration: Flight default range personal'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Instant'), Description: 'Duration: flight can\'t be Instant'});
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: flight can change to Sustained'});
+   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: flight can change to Permanent'});
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Duration: flight change back'});
+   SelectUtil.changeText('powerModifierChoices0.0', 'Affects Others Also');
+   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Duration: flight has close range'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Duration: close flight can\'t be Permanent'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Instant'), Description: 'Duration: close flight can\'t be Instant'});
+   } catch(e){assertions.push({Error: e, Description: 'Duration'});}
+
+   //ADD TESTS: Data.Power[effect].isAttack
+   //TODO: TestSuite sections should exist for generate and set all so that the gui logic is tested
+
+   return TestRunner.displayResults('TestSuite.HtmlGenerator.powerRow', assertions, testState);
+};

@@ -94,3 +94,106 @@ HtmlGenerator.modifierRow=function(isBlank, power, powerRowIndex, modifierRowInd
    htmlString+='   </div>\n';
    return htmlString;
 };
+HtmlGenerator.powerRow=function(isBlank, possibleActions, possibleRanges, possibleDurations, powerListParent, rowIndex,
+   sectionName, effect, canSetBaseCost, skillUsed, modifierHtml)
+{
+   var htmlString = '<div class="container-fluid"><div class="row">\n', i;
+   htmlString+='<div class="col-12 col-sm-6 col-xl-auto"><select id="'+sectionName+'Choices'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').select();">\n';
+   htmlString+='    <option>Select Power</option>\n';
+   var displayGodhood = (undefined !== Main && powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
+   //equipment can't be god-like so I only need to check power section's switch
+      //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
+   for (i = 0; i < Data.Power.names.length; ++i)
+   {
+      if(displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
+         htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
+   }
+   htmlString+='</select></div>\n';
+   if(isBlank) return htmlString + '</div></div>';  //done
+
+   if (canSetBaseCost)
+   {
+      htmlString+='<label class="col">Base Cost per Rank:\n';
+      htmlString+='<input type="text" size="1" id="'+sectionName+'BaseCost'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeBaseCost();" />';
+      htmlString+='</label>\n';  //end col
+   }
+   else
+   {
+      htmlString+='<div class="col">Base Cost per Rank:\n';
+      htmlString+='<span id="'+sectionName+'BaseCost'+rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
+      htmlString+='</div>\n';  //end col
+   }
+   htmlString+='</div>\n';  //end row
+   htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+sectionName+'Text'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeText();" /></div>\n';
+   htmlString+='<div class="row justify-content-center">\n';
+
+   htmlString+='<div class="col-12 col-sm-4 col-lg-3">\n';
+   if(1 === possibleActions.length) htmlString+='Action <span id="'+sectionName+'SelectAction'+rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+      //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
+   else
+   {
+      htmlString+='<label>Action';
+      htmlString+='         <select id="'+sectionName+'SelectAction'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectAction();">\n';
+      for (i = 0; i < possibleActions.length; ++i)
+      {
+         htmlString+='             <option>' + possibleActions[i] + '</option>\n';
+      }
+      htmlString+='         </select></label>\n';
+   }
+   htmlString+='      </div>\n';
+
+   htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
+   if(1 === possibleRanges.length) htmlString+='Range <span id="'+sectionName+'SelectRange'+rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+   else
+   {
+      htmlString+='<label>Range';
+      htmlString+='          <select id="'+sectionName+'SelectRange'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectRange();">\n';
+      for (i = 0; i < possibleRanges.length; ++i)
+      {
+         htmlString+='             <option>' + possibleRanges[i] + '</option>\n';
+      }
+      htmlString+='         </select></label>\n';
+   }
+   htmlString+='      </div>\n';
+
+   htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
+   if(1 === possibleDurations.length) htmlString+='Duration <span id="'+sectionName+'SelectDuration'+rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+   else
+   {
+      htmlString+='<label>Duration';
+      htmlString+='          <select id="'+sectionName+'SelectDuration'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').selectDuration();">\n';
+      for (i = 0; i < possibleDurations.length; ++i)
+      {
+         htmlString+='             <option>' + possibleDurations[i] + '</option>\n';
+      }
+      htmlString+='         </select></label>\n';
+   }
+   htmlString+='      </div>\n';
+   htmlString+='   </div>\n';  //row
+
+   if (Data.Power[effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
+   {
+      htmlString+='   <div class="row justify-content-end justify-content-xl-center">\n';
+      htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
+      htmlString+=Data.SharedHtml.powerName(sectionName, rowIndex);
+      htmlString+='      </div>\n';
+      if(undefined !== skillUsed) htmlString+='<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' + Data.SharedHtml.powerSkill(sectionName, rowIndex) + '</div>';
+      htmlString+='   </div>\n';
+   }
+
+   htmlString+=modifierHtml;
+
+   htmlString+='<div class="row">\n';
+   htmlString+='<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
+   htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></label>\n';
+   htmlString+='<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
+   htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
+   htmlString+='<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
+   htmlString+='<span id="'+sectionName+'FlatModifierCost'+rowIndex+'"></span></div>\n';
+   htmlString+='</div>\n';
+   htmlString+='<div class="row"><div class="col">Grand total for ' + sectionName.toTitleCase() + ': ';
+   htmlString+='<span id="'+sectionName+'RowTotal'+rowIndex+'"></span></div>\n';
+   htmlString+='</div>\n';
+   htmlString+='</div><hr />\n\n';
+   return htmlString;
+};
