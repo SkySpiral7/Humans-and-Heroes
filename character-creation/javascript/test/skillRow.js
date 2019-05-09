@@ -55,45 +55,6 @@ TestSuite.skillRow.setSkill=function(testState={})
 
     return TestRunner.displayResults('TestSuite.skillRow.setSkill', assertions, testState);
 };
-TestSuite.skillRow.generate=function(testState={})
-{
-    TestRunner.clearResults(testState);
-
-    var assertions=[];
-    var actionTaken='Initial';
-    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: actionTaken+': Bonus doesn\'t exist'});
-
-    try{
-    actionTaken='Set Acrobatics'; SelectUtil.changeText('skillChoices0', 'Acrobatics');
-    assertions.push({Expected: false, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is not blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: actionTaken+': Text exists'});
-    assertions.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: actionTaken+': Rank exists'});
-    assertions.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: actionTaken+': Ability exists'});
-    assertions.push({Expected: '+1', Actual: document.getElementById('skillBonus0').innerHTML, Description: actionTaken+': Bonus exists'});
-
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: actionTaken+('Has first ability: ' + Data.Ability.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: actionTaken+('Has last ability: ' + Data.Ability.names.last())});
-
-    actionTaken='Unset'; SelectUtil.changeText('skillChoices0', 'Select Skill');
-    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: actionTaken+': First Row is blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: actionTaken+('Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: actionTaken+('Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: actionTaken+': Text doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: actionTaken+': Rank doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: actionTaken+': Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: actionTaken+': Bonus doesn\'t exist'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
-
-    return TestRunner.displayResults('TestSuite.skillRow.generate', assertions, testState);
-};
 TestSuite.skillRow.setValues=function(testState={})
 {
    TestRunner.clearResults(testState);

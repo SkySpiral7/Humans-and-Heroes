@@ -78,41 +78,8 @@ function SkillObject(rowIndex)
    /**This creates the page's html (for the row). called by skill section only*/
    this.generate=function()
    {
-      var htmlString = '<div class="row">\n';
-      htmlString+='<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">';
-      htmlString+='<select id="skillChoices'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').select();">\n';
-      htmlString+='   <option>Select Skill</option>\n';
-      for (var i=0; i < Data.Skill.names.length; i++)
-      {
-         htmlString+='   <option>'+Data.Skill.names[i]+'</option>\n';
-      }
-      htmlString+='</select></div>\n';
-      if(this.isBlank()) return htmlString + '</div>';  //done
-
-      if (hasText)
-      {
-         htmlString += '<div class="col-12 col-sm-8 col-md-5">';
-         htmlString += '<input type="text" style="width: 100%" id="skillText' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeText();" />';
-         htmlString += '</div>\n';
-         htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
-      }
-      else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
-      htmlString+='<label>Ranks <input type="text" size="1" id="skillRank'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').changeRank();" /></label>\n';
-      //v1 Expertise can use any ability but PL sounds like Int only. Also sounds like the rest are set
-      htmlString+='+&nbsp;<select id="skillAbility'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').selectAbility();">\n';
-      htmlString+='   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
-      htmlString+='   <option>Agility</option>\n';
-      htmlString+='   <option>Fighting</option>\n';
-      htmlString+='   <option>Dexterity</option>\n';
-      htmlString+='   <option>Stamina</option>\n';
-      htmlString+='   <option>Intellect</option>\n';
-      htmlString+='   <option>Awareness</option>\n';
-      htmlString+='   <option>Presence</option>\n';
-      htmlString+='</select>\n';
-      htmlString+='(<span id="skillBonus'+rowIndex+'"></span>)\n';
-      htmlString+='</div>\n';
-      htmlString+='</div>\n';
-      return htmlString;
+      var isBlank = this.isBlank();
+      return HtmlGenerator.skillRow(isBlank, rowIndex, hasText);
    };
    /**Get the name of the skill appended with text to determine redundancy*/
    this.getUniqueName=function()

@@ -312,3 +312,43 @@ TestSuite.HtmlGenerator.powerRow=function(testState={})
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.powerRow', assertions, testState);
 };
+TestSuite.HtmlGenerator.skillRow=function(testState={})
+{
+    TestRunner.clearResults(testState);
+
+    var assertions=[];
+    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Initial: First Row is blank'});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Initial Has first skill: ' + Data.Skill.names[0])});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Initial Has last skill: ' + Data.Skill.names.last())});
+    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: 'Initial: Text doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: 'Initial: Rank doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: 'Initial: Ability doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: 'Initial: Bonus doesn\'t exist'});
+
+    try{
+    SelectUtil.changeText('skillChoices0', 'Acrobatics');
+    assertions.push({Expected: false, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Set Acrobatics: First Row is not blank'});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Set Acrobatics Has first skill: ' + Data.Skill.names[0])});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Set Acrobatics Has last skill: ' + Data.Skill.names.last())});
+    assertions.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: 'Set Acrobatics: Text exists'});
+    assertions.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: 'Set Acrobatics: Rank exists'});
+    assertions.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: 'Set Acrobatics: Ability exists'});
+    assertions.push({Expected: '+1', Actual: document.getElementById('skillBonus0').innerHTML, Description: 'Set Acrobatics: Bonus exists'});
+
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: ('Set Acrobatics Has first ability: ' + Data.Ability.names[0])});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: ('Set Acrobatics Has last ability: ' + Data.Ability.names.last())});
+    } catch(e){assertions.push({Error: e, Description: 'Set Acrobatics'});}
+
+    try{
+    SelectUtil.changeText('skillChoices0', 'Select Skill');
+    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Unset: First Row is blank'});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Unset Has first skill: ' + Data.Skill.names[0])});
+    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Unset Has last skill: ' + Data.Skill.names.last())});
+    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: 'Unset: Text doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: 'Unset: Rank doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: 'Unset: Ability doesn\'t exist'});
+    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: 'Unset: Bonus doesn\'t exist'});
+    } catch(e){assertions.push({Error: e, Description: 'Unset'});}
+
+    return TestRunner.displayResults('TestSuite.HtmlGenerator.skillRow', assertions, testState);
+};
