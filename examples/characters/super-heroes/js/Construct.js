@@ -11,7 +11,7 @@ var json = {
       "Strength": 6,
       "Agility": 3,
       "Fighting": 5,
-      "Dexterity": 3,
+      "Dexterity": 7,
       "Stamina": 0,
       "Intellect": 5,
       "Awareness": 1,
@@ -38,46 +38,32 @@ var json = {
       }
    ],
    "Equipment": [],
-   "Advantages": [],
+   "Advantages": [
+      {
+         "name": "Perfect Memory"
+      }
+   ],
    "Skills": [
       {
-         "name": "Ranged Combat",
-         "subtype": rangedAttackName,
-         "rank": 5,
-         "ability": "Dexterity"
-      },
-      {
-         "name": "Memory",
-         "rank": 5,
-         "ability": "Intellect"
-      },
-      {
          "name": "Investigation",
-         "subtype": "",
-         "rank": 2,
-         "ability": "Intellect"
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 5,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
          "name": "Persuasion",
-         "rank": 4,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
-         "name": "Technology",
-         "subtype": "",
-         "rank": 5,
-         "ability": "Intellect"
+         "name": "Ranged Combat",
+         "subtype": rangedAttackName,
+         "rank": "Trained"
       },
       {
-         "name": "Vehicles",
-         "subtype": "",
-         "rank": 2,
-         "ability": "Dexterity"
+         "name": "Survival",
+         "rank": "Trained"
       }
    ],
    "Defenses": {
@@ -86,7 +72,7 @@ var json = {
       "Will": 9,
       "Fortitude": 8
    },
-   "ruleset": "3.11",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -7,7 +7,7 @@ var json = {
    "Abilities": {
       "Strength": 1,
       "Agility": 2,
-      "Fighting": 6,
+      "Fighting": 9,
       "Dexterity": 1,
       "Stamina": 2,
       "Intellect": 2,
@@ -59,31 +59,32 @@ var json = {
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": 4,
-         "ability": "Fighting"
+         "rank": "Trained"
       },
       {
          "name": "Deception",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
-         "name": "Expertise",
-         "subtype": "Zoology",
-         "rank": 6,
-         "ability": "Intellect"
+         "name": "Handle Animal",
+         "rank": "Mastered"
+      },
+      {
+         "name": "Knowledge",
+         "subtype": "Nature",
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 6,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
          "name": "Stealth",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Agility"
+         "rank": "Trained"
+      },
+      {
+         "name": "Survival",
+         "rank": "Mastered"
       }
    ],
    "Defenses": {
@@ -92,7 +93,7 @@ var json = {
       "Will": 6,
       "Fortitude": 6
    },
-   "ruleset": "3.8",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

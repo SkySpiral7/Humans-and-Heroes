@@ -1,5 +1,5 @@
-var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+var knowledge = '(Choose One)';
+if(undefined !== queryParameters['names'][0]) knowledge = queryParameters['names'][0];
 
 var json = {
    "Hero": {
@@ -11,11 +11,11 @@ var json = {
       "Strength": 12,
       "Agility": 3,
       "Fighting": 8,
-      "Dexterity": 3,
+      "Dexterity": 7,
       "Stamina": 12,
       "Intellect": 0,
       "Awareness": 1,
-      "Presence": 1
+      "Presence": 5
    },
    "Powers": [
       {
@@ -89,41 +89,35 @@ var json = {
    ],
    "Skills": [
       {
-         "name": "Expertise",
-         "subtype": expertise,
-         "rank": 7,
-         "ability": "Intellect"
+         "name": "Insight",
+         "rank": "Trained"
       },
       {
-         "name": "Insight",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Awareness"
+         "name": "Knowledge",
+         "subtype": knowledge,
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 8,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
          "name": "Persuasion",
-         "rank": 6,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",
          "subtype": "Throwing",
-         "rank": 5,
-         "ability": "Dexterity"
+         "rank": "Trained"
       }
    ],
    "Defenses": {
       "Dodge": 5,
       "Parry": 0,
-      "Will": 7,
+      "Will": 3,
       "Fortitude": 0
    },
-   "ruleset": "3.11",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -1,6 +1,3 @@
-var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][1]) expertise = queryParameters['names'][1];
-
 var json = {
    "Hero": {
       "name": "Crime Fighter",
@@ -11,11 +8,11 @@ var json = {
       "Strength": 7,
       "Agility": 6,
       "Fighting": 12,
-      "Dexterity": 6,
+      "Dexterity": 9,
       "Stamina": 3,
-      "Intellect": 3,
-      "Awareness": 4,
-      "Presence": 4
+      "Intellect": 5,
+      "Awareness": 6,
+      "Presence": 6
    },
    "Powers": [],
    "Equipment": [
@@ -139,86 +136,63 @@ var json = {
    "Skills": [
       {
          "name": "Acrobatics",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Agility"
+         "rank": "Trained"
       },
       {
          "name": "Athletics",
-         "subtype": "",
-         "rank": 2,
-         "ability": "Strength"
+         "rank": "Trained"
+      },
+      {
+         "name": "Contortion",
+         "rank": "Trained"
       },
       {
          "name": "Deception",
-         "subtype": "",
-         "rank": 2,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
-         "name": "Expertise",
-         "subtype": expertise,
-         "rank": 4,
-         "ability": "Intellect"
+         "name": "Engineering",
+         "subtype": "Electronic",
+         "rank": "Trained"
       },
       {
          "name": "Insight",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Awareness"
-      },
-      {
-         "name": "Intimidation",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
          "name": "Investigation",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Intellect"
+         "rank": "Trained"
+      },
+      {
+         "name": "Knowledge",
+         "subtype": "Criminal",
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 6,
-         "ability": "Awareness"
+         "rank": "Trained"
+      },
+      {
+         "name": "Persuasion",
+         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",
          "subtype": "Boomerang",
-         "rank": 4,
-         "ability": "Dexterity"
+         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",
          "subtype": "Grenades",
-         "rank": 4,
-         "ability": "Dexterity"
+         "rank": "Trained"
       },
       {
          "name": "Sleight of Hand",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Dexterity"
+         "rank": "Trained"
       },
       {
          "name": "Stealth",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Agility"
-      },
-      {
-         "name": "Technology",
-         "subtype": "",
-         "rank": 2,
-         "ability": "Intellect"
-      },
-      {
-         "name": "Vehicles",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Dexterity"
+         "rank": "Mastered"
       }
    ],
    "Defenses": {
@@ -227,7 +201,7 @@ var json = {
       "Will": 6,
       "Fortitude": 3
    },
-   "ruleset": "3.10",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

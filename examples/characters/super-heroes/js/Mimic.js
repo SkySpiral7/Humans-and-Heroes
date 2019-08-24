@@ -1,6 +1,3 @@
-var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
-
 var json = {
    "Hero": {
       "name": "Mimic",
@@ -20,7 +17,7 @@ var json = {
    "Powers": [
       {
          "effect": "Variable",
-         "text": "Mimic: 50 variable points for duplicating a subject's traits",
+         "text": "Mimic: 55 variable points for duplicating a subject's traits",
          "action": "Move",
          "range": "Personal",
          "duration": "Continuous",
@@ -43,7 +40,7 @@ var json = {
                "text": "Limited to subjects he can remember seeing with Power Sense (-0)"
             }
          ],
-         "rank": 10
+         "rank": 11
       },
       {
          "effect": "Senses",
@@ -78,26 +75,15 @@ var json = {
    "Skills": [
       {
          "name": "Deception",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Presence"
-      },
-      {
-         "name": "Expertise",
-         "subtype": expertise,
-         "rank": 4,
-         "ability": "Intellect"
+         "rank": "Trained"
       },
       {
          "name": "Insight",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 6,
-         "ability": "Awareness"
+         "rank": "Trained"
       }
    ],
    "Defenses": {
@@ -106,7 +92,7 @@ var json = {
       "Will": 6,
       "Fortitude": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

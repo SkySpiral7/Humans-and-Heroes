@@ -1,5 +1,5 @@
-var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+var knowledge = '(Choose One)';
+if(undefined !== queryParameters['names'][0]) knowledge = queryParameters['names'][0];
 
 var json = {
    "Hero": {
@@ -10,7 +10,7 @@ var json = {
    "Abilities": {
       "Strength": 2,
       "Agility": 4,
-      "Fighting": 4,
+      "Fighting": 9,
       "Dexterity": 3,
       "Stamina": 2,
       "Intellect": 0,
@@ -20,7 +20,7 @@ var json = {
    "Powers": [
       {
          "effect": "Damage",
-         "text": "Fast Attack. Total of Damage 8 by default",
+         "text": "Fast Attack. Total of Damage 9 by default",
          "action": "Standard",
          "range": "Close",
          "duration": "Instant",
@@ -38,7 +38,7 @@ var json = {
                "name": "Selective"
             }
          ],
-         "rank": 6
+         "rank": 7
       },
       {
          "effect": "Damage",
@@ -68,7 +68,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-         "text": "",
+         "text": "2 hour task in 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -78,7 +78,7 @@ var json = {
       {
          "effect": "Movement",
          "cost": 1,
-         "text": "Gound Speed 15: 64,000 MPH",
+         "text": "Ground Speed 15: 95,000 MPH",
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
@@ -121,8 +121,15 @@ var json = {
    "Equipment": [],
    "Advantages": [
       {
+         "name": "Beginner's Luck"
+      },
+      {
          "name": "Defensive Roll",
          "rank": 3
+      },
+      {
+         "name": "Evasion",
+         "rank": 2
       },
       {
          "name": "Improved Initiative",
@@ -133,58 +140,50 @@ var json = {
       },
       {
          "name": "Move-by Action"
+      },
+      {
+         "name": "Seize Initiative"
       }
    ],
    "Skills": [
       {
          "name": "Acrobatics",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Agility"
+         "rank": "Trained"
       },
       {
          "name": "Athletics",
-         "subtype": "",
-         "rank": 8,
-         "ability": "Strength"
+         "rank": "Trained"
       },
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": 6,
-         "ability": "Fighting"
+         "rank": "Trained"
       },
       {
          "name": "Deception",
-         "subtype": "",
-         "rank": 3,
-         "ability": "Presence"
+         "rank": "Trained"
       },
       {
-         "name": "Expertise",
-         "subtype": expertise,
-         "rank": 6,
-         "ability": "Intellect"
+         "name": "Knowledge",
+         "subtype": knowledge,
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 8,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
-         "name": "Technology",
-         "subtype": "",
-         "rank": 3,
-         "ability": "Intellect"
+         "name": "Sleight of Hand",
+         "rank": "Trained"
       }
    ],
    "Defenses": {
       "Dodge": 11,
-      "Parry": 11,
+      "Parry": 6,
       "Will": 8,
       "Fortitude": 8
    },
-   "ruleset": "3.10",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

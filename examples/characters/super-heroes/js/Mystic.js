@@ -8,7 +8,7 @@ var json = {
       "Strength": 0,
       "Agility": 1,
       "Fighting": 4,
-      "Dexterity": 3,
+      "Dexterity": 8,
       "Stamina": 0,
       "Intellect": 3,
       "Awareness": 6,
@@ -39,7 +39,7 @@ var json = {
       {
          "effect": "Flight",
          "text": "Levitation: 30 MPH",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
@@ -115,39 +115,30 @@ var json = {
    "Advantages": [],
    "Skills": [
       {
-         "name": "Expertise",
-         "subtype": "Wizardry",
-         "rank": 10,
-         "ability": "Intellect"
-      },
-      {
          "name": "Insight",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
-         "name": "Intimidation",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Presence"
+         "name": "Knowledge",
+         "subtype": "Magic",
+         "rank": "Mastered"
       },
       {
          "name": "Perception",
-         "rank": 4,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
-         "name": "Sleight of Hand",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Dexterity"
+         "name": "Persuasion",
+         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",
          "subtype": "Spellcasting",
-         "rank": 6,
-         "ability": "Dexterity"
+         "rank": "Trained"
+      },
+      {
+         "name": "Sleight of Hand",
+         "rank": "Trained"
       }
    ],
    "Defenses": {
@@ -156,7 +147,7 @@ var json = {
       "Will": 9,
       "Fortitude": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

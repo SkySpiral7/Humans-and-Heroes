@@ -209,8 +209,10 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <!----
 <h2>Admin Powers</h2>
 <br />
-<input type="text" value="TestRunner.testAll();" id="command-text" />
-<input type="button" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
+<form action="javascript:void(0);">
+<input type="text" value="upgradeCurrentCharacter();" id="command-text" />
+<input type="submit" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
+</form>
 <script>
 function convertToJsFile()
 {
@@ -222,12 +224,56 @@ function convertToJsFile()
    document.getElementById('code-box').value = stringDoc;
    location.hash = '#code-box';
 }
+function upgradeCurrentCharacter()
+{
+   var jsonDoc = Main.save();
+   if('4.0' === jsonDoc.ruleset){alert('Already is 4.0'); return;}
+
+   if ('3.14' !== jsonDoc.ruleset)
+   {
+      jsonDoc.ruleset = '3.14';
+      Main.load(jsonDoc);
+      if('' !== document.getElementById('code-box').value) return;  //load already displayed alert
+      jsonDoc = Main.save();
+   }
+   Main.clear();
+   Main.setRuleset(4, 0);
+   jsonDoc.ruleset = '4.0';
+
+   //TODO: assumes too much for prod but converting rank could be in prod?
+   var fightingBonus = 0, dexBonus = 0;
+   for (var i=0; i < jsonDoc.Skills.length; i++)
+   {
+      if('Expertise' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Knowledge';  //not 1:1 but a start
+      //Common Knowledge ignore so that it is removed with error
+      else if('Intimidation' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Persuasion';  //possible duplication
+      //ignore Memory
+      else if('Strategy' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Competition';  //assumption
+      else if('Technology' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Engineering';
+      else if('Tracking' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Survival';
+      else if('Treatment' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Medical';
+      else if('Vehicles' === jsonDoc.Skills[i].name) jsonDoc.Skills[i].name = 'Engineering';  //possible duplication
+      //can't convert "Other"
+
+      //subtype is the same
+      else if('Close Combat' === jsonDoc.Skills[i].name && jsonDoc.Skills[i].rank > fightingBonus) fightingBonus = jsonDoc.Skills[i].rank;
+      else if('Ranged Combat' === jsonDoc.Skills[i].name && jsonDoc.Skills[i].rank > dexBonus) dexBonus = jsonDoc.Skills[i].rank;
+      jsonDoc.Skills[i].rank = 'Trained';  //never assume Mastered. that's manual only
+      //can ignore ability
+   }
+   //-1 because the skill remains
+   if(fightingBonus > 1) jsonDoc.Abilities.Fighting += (fightingBonus - 1);
+   if(dexBonus > 1) jsonDoc.Abilities.Dexterity += (dexBonus - 1);
+
+   Main.load(jsonDoc);
+}
 </script>
 <a href="javascript:convertToJsFile();">Convert to JS file</a><br />
 <a href="?includeJsCharacterFile=javascript%2Ftest%2FLoadMe.js">Load me form</a>
 <a href="?includeJsCharacterFile=javascript%2Ftest%2FLoadMeWithGodhood.js">with godhood</a><br />
 <a href="javascript:TestRunner.testAll();">Test All</a><br />
-<a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br /><br />
+<a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br />
+testResults:<br />
 <textarea id="testResults"></textarea>
 <br /><br /><br /><br /><br /><br /><br /><br />
 <!---->

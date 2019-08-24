@@ -8,9 +8,9 @@ var json = {
       "Strength": 0,
       "Agility": 1,
       "Fighting": 4,
-      "Dexterity": 3,
+      "Dexterity": 7,
       "Stamina": 0,
-      "Intellect": 8,
+      "Intellect": 9,
       "Awareness": 5,
       "Presence": 0
    },
@@ -134,7 +134,10 @@ var json = {
       },
       {
          "name": "Lucky",
-         "rank": 1
+         "rank": 3
+      },
+      {
+         "name": "Perfect Memory"
       },
       {
          "name": "Skill Mastery",
@@ -143,62 +146,30 @@ var json = {
    ],
    "Skills": [
       {
-         "name": "Expertise",
-         "subtype": "Engineering",
-         "rank": 5,
-         "ability": "Intellect"
-      },
-      {
-         "name": "Expertise",
-         "subtype": "Science",
-         "rank": 10,
-         "ability": "Intellect"
+         "name": "Engineering",
+         "subtype": "Mechanical",
+         "rank": "Mastered"
       },
       {
          "name": "Insight",
-         "subtype": "",
-         "rank": 5,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
          "name": "Investigation",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Intellect"
+         "rank": "Trained"
+      },
+      {
+         "name": "Medical",
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 5,
-         "ability": "Awareness"
-      },
-      {
-         "name": "Technology",
-         "subtype": "",
-         "rank": 10,
-         "ability": "Intellect"
-      },
-      {
-         "name": "Vehicles",
-         "subtype": "",
-         "rank": 5,
-         "ability": "Dexterity"
-      },
-      {
-         "name": "Memory",
-         "rank": 4,
-         "ability": "Intellect"
-      },
-      {
-         "name": "Other",
-         "subtype": "Inventor",
-         "rank": 3,
-         "ability": "Intellect"
+         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",
          "subtype": "Blaster",
-         "rank": 5,
-         "ability": "Dexterity"
+         "rank": "Trained"
       }
    ],
    "Defenses": {
@@ -207,7 +178,7 @@ var json = {
       "Will": 7,
       "Fortitude": 6
    },
-   "ruleset": "3.10",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -8,10 +8,10 @@ var json = {
       "Strength": 8,
       "Agility": 6,
       "Fighting": 8,
-      "Dexterity": 4,
+      "Dexterity": 9,
       "Stamina": 3,
       "Intellect": 0,
-      "Awareness": 5,
+      "Awareness": 6,
       "Presence": 5
    },
    "Powers": [
@@ -94,50 +94,45 @@ var json = {
    "Skills": [
       {
          "name": "Acrobatics",
-         "subtype": "",
-         "rank": 9,
-         "ability": "Agility"
+         "rank": "Mastered"
       },
       {
          "name": "Athletics",
-         "subtype": "",
-         "rank": 9,
-         "ability": "Strength"
+         "rank": "Mastered"
       },
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": 3,
-         "ability": "Fighting"
+         "rank": "Mastered"
       },
       {
-         "name": "Expertise",
-         "subtype": "Philosophy",
-         "rank": 5,
-         "ability": "Intellect"
+         "name": "Contortion",
+         "rank": "Trained"
       },
       {
          "name": "Insight",
-         "subtype": "",
-         "rank": 4,
-         "ability": "Awareness"
+         "rank": "Trained"
       },
       {
-         "name": "Intimidation",
-         "subtype": "",
-         "rank": 7,
-         "ability": "Presence"
+         "name": "Knowledge",
+         "subtype": "Philosophy",
+         "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": 8,
-         "ability": "Awareness"
+         "rank": "Trained"
+      },
+      {
+         "name": "Persuasion",
+         "rank": "Trained"
       },
       {
          "name": "Stealth",
-         "subtype": "",
-         "rank": 7,
-         "ability": "Agility"
+         "rank": "Mastered"
+      },
+      {
+         "name": "Survival",
+         "rank": "Trained"
       }
    ],
    "Defenses": {
@@ -146,7 +141,7 @@ var json = {
       "Will": 4,
       "Fortitude": 8
    },
-   "ruleset": "3.0",
+   "ruleset": "4.0",
    "version": 2,
    "Information": "Complications, background and other information"
 };

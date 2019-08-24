@@ -2,6 +2,7 @@ var expertise = 'Business';
 if(undefined !== queryParameters['options'][0]) expertise = ['Business', 'Engineering', 'Science'][queryParameters['options'][0] - 1];
 
 var json = {
+   //TODO: last super!
    "Hero": {
       "name": "Battlesuit",
       "transcendence": 0,
