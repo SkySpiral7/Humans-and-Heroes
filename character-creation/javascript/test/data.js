@@ -4456,6 +4456,16 @@ TestSuite.data.v4=function(testState={})
       }
    };
    assertions.push({Expected: expected, Actual: Data.Skill, Description: 'Data.Skill'});
+
+   expected = {
+      "name": "Perfect Memory",
+      "costPerRank": 1,
+      "defaultText": "Advantage Subtype",
+      "hasText": false,
+      "isGodhood": false,
+      "maxRank": 1
+   };
+   assertions.push({Expected: expected, Actual: Data.Advantage['Perfect Memory'], Description: 'Added Data.Advantage[Perfect Memory]'});
    } catch(e){assertions.push({Error: e, Description: 'v4.0 Some data'});}
 
    //reset data, Main.setRuleset will not work because Main.activeRuleset is out of sync

@@ -84,10 +84,24 @@ function SkillList()
          }
          else  //v4.0+
          {
-            //TODO: ignore v4.0 attack PL until accurate mod is tracked. add tests
+            //TODO: track v4.0 attack PL. add tests
             if('Trained' === rowArray[i].getRank()) ++total;
-            else total+=2;  //Mastered
+            else total += 2;  //Mastered
             //TODO: v4.0 test total and offense
+
+            //add to map, there is no redundancy
+            //only use the subtype for the map
+            //Trained and Mastered both give a bonus of 1
+            if(rowArray[i].getName() === 'Close Combat')
+            {
+               var fighting = Main.abilitySection.getByName('Fighting').getValue();
+               if('--' !== fighting) closeCombatMap.add(rowArray[i].getText(), 1 + fighting);
+            }
+            else if(rowArray[i].getName() === 'Ranged Combat')
+            {
+               var dexterity = Main.abilitySection.getByName('Dexterity').getValue();
+               if('--' !== dexterity) rangedCombatMap.add(rowArray[i].getText(), 1 + dexterity);
+            }
          }
       }
       if(Main.getActiveRuleset().isLessThan(4,0)) total/=2;  //do not round

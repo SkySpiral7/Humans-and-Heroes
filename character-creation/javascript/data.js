@@ -363,6 +363,8 @@ Data.change = function(version)
          //ability isn't used by 4.0 calc so delete it
          delete Data.Skill[Data.Skill.names[i]].ability;
       }
+
+      addAdvantage('Perfect Memory');
    }
 
    sortData();

@@ -129,6 +129,7 @@ function SkillObject(rowIndex)
          htmlString += '   <option>Mastered</option>\n';
          htmlString += '</select>\n';
          htmlString += '</div>\n';
+         //TODO: should have = 2 for mastered?
       }
       htmlString += '</div>\n';  //end row
       return htmlString;

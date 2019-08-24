@@ -29,6 +29,7 @@ TestSuite.skillList.load=function(testState={})
    TestRunner.clearResults(testState);
    var assertions=[], dataToLoad;
 
+   //TODO: fix tests (currently 4.0 with rank but no ability)
    try{
       dataToLoad = Loader.resetData();
       dataToLoad.Skills.push({"name":"Close Combat","subtype":"Swords","rank":2});
