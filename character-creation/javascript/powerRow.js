@@ -342,6 +342,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       htmlString+='<div class="row">\n';
       htmlString+='<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
       htmlString+='<input type="text" size="1" id="'+sectionName+'Rank'+rowIndex+'" onChange="Main.'+sectionName+'Section.getRow('+rowIndex+').changeRank();" /></label>\n';
+      //TODO: don't show junk that can't be set
       htmlString+='<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
       htmlString+='<span id="'+sectionName+'TotalCostPerRank'+rowIndex+'"></span></div>\n';
       htmlString+='<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';

@@ -99,7 +99,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-         "text": "Quick-Thinking. 6.4 minutes of thought in 6 seconds",
+         "text": "Quick-Thinking. 6 and a half minutes of thought in 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
