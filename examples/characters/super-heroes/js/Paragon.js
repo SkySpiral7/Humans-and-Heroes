@@ -57,7 +57,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-         "text": "",
+         "text": "1 minute task within 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -84,6 +84,9 @@ var json = {
    "Equipment": [],
    "Advantages": [
       {
+         "name": "All-out Attack"
+      },
+      {
          "name": "Power Attack"
       }
    ],
@@ -95,10 +98,6 @@ var json = {
       {
          "name": "Knowledge",
          "subtype": knowledge,
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
          "rank": "Trained"
       },
       {

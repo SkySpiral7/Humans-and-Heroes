@@ -66,7 +66,7 @@ var json = {
       },
       {
          "name": "Improved Initiative",
-         "rank": 2
+         "rank": 4
       },
       {
          "name": "Improved Trip"
@@ -110,20 +110,12 @@ var json = {
          "rank": "Trained"
       },
       {
-         "name": "Insight",
-         "rank": "Trained"
-      },
-      {
          "name": "Knowledge",
          "subtype": "Philosophy",
          "rank": "Trained"
       },
       {
          "name": "Perception",
-         "rank": "Trained"
-      },
-      {
-         "name": "Persuasion",
          "rank": "Trained"
       },
       {

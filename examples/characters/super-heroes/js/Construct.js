@@ -14,7 +14,7 @@ var json = {
       "Dexterity": 7,
       "Stamina": 0,
       "Intellect": 5,
-      "Awareness": 1,
+      "Awareness": 3,
       "Presence": 0
    },
    "Powers": [
@@ -45,24 +45,8 @@ var json = {
    ],
    "Skills": [
       {
-         "name": "Investigation",
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
-         "rank": "Trained"
-      },
-      {
-         "name": "Persuasion",
-         "rank": "Trained"
-      },
-      {
          "name": "Ranged Combat",
          "subtype": rangedAttackName,
-         "rank": "Trained"
-      },
-      {
-         "name": "Survival",
          "rank": "Trained"
       }
    ],

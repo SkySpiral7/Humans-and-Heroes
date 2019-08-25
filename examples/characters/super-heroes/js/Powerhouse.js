@@ -39,12 +39,12 @@ var json = {
       },
       {
          "effect": "Leaping",
-         "text": "120 feet",
+         "text": "960 feet",
          "action": "Move",
          "range": "Personal",
          "duration": "Instant",
          "Modifiers": [],
-         "rank": 4
+         "rank": 7
       },
       {
          "effect": "Regeneration",
@@ -130,18 +130,6 @@ var json = {
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": "Trained"
-      },
-      {
-         "name": "Insight",
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
-         "rank": "Trained"
-      },
-      {
-         "name": "Persuasion",
          "rank": "Trained"
       },
       {

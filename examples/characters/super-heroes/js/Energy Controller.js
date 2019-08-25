@@ -33,7 +33,7 @@ var json = {
                "name": "Selective"
             }
          ],
-         "rank": 3
+         "rank": 4
       },
       {
          "effect": "Damage",
@@ -112,9 +112,6 @@ var json = {
    "Equipment": [],
    "Advantages": [
       {
-         "name": "Accurate Attack"
-      },
-      {
          "name": "All-out Attack"
       },
       {
@@ -124,18 +121,6 @@ var json = {
    "Skills": [
       {
          "name": "Acrobatics",
-         "rank": "Trained"
-      },
-      {
-         "name": "Insight",
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
-         "rank": "Trained"
-      },
-      {
-         "name": "Persuasion",
          "rank": "Trained"
       },
       {

@@ -70,6 +70,10 @@ var json = {
       {
          "name": "Defensive Roll",
          "rank": 1
+      },
+      {
+         "name": "Improved Initiative",
+         "rank": 1
       }
    ],
    "Skills": [
@@ -79,10 +83,6 @@ var json = {
       },
       {
          "name": "Insight",
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
          "rank": "Trained"
       }
    ],

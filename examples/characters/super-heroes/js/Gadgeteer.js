@@ -99,7 +99,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-         "text": "Quick-Thinking",
+         "text": "Quick-Thinking. 6.4 minutes of thought in 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -110,7 +110,7 @@ var json = {
                "text": "only for Mental Tasks"
             }
          ],
-         "rank": 2
+         "rank": 6
       }
    ],
    "Equipment": [],
@@ -151,19 +151,11 @@ var json = {
          "rank": "Mastered"
       },
       {
-         "name": "Insight",
-         "rank": "Trained"
-      },
-      {
          "name": "Investigation",
          "rank": "Trained"
       },
       {
          "name": "Medical",
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
          "rank": "Trained"
       },
       {

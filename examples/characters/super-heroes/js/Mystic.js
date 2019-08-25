@@ -57,7 +57,7 @@ var json = {
                "applications": 3
             }
          ],
-         "rank": 6
+         "rank": 9
       },
       {
          "effect": "Senses",
@@ -115,21 +115,9 @@ var json = {
    "Advantages": [],
    "Skills": [
       {
-         "name": "Insight",
-         "rank": "Trained"
-      },
-      {
          "name": "Knowledge",
          "subtype": "Magic",
          "rank": "Mastered"
-      },
-      {
-         "name": "Perception",
-         "rank": "Trained"
-      },
-      {
-         "name": "Persuasion",
-         "rank": "Trained"
       },
       {
          "name": "Ranged Combat",

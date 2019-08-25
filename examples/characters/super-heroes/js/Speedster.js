@@ -64,7 +64,7 @@ var json = {
                "text": "Always points straight up"
             }
          ],
-         "rank": 2
+         "rank": 6
       },
       {
          "effect": "Quickness",
@@ -151,10 +151,6 @@ var json = {
          "rank": "Trained"
       },
       {
-         "name": "Athletics",
-         "rank": "Trained"
-      },
-      {
          "name": "Close Combat",
          "subtype": "Unarmed",
          "rank": "Trained"
@@ -166,10 +162,6 @@ var json = {
       {
          "name": "Knowledge",
          "subtype": knowledge,
-         "rank": "Trained"
-      },
-      {
-         "name": "Perception",
          "rank": "Trained"
       },
       {
