@@ -209,8 +209,10 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <!----
 <h2>Admin Powers</h2>
 <br />
+<form action="javascript:void(0);">
 <input type="text" value="TestRunner.testAll();" id="command-text" />
-<input type="button" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
+<input type="submit" value="Execute" onClick="eval(document.getElementById('command-text').value);" /><br />
+</form>
 <script>
 function convertToJsFile()
 {
@@ -227,7 +229,8 @@ function convertToJsFile()
 <a href="?includeJsCharacterFile=javascript%2Ftest%2FLoadMe.js">Load me form</a>
 <a href="?includeJsCharacterFile=javascript%2Ftest%2FLoadMeWithGodhood.js">with godhood</a><br />
 <a href="javascript:TestRunner.testAll();">Test All</a><br />
-<a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br /><br />
+<a href="javascript:eval(document.getElementById('code-box').value);">Eval Code Box</a> (above)<br />
+testResults:<br />
 <textarea id="testResults"></textarea>
 <br /><br /><br /><br /><br /><br /><br /><br />
 <!---->
