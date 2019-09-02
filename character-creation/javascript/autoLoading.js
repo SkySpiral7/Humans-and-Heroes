@@ -15,6 +15,7 @@ else queryParameters['options'] = queryParameters['options'].split(',');
 if(undefined === queryParameters['checkboxes']) queryParameters['checkboxes'] = [];
 else
 {
+   //checkboxes is binary eg: checkboxes=011000
    queryParameters['checkboxes'] = queryParameters['checkboxes']
       .replace(/(.)/g, '$1,')  //add a comma after every number
       .replace(/,$/, '')  //remove last comma
