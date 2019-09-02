@@ -5,10 +5,10 @@ Defense: change();
 function DefenseList()
 {
    //private variable section:
-    const defenseArray = [];
-    var toughnessMaxValue = 0;  //for power level
-    var total = 0;
-    var calculations;
+   const defenseArray = [];
+   var toughnessMaxValue = 0;  //for power level
+   var total = 0;
+   var calculations;
 
    //Single line function section
    //getByName is not validated because I want an error thrown so I can debug
@@ -30,8 +30,8 @@ function DefenseList()
          calculations[Data.Defense.names[i]] = {abilityValue: defenseArray[i].getAbilityValue(), totalBonus: defenseArray[i].getTotalBonus()};
          total+=defenseArray[i].getRank();  //cost is 1:1
       }
-      this.calculateToughness();  //split off because it is involved
-      this.setValues();
+      this._calculateToughness();  //split off because it is involved
+      this._setValues();
    };
    /**Resets all values then updates*/
    this.clear=function()
@@ -67,7 +67,7 @@ function DefenseList()
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Calculates and sets the total toughness value. This accounts for all sections that influence toughness (advantages, powers, and equipment).*/
-   this.calculateToughness=function()
+   this._calculateToughness=function()
    {
       //TODO: there is no enhanced toughness. probably need a new power 'Enhanced Toughness' can't set base cost and is detected like protection is
       //make Main.getEnhancedToughness which adds both sections and stamina
@@ -87,7 +87,7 @@ function DefenseList()
       if(toughnessWithoutDefensiveRoll !== toughnessMaxValue) calculations.Toughness.withoutDefensiveRoll = toughnessWithoutDefensiveRoll;
    };
    /**This sets the page's data. called only by calculateValues*/
-   this.setValues=function()
+   this._setValues=function()
    {
       for (var i = 0; i < defenseArray.length; i++)  //the array doesn't include toughness
       {
@@ -99,21 +99,21 @@ function DefenseList()
       if(undefined !== calculations.Toughness.withoutDefensiveRoll) toughnessString+=' ('+calculations.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
       document.getElementById('Toughness').innerHTML=toughnessString;
    };
-   this.constructor=function()
+   this._constructor=function()
    {
       for(var i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
          {defenseArray.push(new DefenseObject(Data.Defense.names[i]));}
       Object.freeze(defenseArray);
    };
    //constructor:
-   this.constructor();
+   this._constructor();
 }
 function DefenseObject(defenseName)
 {
-    var defenseValue = 0;
-    /**Onchange function for changing the defense-input*/
-    this.change=function(){CommonsLibrary.change.call(this, this.set, (defenseName+'-input'), Main.defenseSection, false);};
-    this.getRank=function(){return defenseValue;};
+   var defenseValue = 0;
+   /**Onchange function for changing the defense-input*/
+   this.change=function(){CommonsLibrary.change.call(this, this.set, (defenseName+'-input'), Main.defenseSection, false);};
+   this.getRank=function(){return defenseValue;};
    /**Call this to get the initial defense value. The ability name and zeroed value is not saved.
    It asks Data.Defense for name and abilitySection for the value each time.
    The ability value is not saved so that it will never be out of date.
@@ -121,14 +121,14 @@ function DefenseObject(defenseName)
    The ability value is zeroed because you can't lack defense scores*/
    this.getAbilityValue=function()
    {
-       var abilityUsed = Data.Defense[defenseName].ability;
-       return Main.abilitySection.getByName(abilityUsed).getZeroedValue();  //TODO: defenses should auto fail if ability lacked
+      var abilityUsed = Data.Defense[defenseName].ability;
+      return Main.abilitySection.getByName(abilityUsed).getZeroedValue();  //TODO: defenses should auto fail if ability lacked
    };
-    /**Call this to get the final defense value. The ability value used is from this.getAbilityValue()*/
-    this.getTotalBonus=function(){return (defenseValue + this.getAbilityValue());};
+   /**Call this to get the final defense value. The ability value used is from this.getAbilityValue()*/
+   this.getTotalBonus=function(){return (defenseValue + this.getAbilityValue());};
    /**Validates and sets this defense to the value given. Because there is no generate the document's value must also be set here.*/
    this.set=function(valueGiven)
    {
-       document.getElementById(defenseName+'-input').value=defenseValue=sanitizeNumber(valueGiven, 0, 0);
+      document.getElementById(defenseName+'-input').value = defenseValue = sanitizeNumber(valueGiven, 0, 0);
    };
 }

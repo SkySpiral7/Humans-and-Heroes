@@ -157,10 +157,10 @@ h3 {
    color: darkblue;
 }
 
+/*Need to also have :visited so that the browser won't blue shift the color*/
 a:link, a:visited {
-   /*Need to also have :visited so that the browser won't blue shift the color*/
    color: darkred;
-   font-weight: bold;
+   /*No decoration etc so that the links look like normal text making it easier to read a paragraph of links.*/
    text-decoration: none;
 }
 

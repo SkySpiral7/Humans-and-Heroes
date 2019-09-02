@@ -133,17 +133,17 @@ function AdvantageObject(rowIndex)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   this.constructor=function()
+   this._constructor=function()
    {
-       name = undefined;
-       maxRank = undefined;
-       hasRank = undefined;
-       rank = undefined;
-       hasText = undefined;
-       text = undefined;
-       costPerRank = undefined;
-       total = 0;
+      name = undefined;
+      maxRank = undefined;
+      hasRank = undefined;
+      rank = undefined;
+      hasText = undefined;
+      text = undefined;
+      costPerRank = undefined;
+      total = 0;
    };
    //constructor:
-    this.constructor();
+   this._constructor();
 }
