@@ -97,6 +97,12 @@ although for some reason it prevents disabling the page's right margin (see belo
    max-height: 100%;
 }
 
+/**These are Chrome default values. Setting here for consistent color and dark theme contrast.*/
+body {
+   background-color: white;
+   color: #212529;
+}
+
 /**This is to disable the page's right padding. Bootstrap requires container-fluid to exist.*/
 body > div.container-fluid {
    padding-right: 0;
@@ -184,6 +190,11 @@ ul.radio-ul {
    padding-left: 20px;
 }
 
+.external-links {
+   /*Half padding so that the bullet is close to the edge.*/
+   padding-left: 20px;
+}
+
 ul li {
    list-style: square outside;
 }
@@ -200,7 +211,7 @@ ol.legal-document > li > ol > li {
    list-style-type: lower-alpha;
 }
 
-.sites-sidebar-nav li, .external-links li {
+.sites-sidebar-nav li {
    list-style: none;
 }
 
@@ -237,7 +248,7 @@ U+25BF (White down-pointing small triangle ▿)
    padding-bottom: 0;
 }
 
-.sites-sidebar-nav ul, .external-links {
+.sites-sidebar-nav ul {
    padding: 0;
 }
 
@@ -284,7 +295,7 @@ div.goog-toc p {
 
 .sites-layout-sidebar-left {
    background: url("bg-pattern.gif") repeat;
-   padding: 0;
+   padding-right: 0;
 }
 
 .sites-embed-content-sidebar-textbox {
