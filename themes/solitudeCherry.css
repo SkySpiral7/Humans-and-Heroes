@@ -116,7 +116,8 @@ body > div.container-fluid > div.row {
 }
 
 main {
-   background: url("bg-top.gif") top repeat-x;
+   /*This is designed to look like a previous image although the image used a dot gradient for the grey */
+   background-image: linear-gradient(#A90707 12px, #530303 17px, white 17px, white 20px, #DADADA 21px, white 50px);
    padding-top: 50px;
    padding-bottom: 50px;
 }
