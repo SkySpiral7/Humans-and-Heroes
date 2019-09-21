@@ -208,7 +208,6 @@ public class Main
       //			return true;
       //		});
       //		builder.fileCriteria((File file)->{
-      //			if(file.equals(new File("../themes/bg-pattern.gif"))) return false;
       //			if(file.equals(new File("../themes/bg-top.gif"))) return false;
       //			//if(file.equals(new File("../secret-origins/xml/Mewtwo.xml"))) return false;
       //			return true;
