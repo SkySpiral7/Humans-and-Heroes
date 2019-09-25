@@ -22,7 +22,7 @@ public class Main
 {
    public static final File rootFolder = new File("..");
    public static final File sideBar = new File("../themes/sideBar.js");
-   private static String rootFolderPath;
+   public static String rootFolderPath;
 
    private enum RunCommands
    {
@@ -34,14 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         Arrays.stream(getAllHtmlFiles()).forEach(file -> {
-            //TODO: have the site map generator write to the txt file
-            //more advanced: could make an xml sitemap and ask git for last updated: git log -1 --format="%aI" -- :/$filepath
-            final String outputAbsolutePath = file.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
-            final String outputRelativePath = outputAbsolutePath.replace(rootFolderPath, "");
-            final String outputOnlinePath = "http://skyspiral7.github.io/Humans-and-Heroes" + outputRelativePath;
-            System.out.println(outputOnlinePath);
-         });
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))

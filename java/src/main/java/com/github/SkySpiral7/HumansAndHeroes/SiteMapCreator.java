@@ -1,5 +1,6 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +30,22 @@ public class SiteMapCreator
 
       return a.compareTo(b);
    };
+
+   public static void writeToTextFile()
+   {
+      final List<String> blackList = Arrays.asList("/google122b9bf962559bcf.html", "/index.html");
+      final StringBuilder stringBuilder = new StringBuilder();
+      Arrays.stream(Main.getAllHtmlFiles())
+            .map(file -> {
+               //more advanced: could make an xml sitemap and ask git for last updated: git log -1 --format="%aI" -- :/$filepath
+               final String outputAbsolutePath = file.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
+               final String outputRelativePath = outputAbsolutePath.replace(Main.rootFolderPath, "");
+               return outputRelativePath;
+            })
+            .filter(path -> !blackList.contains(path))
+            .forEach(path -> stringBuilder.append("http://skyspiral7.github.io/Humans-and-Heroes").append(path).append('\n'));
+      FileIoUtil.writeToFile(new File("../sitemap.txt"), stringBuilder.toString());
+   }
 
    public static void generate()
    {
