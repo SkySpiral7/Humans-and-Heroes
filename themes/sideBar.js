@@ -59,12 +59,12 @@ https://cse.google.com/cse/setup/basic?cx=002064182061922770744:f-jonz3baes
 if still sucks:
 I am the owner of http://skyspiral7.github.io/Humans-and-Heroes/ and currently have a search bar that simply makes a calls directly google such as https://www.google.com/search?q=site:http://skyspiral7.github.io/Humans-and-Heroes+flight and I have been satisfied with the results. I just found out about Google custom searches and created one. However I noticed that doing a custom search for the exact same search term returns 2 fewer results, one of which is the most relevant result (https://cse.google.com/cse?q=flight&cx=002064182061922770744:f-jonz3baes doesn't include a result of http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/effects/flight.html)
 */
-output+='<div>\n';
-output+='<form class="d-flex align-items-center" action="javascript:search();">\n';
+output+='<form class="d-flex align-items-center search-form" action="javascript:search();">\n';
 output+='<input type="search" value="" class="form-control" placeholder="Search..." id="searchBar" />\n';
 output+='<button class="btn btn-link" type="submit">\n';
 output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12 13">\n';
-output+='<g fill="none" stroke="#c7c3bb" stroke-width="2">\n';
+output+='<title>Search</title>\n';
+output+='<g fill="none" stroke="#575757" stroke-width="2">\n';
 output+='<path d="M11.29 11.71l-4-4"></path>\n';
 output+='<circle cx="5" cy="5" r="4"></circle>\n';
 output+='</g>\n';
@@ -74,12 +74,11 @@ output+='<button class="btn btn-link d-md-none" type="button" data-toggle="colla
 output+='data-target="#top-nav">\n';
 output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" focusable="false">\n';
 output+='<title>Menu</title>\n';
-output+='<path stroke="#33a2ff" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
+output+='<path stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
 output+='d="M4 7h22M4 15h22M4 23h22"></path>\n';
 output+='</svg>\n';
 output+='</button>\n';
 output+='</form>\n';
-output+='</div>\n';
 
 //Adding a div outside of nav doesn't help the animation.
 output+='<nav class="collapse" id="top-nav"><div class="sites-sidebar-nav"><ul>\n';
@@ -651,7 +650,7 @@ output+='<li><a href="http://stornart.com/">Hero Art by Storn Cook</a></li>\n';
 output+='<li><a href="http://opengameart.org/">Open Game Art</a></li>\n';
 output+='<li><a href="http://www.d20herosrd.com/">d20 Hero SRD (M&amp;M SRD)</a></li>';
 output+='</ul>\n';
-output+='<hr/>\n';
+output+='<hr class="d-none d-md-block" />\n';
 output+='<div class="sites-embed-content-sidebar-textbox d-none d-md-block">\n';
 output+='<img src="' + absolutePrefix + 'images/upc.png" class="bar-code-border" />\n';
 output+='</div>\n';

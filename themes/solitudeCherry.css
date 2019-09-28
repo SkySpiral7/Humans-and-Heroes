@@ -5,22 +5,25 @@ Um was I allowed to copy this? Because I did then stripped most of it out (like 
 official colors: https://www.w3.org/TR/css3-color/
 
 These are all of the colors used:
-white (for font color against dark background)
-grey (for most borders)
-black (for the huge stamp border)
+grey
+   #000000 (black): bg
+   #101010: scroll tray, stripe
+   #202020: scroll handle, borders
+   #575757: side bar grey dot (not a hr), magnifying glass, menu bars
+   #A0A0A0: text
+red
+   #450000: bg
+   #700000: under, red-img-border
+   #FF2020: text, text border, hr
+blue
+   #000040: bg, alt-rows
+   #79aaff: text (only table-name)
+green
+   #002500: bg
+   #113a11: under
+purple (only the info banner)
+   #150021: bg
 
-darkred
-pink (under red)
-
-navajowhite (under orange. info-banner)
-
-darkgreen
-palegreen (under green). TODO: changed to #046d04 which is unreadable. too close to darkgreen #006400
-
-darkblue
-lightskyblue (under blue. used for alt table)
-
-TODO: correct all colors to be dark but usable
 TODO: as many as possible images should have transparent bg
 
 good example pages:
@@ -110,24 +113,42 @@ although for some reason it prevents disabling the page's right margin (see belo
 }
 
 html, body, input, textarea, select, button {
-   background-color: #181a1b;
-   border-color: #575757;
-   color: #dad7d2;
+   background-color: black;
+   border-color: #202020;
+   color: #A0A0A0;
 }
+/**Search box. Uses a bootstrap class name.*/
 .form-control, .form-control:focus {
-   background-color: #181a1b;
-   border-color: #363f48;
-   color: #cac6be;
+   background-color: black;
+   border-color: #202020;
+   color: #A0A0A0;
+}
+.search-form > button > svg {
+   vertical-align: middle;
+}
+.btn {
+   padding: 6px;
 }
 ::-webkit-scrollbar {
-   background-color: #1c1e1f;
+   background-color: #101010;
 }
 ::-webkit-scrollbar-thumb {
-   background-color: #2a2c2e;
+   background-color: #202020;
 }
+/*
+TODO: figure out how to have different buttons for up/down
+unfortunately disabled and read-only don't work and I'd have to be silly to get it: https://stackoverflow.com/questions/16422124/javascript-detect-browser-scroll-to-the-top
+*
+::-webkit-scrollbar-button {
+   background-image: url("../images/arrow-down.gif");
+}
+::-webkit-scrollbar-button:active {
+   background-image: url("../images/arrow-left.gif");
+}
+/**/
 
 .form-control::placeholder {
-   color: #cac6be;
+   color: #A0A0A0;
 }
 
 /**This is to disable the page's right padding. Bootstrap requires container-fluid to exist.*/
@@ -147,10 +168,10 @@ main {
 }
 
 h1 {
-   background-color: darkblue;
+   background-color: #000040;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
-   color: white;
+   color: #A0A0A0;
    padding: 10px;
    font-size: 32px;
    clear: both;  /*This can be removed (along with some id=) when h1 is only a page header*/
@@ -162,11 +183,11 @@ h1 that is not at the top of page is considered a leaf (blue)
 site-map.html is considered the folder of the website (red)
 */
 .page-header-folder {
-   background-color: darkred;
+   background-color: #450000;
 }
 
 h2 {
-   color: #ff7979;
+   color: #FF2020;
    font-size: 28px;
    text-decoration: underline;
 }
@@ -178,8 +199,8 @@ h3 {
 
 /**Used for h2 Extras, Free Modifiers, and Flaws on power pages*/
 .power-modifier-header {
-   border-bottom: solid thin #e30000;
-   border-top: solid thin #e30000;
+   border-bottom: solid thin #FF2020;
+   border-top: solid thin #FF2020;
    text-decoration: none;
 }
 
@@ -190,7 +211,7 @@ h3 {
 
 /*Need to also have :visited so that the browser won't blue shift the color*/
 a:link, a:visited {
-   color: #ff7979;
+   color: #FF2020;
    /*No decoration etc so that the links look like normal text making it easier to read a paragraph of links.*/
    text-decoration: none;
 }
@@ -201,7 +222,7 @@ a:hover,a:active {
 
 hr {
    border: 0;
-   border-bottom: 1px dotted #e30000;
+   border-bottom: 1px dotted #FF2020;
    height: 3px;
 }
 
@@ -282,13 +303,13 @@ U+25BF (White down-pointing small triangle ▿)
 }
 
 .sites-sidebar-nav .current-bg {
-   background-color: darkred;
-   color: white;
+   background-color: #450000;
+   color: #A0A0A0;
    font-weight: bold;
 }
 
 .sites-sidebar-nav .topLevel {
-   border-top: 1px #4c4c4c dotted;
+   border-top: 1px #575757 dotted;
 }
 
 .sites-sidebar-nav .nav-first {
@@ -303,12 +324,12 @@ ol.goog-toc {
 
 div.goog-toc, .sites-layout-sidebar-left, th {
    /*from: http://stripesgenerator.com/ angle: 315, maintainRatio: yes, size: 4 */
-   background-image: linear-gradient(135deg, #181a1b 25%, #1c1d1f 25%, #1c1d1f 50%, #181a1b 50%, #181a1b 75%, #1c1d1f 75%, #1c1d1f 100%);
+   background-image: linear-gradient(135deg, black 25%, #101010 25%, #101010 50%, black 50%, black 75%, #101010 75%, #101010 100%);
    background-size: 11.31px 11.31px;
 }
 
 div.goog-toc {
-   border: 1px solid #4c4c4c;
+   border: 1px solid #202020;
 }
 
 div.goog-toc p {
@@ -325,14 +346,14 @@ div.goog-toc p {
 
 .sites-layout-sidebar-left {
    padding-right: 0;
+   padding-top: 10px;
+   /*TODO: bar code is ignoring bottom pad
+   Also make sure that small window doesn't have this padding*/
+   /*padding-bottom: 10px;*/
 }
 
 .sites-embed-content-sidebar-textbox {
    padding: 5px;
-}
-
-.sites-layout-sidebar-left h2 {
-   border-bottom: 1px dotted #e30000;
 }
 
 .sites-sidebar-nav {
@@ -341,6 +362,10 @@ div.goog-toc p {
 
 /** Extra small and Small devices*/
 @media (max-width: 767px) {
+   .search-form {
+      padding-bottom: 10px;
+   }
+
    #top-nav:not(.collapse) {
       display: none
    }
@@ -348,6 +373,10 @@ div.goog-toc p {
 
 /** Medium+ devices*/
 @media (min-width: 768px) {
+   .search-form {
+      padding-bottom: 6px;
+   }
+
    /**this is used to show the element despite not having .show*/
    #top-nav.collapse {
       display: block
@@ -415,32 +444,28 @@ th {
 
 /**This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
 .table-alt-rows tr:nth-child(odd) {
-   background-color: #181a1b;
+   background-color: black;
 }
 
 .table-alt-rows tr:nth-child(even) {
-   background-color: #054b76;
+   background-color: #000040;
 }
 
 .table-alt-rows,.table-alt-rows th,.table-alt-rows td {
    border-collapse: collapse;
-   border: 1px inset #4c4c4c;
-}
-
-.table-alt-rows .blue-top-th {
-   border-top: 8px solid #0000e3;
+   border: 1px inset #202020;
 }
 
 .stamp-top, .stamp-middle, .stamp-bottom {
-   border: solid #666666 5px;
+   border: solid #202020 5px;
    font-weight: bold;
    text-align: center;
    width: 150px;
 }
 .stamp-top {
-   background-color: darkred;
+   background-color: #450000;
    border-bottom-width: 0;
-   color: white;
+   color: #A0A0A0;
 }
 .stamp-middle {
    font-size: 32px;
@@ -449,14 +474,11 @@ th {
    border-top-width: 0;
 }
 .bar-code-border {
-   border: 5px solid;
+   border: 5px solid #202020;
 }
 
 .character-sheet input, .character-sheet select {
    font-size: 16px;
-}
-.character-sheet input[type="file"] {
-   background-color: #181a1b;
 }
 .fill-remaining {
    display: flex;
@@ -479,7 +501,7 @@ textarea {
    text-align: center;
 }
 .character-sheet-defense-green > div {
-   background-color: #046d04;
+   background-color: #113a11;
 }
 .character-sheet-defense-green > div:nth-child(odd), .character-sheet-defense-white > div:nth-child(odd) {
    font-weight: bold;
@@ -489,19 +511,19 @@ textarea {
    text-align: center;
 }
 .character-sheet-initiative {
-   background-color: #046d04;
+   background-color: #113a11;
    font-size: 24px;
    font-weight: bold;
    padding: 5px 0;
    text-align: center;
 }
 .character-sheet-light-green {
-   background-color: #046d04;
+   background-color: #113a11;
    padding: 5px;
 }
 .character-sheet-section-label, .character-sheet-point-totals {
-   background-color: darkgreen;
-   color: white;
+   background-color: #002500;
+   color: #A0A0A0;
    font-weight: bold;
    padding: 10px;
 }
@@ -542,7 +564,7 @@ textarea {
 }
 
 .red-panel,.green-panel {
-   border: solid thin #4c4c4c;
+   border: solid thin #202020;
 }
 .character-sheet-ability-section > .row > .green-panel {
    border: none;
@@ -554,7 +576,7 @@ textarea {
 }
 
 .red-panel > h3,.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
-   color: white;
+   color: #A0A0A0;
    font-weight: bold;
    padding: 5px;
    text-align: center;
@@ -571,19 +593,19 @@ textarea {
 }
 
 .red-panel > h3 {
-   background-color: darkred;
+   background-color: #450000;
 }
 
 .red-panel > div {
-   background-color: #590010;
+   background-color: #700000;
 }
 
 .green-panel > h3,.character-sheet-top > div:nth-child(odd) {
-   background-color: darkgreen;
+   background-color: #002500;
 }
 
 .green-panel > div,.character-sheet-top > div:nth-child(even) {
-   background-color: #046d04;
+   background-color: #113a11;
 }
 
 .example {
@@ -592,20 +614,20 @@ textarea {
 }
 
 .info-banner {
-   background-color: #643c00;
+   background-color: #150021;
    display: block;
    padding: 5px;
 }
 
 .condition-card-bootstrap > .row > .col-xl-4 > div {
-   border: solid thin #4c4c4c;
+   border: solid thin #202020;
 }
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > h3 {
-   color: white;
+   color: #A0A0A0;
    font-weight: bold;
    padding: 5px;
-   background-color: darkgreen;
+   background-color: #002500;
    margin-bottom: 0;
    text-align: center;
    text-decoration: none;
@@ -613,7 +635,7 @@ textarea {
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > div {
    padding: 10px;
-   background-color: #046d04;
+   background-color: #113a11;
    flex-grow: 1;
 }
 
@@ -628,11 +650,11 @@ textarea {
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > div > table,.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
    border-collapse: collapse;
-   border: 1px inset #4c4c4c;
+   border: 1px inset #202020;
 }
 
 .red-img-border {
-   border: solid medium #e30000;
+   border: solid medium #700000;
    padding: 5px;
 }
 
@@ -650,7 +672,7 @@ textarea {
 /**used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
-   color: #ff7979;
+   color: #FF2020;
    display: block;
    font-size: 24px;
    font-weight: bold;
