@@ -20,7 +20,6 @@ palegreen (under green). TODO: changed to #046d04 which is unreadable. too close
 darkblue
 lightskyblue (under blue. used for alt table)
 
-TODO: the scroll bars, search button, more inputs
 TODO: correct all colors to be dark but usable
 TODO: as many as possible images should have transparent bg
 
@@ -35,6 +34,7 @@ character-creation/point-counter.html
 character-creation/index.html
 meta/statistics.html
 gameplay/conditions.html
+site-map.html
 */
 
 /* ========Font reference========
@@ -61,10 +61,6 @@ xl: 1200px+ (1835px maximized window)
 */
 
 /* TODO: more css clean up
-dark mode:
-   background needs to be dark eg: #17181C
-   text color eg: #d2d0ca
-   replace image background strips with https://css-tricks.com/stripes-css/
 h1 should only be 1 per page
 calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
@@ -113,10 +109,21 @@ although for some reason it prevents disabling the page's right margin (see belo
    max-height: 100%;
 }
 
-html, body, input, textarea, select, button, input.form-control {
+html, body, input, textarea, select, button {
    background-color: #181a1b;
    border-color: #575757;
    color: #dad7d2;
+}
+.form-control, .form-control:focus {
+   background-color: #181a1b;
+   border-color: #363f48;
+   color: #cac6be;
+}
+::-webkit-scrollbar {
+   background-color: #1c1e1f;
+}
+::-webkit-scrollbar-thumb {
+   background-color: #2a2c2e;
 }
 
 .form-control::placeholder {

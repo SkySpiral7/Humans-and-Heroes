@@ -64,7 +64,7 @@ output+='<form class="d-flex align-items-center" action="javascript:search();">\
 output+='<input type="search" value="" class="form-control" placeholder="Search..." id="searchBar" />\n';
 output+='<button class="btn btn-link" type="submit">\n';
 output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12 13">\n';
-output+='<g fill="none" stroke="#54595d" stroke-width="2">\n';
+output+='<g fill="none" stroke="#c7c3bb" stroke-width="2">\n';
 output+='<path d="M11.29 11.71l-4-4"></path>\n';
 output+='<circle cx="5" cy="5" r="4"></circle>\n';
 output+='</g>\n';
@@ -74,7 +74,7 @@ output+='<button class="btn btn-link d-md-none" type="button" data-toggle="colla
 output+='data-target="#top-nav">\n';
 output+='<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" focusable="false">\n';
 output+='<title>Menu</title>\n';
-output+='<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
+output+='<path stroke="#33a2ff" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10"\n';
 output+='d="M4 7h22M4 15h22M4 23h22"></path>\n';
 output+='</svg>\n';
 output+='</button>\n';
