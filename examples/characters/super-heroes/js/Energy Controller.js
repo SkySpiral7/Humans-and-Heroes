@@ -152,7 +152,7 @@ var json = {
       },
       {
          "name": "Ranged Combat",
-         "subtype": "Energy Control",
+         "subtype": energyType + " Control",
          "rank": 5,
          "ability": "Dexterity"
       }
