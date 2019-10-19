@@ -180,29 +180,42 @@ rank a power costs (this is mechanically the same as using extras). Some example
 with the cost per rank because the example uses a set number of ranks of a trait (see description for details).</p>
 <h3 id="TOC-MODIFIERS">Modifiers</h3>
 <p>A listing of modifiers relevant or unique to the effect. This section may also include forbidden modifiers.
-By default it is possible to use <a href="../modifiers/index.html">any modifier</a> on any power unless otherwise stated however a Gamemaster should watch out
+By default it is possible to use any <a href="../modifiers/index.html">modifier</a> on any power unless otherwise
+stated however a Gamemaster should watch out
 for problematic or nonsensical combinations.</p>
 <h2 id="TOC-COUNTERING-EFFECTS">Countering Effects</h2>
-<p>In some circumstances the effects of one power may counter another, negating it. Generally for
+<p>In some circumstances the effects of one power may counter another, reducing or negating it. Generally for
 two effects to counter each other they must have opposed descriptors. For example, light and darkness powers can counter
 each other as can heat and cold, water and fire, and so forth. In some cases, such as magical or mental effects, powers
 of the same descriptor can also counter each other. The GM is the final arbiter as to whether or not an effect with a
 particular descriptor can counter another. The <a href="nullify.html">Nullify
-effect</a> can counter any effect of a particular descriptor!</p>
+effect</a> can counter any effect of a particular <a href="../descriptors.html">descriptor</a>!</p>
+<p>Saying that a power is countered means the power was negated or cancelled.
+If a power with instant duration is countered then the effect is prevented
+from occurring. Ongoing powers that are countered have their duration forcibly ended.</p>
 <h3 id="TOC-HOW-COUNTERING-WORKS">How Countering Works</h3>
-<p>To counter an effect, you must take the <b>ready action</b>. In doing so, you wait to complete
-your action until your opponent tries to use a power. You may still move, since ready is a standard action.</p>
-<p>You must be able to use the readied effect as a standard action or less. Reaction effects
-may counter at any time without readying an action. Effects that have a slow action
+<p>To counter an effect, you must take the <a href="../../../gameplay/index.html#TOC-READY---STANDARD-ACTION">ready</a>
+action. In doing so, you wait to complete
+your action until your opponent tries to use a power. You may still move, since
+<a href="../../../gameplay/index.html#TOC-READY---STANDARD-ACTION">ready</a> is a standard action (unless you
+<a href="../../../gameplay/index.html#TOC-READY---STANDARD-ACTION">readied</a> a full turn action).</p>
+<p>Reaction effects
+may counter at any time without <a href="../../../gameplay/index.html#TOC-READY---STANDARD-ACTION">readying</a> an action.
+Effects that have a slow action
 cannot counter during action rounds (although they may be able to counter ongoing effects, see the
 following section).</p>
 <p>If an opponent attempts to use a power you are able to counter, use your countering effect as
-your readied action. You and the opposing character make power checks (3dF + rank). If you win, your two powers cancel
-each other out and there is no effect from either. If the opposing character wins, your attempt to counter is
-unsuccessful. The opposing effect works normally.</p>
+your <a href="../../../gameplay/index.html#TOC-READY---STANDARD-ACTION">readied</a> action. You and the opposing
+character make power checks (3dF + rank). Take your opponent's result and subtract your result, this is the new effective
+rank of the effect being countered to a maximum of the original rank. If the rank would be reduced to 0 or less then
+the effect is canceled entirely, as though it didn't activate although some things may still apply like
+<a href="../modifiers/flaws.html#TOC-AMMUNITION">ammunition</a>. Note that there is no counter attack even if your
+check exceeds your opponent.</p>
 <p class="example"><b>Example</b>: Thetis, goddess of the seas, is fighting the
-Silver Knight. Thetis readies an action as her player says she wants to counter Silver Knight's fire blast with her water powers
-and the GM agrees the two powers should be able to counter each other. Then the hate-mongering villain hurls a blast of
+Silver Knight. Thetis readies an action as her player says she wants to counter Silver Knight's fire blast with her water powers,
+in this case <a href="move-object.html">Move Object</a> limited to water.
+There is a nearby body of water and the GM agrees the two powers should be able to counter each other.
+On his turn the hate-mongering villain hurls a blast of
 white-hot fire (a Ranged <a href="damage.html">Damage</a> effect) which Thetis tries to counter.
 The GM asks Thetis's player to make a Water Control power check, while he makes a Fire Control power
 check for Silver Knight. Thetis's player rolls a result of 10 while the GM rolls a result of 7 for Silver Knight. Thetis
@@ -210,32 +223,34 @@ successfully counters the flame blast, which fizzles out in a gout of steam.</p>
 <h3 id="TOC-COUNTERING-ONGOING-EFFECTS">Countering Ongoing Effects</h3>
 <p>You can also use one power to counter the ongoing effect of another, or other lingering results
 of an instant effect (like flames ignited by a fiery <a href="damage.html">Damage</a>
-effect). You must be within range of the affected target (including created object etc) not the one who caused it. This
-requires a normal use of the countering effect and an opposed check, as above. If you are successful, you negate the
-effect (although the opposing character can attempt to reestablish it normally). Poison, Disease, and Being on Fire can
-be countered like an affliction but conditions caused by physical conditions such as ropes causing Immobile or low HP
-causing incapacitation can't be countered. Conditions and effects with duration more then instant are the only ones that
-can be ended, reversible instant effects can't be reversed by countering them. Activated effects can be deactivated but
-otherwise when a permanent effect is countered it is reactivated during the next round (6 seconds later) as a
-reaction.</p>
+effect). You must be within range of the affected target (or <a href="create.html">created</a> object etc) not the one who caused it. This
+requires a normal use of the countering effect and an opposed check, as above except the ongoing effect uses a
+<a href="../../../gameplay/the-basics.html#TOC-ROUTINE-OPPOSITION">routine check</a> (and therefore has a result equal to rank).
+Subtract your result from the ongoing effect to determine new rank with a maximum rank of the current rank.
+If the rank is 0 or less then the effect ends. If the effect is permanent duration then it automatically turns back on
+during the following round at full strength (prior to countering attempts). The reduced rank is cumulative such that
+the rank can be reduced in different turns however a permanent effect will be refreshed to original rank each round.
+It is likewise possible for the owner to recreate any non-permanent ongoing effect by taking the action required to activate it.
+Recreating an ongoing effect will refresh it to max rank without needing to first end the effect.</p>
+<p>Poison, disease, being on fire, and any conditions caused by <a href="affliction.html">affliction</a> can be countered
+but conditions caused by physical circumstances such as ropes causing Immobile or low HP
+causing incapacitation can't be countered. Conditions of lower rank are equally functional the only difference being that
+they are easier to recover from.</p>
 <p class="example"><b>Example</b>: Mindmaster has placed Johnny Comet under his
 mental control (an <a href="affliction.html">Affliction</a> effect). Lady Justice has
 the power to break such bonds (the <a href="nullify.html">Nullify</a> effect). She
 shines the light of liberty on her teammate and makes a power check (3dF + her <a
-href="nullify.html">Nullify</a> rank). The GM makes a check of 3dF + Mindmaster's <a
+href="nullify.html">Nullify</a> rank) against Mindmaster's <a
 href="affliction.html">Affliction</a> rank. If Lady Justice wins, Johnny is free of
 Mindmaster's control. If she fails, the Victory League will have to come up with another plan to neutralize their super-fast
 teammate without hurting him.</p>
-<p>A permanent duration power can be countered as though it had continuous duration. If such
-countering succeeds then there will be <b>Power Loss</b> of that power for 1 round at which point it is
-instantly reactivated. Note that for other ongoing effects the duration ends instead of <b>Power Loss</b>. In order to
-cause <b>Power Loss</b> of a trait that doesn't have permanent duration you must use <a
-href="weaken.html">Weaken</a>.</p>
 <h3 id="TOC-INSTANT-COUNTERING">Instant Countering</h3>
-<p>You can spend a victory point to attempt to counter another power as a reaction, without the
-need to ready an action to do so. See <b>victory points</b> for details.</p>
+<p>You can spend a <a href="../../../gameplay/the-basics.html#TOC-VICTORY-POINTS">victory point</a> to attempt to counter
+another power as a reaction, without the need to ready an action to do so. See
+<a href="../../../gameplay/the-basics.html#TOC-VICTORY-POINTS">victory points</a> for details.</p>
 <h2 id="TOC-POWER-LISTING">Power Listing</h2>
-<p>Below is a table of every power. All effects are built from these base powers. Also see <a href="../../../examples/powers/index.html">example powers</a>.</p>
+<p>Below is a table of every power. All effects are built from these base powers. Also see
+<a href="../../../examples/powers/index.html">example powers</a>.</p>
 <h3 class="table-name" id="TOC-POWER-TABLE">Table: Power Effects</h3>
 <table class="table-alt-rows table-long-text">
 <tbody>
