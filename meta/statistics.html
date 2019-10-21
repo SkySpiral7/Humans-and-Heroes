@@ -258,96 +258,115 @@ tangible application since it shows the difference between rank and DC.</p>
    <tr>
       <th class="blue-top-th">Toughness Difference</th>
       <th class="blue-top-th">Frequency</th>
+      <th class="blue-top-th">Average Damage</th>
       <th class="blue-top-th">Chance</th>
    </tr>
    <tr>
       <td>-8</td>
       <td>1</td>
+      <td>8.000</td>
       <td>100.000%</td>
    </tr>
    <tr>
       <td>-7</td>
       <td>6</td>
+      <td>7.001</td>
       <td>99.863%</td>
    </tr>
    <tr>
       <td>-6</td>
       <td>6</td>
+      <td>6.003</td>
       <td>99.863%</td>
    </tr>
    <tr>
       <td>-5</td>
       <td>12</td>
+      <td>5.012</td>
       <td>99.040%</td>
    </tr>
    <tr>
       <td>-4</td>
       <td>23</td>
+      <td>4.038</td>
       <td>97.394%</td>
    </tr>
    <tr>
       <td>-3</td>
       <td>48</td>
+      <td>3.096</td>
       <td>94.239%</td>
    </tr>
    <tr>
       <td>-2</td>
       <td>84</td>
+      <td>2.219</td>
       <td>87.654%</td>
    </tr>
    <tr>
       <td>-1</td>
       <td>120</td>
+      <td>1.458</td>
       <td>76.132%</td>
    </tr>
    <tr>
       <td>0</td>
       <td>141</td>
+      <td>0.861</td>
       <td>59.671%</td>
    </tr>
    <tr>
       <td>1</td>
       <td>120</td>
+      <td>0.458</td>
       <td>40.329%</td>
    </tr>
    <tr>
       <td>2</td>
       <td>84</td>
+      <td>0.219</td>
       <td>23.868%</td>
    </tr>
    <tr>
       <td>3</td>
       <td>48</td>
+      <td>0.096</td>
       <td>12.346%</td>
    </tr>
    <tr>
       <td>4</td>
       <td>23</td>
+      <td>0.038</td>
       <td>5.761%</td>
    </tr>
    <tr>
       <td>5</td>
       <td>12</td>
+      <td>0.012</td>
       <td>2.606%</td>
    </tr>
    <tr>
       <td>6</td>
       <td>6</td>
+      <td>0.003</td>
       <td>0.960%</td>
    </tr>
    <tr>
       <td>7</td>
       <td>6</td>
+      <td>0.001</td>
       <td>0.960%</td>
    </tr>
    <tr>
       <td>8</td>
       <td>1</td>
+      <td>0.000</td>
       <td>0.137%</td>
    </tr>
    <tr>
       <td>9</td>
       <td>0</td>
+      <td>0.000</td>
       <td>0.000%</td>
    </tr>
 </tbody></table>
@@ -358,12 +377,73 @@ power check. The chance of success is defined by doing at least 0 damage, that i
 penalty. The statistics can be applied for any rank of <a href="../character-creation/powers/effects/damage.html">Damage</a> or Toughness.
 For example <a href="../character-creation/powers/effects/damage.html">Damage</a> 9 vs Toughness 5 is a toughness difference of -4
 which has a 97.394% that the attacker will succeed.</p>
+<p>The Average Damage column is for the average amount of HP dealt per hit assuming it is never a critical hit (since that's
+determined by the attack skill check not <a href="../character-creation/powers/effects/damage.html">Damage</a> power check).</p>
 <p>Note that these numbers can be applied to any contested roll involving traits however the chances
 assume that there is no automatic success or failure and that you will succeed in the case of a tie. If you lose from a
 tie then treat your opponent's trait as 1 higher. For example if you are rolling an
 <a href="../character-creation/powers/effects/affliction.html">Affliction</a>
 5 power check against a Fortitude of 9 then your chance of success is 2.606%.</p>
 </main>
+<!--
+//math for stats (requires my Dice library)
+//3dF is easy: Draw.diceBellCurve(new DicePool('3dF')); just convert the +/-3 to 4
+//whole script runs very fast (less than 10 ms)
+
+var singleFudge = [-1, 0, 1];
+var raw3dF = Combination.cartesianProduct([JSON.clone(singleFudge), JSON.clone(singleFudge), JSON.clone(singleFudge)]);
+var rawContest = Combination.cartesianProduct([JSON.clone(raw3dF), JSON.clone(raw3dF)]);
+
+var contestCounts = {}, i;
+for (i = 0; i < rawContest.length; ++i)
+{
+   var mySum = sumDice(rawContest[i][0]);
+   var hisSum = sumDice(rawContest[i][1]);
+   var ourSum = mySum - hisSum;
+   if(undefined === contestCounts[ourSum]) contestCounts[ourSum] = 1;
+   else ++contestCounts[ourSum];
+}
+
+var stats = [];
+var contestKeyList = Object.keys(contestCounts);
+for (i = 0; i < contestKeyList.length; ++i)
+{
+   var sum = Number.parseInt(contestKeyList[i]);
+   stats.push({result: sum,  frequency: contestCounts[sum]});
+}
+stats.sort(Statistics.resultAscending);
+Statistics.determineProbability(stats);
+myDiceBellCurve(stats);
+
+var averageDamage = [];
+for (var toughnessDiff=-8; toughnessDiff <= 9; ++toughnessDiff)
+{
+   var thisSum = 0;
+   for (i=0; i < stats.length; ++i)
+   {
+      var wouldBeDamage = (stats[i].result - toughnessDiff);
+      wouldBeDamage *= stats[i].probability;
+      thisSum += Math.max(0, wouldBeDamage);
+   }
+   averageDamage.push(thisSum.toFixed(3));
+}
+writeln(JSON.stringify(averageDamage));
+
+function sumDice(single3dfResult)
+{
+   var result = single3dfResult[0] + single3dfResult[1] + single3dfResult[2];
+   if (3 === result) return 4;
+   else if (-3 === result) return -4;
+   return result;
+}
+function myDiceBellCurve(stats, secondColumn)
+{
+   var out = '<b>Roll:</b> Damage Roll<br />\n';
+   out += GenerateHtml.aggregates(Statistics.calculateAggregates(stats));
+   out += GenerateHtml.statistics(stats, secondColumn);
+   document.getElementById('graphResults').innerHTML = out;
+}
+-->
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
