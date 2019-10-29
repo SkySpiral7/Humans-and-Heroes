@@ -385,65 +385,6 @@ tie then treat your opponent's trait as 1 higher. For example if you are rolling
 <a href="../character-creation/powers/effects/affliction.html">Affliction</a>
 5 power check against a Fortitude of 9 then your chance of success is 2.606%.</p>
 </main>
-<!--
-//math for stats (requires my Dice library)
-//3dF is easy: Draw.diceBellCurve(new DicePool('3dF')); just convert the +/-3 to 4
-//whole script runs very fast (less than 10 ms)
-
-var singleFudge = [-1, 0, 1];
-var raw3dF = Combination.cartesianProduct([JSON.clone(singleFudge), JSON.clone(singleFudge), JSON.clone(singleFudge)]);
-var rawContest = Combination.cartesianProduct([JSON.clone(raw3dF), JSON.clone(raw3dF)]);
-
-var contestCounts = {}, i;
-for (i = 0; i < rawContest.length; ++i)
-{
-   var mySum = sumDice(rawContest[i][0]);
-   var hisSum = sumDice(rawContest[i][1]);
-   var ourSum = mySum - hisSum;
-   if(undefined === contestCounts[ourSum]) contestCounts[ourSum] = 1;
-   else ++contestCounts[ourSum];
-}
-
-var stats = [];
-var contestKeyList = Object.keys(contestCounts);
-for (i = 0; i < contestKeyList.length; ++i)
-{
-   var sum = Number.parseInt(contestKeyList[i]);
-   stats.push({result: sum,  frequency: contestCounts[sum]});
-}
-stats.sort(Statistics.resultAscending);
-Statistics.determineProbability(stats);
-myDiceBellCurve(stats);
-
-var averageDamage = [];
-for (var toughnessDiff=-8; toughnessDiff <= 9; ++toughnessDiff)
-{
-   var thisSum = 0;
-   for (i=0; i < stats.length; ++i)
-   {
-      var wouldBeDamage = (stats[i].result - toughnessDiff);
-      wouldBeDamage *= stats[i].probability;
-      thisSum += Math.max(0, wouldBeDamage);
-   }
-   averageDamage.push(thisSum.toFixed(3));
-}
-writeln(JSON.stringify(averageDamage));
-
-function sumDice(single3dfResult)
-{
-   var result = single3dfResult[0] + single3dfResult[1] + single3dfResult[2];
-   if (3 === result) return 4;
-   else if (-3 === result) return -4;
-   return result;
-}
-function myDiceBellCurve(stats, secondColumn)
-{
-   var out = '<b>Roll:</b> Damage Roll<br />\n';
-   out += GenerateHtml.aggregates(Statistics.calculateAggregates(stats));
-   out += GenerateHtml.statistics(stats, secondColumn);
-   document.getElementById('graphResults').innerHTML = out;
-}
--->
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
