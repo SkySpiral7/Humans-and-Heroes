@@ -74,14 +74,22 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("(>)<strong>[^<>]+</strong>([^<>]+)(</a>)").matcher(newContents);
+         final Matcher matcher = Pattern.compile("<div class=\"col-12 col-md-3 col-xl-2 sites-layout-sidebar-left\">\n"
+                                                 + "<script type=\"text/javascript\" src=\"((?:\\.\\./?)*)/themes/"
+                                                 + "sideBar\\.js\"></script>\n" + "</div>").matcher(newContents);
          while (matcher.find())
          {
-            final String oldTargetText = matcher.group(2);
-            if (!oldTargetText.equals(oldTargetText.toUpperCase())) continue;
-            final String newTargetText = toTitleCase(oldTargetText);
-            final String oldWholeText = matcher.group(1) + oldTargetText + matcher.group(3);
-            final String newWholeText = matcher.group(1) + newTargetText + matcher.group(3);
+            final String oldWholeText = matcher.group(0);
+            final String toRoot = matcher.group(1);
+            final String newWholeText = "<div class=\"col-12 col-md-3 col-xl-2 sites-layout-sidebar-left\">\n"
+                                        + "<p>Please enable JavaScript in order to see the generated sidebar.\n"
+                                        + "Without it you'll have to use the <a href=\"" + toRoot + "/site-map.html\">sitemap</a> in "
+                                        + "order easily navigate.</p>\n" + "\n"
+                                        + "<p>sideBar.js is harmless: it simply generates hyperlinks to major pages. It exists in a "
+                                        + "single place so that\n"
+                                        + "I don't have to update 100+ html pages with relative links whenever I want to change it.</p>\n"
+                                        + "</div>\n" + "<script type=\"text/javascript\" src=\"" + toRoot
+                                        + "/themes/sideBar.js\"></script>";
             newContents = StringUtil.literalReplaceFirst(newContents, oldWholeText, newWholeText);
          }
 
