@@ -1,5 +1,15 @@
 var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][1]) expertise = queryParameters['names'][1];
+if (undefined !== queryParameters['names'][1]) expertise = queryParameters['names'][1];
+
+var costume = {
+   "effect": "Protection",
+   "text": "Costume",
+   "action": "None",
+   "range": "Personal",
+   "duration": "Permanent",
+   "Modifiers": [],
+   "rank": 5
+};
 
 var json = {
    "Hero": {
@@ -12,13 +22,14 @@ var json = {
       "Agility": 6,
       "Fighting": 12,
       "Dexterity": 6,
-      "Stamina": 3,
+      "Stamina": 1,
       "Intellect": 3,
       "Awareness": 4,
       "Presence": 4
    },
    "Powers": [],
    "Equipment": [
+      costume,
       {
          "effect": "Feature",
          "cost": 1,
@@ -28,15 +39,6 @@ var json = {
          "duration": "Permanent",
          "Modifiers": [],
          "rank": 1
-      },
-      {
-         "effect": "Protection",
-         "text": "Costume",
-         "action": "None",
-         "range": "Personal",
-         "duration": "Permanent",
-         "Modifiers": [],
-         "rank": 2
       },
       {
          "effect": "Movement",
@@ -114,22 +116,13 @@ var json = {
             }
          ],
          "rank": 1
-      },
-      {
-         "effect": "Feature",
-         "cost": 1,
-         "text": "Handcuffs",
-         "action": "None",
-         "range": "Personal",
-         "duration": "Permanent",
-         "Modifiers": [],
-         "rank": 1
       }
    ],
    "Advantages": [
       {
+         //must be first because options assume it is
          "name": "Equipment",
-         "rank": 6
+         "rank": 7
       },
       {
          "name": "Defensive Roll",
@@ -225,17 +218,34 @@ var json = {
       "Dodge": 6,
       "Parry": 0,
       "Will": 6,
-      "Fortitude": 3
+      "Fortitude": 6
    },
    "ruleset": "3.10",
    "version": 2,
    "Information": "Complications, background and other information"
 };
 
+var lastEquipment = {
+   "effect": "Feature",
+   "cost": 1,
+   "text": "Handcuffs, Camera, Flashlight",
+   "action": "None",
+   "range": "Personal",
+   "duration": "Permanent",
+   "Modifiers": [],
+   "rank": 3
+};
+
+//2 removes this equipment and 3 replaces the Flashlight
+if ('1' === queryParameters['options'][0] || '4' === queryParameters['options'][0])
+{
+   json.Equipment.push(lastEquipment);
+}
+
 if ('2' === queryParameters['options'][0])
 {
-   json.Equipment = [];
-   json.Advantages.remove(0);
+   json.Equipment = [costume];
+   json.Advantages[0].rank = 2;
    json.Powers.push({
       "effect": "Healing",
       "text": "(Device of your choice)",
@@ -264,6 +274,8 @@ else if ('3' === queryParameters['options'][0])
       "Modifiers": [],
       "rank": 1
    });
+   lastEquipment.text = lastEquipment.text.replace('Flashlight', 'Night Vision Goggles');
+   json.Equipment.push(lastEquipment);
    json.Equipment = json.Equipment.concat([
       {
          "effect": "Damage",
@@ -302,7 +314,6 @@ else if ('4' === queryParameters['options'][0])
       "rank": 15
    });
 }
-//1 === option[0] is the default (no changes)
 
 if (queryParameters['checkboxes'][0])
 {
