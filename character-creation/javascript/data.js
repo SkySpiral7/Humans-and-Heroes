@@ -187,7 +187,7 @@ Data.change = function(version)
       remove(Data.Advantage, 'Improvised Weapon');
       remove(Data.Advantage, 'Inventor');
       remove(Data.Advantage, 'Leadership');
-      remove(Data.Advantage, 'Luck');
+      remove(Data.Advantage, 'Luck');  //renamed to Lucky with different cost and max rank
       remove(Data.Advantage, 'Precise Attack');
       remove(Data.Advantage, 'Ranged Attack');
       remove(Data.Advantage, 'Redirect');

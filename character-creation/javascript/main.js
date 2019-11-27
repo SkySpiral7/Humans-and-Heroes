@@ -153,10 +153,16 @@ function MainObject()
    /**Gets the total protection value of the sections power and equipment.*/
    this.getProtectionTotal=function()
    {
-       if(1 === activeRuleset.major) return (this.powerSection.getProtectionRankTotal() + this.equipmentSection.getProtectionRankTotal());
+       var powerProtectionRanks = this.powerSection.getProtectionRankTotal();
+       var equipmentProtectionRanks = this.equipmentSection.getProtectionRankTotal();
+       //this correctly returns null if both are null
+       if (null === powerProtectionRanks) return equipmentProtectionRanks;
+       if (null === equipmentProtectionRanks) return powerProtectionRanks;
+
        //protection stacks only in v1.0
-       if(this.powerSection.getProtectionRankTotal() > this.equipmentSection.getProtectionRankTotal()) return this.powerSection.getProtectionRankTotal();
-       return this.equipmentSection.getProtectionRankTotal();
+       if(1 === activeRuleset.major) return (powerProtectionRanks + equipmentProtectionRanks);
+       if(powerProtectionRanks > equipmentProtectionRanks) return powerProtectionRanks;
+       return equipmentProtectionRanks;
    };
    /**This method passes a message to the user in some way (currently uses code-box).
    It is abstracted for mocking and so it can easily be changed later.

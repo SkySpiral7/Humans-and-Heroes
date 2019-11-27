@@ -3,9 +3,29 @@ TestSuite.powerList={};
 TestSuite.powerList.calculateValues=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   function getActual()
+   {
+      return Main.powerSection.getProtectionRankTotal();
+   }
+
+   assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
+
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'picks up protection'});
+
+   SelectUtil.changeText('powerChoices1', 'Protection');
+   DomUtil.changeValue('powerRank1', 2);
+   assertions.push({Expected: 2, Actual: getActual(), Description: 'protection doesn\'t stack'});
+
+   Main.setRuleset(1, 0);
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
+   SelectUtil.changeText('powerChoices1', 'Protection');
+   DomUtil.changeValue('powerRank1', 2);
+   assertions.push({Expected: 3, Actual: getActual(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.powerList.calculateValues', assertions, testState);
 };

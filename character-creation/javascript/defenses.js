@@ -74,13 +74,15 @@ function DefenseList()
       var staminaValue = Main.abilitySection.getByName('Stamina').getZeroedValue();  //Zeroed because you can't lack toughness
       var protectionValue = Main.getProtectionTotal();
       var defensiveRollValue = Main.advantageSection.getRankMap().get('Defensive Roll');
+      //defensiveRollValue defaults to 0 but this is fine because it isn't compared to anything
 
       var toughnessWithoutDefensiveRoll;
-      if(1 === Main.getActiveRuleset().major) toughnessWithoutDefensiveRoll = protectionValue + staminaValue;  //in ruleset 1.0 stamina stacked but nothing else
-      //TODO: actually in v1.0 everything stacked
+      if(null === protectionValue) toughnessWithoutDefensiveRoll = staminaValue;
+      //in v1.0 everything stacked
+      else if(1 === Main.getActiveRuleset().major) toughnessWithoutDefensiveRoll = protectionValue + staminaValue;
       else if(protectionValue > staminaValue) toughnessWithoutDefensiveRoll = protectionValue;
       else toughnessWithoutDefensiveRoll = staminaValue;
-      toughnessMaxValue = toughnessWithoutDefensiveRoll + defensiveRollValue;  //defensive Roll stacks
+      toughnessMaxValue = toughnessWithoutDefensiveRoll + defensiveRollValue;  //defensive Roll stacks with everything
 
       //TODO: bug: crime fighter toughness doesn't include protection
       calculations.Toughness = {totalBonus: toughnessMaxValue};

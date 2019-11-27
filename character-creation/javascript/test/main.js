@@ -187,14 +187,38 @@ TestSuite.main.loadImageFromFile=function(testState={})
 TestSuite.main.getProtectionTotal=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   function getActual()
+   {
+      return Main.getProtectionTotal();
+   }
+
+   assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
+
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'uses equip when power is null'});
+
+   Main.equipmentSection.clear();
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'uses power when equip is null'});
+
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'does not stack'});
+
+   DomUtil.changeValue('equipmentRank0', 2);
+   assertions.push({Expected: 2, Actual: getActual(), Description: 'use equip if greater'});
+
+   DomUtil.changeValue('powerRank0', 3);
+   assertions.push({Expected: 3, Actual: getActual(), Description: 'use power if greater'});
+
+   Main.setRuleset(1, 0);
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   DomUtil.changeValue('powerRank0', 2);
+   assertions.push({Expected: 3, Actual: getActual(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', assertions, testState);
-
-    //be sure to call Main.setRuleset(1, 0); inside tests and:
-    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), assertions, testState);
 };
 TestSuite.main.update=function(testState={})
 {
