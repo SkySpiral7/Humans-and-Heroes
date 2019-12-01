@@ -36,7 +36,7 @@ function MainObject()
    //private variable section:
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var powerLevel = 0, powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
@@ -210,10 +210,14 @@ function MainObject()
    {
       this._calculateTotal();
 
-      //start by looking at character points which can't be negative
-      powerLevel = Math.ceil(characterPointsSpent / 15);  //if characterPointsSpent is 0 then powerLevel is 0
+      //start by looking at character points
+      //CP -5 => PL -0 which should be fine
+      //CP 0 => PL 0 rounds up after that.
+      powerLevel = Math.ceil(characterPointsSpent / 15);
       //min PL is now 1. M&M has min 0 (kinda). old H&H can also use 0
-      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && 0 === powerLevel) powerLevel = 1;
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && powerLevel < 1) powerLevel = 1;
+      //CP -30 => needs to be PL 0 or 1
+      else if(powerLevel < 0) powerLevel = 0;
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
       if (this.advantageSection.isUsingPettyRules())
@@ -248,8 +252,7 @@ function MainObject()
    /**Calculates and creates the offense section of the document.*/
    this.updateOffense=function()
    {
-      powerLevelAttackEffect = 0;
-      powerLevelPerceptionEffect = 0;
+      powerLevelAttackEffect = powerLevelPerceptionEffect = powerLevelMaxAttack = powerLevelMaxEffect = -Infinity;
       var attackBonus;
       var allOffensiveRows = '';
       derivedValues.Offense = [];

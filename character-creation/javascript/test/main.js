@@ -225,7 +225,7 @@ TestSuite.main.update=function(testState={})
    TestRunner.clearResults(testState);
    var assertions = [];
 
-   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'Min PL 1'});
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'Default PL 1'});
    assertions.push(
       {Expected: '1', Actual: document.getElementById('power-level').innerHTML, Description: 'power-level html set'});
    assertions.push({
@@ -233,6 +233,15 @@ TestSuite.main.update=function(testState={})
       Actual: document.getElementById('grand-total-max').innerHTML,
       Description: 'grand-total-max html set'
    });
+
+   DomUtil.changeValue('Strength', -5);
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: '-10 CP = PL 1'});
+
+   DomUtil.changeValue('Fighting', -5);
+   DomUtil.changeValue('Agility', -5);
+   DomUtil.changeValue('Dexterity', -5);
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: '-35 CP = PL 1'});
+   Main.abilitySection.clear();
 
    SelectUtil.changeText('powerChoices0', 'Feature');
    DomUtil.changeValue('powerRank0', 15);
@@ -262,7 +271,16 @@ TestSuite.main.update=function(testState={})
 
    //v3.15
    Main.setRuleset(3, 15);
-   assertions.push({Expected: 0, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 Min PL 0'});
+   assertions.push({Expected: 0, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 Default PL 0'});
+
+   DomUtil.changeValue('Strength', -5);
+   assertions.push({Expected: 0, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 -10 CP = PL 0'});
+
+   DomUtil.changeValue('Fighting', -5);
+   DomUtil.changeValue('Agility', -5);
+   DomUtil.changeValue('Dexterity', -5);
+   assertions.push({Expected: 0, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 -35 CP = PL 0'});
+   Main.abilitySection.clear();
 
    SelectUtil.changeText('powerChoices0', 'Feature');
    assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 1 CP = PL 1'});
@@ -335,8 +353,7 @@ TestSuite.main.updateInitiative=function(testState={})
 TestSuite.main.updateOffense=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
-   var expected;
+   var assertions = [], expected;
 
    expected = {Offense: [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}]};
    assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy: Unarmed only by default'});
