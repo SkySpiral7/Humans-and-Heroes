@@ -44,7 +44,16 @@ function MainObject()
 
    //Single line function section
    this.canUseGodhood=function(){return (transcendence > 0);};
-   this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
+   //does a defensive copy so that yoda conditions function
+   this.getActiveRuleset=function(){return activeRuleset.clone();};
+   this.getCalculations = function ()
+   {
+      return {
+         powerLevel: powerLevel,
+         characterPointsSpent: characterPointsSpent,
+         transcendence: transcendence
+      };
+   };
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
    this.getTranscendence=function(){return transcendence;};
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
@@ -199,22 +208,25 @@ function MainObject()
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
    this.update=function()
    {
-       this._calculateTotal();
+      this._calculateTotal();
 
-       //start by looking at character points which can't be negative
-       powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
+      //start by looking at character points which can't be negative
+      powerLevel = Math.ceil(characterPointsSpent / 15);  //if characterPointsSpent is 0 then powerLevel is 0
+      //min PL is now 1. M&M has min 0 (kinda). old H&H can also use 0
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && 0 === powerLevel) powerLevel = 1;
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
-      if(this.advantageSection.isUsingPettyRules())
-          this._calculatePowerLevelLimitations();
+      if (this.advantageSection.isUsingPettyRules())
+         this._calculatePowerLevelLimitations();
 
-       document.getElementById('power-level').innerHTML = powerLevel;
-       document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
+      document.getElementById('power-level').innerHTML = powerLevel.toString();
+      document.getElementById('grand-total-max').innerHTML = (powerLevel * 15).toString();
       if (activeRuleset.major > 1)
       {
-          transcendence = Math.floor(powerLevel/20);  //gain a transcendence every 20 PL
-          if(transcendence < minimumTranscendence) transcendence = minimumTranscendence;  //don't auto-set below the user requested value
-          this.updateTranscendence();  //to regenerate as needed
+         transcendence = Math.floor(powerLevel / 20);  //gain a transcendence every 20 PL
+         //don't auto-set below the user requested value
+         if (transcendence < minimumTranscendence) transcendence = minimumTranscendence;
+         this.updateTranscendence();  //to regenerate as needed
       }
    };
    /**Calculates initiative and sets the document.*/
@@ -341,42 +353,44 @@ function MainObject()
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
    this._calculatePowerLevelLimitations=function()
    {
-       var compareTo;
-       //Skills and Abilities
-       //TODO: ruleset 1.0 has advantages I need to include: Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
-      for (var i=0; i < Data.Ability.names.length; i++)
+      //TODO: simple PL
+      var compareTo;
+      //Skills and Abilities
+      //TODO: ruleset 1.0 has advantages I need to include:
+      //Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
+      for (var i = 0; i < Data.Ability.names.length; i++)
       {
-          compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
-          compareTo-=10;
-          if(compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
+         compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
+         compareTo -= 10;
+         if (compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
       }
 
-       //Attack and Effect
-       compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+      //Attack and Effect
+      compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
+      compareTo /= 2;
+      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
 
-       //Effect without Attack (ie Perception range)
-       compareTo = powerLevelPerceptionEffect;
-       if(compareTo > powerLevel) powerLevel = compareTo;
+      //Effect without Attack (ie Perception range)
+      compareTo = powerLevelPerceptionEffect;
+      if (compareTo > powerLevel) powerLevel = compareTo;
 
-       //Dodge and Toughness
-       compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+      //Dodge and Toughness
+      compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+      compareTo += this.defenseSection.getMaxToughness();
+      compareTo /= 2;
+      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
 
-       //Parry and Toughness
-       compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+      //Parry and Toughness
+      compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+      compareTo += this.defenseSection.getMaxToughness();
+      compareTo /= 2;
+      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
 
-       //Fortitude and Will
-       compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
-       compareTo+= this.defenseSection.getByName('Will').getTotalBonus();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+      //Fortitude and Will
+      compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+      compareTo += this.defenseSection.getByName('Will').getTotalBonus();
+      compareTo /= 2;
+      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this._calculateTotal=function()

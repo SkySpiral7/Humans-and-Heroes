@@ -223,9 +223,64 @@ TestSuite.main.getProtectionTotal=function(testState={})
 TestSuite.main.update=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'Min PL 1'});
+   assertions.push(
+      {Expected: '1', Actual: document.getElementById('power-level').innerHTML, Description: 'power-level html set'});
+   assertions.push({
+      Expected: '15',
+      Actual: document.getElementById('grand-total-max').innerHTML,
+      Description: 'grand-total-max html set'
+   });
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15);
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: '15 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 16);
+   assertions.push({Expected: 2, Actual: Main.getCalculations().powerLevel, Description: '16 CP = PL 2'});
+
+   DomUtil.changeValue('powerRank0', 1000);
+   SelectUtil.changeText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me');
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   //petty costs 50 + 40 damage = 90 CP /15 = 6 PL even though PL limit would require 10
+   DomUtil.changeValue('powerRank0', 10);
+   assertions.push(
+      {Expected: 6, Actual: Main.getCalculations().powerLevel, Description: 'Petty rules has PL from CP only'});
+
+   Main.clear();
+   assertions.push({Expected: 0, Actual: Main.getCalculations().transcendence, Description: 'Default transcendence 0'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15 * 19);
+   assertions.push({Expected: 0, Actual: Main.getCalculations().transcendence, Description: 'PL 19 = transcendence 0'});
+
+   DomUtil.changeValue('powerRank0', 15 * 20);
+   assertions.push({Expected: 1, Actual: Main.getCalculations().transcendence, Description: 'PL 20 = transcendence 1'});
+
+   //v3.15
+   Main.setRuleset(3, 15);
+   assertions.push({Expected: 0, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 Min PL 0'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 1 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 15);
+   assertions.push({Expected: 1, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 15 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 16);
+   assertions.push({Expected: 2, Actual: Main.getCalculations().powerLevel, Description: 'v3.15 16 CP = PL 2'});
+
+   //v1.0
+   Main.setRuleset(1, 0);
+   assertions.push({Expected: 0, Actual: Main.getCalculations().transcendence, Description: 'v1.0 Default transcendence 0'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15 * 20);
+   assertions.push(
+      {Expected: 0, Actual: Main.getCalculations().transcendence, Description: 'v1.0 PL 20 = still transcendence 0'});
 
    return TestRunner.displayResults('TestSuite.main.update', assertions, testState);
 };
@@ -411,14 +466,14 @@ TestSuite.main.updateOffense=function(testState={})
 
    return TestRunner.displayResults('TestSuite.main.updateOffense', assertions, testState);
 };
-TestSuite.main.calculatePowerLevelLimitations=function(testState={})
+TestSuite.main._calculatePowerLevelLimitations=function(testState={})
 {
    TestRunner.clearResults(testState);
    var assertions=[];
 
    //ADD TESTS
 
-   return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', assertions, testState);
+   return TestRunner.displayResults('TestSuite.main._calculatePowerLevelLimitations', assertions, testState);
 };
 TestSuite.main.calculateTotal=function(testState={})
 {
