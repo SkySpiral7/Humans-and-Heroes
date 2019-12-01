@@ -252,7 +252,7 @@ function MainObject()
    /**Calculates and creates the offense section of the document.*/
    this.updateOffense=function()
    {
-      powerLevelAttackEffect = powerLevelPerceptionEffect = powerLevelMaxAttack = powerLevelMaxEffect = -Infinity;
+      powerLevelMaxAttack = powerLevelMaxEffect = powerLevelAttackEffect = powerLevelPerceptionEffect = -Infinity;
       var attackBonus;
       var allOffensiveRows = '';
       derivedValues.Offense = [];
@@ -276,6 +276,8 @@ function MainObject()
             //attackBonus can't be -- so don't need to check powerLevelPerceptionEffect
             if(powerLevelAttackEffect < (attackBonus + strengthValue))
                powerLevelAttackEffect = (attackBonus + strengthValue);
+            if(powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+            if(powerLevelMaxEffect < strengthValue) powerLevelMaxEffect = strengthValue;
 
             derivedValues.Offense.push({skillName: 'Unarmed', attackBonus: attackBonus, range: 'Close',
                effect: 'Damage', rank: strengthValue});
@@ -326,9 +328,14 @@ function MainObject()
             //keep track of the highest values for PL
             //TODO: test for PL?
             effectRank = rowPointer.getRank();
-            if(attackBonus === '--' && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
-            else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus + effectRank))
-               powerLevelAttackEffect = (attackBonus + effectRank);
+            if ('--' === attackBonus && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
+            if ('--' !== attackBonus)
+            {
+               if (powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+               if (powerLevelAttackEffect < (attackBonus + effectRank))
+                  powerLevelAttackEffect = (attackBonus + effectRank);
+            }
+            if (powerLevelMaxEffect < effectRank) powerLevelMaxEffect = effectRank;
 
             derivedValues.Offense.push({skillName: rowPointer.getName(), attackBonus: attackBonus, range: range,
                effect: rowPointer.getEffect(), rank: effectRank});
@@ -370,9 +377,9 @@ function MainObject()
 
       if (activeRuleset.isGreaterThanOrEqualTo(3, 16))
       {
-         //TODO: simple PL
-         //Attack
-         //Effect
+         //Attack and Effect
+         if(powerLevelMaxAttack > powerLevel) powerLevel = powerLevelMaxAttack;
+         if(powerLevelMaxEffect > powerLevel) powerLevel = powerLevelMaxEffect;
 
          //Defenses
          compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
