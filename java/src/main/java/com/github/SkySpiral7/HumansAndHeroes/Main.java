@@ -51,6 +51,7 @@ public class Main
             FileMover.moveFile(new File(oldPath), new File(newPath));
             break;
          case MAP:
+            SiteMapCreator.writeToTextFile();
             SiteMapCreator.generate();
             break;
       }

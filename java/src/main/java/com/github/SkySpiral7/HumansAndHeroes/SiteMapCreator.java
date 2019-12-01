@@ -53,7 +53,7 @@ public class SiteMapCreator
                                                .map(name -> Paths.get("..", name))
                                                .map(path -> path.toAbsolutePath().normalize())
                                                .collect(Collectors.toList());
-      final List<Path> filesToIgnore = Stream.of("index.html", "site-map.html")
+      final List<Path> filesToIgnore = Stream.of("google122b9bf962559bcf.html", "index.html", "site-map.html")
                                              .map(name -> Paths.get("..", name))
                                              .map(path -> path.toAbsolutePath().normalize())
                                              .collect(Collectors.toList());

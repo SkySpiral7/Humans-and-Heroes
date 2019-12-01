@@ -1,5 +1,6 @@
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/abilities.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/advantages.html
+http://skyspiral7.github.io/Humans-and-Heroes/character-creation/character-points.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/complications.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/constructs.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/defenses.html
@@ -8,6 +9,7 @@ http://skyspiral7.github.io/Humans-and-Heroes/character-creation/gadgets-gear/in
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/gadgets-gear/vehicles.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/index.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/point-counter.html
+http://skyspiral7.github.io/Humans-and-Heroes/character-creation/power-level.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/descriptors.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/effects/affliction.html
 http://skyspiral7.github.io/Humans-and-Heroes/character-creation/powers/effects/attain-knowledge.html
