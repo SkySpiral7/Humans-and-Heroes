@@ -73,6 +73,7 @@ function SkillList()
          if ('--' !== abilityValue)
          {
             //missing doesn't affect power levels so it isn't added to max skill map
+            //attacks have a lower PL limit therefore being in maxSkillRanks is fine (for every ruleset)
             if(bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
 
             if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy

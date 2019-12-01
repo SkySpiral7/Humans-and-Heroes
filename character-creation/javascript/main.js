@@ -353,9 +353,9 @@ function MainObject()
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
    this._calculatePowerLevelLimitations=function()
    {
-      //TODO: simple PL
       var compareTo;
-      //Skills and Abilities
+      //Skills and Abilities. Skills (which can't be negative) includes abilities even if there are no skills
+      //therefore this covers Abilities just fine (for every ruleset)
       //TODO: ruleset 1.0 has advantages I need to include:
       //Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
       for (var i = 0; i < Data.Ability.names.length; i++)
@@ -365,32 +365,57 @@ function MainObject()
          if (compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
       }
 
-      //Attack and Effect
-      compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
-      compareTo /= 2;
-      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16))
+      {
+         //TODO: simple PL
+         //Attack
+         //Effect
 
-      //Effect without Attack (ie Perception range)
-      compareTo = powerLevelPerceptionEffect;
-      if (compareTo > powerLevel) powerLevel = compareTo;
+         //Defenses
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-      //Dodge and Toughness
-      compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
-      compareTo += this.defenseSection.getMaxToughness();
-      compareTo /= 2;
-      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-      //Parry and Toughness
-      compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
-      compareTo += this.defenseSection.getMaxToughness();
-      compareTo /= 2;
-      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-      //Fortitude and Will
-      compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
-      compareTo += this.defenseSection.getByName('Will').getTotalBonus();
-      compareTo /= 2;
-      if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Will').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
+
+         compareTo = this.defenseSection.getMaxToughness();
+         if (compareTo > powerLevel) powerLevel = compareTo;
+      }
+      else
+      {
+         //Attack and Effect
+         compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+
+         //Effect without Attack (ie Perception range)
+         compareTo = powerLevelPerceptionEffect;
+         if (compareTo > powerLevel) powerLevel = compareTo;
+
+         //Dodge and Toughness
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+
+         //Parry and Toughness
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+
+         //Fortitude and Will
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         compareTo += this.defenseSection.getByName('Will').getTotalBonus();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+      }
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this._calculateTotal=function()

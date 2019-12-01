@@ -487,6 +487,39 @@ TestSuite.main._calculatePowerLevelLimitations=function(testState={})
    DomUtil.changeValue('skillRank0', 12);
    assertions.push({Expected: 2, Actual: Main.getCalculations().powerLevel, Description: 'Skill 12 = PL 2'});
 
+   Main.skillSection.clear();
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   DomUtil.changeValue('powerRank0', 10);
+   //10 CP /15 = PL 1
+   assertions.push({Expected: 10, Actual: Main.getCalculations().powerLevel, Description: 'Toughness to PL'});
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Dodge-input', 2);
+   assertions.push({Expected: 10, Actual: Main.getCalculations().powerLevel, Description: 'PL doesn\'t Dodge+Toughness'});
+
+   Main.clear();
+   //2 CP /15 = PL 1
+   DomUtil.changeValue('Dodge-input', 2);
+   assertions.push({Expected: 2, Actual: Main.getCalculations().powerLevel, Description: 'Dodge to PL'});
+   DomUtil.changeValue('Dodge-input', 0);
+
+   //4 CP /15 = PL 1
+   DomUtil.changeValue('Parry-input', 4);
+   assertions.push({Expected: 4, Actual: Main.getCalculations().powerLevel, Description: 'Parry to PL'});
+   DomUtil.changeValue('Parry-input', 0);
+
+   DomUtil.changeValue('Fortitude-input', 5);
+   //5 CP /15 = PL 1
+   assertions.push({Expected: 5, Actual: Main.getCalculations().powerLevel, Description: 'Fortitude to PL'});
+   DomUtil.changeValue('Fortitude-input', 0);
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Will-input', 12);
+   assertions.push({Expected: 12, Actual: Main.getCalculations().powerLevel, Description: 'Will to PL'});
+   //Toughness to PL is above
+
+   //v3.15
+   Main.setRuleset(3, 15);
    SelectUtil.changeText('skillChoices0', 'Close Combat');
    DomUtil.changeValue('skillText0', 'Unarmed');
    DomUtil.changeValue('skillRank0', 10);
