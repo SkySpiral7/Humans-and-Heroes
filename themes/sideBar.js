@@ -542,8 +542,8 @@ var navigationJson = [
             "link": "meta/known-issues.html"
          },
          {
-            "name": "Open Game License",
-            "link": "meta/open-game-license.html"
+            "name": "License",
+            "link": "meta/license.html"
          },
          {
             "name": "Statistics",

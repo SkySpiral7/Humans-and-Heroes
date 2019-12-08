@@ -139,7 +139,7 @@ http://skyspiral7.github.io/Humans-and-Heroes/gameplay/the-basics.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/calculations.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/index.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/known-issues.html
-http://skyspiral7.github.io/Humans-and-Heroes/meta/open-game-license.html
+http://skyspiral7.github.io/Humans-and-Heroes/meta/license.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/statistics.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/survey.html
 http://skyspiral7.github.io/Humans-and-Heroes/meta/versioning.html
