@@ -84,7 +84,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '\n' +
       '\n' +
       '## More Info\n' +
-      '![Character Image](../images/Sirocco.jpg)\n' +
+      '![Character Image](../images/Sirocco.png)\n' +
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
@@ -274,7 +274,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '\n' +
       '\n' +
       '## More Info\n' +
-      '![Character Image](../images/Sirocco.jpg)\n' +
+      '![Character Image](../images/Sirocco.png)\n' +
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
