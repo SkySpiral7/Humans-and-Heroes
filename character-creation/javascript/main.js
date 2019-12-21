@@ -147,7 +147,7 @@ function MainObject()
    this.loadImageFromPath=function()
    {
        if(document.getElementById('img-file-path').value === '')  //the reason for this is because the user doesn't know this default image path
-          document.getElementById('img-file-path').value = '../images/Sirocco.jpg';
+          document.getElementById('img-file-path').value = '../images/Sirocco.png';
        document.getElementById('character-image').src = document.getElementById('img-file-path').value;
    };
    /**Gets the total protection value of the sections power and equipment.*/

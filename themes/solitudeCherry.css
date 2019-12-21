@@ -24,8 +24,6 @@ green
 purple (only the info banner)
    #150021: bg
 
-TODO: as many as possible images should have transparent bg
-
 good example pages:
 character-creation/powers/descriptors.html
 character-creation/powers/effects/create.html
@@ -140,10 +138,10 @@ TODO: figure out how to have different buttons for up/down
 unfortunately disabled and read-only don't work and I'd have to be silly to get it: https://stackoverflow.com/questions/16422124/javascript-detect-browser-scroll-to-the-top
 *
 ::-webkit-scrollbar-button {
-   background-image: url("../images/arrow-down.gif");
+   background-image: url("../images/arrow-down.png");
 }
 ::-webkit-scrollbar-button:active {
-   background-image: url("../images/arrow-left.gif");
+   background-image: url("../images/arrow-left.png");
 }
 /**/
 
@@ -262,7 +260,7 @@ ol.legal-document > li > ol > li {
 }
 
 .sites-sidebar-nav .expander {
-   background: url("../images/arrow-down.gif") no-repeat;
+   background: url("../images/arrow-down.png") no-repeat;
    background-size: 15px 15px;
    float: left;
    height: 15px;
@@ -285,7 +283,7 @@ U+25BF (White down-pointing small triangle ▿)
 */
 
 .sites-sidebar-nav .expander.collapsed {
-   background: url("../images/arrow-left.gif") no-repeat;
+   background: url("../images/arrow-left.png") no-repeat;
    background-size: 15px 15px;
 }
 
