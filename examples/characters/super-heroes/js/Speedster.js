@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+if (undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
 
 var json = {
    "Hero": {
@@ -20,7 +20,7 @@ var json = {
    "Powers": [
       {
          "effect": "Damage",
-         "text": "Fast Attack. Total of Damage 8 by default",
+         "text": "Fast Attack. Total of Damage 10 by default",
          "action": "Standard",
          "range": "Close",
          "duration": "Instant",
@@ -38,7 +38,7 @@ var json = {
                "name": "Selective"
             }
          ],
-         "rank": 6
+         "rank": 8
       },
       {
          "effect": "Damage",
@@ -64,11 +64,20 @@ var json = {
                "text": "Always points straight up"
             }
          ],
-         "rank": 2
+         "rank": 10
+      },
+      {
+         "effect": "Protection",
+         "text": "Anti-kinetic barrier",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 5
       },
       {
          "effect": "Quickness",
-         "text": "",
+         "text": "2 hour task in 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -78,12 +87,12 @@ var json = {
       {
          "effect": "Movement",
          "cost": 1,
-         "text": "Gound Speed 15: 64,000 MPH",
+         "text": "Ground Speed 10: 3,000 MPH",
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
-         "rank": 15
+         "rank": 10
       },
       {
          "effect": "Movement",
@@ -179,12 +188,12 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 11,
-      "Parry": 11,
+      "Dodge": 6,
+      "Parry": 6,
       "Will": 8,
       "Fortitude": 8
    },
-   "ruleset": "3.10",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };
