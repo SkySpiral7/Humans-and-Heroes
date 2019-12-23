@@ -5,12 +5,12 @@ var json = {
       "image": "../images/Martial-Artist.jpg"
    },
    "Abilities": {
-      "Strength": 8,
+      "Strength": 10,
       "Agility": 6,
       "Fighting": 8,
       "Dexterity": 4,
       "Stamina": 3,
-      "Intellect": 0,
+      "Intellect": 2,
       "Awareness": 5,
       "Presence": 5
    },
@@ -49,7 +49,7 @@ var json = {
       },
       {
          "name": "Defensive Roll",
-         "rank": 4
+         "rank": 6
       },
       {
          "name": "Evasion",
@@ -101,25 +101,25 @@ var json = {
       {
          "name": "Athletics",
          "subtype": "",
-         "rank": 9,
+         "rank": 7,
          "ability": "Strength"
       },
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": 3,
+         "rank": 2,
          "ability": "Fighting"
       },
       {
          "name": "Expertise",
          "subtype": "Philosophy",
-         "rank": 5,
+         "rank": 1,
          "ability": "Intellect"
       },
       {
          "name": "Insight",
          "subtype": "",
-         "rank": 4,
+         "rank": 5,
          "ability": "Awareness"
       },
       {
@@ -141,12 +141,12 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 7,
-      "Parry": 5,
+      "Dodge": 4,
+      "Parry": 2,
       "Will": 4,
-      "Fortitude": 8
+      "Fortitude": 7
    },
-   "ruleset": "3.0",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };
