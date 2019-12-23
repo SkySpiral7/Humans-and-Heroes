@@ -39,7 +39,7 @@ var json = {
       {
          "effect": "Flight",
          "text": "Levitation: 30 MPH",
-         "action": "Free",
+         "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
@@ -57,7 +57,7 @@ var json = {
                "applications": 3
             }
          ],
-         "rank": 6
+         "rank": 9
       },
       {
          "effect": "Senses",
@@ -153,10 +153,10 @@ var json = {
    "Defenses": {
       "Dodge": 7,
       "Parry": 2,
-      "Will": 9,
+      "Will": 6,
       "Fortitude": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };
