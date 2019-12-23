@@ -30,11 +30,11 @@ var json = {
             },
             {
                "name": "Other Flat Flaw",
-               "applications": 14,
+               "applications": 12,
                "text": "Easily Removable. Can't use the actual flaw because this calculator can't include alternate effects"
             }
          ],
-         "rank": 12
+         "rank": 10
       },
       {
          "effect": "Affliction",
@@ -74,14 +74,14 @@ var json = {
             },
             {
                "name": "Impervious",
-               "applications": 5
+               "applications": 4
             },
             {
                "name": "Removable",
                "text": "Belt"
             }
          ],
-         "rank": 10
+         "rank": 8
       },
       {
          "effect": "Flight",
@@ -202,12 +202,12 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 6,
-      "Parry": 3,
+      "Dodge": 9,
+      "Parry": 5,
       "Will": 7,
       "Fortitude": 6
    },
-   "ruleset": "3.10",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };
