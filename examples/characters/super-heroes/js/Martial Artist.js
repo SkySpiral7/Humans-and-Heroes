@@ -9,7 +9,7 @@ var json = {
       "Agility": 6,
       "Fighting": 8,
       "Dexterity": 4,
-      "Stamina": 3,
+      "Stamina": 8,
       "Intellect": 2,
       "Awareness": 5,
       "Presence": 5
@@ -49,7 +49,7 @@ var json = {
       },
       {
          "name": "Defensive Roll",
-         "rank": 6
+         "rank": 2
       },
       {
          "name": "Evasion",
@@ -144,7 +144,7 @@ var json = {
       "Dodge": 4,
       "Parry": 2,
       "Will": 4,
-      "Fortitude": 7
+      "Fortitude": 1
    },
    "ruleset": "3.16",
    "version": 2,

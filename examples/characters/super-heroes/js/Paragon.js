@@ -57,7 +57,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-         "text": "",
+         "text": "1 minute task within 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",

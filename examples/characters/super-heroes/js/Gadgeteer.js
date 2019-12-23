@@ -85,21 +85,21 @@ var json = {
       },
       {
          "effect": "Flight",
-         "text": "Jet-Pack. 60 MPH",
+         "text": "Jet-Pack. 93 MPH",
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [
             {
                "name": "Removable",
-               "text": "Like a Back-back"
+               "text": "Like a Back-pack"
             }
          ],
          "rank": 5
       },
       {
          "effect": "Quickness",
-         "text": "Quick-Thinking",
+         "text": "Quick-Thinking: 24 seconds of thought in 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
