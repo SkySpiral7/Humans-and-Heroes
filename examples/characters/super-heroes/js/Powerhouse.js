@@ -8,11 +8,11 @@ var json = {
       "image": "../images/Powerhouse.jpg"
    },
    "Abilities": {
-      "Strength": 12,
+      "Strength": 10,
       "Agility": 1,
       "Fighting": 6,
       "Dexterity": 1,
-      "Stamina": 14,
+      "Stamina": 10,
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 1
@@ -88,17 +88,17 @@ var json = {
       {
          "effect": "Feature",
          "cost": 2,
-         "text": "Impervious Toughness 6",
+         "text": "Impervious Toughness 5",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 6
+         "rank": 5
       },
       {
          "effect": "Enhanced Trait",
          "cost": 2,
-         "text": "Power Lifting: Enhanced Trait 4. Lifting Str 16; 1,600 tons",
+         "text": "Power Lifting: Enhanced Strength 6. Lifting Str 16; 1,600 tons",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -109,7 +109,7 @@ var json = {
                "text": "to Lifting"
             }
          ],
-         "rank": 4
+         "rank": 6
       }
    ],
    "Equipment": [],
@@ -129,7 +129,7 @@ var json = {
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
-         "rank": 2,
+         "rank": 4,
          "ability": "Fighting"
       },
       {
@@ -163,12 +163,12 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 5,
-      "Parry": 0,
-      "Will": 5,
+      "Dodge": 9,
+      "Parry": 4,
+      "Will": 8,
       "Fortitude": 0
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -67,7 +67,7 @@ var json = {
       {
          "effect": "Enhanced Trait",
          "cost": 2,
-         "text": "Lifting Str 14; 410 tons",
+         "text": "Power Lifting: Enhanced Strength 4. Lifting Str 14; 410 tons",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
