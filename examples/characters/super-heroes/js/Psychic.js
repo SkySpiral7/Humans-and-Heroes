@@ -138,50 +138,46 @@ var json = {
 
 if ('2' === queryParameters['options'][0])
 {
-   json.Powers = json.Powers.concat([
-      {
-         "effect": "Affliction",
-         "text": "Mind Control: Resisted by Will; Dazed, Compelled, Controlled",
-         "action": "Full",
-         "range": "Perception",
-         "duration": "Instant",
-         "name": "Mind Control",
-         "Modifiers": [
-            {
-               "name": "Increased Range",
-               "applications": 2
-            },
-            {
-               "name": "Other Rank Extra",
-               "applications": 1,
-               "text": "Cumulative"
-            }
-         ],
-         "rank": 10
-      }
-   ]);
+   json.Powers = json.Powers.push({
+      "effect": "Affliction",
+      "text": "Mind Control: Resisted by Will; Dazed, Compelled, Controlled",
+      "action": "Full",
+      "range": "Perception",
+      "duration": "Instant",
+      "name": "Mind Control",
+      "Modifiers": [
+         {
+            "name": "Increased Range",
+            "applications": 2
+         },
+         {
+            "name": "Other Rank Extra",
+            "applications": 1,
+            "text": "Cumulative"
+         }
+      ],
+      "rank": 10
+   });
 }
 else
 {
-   json.Powers = json.Powers.concat([
-      {
-         "effect": "Damage",
-         "text": "Mental Blast",
-         "action": "Full",
-         "range": "Perception",
-         "duration": "Instant",
-         "name": "Mental Blast",
-         "Modifiers": [
-            {
-               "name": "Increased Range",
-               "applications": 2
-            },
-            {
-               "name": "Alternate Resistance (Cost)",
-               "text": "Will"
-            }
-         ],
-         "rank": 10
-      }
-   ]);
+   json.Powers = json.Powers.push({
+      "effect": "Damage",
+      "text": "Mental Blast",
+      "action": "Full",
+      "range": "Perception",
+      "duration": "Instant",
+      "name": "Mental Blast",
+      "Modifiers": [
+         {
+            "name": "Increased Range",
+            "applications": 2
+         },
+         {
+            "name": "Alternate Resistance (Cost)",
+            "text": "Will"
+         }
+      ],
+      "rank": 10
+   });
 }
