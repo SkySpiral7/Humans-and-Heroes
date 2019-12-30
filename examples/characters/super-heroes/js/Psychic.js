@@ -138,7 +138,7 @@ var json = {
 
 if ('2' === queryParameters['options'][0])
 {
-   json.Powers = json.Powers.push({
+   json.Powers.push({
       "effect": "Affliction",
       "text": "Mind Control: Resisted by Will; Dazed, Compelled, Controlled",
       "action": "Full",
@@ -161,7 +161,7 @@ if ('2' === queryParameters['options'][0])
 }
 else
 {
-   json.Powers = json.Powers.push({
+   json.Powers.push({
       "effect": "Damage",
       "text": "Mental Blast",
       "action": "Full",

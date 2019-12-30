@@ -33,7 +33,7 @@ I don't have to update 100+ html pages with relative links whenever I want to ch
 <div class="row">
 <div class="col green-panel">
 <h3>Strength</h3>
-<div>7</div>
+<div>8</div>
 </div>
 <div class="col green-panel">
 <h3>Agility</h3>
@@ -41,7 +41,7 @@ I don't have to update 100+ html pages with relative links whenever I want to ch
 </div>
 <div class="col green-panel">
 <h3>Fighting</h3>
-<div>12</div>
+<div>10</div>
 </div>
 <div class="col green-panel">
 <h3>Dexterity</h3>
@@ -63,7 +63,7 @@ I don't have to update 100+ html pages with relative links whenever I want to ch
 </div>
 <div class="col green-panel">
 <h3>Presence</h3>
-<div>4</div>
+<div>3</div>
 </div>
 </div>
 </div>
@@ -77,31 +77,27 @@ I don't have to update 100+ html pages with relative links whenever I want to ch
 </div>
 <div class="row">
 <div class="character-sheet-light-green col">
-<p><b>Costume</b>: Protection 5 &#8226; <i>5 points</i>.</p>
+<p><b>Costume</b>: Protection 7 &#8226; <i>7 points</i>.</p>
 <p><b>Commlink</b> &#8226; <i>1 point</i>.</p>
-<p><b>Utility Belt</b>: &#8226; <i>29 points total</i>.</p>
+<p><b>Utility Belt</b>: &#8226; <i>57 points total</i>.</p>
 <ul>
 <li><b>Grappling hook</b>: Movement 1 (Swinging) &#8226; <i>2 points</i>.</li>
-<li><b>Flash-Bangs</b> (much smaller than normal): Burst Area 1 Visual Dazzle 2 Resisted by Fortitude, Extra Condition: Dazzle
-Auditory &#8226; <i>10 points</i>.</li>
-<li><b>Sleep Gas Pellets</b>: Ranged Cloud Area 1 Affliction 4 (Resisted by Fortitude; Daze, Stun,
-Asleep) &#8226; <i>12 points</i>.</li>
-<li><b>Boomerangs</b>: Strength-based Ranged Damage 1 (Total Damage 8 by default) &#8226; <i>2
+<li><b>Flash-Bangs</b> (much stronger than normal): Burst Area 1 Visual Dazzle 10 Resisted by Fortitude, Extra Condition: Dazzle
+Auditory &#8226; <i>50 points</i>.</li>
+<li><b>Boomerangs</b>: Strength-based Ranged Damage 2 (Total Damage 10 by default) &#8226; <i>4
 points</i>.</li>
 <li><b>Handcuffs</b> &#8226; <i>1 point</i>.</li>
-<li><b>Camera</b> &#8226; <i>1 point</i>.</li>
-<li><b>Flashlight</b> &#8226; <i>1 point</i>.</li>
 </ul>
 <h3>Options</h3>
 <p>To customize, you may choose one of the following options with no change in point total:</p>
 <ul class="radio-ul">
 <li><label><input type="radio" name="option0" checked value="1"/>None of these.</label></li>
-<li><label><input type="radio" name="option0" value="2"/><b>Gimmick</b>: Replace all Equipment except Costume with a
-10-point Easily Removable (total of 6 points) power device.</label></li>
-<li><label><input type="radio" name="option0" value="3"/><b>Stealthy</b>: Remove 2 optional advantages to add Low-light Vision,
-replace the Flashlight with Night Vision Goggles, and add the following equipment: Knife, Camo Clothing, Multi-tool,
-Binoculars, Mini-Tracer.</label></li>
-<li><label><input type="radio" name="option0" value="4"/><b>Vehicle</b>: Replace all optional advantages with a vehicle worth up
+<li><label><input type="radio" name="option0" value="2"/><b>Gimmick</b>: Replace Flash-Bangs with a
+16-point Easily Removable power device. Replace Ranged Combat: Grenades with 2 more advantages.</label></li>
+<li><label><input type="radio" name="option0" value="3"/><b>Stealthy</b>: Remove 1 advantage to
+add the following equipment (1 additional rank of equipment):
+Camo Clothing, Multi-tool, Binoculars, Parabolic Microphone, Night Vision Goggles.</label></li>
+<li><label><input type="radio" name="option0" value="4"/><b>Vehicle</b>: Replace 3 advantages with a vehicle worth up
 to 15 equipment points (an additional 3 ranks of Equipment).</label></li>
 </ul>
 </div>
@@ -111,16 +107,17 @@ to 15 equipment points (an additional 3 ranks of Equipment).</label></li>
 </div>
 <div class="row">
 <div class="character-sheet-light-green col">
-<p>Defensive Roll 3, Equipment 7</p>
-<p>Plus choose <b><i>three</i></b> of the following (choose only 1 with the Stealthy option and none with the Vehicle option):</p>
+<p>Defensive Roll 3, Equipment 13</p>
+<p>Normally choose <b><i>three</i></b> of the following. Gimmick option chooses 5,
+Stealthy option gets 2, and Vehicle option gets none.</p>
 <p>
 <!--Benefit is a label for the checkbox so that it checks when clicked. Label can only be for 1 input.-->
 <label><input type="checkbox" name="checkbox0"/>Benefit</label> <input type="text" name="name0" value="(Choose One)"/>,
 <label><input type="checkbox" name="checkbox1"/>Defensive Attack</label>,
-<label><input type="checkbox" name="checkbox2"/>Jack of all trades</label>,
+<label><input type="checkbox" name="checkbox2" checked />Jack of all trades</label>,
 <label><input type="checkbox" name="checkbox3"/>Power Attack</label>,
-<label><input type="checkbox" name="checkbox4"/>Skill Mastery (Stealth)</label>,
-<label><input type="checkbox" name="checkbox5"/>Ultimate Effort (Investigation)</label></p>
+<label><input type="checkbox" name="checkbox4" checked />Skill Mastery (Stealth)</label>,
+<label><input type="checkbox" name="checkbox5" checked />Ultimate Effort (Investigation)</label></p>
 </div>
 </div>
 <div class="row">
@@ -128,8 +125,8 @@ to 15 equipment points (an additional 3 ranks of Equipment).</label></li>
 </div>
 <div class="row">
 <div class="character-sheet-light-green col">
-Acrobatics 6 (+12), Athletics 2 (+9), Deception 2 (+6), <label>Expertise: <input type="text" name="name1" value="(Choose One)"/> 4 (+7)</label>,
-Insight 6 (+10), Intimidation 6 (+10), Investigation 8 (+11), Perception 6 (+10), Ranged Combat: Boomerang 4 (+10),
+Acrobatics 6 (+12), Athletics 2 (+10), Deception 2 (+5), <label>Expertise: <input type="text" name="name1" value="(Choose One)"/> 4 (+7)</label>,
+Insight 6 (+10), Intimidation 6 (+9), Investigation 6 (+9), Perception 6 (+10), Ranged Combat: Boomerang 4 (+10),
 Ranged Combat: Grenades 4 (+10), Sleight of Hand 4 (+10), Stealth 8 (+14), Technology 2 (+5), Vehicles 4 (+10)
 </div>
 </div>
@@ -140,43 +137,39 @@ Ranged Combat: Grenades 4 (+10), Sleight of Hand 4 (+10), Stealth 8 (+14), Techn
 <div class="character-sheet-initiative col">Initiative +6</div>
 </div>
 <div class="row">
-<div class="character-sheet-offense-row col">Unarmed +12</div>
-<div class="character-sheet-offense-row col">Close, Damage 7</div>
+<div class="character-sheet-offense-row col">Unarmed +10</div>
+<div class="character-sheet-offense-row col">Close, Damage 8</div>
 </div>
 <div class="row">
 <div class="character-sheet-offense-row col">Flash-Bangs +10</div>
-<div class="character-sheet-offense-row col">Ranged, Affliction 2</div>
-</div>
-<div class="row">
-<div class="character-sheet-offense-row col">Sleep Gas Pellets +10</div>
-<div class="character-sheet-offense-row col">Ranged, Affliction 4</div>
+<div class="character-sheet-offense-row col">Ranged, Affliction 10</div>
 </div>
 <div class="row">
 <div class="character-sheet-offense-row col">Boomerang +10</div>
-<div class="character-sheet-offense-row col">Ranged, Damage 8</div>
+<div class="character-sheet-offense-row col">Ranged, Damage 10</div>
 </div>
 <div class="row">
 <div class="character-sheet-section-label col">Defense</div>
 </div>
 <div class="row character-sheet-defense-green">
 <div class="col-6 col-sm-3">Dodge</div>
-<div class="col-6 col-sm-3">6+6=12</div>
+<div class="col-6 col-sm-3">6+4=10</div>
 <div class="col-6 col-sm-3">Parry</div>
-<div class="col-6 col-sm-3">12+0=12</div>
+<div class="col-6 col-sm-3">10+0=10</div>
 </div>
 <div class="row character-sheet-defense-white">
 <div class="col-6 col-sm-3">Will</div>
-<div class="col-6 col-sm-3">4+6=10</div>
+<div class="col-6 col-sm-3">3+6=9</div>
 <div class="col-6 col-sm-3">Fortitude</div>
-<div class="col-6 col-sm-3">1+6=7</div>
+<div class="col-6 col-sm-3">1+7=8</div>
 </div>
 <div class="row character-sheet-defense-green">
 <div class="col-6 col-sm-3">Toughness</div>
-<div class="col-6 col-sm-3">8 (5 without Defensive Roll)</div>
+<div class="col-6 col-sm-3">10 (7 without Defensive Roll)</div>
 <div class="col"></div>
 </div>
-<div class="row character-sheet-point-totals">Character Point Totals: Abilities&nbsp;86 &#8226; Powers&nbsp;0 &#8226;
-Advantages&nbsp;13 &#8226; Skills&nbsp;33 &#8226; Defenses&nbsp;18 =&nbsp;150 /&nbsp;150</div>
+<div class="row character-sheet-point-totals">Character Point Totals: Abilities&nbsp;82 &#8226; Powers&nbsp;0 &#8226;
+Advantages&nbsp;19 &#8226; Skills&nbsp;32 &#8226; Defenses&nbsp;17 =&nbsp;150 /&nbsp;150</div>
 </div>
 </form>
 <p><a href="../../../character-creation/point-counter.html?includeJsCharacterFile=..%2Fexamples%2Fcharacters%2Fsuper-heroes%2Fjs%2FCrime%20Fighter.js" id="characterLink">Click here</a>
