@@ -1,6 +1,6 @@
 //rangedAttackName is ignored for some options
 var rangedAttackName = '(Name of Ranged Attack)';
-if (undefined !== queryParameters['names'][0]) rangedAttackName = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) rangedAttackName = queryParameters.names[0];
 
 var json = {
    "Hero": {
@@ -86,7 +86,7 @@ var json = {
    "Information": "Complications, background and other information"
 };
 
-if ('3' === queryParameters['options'][0])
+if ('3' === queryParameters.options[0])
 {
    json.Abilities.Strength += 3;
    json.Abilities.Intellect -= 3;
@@ -117,7 +117,7 @@ if ('3' === queryParameters['options'][0])
       }
    ]);
 }
-else if ('4' === queryParameters['options'][0])
+else if ('4' === queryParameters.options[0])
 {
    json.Abilities.Strength += 3;
    json.Abilities.Intellect -= 3;
@@ -145,7 +145,7 @@ else
       "rank": 5,
       "ability": "Dexterity"
    });
-   var text = ('2' === queryParameters['options'][0]) ? 'Soldier Option (built-in weapon)'
+   var text = ('2' === queryParameters.options[0]) ? 'Soldier Option (built-in weapon)'
       : 'Elemental Option (See Elemental Control for Alternate Effect examples)';
    json.Powers.push({
       "effect": "Damage",

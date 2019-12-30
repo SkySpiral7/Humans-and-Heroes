@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if (undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) expertise = queryParameters.names[0];
 
 var json = {
    "Hero": {

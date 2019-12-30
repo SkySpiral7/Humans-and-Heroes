@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if (undefined !== queryParameters['names'][1]) expertise = queryParameters['names'][1];
+if (undefined !== queryParameters.names[1]) expertise = queryParameters.names[1];
 
 var equipmentAdvantage = {
    "name": "Equipment",
@@ -182,7 +182,7 @@ var json = {
 };
 
 //2 removes these. requirement: this must run when there's no query params
-if ('2' !== queryParameters['options'][0])
+if ('2' !== queryParameters.options[0])
 {
    json.Equipment.push({
       "effect": "Affliction",
@@ -218,7 +218,7 @@ if ('2' !== queryParameters['options'][0])
    });
 }
 
-if ('2' === queryParameters['options'][0])
+if ('2' === queryParameters.options[0])
 {
    equipmentAdvantage.rank -= 10;
    json.Powers.push({
@@ -236,7 +236,7 @@ if ('2' === queryParameters['options'][0])
       "rank": 8
    });
 }
-else if ('3' === queryParameters['options'][0])
+else if ('3' === queryParameters.options[0])
 {
    ++equipmentAdvantage.rank;
    json.Equipment.push({
@@ -250,7 +250,7 @@ else if ('3' === queryParameters['options'][0])
       "rank": 5
    });
 }
-else if ('4' === queryParameters['options'][0])
+else if ('4' === queryParameters.options[0])
 {
    equipmentAdvantage.rank += 3;
    json.Equipment.push({
@@ -265,29 +265,29 @@ else if ('4' === queryParameters['options'][0])
    });
 }
 
-if (queryParameters['checkboxes'][0])
+if (queryParameters.checkboxes[0])
 {
    var benefitText = '(Choose One)';
-   if (undefined !== queryParameters['names'][0]) benefitText = queryParameters['names'][0];
+   if (undefined !== queryParameters.names[0]) benefitText = queryParameters.names[0];
    json.Advantages.push({
       "name": "Benefit",
       "rank": 1,
       "text": benefitText
    });
 }
-if (queryParameters['checkboxes'][1]) json.Advantages.push({"name": "Defensive Attack"});
+if (queryParameters.checkboxes[1]) json.Advantages.push({"name": "Defensive Attack"});
 //0 === queryParameters.checkboxes.length is only possible if there are no queryParameters
-if (queryParameters['checkboxes'][2] || 0 === queryParameters.checkboxes.length)
+if (queryParameters.checkboxes[2] || 0 === queryParameters.checkboxes.length)
    json.Advantages.push({"name": "Jack of All Trades"});
-if (queryParameters['checkboxes'][3]) json.Advantages.push({"name": "Power Attack"});
-if (queryParameters['checkboxes'][4] || 0 === queryParameters.checkboxes.length)
+if (queryParameters.checkboxes[3]) json.Advantages.push({"name": "Power Attack"});
+if (queryParameters.checkboxes[4] || 0 === queryParameters.checkboxes.length)
 {
    json.Advantages.push({
       "name": "Skill Mastery",
       "text": "Stealth"
    });
 }
-if (queryParameters['checkboxes'][5] || 0 === queryParameters.checkboxes.length)
+if (queryParameters.checkboxes[5] || 0 === queryParameters.checkboxes.length)
 {
    json.Advantages.push({
       "name": "Ultimate Effort",

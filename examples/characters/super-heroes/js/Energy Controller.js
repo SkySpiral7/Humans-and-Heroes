@@ -1,5 +1,5 @@
 var energyType = 'Energy';
-if(undefined !== queryParameters['names'][0]) energyType = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) energyType = queryParameters.names[0];
 
 var json = {
    "Hero": {

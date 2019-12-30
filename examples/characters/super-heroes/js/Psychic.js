@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if (undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) expertise = queryParameters.names[0];
 
 var json = {
    "Hero": {
@@ -136,7 +136,7 @@ var json = {
    "Information": "Complications, background and other information"
 };
 
-if ('2' === queryParameters['options'][0])
+if ('2' === queryParameters.options[0])
 {
    json.Powers.push({
       "effect": "Affliction",

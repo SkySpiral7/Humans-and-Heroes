@@ -1,5 +1,9 @@
 var expertise = 'Business';
-if(undefined !== queryParameters['options'][0]) expertise = ['Business', 'Engineering', 'Science'][queryParameters['options'][0] - 1];
+if (undefined !== queryParameters.options[0])
+{
+   var optionIndex = queryParameters.options[0] - 1;
+   expertise = ['Business', 'Engineering', 'Science'][optionIndex];
+}
 
 var json = {
    "Hero": {
