@@ -49,6 +49,8 @@ public class SiteMapCreator
 
    public static void generate()
    {
+      //TODO: have generate call determineMap which is passed to writeToTextFile and writeToHtmlFile
+      //alt: https://stackoverflow.com/a/35473112
       final List<Path> foldersToIgnore = Stream.of(".git", "java", "secret-origins/javascript", "secret-origins/js", "secret-origins/xml")
                                                .map(name -> Paths.get("..", name))
                                                .map(path -> path.toAbsolutePath().normalize())
@@ -91,6 +93,7 @@ public class SiteMapCreator
       stringBuilder.append("</ul>\n");
       String siteMap = stringBuilder.toString();
       siteMap = siteMap.replaceFirst("<ul>", "<ul class=\"tree\">");
+      //TODO: write to site-map.html instead of sys out
       System.out.print(siteMap);
    }
 

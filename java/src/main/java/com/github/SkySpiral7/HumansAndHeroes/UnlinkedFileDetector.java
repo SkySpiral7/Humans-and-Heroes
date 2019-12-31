@@ -1,7 +1,6 @@
 package com.github.SkySpiral7.HumansAndHeroes;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -9,11 +8,8 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import com.github.skySpiral7.java.util.FileIoUtil;
+import java.util.stream.Stream;
 
 public class UnlinkedFileDetector
 {
@@ -24,15 +20,24 @@ public class UnlinkedFileDetector
     */
    public static void detect()
    {
+      final List<String> blackList = Stream.of("../google122b9bf962559bcf.html")
+                                           .map(input -> Paths.get(input).toAbsolutePath().normalize().toFile().getAbsolutePath())
+                                           .collect(Collectors.toList());
       final List<String> hiddenFiles = Arrays.stream(Main.getAllHtmlFiles())
                                              .map(input -> input.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath())
                                              .sorted()
                                              .collect(Collectors.toList());
       hiddenFiles.removeAll(findAllLinkedFiles());
+      hiddenFiles.removeAll(blackList);
 
+      //TODO: use loggers instead of sys out
       System.out.println();
-      System.out.println("Unlinked files:");
-      hiddenFiles.forEach(Main::printFilePath);
+      if (hiddenFiles.isEmpty()) System.out.println("No Unlinked files.");
+      else
+      {
+         System.out.println("Unlinked files:");
+         hiddenFiles.forEach(Main::printFilePath);
+      }
    }
 
    private static Set<String> findAllLinkedFiles()

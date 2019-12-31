@@ -14,6 +14,7 @@ import com.github.skySpiral7.java.util.StringUtil;
 
 public class DeadLinkDetector
 {
+   //static state? ew. TODO: refactor
    private static boolean hasDeadLinks = false;
 
    /**
