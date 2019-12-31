@@ -4,6 +4,19 @@ var originalHref;
 function adjustLink(formId, linkId)
 {
    var form = document.getElementById(formId);
+   var link = document.getElementById(linkId);
+   originalHref = testableAdjustLink(form, link, originalHref);
+}
+
+/**Expectations for mocked elements:
+ * @param {object} form: {elements: {option#: undefined or {value: number}, checkbox#: undefined or {checked:
+ *    boolean}, name#: undefined or {value: string}}}
+ * @param {object} link: {href: string}
+ * @param {string?} paramOriginalHref pass in originalHref
+ * @return {string} new value for originalHref (link was already updated)
+ */
+function testableAdjustLink(form, link, paramOriginalHref)
+{
    var options = [];
    for (var optionIndex = 0; undefined !== form.elements['option' + optionIndex]; ++optionIndex)
    {
@@ -39,7 +52,8 @@ function adjustLink(formId, linkId)
       names = '&names=' + encodeURIComponent(uriComponent);
    }
 
-   var link = document.getElementById(linkId);
-   if (undefined === originalHref) originalHref = link.href;
-   link.href = originalHref + options + checkboxes + names;
+   if (undefined === paramOriginalHref) paramOriginalHref = link.href;
+   link.href = paramOriginalHref + options + checkboxes + names;
+
+   return paramOriginalHref;
 }

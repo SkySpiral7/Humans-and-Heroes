@@ -12,7 +12,7 @@ if (null !== document.getElementById('testResults'))  //false in production to s
    var runnerPath = miscRepo + 'testRunner';
    var unstableSortPath = miscRepo + 'unstableSort';
    jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
-      'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
+      'test/advantageRow', 'test/characterForm', 'test/characterFormParsing', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
       'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
       'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
       'test/testTools', unstableSortPath]);
