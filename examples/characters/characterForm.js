@@ -1,5 +1,5 @@
 'use strict';
-var originalLink;
+var originalHref;
 
 function adjustLink(formId, linkId)
 {
@@ -10,7 +10,8 @@ function adjustLink(formId, linkId)
       options.push(form.elements['option' + optionIndex].value);
    }
    if (0 === options.length) options = '';
-   else options = '&options=' + options;  //comma separated number array
+   //dot separated number array because . isn't escaped
+   else options = '&options=' + options.toString().replace(/,/g, '.');
 
    var checkboxes = [];
    for (var checkboxIndex = 0; undefined !== form.elements['checkbox' + checkboxIndex]; ++checkboxIndex)
@@ -27,10 +28,18 @@ function adjustLink(formId, linkId)
       names.push(form.elements['name' + nameIndex].value);
    }
    if (0 === names.length) names = '';
-   //must stringify because names can contain anything
-   else names = '&names=' + encodeURIComponent(JSON.stringify(names));
+   else
+   {
+      //must stringify because names can contain anything.
+      //likewise can't avoid comma separated but can remove braces
+      var uriComponent = JSON.stringify(names);
+      //using replace /^\[/ then /]$/ is less confusing then /^\[|]$/g which also works
+      //using substring is more simple still (removes first and last characters)
+      uriComponent = uriComponent.substring(1, uriComponent.length - 1);
+      names = '&names=' + encodeURIComponent(uriComponent);
+   }
 
    var link = document.getElementById(linkId);
-   if (undefined === originalLink) originalLink = link.href;
-   link.href = originalLink + options + checkboxes + names;
+   if (undefined === originalHref) originalHref = link.href;
+   link.href = originalHref + options + checkboxes + names;
 }

@@ -3,7 +3,8 @@
 var queryParameters = {};
 var json;
 
-(function (){
+(function(){
+//TODO: make queryParameters parsing into testable function. make test html for option array
 var allParameters = location.search.substring(1).split('&');  //"".substring(1) === "" and "".split('&') === [""]
 for (var i = 0; i < allParameters.length; ++i)
 {
@@ -11,7 +12,7 @@ for (var i = 0; i < allParameters.length; ++i)
    queryParameters[entry[0]] = entry[1];  //entry[1] might be undefined
 }
 if (undefined === queryParameters.options) queryParameters.options = [];
-else queryParameters.options = queryParameters.options.split(',');
+else queryParameters.options = queryParameters.options.split(/\./);
 if (undefined === queryParameters.checkboxes) queryParameters.checkboxes = [];
 else
 {
@@ -24,9 +25,14 @@ else
    queryParameters.checkboxes = JSON.parse('[' + queryParameters.checkboxes + ']');
 }
 if (undefined === queryParameters.names) queryParameters.names = [];
-else queryParameters.names = JSON.parse(decodeURIComponent(queryParameters.names));
-//if there are no query parameters at all then queryParameters === {"": undefined, "options": [], "names": []}
+else queryParameters.names = JSON.parse('[' + decodeURIComponent(queryParameters.names) + ']');
+//if there are no query parameters at all then queryParameters === {"": undefined, options: [], checkboxes: [], names: []}
+//TODO: rename query parameter "names" to "strings"
 
+//checkboxes could be hex and param names could be min-ed. but am I anywhere near 2k URL limit of IE? (then 4k)
+//no: crime fighter was 250 characters. therefore leave like this since it is fully developer readable
+//I see no further possible compression without something like ZIP
+//base64 is decompressed 33% but wouldn't need % escaping so it may improve names
 if (undefined !== queryParameters.loadAjaxCharacterFile)
 {
    var url = decodeURIComponent(queryParameters.loadAjaxCharacterFile);
