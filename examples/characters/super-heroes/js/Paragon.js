@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) expertise = queryParameters.names[0];
 
 var json = {
    "Hero": {
@@ -8,11 +8,11 @@ var json = {
       "image": "../images/Paragon.jpg"
    },
    "Abilities": {
-      "Strength": 12,
+      "Strength": 10,
       "Agility": 3,
-      "Fighting": 8,
+      "Fighting": 10,
       "Dexterity": 3,
-      "Stamina": 12,
+      "Stamina": 10,
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 1
@@ -48,16 +48,16 @@ var json = {
       {
          "effect": "Feature",
          "cost": 2,
-         "text": "Impervious Toughness 6",
+         "text": "Impervious Toughness 5",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 6
+         "rank": 5
       },
       {
          "effect": "Quickness",
-         "text": "",
+         "text": "1 minute task within 6 seconds",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -67,7 +67,7 @@ var json = {
       {
          "effect": "Enhanced Trait",
          "cost": 2,
-         "text": "Lifting Str 14; 410 tons",
+         "text": "Power Lifting: Enhanced Strength 4. Lifting Str 14; 410 tons",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -78,7 +78,7 @@ var json = {
                "text": "to Lifting"
             }
          ],
-         "rank": 2
+         "rank": 4
       }
    ],
    "Equipment": [],
@@ -113,17 +113,17 @@ var json = {
       {
          "name": "Ranged Combat",
          "subtype": "Throwing",
-         "rank": 5,
+         "rank": 7,
          "ability": "Dexterity"
       }
    ],
    "Defenses": {
-      "Dodge": 5,
+      "Dodge": 7,
       "Parry": 0,
-      "Will": 7,
+      "Will": 8,
       "Fortitude": 0
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };

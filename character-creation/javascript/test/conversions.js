@@ -59,7 +59,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
    //blank character (no need to load)
    expected = '# Hero Name\n' +
       'A character for Humans and Heroes v3.' + latestMinorRuleset + '\n' +
-      'PL 0 (transcendence 0)\n' +
+      'PL 1 (transcendence 0)\n' +
       '\n' +
       '## Abilities\n' +
       '* Strength: 0\n' +
@@ -79,7 +79,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +
-      'Grand Total: 0/0\n' +
+      'Grand Total: 0/15\n' +
       'Equipment Points: 0/0\n' +
       '\n' +
       '\n' +
@@ -178,7 +178,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
    Loader.sendData(dataToLoad);
    expected = '# New Name\n' +
       'A character for Humans and Heroes v3.' + latestMinorRuleset + '\n' +
-      'PL 10 (transcendence 0)\n' +
+      'PL 11 (transcendence 0)\n' +
       '\n' +
       '## Abilities\n' +
       '* Strength: 1\n' +
@@ -225,7 +225,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Skill: 2\n' +
       '* Defense: 10\n' +
       '\n' +
-      'Grand Total: 95/150\n' +
+      'Grand Total: 95/165\n' +
       'Equipment Points: 6/10\n' +
       'Unused skill rank: 1\n' +
       '\n' +

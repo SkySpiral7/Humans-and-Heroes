@@ -59,7 +59,7 @@ var json = {
       "Will": 0,
       "Fortitude": 0
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": ""
 };

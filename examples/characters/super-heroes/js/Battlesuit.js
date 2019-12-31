@@ -1,5 +1,9 @@
 var expertise = 'Business';
-if(undefined !== queryParameters['options'][0]) expertise = ['Business', 'Engineering', 'Science'][queryParameters['options'][0] - 1];
+if (undefined !== queryParameters.options[0])
+{
+   var optionIndex = queryParameters.options[0] - 1;
+   expertise = ['Business', 'Engineering', 'Science'][optionIndex];
+}
 
 var json = {
    "Hero": {
@@ -15,7 +19,7 @@ var json = {
       "Stamina": 0,
       "Intellect": 5,
       "Awareness": 1,
-      "Presence": 0
+      "Presence": 1
    },
    "Powers": [
       {
@@ -27,15 +31,15 @@ var json = {
          "Modifiers": [
             {
                "name": "Impervious",
-               "applications": 6
+               "applications": 5
             },
             {
                "name": "Other Flat Flaw",
-               "applications": 22,
+               "applications": 19,
                "text": "Removable (for the whole group and Enhanced Traits)"
             }
          ],
-         "rank": 11
+         "rank": 10
       },
       {
          "effect": "Flight",
@@ -46,7 +50,7 @@ var json = {
          "Modifiers": [
             {
                "name": "Other Flat Flaw",
-               "applications": 4,
+               "applications": 5,
                "text": "Removable (was split because the flat flaw was too big for Armor alone)"
             }
          ],
@@ -169,7 +173,7 @@ var json = {
                "applications": 1
             }
          ],
-         "rank": 12
+         "rank": 10
       }
    ],
    "Equipment": [],
@@ -216,17 +220,17 @@ var json = {
       {
          "name": "Ranged Combat",
          "subtype": "Force Beams",
-         "rank": 6,
+         "rank": 8,
          "ability": "Dexterity"
       }
    ],
    "Defenses": {
       "Dodge": 7,
-      "Parry": 0,
+      "Parry": 2,
       "Will": 8,
       "Fortitude": 5
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };

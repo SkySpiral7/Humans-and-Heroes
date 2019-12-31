@@ -34,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         writeToFiles();
+         UnlinkedFileDetector.detect();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -51,6 +51,7 @@ public class Main
             FileMover.moveFile(new File(oldPath), new File(newPath));
             break;
          case MAP:
+            SiteMapCreator.writeToTextFile();
             SiteMapCreator.generate();
             break;
       }

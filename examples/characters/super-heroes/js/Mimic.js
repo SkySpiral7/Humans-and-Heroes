@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) expertise = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) expertise = queryParameters.names[0];
 
 var json = {
    "Hero": {
@@ -106,7 +106,7 @@ var json = {
       "Will": 6,
       "Fortitude": 6
    },
-   "ruleset": "3.0",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };

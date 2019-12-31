@@ -1,5 +1,5 @@
 var energyType = 'Energy';
-if(undefined !== queryParameters['names'][0]) energyType = queryParameters['names'][0];
+if (undefined !== queryParameters.names[0]) energyType = queryParameters.names[0];
 
 var json = {
    "Hero": {
@@ -49,7 +49,7 @@ var json = {
                "applications": 1
             }
          ],
-         "rank": 12
+         "rank": 10
       },
       {
          "effect": "Nullify",
@@ -153,17 +153,17 @@ var json = {
       {
          "name": "Ranged Combat",
          "subtype": energyType + " Control",
-         "rank": 5,
+         "rank": 7,
          "ability": "Dexterity"
       }
    ],
    "Defenses": {
       "Dodge": 4,
-      "Parry": 0,
+      "Parry": 3,
       "Will": 6,
       "Fortitude": 5
    },
-   "ruleset": "3.10",
+   "ruleset": "3.16",
    "version": 2,
    "Information": "Complications, background and other information"
 };

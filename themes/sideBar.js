@@ -97,6 +97,14 @@ var navigationJson = [
             "link": "character-creation/point-counter.html"
          },
          {
+            "name": "Character Points",
+            "link": "character-creation/character-points.html"
+         },
+         {
+            "name": "Power Level",
+            "link": "character-creation/power-level.html"
+         },
+         {
             "name": "Abilities",
             "link": "character-creation/abilities.html"
          },

@@ -64,7 +64,7 @@ var json = {
       "Will": 4,
       "Fortitude": 2
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": ""
 };

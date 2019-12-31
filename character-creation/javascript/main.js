@@ -36,7 +36,7 @@ function MainObject()
    //private variable section:
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var powerLevel = 0, powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
@@ -44,7 +44,16 @@ function MainObject()
 
    //Single line function section
    this.canUseGodhood=function(){return (transcendence > 0);};
-   this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
+   //does a defensive copy so that yoda conditions function
+   this.getActiveRuleset=function(){return activeRuleset.clone();};
+   this.getCalculations = function ()
+   {
+      return {
+         powerLevel: powerLevel,
+         characterPointsSpent: characterPointsSpent,
+         transcendence: transcendence
+      };
+   };
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
    this.getTranscendence=function(){return transcendence;};
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
@@ -199,22 +208,29 @@ function MainObject()
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
    this.update=function()
    {
-       this._calculateTotal();
+      this._calculateTotal();
 
-       //start by looking at character points which can't be negative
-       powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
+      //start by looking at character points
+      //CP -5 => PL -0 which should be fine
+      //CP 0 => PL 0 rounds up after that.
+      powerLevel = Math.ceil(characterPointsSpent / 15);
+      //min PL is now 1. M&M has min 0 (kinda). old H&H can also use 0
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && powerLevel < 1) powerLevel = 1;
+      //CP -30 => needs to be PL 0 or 1
+      else if(powerLevel < 0) powerLevel = 0;
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
-      if(this.advantageSection.isUsingPettyRules())
-          this._calculatePowerLevelLimitations();
+      if (this.advantageSection.isUsingPettyRules())
+         this._calculatePowerLevelLimitations();
 
-       document.getElementById('power-level').innerHTML = powerLevel;
-       document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
+      document.getElementById('power-level').innerHTML = powerLevel.toString();
+      document.getElementById('grand-total-max').innerHTML = (powerLevel * 15).toString();
       if (activeRuleset.major > 1)
       {
-          transcendence = Math.floor(powerLevel/20);  //gain a transcendence every 20 PL
-          if(transcendence < minimumTranscendence) transcendence = minimumTranscendence;  //don't auto-set below the user requested value
-          this.updateTranscendence();  //to regenerate as needed
+         transcendence = Math.floor(powerLevel / 20);  //gain a transcendence every 20 PL
+         //don't auto-set below the user requested value
+         if (transcendence < minimumTranscendence) transcendence = minimumTranscendence;
+         this.updateTranscendence();  //to regenerate as needed
       }
    };
    /**Calculates initiative and sets the document.*/
@@ -236,8 +252,7 @@ function MainObject()
    /**Calculates and creates the offense section of the document.*/
    this.updateOffense=function()
    {
-      powerLevelAttackEffect = 0;
-      powerLevelPerceptionEffect = 0;
+      powerLevelMaxAttack = powerLevelMaxEffect = powerLevelAttackEffect = powerLevelPerceptionEffect = -Infinity;
       var attackBonus;
       var allOffensiveRows = '';
       derivedValues.Offense = [];
@@ -261,6 +276,8 @@ function MainObject()
             //attackBonus can't be -- so don't need to check powerLevelPerceptionEffect
             if(powerLevelAttackEffect < (attackBonus + strengthValue))
                powerLevelAttackEffect = (attackBonus + strengthValue);
+            if(powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+            if(powerLevelMaxEffect < strengthValue) powerLevelMaxEffect = strengthValue;
 
             derivedValues.Offense.push({skillName: 'Unarmed', attackBonus: attackBonus, range: 'Close',
                effect: 'Damage', rank: strengthValue});
@@ -311,9 +328,14 @@ function MainObject()
             //keep track of the highest values for PL
             //TODO: test for PL?
             effectRank = rowPointer.getRank();
-            if(attackBonus === '--' && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
-            else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus + effectRank))
-               powerLevelAttackEffect = (attackBonus + effectRank);
+            if ('--' === attackBonus && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
+            if ('--' !== attackBonus)
+            {
+               if (powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+               if (powerLevelAttackEffect < (attackBonus + effectRank))
+                  powerLevelAttackEffect = (attackBonus + effectRank);
+            }
+            if (powerLevelMaxEffect < effectRank) powerLevelMaxEffect = effectRank;
 
             derivedValues.Offense.push({skillName: rowPointer.getName(), attackBonus: attackBonus, range: range,
                effect: rowPointer.getEffect(), rank: effectRank});
@@ -341,42 +363,69 @@ function MainObject()
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
    this._calculatePowerLevelLimitations=function()
    {
-       var compareTo;
-       //Skills and Abilities
-       //TODO: ruleset 1.0 has advantages I need to include: Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
-      for (var i=0; i < Data.Ability.names.length; i++)
+      var compareTo;
+      //Skills and Abilities. Skills (which can't be negative) includes abilities even if there are no skills
+      //therefore this covers Abilities just fine (for every ruleset)
+      //TODO: ruleset 1.0 has advantages I need to include:
+      //Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
+      for (var i = 0; i < Data.Ability.names.length; i++)
       {
-          compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
-          compareTo-=10;
-          if(compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
+         compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
+         compareTo -= 10;
+         if (compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
       }
 
-       //Attack and Effect
-       compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16))
+      {
+         //Attack and Effect
+         if(powerLevelMaxAttack > powerLevel) powerLevel = powerLevelMaxAttack;
+         if(powerLevelMaxEffect > powerLevel) powerLevel = powerLevelMaxEffect;
 
-       //Effect without Attack (ie Perception range)
-       compareTo = powerLevelPerceptionEffect;
-       if(compareTo > powerLevel) powerLevel = compareTo;
+         //Defenses
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-       //Dodge and Toughness
-       compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-       //Parry and Toughness
-       compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
 
-       //Fortitude and Will
-       compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
-       compareTo+= this.defenseSection.getByName('Will').getTotalBonus();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Will').getTotalBonus();
+         if (compareTo > powerLevel) powerLevel = compareTo;
+
+         compareTo = this.defenseSection.getMaxToughness();
+         if (compareTo > powerLevel) powerLevel = compareTo;
+      }
+      else
+      {
+         //Attack and Effect
+         compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+
+         //Effect without Attack (ie Perception range)
+         compareTo = powerLevelPerceptionEffect;
+         if (compareTo > powerLevel) powerLevel = compareTo;
+
+         //Dodge and Toughness
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+
+         //Parry and Toughness
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+
+         //Fortitude and Will
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         compareTo += this.defenseSection.getByName('Will').getTotalBonus();
+         compareTo /= 2;
+         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+      }
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this._calculateTotal=function()
