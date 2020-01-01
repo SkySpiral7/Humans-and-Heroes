@@ -1,5 +1,5 @@
 var expertise = '(Choose One)';
-if (undefined !== queryParameters.names[1]) expertise = queryParameters.names[1];
+if (undefined !== queryParameters.strings[1]) expertise = queryParameters.strings[1];
 
 var equipmentAdvantage = {
    "name": "Equipment",
@@ -268,7 +268,7 @@ else if ('4' === queryParameters.options[0])
 if (queryParameters.checkboxes[0])
 {
    var benefitText = '(Choose One)';
-   if (undefined !== queryParameters.names[0]) benefitText = queryParameters.names[0];
+   if (undefined !== queryParameters.strings[0]) benefitText = queryParameters.strings[0];
    json.Advantages.push({
       "name": "Benefit",
       "rank": 1,

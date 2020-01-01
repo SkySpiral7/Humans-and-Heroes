@@ -1,35 +1,12 @@
 'use strict';
 //This file can only be tested by hand
-var queryParameters = {};
+var queryParameters = parseQueryParameters(location.search);
+//json is global here for includeJsCharacterFile's error message
 var json;
 
-(function (){
-var allParameters = location.search.substring(1).split('&');  //"".substring(1) === "" and "".split('&') === [""]
-for (var i = 0; i < allParameters.length; ++i)
-{
-   var entry = allParameters[i].split('=', 2);  //can't have another =
-   queryParameters[entry[0]] = entry[1];  //entry[1] might be undefined
-}
-if (undefined === queryParameters.options) queryParameters.options = [];
-else queryParameters.options = queryParameters.options.split(',');
-if (undefined === queryParameters.checkboxes) queryParameters.checkboxes = [];
-else
-{
-   //checkboxes is binary eg: checkboxes=011000
-   queryParameters.checkboxes = queryParameters.checkboxes
-   .replace(/(.)/g, '$1,')  //add a comma after every number
-   .replace(/,$/, '')  //remove last comma
-   .replace(/0/g, 'false')  //convert 1/0 to true/false
-   .replace(/1/g, 'true');
-   queryParameters.checkboxes = JSON.parse('[' + queryParameters.checkboxes + ']');
-}
-if (undefined === queryParameters.names) queryParameters.names = [];
-else queryParameters.names = JSON.parse(decodeURIComponent(queryParameters.names));
-//if there are no query parameters at all then queryParameters === {"": undefined, "options": [], "names": []}
-
+(function(){
 if (undefined !== queryParameters.loadAjaxCharacterFile)
 {
-   var url = decodeURIComponent(queryParameters.loadAjaxCharacterFile);
    var ajaxRequest = new XMLHttpRequest();
    ajaxRequest.onreadystatechange = function ()
    {
@@ -63,7 +40,7 @@ if (undefined !== queryParameters.loadAjaxCharacterFile)
    try
    {
       //IE11 will throw "Error: Access is denied." here for a Cross origin request being denied
-      ajaxRequest.open('GET', url, true);
+      ajaxRequest.open('GET', queryParameters.loadAjaxCharacterFile, true);
       ajaxRequest.send();
    }
    catch (error)
@@ -75,8 +52,7 @@ if (undefined !== queryParameters.loadAjaxCharacterFile)
 
 else if (undefined !== queryParameters.includeJsCharacterFile)
 {
-   var include = decodeURIComponent(queryParameters.includeJsCharacterFile);
-   document.write('<script type="text/javascript" src="' + include + '"></script>');
+   document.write('<script type="text/javascript" src="' + queryParameters.includeJsCharacterFile + '"></script>');
    document.write('<script type="text/javascript">' +
       'if(undefined === json) alert(\'Failed to load character file.\');' +
       'else Main.load(json);' +
