@@ -66,27 +66,37 @@ function PowerObjectAgnostic(props)
 
    //Onchange section
     /**Onchange function for selecting a power*/
-    this.select=function(){CommonsLibrary.select.call(this, this.setPower, (props.sectionName+'Choices'+state.rowIndex), props.powerListParent);};
+    this.select=function(){CommonsLibrary.select.call(this, this.setPower,
+       (props.sectionName+'Choices'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the base cost (if possible)*/
-    this.changeBaseCost=function(){CommonsLibrary.change.call(this, this.setBaseCost, (props.sectionName+'BaseCost'+state.rowIndex), props.powerListParent);};
-       //won't be called if you can't set base cost
+    //won't be called if you can't set base cost
+    this.changeBaseCost=function(){CommonsLibrary.change.call(this, this.setBaseCost,
+       (props.sectionName+'BaseCost'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the text*/
-    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, (props.sectionName+'Text'+state.rowIndex), props.powerListParent);};
+    this.changeText=function(){CommonsLibrary.change.call(this, this.setText,
+       (props.sectionName+'Text'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the action*/
-    this.selectAction=function(){CommonsLibrary.select.call(this, this.setAction, (props.sectionName+'SelectAction'+state.rowIndex), props.powerListParent);};
-       //won't be called if SelectAction doesn't exists
+    //won't be called if SelectAction doesn't exists
+    this.selectAction=function(){CommonsLibrary.select.call(this, this.setAction,
+       (props.sectionName+'SelectAction'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the range*/
-    this.selectRange=function(){CommonsLibrary.select.call(this, this.setRange, (props.sectionName+'SelectRange'+state.rowIndex), props.powerListParent);};
+    this.selectRange=function(){CommonsLibrary.select.call(this, this.setRange,
+       (props.sectionName+'SelectRange'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the duration*/
-    this.selectDuration=function(){CommonsLibrary.select.call(this, this.setDuration, (props.sectionName+'SelectDuration'+state.rowIndex), props.powerListParent);};
+    this.selectDuration=function(){CommonsLibrary.select.call(this, this.setDuration,
+       (props.sectionName+'SelectDuration'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the user's name for the power*/
-    this.changeName=function(){CommonsLibrary.change.call(this, this.setName, (props.sectionName+'Name'+state.rowIndex), props.powerListParent);};
+    this.changeName=function(){CommonsLibrary.change.call(this, this.setName,
+       (props.sectionName+'Name'+state.rowIndex), props.powerListParent);};
     /**Onchange function for changing the skill name used for the power's attack*/
-    this.changeSkill=function(){CommonsLibrary.change.call(this, this.setSkill, (props.sectionName+'Skill'+state.rowIndex), props.powerListParent);};
+    this.changeSkill=function(){CommonsLibrary.change.call(this, this.setSkill,
+       (props.sectionName+'Skill'+state.rowIndex), props.powerListParent);};
     /**Getter is used for onChange events and for other information gathering*/
-    this.getModifierList=function(){return modifierSection;};  //listed here instead of getter section to match its document location
+    //listed here instead of getter section to match its document location
+    this.getModifierList=function(){return modifierSection;};
     /**Onchange function for changing the rank*/
-    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, (props.sectionName+'Rank'+state.rowIndex), props.powerListParent);};
+    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank,
+       (props.sectionName+'Rank'+state.rowIndex), props.powerListParent);};
 
    //Value setting section
    /**Populates data of the power by using the name (which is validated).

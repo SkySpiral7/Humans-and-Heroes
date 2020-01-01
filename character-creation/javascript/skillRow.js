@@ -5,38 +5,38 @@ Text: changeText(rowIndex);
 Rank: changeRank(rowIndex);
 Select Ability: selectAbility(rowIndex);  //needs to be saved for generating reasons
 */
-function SkillObject(rowIndex)
+function SkillObject(initialRowIndex)
 {
    //private variable section:
-   var name, rank, hasText, text, abilityName, totalBonus;
+   var state, derivedValues;
 
    //Basic getter section (all single line)
-   this.doesHaveText=function(){return hasText;};
-   this.getAbilityName=function(){return abilityName;};
-   this.getName=function(){return name;};
-   this.getRank=function(){return rank;};
-   this.getText=function(){return text;};
-   this.getTotalBonus=function(){return totalBonus;};
+   this.doesHaveText=function(){return derivedValues.hasText;};
+   this.getAbilityName=function(){return state.abilityName;};
+   this.getName=function(){return state.name;};
+   this.getRank=function(){return state.rank;};
+   this.getText=function(){return state.text;};
+   this.getTotalBonus=function(){return derivedValues.totalBonus;};
 
    //Single line function section (ignoring isBlank check)
-   this.isBlank=function(){return (name === undefined);};
+   this.isBlank=function(){return (undefined === state.name);};
    /**Simple setter for totalBonus which is the sum of the ability value and skill rank. Or a string indicator if the ability is --.*/
    this.setTotalBonus=function(bonusGiven)
    {
        if(this.isBlank()) return;
-       totalBonus = bonusGiven;  //number or string
+       derivedValues.totalBonus = bonusGiven;  //number or string
    };
-   this.setRowIndex=function(indexGiven){rowIndex=indexGiven;};
+   this.setRowIndex=function(indexGiven){state.rowIndex=indexGiven;};
 
    //Onchange section
    /**Onchange function for selecting a skill*/
-   this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+rowIndex), Main.skillSection);};
+   this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+state.rowIndex), Main.skillSection);};
    /**Onchange function for changing the text*/
-   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+rowIndex), Main.skillSection);};
+   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+state.rowIndex), Main.skillSection);};
    /**Onchange function for changing the rank*/
-   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+rowIndex), Main.skillSection);};
+   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+state.rowIndex), Main.skillSection);};
    /**Onchange function for selecting an ability*/
-   this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+rowIndex), Main.skillSection);};
+   this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+state.rowIndex), Main.skillSection);};
 
    //Value setting section
    /**Populates data of the skill by using the name (which is validated).
@@ -44,59 +44,59 @@ function SkillObject(rowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setSkill=function(nameGiven)
    {
-       if(!Data.Skill.names.contains(nameGiven)){this.constructor(); return;}
-       name = nameGiven;
-       rank = 1;
-       abilityName = Data.Skill[name].ability;
-       hasText = Data.Skill[name].hasText;
-       if(name === 'Other') text = 'Skill Name and Subtype';  //doesn't exist in v1
-       else if(hasText) text = 'Skill Subtype';
-       else text = undefined;
+       if(!Data.Skill.names.contains(nameGiven)){this._resetValues(); return;}
+       state.name = nameGiven;
+       state.rank = 1;
+       state.abilityName = Data.Skill[state.name].ability;
+       derivedValues.hasText = Data.Skill[state.name].hasText;
+       if(state.name === 'Other') state.text = 'Skill Name and Subtype';  //doesn't exist in v1
+       else if(derivedValues.hasText) state.text = 'Skill Subtype';
+       else state.text = undefined;
    };
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
    {
        if(this.isBlank()) return;
-       if(!hasText) return;  //can only happen when loading
-       text = textGiven.trim();  //trimmed in case it needs to match up with something else
+       if(!derivedValues.hasText) return;  //can only happen when loading
+       state.text = textGiven.trim();  //trimmed in case it needs to match up with something else
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
    {
        if(this.isBlank()) return;
-       rank = sanitizeNumber(rankGiven, 1, 1);
+       state.rank = sanitizeNumber(rankGiven, 1, 1);
    };
    /**Used to set data independent of the document and without calling update. This function takes the ability's name*/
    this.setAbility=function(abilityNameGiven)
    {
        if(this.isBlank()) return;
        if(!Data.Ability.names.contains(abilityNameGiven)) return;  //only happens when loading bad data
-       abilityName = abilityNameGiven;
+       state.abilityName = abilityNameGiven;
    };
 
    //public function section
    /**This creates the page's html (for the row). called by skill section only*/
    this.generate=function()
    {
-      var isBlank = this.isBlank();
-      return HtmlGenerator.skillRow(isBlank, rowIndex, hasText);
+      return HtmlGenerator.skillRow(this.isBlank(), state.rowIndex, derivedValues.hasText);
    };
    /**Get the name of the skill appended with text to determine redundancy*/
    this.getUniqueName=function()
    {
-       if(name === 'Close Combat' || name === 'Ranged Combat') return ('Combat: '+text);  //must not have the same text as each other
-       if(hasText) return (name+': '+text);
-       return name;
+       if(state.name === 'Close Combat' || state.name === 'Ranged Combat') return ('Combat: '+state.text);  //must not have the same text as each other
+       if(derivedValues.hasText) return (state.name+': '+state.text);
+       return state.name;
    };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
-       var json={};
-       json.name=name;
-       if(hasText) json.subtype=text;
-       json.rank=rank;
-       json.ability=abilityName;
-       return json;
+      //don't just clone state: text is different
+      var json = {};
+      json.name = state.name;
+      if (derivedValues.hasText) json.subtype = state.text;
+      json.rank = state.rank;
+      json.ability = state.abilityName;
+      return json;
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
@@ -104,20 +104,22 @@ function SkillObject(rowIndex)
    this.setValues=function()
    {
        if(this.isBlank()) return;  //already set (to default)
-       SelectUtil.setText(('skillChoices'+rowIndex), name);
-       if(hasText) document.getElementById('skillText'+rowIndex).value=text;
-       document.getElementById('skillRank'+rowIndex).value = rank;
-       SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
-       document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;
+       SelectUtil.setText(('skillChoices'+state.rowIndex), state.name);
+       if(derivedValues.hasText) document.getElementById('skillText'+state.rowIndex).value=state.text;
+       document.getElementById('skillRank'+state.rowIndex).value = state.rank;
+       SelectUtil.setText(('skillAbility'+state.rowIndex), state.abilityName);
+       document.getElementById('skillBonus'+state.rowIndex).innerHTML = derivedValues.totalBonus;
    };
    this._constructor=function()
    {
-       name=undefined;
-       rank=undefined;
-       hasText=undefined;
-       text=undefined;
-       abilityName=undefined;
-       totalBonus=undefined;
+      state = {rowIndex: initialRowIndex};
+      this._resetValues();
+   };
+   this._resetValues=function()
+   {
+      //index is not reset
+      state = {rowIndex: state.rowIndex};
+      derivedValues = {};
    };
    //constructor:
    this._constructor();
