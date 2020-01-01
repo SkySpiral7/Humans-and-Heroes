@@ -62,7 +62,7 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
     /**If true then getAutoTotal must be called*/
     this.hasAutoTotal=function(){return modifierSection.hasAutoTotal();};
     /**True if this row has no data*/
-    this.isBlank=function(){return (effect === undefined);};
+    this.isBlank=function(){return (undefined === effect);};
     this.setRowIndex=function(indexGiven){rowIndex=indexGiven; modifierSection.setSectionRowIndex(rowIndex);};
 
    //Onchange section
@@ -254,20 +254,23 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       var possibleRanges = [];
       var possibleDurations = [];
       var modifierHtml = '';
-      var isBlank = this.isBlank();
-      if (!isBlank)  //this is here because the validate methods can't be called during Main.constructor. and don't apply anyway
+      if (!this.isBlank())  //this is here because the validate methods can't be called during Main.constructor. and don't apply anyway
       {
          possibleActions = this._validateAndGetPossibleActions();
          possibleRanges = this._getPossibleRanges();
          possibleDurations = this._validateAndGetPossibleDurations();
          modifierHtml = modifierSection.generate();
       }
-      return HtmlGenerator.powerRow(isBlank, possibleActions, possibleRanges, possibleDurations, powerListParent,
-         rowIndex, sectionName, effect, canSetBaseCost, skillUsed, modifierHtml);
+      var props = {powerListParent:powerListParent, sectionName:sectionName};
+      var state = {rowIndex:rowIndex, effect:effect, skillUsed:skillUsed};
+      var derivedValues = {possibleActions:possibleActions, possibleRanges:possibleRanges, possibleDurations:possibleDurations,
+         canSetBaseCost:canSetBaseCost, modifierHtml:modifierHtml};
+      return HtmlGenerator.powerRow(props, state, derivedValues);
    };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
+      //don't just clone state: skill, cost is different
       var json={};
       json.effect=effect;
       if(canSetBaseCost) json.cost=baseCost;
@@ -275,8 +278,10 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       json.action=action;
       json.range=range;
       json.duration=duration;
+      //checking undefined is redundant but more clear
       if(name !== undefined) json.name=name;
-      if(skillUsed !== undefined) json.skill=skillUsed;  //if no name then there is also no skill but can have name without skill
+      //skill requires name however perception range has name without skill
+      if(skillUsed !== undefined) json.skill=skillUsed;
       json.Modifiers=modifierSection.save();
       json.rank=rank;
       return json;
