@@ -163,15 +163,13 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    /**Creates a new row at the end of the array*/
    this.addRow = function ()
    {
-      rowArray.push(new ModifierObject(
-         {
-            powerRowParent: powerRowParent,
-            modifierListParent: this,
-            initialPowerRowIndex: sectionRowIndex,
-            initialModifierRowIndex: rowArray.length,
-            sectionName: sectionName
-         }
-      ));
+      rowArray.push(new ModifierObject({
+         powerRowParent: powerRowParent,
+         modifierListParent: this,
+         initialPowerRowIndex: sectionRowIndex,
+         initialModifierRowIndex: rowArray.length,
+         sectionName: sectionName
+      }));
    };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this._sanitizeRows=function()

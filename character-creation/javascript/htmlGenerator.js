@@ -113,115 +113,139 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
    htmlString += '   </div>\n';
    return htmlString;
 };
-//TODO: have every html use state, derivedValues
 /*
 values used:
 var props = {powerListParent, sectionName};
 var state = {rowIndex, effect, skillUsed};
 var derivedValues = {possibleActions, possibleRanges, possibleDurations, canSetBaseCost, modifierHtml};
 */
-HtmlGenerator.powerRow=function(props, state, derivedValues)
+HtmlGenerator.powerRow = function (props, state, derivedValues)
 {
+   function idFor(elementLabel)
+   {
+      return props.sectionName + elementLabel + state.rowIndex;
+   }
+
+   function onChangeFor(nextFunctionName)
+   {
+      return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
+   }
+
    var htmlString = '<div class="container-fluid"><div class="row">\n', i;
-   htmlString+='<div class="col-12 col-sm-6 col-xl-auto"><select id="'+props.sectionName+'Choices'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').select();">\n';
-   htmlString+='    <option>Select Power</option>\n';
-   var displayGodhood = (undefined !== Main && props.powerListParent !== Main.equipmentSection && (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
+   htmlString += '<div class="col-12 col-sm-6 col-xl-auto"><select id="' +
+      idFor('Choices') + '" onChange="' + onChangeFor('select') + '">\n';
+   htmlString += '    <option>Select Power</option>\n';
+   var displayGodhood = (undefined !== Main && props.powerListParent !== Main.equipmentSection &&
+      (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
    //equipment can't be god-like so I only need to check power section's switch
-      //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
+   //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
    for (i = 0; i < Data.Power.names.length; ++i)
    {
-      if(displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
-         htmlString+='    <option>'+Data.Power.names[i]+'</option>\n';
+      if (displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
+         htmlString += '    <option>' + Data.Power.names[i] + '</option>\n';
    }
-   htmlString+='</select></div>\n';
-   if(undefined === state.effect) return htmlString + '</div></div>';  //done for blank
+   htmlString += '</select></div>\n';
+   if (undefined === state.effect) return htmlString + '</div></div>';  //done for blank
 
    if (derivedValues.canSetBaseCost)
    {
-      htmlString+='<label class="col">Base Cost per Rank:\n';
-      htmlString+='<input type="text" size="1" id="'+props.sectionName+'BaseCost'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').changeBaseCost();" />';
-      htmlString+='</label>\n';  //end col
+      htmlString += '<label class="col">Base Cost per Rank:\n';
+      htmlString += '<input type="text" size="1" id="' + idFor('BaseCost') + '" onChange="' +
+         onChangeFor('changeBaseCost') + '" />';
+      htmlString += '</label>\n';  //end col
    }
    else
    {
-      htmlString+='<div class="col">Base Cost per Rank:\n';
-      htmlString+='<span id="'+props.sectionName+'BaseCost'+state.rowIndex+'" style="display: inline-block; width: 50px; text-align: center;"></span>\n';
-      htmlString+='</div>\n';  //end col
+      htmlString += '<div class="col">Base Cost per Rank:\n';
+      htmlString += '<span id="' + idFor('BaseCost') + '" style="display: inline-block; width: 50px; ' +
+         'text-align: center;"></span>\n';
+      htmlString += '</div>\n';  //end col
    }
-   htmlString+='</div>\n';  //end row
-   htmlString+='<div class="row"><input type="text" style="width: 100%" id="'+props.sectionName+'Text'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').changeText();" /></div>\n';
-   htmlString+='<div class="row justify-content-center">\n';
+   htmlString += '</div>\n';  //end row
+   htmlString += '<div class="row"><input type="text" style="width: 100%" id="' + idFor('Text') + '" ' +
+      'onChange="' + onChangeFor('changeText') + '" /></div>\n';
+   htmlString += '<div class="row justify-content-center">\n';
 
-   htmlString+='<div class="col-12 col-sm-4 col-lg-3">\n';
-   if(1 === derivedValues.possibleActions.length) htmlString+='Action <span id="'+props.sectionName+'SelectAction'+state.rowIndex+'" style="display: inline-block; width: 85px; text-align: center;"></span>\n';
-      //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
+   htmlString += '<div class="col-12 col-sm-4 col-lg-3">\n';
+   if (1 === derivedValues.possibleActions.length) htmlString += 'Action <span id="' + idFor('SelectAction') + '" ' +
+      'style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+   //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
    else
    {
-      htmlString+='<label>Action';
-      htmlString+='         <select id="'+props.sectionName+'SelectAction'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').selectAction();">\n';
+      htmlString += '<label>Action';
+      htmlString += '         <select id="' + idFor('SelectAction') + '" onChange="' +
+         onChangeFor('selectAction') + '">\n';
       for (i = 0; i < derivedValues.possibleActions.length; ++i)
       {
-         htmlString+='             <option>' + derivedValues.possibleActions[i] + '</option>\n';
+         htmlString += '             <option>' + derivedValues.possibleActions[i] + '</option>\n';
       }
-      htmlString+='         </select></label>\n';
+      htmlString += '         </select></label>\n';
    }
-   htmlString+='      </div>\n';
+   htmlString += '      </div>\n';
 
-   htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
-   if(1 === derivedValues.possibleRanges.length) htmlString+='Range <span id="'+props.sectionName+'SelectRange'+state.rowIndex+'" style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+   htmlString += '      <div class="col-12 col-sm-4 col-lg-3">\n';
+   if (1 === derivedValues.possibleRanges.length) htmlString += 'Range <span id="' + idFor('SelectRange') + '" ' +
+      'style="display: inline-block; width: 90px; text-align: center;"></span>\n';
    else
    {
-      htmlString+='<label>Range';
-      htmlString+='          <select id="'+props.sectionName+'SelectRange'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').selectRange();">\n';
+      htmlString += '<label>Range';
+      htmlString += '          <select id="' + idFor('SelectRange') + '" onChange="' +
+         onChangeFor('selectRange') + '">\n';
       for (i = 0; i < derivedValues.possibleRanges.length; ++i)
       {
-         htmlString+='             <option>' + derivedValues.possibleRanges[i] + '</option>\n';
+         htmlString += '             <option>' + derivedValues.possibleRanges[i] + '</option>\n';
       }
-      htmlString+='         </select></label>\n';
+      htmlString += '         </select></label>\n';
    }
-   htmlString+='      </div>\n';
+   htmlString += '      </div>\n';
 
-   htmlString+='      <div class="col-12 col-sm-4 col-lg-3">\n';
-   if(1 === derivedValues.possibleDurations.length) htmlString+='Duration <span id="'+props.sectionName+'SelectDuration'+state.rowIndex+'" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+   htmlString += '      <div class="col-12 col-sm-4 col-lg-3">\n';
+   if (1 === derivedValues.possibleDurations.length) htmlString += 'Duration <span id="' +
+      idFor('SelectDuration') + '" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
    else
    {
-      htmlString+='<label>Duration';
-      htmlString+='          <select id="'+props.sectionName+'SelectDuration'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').selectDuration();">\n';
+      htmlString += '<label>Duration';
+      htmlString += '          <select id="' + idFor('SelectDuration') + '" onChange="' +
+         onChangeFor('selectDuration') + '">\n';
       for (i = 0; i < derivedValues.possibleDurations.length; ++i)
       {
-         htmlString+='             <option>' + derivedValues.possibleDurations[i] + '</option>\n';
+         htmlString += '             <option>' + derivedValues.possibleDurations[i] + '</option>\n';
       }
-      htmlString+='         </select></label>\n';
+      htmlString += '         </select></label>\n';
    }
-   htmlString+='      </div>\n';
-   htmlString+='   </div>\n';  //row
+   htmlString += '      </div>\n';
+   htmlString += '   </div>\n';  //row
 
-   if (Data.Power[state.effect].isAttack)  //don't check for attack modifier because that's handled by the modifier generate
+   //don't check for attack modifier because that's handled by the modifier generate
+   if (Data.Power[state.effect].isAttack)
    {
-      htmlString+='   <div class="row justify-content-end justify-content-xl-center">\n';
-      htmlString+='      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
-      htmlString+=Data.SharedHtml.powerName(props.sectionName, state.rowIndex);
-      htmlString+='      </div>\n';
-      if(undefined !== state.skillUsed) htmlString+='<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' + Data.SharedHtml.powerSkill(props.sectionName, state.rowIndex) + '</div>';
-      htmlString+='   </div>\n';
+      htmlString += '   <div class="row justify-content-end justify-content-xl-center">\n';
+      htmlString += '      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
+      htmlString += Data.SharedHtml.powerName(props.sectionName, state.rowIndex);
+      htmlString += '      </div>\n';
+      if (undefined !== state.skillUsed) htmlString += '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
+         Data.SharedHtml.powerSkill(props.sectionName, state.rowIndex) + '</div>';
+      htmlString += '   </div>\n';
    }
 
-   htmlString+=derivedValues.modifierHtml;
+   htmlString += derivedValues.modifierHtml;
 
-   htmlString+='<div class="row">\n';
-   htmlString+='<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
-   htmlString+='<input type="text" size="1" id="'+props.sectionName+'Rank'+state.rowIndex+'" onChange="Main.'+props.sectionName+'Section.getRow('+state.rowIndex+').changeRank();" /></label>\n';
-   htmlString+='<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
-   htmlString+='<span id="'+props.sectionName+'TotalCostPerRank'+state.rowIndex+'"></span></div>\n';
-   htmlString+='<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
-   htmlString+='<span id="'+props.sectionName+'FlatModifierCost'+state.rowIndex+'"></span></div>\n';
-   htmlString+='</div>\n';
-   htmlString+='<div class="row"><div class="col">Grand total for ' + props.sectionName.toTitleCase() + ': ';
-   htmlString+='<span id="'+props.sectionName+'RowTotal'+state.rowIndex+'"></span></div>\n';
-   htmlString+='</div>\n';
-   htmlString+='</div><hr />\n\n';
+   htmlString += '<div class="row">\n';
+   htmlString += '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
+   htmlString += '<input type="text" size="1" id="' + idFor('Rank') + '" onChange="' +
+      onChangeFor('changeRank') + '" /></label>\n';
+   htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
+   htmlString += '<span id="' + idFor('TotalCostPerRank') + '"></span></div>\n';
+   htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
+   htmlString += '<span id="' + idFor('FlatModifierCost') + '"></span></div>\n';
+   htmlString += '</div>\n';
+   htmlString += '<div class="row"><div class="col">Grand total for ' + props.sectionName.toTitleCase() + ': ';
+   htmlString += '<span id="' + idFor('RowTotal') + '"></span></div>\n';
+   htmlString += '</div>\n';
+   htmlString += '</div><hr />\n\n';
    return htmlString;
 };
+//TODO: have every html use state, derivedValues
 HtmlGenerator.skillRow=function(isBlank, rowIndex, hasText)
 {
       var htmlString = '<div class="row">\n';

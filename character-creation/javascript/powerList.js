@@ -124,7 +124,14 @@ function PowerListAgnostic(sectionName)
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   this.addRow=function(){rowArray.push(new PowerObjectAgnostic(this, rowArray.length, sectionName));};
+   this.addRow = function ()
+   {
+      rowArray.push(new PowerObjectAgnostic({
+         powerListParent: this,
+         initialRowIndex: rowArray.length,
+         sectionName: sectionName
+      }));
+   };
    /**Updates other sections which depend on power section*/
    this.notifyDependent=function()
    {
