@@ -1,6 +1,6 @@
 'use strict';
 TestSuite.characterForm = {};
-TestSuite.characterForm.adjustLink = function (testState={})
+TestSuite.characterForm.adjustLink = async function (testState={})
 {
    TestRunner.clearResults(testState);
    var assertions = [], form, link, returnValue;
@@ -44,18 +44,18 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: 'empty form no href: returned link href'
       });
 
-   form = {elements: {option0: {value: 2}, checkbox0: {checked: true}, name0: {value: 'j i'}}};
+   form = {elements: {option0: {value: 2}, checkbox0: {checked: true}, string0: {value: 'j i'}}};
    link = {href: 'current'};
    testableAdjustLink(form, link, 'original?a=1');
    assertions.push(
       {
-         Expected: {elements: {option0: {value: 2}, checkbox0: {checked: true}, name0: {value: 'j i'}}},
+         Expected: {elements: {option0: {value: 2}, checkbox0: {checked: true}, string0: {value: 'j i'}}},
          Actual: form,
          Description: '1 each form: form not changed'
       });
    assertions.push(
       {
-         Expected: {href: 'original?a=1&options=2&checkboxes=1&names=%22j%20i%22'},
+         Expected: {href: 'original?a=1&options=2&checkboxes=1&strings=%22j%20i%22'},
          Actual: link,
          Description: '1 each form: link changed'
       });
@@ -70,14 +70,14 @@ TestSuite.characterForm.adjustLink = function (testState={})
       '<input type="radio" name="option0" value="1"/>' +
       '<input type="radio" name="option0" checked value="2"/>' +
       '<input type="checkbox" name="checkbox0" checked />' +
-      '<input type="text" name="name0" value="j i"/>' +
+      '<input type="text" name="string0" value="j i"/>' +
       '</form>');
    link = parseHtml('<a href="current">link</a>');
    //real href needs a full path to avoid being changed to one
    testableAdjustLink(form, link, 'http://a/?b=1');
    assertions.push(
       {
-         Expected: 'http://a/?b=1&options=2&checkboxes=1&names=%22j%20i%22',
+         Expected: 'http://a/?b=1&options=2&checkboxes=1&strings=%22j%20i%22',
          Actual: link.href,
          Description: '1 each real form: link changed'
       });
@@ -114,20 +114,20 @@ TestSuite.characterForm.adjustLink = function (testState={})
       });
 
    form = parseHtml('<form>' +
-      '<input type="text" name="name0" value="j i"/>' +
+      '<input type="text" name="string0" value="j i"/>' +
       //raw: "."
-      '<input type="text" name="name1" value="&quot;.&quot;"/>' +
+      '<input type="text" name="string1" value="&quot;.&quot;"/>' +
       //raw: \"
-      '<input type="text" name="name2" value="\\&quot;"/>' +
+      '<input type="text" name="string2" value="\\&quot;"/>' +
       '</form>');
    link = parseHtml('<a href="current">link</a>');
    testableAdjustLink(form, link, 'http://a/?b=1');
    assertions.push(
       {
-         //decoded (note the stringify): http://a/?b=1&names="j i","\".\"","\\\""
-         Expected: 'http://a/?b=1&names=%22j%20i%22%2C%22%5C%22.%5C%22%22%2C%22%5C%5C%5C%22%22',
+         //decoded (note the stringify): http://a/?b=1&strings="j i","\".\"","\\\""
+         Expected: 'http://a/?b=1&strings=%22j%20i%22%2C%22%5C%22.%5C%22%22%2C%22%5C%5C%5C%22%22',
          Actual: link.href,
-         Description: 'multiple names'
+         Description: 'multiple strings'
       });
 
    return TestRunner.displayResults('TestSuite.characterForm.adjustLink', assertions, testState);

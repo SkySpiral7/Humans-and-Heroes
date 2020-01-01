@@ -1,6 +1,6 @@
 'use strict';
 TestSuite.characterFormParsing = {};
-TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
+TestSuite.characterFormParsing.parseQueryParameters = async function (testState={})
 {
    TestRunner.clearResults(testState);
    var assertions = [], input;
@@ -8,7 +8,7 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
    input = '';
    assertions.push(
       {
-         Expected: {options: [], checkboxes: [], names: []},
+         Expected: {options: [], checkboxes: [], strings: []},
          Actual: parseQueryParameters(input),
          Description: 'no query params => default values'
       });
@@ -16,18 +16,18 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
    input = '?a';
    assertions.push(
       {
-         Expected: {a: undefined, options: [], checkboxes: [], names: []},
+         Expected: {a: undefined, options: [], checkboxes: [], strings: []},
          Actual: parseQueryParameters(input),
          Description: 'query params without value => key without value'
       });
 
-   input = '?ab=Crime%20Fighter.js&bc=23&options=1.5.1&checkboxes=011&names=%22(Choose%20One)%22%2C%22name2%22';
+   input = '?ab=Crime%20Fighter.js&bc=23&options=1.5.1&checkboxes=011&strings=%22(Choose%20One)%22%2C%22string2%22';
    assertions.push(
       {
          Expected: {
             "ab": "Crime Fighter.js",
             "bc": "23",
-            options: ['1', '5', '1'], checkboxes: [false, true, true], names: ["(Choose One)", "name2"]
+            options: ['1', '5', '1'], checkboxes: [false, true, true], strings: ["(Choose One)", "string2"]
          },
          Actual: parseQueryParameters(input),
          Description: 'parse all query params'
@@ -36,7 +36,7 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
    input = '?options=1';
    assertions.push(
       {
-         Expected: {options: ['1'], checkboxes: [], names: []},
+         Expected: {options: ['1'], checkboxes: [], strings: []},
          Actual: parseQueryParameters(input),
          Description: 'just options'
       });
@@ -44,23 +44,23 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
    input = '?checkboxes=1';
    assertions.push(
       {
-         Expected: {options: [], checkboxes: [true], names: []},
+         Expected: {options: [], checkboxes: [true], strings: []},
          Actual: parseQueryParameters(input),
          Description: 'just checkboxes'
       });
 
-   input = '?names=%22a%22';
+   input = '?strings=%22a%22';
    assertions.push(
       {
-         Expected: {options: [], checkboxes: [], names: ["a"]},
+         Expected: {options: [], checkboxes: [], strings: ["a"]},
          Actual: parseQueryParameters(input),
-         Description: 'just names'
+         Description: 'just strings'
       });
 
    return TestRunner.displayResults('TestSuite.characterFormParsing.parseQueryParameters', assertions, testState);
 };
 /**This is an IT to make sure characterForm and characterFormParsing agree on format*/
-TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testState={})
+TestSuite.characterFormParsing.parseQueryParametersFromForm = async function (testState={})
 {
    TestRunner.clearResults(testState);
    var assertions = [], query, form, link;
@@ -78,7 +78,7 @@ TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testStat
    query = link.href.substring('http://a/'.length);
    assertions.push(
       {
-         Expected: {b: '1', options: [], checkboxes: [], names: []},
+         Expected: {b: '1', options: [], checkboxes: [], strings: []},
          Actual: parseQueryParameters(query),
          Description: 'empty'
       });
@@ -87,14 +87,14 @@ TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testStat
       '<input type="radio" name="option0" value="1"/>' +
       '<input type="radio" name="option0" checked value="2"/>' +
       '<input type="checkbox" name="checkbox0" checked />' +
-      '<input type="text" name="name0" value="j i"/>' +
+      '<input type="text" name="string0" value="j i"/>' +
       '</form>');
    link = parseHtml('<a href="current">link</a>');
    testableAdjustLink(form, link, 'http://a/?b=1');
    query = link.href.substring('http://a/'.length);
    assertions.push(
       {
-         Expected: {b: '1', options: ['2'], checkboxes: [true], names: ["j i"]},
+         Expected: {b: '1', options: ['2'], checkboxes: [true], strings: ["j i"]},
          Actual: parseQueryParameters(query),
          Description: '1 each'
       });
@@ -112,7 +112,7 @@ TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testStat
    query = link.href.substring('http://a/'.length);
    assertions.push(
       {
-         Expected: {b: '1', options: ['2', '5', '1'], checkboxes: [], names: []},
+         Expected: {b: '1', options: ['2', '5', '1'], checkboxes: [], strings: []},
          Actual: parseQueryParameters(query),
          Description: 'multiple options'
       });
@@ -127,26 +127,26 @@ TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testStat
    query = link.href.substring('http://a/'.length);
    assertions.push(
       {
-         Expected: {b: '1', options: [], checkboxes: [true, false, false], names: []},
+         Expected: {b: '1', options: [], checkboxes: [true, false, false], strings: []},
          Actual: parseQueryParameters(query),
          Description: 'multiple checkboxes'
       });
 
    form = parseHtml('<form>' +
-      '<input type="text" name="name0" value="j i"/>' +
+      '<input type="text" name="string0" value="j i"/>' +
       //raw: "."
-      '<input type="text" name="name1" value="&quot;.&quot;"/>' +
+      '<input type="text" name="string1" value="&quot;.&quot;"/>' +
       //raw: \"
-      '<input type="text" name="name2" value="\\&quot;"/>' +
+      '<input type="text" name="string2" value="\\&quot;"/>' +
       '</form>');
    link = parseHtml('<a href="current">link</a>');
    testableAdjustLink(form, link, 'http://a/?b=1');
    query = link.href.substring('http://a/'.length);
    assertions.push(
       {
-         Expected: {b: '1', options: [], checkboxes: [], names: ["j i", "\".\"", "\\\""]},
+         Expected: {b: '1', options: [], checkboxes: [], strings: ["j i", "\".\"", "\\\""]},
          Actual: parseQueryParameters(query),
-         Description: 'multiple names'
+         Description: 'multiple strings'
       });
 
    return TestRunner.displayResults('TestSuite.characterFormParsing.parseQueryParametersFromForm', assertions,

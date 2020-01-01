@@ -1,6 +1,6 @@
 //rangedAttackName is ignored for some options
 var rangedAttackName = '(Name of Ranged Attack)';
-if (undefined !== queryParameters.names[0]) rangedAttackName = queryParameters.names[0];
+if (undefined !== queryParameters.strings[0]) rangedAttackName = queryParameters.strings[0];
 
 var json = {
    "Hero": {

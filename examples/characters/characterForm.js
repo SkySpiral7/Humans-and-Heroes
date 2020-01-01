@@ -10,7 +10,7 @@ function adjustLink(formId, linkId)
 
 /**Expectations for mocked elements:
  * @param {object} form: {elements: {option#: undefined or {value: number}, checkbox#: undefined or {checked:
- *    boolean}, name#: undefined or {value: string}}}
+ *    boolean}, string#: undefined or {value: string}}}
  * @param {object} link: {href: string}
  * @param {string?} paramOriginalHref pass in originalHref
  * @return {string} new value for originalHref (link was already updated)
@@ -35,25 +35,25 @@ function testableAdjustLink(form, link, paramOriginalHref)
    if (0 === checkboxes.length) checkboxes = '';
    else checkboxes = '&checkboxes=' + checkboxes.toString().replace(/,/g, '');
 
-   var names = [];
-   for (var nameIndex = 0; undefined !== form.elements['name' + nameIndex]; ++nameIndex)
+   var strings = [];
+   for (var stringIndex = 0; undefined !== form.elements['string' + stringIndex]; ++stringIndex)
    {
-      names.push(form.elements['name' + nameIndex].value);
+      strings.push(form.elements['string' + stringIndex].value);
    }
-   if (0 === names.length) names = '';
+   if (0 === strings.length) strings = '';
    else
    {
-      //must stringify because names can contain anything.
+      //must stringify because strings can contain anything.
       //likewise can't avoid comma separated but can remove braces
-      var uriComponent = JSON.stringify(names);
+      var uriComponent = JSON.stringify(strings);
       //using replace /^\[/ then /]$/ is less confusing then /^\[|]$/g which also works
       //using substring is more simple still (removes first and last characters)
       uriComponent = uriComponent.substring(1, uriComponent.length - 1);
-      names = '&names=' + encodeURIComponent(uriComponent);
+      strings = '&strings=' + encodeURIComponent(uriComponent);
    }
 
    if (undefined === paramOriginalHref) paramOriginalHref = link.href;
-   link.href = paramOriginalHref + options + checkboxes + names;
+   link.href = paramOriginalHref + options + checkboxes + strings;
 
    return paramOriginalHref;
 }
