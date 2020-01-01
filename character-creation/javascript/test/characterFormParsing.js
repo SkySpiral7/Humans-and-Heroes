@@ -8,16 +8,24 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
    input = '';
    assertions.push(
       {
-         Expected: {"": undefined, options: [], checkboxes: [], names: []},
+         Expected: {options: [], checkboxes: [], names: []},
          Actual: parseQueryParameters(input),
          Description: 'no query params => default values'
+      });
+
+   input = '?a';
+   assertions.push(
+      {
+         Expected: {a: undefined, options: [], checkboxes: [], names: []},
+         Actual: parseQueryParameters(input),
+         Description: 'query params without value => key without value'
       });
 
    input = '?ab=Crime%20Fighter.js&bc=23&options=1.5.1&checkboxes=011&names=%22(Choose%20One)%22%2C%22name2%22';
    assertions.push(
       {
          Expected: {
-            "ab": "Crime%20Fighter.js",
+            "ab": "Crime Fighter.js",
             "bc": "23",
             options: ['1', '5', '1'], checkboxes: [false, true, true], names: ["(Choose One)", "name2"]
          },
@@ -51,3 +59,4 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
 
    return TestRunner.displayResults('TestSuite.characterFormParsing.parseQueryParameters', assertions, testState);
 };
+//TODO: IT: make sure read matches write

@@ -7,7 +7,6 @@ var json;
 (function(){
 if (undefined !== queryParameters.loadAjaxCharacterFile)
 {
-   var url = decodeURIComponent(queryParameters.loadAjaxCharacterFile);
    var ajaxRequest = new XMLHttpRequest();
    ajaxRequest.onreadystatechange = function ()
    {
@@ -41,7 +40,7 @@ if (undefined !== queryParameters.loadAjaxCharacterFile)
    try
    {
       //IE11 will throw "Error: Access is denied." here for a Cross origin request being denied
-      ajaxRequest.open('GET', url, true);
+      ajaxRequest.open('GET', queryParameters.loadAjaxCharacterFile, true);
       ajaxRequest.send();
    }
    catch (error)
@@ -53,8 +52,7 @@ if (undefined !== queryParameters.loadAjaxCharacterFile)
 
 else if (undefined !== queryParameters.includeJsCharacterFile)
 {
-   var include = decodeURIComponent(queryParameters.includeJsCharacterFile);
-   document.write('<script type="text/javascript" src="' + include + '"></script>');
+   document.write('<script type="text/javascript" src="' + queryParameters.includeJsCharacterFile + '"></script>');
    document.write('<script type="text/javascript">' +
       'if(undefined === json) alert(\'Failed to load character file.\');' +
       'else Main.load(json);' +
