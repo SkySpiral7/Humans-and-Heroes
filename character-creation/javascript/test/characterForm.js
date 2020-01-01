@@ -44,7 +44,6 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: 'empty form no href: returned link href'
       });
 
-   //TODO: create elements for below for more realistic testing
    form = {elements: {option0: {value: 2}, checkbox0: {checked: true}, name0: {value: 'j i'}}};
    link = {href: 'current'};
    testableAdjustLink(form, link, 'original?a=1');
@@ -61,34 +60,73 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: '1 each form: link changed'
       });
 
-   form = {elements: {option0: {value: 2}, option1: {value: 5}, option2: {value: 1}}};
-   link = {href: 'current'};
-   testableAdjustLink(form, link, 'o?a=1');
+   function parseHtml(htmlString)
+   {
+      return document.createRange()
+      .createContextualFragment(htmlString).firstChild;
+   }
+
+   form = parseHtml('<form action="javascript:void(0);">' +
+      '<input type="radio" name="option0" value="1"/>' +
+      '<input type="radio" name="option0" checked value="2"/>' +
+      '<input type="checkbox" name="checkbox0" checked />' +
+      '<input type="text" name="name0" value="j i"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   //real href needs a full path to avoid being changed to one
+   testableAdjustLink(form, link, 'http://a/?b=1');
    assertions.push(
       {
-         Expected: {href: 'o?a=1&options=2.5.1'},
-         Actual: link,
+         Expected: 'http://a/?b=1&options=2&checkboxes=1&names=%22j%20i%22',
+         Actual: link.href,
+         Description: '1 each real form: link changed'
+      });
+
+   form = parseHtml('<form action="javascript:void(0);">' +
+      '<input type="radio" name="option0" value="7"/>' +
+      '<input type="radio" name="option0" checked value="2"/>' +
+      '<input type="radio" name="option1" value="7"/>' +
+      '<input type="radio" name="option1" checked value="5"/>' +
+      '<input type="radio" name="option2" checked value="1"/>' +
+      '<input type="radio" name="option2" value="7"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   assertions.push(
+      {
+         Expected: 'http://a/?b=1&options=2.5.1',
+         Actual: link.href,
          Description: 'multiple options'
       });
 
-   form = {elements: {checkbox0: {checked: true}, checkbox1: {checked: false}, checkbox2: {checked: false}}};
-   link = {href: 'current'};
-   testableAdjustLink(form, link, 'o?a=1');
+   form = parseHtml('<form action="javascript:void(0);">' +
+      '<input type="checkbox1" name="checkbox0" checked />' +
+      '<input type="checkbox1" name="checkbox1" />' +
+      '<input type="checkbox1" name="checkbox2" />' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
    assertions.push(
       {
-         Expected: {href: 'o?a=1&checkboxes=100'},
-         Actual: link,
+         Expected: 'http://a/?b=1&checkboxes=100',
+         Actual: link.href,
          Description: 'multiple checkboxes'
       });
 
-   form = {elements: {name0: {value: 'j i'}, name1: {value: '"."'}, name2: {value: '\\"'}}};
-   link = {href: 'current'};
-   testableAdjustLink(form, link, 'o?a=1');
+   form = parseHtml('<form action="javascript:void(0);">' +
+      '<input type="text" name="name0" value="j i"/>' +
+      //raw: "."
+      '<input type="text" name="name1" value="&quot;.&quot;"/>' +
+      //raw: \"
+      '<input type="text" name="name2" value="\\&quot;"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
    assertions.push(
       {
-         //decoded (note the stringify): o?a=1&names="j i","\".\"","\\\""
-         Expected: {href: 'o?a=1&names=%22j%20i%22%2C%22%5C%22.%5C%22%22%2C%22%5C%5C%5C%22%22'},
-         Actual: link,
+         //decoded (note the stringify): http://a/?b=1&names="j i","\".\"","\\\""
+         Expected: 'http://a/?b=1&names=%22j%20i%22%2C%22%5C%22.%5C%22%22%2C%22%5C%5C%5C%22%22',
+         Actual: link.href,
          Description: 'multiple names'
       });
 
