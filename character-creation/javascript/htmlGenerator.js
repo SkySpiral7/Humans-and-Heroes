@@ -1,36 +1,39 @@
 'use strict';
 var HtmlGenerator = {};
-HtmlGenerator.advantageRow=function(rowIndex, state, derivedValues)
+HtmlGenerator.advantageRow = function (rowIndex, state, derivedValues)
 {
    var htmlString = '<div class="row">', i;
-   if(state.name === 'Equipment') htmlString+='<div class="col-6 col-lg-4 col-xl-auto"><b id="advantageEquipment">Equipment</b></div>\n';
+   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b id="advantageEquipment">Equipment</b></div>\n';
    else
    {
-      htmlString+='<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-         '<select id="advantageChoices'+rowIndex+'" onChange="Main.advantageSection.getRow('+rowIndex+').select();">\n';
-      htmlString+='    <option>Select Advantage</option>\n';
+      htmlString += '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+         '<select id="advantageChoices' + rowIndex + '" onChange="Main.advantageSection.getRow(' + rowIndex + ').select();">\n';
+      htmlString += '    <option>Select Advantage</option>\n';
       var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
-         //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
-      for (i=0; i < Data.Advantage.names.length; i++)
+      //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
+      for (i = 0; i < Data.Advantage.names.length; i++)
       {
-         if('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
-            htmlString+='    <option>'+Data.Advantage.names[i]+'</option>\n';
+         if ('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
+            htmlString += '    <option>' + Data.Advantage.names[i] + '</option>\n';
       }
-      htmlString+='</select></div>\n';
+      htmlString += '</select></div>\n';
    }
-   if(undefined === state.name) return htmlString + '</div>';  //done
+   if (undefined === state.name) return htmlString + '</div>';  //done for blank
 
-   if(state.name === 'Equipment') htmlString+='<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost <span id="advantageEquipmentRankSpan"></span></div>\n';
+   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost ' +
+      '<span id="advantageEquipmentRankSpan"></span></div>\n';
    //state.rank is always defined but only show this if max rank is > 1
-   else if(derivedValues.hasRank) htmlString+='<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank <input type="text" size="1" id="advantageRank'+rowIndex+'" ' +
-      'onChange="Main.advantageSection.getRow('+rowIndex+').changeRank();" /></label>\n';
+   else if (derivedValues.hasRank) htmlString += '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
+      '<input type="text" size="1" id="advantageRank' + rowIndex + '" ' +
+      'onChange="Main.advantageSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
 
-   if(undefined !== state.text) htmlString+='<div class="col-12 col-sm-6"><input type="text" style="width: 100%" id="advantageText'+rowIndex+'" ' +
-      'onChange="Main.advantageSection.getRow('+rowIndex+').changeText();" /></div>\n';
-   if(derivedValues.costPerRank > 1) htmlString+='<div class="col-auto">=&nbsp;<span id="advantageRowTotal'+rowIndex+'"></span></div>\n';
-   htmlString+='</div>\n';
+   if (undefined !== state.text) htmlString += '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
+      'id="advantageText' + rowIndex + '" ' + 'onChange="Main.advantageSection.getRow(' + rowIndex + ').changeText();" /></div>\n';
+   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + rowIndex + '"></span></div>\n';
+   htmlString += '</div>\n';
    return htmlString;
 };
+//TODO: have every html use state, derivedValues
 HtmlGenerator.modifierRow=function(isBlank, power, powerRowIndex, modifierRowIndex, sectionName, name, costPerRank,
                                    hasRank, rank, hasText, hasAutoTotal, rawTotal)
 {
