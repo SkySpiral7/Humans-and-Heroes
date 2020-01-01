@@ -1,13 +1,13 @@
 'use strict';
 var HtmlGenerator = {};
-HtmlGenerator.advantageRow = function (rowIndex, state, derivedValues)
+HtmlGenerator.advantageRow = function (state, derivedValues)
 {
    var htmlString = '<div class="row">', i;
    if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b id="advantageEquipment">Equipment</b></div>\n';
    else
    {
       htmlString += '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-         '<select id="advantageChoices' + rowIndex + '" onChange="Main.advantageSection.getRow(' + rowIndex + ').select();">\n';
+         '<select id="advantageChoices' + state.index + '" onChange="Main.advantageSection.getRow(' + state.index + ').select();">\n';
       htmlString += '    <option>Select Advantage</option>\n';
       var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
       //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
@@ -24,12 +24,12 @@ HtmlGenerator.advantageRow = function (rowIndex, state, derivedValues)
       '<span id="advantageEquipmentRankSpan"></span></div>\n';
    //state.rank is always defined but only show this if max rank is > 1
    else if (derivedValues.hasRank) htmlString += '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
-      '<input type="text" size="1" id="advantageRank' + rowIndex + '" ' +
-      'onChange="Main.advantageSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
+      '<input type="text" size="1" id="advantageRank' + state.index + '" ' +
+      'onChange="Main.advantageSection.getRow(' + state.index + ').changeRank();" /></label>\n';
 
    if (undefined !== state.text) htmlString += '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText' + rowIndex + '" ' + 'onChange="Main.advantageSection.getRow(' + rowIndex + ').changeText();" /></div>\n';
-   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + rowIndex + '"></span></div>\n';
+      'id="advantageText' + state.index + '" ' + 'onChange="Main.advantageSection.getRow(' + state.index + ').changeText();" /></div>\n';
+   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + state.index + '"></span></div>\n';
    htmlString += '</div>\n';
    return htmlString;
 };
