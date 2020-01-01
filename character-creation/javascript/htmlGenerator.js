@@ -7,7 +7,7 @@ HtmlGenerator.advantageRow = function (state, derivedValues)
    else
    {
       htmlString += '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-         '<select id="advantageChoices' + state.index + '" onChange="Main.advantageSection.getRow(' + state.index + ').select();">\n';
+         '<select id="advantageChoices' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').select();">\n';
       htmlString += '    <option>Select Advantage</option>\n';
       var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
       //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
@@ -24,12 +24,12 @@ HtmlGenerator.advantageRow = function (state, derivedValues)
       '<span id="advantageEquipmentRankSpan"></span></div>\n';
    //state.rank is always defined but only show this if max rank is > 1
    else if (derivedValues.hasRank) htmlString += '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
-      '<input type="text" size="1" id="advantageRank' + state.index + '" ' +
-      'onChange="Main.advantageSection.getRow(' + state.index + ').changeRank();" /></label>\n';
+      '<input type="text" size="1" id="advantageRank' + state.rowIndex + '" ' +
+      'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeRank();" /></label>\n';
 
    if (undefined !== state.text) htmlString += '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText' + state.index + '" ' + 'onChange="Main.advantageSection.getRow(' + state.index + ').changeText();" /></div>\n';
-   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + state.index + '"></span></div>\n';
+      'id="advantageText' + state.rowIndex + '" ' + 'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeText();" /></div>\n';
+   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + state.rowIndex + '"></span></div>\n';
    htmlString += '</div>\n';
    return htmlString;
 };
@@ -43,40 +43,43 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
 {
    function idFor(elementLabel)
    {
-      return props.sectionName+'Modifier'+elementLabel+state.powerRowIndex+'.'+state.modifierRowIndex;
+      return props.sectionName + 'Modifier' + elementLabel + state.powerRowIndex + '.' + state.modifierRowIndex;
    }
-   var onChangePrefix = 'Main.'+props.sectionName+'Section.getModifierRowShort('+state.powerRowIndex+','+state.modifierRowIndex+')';
-   var htmlString='';
-   htmlString+='   <div class="row">\n';  //TODO: confirm html and test
-   htmlString+='      <div class="col-12 col-sm-5 col-lg-4 col-xl-auto">\n';
+
+   var onChangePrefix = 'Main.' + props.sectionName + 'Section.getModifierRowShort(' +
+      state.powerRowIndex + ',' + state.modifierRowIndex + ')';
+   var htmlString = '';
+   htmlString += '   <div class="row">\n';  //TODO: confirm html and test
+   htmlString += '      <div class="col-12 col-sm-5 col-lg-4 col-xl-auto">\n';
    var amReadOnly = ('Selective' === state.name && 'Triggered' === props.power.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
-   if(undefined !== state.name && !amReadOnly) amReadOnly = Data.Modifier[state.name].isReadOnly;
+   if (undefined !== state.name && !amReadOnly) amReadOnly = Data.Modifier[state.name].isReadOnly;
    if (props.power.getEffect() === 'Feature' || !amReadOnly)
    {
-      htmlString+='         <select id="'+idFor('Choices')+'" ' +
-         'onChange="'+onChangePrefix+'.select()">\n';
-      htmlString+='             <option>Select Modifier</option>\n';
-      for (var i=0; i < Data.Modifier.names.length; i++)
+      htmlString += '         <select id="' + idFor('Choices') + '" ' +
+         'onChange="' + onChangePrefix + '.select()">\n';
+      htmlString += '             <option>Select Modifier</option>\n';
+      for (var i = 0; i < Data.Modifier.names.length; i++)
       {
-         if(props.power.getSection() === Main.equipmentSection &&
+         if (props.power.getSection() === Main.equipmentSection &&
             (Data.Modifier.names[i] === 'Removable' || Data.Modifier.names[i] === 'Easily Removable')) continue;
          //equipment has removable built in and can't have the modifiers
-         if(props.power.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
-            htmlString+='             <option>'+Data.Modifier.names[i]+'</option>\n';
+         if (props.power.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
+            htmlString += '             <option>' + Data.Modifier.names[i] + '</option>\n';
       }
-      htmlString+='         </select>\n';
+      htmlString += '         </select>\n';
    }
-   else htmlString+='          <b><span id="'+idFor('Name')+'"></span></b>\n';  //I know I could have the b tag with the id but I don't like that
-   htmlString+='      </div>\n';
-   if(undefined === state.state.name) return htmlString + '   </div>\n';  //done for blank
+   //I know I could have the b tag with the id but I don't like that
+   else htmlString += '          <b><span id="' + idFor('Name') + '"></span></b>\n';
+   htmlString += '      </div>\n';
+   if (undefined === state.name) return htmlString + '   </div>\n';  //done for blank
 
    if (state.name === 'Attack')
    {
-      htmlString+='      <div class="col-12 col-sm-6 col-lg-4">\n';
-      htmlString+=Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex);
-      htmlString+='      </div>\n';
-      if(props.power.getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
+      htmlString += '      <div class="col-12 col-sm-6 col-lg-4">\n';
+      htmlString += Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex);
+      htmlString += '      </div>\n';
+      if (props.power.getRange() !== 'Perception') htmlString += '<div class="col-12 col-sm-6 col-lg-4">' +
          Data.SharedHtml.powerSkill(props.sectionName, state.powerRowIndex) + '</div>';
    }
    else  //attack doesn't have anything in this block so I might as well use else here
@@ -84,26 +87,30 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
       //if hasAutoTotal then hasRank is false
       if (derivedValues.hasRank)
       {
-         if(props.power.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3 col-xl-auto">' +
-            'Cost <span id="'+idFor('RankSpan')+'"></span></div>\n';
+         if (props.power.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) htmlString +=
+            '<div class="col-6 col-sm-3 col-xl-auto">' +
+            'Cost <span id="' + idFor('RankSpan') + '"></span></div>\n';
          //only Feature can change the ranks of these
          else
          {
-            htmlString+='<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications ';
-            htmlString+='<input type="text" size="1" id="'+idFor('Rank')+'" ' +
-               'onChange="'+onChangePrefix+'.changeRank()" />';
-            htmlString+='</label>\n';
+            htmlString += '<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications ';
+            htmlString += '<input type="text" size="1" id="' + idFor('Rank') + '" ' +
+               'onChange="' + onChangePrefix + '.changeRank()" />';
+            htmlString += '</label>\n';
          }
       }
-      if(derivedValues.hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;<input type="text" id="'+idFor('Text')+'" ' +
-         'onChange="'+onChangePrefix+'.changeText()" /></label>\n';
-      if(derivedValues.hasAutoTotal || Math.abs(derivedValues.costPerRank) > 1 || derivedValues.rawTotal !== (derivedValues.costPerRank*state.rank)) htmlString+='<div class="col-auto">' +
-         '=&nbsp;<span id="'+idFor('RowTotal')+'"></span></div>\n';
-      //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,
-      //if total doesn't match then it has had some cost quirk so show the total
-      //yes I know if hasAutoTotal then rawTotal !== (costPerRank*rank) but checking hasAutoTotal is fast and more clear
+      if (derivedValues.hasText) htmlString += '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
+         '&nbsp;<input type="text" id="' + idFor('Text') + '" ' +
+         'onChange="' + onChangePrefix + '.changeText()" /></label>\n';
+      if (derivedValues.hasAutoTotal || Math.abs(derivedValues.costPerRank) > 1
+         || derivedValues.rawTotal !== (derivedValues.costPerRank * state.rank))
+         htmlString += '<div class="col-auto">' +
+            '=&nbsp;<span id="' + idFor('RowTotal') + '"></span></div>\n';
+      //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its
+      // worth, if total doesn't match then it has had some cost quirk so show the total yes I know if hasAutoTotal
+      // then rawTotal !== (costPerRank*rank) but checking hasAutoTotal is fast and more clear
    }
-   htmlString+='   </div>\n';
+   htmlString += '   </div>\n';
    return htmlString;
 };
 HtmlGenerator.powerRow=function(isBlank, possibleActions, possibleRanges, possibleDurations, powerListParent, rowIndex,

@@ -4,7 +4,7 @@ Select Advantage: select();
 Rank: changeRank();
 Text: changeText();
 */
-function AdvantageObject(initialIndex)
+function AdvantageObject(initialRowIndex)
 {
    //private variable section:
    var state, derivedValues;
@@ -20,17 +20,17 @@ function AdvantageObject(initialIndex)
     this.getTotal=function(){return derivedValues.total;};
 
    //Single line function section
-    this.getRowIndex=function(){return state.index;};
-    this.setRowIndex=function(indexGiven){state.index=indexGiven;};
+    this.getRowIndex=function(){return state.rowIndex;};
+    this.setRowIndex=function(indexGiven){state.rowIndex=indexGiven;};
     this.isBlank=function(){return (state.name === undefined);};
 
    //Onchange section
     /**Onchange function for selecting an advantage*/
-    this.select=function(){CommonsLibrary.select.call(this, this.setAdvantage, ('advantageChoices'+state.index), Main.advantageSection);};
+    this.select=function(){CommonsLibrary.select.call(this, this.setAdvantage, ('advantageChoices'+state.rowIndex), Main.advantageSection);};
     /**Onchange function for changing the rank*/
-    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('advantageRank'+state.index), Main.advantageSection);};
+    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('advantageRank'+state.rowIndex), Main.advantageSection);};
     /**Onchange function for changing the text*/
-    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('advantageText'+state.index), Main.advantageSection);};
+    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('advantageText'+state.rowIndex), Main.advantageSection);};
 
    //Value setting section
    /**Populates data of the advantage by using the name (which is validated).
@@ -100,21 +100,20 @@ function AdvantageObject(initialIndex)
    {
        //TODO: should setValues exist at all? no. just have generate populate the values as it creates (closer to react)
        if(this.isBlank()) return;  //already set (to default)
-       if(state.name !== 'Equipment') SelectUtil.setText(('advantageChoices'+state.index), state.name);
+       if(state.name !== 'Equipment') SelectUtil.setText(('advantageChoices'+state.rowIndex), state.name);
 
        //do not connect else with above because non-equipment might also have text
        if(state.name === 'Equipment') document.getElementById('advantageEquipmentRankSpan').innerHTML = state.rank;
-       else if(derivedValues.hasRank) document.getElementById('advantageRank'+state.index).value = state.rank;
+       else if(derivedValues.hasRank) document.getElementById('advantageRank'+state.rowIndex).value = state.rank;
 
-       if(derivedValues.hasText) document.getElementById('advantageText'+state.index).value = state.text;
-       if(derivedValues.costPerRank !== 1) document.getElementById('advantageRowTotal'+state.index).innerHTML = derivedValues.total;
+       if(derivedValues.hasText) document.getElementById('advantageText'+state.rowIndex).value = state.text;
+       if(derivedValues.costPerRank !== 1) document.getElementById('advantageRowTotal'+state.rowIndex).innerHTML = derivedValues.total;
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    this._constructor=function()
    {
-      //TODO: rename back to rowIndex
-      state = {index: initialIndex};
+      state = {rowIndex: initialRowIndex};
       derivedValues = {total: 0};
    };
    //constructor:
