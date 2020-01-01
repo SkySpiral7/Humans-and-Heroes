@@ -59,4 +59,96 @@ TestSuite.characterFormParsing.parseQueryParameters = function (testState={})
 
    return TestRunner.displayResults('TestSuite.characterFormParsing.parseQueryParameters', assertions, testState);
 };
-//TODO: IT: make sure read matches write
+/**This is an IT to make sure characterForm and characterFormParsing agree on format*/
+TestSuite.characterFormParsing.parseQueryParametersFromForm = function (testState={})
+{
+   TestRunner.clearResults(testState);
+   var assertions = [], query, form, link;
+
+   function parseHtml(htmlString)
+   {
+      return document.createRange()
+      .createContextualFragment(htmlString).firstChild;
+   }
+
+   form = parseHtml('<form></form>');
+   link = parseHtml('<a href="current">link</a>');
+   //real href needs a full path to avoid being changed to one
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   query = link.href.substring('http://a/'.length);
+   assertions.push(
+      {
+         Expected: {b: '1', options: [], checkboxes: [], names: []},
+         Actual: parseQueryParameters(query),
+         Description: 'empty'
+      });
+
+   form = parseHtml('<form>' +
+      '<input type="radio" name="option0" value="1"/>' +
+      '<input type="radio" name="option0" checked value="2"/>' +
+      '<input type="checkbox" name="checkbox0" checked />' +
+      '<input type="text" name="name0" value="j i"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   query = link.href.substring('http://a/'.length);
+   assertions.push(
+      {
+         Expected: {b: '1', options: ['2'], checkboxes: [true], names: ["j i"]},
+         Actual: parseQueryParameters(query),
+         Description: '1 each'
+      });
+
+   form = parseHtml('<form>' +
+      '<input type="radio" name="option0" value="7"/>' +
+      '<input type="radio" name="option0" checked value="2"/>' +
+      '<input type="radio" name="option1" value="7"/>' +
+      '<input type="radio" name="option1" checked value="5"/>' +
+      '<input type="radio" name="option2" checked value="1"/>' +
+      '<input type="radio" name="option2" value="7"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   query = link.href.substring('http://a/'.length);
+   assertions.push(
+      {
+         Expected: {b: '1', options: ['2', '5', '1'], checkboxes: [], names: []},
+         Actual: parseQueryParameters(query),
+         Description: 'multiple options'
+      });
+
+   form = parseHtml('<form>' +
+      '<input type="checkbox1" name="checkbox0" checked />' +
+      '<input type="checkbox1" name="checkbox1" />' +
+      '<input type="checkbox1" name="checkbox2" />' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   query = link.href.substring('http://a/'.length);
+   assertions.push(
+      {
+         Expected: {b: '1', options: [], checkboxes: [true, false, false], names: []},
+         Actual: parseQueryParameters(query),
+         Description: 'multiple checkboxes'
+      });
+
+   form = parseHtml('<form>' +
+      '<input type="text" name="name0" value="j i"/>' +
+      //raw: "."
+      '<input type="text" name="name1" value="&quot;.&quot;"/>' +
+      //raw: \"
+      '<input type="text" name="name2" value="\\&quot;"/>' +
+      '</form>');
+   link = parseHtml('<a href="current">link</a>');
+   testableAdjustLink(form, link, 'http://a/?b=1');
+   query = link.href.substring('http://a/'.length);
+   assertions.push(
+      {
+         Expected: {b: '1', options: [], checkboxes: [], names: ["j i", "\".\"", "\\\""]},
+         Actual: parseQueryParameters(query),
+         Description: 'multiple names'
+      });
+
+   return TestRunner.displayResults('TestSuite.characterFormParsing.parseQueryParametersFromForm', assertions,
+      testState);
+};

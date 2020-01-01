@@ -66,7 +66,7 @@ TestSuite.characterForm.adjustLink = function (testState={})
       .createContextualFragment(htmlString).firstChild;
    }
 
-   form = parseHtml('<form action="javascript:void(0);">' +
+   form = parseHtml('<form>' +
       '<input type="radio" name="option0" value="1"/>' +
       '<input type="radio" name="option0" checked value="2"/>' +
       '<input type="checkbox" name="checkbox0" checked />' +
@@ -82,7 +82,7 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: '1 each real form: link changed'
       });
 
-   form = parseHtml('<form action="javascript:void(0);">' +
+   form = parseHtml('<form>' +
       '<input type="radio" name="option0" value="7"/>' +
       '<input type="radio" name="option0" checked value="2"/>' +
       '<input type="radio" name="option1" value="7"/>' +
@@ -99,7 +99,7 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: 'multiple options'
       });
 
-   form = parseHtml('<form action="javascript:void(0);">' +
+   form = parseHtml('<form>' +
       '<input type="checkbox1" name="checkbox0" checked />' +
       '<input type="checkbox1" name="checkbox1" />' +
       '<input type="checkbox1" name="checkbox2" />' +
@@ -113,7 +113,7 @@ TestSuite.characterForm.adjustLink = function (testState={})
          Description: 'multiple checkboxes'
       });
 
-   form = parseHtml('<form action="javascript:void(0);">' +
+   form = parseHtml('<form>' +
       '<input type="text" name="name0" value="j i"/>' +
       //raw: "."
       '<input type="text" name="name1" value="&quot;.&quot;"/>' +
