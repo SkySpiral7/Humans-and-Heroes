@@ -257,10 +257,10 @@ function PowerObjectAgnostic(powerListParent, rowIndex, sectionName)
       var isBlank = this.isBlank();
       if (!isBlank)  //this is here because the validate methods can't be called during Main.constructor. and don't apply anyway
       {
-         var possibleActions = this._validateAndGetPossibleActions();
-         var possibleRanges = this._getPossibleRanges();
-         var possibleDurations = this._validateAndGetPossibleDurations();
-         var modifierHtml = modifierSection.generate();
+         possibleActions = this._validateAndGetPossibleActions();
+         possibleRanges = this._getPossibleRanges();
+         possibleDurations = this._validateAndGetPossibleDurations();
+         modifierHtml = modifierSection.generate();
       }
       return HtmlGenerator.powerRow(isBlank, possibleActions, possibleRanges, possibleDurations, powerListParent,
          rowIndex, sectionName, effect, canSetBaseCost, skillUsed, modifierHtml);

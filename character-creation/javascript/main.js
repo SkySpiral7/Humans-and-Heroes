@@ -21,6 +21,7 @@ function MainObject()
    this.getActiveRuleset=function(){return activeRuleset.clone();};
    this.getCalculations = function ()
    {
+      //TODO: replace getCalculations with getDerivedValues (also in defense)
       return {
          powerLevel: powerLevel,
          characterPointsSpent: characterPointsSpent,

@@ -75,7 +75,13 @@ function AdvantageObject(rowIndex)
    {
       //TODO: passing in isBlank is stupid.
       //TODO: should this take in a single advantage row from save file?
-      return HtmlGenerator.advantageRow(rowIndex, this.isBlank(), name, costPerRank, hasRank, hasText);
+      //rowIndex, {name (undefined if blank), rank, text?}, {costPerRank, hasRank}
+      //since setValues still exists for now the saved row is for future
+      //react: state can't be undefined so the section should render a list with blank row
+      //shorter term: check for undefined name
+      var state = {name: name, rank: rank, text: text};
+      var derivedValues = {costPerRank: costPerRank, hasRank: hasRank};
+      return HtmlGenerator.advantageRow(rowIndex, state, derivedValues);
    };
    /**Get the name of the advantage appended with text to determine redundancy*/
    this.getUniqueName=function()
@@ -97,8 +103,7 @@ function AdvantageObject(rowIndex)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-       //TODO: should setValues exist at all? could have generate populate the values as it creates
-       //TODO: should setValues be in html generator file?
+       //TODO: should setValues exist at all? no. just have generate populate the values as it creates (closer to react)
        if(this.isBlank()) return;  //already set (to default)
        if(name !== 'Equipment') SelectUtil.setText(('advantageChoices'+rowIndex), name);
 
