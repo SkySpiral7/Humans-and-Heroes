@@ -121,8 +121,12 @@ function ModifierObject(modifierListParent, powerRowIndex, modifierRowIndex, sec
    /**This creates the page's html (for the row). called by modifier section only*/
    this.generate=function()
    {
-      return HtmlGenerator.modifierRow(this.isBlank(), this.getPower(), powerRowIndex, modifierRowIndex, sectionName,
-         name, costPerRank, hasRank, rank, hasText, hasAutoTotal, rawTotal);
+      var props = {power: this.getPower(), sectionName: sectionName};
+      var state = {powerRowIndex: powerRowIndex, modifierRowIndex: modifierRowIndex,
+         name: name, rank: rank};
+      var derivedValues = {costPerRank: costPerRank, hasRank: hasRank, hasText: hasText, hasAutoTotal: hasAutoTotal,
+         rawTotal: rawTotal};
+      return HtmlGenerator.modifierRow(props, state, derivedValues);
    };
    /**Get the name of the modifier appended with text to determine redundancy*/
    this.getUniqueName=function(includeText)

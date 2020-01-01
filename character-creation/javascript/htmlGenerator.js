@@ -34,63 +34,71 @@ HtmlGenerator.advantageRow = function (state, derivedValues)
    return htmlString;
 };
 //TODO: have every html use state, derivedValues
-HtmlGenerator.modifierRow=function(isBlank, power, powerRowIndex, modifierRowIndex, sectionName, name, costPerRank,
-                                   hasRank, rank, hasText, hasAutoTotal, rawTotal)
+/*
+props: {power, sectionName};
+state: {powerRowIndex, modifierRowIndex, name, rank};
+derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
+*/
+HtmlGenerator.modifierRow=function(props, state, derivedValues)
 {
-   var totalIndex = powerRowIndex+'.'+modifierRowIndex;
+   function idFor(elementLabel)
+   {
+      return props.sectionName+'Modifier'+elementLabel+state.powerRowIndex+'.'+state.modifierRowIndex;
+   }
+   var onChangePrefix = 'Main.'+props.sectionName+'Section.getModifierRowShort('+state.powerRowIndex+','+state.modifierRowIndex+')';
    var htmlString='';
    htmlString+='   <div class="row">\n';  //TODO: confirm html and test
    htmlString+='      <div class="col-12 col-sm-5 col-lg-4 col-xl-auto">\n';
-   var amReadOnly = ('Selective' === name && 'Triggered' === power.getAction());
+   var amReadOnly = ('Selective' === state.name && 'Triggered' === props.power.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
-   if(undefined !== name && !amReadOnly) amReadOnly = Data.Modifier[name].isReadOnly;
-   if (power.getEffect() === 'Feature' || !amReadOnly)
+   if(undefined !== state.name && !amReadOnly) amReadOnly = Data.Modifier[state.name].isReadOnly;
+   if (props.power.getEffect() === 'Feature' || !amReadOnly)
    {
-      htmlString+='         <select id="'+sectionName+'ModifierChoices'+totalIndex+'" ' +
-         'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').select()">\n';
+      htmlString+='         <select id="'+idFor('Choices')+'" ' +
+         'onChange="'+onChangePrefix+'.select()">\n';
       htmlString+='             <option>Select Modifier</option>\n';
       for (var i=0; i < Data.Modifier.names.length; i++)
       {
-         if(power.getSection() === Main.equipmentSection &&
+         if(props.power.getSection() === Main.equipmentSection &&
             (Data.Modifier.names[i] === 'Removable' || Data.Modifier.names[i] === 'Easily Removable')) continue;
          //equipment has removable built in and can't have the modifiers
-         if(power.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
+         if(props.power.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
             htmlString+='             <option>'+Data.Modifier.names[i]+'</option>\n';
       }
       htmlString+='         </select>\n';
    }
-   else htmlString+='          <b><span id="'+sectionName+'ModifierName'+totalIndex+'"></span></b>\n';  //I know I could have the b tag with the id but I don't like that
+   else htmlString+='          <b><span id="'+idFor('Name')+'"></span></b>\n';  //I know I could have the b tag with the id but I don't like that
    htmlString+='      </div>\n';
-   if(isBlank) return htmlString + '   </div>\n';  //done
+   if(undefined === state.state.name) return htmlString + '   </div>\n';  //done for blank
 
-   if (name === 'Attack')
+   if (state.name === 'Attack')
    {
       htmlString+='      <div class="col-12 col-sm-6 col-lg-4">\n';
-      htmlString+=Data.SharedHtml.powerName(sectionName, powerRowIndex);
+      htmlString+=Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex);
       htmlString+='      </div>\n';
-      if(power.getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
-         Data.SharedHtml.powerSkill(sectionName, powerRowIndex) + '</div>';
+      if(props.power.getRange() !== 'Perception') htmlString+='<div class="col-12 col-sm-6 col-lg-4">' +
+         Data.SharedHtml.powerSkill(props.sectionName, state.powerRowIndex) + '</div>';
    }
    else  //attack doesn't have anything in this block so I might as well use else here
    {
       //if hasAutoTotal then hasRank is false
-      if (hasRank)
+      if (derivedValues.hasRank)
       {
-         if(power.getEffect() !== 'Feature' && Data.Modifier[name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3 col-xl-auto">' +
-            'Cost <span id="'+sectionName+'ModifierRankSpan'+totalIndex+'"></span></div>\n';
+         if(props.power.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) htmlString+='<div class="col-6 col-sm-3 col-xl-auto">' +
+            'Cost <span id="'+idFor('RankSpan')+'"></span></div>\n';
          //only Feature can change the ranks of these
          else
          {
             htmlString+='<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications ';
-            htmlString+='<input type="text" size="1" id="'+sectionName+'ModifierRank'+totalIndex+'" ' +
-               'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeRank()" />';
+            htmlString+='<input type="text" size="1" id="'+idFor('Rank')+'" ' +
+               'onChange="'+onChangePrefix+'.changeRank()" />';
             htmlString+='</label>\n';
          }
       }
-      if(hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;<input type="text" id="'+sectionName+'ModifierText'+totalIndex+'" ' +
-         'onChange="Main.'+sectionName+'Section.getRow('+powerRowIndex+').getModifierList().getRow('+modifierRowIndex+').changeText()" /></label>\n';
-      if(hasAutoTotal || Math.abs(costPerRank) > 1 || rawTotal !== (costPerRank*rank)) htmlString+='<div class="col-auto">' +
-         '=&nbsp;<span id="'+sectionName+'ModifierRowTotal'+totalIndex+'"></span></div>\n';
+      if(derivedValues.hasText) htmlString+='<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;<input type="text" id="'+idFor('Text')+'" ' +
+         'onChange="'+onChangePrefix+'.changeText()" /></label>\n';
+      if(derivedValues.hasAutoTotal || Math.abs(derivedValues.costPerRank) > 1 || derivedValues.rawTotal !== (derivedValues.costPerRank*state.rank)) htmlString+='<div class="col-auto">' +
+         '=&nbsp;<span id="'+idFor('RowTotal')+'"></span></div>\n';
       //auto total must see total (it doesn't show ranks), if costPerRank isn't 1 then show total to show how much its worth,
       //if total doesn't match then it has had some cost quirk so show the total
       //yes I know if hasAutoTotal then rawTotal !== (costPerRank*rank) but checking hasAutoTotal is fast and more clear

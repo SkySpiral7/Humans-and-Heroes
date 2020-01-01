@@ -113,6 +113,7 @@ function AdvantageObject(initialIndex)
    //'private' functions section. Although all public none of these should be called from outside of this object
    this._constructor=function()
    {
+      //TODO: rename back to rowIndex
       state = {index: initialIndex};
       derivedValues = {total: 0};
    };
