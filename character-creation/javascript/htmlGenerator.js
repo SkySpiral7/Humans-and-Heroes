@@ -35,7 +35,7 @@ HtmlGenerator.advantageRow = function (state, derivedValues)
 };
 //TODO: have every html use state, derivedValues
 /*
-props: {power, sectionName};
+props: {powerRowParent, sectionName};
 state: {powerRowIndex, modifierRowIndex, name, rank};
 derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
 */
@@ -51,20 +51,20 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
    var htmlString = '';
    htmlString += '   <div class="row">\n';  //TODO: confirm html and test
    htmlString += '      <div class="col-12 col-sm-5 col-lg-4 col-xl-auto">\n';
-   var amReadOnly = ('Selective' === state.name && 'Triggered' === props.power.getAction());
+   var amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRowParent.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0
    if (undefined !== state.name && !amReadOnly) amReadOnly = Data.Modifier[state.name].isReadOnly;
-   if (props.power.getEffect() === 'Feature' || !amReadOnly)
+   if (props.powerRowParent.getEffect() === 'Feature' || !amReadOnly)
    {
       htmlString += '         <select id="' + idFor('Choices') + '" ' +
          'onChange="' + onChangePrefix + '.select()">\n';
       htmlString += '             <option>Select Modifier</option>\n';
       for (var i = 0; i < Data.Modifier.names.length; i++)
       {
-         if (props.power.getSection() === Main.equipmentSection &&
+         if (props.powerRowParent.getSection() === Main.equipmentSection &&
             (Data.Modifier.names[i] === 'Removable' || Data.Modifier.names[i] === 'Easily Removable')) continue;
          //equipment has removable built in and can't have the modifiers
-         if (props.power.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
+         if (props.powerRowParent.getEffect() === 'Feature' || !Data.Modifier[Data.Modifier.names[i]].isReadOnly)
             htmlString += '             <option>' + Data.Modifier.names[i] + '</option>\n';
       }
       htmlString += '         </select>\n';
@@ -79,7 +79,7 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
       htmlString += '      <div class="col-12 col-sm-6 col-lg-4">\n';
       htmlString += Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex);
       htmlString += '      </div>\n';
-      if (props.power.getRange() !== 'Perception') htmlString += '<div class="col-12 col-sm-6 col-lg-4">' +
+      if (props.powerRowParent.getRange() !== 'Perception') htmlString += '<div class="col-12 col-sm-6 col-lg-4">' +
          Data.SharedHtml.powerSkill(props.sectionName, state.powerRowIndex) + '</div>';
    }
    else  //attack doesn't have anything in this block so I might as well use else here
@@ -87,7 +87,7 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
       //if hasAutoTotal then hasRank is false
       if (derivedValues.hasRank)
       {
-         if (props.power.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) htmlString +=
+         if (props.powerRowParent.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) htmlString +=
             '<div class="col-6 col-sm-3 col-xl-auto">' +
             'Cost <span id="' + idFor('RankSpan') + '"></span></div>\n';
          //only Feature can change the ranks of these

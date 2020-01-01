@@ -86,7 +86,7 @@ function AdvantageObject(initialRowIndex)
    /**Returns a json object of this row's data*/
    this.save=function()
    {
-      //make a copy of state
+      //don't just clone state: rank is different
       var json = {};
       json.name = state.name;
       //don't include rank if there's only 1 possible rank

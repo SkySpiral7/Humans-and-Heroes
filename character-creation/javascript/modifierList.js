@@ -161,7 +161,18 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   this.addRow=function(){rowArray.push(new ModifierObject(this, sectionRowIndex, rowArray.length, sectionName));};
+   this.addRow = function ()
+   {
+      rowArray.push(new ModifierObject(
+         {
+            powerRowParent: powerRowParent,
+            modifierListParent: this,
+            initialPowerRowIndex: sectionRowIndex,
+            initialModifierRowIndex: rowArray.length,
+            sectionName: sectionName
+         }
+      ));
+   };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this._sanitizeRows=function()
    {
