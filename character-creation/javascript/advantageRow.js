@@ -98,16 +98,7 @@ function AdvantageObject(initialRowIndex)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-       //TODO: should setValues exist at all? no. just have generate populate the values as it creates (closer to react)
-       if(this.isBlank()) return;  //already set (to default)
-       if(state.name !== 'Equipment') SelectUtil.setText(('advantageChoices'+state.rowIndex), state.name);
-
-       //do not connect else with above because non-equipment might also have text
-       if(state.name === 'Equipment') document.getElementById('advantageEquipmentRankSpan').innerHTML = state.rank;
-       else if(derivedValues.hasRank) document.getElementById('advantageRank'+state.rowIndex).value = state.rank;
-
-       if(derivedValues.hasText) document.getElementById('advantageText'+state.rowIndex).value = state.text;
-       if(derivedValues.costPerRank !== 1) document.getElementById('advantageRowTotal'+state.rowIndex).innerHTML = derivedValues.total;
+      //no-op until they can all be removed from commons
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object

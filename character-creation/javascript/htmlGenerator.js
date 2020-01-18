@@ -3,34 +3,39 @@ var HtmlGenerator = {};
 HtmlGenerator.advantageRow = function (state, derivedValues)
 {
    var htmlString = '<div class="row">', i;
-   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>\n';
+   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>';
    else
    {
       htmlString += '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-         '<select id="advantageChoices' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').select();">\n';
-      htmlString += '    <option>Select Advantage</option>\n';
+         '<select id="advantageChoices' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').select();">';
+      htmlString += '<option>Select Advantage</option>';
       var displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
       //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
       for (i = 0; i < Data.Advantage.names.length; i++)
       {
          if ('Equipment' !== Data.Advantage.names[i] && (displayGodhood || !Data.Advantage[Data.Advantage.names[i]].isGodhood))
-            htmlString += '    <option>' + Data.Advantage.names[i] + '</option>\n';
+         {
+            htmlString += '<option';
+            if (state.name === Data.Advantage.names[i]) htmlString += ' selected';
+            htmlString += '>' + Data.Advantage.names[i] + '</option>';
+         }
       }
-      htmlString += '</select></div>\n';
+      htmlString += '</select></div>';
    }
    if (undefined === state.name) return htmlString + '</div>';  //done for blank
 
    if (state.name === 'Equipment') htmlString += '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost ' +
-      '<span id="advantageEquipmentRankSpan"></span></div>\n';
+      state.rank + '</div>';
    //state.rank is always defined but only show this if max rank is > 1
    else if (derivedValues.hasRank) htmlString += '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
       '<input type="text" size="1" id="advantageRank' + state.rowIndex + '" ' +
-      'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeRank();" /></label>\n';
+      'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeRank();" value="' + state.rank + '" /></label>';
 
    if (undefined !== state.text) htmlString += '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeText();" /></div>\n';
-   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + state.rowIndex + '"></span></div>\n';
-   htmlString += '</div>\n';
+      'id="advantageText' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeText();" ' +
+      'value="' + state.text + '" /></div>';
+   if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;' + derivedValues.total + '</div>';
+   htmlString += '</div>';
    return htmlString;
 };
 /*
@@ -39,6 +44,7 @@ props: {powerRowParent, sectionName};
 state: {powerRowIndex, modifierRowIndex, name, rank};
 derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
 */
+//TODO: delete setValues. have generate populate the values as it creates (closer to react)
 HtmlGenerator.modifierRow=function(props, state, derivedValues)
 {
    function idFor(elementLabel)

@@ -7,8 +7,8 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
 
    SelectUtil.changeText('equipmentChoices0', 'Feature');
    var expected = '<div class="row">' +
-      '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>\n' +
-      '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost <span id="advantageEquipmentRankSpan">1</span></div>\n' +
+      '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>' +
+      '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost 1</div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'equipment row'});
    Main.equipmentSection.clear();
@@ -16,7 +16,7 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
+      '</select></div>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'blank row'});
@@ -37,23 +37,23 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
+      '</select></div>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'no rank or text'});
    Main.advantageSection.clear();  //regenerates advantageChoices0
 
    SelectUtil.changeText('advantageChoices0', 'Defensive Roll');
+   DomUtil.changeValue('advantageRank0', '3');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
+      '</select></div>'+
       '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
-      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();"></label>\n'+
+      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();" value="3"></label>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank input'});
-   assertions.push({Expected: '1', Actual: document.getElementById('advantageRank0').value, Description: 'rank is set'});
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank'});
    Main.advantageSection.clear();  //regenerates advantageChoices0
 
    //text is tested in 1.0 so that I can set only text
@@ -63,8 +63,8 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
-      '<div class="col-auto">=&nbsp;<span id="advantageRowTotal0">40</span></div>\n'+
+      '</select></div>'+
+      '<div class="col-auto">=&nbsp;40</div>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has total'});
@@ -74,12 +74,12 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
+      '</select></div>'+
       '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
-      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();"></label>\n'+
+      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();" value="1"></label>'+
       '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();"></div>\n'+
-      '<div class="col-auto">=&nbsp;<span id="advantageRowTotal0">2</span></div>\n'+
+      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();" value="Helper Name"></div>'+
+      '<div class="col-auto">=&nbsp;2</div>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank, text, total'});
@@ -90,17 +90,16 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
       '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>\n'+
+      '</select></div>'+
       '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();"></div>\n'+
+      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();" value="Ocean"></div>'+
       '</div>';
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has text'});
-   assertions.push({Expected: 'Ocean', Actual: document.getElementById('advantageText0').value, Description: 'text is set'});
 
-   //TODO: test html generation
     return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };
+//TODO: test html generation
 TestSuite.HtmlGenerator.modifierRow=function(testState={})
 {
    TestRunner.clearResults(testState);
