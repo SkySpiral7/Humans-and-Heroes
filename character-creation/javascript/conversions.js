@@ -113,12 +113,12 @@ function xmlToJson(xmlString)
 
 /**This function converts a json object (of valid internal data) into plain text as markdown and returns it
 This is used to export as plain text since json is used internally*/
-function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
+function jsonToMarkdown(jsonDoc, derivedValues)
 {
    var i;  //loop variable used throughout
    var markdownString='# ' + jsonDoc.Hero.name + '\n';
    markdownString+='A character for Humans and Heroes v' + jsonDoc.ruleset+'\n';
-   markdownString+='PL ' + powerLevel;
+   markdownString+='PL ' + derivedValues.powerLevel;
    if(undefined !== jsonDoc.Hero.transcendence) markdownString+=' (transcendence ' + jsonDoc.Hero.transcendence + ')';
    markdownString+='\n\n';
 
@@ -181,8 +181,8 @@ function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
    if(0 !== Main.advantageSection.getTotal()) markdownString+='* Advantage: '+Main.advantageSection.getTotal()+'\n';
    if(0 !== Main.skillSection.getTotal()) markdownString+='* Skill: '+Math.ceil(Main.skillSection.getTotal())+'\n';
    if(0 !== Main.defenseSection.getTotal()) markdownString+='* Defense: '+Main.defenseSection.getTotal()+'\n';
-   if(0 !== characterPointsSpent) markdownString+='\n';
-   markdownString+='Grand Total: '+Math.ceil(characterPointsSpent)+'/'+(powerLevel * 15)+'\n';
+   if(0 !== derivedValues.characterPointsSpent) markdownString+='\n';
+   markdownString+='Grand Total: '+Math.ceil(derivedValues.characterPointsSpent)+'/'+(derivedValues.powerLevel * 15)+'\n';
    markdownString+='Equipment Points: '+Main.equipmentSection.getTotal()+'/'+Main.advantageSection.getEquipmentMaxTotal()+'\n';
    //if skill total contains a half point
    if(0 !== Main.skillSection.getTotal() % 1) markdownString+='Unused skill rank: 1\n';  //it can only be 1 or 0

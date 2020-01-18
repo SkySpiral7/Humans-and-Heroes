@@ -8,8 +8,8 @@ function MainObject()
 {
    //private variable section:
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
-   var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevel = 0, powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
+   var powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
@@ -19,17 +19,9 @@ function MainObject()
    this.canUseGodhood=function(){return (transcendence > 0);};
    //does a defensive copy so that yoda conditions function
    this.getActiveRuleset=function(){return activeRuleset.clone();};
-   this.getCalculations = function ()
-   {
-      //TODO: replace getCalculations with getDerivedValues (also in defense)
-      return {
-         powerLevel: powerLevel,
-         characterPointsSpent: characterPointsSpent,
-         transcendence: transcendence
-      };
-   };
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
    this.getTranscendence=function(){return transcendence;};
+   //clone is needed for tests
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
    /**This sets the code-box with the saved text.*/
    this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
@@ -85,7 +77,7 @@ function MainObject()
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
-      derivedValues = {};
+      this._resetDerivedValues();
       document.getElementById('hero-name').value = 'Hero Name';
       document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
       this.abilitySection.clear();
@@ -106,7 +98,7 @@ function MainObject()
    this.exportToMarkdown=function()
    {
       //TODO: store all UI values after calc so that they can be exported or at least defense, skills, offense
-      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, characterPointsSpent);
+      document.getElementById('code-box').value = jsonToMarkdown(this.save(), derivedValues);
    };
    /**Loads the file's data*/
    this.loadFile=function()
@@ -187,21 +179,21 @@ function MainObject()
       //start by looking at character points
       //CP -5 => PL -0 which should be fine
       //CP 0 => PL 0 rounds up after that.
-      powerLevel = Math.ceil(characterPointsSpent / 15);
+      derivedValues.powerLevel = Math.ceil(derivedValues.characterPointsSpent / 15);
       //min PL is now 1. M&M has min 0 (kinda). old H&H can also use 0
-      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && powerLevel < 1) powerLevel = 1;
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && derivedValues.powerLevel < 1) derivedValues.powerLevel = 1;
       //CP -30 => needs to be PL 0 or 1
-      else if(powerLevel < 0) powerLevel = 0;
+      else if(derivedValues.powerLevel < 0) derivedValues.powerLevel = 0;
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
       if (this.advantageSection.isUsingPettyRules())
          this._calculatePowerLevelLimitations();
 
-      document.getElementById('power-level').innerHTML = powerLevel.toString();
-      document.getElementById('grand-total-max').innerHTML = (powerLevel * 15).toString();
+      document.getElementById('power-level').innerHTML = derivedValues.powerLevel.toString();
+      document.getElementById('grand-total-max').innerHTML = (derivedValues.powerLevel * 15).toString();
       if (activeRuleset.major > 1)
       {
-         transcendence = Math.floor(powerLevel / 20);  //gain a transcendence every 20 PL
+         transcendence = Math.floor(derivedValues.powerLevel / 20);  //gain a transcendence every 20 PL
          //don't auto-set below the user requested value
          if (transcendence < minimumTranscendence) transcendence = minimumTranscendence;
          this.updateTranscendence();  //to regenerate as needed
@@ -346,79 +338,79 @@ function MainObject()
       {
          compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
          compareTo -= 10;
-         if (compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;  //won't replace if compareTo is negative
       }
 
       if (activeRuleset.isGreaterThanOrEqualTo(3, 16))
       {
          //Attack and Effect
-         if(powerLevelMaxAttack > powerLevel) powerLevel = powerLevelMaxAttack;
-         if(powerLevelMaxEffect > powerLevel) powerLevel = powerLevelMaxEffect;
+         if(powerLevelMaxAttack > derivedValues.powerLevel) derivedValues.powerLevel = powerLevelMaxAttack;
+         if(powerLevelMaxEffect > derivedValues.powerLevel) derivedValues.powerLevel = powerLevelMaxEffect;
 
          //Defenses
          compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
          compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
          compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
          compareTo = this.defenseSection.getByName('Will').getTotalBonus();
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
          compareTo = this.defenseSection.getMaxToughness();
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
       }
       else
       {
          //Attack and Effect
          compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
          compareTo /= 2;
-         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);  //round up
 
          //Effect without Attack (ie Perception range)
          compareTo = powerLevelPerceptionEffect;
-         if (compareTo > powerLevel) powerLevel = compareTo;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
          //Dodge and Toughness
          compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
          compareTo += this.defenseSection.getMaxToughness();
          compareTo /= 2;
-         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
 
          //Parry and Toughness
          compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
          compareTo += this.defenseSection.getMaxToughness();
          compareTo /= 2;
-         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
 
          //Fortitude and Will
          compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
          compareTo += this.defenseSection.getByName('Will').getTotalBonus();
          compareTo /= 2;
-         if (compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
       }
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this._calculateTotal=function()
    {
-       characterPointsSpent = 0;
-       document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
-       characterPointsSpent += this.abilitySection.getTotal();
-       document.getElementById('power-total').innerHTML = this.powerSection.getTotal();
-       characterPointsSpent += this.powerSection.getTotal();
-       document.getElementById('equipment-points-used').innerHTML = this.equipmentSection.getTotal();
-       document.getElementById('equipment-points-max').innerHTML = this.advantageSection.getEquipmentMaxTotal();
-       //the character points spent for equipment points is accounted for in the advantage section
-       document.getElementById('advantage-total').innerHTML = this.advantageSection.getTotal();
-       characterPointsSpent += this.advantageSection.getTotal();
-       document.getElementById('skill-total').innerHTML = this.skillSection.getTotal();
-       characterPointsSpent += this.skillSection.getTotal();
-       document.getElementById('defense-total').innerHTML = this.defenseSection.getTotal();
-       characterPointsSpent += this.defenseSection.getTotal();
-       document.getElementById('grand-total-used').innerHTML = characterPointsSpent;
+      derivedValues.characterPointsSpent = 0;
+      document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
+      derivedValues.characterPointsSpent += this.abilitySection.getTotal();
+      document.getElementById('power-total').innerHTML = this.powerSection.getTotal();
+      derivedValues.characterPointsSpent += this.powerSection.getTotal();
+      document.getElementById('equipment-points-used').innerHTML = this.equipmentSection.getTotal();
+      document.getElementById('equipment-points-max').innerHTML = this.advantageSection.getEquipmentMaxTotal();
+      //the character points spent for equipment points is accounted for in the advantage section
+      document.getElementById('advantage-total').innerHTML = this.advantageSection.getTotal();
+      derivedValues.characterPointsSpent += this.advantageSection.getTotal();
+      document.getElementById('skill-total').innerHTML = this.skillSection.getTotal();
+      derivedValues.characterPointsSpent += this.skillSection.getTotal();
+      document.getElementById('defense-total').innerHTML = this.defenseSection.getTotal();
+      derivedValues.characterPointsSpent += this.defenseSection.getTotal();
+      document.getElementById('grand-total-used').innerHTML = derivedValues.characterPointsSpent;
    };
    /**Given an older json document, this function converts it to the newest document format.*/
    this._convertDocument=function(jsonDoc)
@@ -595,6 +587,15 @@ function MainObject()
       var jsonDoc = this.save();
       var fileString = JSON.stringify(jsonDoc);
       return fileString;
+   };
+   //TODO: move private functions together
+   this._resetDerivedValues=function()
+   {
+      derivedValues = {
+         characterPointsSpent: -Infinity,
+         powerLevel: -Infinity,
+         Offense: []
+      };
    };
    this._constructor=function()
    {
