@@ -507,12 +507,16 @@ function MainObject()
       this.advantageSection.load(jsonDoc.Advantages);
       this.skillSection.load(jsonDoc.Skills);
       this.defenseSection.load(jsonDoc.Defenses);
-      if ('' !== document.getElementById('code-box').value)
+      if (undefined === mockMessenger)
       {
-         location.hash = '#code-box';  //scroll to the code-box if there's an error
-         alert('An error has occurred, see text box for details.');  //won't trigger in test because messageUser won't write to box
+         if ('' !== document.getElementById('code-box').value)
+         {
+            location.hash = '#code-box';  //scroll to the code-box if there's an error
+            //wouldn't trigger in test anyway because messageUser won't write to box
+            alert('An error has occurred, see text box for details.');
+         }
+         else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
       }
-      else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
       amLoading = false;
    };
    /**This function loads the document according to the text string given.*/
