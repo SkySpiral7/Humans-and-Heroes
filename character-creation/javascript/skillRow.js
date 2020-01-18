@@ -78,7 +78,7 @@ function SkillObject(initialRowIndex)
    /**This creates the page's html (for the row). called by skill section only*/
    this.generate=function()
    {
-      return HtmlGenerator.skillRow(this.isBlank(), state.rowIndex, derivedValues.hasText);
+      return HtmlGenerator.skillRow(state, derivedValues);
    };
    /**Get the name of the skill appended with text to determine redundancy*/
    this.getUniqueName=function()
