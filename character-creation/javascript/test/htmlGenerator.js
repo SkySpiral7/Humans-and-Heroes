@@ -2,83 +2,103 @@
 TestSuite.HtmlGenerator={};
 TestSuite.HtmlGenerator.advantageRow=function(testState={})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
+   var assertions=[];
 
-    var assertions=[];
-    var actionTaken='Initial';
-    assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Equipment'), Description: actionTaken+': Advantage Row exists but doesn\'t have Equipment'});
-    //TODO: this test is now less useful
-    //TODO: examine what should be tested in each
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Ultimate Effort'), Description: actionTaken+': Advantage Row has (last) Ultimate Effort'});
-    assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row doesn\'t have (first Godhood) Beyond Mortal'});
+   SelectUtil.changeText('equipmentChoices0', 'Feature');
+   var expected = '<div class="row">' +
+      '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>\n' +
+      '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost <span id="advantageEquipmentRankSpan">1</span></div>\n' +
+      '</div>';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'equipment row'});
+   Main.equipmentSection.clear();
 
-    try{
-    actionTaken='Set Godhood'; DomUtil.changeValue('Strength', 100);
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row now has (first) Beyond Mortal'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me'), Description: actionTaken+': And has (last) Your Petty Rules Don\'t Apply to Me'});
-    actionTaken='Clear Godhood'; DomUtil.changeValue('Strength', 0);
-    assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: actionTaken+': Advantage Row Godhood removed'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'blank row'});
+   Main.advantageSection.clear();  //to regenerate advantageChoices0
 
-    try{
-    actionTaken='Padded Equipment Row Test'; SelectUtil.changeText('advantageChoices0', 'Ultimate Effort'); SelectUtil.changeText('equipmentChoices0', 'Feature'); DomUtil.changeValue('equipmentRank0', 10); SelectUtil.changeText('advantageChoices2', Data.Advantage.names[0]);
-    assertions.push({Expected: 'Equipment', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is Equipment'});
-    assertions.push({Expected: 'Ultimate Effort', Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then Ultimate Effort'});
-    assertions.push({Expected: Data.Advantage.names[0], Actual: Main.advantageSection.getRow(2).getName(), Description: actionTaken+': Then '+Data.Advantage.names[0]});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(3).isBlank(), Description: actionTaken+': Then blank'});
+   assertions.push({Expected: 'Select Advantage', Actual: document.getElementById('advantageChoices0').value, Description: 'initial: default value'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Equipment'), Description: 'initial: Equipment not in select'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Ultimate Effort'), Description: 'initial: has (last advantage) Ultimate Effort'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: 'initial: no (first Godhood) Beyond Mortal'});
 
-    assertions.push({Expected: null, Actual: document.getElementById('advantageChoices0'), Description: actionTaken+': Equipment select id doesn\'t exist'});
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices1'), Description: actionTaken+': 2nd Row is a select'});
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices2'), Description: actionTaken+': 3rd row is a select'});
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices3'), Description: actionTaken+': 4th row is a select'});
-    assertions.push({Expected: 'Equipment', Actual: document.getElementById('advantageEquipment').innerHTML, Description: actionTaken+': 2nd Row says equipment'});
+   DomUtil.changeValue('Strength', 100);  //set godhood
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: 'godhood: has (first) Beyond Mortal'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me'), Description: 'godhood: has (last) Your Petty Rules Don\'t Apply to Me'});
+   DomUtil.changeValue('Strength', 0);  //clear godhood
 
-    assertions.push({Expected: '2', Actual: document.getElementById('advantageEquipmentRankSpan').innerHTML, Description: actionTaken+': Equipment row is rank 2'});
-    assertions.push({Expected: null, Actual: document.getElementById('advantageRank2'), Description: actionTaken+': Equipment rank input doesn\'t exist'});
+   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   assertions.push({Expected: 'Diehard', Actual: document.getElementById('advantageChoices0').value, Description: 'select set to value'});
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'no rank or text'});
+   Main.advantageSection.clear();  //regenerates advantageChoices0
 
-    actionTaken='Cleared Equipment'; Main.equipmentSection.clear();
-    assertions.push({Expected: 'Ultimate Effort', Actual: Main.advantageSection.getRow(0).getName(), Description: actionTaken+': First Advantage Row is Ultimate Effort'});
-    assertions.push({Expected: Data.Advantage.names[0], Actual: Main.advantageSection.getRow(1).getName(), Description: actionTaken+': Then '+Data.Advantage.names[0]});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(2).isBlank(), Description: actionTaken+': Then blank'});
+   SelectUtil.changeText('advantageChoices0', 'Defensive Roll');
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
+      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();"></label>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank input'});
+   assertions.push({Expected: '1', Actual: document.getElementById('advantageRank0').value, Description: 'rank is set'});
+   Main.advantageSection.clear();  //regenerates advantageChoices0
 
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices0'), Description: actionTaken+': First row is a select'});
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices1'), Description: actionTaken+': 2nd row is a select'});
-    assertions.push({Expected: true, Actual: SelectUtil.isSelect('advantageChoices2'), Description: actionTaken+': 3rd row is a select'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
+   //text is tested in 1.0 so that I can set only text
 
-    try{
-    actionTaken='Pre Defensive Roll'; Main.advantageSection.clear();
-    assertions.push({Expected: null, Actual: document.getElementById('advantageRank0'), Description: actionTaken+': Advantage Rank doesn\'t exist'});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Advantage section is blank'});
+   DomUtil.changeValue('Strength', 100);  //set godhood
+   SelectUtil.changeText('advantageChoices0', 'Let There Be');
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '<div class="col-auto">=&nbsp;<span id="advantageRowTotal0">40</span></div>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has total'});
+   Main.clear();  //regenerates advantageChoices0
 
-    actionTaken='Set Defensive Roll'; SelectUtil.changeText('advantageChoices0', 'Defensive Roll');
-    assertions.push({Expected: '1', Actual: document.getElementById('advantageRank0').value, Description: actionTaken+': Advantage rank was created with a value of 1'});
-    actionTaken='Set Diehard'; SelectUtil.changeText('advantageChoices0', 'Diehard');
-    assertions.push({Expected: null, Actual: document.getElementById('advantageRank0'), Description: actionTaken+': Advantage rank was removed'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
+      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();"></label>\n'+
+      '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
+      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();"></div>\n'+
+      '<div class="col-auto">=&nbsp;<span id="advantageRowTotal0">2</span></div>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank, text, total'});
 
-    try{
-    actionTaken='Pre Languages'; Main.advantageSection.clear();
-    assertions.push({Expected: null, Actual: document.getElementById('advantageText0'), Description: actionTaken+': Advantage text doesn\'t exist'});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Advantage section is blank'});
+   Main.setRuleset(1,0);
+   SelectUtil.changeText('advantageChoices0', 'Favored Environment');
+   DomUtil.changeValue('advantageText0', 'Ocean');
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
+      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
+      '</select></div>\n'+
+      '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
+      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();"></div>\n'+
+      '</div>';
+   document.getElementById('advantageChoices0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has text'});
+   assertions.push({Expected: 'Ocean', Actual: document.getElementById('advantageText0').value, Description: 'text is set'});
 
-    actionTaken='Set Languages'; SelectUtil.changeText('advantageChoices0', 'Languages');
-    assertions.push({Expected: Data.Advantage['Languages'].defaultText, Actual: document.getElementById('advantageText0').value, Description: actionTaken+': Advantage text was created with default text'});
-    actionTaken='Set Diehard'; SelectUtil.changeText('advantageChoices0', 'Diehard');
-    assertions.push({Expected: null, Actual: document.getElementById('advantageText0'), Description: actionTaken+': Advantage text was removed'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
-
-    try{
-    actionTaken='Pre Lucky'; Main.advantageSection.clear();
-    assertions.push({Expected: null, Actual: document.getElementById('advantageRowTotal0'), Description: actionTaken+': Advantage row total doesn\'t exist'});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(0).isBlank(), Description: actionTaken+': Advantage section is blank'});
-
-    actionTaken='Set Lucky'; SelectUtil.changeText('advantageChoices0', 'Lucky');
-    assertions.push({Expected: Data.Advantage['Lucky'].costPerRank.toString(), Actual: document.getElementById('advantageRowTotal0').innerHTML, Description: actionTaken+': Advantage row total was created with default value'});
-    actionTaken='Set Diehard'; SelectUtil.changeText('advantageChoices0', 'Diehard');
-    assertions.push({Expected: null, Actual: document.getElementById('advantageRowTotal0'), Description: actionTaken+': Advantage row total was removed'});
-    } catch(e){assertions.push({Error: e, Description: actionTaken});}
-
+   //TODO: test html generation
     return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };
 TestSuite.HtmlGenerator.modifierRow=function(testState={})
@@ -308,7 +328,6 @@ TestSuite.HtmlGenerator.powerRow=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Duration'});}
 
    //ADD TESTS: Data.Power[effect].isAttack
-   //TODO: TestSuite sections should exist for generate and set all so that the gui logic is tested
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.powerRow', assertions, testState);
 };

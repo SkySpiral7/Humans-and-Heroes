@@ -3,7 +3,7 @@ var HtmlGenerator = {};
 HtmlGenerator.advantageRow = function (state, derivedValues)
 {
    var htmlString = '<div class="row">', i;
-   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b id="advantageEquipment">Equipment</b></div>\n';
+   if (state.name === 'Equipment') htmlString += '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>\n';
    else
    {
       htmlString += '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
@@ -28,7 +28,7 @@ HtmlGenerator.advantageRow = function (state, derivedValues)
       'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeRank();" /></label>\n';
 
    if (undefined !== state.text) htmlString += '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText' + state.rowIndex + '" ' + 'onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeText();" /></div>\n';
+      'id="advantageText' + state.rowIndex + '" onChange="Main.advantageSection.getRow(' + state.rowIndex + ').changeText();" /></div>\n';
    if (derivedValues.costPerRank > 1) htmlString += '<div class="col-auto">=&nbsp;<span id="advantageRowTotal' + state.rowIndex + '"></span></div>\n';
    htmlString += '</div>\n';
    return htmlString;

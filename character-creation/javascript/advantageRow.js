@@ -38,7 +38,7 @@ function AdvantageObject(initialRowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setAdvantage=function(nameGiven)
    {
-       if(!Data.Advantage.names.contains(nameGiven)){this.constructor(); return;}  //reset values
+       if(!Data.Advantage.names.contains(nameGiven)){this._constructor(); return;}  //reset values
        var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        state.name = nameGiven;
