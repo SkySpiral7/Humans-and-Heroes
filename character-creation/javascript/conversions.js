@@ -162,20 +162,21 @@ function jsonToMarkdown(jsonDoc, derivedValues)
    }
 
    markdownString+='## Defenses\n';
-   var defenseCalculations = Main.defenseSection.getCalculations();
+   var defenseDerivedValues = Main.defenseSection.getDerivedValues();
    for (i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
    {
       var defenseName = Data.Defense.names[i];
-      markdownString+='* ' + defenseName + ': ' + defenseCalculations[defenseName].totalBonus +' ('
+      markdownString+='* ' + defenseName + ': ' + defenseDerivedValues[defenseName].totalBonus +' ('
          + jsonDoc.Defenses[defenseName] + ' ranks + '
-         + defenseCalculations[defenseName].abilityValue + ' ' + Data.Defense[defenseName].ability + ')\n';
+         + defenseDerivedValues[defenseName].abilityValue + ' ' + Data.Defense[defenseName].ability + ')\n';
    }
-   markdownString+='* Toughness: ' + defenseCalculations.Toughness.totalBonus;
-   if(undefined !== defenseCalculations.Toughness.withoutDefensiveRoll)
-      markdownString+=' ('+defenseCalculations.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
+   markdownString+='* Toughness: ' + defenseDerivedValues.Toughness.totalBonus;
+   if(undefined !== defenseDerivedValues.Toughness.withoutDefensiveRoll)
+      markdownString+=' ('+defenseDerivedValues.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
    markdownString+='\n\n';
 
    markdownString+='## Point Totals\n';
+   //TODO: should use derivedValues without calling methods (but requires top level state)
    if(0 !== Main.abilitySection.getTotal()) markdownString+='* Ability: '+Main.abilitySection.getTotal()+'\n';
    if(0 !== Main.powerSection.getTotal()) markdownString+='* Power: '+Main.powerSection.getTotal()+'\n';
    if(0 !== Main.advantageSection.getTotal()) markdownString+='* Advantage: '+Main.advantageSection.getTotal()+'\n';

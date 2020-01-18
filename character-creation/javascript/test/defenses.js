@@ -78,7 +78,7 @@ TestSuite.defenseList._calculateToughness=function(testState={})
 
    function getActual()
    {
-      return Main.defenseSection.getCalculations().Toughness;
+      return Main.defenseSection.getDerivedValues().Toughness;
    }
 
    assertions.push({Expected: {totalBonus: 0}, Actual: getActual(), Description: 'Toughness defaults to 0'});

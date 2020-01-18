@@ -81,7 +81,8 @@ CommonsLibrary.sanitizeRows=function(rowArray)
        if(rowArray[i].isBlank() && i < rowArray.length-1){this.removeRow(i); i--; continue;}  //remove blank row that isn't last
        else if(rowArray[i].isBlank()) continue;  //nothing to do
 
-      //TODO: can powers can be redundant?
+       //TODO: can powers can be redundant?
+       //if yes TestSuite.main.updateOffense etc redundantly set some text
        var uniqueName=rowArray[i].getUniqueName();
        if(namesSoFar.contains(uniqueName)){this.removeRow(i); i--; continue;}  //remove redundant row
        namesSoFar.push(uniqueName);
