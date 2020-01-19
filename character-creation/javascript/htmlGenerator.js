@@ -113,15 +113,13 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
       //auto total must see total (it doesn't show ranks)
       if (derivedValues.hasAutoTotal)
          htmlString += '<div class="col-auto">' +
-            //has an id until tests can be updated to not use it
-            '=&nbsp;<span id="' + idFor('RowTotal') + '">' + derivedValues.autoTotal + '</span></div>';
+            '=&nbsp;' + derivedValues.autoTotal + '</div>';
       //if costPerRank isn't 1 then show total to show how much its worth,
       //if total doesn't match then it has had some cost quirk so show the total
       else if (Math.abs(derivedValues.costPerRank) > 1
          || derivedValues.rawTotal !== (derivedValues.costPerRank * state.rank))
          htmlString += '<div class="col-auto">' +
-            //has an id until tests can be updated to not use it
-            '=&nbsp;<span id="' + idFor('RowTotal') + '">' + derivedValues.rawTotal + '</span></div>';
+            '=&nbsp;' + derivedValues.rawTotal + '</div>';
    }
    htmlString += '</div>';
    return htmlString;

@@ -228,7 +228,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '&nbsp;<input type="text" id="powerModifierText0.0" ' +
       'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()" value="Thingy"></label>'+
       '<div class="col-auto">' +
-      '=&nbsp;<span id="powerModifierRowTotal0.0">-2</span></div>'+
+      '=&nbsp;-2</div>'+
       '</div>';
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'hasAutoTotal'});
@@ -242,7 +242,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '</select>'+
       '</div>'+
       '<div class="col-auto">' +
-      '=&nbsp;<span id="powerModifierRowTotal0.0">-2</span></div>'+
+      '=&nbsp;-2</div>'+
       '</div>';
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'abs(cost) > 1'});
@@ -255,7 +255,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '<b>Increased Duration</b></div>'+
       '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>'+
       '<div class="col-auto">' +
-      '=&nbsp;<span id="powerModifierRowTotal0.0">0</span></div>'+
+      '=&nbsp;0</div>'+
       '</div>';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'rawTotal != cost*rank'});
    Main.powerSection.clear();
