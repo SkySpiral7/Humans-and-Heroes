@@ -85,9 +85,10 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    /**This returns the page's html (for the section) as a string. called by power row object only*/
    this.generate=function()
    {
-       var allModifierRows='';
+       var allModifierRows='<div id="'+sectionName+'ModifierSection'+sectionRowIndex+'">';
       for(var i=0; i < rowArray.length; i++)  //last row is always blank but needs to be generated
           {allModifierRows+=rowArray[i].generate();}
+      allModifierRows+='</div>';
        return allModifierRows;
    };
    /**Return the unique name of the section. In this case it returns a sorted array of modifier unique names*/

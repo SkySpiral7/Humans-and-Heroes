@@ -3,10 +3,10 @@ TestSuite.HtmlGenerator={};
 TestSuite.HtmlGenerator.advantageRow=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions=[], expected;
 
    SelectUtil.changeText('equipmentChoices0', 'Feature');
-   var expected = '<div class="row">' +
+   expected = '<div class="row">' +
       '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>' +
       '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost 1</div>' +
       '</div>';
@@ -21,6 +21,8 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'blank row'});
    Main.advantageSection.clear();  //to regenerate advantageChoices0
+
+   //TODO: how to test that it generates a list of rows?
 
    assertions.push({Expected: 'Select Advantage', Actual: document.getElementById('advantageChoices0').value, Description: 'initial: default value'});
    assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Equipment'), Description: 'initial: Equipment not in select'});
@@ -97,18 +99,176 @@ TestSuite.HtmlGenerator.advantageRow=function(testState={})
    document.getElementById('advantageChoices0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has text'});
 
-    return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
+   return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };
-//TODO: test html generation
 TestSuite.HtmlGenerator.modifierRow=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions=[], expected;
 
-   //ADD TESTS
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div></div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'blank row'});
+   Main.powerSection.clear();  //to regenerate powerModifierChoices0.0
+
+   //amReadOnly selective tested below since it is 2.x only
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectAction0', 'Slow');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<b><span id="powerModifierName0.0">Slower Action</span></b>'+
+      '</div>'+
+      '<div class="col-6 col-sm-3 col-xl-auto">Cost <span id="powerModifierRankSpan0.0">2</span></div>'+
+      '</div>';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Slower Action ReadOnly'});
+   Main.powerSection.clear();
+
+   //TODO: test feature
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   assertions.push({Expected: 'Select Modifier', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'power: default value'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Accurate'), Description: 'power has option Accurate'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Removable'), Description: 'power has option Removable'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Easily Removable'), Description: 'power has option Easily Removable'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Slower Action'), Description: 'power no read only option'});
+
+   SelectUtil.changeText('equipmentChoices0', 'Damage');
+   assertions.push({Expected: 'Select Modifier', Actual: document.getElementById('equipmentModifierChoices0.0').value, Description: 'equipment: default value'});
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Accurate'), Description: 'equipment has option Accurate'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('equipmentModifierChoices0.0', 'Removable'), Description: 'equipment no Removable'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('equipmentModifierChoices0.0', 'Easily Removable'), Description: 'equipment no Easily Removable'});
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Slower Action'), Description: 'equipment no read only option'});
+   Main.clear();
+
+   function expectedSharedHtml(sharedName, sectionName, rowIndex){
+      return Data.SharedHtml[sharedName](sectionName, rowIndex).
+      replace(/onChange/g, 'onchange').
+      replace(/ \/>/g, '>')
+         ;
+   }
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Attack');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>' +
+      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0) + '</div>'+
+      '<div class="col-12 col-sm-6 col-lg-4">' + expectedSharedHtml('powerSkill', 'power', 0) + '</div>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Attack ranged'});
+
+   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.1" onchange="Main.powerSection.getModifierRowShort(0,1).select()">'+
+      '</select>'+
+      '</div>' +
+      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0) + '</div>'+
+      '</div>';
+   //0.0 is Increased Range
+   document.getElementById('powerModifierChoices0.1').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').children[1].outerHTML, Description: 'Attack Perception'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.1
+
+   //hasAutoRank tested above via amReadOnly: see "Slower Action ReadOnly"
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Accurate');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>'+
+   '<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications '+
+   '<input type="text" size="1" id="powerModifierRank0.0" ' +
+   'onchange="Main.powerSection.getModifierRowShort(0,0).changeRank()">'+
+   '</label>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'ranked'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.0
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Feature');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>'+
+      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
+      '&nbsp;<input type="text" id="powerModifierText0.0" ' +
+      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()"></label>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'hasText'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.0
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerRank0', '10');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Removable');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>'+
+      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
+      '&nbsp;<input type="text" id="powerModifierText0.0" ' +
+      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()"></label>'+
+      '<div class="col-auto">' +
+      '=&nbsp;<span id="powerModifierRowTotal0.0">-2</span></div>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'hasAutoTotal'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.0
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerModifierChoices0.0', 'System Dependent');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>'+
+      '<div class="col-auto">' +
+      '=&nbsp;<span id="powerModifierRowTotal0.0">-2</span></div>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'abs(cost) > 1'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.0
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<b><span id="powerModifierName0.0">Increased Duration</span></b></div>'+
+      '<div class="col-6 col-sm-3 col-xl-auto">Cost <span id="powerModifierRankSpan0.0">2</span></div>'+
+      '<div class="col-auto">' +
+      '=&nbsp;<span id="powerModifierRowTotal0.0">0</span></div>'+
+      '</div>';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'rawTotal != cost*rank'});
+   Main.powerSection.clear();
+
+   Main.setRuleset(2,7);
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectAction0', 'Triggered');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<b><span id="powerModifierName0.1">Selective</span></b>'+
+      '</div></div>';
+   //firstChild is Faster Action
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').children[1].outerHTML, Description: 'Selective ReadOnly'});
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.modifierRow', assertions, testState);
 };
+//TODO: test html generation
 TestSuite.HtmlGenerator.powerRow=function(testState={})
 {
    TestRunner.clearResults(testState);
