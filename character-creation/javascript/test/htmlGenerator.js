@@ -122,9 +122,9 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    SelectUtil.changeText('powerSelectAction0', 'Slow');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
-      '<b><span id="powerModifierName0.0">Slower Action</span></b>'+
+      '<b>Slower Action</b>'+
       '</div>'+
-      '<div class="col-6 col-sm-3 col-xl-auto">Cost <span id="powerModifierRankSpan0.0">2</span></div>'+
+      '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>'+
       '</div>';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Slower Action ReadOnly'});
    Main.powerSection.clear();
@@ -163,6 +163,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0) + '</div>'+
       '<div class="col-12 col-sm-6 col-lg-4">' + expectedSharedHtml('powerSkill', 'power', 0) + '</div>'+
       '</div>';
+   assertions.push({Expected: 'Attack', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'modifier is set'});
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Attack ranged'});
 
@@ -183,6 +184,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerModifierChoices0.0', 'Accurate');
+   DomUtil.changeValue('powerModifierRank0.0', '2');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
       '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
@@ -190,7 +192,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '</div>'+
    '<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications '+
    '<input type="text" size="1" id="powerModifierRank0.0" ' +
-   'onchange="Main.powerSection.getModifierRowShort(0,0).changeRank()">'+
+   'onchange="Main.powerSection.getModifierRowShort(0,0).changeRank()" value="2">'+
    '</label>'+
       '</div>';
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
@@ -199,6 +201,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerModifierChoices0.0', 'Feature');
+   DomUtil.changeValue('powerModifierText0.0', 'Thingy');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
       '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
@@ -206,7 +209,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '</div>'+
       '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
       '&nbsp;<input type="text" id="powerModifierText0.0" ' +
-      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()"></label>'+
+      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()" value="Thingy"></label>'+
       '</div>';
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'hasText'});
@@ -215,6 +218,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerRank0', '10');
    SelectUtil.changeText('powerModifierChoices0.0', 'Removable');
+   DomUtil.changeValue('powerModifierText0.0', 'Thingy');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
       '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
@@ -222,7 +226,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '</div>'+
       '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
       '&nbsp;<input type="text" id="powerModifierText0.0" ' +
-      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()"></label>'+
+      'onchange="Main.powerSection.getModifierRowShort(0,0).changeText()" value="Thingy"></label>'+
       '<div class="col-auto">' +
       '=&nbsp;<span id="powerModifierRowTotal0.0">-2</span></div>'+
       '</div>';
@@ -248,8 +252,8 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    SelectUtil.changeText('powerSelectDuration0', 'Permanent');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
-      '<b><span id="powerModifierName0.0">Increased Duration</span></b></div>'+
-      '<div class="col-6 col-sm-3 col-xl-auto">Cost <span id="powerModifierRankSpan0.0">2</span></div>'+
+      '<b>Increased Duration</b></div>'+
+      '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>'+
       '<div class="col-auto">' +
       '=&nbsp;<span id="powerModifierRowTotal0.0">0</span></div>'+
       '</div>';
@@ -261,7 +265,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    SelectUtil.changeText('powerSelectAction0', 'Triggered');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
-      '<b><span id="powerModifierName0.1">Selective</span></b>'+
+      '<b>Selective</b>'+
       '</div></div>';
    //firstChild is Faster Action
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').children[1].outerHTML, Description: 'Selective ReadOnly'});

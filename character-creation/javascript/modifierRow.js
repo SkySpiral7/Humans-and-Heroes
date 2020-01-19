@@ -178,20 +178,7 @@ function ModifierObject(props)
    /**This set the page's data. called only by section generate*/
    this.setValues=function()
    {
-       if(this.isBlank()) return;  //already set (to default)
-       var totalIndex = state.powerRowIndex+'.'+state.modifierRowIndex;
-       if (document.getElementById(props.sectionName+'ModifierChoices'+totalIndex) !== null)
-          SelectUtil.setText((props.sectionName+'ModifierChoices'+totalIndex), state.name);
-       else document.getElementById(props.sectionName+'ModifierName'+totalIndex).innerHTML = state.name;
-       if(document.getElementById(props.sectionName+'ModifierRankSpan'+totalIndex) !== null)
-          document.getElementById(props.sectionName+'ModifierRankSpan'+totalIndex).innerHTML = state.rank;
-       //rank is auto (above) or input (below)
-       else if(derivedValues.hasRank) document.getElementById(props.sectionName+'ModifierRank'+totalIndex).value = state.rank;
-       if(derivedValues.hasText) document.getElementById(props.sectionName+'ModifierText'+totalIndex).value = state.text;
-       if(document.getElementById(props.sectionName+'ModifierRowTotal'+totalIndex) !== null && derivedValues.hasAutoTotal)
-          document.getElementById(props.sectionName+'ModifierRowTotal'+totalIndex).innerHTML = derivedValues.autoTotal;
-       else if(document.getElementById(props.sectionName+'ModifierRowTotal'+totalIndex) !== null)
-          document.getElementById(props.sectionName+'ModifierRowTotal'+totalIndex).innerHTML = derivedValues.rawTotal;
+      //no-op until they can all be removed from commons
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
