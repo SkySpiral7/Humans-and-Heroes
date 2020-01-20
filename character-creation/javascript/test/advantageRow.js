@@ -3,9 +3,228 @@ TestSuite.advantageRow={};
 TestSuite.advantageRow.setAdvantage=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [], expected;
 
-   //ADD TESTS
+   assertions.push({
+      Expected: true,
+      Actual: Main.advantageSection.getRow(0)
+      .isBlank(),
+      Description: 'Blank'
+   });
+
+   SelectUtil.changeText('advantageChoices0', 'Lucky');
+   expected = {
+      rowIndex: 0,
+      name: 'Lucky',
+      rank: 1
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Lucky: state'
+   });
+   expected = {
+      maxRank: 3,
+      hasRank: true,
+      costPerRank: 5,
+      total: 5,
+      hasText: false
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getDerivedValues(),
+      Description: 'Lucky: derivedValues'
+   });
+
+   DomUtil.changeValue('advantageRank0', 2);
+   assertions.push({
+      Expected: false,
+      Actual: Main.advantageSection.getRow(0)
+      .isBlank(),
+      Description: 'isBlank'
+   });
+   assertions.push({
+      Expected: 2,
+      Actual: Main.advantageSection.getRow(0)
+      .getRank(),
+      Description: 'getRank pre-reset'
+   });
+   SelectUtil.changeText('advantageChoices0', 'Select Advantage');
+   assertions.push({
+      Expected: true,
+      Actual: Main.advantageSection.getRow(0)
+      .isBlank(),
+      Description: 'reset'
+   });
+   assertions.push({
+      Expected: undefined,
+      Actual: Main.advantageSection.getRow(0)
+      .getRank(),
+      Description: 'getRank post-reset'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   expected = {
+      rowIndex: 0,
+      name: 'Sidekick',
+      rank: 1,
+      text: 'Helper Name'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Sidekick: state'
+   });
+   DomUtil.changeValue('advantageRank0', 2);
+   DomUtil.changeValue('advantageText0', 'I help');
+   SelectUtil.changeText('advantageChoices0', 'Minion');
+   expected = {
+      rowIndex: 0,
+      name: 'Minion',
+      rank: 2,
+      text: 'I help'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Sidekick to Minion keeps rank, text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Minion');
+   DomUtil.changeValue('advantageRank0', 3);
+   DomUtil.changeValue('advantageText0', 'I can help');
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   expected = {
+      rowIndex: 0,
+      name: 'Sidekick',
+      rank: 3,
+      text: 'I can help'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Minion to Sidekick keeps rank, text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Minion');
+   DomUtil.changeValue('advantageRank0', 4);
+   DomUtil.changeValue('advantageText0', 'helping');
+   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   expected = {
+      rowIndex: 0,
+      name: 'Benefit',
+      rank: 1,
+      text: 'Advantage Subtype'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Minion to Benefit clears rank, text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   DomUtil.changeValue('advantageRank0', 2);
+   DomUtil.changeValue('advantageText0', 'benny');
+   SelectUtil.changeText('advantageChoices0', 'Minion');
+   expected = {
+      rowIndex: 0,
+      name: 'Minion',
+      rank: 1,
+      text: 'Helper Name'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Benefit to Minion clears rank, text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   DomUtil.changeValue('advantageRank0', 4);
+   DomUtil.changeValue('advantageText0', 'helping');
+   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   expected = {
+      rowIndex: 0,
+      name: 'Benefit',
+      rank: 1,
+      text: 'Advantage Subtype'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Sidekick to Benefit clears rank, text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   DomUtil.changeValue('advantageRank0', 2);
+   DomUtil.changeValue('advantageText0', 'benny');
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   expected = {
+      rowIndex: 0,
+      name: 'Sidekick',
+      rank: 1,
+      text: 'Helper Name'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Benefit to Sidekick clears rank, text'
+   });
+
+   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   assertions.push({
+      Expected: false,
+      Actual: Main.advantageSection.getRow(0)
+      .doesHaveRank(),
+      Description: 'Diehard hasRank'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   DomUtil.changeValue('advantageRank0', 2);
+   DomUtil.changeValue('advantageText0', 'side');
+   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   expected = {
+      rowIndex: 0,
+      name: 'Diehard',
+      rank: 1
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Sidekick to Diehard no text'
+   });
+
+   Main.advantageSection.clear();
+   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   expected = {
+      rowIndex: 0,
+      name: 'Sidekick',
+      rank: 1,
+      text: 'Helper Name'
+   };
+   assertions.push({
+      Expected: expected,
+      Actual: Main.advantageSection.getRow(0)
+      .getState(),
+      Description: 'Diehard to Sidekick default text'
+   });
 
    return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', assertions, testState);
 };

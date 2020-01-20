@@ -10,6 +10,9 @@ function AdvantageObject(initialRowIndex)
    var state, derivedValues;
 
    //Basic getter section (all single line)
+   this.getState=function(){return JSON.clone(state);};  //defensive copy is important to prevent tamper
+   this.getDerivedValues=function(){return JSON.clone(derivedValues);};  //clone is for tests
+
     this.doesHaveRank=function(){return derivedValues.hasRank;};
     this.doesHaveText=function(){return derivedValues.hasText;};
     this.getCostPerRank=function(){return derivedValues.costPerRank;};
@@ -38,7 +41,7 @@ function AdvantageObject(initialRowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setAdvantage=function(nameGiven)
    {
-       if(!Data.Advantage.names.contains(nameGiven)){this._constructor(); return;}  //reset values
+       if(!Data.Advantage.names.contains(nameGiven)){this._resetValues(); return;}
        var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        state.name = nameGiven;
@@ -49,8 +52,9 @@ function AdvantageObject(initialRowIndex)
        derivedValues.total = derivedValues.costPerRank * state.rank;
        derivedValues.hasText = Data.Advantage[state.name].hasText;
        if(derivedValues.hasText && useNewData) state.text = Data.Advantage[state.name].defaultText;
+       //!derivedValues.hasText && useNewData (useNewData always true when !hasText):
        else if(useNewData) state.text = undefined;  //needs to be explicit so that the previous data is destroyed
-       //else keep using the current text
+       //else (!useNewData which always hasText) keep using the current text
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
@@ -105,6 +109,12 @@ function AdvantageObject(initialRowIndex)
    this._constructor=function()
    {
       state = {rowIndex: initialRowIndex};
+      this._resetValues();
+   };
+   this._resetValues=function()
+   {
+      //index is not reset
+      state = {rowIndex: state.rowIndex};
       derivedValues = {total: 0};
    };
    //constructor:
