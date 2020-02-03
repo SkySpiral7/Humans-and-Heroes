@@ -57,9 +57,10 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
    htmlString += '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">';
    var amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRowParent.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
-   if (undefined !== state.name && !amReadOnly) amReadOnly = Data.Modifier[state.name].isReadOnly;
-   //TODO: bug: triggered feature's Selective should still be read only
-   if (props.powerRowParent.getEffect() === 'Feature' || !amReadOnly)
+   //Triggered's Selective is amReadOnly even for Feature
+   if (!amReadOnly && undefined !== state.name &&
+      props.powerRowParent.getEffect() !== 'Feature') amReadOnly = Data.Modifier[state.name].isReadOnly;
+   if (!amReadOnly)
    {
       htmlString += '<select id="' + idFor('Choices') + '" ' +
          'onChange="' + onChangePrefix + '.select()">';

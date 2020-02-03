@@ -129,11 +129,17 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Slower Action ReadOnly'});
    Main.powerSection.clear();
 
-   //TODO: test feature
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   SelectUtil.changeText('powerSelectAction0', 'Slow');
+   assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0,0).isBlank(), Description: 'Slow Feature doesn\'t auto get Slower Action'});
+   Main.powerSection.clear();
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    assertions.push({Expected: 'Select Modifier', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'power: default value'});
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Accurate'), Description: 'power has option Accurate'});
+   SelectUtil.changeText('powerModifierChoices0.0', 'Accurate');
+   assertions.push({Expected: 'Accurate', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'power: selected value'});
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Removable'), Description: 'power has option Removable'});
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Easily Removable'), Description: 'power has option Easily Removable'});
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Slower Action'), Description: 'power no read only option'});
@@ -141,10 +147,18 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    SelectUtil.changeText('equipmentChoices0', 'Damage');
    assertions.push({Expected: 'Select Modifier', Actual: document.getElementById('equipmentModifierChoices0.0').value, Description: 'equipment: default value'});
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Accurate'), Description: 'equipment has option Accurate'});
+   SelectUtil.changeText('powerModifierChoices0.0', 'Accurate');
+   assertions.push({Expected: 'Accurate', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'power: selected value'});
    assertions.push({Expected: false, Actual: SelectUtil.containsText('equipmentModifierChoices0.0', 'Removable'), Description: 'equipment no Removable'});
    assertions.push({Expected: false, Actual: SelectUtil.containsText('equipmentModifierChoices0.0', 'Easily Removable'), Description: 'equipment no Easily Removable'});
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Slower Action'), Description: 'equipment no read only option'});
    Main.clear();
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Slower Action');
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerModifierChoices0.0', 'Slower Action'), Description: 'Feature Slower Action !read only'});
+   assertions.push({Expected: 'Slower Action', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'Feature Slower Action: selected value'});
+   Main.powerSection.clear();
 
    function expectedSharedHtml(sharedName, sectionName, rowIndex){
       return Data.SharedHtml[sharedName](sectionName, rowIndex).
@@ -181,6 +195,23 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    Main.powerSection.clear();  //regenerates powerModifierChoices0.1
 
    //hasAutoRank tested above via amReadOnly: see "Slower Action ReadOnly"
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Slower Action');
+   DomUtil.changeValue('powerModifierRank0.0', '3');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
+      '</select>'+
+      '</div>'+
+      '<label class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto">Applications '+
+      '<input type="text" size="1" id="powerModifierRank0.0" ' +
+      'onchange="Main.powerSection.getModifierRowShort(0,0).changeRank()" value="3">'+
+      '</label>'+
+      '</div>';
+   document.getElementById('powerModifierChoices0.0').innerHTML = '';
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Feature: ranked normally read only'});
+   Main.powerSection.clear();  //regenerates powerModifierChoices0.0
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerModifierChoices0.0', 'Accurate');
@@ -269,6 +300,17 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '</div></div>';
    //firstChild is Faster Action
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').children[1].outerHTML, Description: 'Selective ReadOnly'});
+   Main.powerSection.clear();
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   SelectUtil.changeText('powerSelectAction0', 'Triggered');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
+      '<b>Selective</b>'+
+      '</div></div>';
+   //there's no Faster Action
+   assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Feature: Selective ReadOnly'});
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.modifierRow', assertions, testState);
 };
