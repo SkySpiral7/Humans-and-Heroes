@@ -144,10 +144,10 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
       return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
    }
 
-   var htmlString = '<div class="container-fluid"><div class="row">\n', i;
+   var htmlString = '<div class="container-fluid"><div class="row">', i;
    htmlString += '<div class="col-12 col-sm-6 col-xl-auto"><select id="' +
-      idFor('Choices') + '" onChange="' + onChangeFor('select') + '">\n';
-   htmlString += '    <option>Select Power</option>\n';
+      idFor('Choices') + '" onChange="' + onChangeFor('select') + '">';
+   htmlString += '<option>Select Power</option>';
    var displayGodhood = (undefined !== Main && props.powerListParent !== Main.equipmentSection &&
       (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
    //equipment can't be god-like so I only need to check power section's switch
@@ -155,107 +155,111 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    for (i = 0; i < Data.Power.names.length; ++i)
    {
       if (displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
-         htmlString += '    <option>' + Data.Power.names[i] + '</option>\n';
+      {
+         htmlString += '<option';
+         //if (state.effect === Data.Power.names[i]) htmlString += ' selected';
+         htmlString += '>' + Data.Power.names[i] + '</option>';
+      }
    }
-   htmlString += '</select></div>\n';
+   htmlString += '</select></div>';
    if (undefined === state.effect) return htmlString + '</div></div>';  //done for blank
 
    if (derivedValues.canSetBaseCost)
    {
-      htmlString += '<label class="col">Base Cost per Rank:\n';
+      htmlString += '<label class="col">Base Cost per Rank: ';
       htmlString += '<input type="text" size="1" id="' + idFor('BaseCost') + '" onChange="' +
          onChangeFor('changeBaseCost') + '" />';
-      htmlString += '</label>\n';  //end col
+      htmlString += '</label>';  //end base cost col
    }
    else
    {
-      htmlString += '<div class="col">Base Cost per Rank:\n';
+      htmlString += '<div class="col">Base Cost per Rank: ';
       htmlString += '<span id="' + idFor('BaseCost') + '" style="display: inline-block; width: 50px; ' +
-         'text-align: center;"></span>\n';
-      htmlString += '</div>\n';  //end col
+         'text-align: center;"></span>';
+      htmlString += '</div>';  //end base cost col
    }
-   htmlString += '</div>\n';  //end row
+   htmlString += '</div>';  //end power/cost row
    htmlString += '<div class="row"><input type="text" style="width: 100%" id="' + idFor('Text') + '" ' +
-      'onChange="' + onChangeFor('changeText') + '" /></div>\n';
-   htmlString += '<div class="row justify-content-center">\n';
+      'onChange="' + onChangeFor('changeText') + '" /></div>';
+   htmlString += '<div class="row justify-content-center">';  //action, range, duration row
 
-   htmlString += '<div class="col-12 col-sm-4 col-lg-3">\n';
+   htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleActions.length) htmlString += 'Action <span id="' + idFor('SelectAction') + '" ' +
-      'style="display: inline-block; width: 85px; text-align: center;"></span>\n';
+      'style="display: inline-block; width: 85px; text-align: center;"></span>';
    //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
    else
    {
       htmlString += '<label>Action';
-      htmlString += '         <select id="' + idFor('SelectAction') + '" onChange="' +
-         onChangeFor('selectAction') + '">\n';
+      htmlString += '<select id="' + idFor('SelectAction') + '" onChange="' +
+         onChangeFor('selectAction') + '">';
       for (i = 0; i < derivedValues.possibleActions.length; ++i)
       {
-         htmlString += '             <option>' + derivedValues.possibleActions[i] + '</option>\n';
+         htmlString += '<option>' + derivedValues.possibleActions[i] + '</option>';
       }
-      htmlString += '         </select></label>\n';
+      htmlString += '</select></label>';
    }
-   htmlString += '      </div>\n';
+   htmlString += '</div>';
 
-   htmlString += '      <div class="col-12 col-sm-4 col-lg-3">\n';
+   htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleRanges.length) htmlString += 'Range <span id="' + idFor('SelectRange') + '" ' +
-      'style="display: inline-block; width: 90px; text-align: center;"></span>\n';
+      'style="display: inline-block; width: 90px; text-align: center;"></span>';
    else
    {
       htmlString += '<label>Range';
-      htmlString += '          <select id="' + idFor('SelectRange') + '" onChange="' +
-         onChangeFor('selectRange') + '">\n';
+      htmlString += '<select id="' + idFor('SelectRange') + '" onChange="' +
+         onChangeFor('selectRange') + '">';
       for (i = 0; i < derivedValues.possibleRanges.length; ++i)
       {
-         htmlString += '             <option>' + derivedValues.possibleRanges[i] + '</option>\n';
+         htmlString += '<option>' + derivedValues.possibleRanges[i] + '</option>';
       }
-      htmlString += '         </select></label>\n';
+      htmlString += '</select></label>';
    }
-   htmlString += '      </div>\n';
+   htmlString += '</div>';
 
-   htmlString += '      <div class="col-12 col-sm-4 col-lg-3">\n';
+   htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleDurations.length) htmlString += 'Duration <span id="' +
-      idFor('SelectDuration') + '" style="display: inline-block; width: 80px; text-align: center;"></span>\n';
+      idFor('SelectDuration') + '" style="display: inline-block; width: 80px; text-align: center;"></span>';
    else
    {
       htmlString += '<label>Duration';
-      htmlString += '          <select id="' + idFor('SelectDuration') + '" onChange="' +
-         onChangeFor('selectDuration') + '">\n';
+      htmlString += '<select id="' + idFor('SelectDuration') + '" onChange="' +
+         onChangeFor('selectDuration') + '">';
       for (i = 0; i < derivedValues.possibleDurations.length; ++i)
       {
-         htmlString += '             <option>' + derivedValues.possibleDurations[i] + '</option>\n';
+         htmlString += '<option>' + derivedValues.possibleDurations[i] + '</option>';
       }
-      htmlString += '         </select></label>\n';
+      htmlString += '</select></label>';
    }
-   htmlString += '      </div>\n';
-   htmlString += '   </div>\n';  //row
+   htmlString += '</div>';
+   htmlString += '</div>';  //end action, range, duration row
 
    //don't check for attack modifier because that's handled by the modifier generate
    if (Data.Power[state.effect].isAttack)
    {
-      htmlString += '   <div class="row justify-content-end justify-content-xl-center">\n';
-      htmlString += '      <div class="col-12 col-sm-6 col-lg-5 col-xl-4">\n';
+      htmlString += '<div class="row justify-content-end justify-content-xl-center">';
+      htmlString += '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">';
       htmlString += Data.SharedHtml.powerName(props.sectionName, state.rowIndex);
-      htmlString += '      </div>\n';
+      htmlString += '</div>';
       if (undefined !== state.skillUsed) htmlString += '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
          Data.SharedHtml.powerSkill(props.sectionName, state.rowIndex) + '</div>';
-      htmlString += '   </div>\n';
+      htmlString += '</div>';
    }
 
    htmlString += derivedValues.modifierHtml;
 
-   htmlString += '<div class="row">\n';
+   htmlString += '<div class="row">';
    htmlString += '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
    htmlString += '<input type="text" size="1" id="' + idFor('Rank') + '" onChange="' +
-      onChangeFor('changeRank') + '" /></label>\n';
-   htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank:\n';
-   htmlString += '<span id="' + idFor('TotalCostPerRank') + '"></span></div>\n';
-   htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost:\n';
-   htmlString += '<span id="' + idFor('FlatModifierCost') + '"></span></div>\n';
-   htmlString += '</div>\n';
+      onChangeFor('changeRank') + '" /></label>';
+   htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ';
+   htmlString += '<span id="' + idFor('TotalCostPerRank') + '"></span></div>';
+   htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ';
+   htmlString += '<span id="' + idFor('FlatModifierCost') + '"></span></div>';
+   htmlString += '</div>';  //end row of costs
    htmlString += '<div class="row"><div class="col">Grand total for ' + props.sectionName.toTitleCase() + ': ';
-   htmlString += '<span id="' + idFor('RowTotal') + '"></span></div>\n';
-   htmlString += '</div>\n';
-   htmlString += '</div><hr />\n\n';
+   htmlString += '<span id="' + idFor('RowTotal') + '"></span></div>';
+   htmlString += '</div>';
+   htmlString += '</div><hr />';
    return htmlString;
 };
 HtmlGenerator.skillRow=function(state, derivedValues)
