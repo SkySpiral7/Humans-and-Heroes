@@ -392,14 +392,16 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    Main.powerSection.clear();  //to regenerate powerChoices0
 
    SelectUtil.changeText('powerChoices0', 'Attain Knowledge');
+   DomUtil.changeValue('powerText0', 'my text');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
       '<label class="col">Base Cost per Rank: ' +
-      '<input type="text" size="1" id="powerBaseCost0" onchange="Main.powerSection.getRow(0).changeBaseCost();">' +
+      '<input type="text" size="1" id="powerBaseCost0" onchange="Main.powerSection.getRow(0).changeBaseCost();" value="2">' +
       '</label>' +
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"></div>' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value="my text"></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
@@ -416,14 +418,13 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div>modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
       '<span id="powerTotalCostPerRank0">2</span></div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
       '<span id="powerFlatModifierCost0">0</span></div>' +
       '</div>' +  //end row of costs
-      '<div class="row"><div class="col">Grand total for Power: ' +
-      '<span id="powerRowTotal0">2</span></div>' +
+      '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
@@ -442,6 +443,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    Main.powerSection.clear();  //to regenerate powerChoices0
 
    SelectUtil.changeText('powerChoices0', 'Create');
+   DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
@@ -449,7 +451,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">2</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"></div>' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
@@ -470,14 +473,13 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div>modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
       '<span id="powerTotalCostPerRank0">2</span></div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
       '<span id="powerFlatModifierCost0">0</span></div>' +
       '</div>' +  //end row of costs
-      '<div class="row"><div class="col">Grand total for Power: ' +
-      '<span id="powerRowTotal0">2</span></div>' +
+      '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
@@ -493,6 +495,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    Main.powerSection.clear();  //to regenerate powerChoices0
 
    SelectUtil.changeText('powerChoices0', 'Immortality');
+   DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
@@ -500,7 +503,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">5</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"></div>' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       'Action <span id="powerSelectAction0" style="display: inline-block; width: 85px; text-align: center;"><b>None</b></span>' +
@@ -517,14 +521,13 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div>modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
       '<span id="powerTotalCostPerRank0">5</span></div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
       '<span id="powerFlatModifierCost0">0</span></div>' +
       '</div>' +  //end row of costs
-      '<div class="row"><div class="col">Grand total for Power: ' +
-      '<span id="powerRowTotal0">5</span></div>' +
+      '<div class="row"><div class="col">Grand total for Power: 5</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
@@ -545,6 +548,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    }
 
    SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
@@ -552,7 +556,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"></div>' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
@@ -579,14 +584,13 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div>modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
       '<span id="powerTotalCostPerRank0">1</span></div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
       '<span id="powerFlatModifierCost0">0</span></div>' +
       '</div>' +  //end row of costs
-      '<div class="row"><div class="col">Grand total for Power: ' +
-      '<span id="powerRowTotal0">1</span></div>' +
+      '<div class="row"><div class="col">Grand total for Power: 1</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
@@ -601,6 +605,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    Main.powerSection.clear();  //to regenerate the selects
 
    SelectUtil.changeText('powerChoices0', 'Damage');
+   DomUtil.changeValue('powerText0', '');
    SelectUtil.changeText('powerSelectRange0', 'Perception');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
@@ -609,7 +614,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"></div>' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
@@ -633,14 +639,13 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div>modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
       '<span id="powerTotalCostPerRank0">4</span></div>' +  //Increased Range to Perception is +3
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
       '<span id="powerFlatModifierCost0">0</span></div>' +
       '</div>' +  //end row of costs
-      '<div class="row"><div class="col">Grand total for Power: ' +
-      '<span id="powerRowTotal0">4</span></div>' +
+      '<div class="row"><div class="col">Grand total for Power: 4</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';

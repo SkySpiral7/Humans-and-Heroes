@@ -157,7 +157,7 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
       if (displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)
       {
          htmlString += '<option';
-         //if (state.effect === Data.Power.names[i]) htmlString += ' selected';
+         if (state.effect === Data.Power.names[i]) htmlString += ' selected';
          htmlString += '>' + Data.Power.names[i] + '</option>';
       }
    }
@@ -168,24 +168,24 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    {
       htmlString += '<label class="col">Base Cost per Rank: ';
       htmlString += '<input type="text" size="1" id="' + idFor('BaseCost') + '" onChange="' +
-         onChangeFor('changeBaseCost') + '" />';
+         onChangeFor('changeBaseCost') + '" value="' + derivedValues.baseCost + '" />';
       htmlString += '</label>';  //end base cost col
    }
    else
    {
       htmlString += '<div class="col">Base Cost per Rank: ';
       htmlString += '<span id="' + idFor('BaseCost') + '" style="display: inline-block; width: 50px; ' +
-         'text-align: center;"></span>';
+         'text-align: center;">' + derivedValues.baseCost + '</span>';
       htmlString += '</div>';  //end base cost col
    }
    htmlString += '</div>';  //end power/cost row
    htmlString += '<div class="row"><input type="text" style="width: 100%" id="' + idFor('Text') + '" ' +
-      'onChange="' + onChangeFor('changeText') + '" /></div>';
+      'onChange="' + onChangeFor('changeText') + '" value="' + state.text + '" /></div>';
    htmlString += '<div class="row justify-content-center">';  //action, range, duration row
 
    htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleActions.length) htmlString += 'Action <span id="' + idFor('SelectAction') + '" ' +
-      'style="display: inline-block; width: 85px; text-align: center;"></span>';
+      'style="display: inline-block; width: 85px; text-align: center;"><b>' + state.action + '</b></span>';
    //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
    else
    {
@@ -194,7 +194,9 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
          onChangeFor('selectAction') + '">';
       for (i = 0; i < derivedValues.possibleActions.length; ++i)
       {
-         htmlString += '<option>' + derivedValues.possibleActions[i] + '</option>';
+         htmlString += '<option';
+         if (state.action === derivedValues.possibleActions[i]) htmlString += ' selected';
+         htmlString += '>' + derivedValues.possibleActions[i] + '</option>';
       }
       htmlString += '</select></label>';
    }
@@ -202,7 +204,7 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
 
    htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleRanges.length) htmlString += 'Range <span id="' + idFor('SelectRange') + '" ' +
-      'style="display: inline-block; width: 90px; text-align: center;"></span>';
+      'style="display: inline-block; width: 90px; text-align: center;"><b>' + state.range + '</b></span>';
    else
    {
       htmlString += '<label>Range';
@@ -210,7 +212,9 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
          onChangeFor('selectRange') + '">';
       for (i = 0; i < derivedValues.possibleRanges.length; ++i)
       {
-         htmlString += '<option>' + derivedValues.possibleRanges[i] + '</option>';
+         htmlString += '<option';
+         if (state.range === derivedValues.possibleRanges[i]) htmlString += ' selected';
+         htmlString += '>' + derivedValues.possibleRanges[i] + '</option>';
       }
       htmlString += '</select></label>';
    }
@@ -218,7 +222,7 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
 
    htmlString += '<div class="col-12 col-sm-4 col-lg-3">';
    if (1 === derivedValues.possibleDurations.length) htmlString += 'Duration <span id="' +
-      idFor('SelectDuration') + '" style="display: inline-block; width: 80px; text-align: center;"></span>';
+      idFor('SelectDuration') + '" style="display: inline-block; width: 80px; text-align: center;"><b>' + state.duration + '</b></span>';
    else
    {
       htmlString += '<label>Duration';
@@ -226,7 +230,9 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
          onChangeFor('selectDuration') + '">';
       for (i = 0; i < derivedValues.possibleDurations.length; ++i)
       {
-         htmlString += '<option>' + derivedValues.possibleDurations[i] + '</option>';
+         htmlString += '<option';
+         if (state.duration === derivedValues.possibleDurations[i]) htmlString += ' selected';
+         htmlString += '>' + derivedValues.possibleDurations[i] + '</option>';
       }
       htmlString += '</select></label>';
    }
@@ -250,14 +256,14 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    htmlString += '<div class="row">';
    htmlString += '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
    htmlString += '<input type="text" size="1" id="' + idFor('Rank') + '" onChange="' +
-      onChangeFor('changeRank') + '" /></label>';
+      onChangeFor('changeRank') + '" value="' + state.rank + '" /></label>';
    htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ';
    htmlString += '<span id="' + idFor('TotalCostPerRank') + '"></span></div>';
    htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ';
    htmlString += '<span id="' + idFor('FlatModifierCost') + '"></span></div>';
    htmlString += '</div>';  //end row of costs
    htmlString += '<div class="row"><div class="col">Grand total for ' + props.sectionName.toTitleCase() + ': ';
-   htmlString += '<span id="' + idFor('RowTotal') + '"></span></div>';
+   htmlString += state.total + '</div>';
    htmlString += '</div>';
    htmlString += '</div><hr />';
    return htmlString;

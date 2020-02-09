@@ -309,34 +309,14 @@ function PowerObjectAgnostic(props)
    this.setValues=function()
    {
       if(this.isBlank()) return;  //already set (to default)
-      SelectUtil.setText((props.sectionName+'Choices'+state.rowIndex), state.effect);
-      if(derivedValues.canSetBaseCost) document.getElementById(props.sectionName+'BaseCost'+state.rowIndex).value = derivedValues.baseCost;
-      else document.getElementById(props.sectionName+'BaseCost'+state.rowIndex).innerHTML = derivedValues.baseCost;
-      document.getElementById(props.sectionName+'Text'+state.rowIndex).value=state.text;  //might be empty
-      if('SPAN' === document.getElementById(props.sectionName+'SelectAction'+state.rowIndex).tagName)
-         document.getElementById(props.sectionName+'SelectAction'+state.rowIndex).innerHTML = '<b>' + state.action + '</b>';
-      else SelectUtil.setText((props.sectionName+'SelectAction'+state.rowIndex), state.action);  //Feature edge cases are handled in generate
-      if (state.effect === 'Feature')  //has unique drop downs
-      {
-         //these 2 holders always have selects
-         SelectUtil.setText((props.sectionName+'SelectRange'+state.rowIndex), state.range);
-         SelectUtil.setText((props.sectionName+'SelectDuration'+state.rowIndex), state.duration);
-      }
-      else
-      {
-         if('SPAN' === document.getElementById(props.sectionName+'SelectRange'+state.rowIndex).tagName)
-            document.getElementById(props.sectionName+'SelectRange'+state.rowIndex).innerHTML = '<b>' + state.range + '</b>';
-         else SelectUtil.setText((props.sectionName+'SelectRange'+state.rowIndex), state.range);
-         if(state.duration === 'Instant') document.getElementById(props.sectionName+'SelectDuration'+state.rowIndex).innerHTML = '<b>Instant</b>';
-         else SelectUtil.setText((props.sectionName+'SelectDuration'+state.rowIndex), state.duration);
-      }
+      //TODO: shared html will need to take in current value
       if(document.getElementById(props.sectionName+'Name'+state.rowIndex) !== null)  //might have been defined by power or modifier
          document.getElementById(props.sectionName+'Name'+state.rowIndex).value = state.name;
       if(document.getElementById(props.sectionName+'Skill'+state.rowIndex) !== null)
          document.getElementById(props.sectionName+'Skill'+state.rowIndex).value = state.skillUsed;
-      document.getElementById(props.sectionName+'Rank'+state.rowIndex).value=state.rank;  //must come before modifiers
-      modifierSection.setAll();
+      //no-op: modifierSection.setAll();
 
+      //TODO: find a place for this rank validation logic
       var totalRankCost=derivedValues.baseCost+modifierSection.getRankTotal();
       if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === state.effect && totalRankCost < 5) totalRankCost = 5;
       else if(totalRankCost < -3) totalRankCost = -3;  //can't be less than 1/5
@@ -344,7 +324,6 @@ function PowerObjectAgnostic(props)
       if(totalRankCost > 0) document.getElementById(props.sectionName+'TotalCostPerRank'+state.rowIndex).innerHTML=totalRankCost;
       else document.getElementById(props.sectionName+'TotalCostPerRank'+state.rowIndex).innerHTML='(1/'+(2-totalRankCost)+')';  //0 is 1/2 and -1 is 1/3
       document.getElementById(props.sectionName+'FlatModifierCost'+state.rowIndex).innerHTML=modifierSection.getFlatTotal();
-      document.getElementById(props.sectionName+'RowTotal'+state.rowIndex).innerHTML=state.total;
    };
    /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
    this.updateActivationModifiers=function()
