@@ -19,7 +19,7 @@ function PowerObjectAgnostic(props)
 
    //Basic getter section (all single line)
    this.getAction=function(){return state.action;};
-   this.getBaseCost=function(){return derivedValues.baseCost;};
+   this.getBaseCost=function(){return state.baseCost;};
    this.getDuration=function(){return state.duration;};
    /**Get the effect name of the power*/
    this.getEffect=function(){return state.effect;};
@@ -110,7 +110,7 @@ function PowerObjectAgnostic(props)
 
        state.effect = effectNameGiven;
        derivedValues.canSetBaseCost = Data.Power[state.effect].hasInputBaseCost;
-       derivedValues.baseCost = Data.Power[state.effect].baseCost;
+       state.baseCost = Data.Power[state.effect].baseCost;
        if(undefined === state.text) state.text = 'Descriptors and other text';  //let the text stay if changing between powers
        state.action = Data.Power[state.effect].defaultAction;
        state.range = Data.Power[state.effect].defaultRange;
@@ -123,7 +123,7 @@ function PowerObjectAgnostic(props)
    this.setBaseCost=function(baseGiven)
    {
        if(!derivedValues.canSetBaseCost || this.isBlank()) return;  //only possible when loading bad data
-       derivedValues.baseCost = sanitizeNumber(baseGiven, 1, Data.Power[state.effect].baseCost);  //unique defaults
+       state.baseCost = sanitizeNumber(baseGiven, 1, Data.Power[state.effect].baseCost);  //unique defaults
    };
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
@@ -238,10 +238,11 @@ function PowerObjectAgnostic(props)
    this.calculateValues=function()
    {
       modifierSection.calculateValues();
-      var costPerRank = (derivedValues.baseCost + modifierSection.getRankTotal());
-      if(costPerRank < 1) costPerRank = 1/(2 - costPerRank);
+      var costPerRank = (state.baseCost + modifierSection.getRankTotal());
       if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === state.effect && costPerRank < 5) costPerRank = 5;
-      else if(costPerRank < 0.2) costPerRank = 0.2;  //can't be less than 1/5
+      else if(costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
+      derivedValues.costPerRank = costPerRank;  //save the non-decimal version
+      if(costPerRank < 1) costPerRank = 1/(2 - costPerRank);
 
       state.total = Math.ceil(costPerRank*state.rank);  //round up
       var flatValue = modifierSection.getFlatTotal();
@@ -251,6 +252,7 @@ function PowerObjectAgnostic(props)
          state.rank = Math.floor(state.rank) + 1;  //must be higher than for this to work. don't use ceil so that if whole number will still be +1
          state.total = Math.ceil(costPerRank * state.rank);  //round up
       }
+      derivedValues.flatValue = flatValue;
       state.total += flatValue;  //flatValue might be negative
       if('A God I Am' === state.effect) state.total += 145;  //for first ranks
       else if('Reality Warp' === state.effect) state.total += 75;
@@ -278,7 +280,7 @@ function PowerObjectAgnostic(props)
       //don't just clone state: skill, cost is different
       var json = {};
       json.effect = state.effect;
-      if (derivedValues.canSetBaseCost) json.cost = derivedValues.baseCost;
+      if (derivedValues.canSetBaseCost) json.cost = state.baseCost;
       json.text = state.text;
       json.action = state.action;
       json.range = state.range;
@@ -308,17 +310,8 @@ function PowerObjectAgnostic(props)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-      if(this.isBlank()) return;  //already set (to default)
+      //no-op until they can all be removed from commons
       //no-op: modifierSection.setAll();
-
-      //TODO: find a place for this rank validation logic
-      var totalRankCost=derivedValues.baseCost+modifierSection.getRankTotal();
-      if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === state.effect && totalRankCost < 5) totalRankCost = 5;
-      else if(totalRankCost < -3) totalRankCost = -3;  //can't be less than 1/5
-
-      if(totalRankCost > 0) document.getElementById(props.sectionName+'TotalCostPerRank'+state.rowIndex).innerHTML=totalRankCost;
-      else document.getElementById(props.sectionName+'TotalCostPerRank'+state.rowIndex).innerHTML='(1/'+(2-totalRankCost)+')';  //0 is 1/2 and -1 is 1/3
-      document.getElementById(props.sectionName+'FlatModifierCost'+state.rowIndex).innerHTML=modifierSection.getFlatTotal();
    };
    /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
    this.updateActivationModifiers=function()
