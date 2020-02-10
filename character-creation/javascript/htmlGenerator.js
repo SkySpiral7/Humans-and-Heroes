@@ -86,10 +86,10 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
    if ('Attack' === state.name)
    {
       htmlString += '<div class="col-12 col-sm-6 col-lg-4">';
-      htmlString += Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex);
+      htmlString += Data.SharedHtml.powerName(props.sectionName, state.powerRowIndex, props.powerRowParent.getName());
       htmlString += '</div>';
       if (props.powerRowParent.getRange() !== 'Perception') htmlString += '<div class="col-12 col-sm-6 col-lg-4">' +
-         Data.SharedHtml.powerSkill(props.sectionName, state.powerRowIndex) + '</div>';
+         Data.SharedHtml.powerSkill(props.sectionName, state.powerRowIndex, props.powerRowParent.getSkillUsed()) + '</div>';
    }
    else  //attack doesn't have anything in this block so I might as well use else here
    {
@@ -244,10 +244,10 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    {
       htmlString += '<div class="row justify-content-end justify-content-xl-center">';
       htmlString += '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">';
-      htmlString += Data.SharedHtml.powerName(props.sectionName, state.rowIndex);
+      htmlString += Data.SharedHtml.powerName(props.sectionName, state.rowIndex, state.name);
       htmlString += '</div>';
       if (undefined !== state.skillUsed) htmlString += '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
-         Data.SharedHtml.powerSkill(props.sectionName, state.rowIndex) + '</div>';
+         Data.SharedHtml.powerSkill(props.sectionName, state.rowIndex, state.skillUsed) + '</div>';
       htmlString += '</div>';
    }
 

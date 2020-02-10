@@ -309,11 +309,6 @@ function PowerObjectAgnostic(props)
    this.setValues=function()
    {
       if(this.isBlank()) return;  //already set (to default)
-      //TODO: shared html will need to take in current value
-      if(document.getElementById(props.sectionName+'Name'+state.rowIndex) !== null)  //might have been defined by power or modifier
-         document.getElementById(props.sectionName+'Name'+state.rowIndex).value = state.name;
-      if(document.getElementById(props.sectionName+'Skill'+state.rowIndex) !== null)
-         document.getElementById(props.sectionName+'Skill'+state.rowIndex).value = state.skillUsed;
       //no-op: modifierSection.setAll();
 
       //TODO: find a place for this rank validation logic

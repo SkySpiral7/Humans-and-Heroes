@@ -160,22 +160,24 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
    assertions.push({Expected: 'Slower Action', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'Feature Slower Action: selected value'});
    Main.powerSection.clear();
 
-   function expectedSharedHtml(sharedName, sectionName, rowIndex)
+   function expectedSharedHtml(sharedName, sectionName, rowIndex, currentValue)
    {
-      return Data.SharedHtml[sharedName](sectionName, rowIndex)
+      return Data.SharedHtml[sharedName](sectionName, rowIndex, currentValue)
       .replace(/onChange/g, 'onchange')
       .replace(/ \/>/g, '>');
    }
 
    SelectUtil.changeText('powerChoices0', 'Flight');
    SelectUtil.changeText('powerModifierChoices0.0', 'Attack');
+   DomUtil.changeValue('powerName0', 'my name');
+   DomUtil.changeValue('powerSkill0', 'my skill');
    expected = '<div class="row">'+
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">'+
       '<select id="powerModifierChoices0.0" onchange="Main.powerSection.getModifierRowShort(0,0).select()">'+
       '</select>'+
       '</div>' +
-      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0) + '</div>'+
-      '<div class="col-12 col-sm-6 col-lg-4">' + expectedSharedHtml('powerSkill', 'power', 0) + '</div>'+
+      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0, 'my name') + '</div>'+
+      '<div class="col-12 col-sm-6 col-lg-4">' + expectedSharedHtml('powerSkill', 'power', 0, 'my skill') + '</div>'+
       '</div>';
    assertions.push({Expected: 'Attack', Actual: document.getElementById('powerModifierChoices0.0').value, Description: 'modifier is set'});
    document.getElementById('powerModifierChoices0.0').innerHTML = '';
@@ -187,7 +189,7 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
       '<select id="powerModifierChoices0.1" onchange="Main.powerSection.getModifierRowShort(0,1).select()">'+
       '</select>'+
       '</div>' +
-      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0) + '</div>'+
+      '<div class="col-12 col-sm-6 col-lg-4">'+expectedSharedHtml('powerName', 'power', 0, 'my name') + '</div>'+
       '</div>';
    //0.0 is Increased Range
    document.getElementById('powerModifierChoices0.1').innerHTML = '';
@@ -540,15 +542,17 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   function expectedSharedHtml(sharedName, sectionName, rowIndex)
+   function expectedSharedHtml(sharedName, sectionName, rowIndex, currentValue)
    {
-      return Data.SharedHtml[sharedName](sectionName, rowIndex)
+      return Data.SharedHtml[sharedName](sectionName, rowIndex, currentValue)
       .replace(/onChange/g, 'onchange')
       .replace(/ \/>/g, '>');
    }
 
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerText0', '');
+   DomUtil.changeValue('powerName0', 'my name 2');
+   DomUtil.changeValue('powerSkill0', 'my skill 2');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
@@ -575,10 +579,10 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>' +  //end action, range, duration row
       '<div class="row justify-content-end justify-content-xl-center">' +
       '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
-      expectedSharedHtml('powerName', 'power', 0) +
+      expectedSharedHtml('powerName', 'power', 0, 'my name 2') +
       '</div>' +
       '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
-      expectedSharedHtml('powerSkill', 'power', 0) +
+      expectedSharedHtml('powerSkill', 'power', 0, 'my skill 2') +
       '</div>' +
       '</div>' +
       '<div>modifiers</div>' +  //set below
@@ -607,6 +611,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerText0', '');
    SelectUtil.changeText('powerSelectRange0', 'Perception');
+   DomUtil.changeValue('powerName0', 'my name 3');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
       '</select></div>' +
@@ -633,7 +638,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>' +  //end action, range, duration row
       '<div class="row justify-content-end justify-content-xl-center">' +
       '<div class="col-12 col-sm-6 col-lg-5 col-xl-4">' +
-      expectedSharedHtml('powerName', 'power', 0) +
+      expectedSharedHtml('powerName', 'power', 0, 'my name 3') +
       '</div>' +
       '</div>' +
       '<div>modifiers</div>' +  //set below
