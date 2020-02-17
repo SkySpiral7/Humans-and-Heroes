@@ -975,14 +975,12 @@ TestSuite.powerRow.calculateValues=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
 
     try{
-    Main.powerSection.clear();
     Main.setRuleset(3,4);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
     DomUtil.changeValue('powerModifierRank0.0', 6);
     assertions.push({Expected: 1, Actual: Main.powerSection.getRow(0).getTotal(), Description: 'v3.4 Variable has no min cost'});
 
-    Main.powerSection.clear();
     Main.setRuleset(3,5);
     SelectUtil.changeText('powerChoices0', 'Variable');
     SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');

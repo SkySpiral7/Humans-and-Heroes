@@ -257,14 +257,11 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    htmlString += '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
    htmlString += '<input type="text" size="1" id="' + idFor('Rank') + '" onChange="' +
       onChangeFor('changeRank') + '" value="' + state.rank + '" /></label>';
-   //TODO: modern tests, remove spans
    var costPerRankDisplay = derivedValues.costPerRank;
    if (derivedValues.costPerRank > 0) costPerRankDisplay = '' + derivedValues.costPerRank;
    else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')';  //0 is 1/2 and -1 is 1/3
-   htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ';
-   htmlString += '<span id="' + idFor('TotalCostPerRank') + '">' + costPerRankDisplay + '</span></div>';
-   htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ';
-   htmlString += '<span id="' + idFor('FlatModifierCost') + '">'+derivedValues.flatValue+'</span></div>';
+   htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' + costPerRankDisplay + '</div>';
+   htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' + derivedValues.flatValue + '</div>';
    htmlString += '</div>';  //end row of costs
    htmlString += '<div class="row"><div class="col">Grand total for ' + props.sectionName.toTitleCase() + ': ';
    htmlString += state.total + '</div>';

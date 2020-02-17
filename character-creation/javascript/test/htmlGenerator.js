@@ -421,10 +421,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
-      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
-      '<span id="powerTotalCostPerRank0">2</span></div>' +
-      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
-      '<span id="powerFlatModifierCost0">0</span></div>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 2</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
@@ -476,10 +474,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
-      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
-      '<span id="powerTotalCostPerRank0">2</span></div>' +
-      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
-      '<span id="powerFlatModifierCost0">0</span></div>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 2</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
@@ -524,10 +520,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
-      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
-      '<span id="powerTotalCostPerRank0">5</span></div>' +
-      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
-      '<span id="powerFlatModifierCost0">0</span></div>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 5</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
       '<div class="row"><div class="col">Grand total for Power: 5</div>' +
       '</div>' +
@@ -589,10 +583,8 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
-      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
-      '<span id="powerTotalCostPerRank0">1</span></div>' +
-      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
-      '<span id="powerFlatModifierCost0">0</span></div>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 1</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
       '<div class="row"><div class="col">Grand total for Power: 1</div>' +
       '</div>' +
@@ -645,10 +637,9 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
-      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' +
-      '<span id="powerTotalCostPerRank0">4</span></div>' +  //Increased Range to Perception is +3
-      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' +
-      '<span id="powerFlatModifierCost0">0</span></div>' +
+      //Increased Range to Perception is +3
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 4</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
       '<div class="row"><div class="col">Grand total for Power: 4</div>' +
       '</div>' +
@@ -664,49 +655,100 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
+   SelectUtil.changeText('powerChoices0', 'Leaping');
+   DomUtil.changeValue('powerText0', '');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+   DomUtil.changeValue('powerRank0', '4');
+   expected = '<div class="container-fluid"><div class="row">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '</select></div>' +
+      '<div class="col">Base Cost per Rank: ' +
+      '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
+      '</div>' +  //end base cost col
+      '</div>' +  //end power/cost row
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
+      '<div class="row justify-content-center">' +  //action, range, duration row
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      '<label>Action' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '</select></label>' +
+      '</div>' +
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      'Range <span id="powerSelectRange0" style="display: inline-block; width: 90px; text-align: center;"><b>Personal</b></span>' +
+      '</div>' +
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      'Duration <span id="powerSelectDuration0" style="display: inline-block; width: 80px; text-align: center;"><b>Instant</b></span>' +
+      '</div>' +
+      '</div>' +  //end action, range, duration row
+      '<div>modifiers</div>' +  //set below
+      '<div class="row">' +
+      '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="4"></label>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: (1/2)</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
+      '</div>' +  //end row of costs
+      '<div class="row"><div class="col">Grand total for Power: 2</div>' +
+      '</div>' +
+      '</div>';  //<hr> is next child
+   document.getElementById('powerChoices0').innerHTML = '';
+   document.getElementById('powerSelectAction0').innerHTML = '';
+   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   assertions.push({
+      Expected: expected,
+      Actual: document.getElementById('power-section').firstChild.outerHTML,
+      Description: 'costPerRank 0 displays 1/2'
+   });
+   Main.powerSection.clear();  //to regenerate powerChoices0
+
+   SelectUtil.changeText('powerChoices0', 'Leaping');
+   DomUtil.changeValue('powerText0', '');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
+   DomUtil.changeValue('powerModifierRank0.0', '3');
+   DomUtil.changeValue('powerRank0', '8');
+   expected = '<div class="container-fluid"><div class="row">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '</select></div>' +
+      '<div class="col">Base Cost per Rank: ' +
+      '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
+      '</div>' +  //end base cost col
+      '</div>' +  //end power/cost row
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      ' value=""></div>' +
+      '<div class="row justify-content-center">' +  //action, range, duration row
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      '<label>Action' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '</select></label>' +
+      '</div>' +
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      'Range <span id="powerSelectRange0" style="display: inline-block; width: 90px; text-align: center;"><b>Personal</b></span>' +
+      '</div>' +
+      '<div class="col-12 col-sm-4 col-lg-3">' +
+      'Duration <span id="powerSelectDuration0" style="display: inline-block; width: 80px; text-align: center;"><b>Instant</b></span>' +
+      '</div>' +
+      '</div>' +  //end action, range, duration row
+      '<div>modifiers</div>' +  //set below
+      '<div class="row">' +
+      '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="8"></label>' +
+      '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: (1/4)</div>' +
+      '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
+      '</div>' +  //end row of costs
+      '<div class="row"><div class="col">Grand total for Power: 2</div>' +
+      '</div>' +
+      '</div>';  //<hr> is next child
+   document.getElementById('powerChoices0').innerHTML = '';
+   document.getElementById('powerSelectAction0').innerHTML = '';
+   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   assertions.push({
+      Expected: expected,
+      Actual: document.getElementById('power-section').firstChild.outerHTML,
+      Description: 'costPerRank -2 displays 1/4'
+   });
+   Main.powerSection.clear();  //to regenerate powerChoices0
+
    //TODO: some of these tests are valid (but shouldn't check html). move or delete them
-   try{
-   Main.powerSection.clear();
-   SelectUtil.changeText('powerChoices0', 'Variable');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
-   assertions.push({Expected: '6', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Rank flaws reduce cost/rank'});
-
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
-   assertions.push({Expected: '(1/2)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Displays fractional Rank flaws'});
-
-   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-   DomUtil.changeValue('powerModifierRank0.0', 100);
-   assertions.push({Expected: '(1/5)', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'Rank flaws min of 1/5'});
-   } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
-
-   try{
-   Main.powerSection.clear();
-   Main.setRuleset(3,4);
-   SelectUtil.changeText('powerChoices0', 'Variable');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-   DomUtil.changeValue('powerModifierRank0.0', 6);
-   assertions.push({Expected: '1', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.4 Variable has no min cost'});
-
-   Main.powerSection.clear();
-   Main.setRuleset(3,5);
-   SelectUtil.changeText('powerChoices0', 'Variable');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-   DomUtil.changeValue('powerModifierRank0.0', 6);
-   assertions.push({Expected: '5', Actual: document.getElementById('powerTotalCostPerRank0').innerHTML, Description: 'v3.5 Variable has a min cost of 5/rank'});
-   } catch(e){assertions.push({Error: e, Description: 'Variable min cost'});}
-
-   try{
-   SelectUtil.changeText('powerChoices0', 'Flight');
-   assertions.push({Expected: 'SPAN', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'Fixed base cost for flight'});
-
-   SelectUtil.changeText('powerChoices0', 'Movement');
-   assertions.push({Expected: 'INPUT', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'input base cost for movement'});
-
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   assertions.push({Expected: 'INPUT', Actual: document.getElementById('powerBaseCost0').tagName, Description: 'input base cost for feature'});
-   } catch(e){assertions.push({Error: e, Description: 'input base cost'});}
-
    try{
    SelectUtil.changeText('powerChoices0', 'Flight');
    SelectUtil.changeText('powerSelectDuration0', 'Permanent');
