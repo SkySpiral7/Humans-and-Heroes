@@ -139,7 +139,8 @@ function PowerObjectAgnostic(props)
       if (!Data.Power.actions.contains(newActionName))
       {
          //if not found (only possible when loading bad data)
-         Main.messageUser('PowerObjectAgnostic.setAction.notExist', props.sectionName.toTitleCase() + ' #' + (state.rowIndex+1) + ': ' + newActionName + ' is not the name of an action.');
+         Main.messageUser('PowerObjectAgnostic.setAction.notExist', props.sectionName.toTitleCase() + ' #' +
+            (state.rowIndex+1) + ': ' + newActionName + ' is not the name of an action.');
          return;
       }
 
@@ -147,7 +148,8 @@ function PowerObjectAgnostic(props)
 
       if(!derivedValues.shouldValidateActivationInfo) return;  //done
       this._updateActionModifiers();
-      if('Reaction' === state.action && 'Feature' !== state.effect && 'Luck Control' !== state.effect && Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4)) this.setRange('Close');
+      if('Reaction' === state.action && 'Feature' !== state.effect && 'Luck Control' !== state.effect &&
+         Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4)) this.setRange('Close');
       this.generateNameAndSkill();
    };
    /**Used to set data independent of the document and without calling update*/
@@ -158,7 +160,8 @@ function PowerObjectAgnostic(props)
       if (!Data.Power.ranges.contains(newRangeName))
       {
          //if not found (only possible when loading bad data)
-         Main.messageUser('PowerObjectAgnostic.setRange.notExist', props.sectionName.toTitleCase() + ' #' + (state.rowIndex+1) + ': ' + newRangeName + ' is not the name of a range.');
+         Main.messageUser('PowerObjectAgnostic.setRange.notExist', props.sectionName.toTitleCase() + ' #' +
+            (state.rowIndex+1) + ': ' + newRangeName + ' is not the name of a range.');
          return;
       }
 
@@ -301,9 +304,11 @@ function PowerObjectAgnostic(props)
          state.name = state.skillUsed = undefined;
          return;
       }
-      if(undefined === state.name) state.name = (props.sectionName.toTitleCase() + ' ' + (state.rowIndex+1) + ' ' + state.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+      if(undefined === state.name) state.name = (props.sectionName.toTitleCase() + ' ' + (state.rowIndex+1) +
+         ' ' + state.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
 
-      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === state.action && 'Luck Control' !== state.effect && 'Feature' !== state.effect);
+      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === state.action &&
+         'Luck Control' !== state.effect && 'Feature' !== state.effect);
       if('Perception' === state.range || isAura) state.skillUsed = undefined;
       else if(undefined === state.skillUsed) state.skillUsed = 'Skill used for attack';
    };
@@ -333,7 +338,8 @@ function PowerObjectAgnostic(props)
       if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== state.effect && 'Feature' !== state.effect &&
          'Reaction' === state.action && 'Close' !== state.range)
       {
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose', props.sectionName.toTitleCase() + ' #' + (state.rowIndex+1) + ': ' +
+         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose', props.sectionName.toTitleCase() +
+            ' #' + (state.rowIndex+1) + ': ' +
             state.effect + ' has an action of Reaction and therefore must have a range of Close.');
          state.range = 'Close';
          //TODO: confusing limitation: in 3 cases Variable is allowed to have Reaction with Personal range
@@ -458,24 +464,29 @@ function PowerObjectAgnostic(props)
          Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.notNone', props.sectionName.toTitleCase() + ' #' + (state.rowIndex+1) + ': ' +
             state.effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + state.duration + '). Using action of ' + state.action + ' instead.');
       }
+      var possibleActions = Data.Power.actions.copy();
+      possibleActions.removeByValue('None');  //it would have returned above if none is allowed
 
-      var possibleActions = [];
       var allowMoveAction = (Main.getActiveRuleset().isLessThan(3,4) || !Data.Power[state.effect].isAttack || 'Move Object' === state.effect);
+      if (!allowMoveAction) possibleActions.removeByValue('Move');
       if ('Move' === state.action && !allowMoveAction)
       {
          state.action = Data.Power[state.effect].defaultAction;
          if('None' === state.action) state.action = 'Free';  //dead code: attacks can't have a default duration of Permanent
-         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed', props.sectionName.toTitleCase() + ' #' + (state.rowIndex+1) + ': ' +
-            state.effect + ' can\'t have an action of Move because it is an attack type. Using action of ' + state.action + ' instead.');
+         Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed',
+            props.sectionName.toTitleCase() + ' #' + (state.rowIndex + 1) + ': ' + state.effect + ' can\'t have an action ' +
+            'of Move because it is an attack type. Using action of ' + state.action + ' instead.');
       }
 
-      var allowFreeAction = (Main.getActiveRuleset().isLessThan(3,4) || (allowMoveAction && !Data.Power[state.effect].isMovement && 'Healing' !== state.effect));
+      var allowFreeAction = (Main.getActiveRuleset().isLessThan(3, 4) ||
+         (allowMoveAction && !Data.Power[state.effect].isMovement && 'Healing' !== state.effect));
+      if (!allowFreeAction) possibleActions.removeByValue('Free');
       if ('Free' === state.action && !allowFreeAction)
       {
          if (!allowMoveAction)
          {
             state.action = Data.Power[state.effect].defaultAction;
-            if ('None' === state.action) state.action = 'Free';  //dead code: attacks can't have a default duration of Permanent
+            if ('None' === state.action) state.action = 'Free';  //dead code: attacks/movement can't have a default duration of Permanent
             Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks', props.sectionName.toTitleCase() + ' #' + (state.rowIndex + 1) + ': ' +
                state.effect + ' can\'t have an action of Free because it is an attack type. Using action of ' + state.action + ' instead.');
          }
@@ -498,6 +509,7 @@ function PowerObjectAgnostic(props)
       }
 
       var allowReaction = (Main.getActiveRuleset().isLessThan(3,4) || Data.Power[state.effect].allowReaction);
+      if (!allowReaction) possibleActions.removeByValue('Reaction');
       if ('Reaction' === state.action && !allowReaction)
       {
          state.action = Data.Power[state.effect].defaultAction;
@@ -507,14 +519,6 @@ function PowerObjectAgnostic(props)
          //TODO: confusing limitation: Variable is allowed to have Reaction in 3 cases
       }
 
-      for (var i = 0; i < Data.Power.actions.length - 1; ++i)  //-1 to avoid 'None'
-      {
-         //I'd rather not unroll the loop because Data.Power.actions.length is dependent on the version
-         if(!allowMoveAction && 'Move' === Data.Power.actions[i]) continue;
-         if(!allowFreeAction && 'Free' === Data.Power.actions[i]) continue;
-         if(!allowReaction && 'Reaction' === Data.Power.actions[i]) continue;
-         possibleActions.push(Data.Power.actions[i]);
-      }
       return possibleActions;
    };
    /**@returns {Array} of all durations that are possible for this power based on current state.*/

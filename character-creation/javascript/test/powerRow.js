@@ -255,6 +255,7 @@ TestSuite.powerRow.validateActivationInfo_valid=function(testState={})
 TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
 {
    TestRunner.clearResults(testState);
+   //this func doesn't need feature tests but it has them anyway
 
    var dataToLoad;
    var assertions=[];
@@ -265,6 +266,11 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRow(0).getAction(), Description: 'None action happy: getAction'});
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'None action happy: getDuration'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'None action happy: error'});
+   assertions.push({
+      Expected: ['None'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'None action happy: return'
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
@@ -306,12 +312,22 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Move action happy: action'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'Move action happy: error'});
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Move', 'Free'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'happy: returns all actions except Reaction'  //and None
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Move","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Standard', Actual: Main.powerSection.getRow(0).getAction(), Description: 'moveNotAllowed isAttack: action'});
    assertions.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed'], Actual: Messages.errorCodes(), Description: 'moveNotAllowed isAttack: error'});
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Reaction'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'isAttack: returns all actions except Move, Free'  //and None
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Move Object","text":"","action":"Move","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
@@ -336,6 +352,11 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'freeNotAllowedForMovement: action'});
    assertions.push({Expected: ['PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement'], Actual: Messages.errorCodes(), Description: 'freeNotAllowedForMovement: error'});
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Move'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'movement: returns all actions except Free, Reaction'  //and None
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Healing","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
@@ -377,6 +398,21 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Reaction Feature happy: action'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'Reaction Feature happy: error'});
 
+   Main.powerSection.clear();
+   SelectUtil.changeText('powerChoices0', 'Illusion');  //isAttack but !allowReaction
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'Illusion: returns all actions except Move, Free, Reaction'  //and None
+   });
+   SelectUtil.changeText('powerChoices0', 'Luck Control');  //!isAttack and allowReaction
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction'],
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'Luck Control: returns all actions'  //except None
+   });
+   //every other allowReaction is also isAttack. Damage has been tested above
+
    Main.setRuleset(3,3);
 
    dataToLoad = Loader.resetData();
@@ -384,6 +420,11 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 move isAttack happy: action'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'v3.3 move isAttack happy: error'});
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction', 'Triggered'],  //except None
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'v3.3 returns all actions'
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Free","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
@@ -408,6 +449,26 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRow(0).getAction(), Description: 'v3.3 Reaction Flight: action'});
    assertions.push({Expected: [], Actual: Messages.list, Description: 'v3.3 Reaction Flight: error'});
+
+   Main.setRuleset(2,7);
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Standard","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction', 'Triggered'],  //except None
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'v2.x returns all actions'
+   });
+
+   Main.setRuleset(1,0);
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Standard","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: ['Standard', 'Move', 'Free', 'Reaction'],  //except None
+      Actual: Main.powerSection.getRow(0)._validateAndGetPossibleActions(),
+      Description: 'v1.0 returns all actions'
+   });
 
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleActions', assertions, testState);
 };
