@@ -442,6 +442,20 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({
+      Expected: 'Move',
+      Actual: document.getElementById('powerSelectAction0').value,
+      Description: 'action: selected value'
+   });
+   SelectUtil.changeText('powerSelectAction0', 'Full');
+   assertions.push({
+      Expected: 'Full',
+      Actual: document.getElementById('powerSelectAction0').value,
+      Description: 'action: has list of values that can be selected'
+   });
+   Main.powerSection.clear();
+
    SelectUtil.changeText('powerChoices0', 'Create');
    DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
@@ -491,6 +505,34 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       Description: 'Create: !canSetBaseCost, select range, select duration'
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
+
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   assertions.push({
+      Expected: 'Close',
+      Actual: document.getElementById('powerSelectRange0').value,
+      Description: 'range: selected value'
+   });
+   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   assertions.push({
+      Expected: 'Ranged',
+      Actual: document.getElementById('powerSelectRange0').value,
+      Description: 'range: has list of values that can be selected'
+   });
+   Main.powerSection.clear();
+
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   assertions.push({
+      Expected: 'Permanent',
+      Actual: document.getElementById('powerSelectDuration0').value,
+      Description: 'duration: selected value'
+   });
+   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   assertions.push({
+      Expected: 'Sustained',
+      Actual: document.getElementById('powerSelectDuration0').value,
+      Description: 'duration: has list of values that can be selected'
+   });
+   Main.powerSection.clear();
 
    SelectUtil.changeText('powerChoices0', 'Immortality');
    DomUtil.changeValue('powerText0', '');
