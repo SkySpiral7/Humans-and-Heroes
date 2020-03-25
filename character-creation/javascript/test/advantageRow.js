@@ -321,12 +321,3 @@ TestSuite.advantageRow.setText=function(testState={})
 
     return TestRunner.displayResults('TestSuite.advantageRow.setText', assertions, testState);
 };
-TestSuite.advantageRow.setValues=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.advantageRow.setValues', assertions, testState);
-};

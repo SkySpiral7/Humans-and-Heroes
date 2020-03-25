@@ -100,11 +100,6 @@ function SkillObject(initialRowIndex)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   /**This sets the page's data. called only by section generate*/
-   this.setValues=function()
-   {
-      //no-op until they can all be removed from commons
-   };
    this._constructor=function()
    {
       state = {rowIndex: initialRowIndex};

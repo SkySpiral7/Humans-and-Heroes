@@ -793,7 +793,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    //TODO: previously there was also IT for flaws reducing cost. maybe have those in a special place
    return TestRunner.displayResults('TestSuite.HtmlGenerator.powerRow', assertions, testState);
 };
-TestSuite.HtmlGenerator.skillRow=function(testState={})
+TestSuite.HtmlGenerator.skillRow = function (testState = {})
 {
    TestRunner.clearResults(testState);
 
@@ -832,10 +832,10 @@ TestSuite.HtmlGenerator.skillRow=function(testState={})
    });
    Main.skillSection.clear();
 
-   expected = '<div class="row">'+
-      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
-      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
-      '</select></div>'+
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">' +
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">' +
+      '</select></div>' +
       '</div>';
    document.getElementById('skillChoices0').innerHTML = '';
    assertions.push({
@@ -848,11 +848,11 @@ TestSuite.HtmlGenerator.skillRow=function(testState={})
    SelectUtil.changeText('skillChoices0', 'Knowledge');
    DomUtil.changeValue('skillText0', 'my text');
    DomUtil.changeValue('skillRank0', '3');
-   expected = '<div class="row">'+
-      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
-      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
-      '</select></div>'+
-      '<div class="col-12 col-sm-8 col-md-5">'+
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">' +
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">' +
+      '</select></div>' +
+      '<div class="col-12 col-sm-8 col-md-5">' +
       '<input type="text" style="width: 100%" id="skillText0" onchange="Main.skillSection.getRow(0).changeText();" value="my text">' +
       '</div>' +  //text
       '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">' +
@@ -872,10 +872,10 @@ TestSuite.HtmlGenerator.skillRow=function(testState={})
    Main.skillSection.clear();  //to regenerate skillChoices0
 
    SelectUtil.changeText('skillChoices0', 'Perception');
-   expected = '<div class="row">'+
-      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
-      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
-      '</select></div>'+
+   expected = '<div class="row">' +
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">' +
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">' +
+      '</select></div>' +
       '<div class="col-12 col-sm-8 col-xl-auto">' +
       '<label>Ranks <input type="text" size="1" id="skillRank0" onchange="Main.skillSection.getRow(0).changeRank();" value="1"></label>' +
       '+&nbsp;<select id="skillAbility0" onchange="Main.skillSection.getRow(0).selectAbility();">' +

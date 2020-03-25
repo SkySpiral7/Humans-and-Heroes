@@ -72,15 +72,6 @@ TestSuite.CommonsLibrary.sanitizeRows=function(testState={})
 
    return TestRunner.displayResults('TestSuite.CommonsLibrary.sanitizeRows', assertions, testState);
 };
-TestSuite.CommonsLibrary.setAll=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.setAll', assertions, testState);
-};
 TestSuite.CommonsLibrary.initializeRows=function(testState={})
 {
    TestRunner.clearResults(testState);

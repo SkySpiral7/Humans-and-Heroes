@@ -26,8 +26,6 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    //don't use CommonsLibrary.generate.call(this, rowArray, 'modifier'); because this isn't a section and the generate must return a string
    //don't use CommonsLibrary.removeRow(rowArray, rowIndex); because the way index is updated is different
    //don't use CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
-   /**This set the page's data. called only by power row generate*/
-   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/

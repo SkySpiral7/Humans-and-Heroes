@@ -312,12 +312,6 @@ function PowerObjectAgnostic(props)
       json.rank = state.rank;
       return json;
    };
-   /**This sets the page's data. called only by section generate*/
-   this.setValues=function()
-   {
-      //no-op until they can all be removed from commons
-      //no-op: modifierSection.setAll();
-   };
    /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
    this.updateActivationModifiers=function()
    {

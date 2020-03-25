@@ -194,12 +194,3 @@ TestSuite.modifierRow.setAutoRank=function(testState={})
 
     return TestRunner.displayResults('TestSuite.modifierRow.setAutoRank', assertions, testState);
 };
-TestSuite.modifierRow.setValues=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierRow.setValues', assertions, testState);
-};
