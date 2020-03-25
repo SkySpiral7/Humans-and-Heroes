@@ -277,6 +277,22 @@ function PowerObjectAgnostic(props)
       }
       return HtmlGenerator.powerRow(props, state, derivedValues);
    };
+   /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
+   this.generateNameAndSkill=function()
+   {
+      if (!Data.Power[state.effect].isAttack && undefined === modifierSection.findRowByName('Attack'))
+      {
+         state.name = state.skillUsed = undefined;
+         return;
+      }
+      if(undefined === state.name) state.name = (props.sectionName.toTitleCase() + ' ' + (state.rowIndex+1) +
+         ' ' + state.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+
+      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === state.action &&
+         'Luck Control' !== state.effect && 'Feature' !== state.effect);
+      if('Perception' === state.range || isAura) state.skillUsed = undefined;
+      else if(undefined === state.skillUsed) state.skillUsed = 'Skill used for attack';
+   };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
@@ -295,22 +311,6 @@ function PowerObjectAgnostic(props)
       json.Modifiers = modifierSection.save();
       json.rank = state.rank;
       return json;
-   };
-   /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
-   this.generateNameAndSkill=function()
-   {
-      if (!Data.Power[state.effect].isAttack && undefined === modifierSection.findRowByName('Attack'))
-      {
-         state.name = state.skillUsed = undefined;
-         return;
-      }
-      if(undefined === state.name) state.name = (props.sectionName.toTitleCase() + ' ' + (state.rowIndex+1) +
-         ' ' + state.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
-
-      var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3,4) && 'Reaction' === state.action &&
-         'Luck Control' !== state.effect && 'Feature' !== state.effect);
-      if('Perception' === state.range || isAura) state.skillUsed = undefined;
-      else if(undefined === state.skillUsed) state.skillUsed = 'Skill used for attack';
    };
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
@@ -360,6 +360,7 @@ function PowerObjectAgnostic(props)
       if('Feature' === state.effect) possibleRanges.push('Personal');
       else
       {
+         //TODO: does load validate that Reaction is Close?
          if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Reaction' === state.action && 'Luck Control' !== state.effect) return ['Close'];
          if('Personal' === state.range) return ['Personal'];
       }
@@ -569,7 +570,7 @@ function PowerObjectAgnostic(props)
             state.effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
          state.range = defaultRange;  //can't change something to personal unless it started out as that (Feature's defaultRange is Personal)
       }
-      else if ('Personal' !== state.range  && 'Personal' === defaultRange)
+      else if ('Personal' !== state.range && 'Personal' === defaultRange)
       {
          var hasNonPersonalMod = modifierSection.isNonPersonalModifierPresent();
          if (!hasNonPersonalMod)

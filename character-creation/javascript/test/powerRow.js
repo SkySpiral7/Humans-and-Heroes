@@ -1089,37 +1089,64 @@ TestSuite.powerRow.calculateValues=function(testState={})
 
     return TestRunner.displayResults('TestSuite.powerRow.calculateValues', assertions, testState);
 };
+TestSuite.powerRow.generate=function(testState={})
+{
+   TestRunner.clearResults(testState);
+
+   const assertions = [];
+
+   /*2 different values for each to show they aren't hard coded.
+   check DOM to show that it's passed to HTML*/
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 1'});
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 2'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 1'});
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 2'});
+
+   SelectUtil.changeText('powerChoices0', 'Flight');
+   assertions.push(
+      {Expected: true, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 1'});
+   SelectUtil.changeText('powerChoices0', 'Create');
+   assertions.push(
+      {Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 2'});
+
+   return TestRunner.displayResults('TestSuite.powerRow.generate', assertions, testState);
+};
 TestSuite.powerRow.generateNameAndSkill=function(testState={})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var assertions=[];
-    try{
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name 1'});
-    assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Default skill 1'});
-    SelectUtil.changeText('powerChoices1', 'Affliction');
-    assertions.push({Expected: 'Power 2 Affliction', Actual: Main.powerSection.getRow(1).getName(), Description: 'Default name 2'});
-    SelectUtil.changeText('equipmentChoices0', 'Nullify');
-    assertions.push({Expected: 'Equipment 1 Nullify', Actual: Main.equipmentSection.getRow(0).getName(), Description: 'Default name 3'});
-    assertions.push({Expected: 'Skill used for attack', Actual: Main.equipmentSection.getRow(0).getSkillUsed(), Description: 'Default skill 2'});
-    } catch(e){assertions.push({Error: e, Description: 'Default name and skill'});}
+   const assertions=[];
+   try{
+      SelectUtil.changeText('powerChoices0', 'Damage');
+      assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name 1'});
+      assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Default skill 1'});
+      SelectUtil.changeText('powerChoices1', 'Affliction');
+      assertions.push({Expected: 'Power 2 Affliction', Actual: Main.powerSection.getRow(1).getName(), Description: 'Default name 2'});
+      SelectUtil.changeText('equipmentChoices0', 'Nullify');
+      assertions.push({Expected: 'Equipment 1 Nullify', Actual: Main.equipmentSection.getRow(0).getName(), Description: 'Default name 3'});
+      assertions.push({Expected: 'Skill used for attack', Actual: Main.equipmentSection.getRow(0).getSkillUsed(), Description: 'Default skill 2'});
+   } catch(e){assertions.push({Error: e, Description: 'Default name and skill'});}
 
-    try{
-    Main.clear();
-    Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Flight');
-    assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'No name'});
-    assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'No skill'});
+   try{
+      Main.clear();
+      Main.setRuleset(3,4);
+      SelectUtil.changeText('powerChoices0', 'Flight');
+      assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getName(), Description: 'No name'});
+      assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'No skill'});
 
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
-    assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name'});
-    assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Aura has no skill'});
-    SelectUtil.changeText('powerSelectAction0', 'Standard');
-    SelectUtil.changeText('powerSelectRange0', 'Perception');
-    assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Perception has no skill'});
-    } catch(e){assertions.push({Error: e, Description: 'No name or skill'});}
+      SelectUtil.changeText('powerChoices0', 'Damage');
+      SelectUtil.changeText('powerSelectAction0', 'Reaction');
+      assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRow(0).getName(), Description: 'Default name'});
+      assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Aura has no skill'});
+      SelectUtil.changeText('powerSelectAction0', 'Standard');
+      SelectUtil.changeText('powerSelectRange0', 'Perception');
+      assertions.push({Expected: undefined, Actual: Main.powerSection.getRow(0).getSkillUsed(), Description: 'Perception has no skill'});
+   } catch(e){assertions.push({Error: e, Description: 'No name or skill'});}
 
-    return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', assertions, testState);
+   return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', assertions, testState);
 };
