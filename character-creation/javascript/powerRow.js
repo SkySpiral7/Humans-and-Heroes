@@ -335,6 +335,9 @@ function PowerObjectAgnostic(props)
       this._validatePersonalRange();
       this._validateAndGetPossibleDurations();
       this._validateAndGetPossibleActions();
+      /*the order is Range, Duration, Action, Range again
+      first 3 are required order based on dependencies,
+      visit range again so that Reaction can have a more reasonable fallback action*/
       if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== state.effect && 'Feature' !== state.effect &&
          'Reaction' === state.action && 'Close' !== state.range)
       {
@@ -360,7 +363,6 @@ function PowerObjectAgnostic(props)
       if('Feature' === state.effect) possibleRanges.push('Personal');
       else
       {
-         //TODO: does load validate that Reaction is Close?
          if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'Reaction' === state.action && 'Luck Control' !== state.effect) return ['Close'];
          if('Personal' === state.range) return ['Personal'];
       }

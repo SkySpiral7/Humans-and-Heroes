@@ -103,12 +103,7 @@ function SkillObject(initialRowIndex)
    /**This sets the page's data. called only by section generate*/
    this.setValues=function()
    {
-       if(this.isBlank()) return;  //already set (to default)
-       SelectUtil.setText(('skillChoices'+state.rowIndex), state.name);
-       if(derivedValues.hasText) document.getElementById('skillText'+state.rowIndex).value=state.text;
-       document.getElementById('skillRank'+state.rowIndex).value = state.rank;
-       SelectUtil.setText(('skillAbility'+state.rowIndex), state.abilityName);
-       document.getElementById('skillBonus'+state.rowIndex).innerHTML = derivedValues.totalBonus;
+      //no-op until they can all be removed from commons
    };
    this._constructor=function()
    {

@@ -55,12 +55,3 @@ TestSuite.skillRow.setSkill=function(testState={})
 
     return TestRunner.displayResults('TestSuite.skillRow.setSkill', assertions, testState);
 };
-TestSuite.skillRow.setValues=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.skillRow.setValues', assertions, testState);
-};

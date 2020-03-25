@@ -90,6 +90,7 @@ CommonsLibrary.sanitizeRows=function(rowArray)
    if(rowArray.isEmpty() || !rowArray.last().isBlank())  //if last row isn't blank add one
        this.addRow();
 };
+//TODO: delete setValues. have generate populate the values as it creates (closer to react)
 /**This set the page's data. called only by generate*/
 CommonsLibrary.setAll=function(rowArray)
 {

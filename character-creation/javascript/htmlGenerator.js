@@ -1,5 +1,10 @@
 'use strict';
 var HtmlGenerator = {};
+/*
+values used:
+state: {name, rowIndex, rank, text};
+derivedValues: {hasRank, costPerRank, total};
+*/
 HtmlGenerator.advantageRow = function (state, derivedValues)
 {
    var htmlString = '<div class="row">', i;
@@ -131,7 +136,6 @@ var props = {powerListParent, sectionName};
 var state = {rowIndex, effect, skillUsed};
 var derivedValues = {possibleActions, possibleRanges, possibleDurations, canSetBaseCost, modifierHtml};
 */
-//TODO: delete setValues. have generate populate the values as it creates (closer to react)
 HtmlGenerator.powerRow = function (props, state, derivedValues)
 {
    function idFor(elementLabel)
@@ -269,45 +273,51 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    htmlString += '</div><hr />';
    return htmlString;
 };
-HtmlGenerator.skillRow=function(state, derivedValues)
+/*
+values used:
+state: {rowIndex, name, text, rank, abilityName};
+derivedValues: {hasText, totalBonus};
+*/
+HtmlGenerator.skillRow = function (state, derivedValues)
 {
-   var htmlString = '<div class="row">\n';
+   var htmlString = '<div class="row">', i;
    htmlString += '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">';
    htmlString += '<select id="skillChoices' + state.rowIndex + '" ' +
-      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').select();">\n';
-   htmlString += '   <option>Select Skill</option>\n';
-   for (var i = 0; i < Data.Skill.names.length; i++)
+      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').select();">';
+   htmlString += '<option>Select Skill</option>';
+   for (i = 0; i < Data.Skill.names.length; i++)
    {
-      htmlString += '   <option>' + Data.Skill.names[i] + '</option>\n';
+      htmlString += '<option';
+      if (state.name === Data.Skill.names[i]) htmlString += ' selected';
+      htmlString += '>' + Data.Skill.names[i] + '</option>';
    }
-   htmlString += '</select></div>\n';
+   htmlString += '</select></div>';
    if (undefined === state.name) return htmlString + '</div>';  //done
 
    if (derivedValues.hasText)
    {
       htmlString += '<div class="col-12 col-sm-8 col-md-5">';
       htmlString += '<input type="text" style="width: 100%" id="skillText' + state.rowIndex + '" ' +
-         'onChange="Main.skillSection.getRow(' + state.rowIndex + ').changeText();" />';
-      htmlString += '</div>\n';
+         'onChange="Main.skillSection.getRow(' + state.rowIndex + ').changeText();" value="' + state.text + '" />';
+      htmlString += '</div>';
       htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
    }
    else htmlString += '<div class="col-12 col-sm-8 col-xl-auto">';
    htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + state.rowIndex + '" ' +
-      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').changeRank();" /></label>\n';
+      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').changeRank();" value="' + state.rank + '" /></label>';
    //v1 Expertise can use any ability but PL sounds like Int only. Also sounds like the rest are set
    htmlString += '+&nbsp;<select id="skillAbility' + state.rowIndex + '" ' +
-      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').selectAbility();">\n';
-   htmlString += '   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
-   htmlString += '   <option>Agility</option>\n';
-   htmlString += '   <option>Fighting</option>\n';
-   htmlString += '   <option>Dexterity</option>\n';
-   htmlString += '   <option>Stamina</option>\n';
-   htmlString += '   <option>Intellect</option>\n';
-   htmlString += '   <option>Awareness</option>\n';
-   htmlString += '   <option>Presence</option>\n';
-   htmlString += '</select>\n';
-   htmlString += '(<span id="skillBonus' + state.rowIndex + '"></span>)\n';
-   htmlString += '</div>\n';
-   htmlString += '</div>\n';
+      'onChange="Main.skillSection.getRow(' + state.rowIndex + ').selectAbility();">';
+   //data doesn't change but loop makes selected easier
+   for (i = 0; i < Data.Ability.names.length; i++)
+   {
+      htmlString += '<option';
+      if (state.abilityName === Data.Ability.names[i]) htmlString += ' selected';
+      htmlString += '>' + Data.Ability.names[i] + '</option>';
+   }
+   htmlString += '</select>';
+   htmlString += '(' + derivedValues.totalBonus + ')';
+   htmlString += '</div>';
+   htmlString += '</div>';
    return htmlString;
 };

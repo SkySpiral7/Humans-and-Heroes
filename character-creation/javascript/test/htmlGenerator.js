@@ -316,12 +316,12 @@ TestSuite.HtmlGenerator.modifierRow=function(testState={})
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.modifierRow', assertions, testState);
 };
-//TODO: test html generation
 TestSuite.HtmlGenerator.powerRow = function (testState={})
 {
    TestRunner.clearResults(testState);
 
-   var assertions = [], expected;
+   const assertions = [];
+   let expected;
 
    assertions.push({
       Expected: 'Select Power',
@@ -795,41 +795,102 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
 };
 TestSuite.HtmlGenerator.skillRow=function(testState={})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var assertions=[];
-    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Initial: First Row is blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Initial Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Initial Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: 'Initial: Text doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: 'Initial: Rank doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: 'Initial: Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: 'Initial: Bonus doesn\'t exist'});
+   const assertions = [];
+   let expected;
 
-    try{
-    SelectUtil.changeText('skillChoices0', 'Acrobatics');
-    assertions.push({Expected: false, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Set Acrobatics: First Row is not blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Set Acrobatics Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Set Acrobatics Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: 'Skill Subtype', Actual: document.getElementById('skillText0').value, Description: 'Set Acrobatics: Text exists'});
-    assertions.push({Expected: '1', Actual: document.getElementById('skillRank0').value, Description: 'Set Acrobatics: Rank exists'});
-    assertions.push({Expected: 'Agility', Actual: document.getElementById('skillAbility0').value, Description: 'Set Acrobatics: Ability exists'});
-    assertions.push({Expected: '+1', Actual: document.getElementById('skillBonus0').innerHTML, Description: 'Set Acrobatics: Bonus exists'});
+   assertions.push({
+      Expected: 'Select Skill',
+      Actual: document.getElementById('skillChoices0').value,
+      Description: 'skill: default value'
+   });
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('skillChoices0', 'Knowledge'),
+      Description: 'skill has option Knowledge'
+   });
+   SelectUtil.changeText('skillChoices0', 'Knowledge');
+   assertions.push({
+      Expected: 'Knowledge',
+      Actual: document.getElementById('skillChoices0').value,
+      Description: 'skill: selected value'
+   });
+   Main.skillSection.clear();
 
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names[0]), Description: ('Set Acrobatics Has first ability: ' + Data.Ability.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillAbility0', Data.Ability.names.last()), Description: ('Set Acrobatics Has last ability: ' + Data.Ability.names.last())});
-    } catch(e){assertions.push({Error: e, Description: 'Set Acrobatics'});}
+   SelectUtil.changeText('skillChoices0', 'Athletics');
+   assertions.push({
+      Expected: 'Strength',
+      Actual: document.getElementById('skillAbility0').value,
+      Description: 'ability: default value'
+   });
+   SelectUtil.changeText('skillAbility0', 'Awareness');
+   assertions.push({
+      Expected: 'Awareness',
+      Actual: document.getElementById('skillAbility0').value,
+      Description: 'ability: selected value'
+   });
+   Main.skillSection.clear();
 
-    try{
-    SelectUtil.changeText('skillChoices0', 'Select Skill');
-    assertions.push({Expected: true, Actual: Main.skillSection.getRow(0).isBlank(), Description: 'Unset: First Row is blank'});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names[0]), Description: ('Unset Has first skill: ' + Data.Skill.names[0])});
-    assertions.push({Expected: true, Actual: SelectUtil.containsText('skillChoices0', Data.Skill.names.last()), Description: ('Unset Has last skill: ' + Data.Skill.names.last())});
-    assertions.push({Expected: null, Actual: document.getElementById('skillText0'), Description: 'Unset: Text doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillRank0'), Description: 'Unset: Rank doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillAbility0'), Description: 'Unset: Ability doesn\'t exist'});
-    assertions.push({Expected: null, Actual: document.getElementById('skillBonus0'), Description: 'Unset: Bonus doesn\'t exist'});
-    } catch(e){assertions.push({Error: e, Description: 'Unset'});}
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
+      '</select></div>'+
+      '</div>';
+   document.getElementById('skillChoices0').innerHTML = '';
+   assertions.push({
+      Expected: expected,
+      Actual: document.getElementById('skill-section').firstChild.outerHTML,
+      Description: 'blank row'
+   });
+   Main.skillSection.clear();  //to regenerate skillChoices0
 
-    return TestRunner.displayResults('TestSuite.HtmlGenerator.skillRow', assertions, testState);
+   SelectUtil.changeText('skillChoices0', 'Knowledge');
+   DomUtil.changeValue('skillText0', 'my text');
+   DomUtil.changeValue('skillRank0', '3');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
+      '</select></div>'+
+      '<div class="col-12 col-sm-8 col-md-5">'+
+      '<input type="text" style="width: 100%" id="skillText0" onchange="Main.skillSection.getRow(0).changeText();" value="my text">' +
+      '</div>' +  //text
+      '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">' +
+      '<label>Ranks <input type="text" size="1" id="skillRank0" onchange="Main.skillSection.getRow(0).changeRank();" value="3"></label>' +
+      '+&nbsp;<select id="skillAbility0" onchange="Main.skillSection.getRow(0).selectAbility();">' +
+      '</select>' +
+      '(+3)' +
+      '</div>' +
+      '</div>';
+   document.getElementById('skillChoices0').innerHTML = '';
+   document.getElementById('skillAbility0').innerHTML = '';
+   assertions.push({
+      Expected: expected,
+      Actual: document.getElementById('skill-section').firstChild.outerHTML,
+      Description: 'hasText'
+   });
+   Main.skillSection.clear();  //to regenerate skillChoices0
+
+   SelectUtil.changeText('skillChoices0', 'Perception');
+   expected = '<div class="row">'+
+      '<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">'+
+      '<select id="skillChoices0" onchange="Main.skillSection.getRow(0).select();">'+
+      '</select></div>'+
+      '<div class="col-12 col-sm-8 col-xl-auto">' +
+      '<label>Ranks <input type="text" size="1" id="skillRank0" onchange="Main.skillSection.getRow(0).changeRank();" value="1"></label>' +
+      '+&nbsp;<select id="skillAbility0" onchange="Main.skillSection.getRow(0).selectAbility();">' +
+      '</select>' +
+      '(+1)' +
+      '</div>' +
+      '</div>';
+   document.getElementById('skillChoices0').innerHTML = '';
+   document.getElementById('skillAbility0').innerHTML = '';
+   assertions.push({
+      Expected: expected,
+      Actual: document.getElementById('skill-section').firstChild.outerHTML,
+      Description: '!hasText'
+   });
+   Main.skillSection.clear();  //to regenerate skillChoices0
+
+   return TestRunner.displayResults('TestSuite.HtmlGenerator.skillRow', assertions, testState);
 };
