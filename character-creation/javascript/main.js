@@ -6,7 +6,7 @@ bio box: nothing: same as hero name
 */
 function MainObject()
 {
-   //private variable section:
+   //region private variable
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
    var transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
    var powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
@@ -14,8 +14,9 @@ function MainObject()
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
    var derivedValues = {};  //will be used by html, exists for testing
+   //endregion private variable
 
-   //Single line function section
+   //region Single line function
    this.canUseGodhood=function(){return (transcendence > 0);};
    //does a defensive copy so that yoda conditions function
    this.getActiveRuleset=function(){return activeRuleset.clone();};
@@ -31,8 +32,9 @@ function MainObject()
    this.setMockMessenger=function(mockedFun){mockMessenger = mockedFun;};
    /**Restores the default function for messaging the user*/
    this.clearMockMessenger=function(){mockMessenger = undefined;};
+   //endregion Single line function
 
-   //Onchange section
+   //region Onchange
    /**Onchange function for changing the ruleset. Sets the document values as needed*/
    this.changeRuleset=function()
    {
@@ -72,8 +74,9 @@ function MainObject()
        minimumTranscendence = transcendence;
        this.updateTranscendence();
    };
+   //endregion Onchange
 
-   //public functions section
+   //region public functions
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
@@ -100,6 +103,50 @@ function MainObject()
       //TODO: store all UI values after calc so that they can be exported or at least defense, skills, offense
       document.getElementById('code-box').value = jsonToMarkdown(this.save(), derivedValues);
    };
+   /**This function loads the json document.*/
+   this.load=function(jsonDoc)
+   {
+      amLoading = true;
+      document.getElementById('code-box').value = '';
+      location.hash = '';  //clear out so that it may change later
+
+      this._determineCompatibilityIssues(jsonDoc);
+      if(jsonDoc.version < latestSchemaVersion) this._convertDocument(jsonDoc);
+      //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
+
+      this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
+      document.getElementById('ruleset').value = activeRuleset.toString();
+      //clear does not change activeRuleset
+      this.clear();  //must clear out all other data first so not to have any remain
+      document.getElementById('hero-name').value = jsonDoc.Hero.name;
+      if (activeRuleset.major > 1)
+      {
+         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
+         document.getElementById('transcendence').value = transcendence;
+      }
+      document.getElementById('img-file-path').value = jsonDoc.Hero.image;
+      this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
+      document.getElementById('bio-box').value = jsonDoc.Information;
+      this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
+
+      this.powerSection.load(jsonDoc.Powers);
+      this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
+
+      this.advantageSection.load(jsonDoc.Advantages);
+      this.skillSection.load(jsonDoc.Skills);
+      this.defenseSection.load(jsonDoc.Defenses);
+      if (undefined === mockMessenger)
+      {
+         if ('' !== document.getElementById('code-box').value)
+         {
+            location.hash = '#code-box';  //scroll to the code-box if there's an error
+            //wouldn't trigger in test anyway because messageUser won't write to box
+            alert('An error has occurred, see text box for details.');
+         }
+         else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
+      }
+      amLoading = false;
+   };
    /**Loads the file's data*/
    this.loadFile=function()
    {
@@ -108,6 +155,36 @@ function MainObject()
        var oFReader=new FileReader();  //reference: https://developer.mozilla.org/en-US/docs/DOM/FileReader
        oFReader.readAsText(filePath);
        oFReader.onload=function(oFREvent){Main.loadFromString(oFREvent.target.result);};  //Main has been defined in order to use Main.loadFile() button
+   };
+   /**This function loads the document according to the text string given.*/
+   this.loadFromString=function(fileString)
+   {
+      fileString = fileString.trim();
+      if('' === fileString) return;  //ignore
+
+      var jsonDoc, docType;
+      try {
+         if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
+         else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
+      }
+      catch(e)
+      {
+         amLoading = true;
+         document.getElementById('code-box').value = '';
+         Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
+         //yeah I know the error message is completely unhelpful but there's nothing more I can do
+
+         if (undefined === mockMessenger)
+         {
+            location.hash = '';  //clear out then set it in order to force scroll
+            location.hash = '#code-box';  //scroll to the code-box
+            alert('Invalid document, see text box for details.');
+         }
+         amLoading = false;
+         throw e;  //stop the process and cause a console.error
+      }
+
+      this.load(jsonDoc);
    };
    /**Loads the image file*/
    this.loadImageFromFile=function()
@@ -147,6 +224,33 @@ function MainObject()
        if(undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
        else if(amLoading) document.getElementById('code-box').value += messageSent + '\n';
        else alert(messageSent);
+   };
+   /**This returns the document's data as a json object*/
+   this.save=function()
+   {
+      var jsonDoc = {Hero: {}, Abilities: {}, Powers: [], Equipment: [], Advantages: [], Skills: [], Defenses: {}};
+      //skeleton so I don't need to create these later
+      jsonDoc.ruleset = activeRuleset.toString();
+      jsonDoc.version = latestSchemaVersion;
+      jsonDoc.Hero.name = document.getElementById('hero-name').value;
+      if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
+      jsonDoc.Hero.image = document.getElementById('img-file-path').value;
+      //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
+      jsonDoc.Information = document.getElementById('bio-box').value;
+      jsonDoc.Abilities = this.abilitySection.save();
+      jsonDoc.Powers = this.powerSection.save();
+      jsonDoc.Equipment = this.equipmentSection.save();
+      jsonDoc.Advantages = this.advantageSection.save();
+      jsonDoc.Skills = this.skillSection.save();
+      jsonDoc.Defenses = this.defenseSection.save();
+      return jsonDoc;
+   };
+   /**This returns the document's data as a string*/
+   this.saveAsString=function()
+   {
+      var jsonDoc = this.save();
+      var fileString = JSON.stringify(jsonDoc);
+      return fileString;
    };
    /**Onclick event for the save-to-file-link anchor link only.
    It changes the a tag so that the link downloads the document as a saved file.*/
@@ -324,8 +428,9 @@ function MainObject()
        this.advantageSection.update();
        //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
    };
+   //endregion public functions
 
-   //'private' functions section. Although all public none of these should be called from outside of this object
+   //region 'private' functions. Although all public none of these should be called from outside of this object
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
    this._calculatePowerLevelLimitations=function()
    {
@@ -475,80 +580,6 @@ function MainObject()
        jsonDoc.ruleset = ruleset;
        jsonDoc.version = version;
    };
-   /**This function loads the json document.*/
-   this.load=function(jsonDoc)
-   {
-      amLoading = true;
-      document.getElementById('code-box').value = '';
-      location.hash = '';  //clear out so that it may change later
-
-      this._determineCompatibilityIssues(jsonDoc);
-      if(jsonDoc.version < latestSchemaVersion) this._convertDocument(jsonDoc);
-      //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
-
-      this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
-      document.getElementById('ruleset').value = activeRuleset.toString();
-      //clear does not change activeRuleset
-      this.clear();  //must clear out all other data first so not to have any remain
-      document.getElementById('hero-name').value = jsonDoc.Hero.name;
-      if (activeRuleset.major > 1)
-      {
-         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
-         document.getElementById('transcendence').value = transcendence;
-      }
-      document.getElementById('img-file-path').value = jsonDoc.Hero.image;
-      this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
-      document.getElementById('bio-box').value = jsonDoc.Information;
-      this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
-
-      this.powerSection.load(jsonDoc.Powers);
-      this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
-
-      this.advantageSection.load(jsonDoc.Advantages);
-      this.skillSection.load(jsonDoc.Skills);
-      this.defenseSection.load(jsonDoc.Defenses);
-      if (undefined === mockMessenger)
-      {
-         if ('' !== document.getElementById('code-box').value)
-         {
-            location.hash = '#code-box';  //scroll to the code-box if there's an error
-            //wouldn't trigger in test anyway because messageUser won't write to box
-            alert('An error has occurred, see text box for details.');
-         }
-         else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
-      }
-      amLoading = false;
-   };
-   /**This function loads the document according to the text string given.*/
-   this.loadFromString=function(fileString)
-   {
-      fileString = fileString.trim();
-      if('' === fileString) return;  //ignore
-
-      var jsonDoc, docType;
-      try {
-         if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
-         else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
-      }
-      catch(e)
-      {
-         amLoading = true;
-         document.getElementById('code-box').value = '';
-         Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
-         //yeah I know the error message is completely unhelpful but there's nothing more I can do
-
-         if (undefined === mockMessenger)
-         {
-            location.hash = '';  //clear out then set it in order to force scroll
-            location.hash = '#code-box';  //scroll to the code-box
-            alert('Invalid document, see text box for details.');
-         }
-         amLoading = false;
-         throw e;  //stop the process and cause a console.error
-      }
-
-      this.load(jsonDoc);
-   };
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
    this._makeOffenseRow=function(skillName, attackBonus, range, effect, rank)
    {
@@ -565,34 +596,6 @@ function MainObject()
       thisOffensiveRow+='</div></div>\n';
       return thisOffensiveRow;
    };
-   /**This returns the document's data as a json object*/
-   this.save=function()
-   {
-       var jsonDoc = {Hero: {}, Abilities: {}, Powers: [], Equipment: [], Advantages: [], Skills: [], Defenses: {}};
-          //skeleton so I don't need to create these later
-       jsonDoc.ruleset = activeRuleset.toString();
-       jsonDoc.version = latestSchemaVersion;
-       jsonDoc.Hero.name = document.getElementById('hero-name').value;
-       if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
-       jsonDoc.Hero.image = document.getElementById('img-file-path').value;
-       //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
-       jsonDoc.Information = document.getElementById('bio-box').value;
-       jsonDoc.Abilities = this.abilitySection.save();
-       jsonDoc.Powers = this.powerSection.save();
-       jsonDoc.Equipment = this.equipmentSection.save();
-       jsonDoc.Advantages = this.advantageSection.save();
-       jsonDoc.Skills = this.skillSection.save();
-       jsonDoc.Defenses = this.defenseSection.save();
-       return jsonDoc;
-   };
-   /**This returns the document's data as a string*/
-   this.saveAsString=function()
-   {
-      var jsonDoc = this.save();
-      var fileString = JSON.stringify(jsonDoc);
-      return fileString;
-   };
-   //TODO: move private functions together
    this._resetDerivedValues=function()
    {
       derivedValues = {
@@ -616,6 +619,8 @@ function MainObject()
        this.defenseSection = new DefenseList();
        this.updateOffense();  //for the default damage
    };
+   //endregion 'private' functions
+
    //constructor:
    this._constructor();
 }
