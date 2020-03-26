@@ -790,7 +790,6 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   //TODO: previously there was also IT for flaws reducing cost. maybe have those in a special place
    return TestRunner.displayResults('TestSuite.HtmlGenerator.powerRow', assertions, testState);
 };
 TestSuite.HtmlGenerator.skillRow = function (testState = {})

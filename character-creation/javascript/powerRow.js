@@ -21,6 +21,7 @@ function PowerObjectAgnostic(props)
    this.getAction=function(){return state.action;};
    this.getBaseCost=function(){return state.baseCost;};
    this.getDuration=function(){return state.duration;};
+   this.getDerivedValues=function(){return JSON.clone(derivedValues);};
    /**Get the effect name of the power*/
    this.getEffect=function(){return state.effect;};
    /**Get the user's name for the power*/

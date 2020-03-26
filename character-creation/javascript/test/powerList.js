@@ -29,6 +29,27 @@ TestSuite.powerList.calculateValues=function(testState={})
 
    return TestRunner.displayResults('TestSuite.powerList.calculateValues', assertions, testState);
 };
+/**This tests the combination of power and modifier's calculations*/
+TestSuite.powerList.calculateValues_modCost=function(testState={})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getCostPerRank()
+   {
+      return Main.powerSection.getRow(0).getDerivedValues().costPerRank;
+   }
+
+   SelectUtil.changeText('powerChoices0', 'Nullify');
+   SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+   assertions.push({Expected: 2, Actual: getCostPerRank(), Description: 'Rank flaws reduce cost/rank'});
+
+   SelectUtil.changeText('powerModifierChoices0.1', 'Area');
+   DomUtil.changeValue('powerModifierRank0.1', '5');
+   assertions.push({Expected: 7, Actual: getCostPerRank(), Description: 'Rank extras increase cost/rank'});
+
+   return TestRunner.displayResults('TestSuite.powerList.calculateValues_modCost', assertions, testState);
+};
 TestSuite.powerList.load=function(testState={})
 {
     TestRunner.clearResults(testState);
