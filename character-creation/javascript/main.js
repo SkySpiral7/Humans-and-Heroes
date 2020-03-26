@@ -193,7 +193,14 @@ function MainObject()
        if(undefined === filePath || null === filePath) return;  //no file to load
        var oFReader=new FileReader();  //reference: https://developer.mozilla.org/en-US/docs/DOM/FileReader
        oFReader.readAsDataURL(filePath);
-       oFReader.onload=function(oFREvent){document.getElementById('character-image').src = oFREvent.target.result;};
+       oFReader.onload=function(oFREvent)
+       {
+          var dataUri = oFREvent.target.result;
+          //TODO: maybe add a clear button for img-file-path
+          //TODO: should I scale the image or trim the display path?
+          document.getElementById('img-file-path').value = dataUri;
+          document.getElementById('character-image').src = dataUri;
+       };
    };
    /**Loads the image path. If blank the image path is reset*/
    this.loadImageFromPath=function()
@@ -235,7 +242,6 @@ function MainObject()
       jsonDoc.Hero.name = document.getElementById('hero-name').value;
       if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
       jsonDoc.Hero.image = document.getElementById('img-file-path').value;
-      //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
       jsonDoc.Information = document.getElementById('bio-box').value;
       jsonDoc.Abilities = this.abilitySection.save();
       jsonDoc.Powers = this.powerSection.save();
