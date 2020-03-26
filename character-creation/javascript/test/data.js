@@ -21,10 +21,10 @@ TestSuite.data.allVersions=function(testState={})
    };
    assertions.push({Expected: expected, Actual: Data.Ability, Description: 'Data.Ability'});
 
-   expected = '<label class="fill-remaining">Name&nbsp;<input type="text" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" /></label>\n';
-   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5), Description: 'Data.SharedHtml.powerName'});
-   expected = '<label class="fill-remaining">Skill&nbsp;<input type="text" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" /></label>\n';
-   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5), Description: 'Data.SharedHtml.powerSkill'});
+   expected = '<label class="fill-remaining">Name&nbsp;<input type="text" id="powerName5" onChange="Main.powerSection.getRow(5).changeName();" value="Negavision" /></label>';
+   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerName('power', 5, 'Negavision'), Description: 'Data.SharedHtml.powerName'});
+   expected = '<label class="fill-remaining">Skill&nbsp;<input type="text" id="powerSkill5" onChange="Main.powerSection.getRow(5).changeSkill();" value="Gaze" /></label>';
+   assertions.push({Expected: expected, Actual: Data.SharedHtml.powerSkill('power', 5, 'Gaze'), Description: 'Data.SharedHtml.powerSkill'});
    } catch(e){assertions.push({Error: e, Description: 'Same data'});}
 
    return TestRunner.displayResults('TestSuite.data.allVersions', assertions, testState);

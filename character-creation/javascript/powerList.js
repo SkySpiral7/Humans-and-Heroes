@@ -41,8 +41,6 @@ function PowerListAgnostic(sectionName)
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
       //getUniqueName includes all modifiers since you may have the same power with different modifiers
-   /**This set the page's data. called only by generate*/
-   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Counts totals etc. All values that are not user set or final are created by this method*/
@@ -124,7 +122,14 @@ function PowerListAgnostic(sectionName)
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   this.addRow=function(){rowArray.push(new PowerObjectAgnostic(this, rowArray.length, sectionName));};
+   this.addRow = function ()
+   {
+      rowArray.push(new PowerObjectAgnostic({
+         powerListParent: this,
+         initialRowIndex: rowArray.length,
+         sectionName: sectionName
+      }));
+   };
    /**Updates other sections which depend on power section*/
    this.notifyDependent=function()
    {

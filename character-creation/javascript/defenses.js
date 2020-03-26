@@ -8,13 +8,13 @@ function DefenseList()
    const defenseArray = [];
    var toughnessMaxValue = 0;  //for power level
    var total = 0;
-   var calculations;
+   var derivedValues;
 
    //Single line function section
    //getByName is not validated because I want an error thrown so I can debug
    /**Get the defense row based on its name. Will return undefined if not found so that an error will occur.*/
    this.getByName=function(defenseName){return defenseArray[Data.Defense.names.indexOf(defenseName)];};
-   this.getCalculations=function(){return calculations;};
+   this.getDerivedValues=function(){return derivedValues;};
    /**Get the total toughness including defensive roll*/
    this.getMaxToughness=function(){return toughnessMaxValue;};
    this.getTotal=function(){return total;};
@@ -24,10 +24,10 @@ function DefenseList()
    this.calculateValues=function()
    {
       total = 0;
-      calculations = {};
+      derivedValues = {};
       for (var i = 0; i < defenseArray.length; i++)  //the array doesn't include toughness
       {
-         calculations[Data.Defense.names[i]] = {abilityValue: defenseArray[i].getAbilityValue(), totalBonus: defenseArray[i].getTotalBonus()};
+         derivedValues[Data.Defense.names[i]] = {abilityValue: defenseArray[i].getAbilityValue(), totalBonus: defenseArray[i].getTotalBonus()};
          total+=defenseArray[i].getRank();  //cost is 1:1
       }
       this._calculateToughness();  //split off because it is involved
@@ -84,20 +84,20 @@ function DefenseList()
       else toughnessWithoutDefensiveRoll = staminaValue;
       toughnessMaxValue = toughnessWithoutDefensiveRoll + defensiveRollValue;  //defensive Roll stacks with everything
 
-      calculations.Toughness = {totalBonus: toughnessMaxValue};
-      if(toughnessWithoutDefensiveRoll !== toughnessMaxValue) calculations.Toughness.withoutDefensiveRoll = toughnessWithoutDefensiveRoll;
+      derivedValues.Toughness = {totalBonus: toughnessMaxValue};
+      if(toughnessWithoutDefensiveRoll !== toughnessMaxValue) derivedValues.Toughness.withoutDefensiveRoll = toughnessWithoutDefensiveRoll;
    };
    /**This sets the page's data. called only by calculateValues*/
    this._setValues=function()
    {
       for (var i = 0; i < defenseArray.length; i++)  //the array doesn't include toughness
       {
-         document.getElementById(Data.Defense.names[i]+'-start').innerHTML = calculations[Data.Defense.names[i]].abilityValue;
+         document.getElementById(Data.Defense.names[i]+'-start').innerHTML = derivedValues[Data.Defense.names[i]].abilityValue;
          //input is set by user and is never out of date
-         document.getElementById(Data.Defense.names[i]+'-final').innerHTML = calculations[Data.Defense.names[i]].totalBonus;
+         document.getElementById(Data.Defense.names[i]+'-final').innerHTML = derivedValues[Data.Defense.names[i]].totalBonus;
       }
       var toughnessString = '' + toughnessMaxValue;
-      if(undefined !== calculations.Toughness.withoutDefensiveRoll) toughnessString+=' ('+calculations.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
+      if(undefined !== derivedValues.Toughness.withoutDefensiveRoll) toughnessString+=' ('+derivedValues.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
       document.getElementById('Toughness').innerHTML=toughnessString;
    };
    this._constructor=function()

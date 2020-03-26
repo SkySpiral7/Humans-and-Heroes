@@ -6,7 +6,7 @@ CommonsLibrary.select=function(setterPointer, elementId, updateThis)
 {
     setterPointer.call(this, SelectUtil.getTextById(elementId));
     updateThis.update();
-    //document doesn't need to be reset because setAll will do that later
+    //document doesn't need to be reset because generate will do that later
     var element = document.getElementById(elementId);
     //I was using document.activeElement but it always pointed to the changed element anyway
     if(null !== element) element.focus();  //regain focus (so the user can use tab)
@@ -63,7 +63,6 @@ CommonsLibrary.generate=function(rowArray, sectionName)
    for(var i=0; i < rowArray.length; i++)  //last row is always blank
        {allSectionRows+=rowArray[i].generate();}
     document.getElementById(sectionName+'-section').innerHTML=allSectionRows;
-    this.setAll();
 };
 /**Removes the row from the array and updates the index of all others in the list.*/
 CommonsLibrary.removeRow=function(rowArray, rowIndex)
@@ -81,18 +80,14 @@ CommonsLibrary.sanitizeRows=function(rowArray)
        if(rowArray[i].isBlank() && i < rowArray.length-1){this.removeRow(i); i--; continue;}  //remove blank row that isn't last
        else if(rowArray[i].isBlank()) continue;  //nothing to do
 
+       //TODO: can powers can be redundant?
+       //if yes TestSuite.main.updateOffense etc redundantly set some text
        var uniqueName=rowArray[i].getUniqueName();
        if(namesSoFar.contains(uniqueName)){this.removeRow(i); i--; continue;}  //remove redundant row
        namesSoFar.push(uniqueName);
    }
    if(rowArray.isEmpty() || !rowArray.last().isBlank())  //if last row isn't blank add one
        this.addRow();
-};
-/**This set the page's data. called only by generate*/
-CommonsLibrary.setAll=function(rowArray)
-{
-   for(var i=0; i < rowArray.length-1; i++)  //the last row (being blank) is already set
-      {rowArray[i].setValues();}
 };
 /**Called by the constructor of each section that uses rows. It initializes the rows: addRow then generate.*/
 CommonsLibrary.initializeRows=function()
