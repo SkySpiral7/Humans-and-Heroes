@@ -212,14 +212,14 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <textarea id="code-box"></textarea>
 <br /><br />
 <script type="text/javascript" src="../minorVersion.js"></script>
-<script type="text/javascript">var Main;</script>
-<script type="text/javascript" src="javascript/main.js"></script>
 <script type="text/javascript" src="javascript/polyfill.js"></script>
 <script type="text/javascript" src="javascript/MapDefault.js"></script>
 <script type="text/javascript" src="javascript/Version.js"></script>
 <script type="text/javascript" src="javascript/data.js"></script>
+<script type="text/javascript">var Main;</script>
+<script type="text/javascript" src="javascript/main.js"></script>
 <!--
-the above few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
+the above few are first because everything depends on them in that order
 everything else below is alphabetical
 -->
 <script type="text/javascript" src="javascript/abilities.js"></script>
