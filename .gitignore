@@ -1,3 +1,5 @@
 .idea/
 *.iml
 target/
+character-creation/node_modules/
+character-creation/package-lock.json
