@@ -17,10 +17,10 @@ red
    #FF2020: text, text border, hr
 blue
    #000040: bg, alt-rows
-   #79aaff: text (only table-name)
+   #79AAFF: text (only table-name)
 green
    #002500: bg
-   #113a11: under
+   #113A11: under
 purple (only the info banner)
    #150021: bg
 
@@ -115,24 +115,30 @@ html, body, input, textarea, select, button {
    border-color: #202020;
    color: #A0A0A0;
 }
+
 /**Search box. Uses a bootstrap class name.*/
 .form-control, .form-control:focus {
    background-color: black;
    border-color: #202020;
    color: #A0A0A0;
 }
+
 .search-form > button > svg {
    vertical-align: middle;
 }
+
 .btn {
    padding: 6px;
 }
+
 ::-webkit-scrollbar {
    background-color: #101010;
 }
+
 ::-webkit-scrollbar-thumb {
    background-color: #202020;
 }
+
 /*
 TODO: figure out how to have different buttons for up/down
 unfortunately disabled and read-only don't work and I'd have to be silly to get it: https://stackoverflow.com/questions/16422124/javascript-detect-browser-scroll-to-the-top
@@ -172,7 +178,7 @@ h1 {
    color: #A0A0A0;
    padding: 10px;
    font-size: 32px;
-   clear: both;  /*This can be removed (along with some id=) when h1 is only a page header*/
+   clear: both; /*This can be removed (along with some id=) when h1 is only a page header*/
 }
 
 /**This is only applied to h1 at the top of page and only for index.html.
@@ -204,7 +210,7 @@ h3 {
 
 /**All of them are h3*/
 .table-name {
-   color: #79aaff;
+   color: #79AAFF;
 }
 
 /*Need to also have :visited so that the browser won't blue shift the color*/
@@ -214,7 +220,7 @@ a:link, a:visited {
    text-decoration: none;
 }
 
-a:hover,a:active {
+a:hover, a:active {
    text-decoration: underline;
 }
 
@@ -413,7 +419,7 @@ img {
 
 .graph-row > div {
    display: inline-block;
-   vertical-align: top;  /*This is here for what seems to be a bug: without it the height of graph-row is larger than it should be.*/
+   vertical-align: top; /*This is here for what seems to be a bug: without it the height of graph-row is larger than it should be.*/
 }
 
 .table-alt-rows td {
@@ -449,7 +455,7 @@ th {
    background-color: #000040;
 }
 
-.table-alt-rows,.table-alt-rows th,.table-alt-rows td {
+.table-alt-rows, .table-alt-rows th, .table-alt-rows td {
    border-collapse: collapse;
    border: 1px inset #202020;
 }
@@ -460,17 +466,21 @@ th {
    text-align: center;
    width: 150px;
 }
+
 .stamp-top {
    background-color: #450000;
    border-bottom-width: 0;
    color: #A0A0A0;
 }
+
 .stamp-middle {
    font-size: 32px;
 }
+
 .stamp-bottom {
    border-top-width: 0;
 }
+
 .bar-code-border {
    border: 5px solid #202020;
 }
@@ -478,78 +488,95 @@ th {
 .character-sheet input, .character-sheet select {
    font-size: 16px;
 }
+
 .fill-remaining {
    display: flex;
 }
+
 .fill-remaining > input {
    flex-grow: 1;
 }
+
 textarea {
    resize: both;
    width: 100%;
    max-width: 100%;
    height: 246px;
 }
+
 #testResults {
    width: 950px;
    height: 500px;
 }
+
 .character-sheet-defense-white > div, .character-sheet-defense-green > div {
    padding: 10px;
    text-align: center;
 }
+
 .character-sheet-defense-green > div {
-   background-color: #113a11;
+   background-color: #113A11;
 }
+
 .character-sheet-defense-green > div:nth-child(odd), .character-sheet-defense-white > div:nth-child(odd) {
    font-weight: bold;
 }
+
 .character-sheet-offense-row {
    padding: 5px;
    text-align: center;
 }
+
 .character-sheet-initiative {
-   background-color: #113a11;
+   background-color: #113A11;
    font-size: 24px;
    font-weight: bold;
    padding: 5px 0;
    text-align: center;
 }
+
 .character-sheet-light-green {
-   background-color: #113a11;
+   background-color: #113A11;
    padding: 5px;
 }
+
 .character-sheet-section-label, .character-sheet-point-totals {
    background-color: #002500;
    color: #A0A0A0;
    font-weight: bold;
    padding: 10px;
 }
+
 .character-sheet-hero-name {
    background-color: inherit;
    border: 0;
    padding: 0;
    font-size: 32px;
 }
+
 .character-sheet-power-level {
    font-size: 28px;
    text-align: center;
 }
+
 .character-sheet-section-label {
    font-size: 28px;
 }
+
 .character-sheet-point-totals {
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
    font-size: 28px;
    text-align: center;
-   display: block;  /*This is needed for point-counter since it contains spans.*/
+   display: block; /*This is needed for point-counter since it contains spans.*/
 }
+
 .character-sheet-ability-section > .row > .green-panel > div {
    font-size: 28px;
    font-weight: bold;
    text-align: center;
 }
+
 .character-sheet-ability-section {
    display: inline-block;
 }
@@ -561,9 +588,10 @@ textarea {
    max-width: 50%;
 }
 
-.red-panel,.green-panel {
+.red-panel, .green-panel {
    border: solid thin #202020;
 }
+
 .character-sheet-ability-section > .row > .green-panel {
    border: none;
 }
@@ -573,7 +601,7 @@ textarea {
    margin-bottom: 0;
 }
 
-.red-panel > h3,.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
+.red-panel > h3, .green-panel > h3, .character-sheet-top > div:nth-child(odd) {
    color: #A0A0A0;
    font-weight: bold;
    padding: 5px;
@@ -586,7 +614,7 @@ textarea {
    padding-top: 10px;
 }
 
-.red-panel > div,.green-panel > div,.character-sheet-top > div:nth-child(even) {
+.red-panel > div, .green-panel > div, .character-sheet-top > div:nth-child(even) {
    padding: 10px;
 }
 
@@ -598,12 +626,12 @@ textarea {
    background-color: #700000;
 }
 
-.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
+.green-panel > h3, .character-sheet-top > div:nth-child(odd) {
    background-color: #002500;
 }
 
-.green-panel > div,.character-sheet-top > div:nth-child(even) {
-   background-color: #113a11;
+.green-panel > div, .character-sheet-top > div:nth-child(even) {
+   background-color: #113A11;
 }
 
 .example {
@@ -633,7 +661,7 @@ textarea {
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > div {
    padding: 10px;
-   background-color: #113a11;
+   background-color: #113A11;
    flex-grow: 1;
 }
 
@@ -646,7 +674,8 @@ textarea {
    width: 33%;
 }
 
-.condition-card-bootstrap > .row > .col-xl-4 > div > div > table,.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table,
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
    border-collapse: collapse;
    border: 1px inset #202020;
 }
