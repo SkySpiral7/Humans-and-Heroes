@@ -22,7 +22,7 @@ green
    #002500: bg
    #113A11: under
 purple (only the info banner)
-   #150021: bg
+   #1A0029: bg
 
 good example pages:
 character-creation/powers/descriptors.html
@@ -640,7 +640,7 @@ textarea {
 }
 
 .info-banner {
-   background-color: #150021;
+   background-color: #1A0029;
    display: block;
    padding: 5px;
 }
