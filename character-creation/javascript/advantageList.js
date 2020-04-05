@@ -9,7 +9,7 @@ function AdvantageList()
    //private variable section:
     var equipmentMaxTotal=0, usingGodhoodAdvantages=false, total=0, pettyRulesApply=true;
     var rankMap=new MapDefault({}, 0);
-    var rowArray=[];
+    var rowArray=[], elementArray=[];
 
    //Single line function section
     this.hasGodhoodAdvantages=function(){return usingGodhoodAdvantages;};  //TODO: do I ever care about hasGodhoodAdvantages?
@@ -22,8 +22,18 @@ function AdvantageList()
    //public common section
     /**Removes all rows then updates*/
     this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
-    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
+    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
+    //TODO: rename to getRowByIndex
     this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
+    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
+    this.getRowById = function (rowId)
+    {
+       for (var i = 0; i < rowArray.length; i++)  //include blank row
+       {
+          if (rowArray[i].getKey() === rowId) return rowArray[i];
+       }
+       throw new Error('No row with id ' + rowId + ' (rowArray.length=' + rowArray.length + ')');
+    };
     /**Returns an array of json objects for this section's data*/
     this.save=function(){return CommonsLibrary.saveRows(rowArray);};
     /**Does each step for an onChange*/
@@ -31,9 +41,9 @@ function AdvantageList()
 
    //'private' commons section. Although all public none of these should be called from outside of this object
     /**This creates the page's html (for the section)*/
-    this.generate=function(){CommonsLibrary.generate.call(this, rowArray, 'advantage');};
+    this.generate=function(){renderAdvantageArray(elementArray);};
     /**Removes the row from the array and updates the index of all others in the list.*/
-    this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
+    this.removeRow=function(rowIndex){rowArray.remove(rowIndex); elementArray.remove(rowIndex);};
     /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
     this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
 
@@ -42,7 +52,7 @@ function AdvantageList()
    this.calculateValues=function()
    {
        this.sanitizeRows();
-       rowArray.sort(this._sortOrder);  //this messes up the indexing which is fixed below
+       this._sort();
        rankMap.clear();
        usingGodhoodAdvantages = false;
        pettyRulesApply = true;
@@ -51,7 +61,6 @@ function AdvantageList()
 
       for (var i=0; i < rowArray.length-1; i++)  //last row is blank
       {
-          rowArray[i].setRowIndex(i);  //needs to be reset because of the sorting
           var advantageName = rowArray[i].getName();
           if(Data.Advantage[advantageName].isGodhood) usingGodhoodAdvantages = true;
           //do not connected with else since Petty Rules are godhood
@@ -84,7 +93,12 @@ function AdvantageList()
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   this.addRow=function(){rowArray.push(new AdvantageObject(rowArray.length));};
+   this.addRow = function ()
+   {
+      var advantageObject = createAdvantageObject();
+      rowArray.push(advantageObject.instance);
+      elementArray.push(advantageObject.element);
+   };
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
    this._calculateEquipmentRank=function()
    {
@@ -105,20 +119,40 @@ function AdvantageList()
       if(newEquipmentRank === 0) this.removeRow(equipmentRow);  //don't need the row any more
       else rowArray[equipmentRow].setRank(newEquipmentRank);
    };
+   this._sort = function ()
+   {
+      var i, combinedArray = [];
+      for (i = 0; i < rowArray.length; i++)
+      {
+         combinedArray.push({
+            instance: rowArray[i],
+            element: elementArray[i]
+         });
+      }
+      //TODO: can this be less stupid?
+      combinedArray.stableSort(this._sortOrder);
+      rowArray = [];
+      elementArray = [];
+      for (i = 0; i < rowArray.length; i++)
+      {
+         rowArray.push(combinedArray[i].instance);
+         elementArray.push(combinedArray[i].element);
+      }
+   };
    /**Pass into Array.prototype.sort so that the automatic advantages come first (equipment then the rest).*/
    this._sortOrder=function(a, b)
    {
        const aFirst = -1;
        const bFirst = 1;
 
-       //TODO: bug: when first adding equipment the new advantage is placed last without sorting
-       if('Equipment' === a.getName()) return aFirst;
-       if('Equipment' === b.getName()) return bFirst;
+       if(a.instance.isBlank()) return bFirst;
+       if(b.instance.isBlank()) return aFirst;
 
-       //else maintain the current order
-       //using rowIndex to force sort to be stable (since it might not be)
-       if(a.getRowIndex() < b.getRowIndex()) return aFirst;
-       return bFirst;
+       //TODO: bug: when first adding equipment the new advantage is placed last without sorting
+       if('Equipment' === a.instance.getName()) return aFirst;
+       if('Equipment' === b.instance.getName()) return bFirst;
+
+       return 0;
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
    this._testSortStability=function(){unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist

@@ -624,6 +624,9 @@ function MainObject()
    //constructor:
    this._constructor();
 }
+//static:
+MainObject.keyCount = 0;
+MainObject.generateKey=function(){return ++MainObject.keyCount;};
 
 /*Map of objects that update others:
 everything (except modifier) calls Main.update();  //updates totals and power level
