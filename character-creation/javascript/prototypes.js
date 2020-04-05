@@ -37,5 +37,13 @@ Array.prototype.removeByValue=function(value)
     if(-1 === index) return;  //not found
     this.remove(index);
 };
+/**A sort that is grantee to be stable by using a wrapper*/
+Array.prototype.stableSort=function(compare)
+{
+   return this
+   .map((item, index) => ({item, index}))
+   .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
+   .map(({item}) => item);
+};
 
 if(undefined === JSON.clone){JSON.clone = function(obj){return JSON.parse(JSON.stringify(obj));};}
