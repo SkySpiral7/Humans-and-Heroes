@@ -614,7 +614,8 @@ function MainObject()
        //TODO: define the naming conventions for html elements.
        //I'm thinking: user input: TitleCase, output: snake_case, else: two words
        //but why not make them all TitleCase? Power row.generate uses 'Main.'+sectionName+'Section' for onchange
-       this.advantageSection = new AdvantageList();
+       var self = this;  //required to pass the this pointer down
+       createAdvantageList(function(newThing){self.advantageSection = newThing;});
        this.skillSection = new SkillList();
        this.defenseSection = new DefenseList();
        this.updateOffense();  //for the default damage
