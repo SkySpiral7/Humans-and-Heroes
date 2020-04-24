@@ -19,8 +19,8 @@ class AdvantageList extends React.Component
       this.pettyRulesApply=true;
       this.rankMap=new MapDefault({}, 0);
       this.rowArray=[];
-      CommonsLibrary.initializeRows.call(this);
       props.callback(this);
+      this.blankKey = MainObject.generateKey();
    }
 
    //Single line function section
@@ -46,17 +46,73 @@ class AdvantageList extends React.Component
     /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
     getRowById=(rowId)=>
     {
-       //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
-       for (var i = 0; i < this.rowArray.length; i++)  //include blank row
-       {
-          if (this.rowArray[i].getKey() === rowId) return this.rowArray[i];
-       }
-       throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this.rowArray.length + ')');
+       return this.rowArray[this.getIndexById(rowId)];
     };
+   getIndexById=(rowId)=>
+   {
+      if (rowId === this.blankKey){
+         throw new Error('Can\'t get blank row ' + rowId);
+      }
+      //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
+      for (var i = 0; i < this.rowArray.length; i++)  //include blank row
+      {
+         if (this.rowArray[i].getKey() === rowId) return i;
+      }
+      throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this.rowArray.length + ')');
+   };
     /**Returns an array of json objects for this section's data*/
     save=()=>{return CommonsLibrary.saveRows(this.rowArray);};
     /**Does each step for an onChange*/
     update=()=>{this.render();};
+    updateByKey=(updatedKey)=>{
+       const updatedIndex = this.getIndexById(updatedKey);
+       const newStateRow = this.rowArray[updatedIndex].getState();
+       this.setState((state) =>
+       {
+          //TODO: race conditions? merge issues?
+          state.it[updatedIndex] = newStateRow;
+          return state;
+       });
+    };
+   updateNameByKey=(updatedKey)=>{
+      if (updatedKey === this.blankKey)
+      {
+         throw new Error('Can\'t update name of blank row ' + updatedKey);
+      }
+
+      const updatedIndex = this.getIndexById(updatedKey);
+      const newName = this.rowArray[updatedIndex].getName();
+      if (undefined === newName)
+      {
+         this.removeRow(updatedIndex);
+      }
+      else
+      {
+         this.setState((state) =>
+         {
+            state.it[updatedIndex].name = newName;
+            return state;
+         });
+      }
+   };
+   updateRankByKey=(updatedKey)=>{
+      const updatedIndex = this.getIndexById(updatedKey);
+      const newRank = this.rowArray[updatedIndex].getRank();
+      this.setState((state) =>
+      {
+         state.it[updatedIndex].rank = newRank;
+         return state;
+      });
+   };
+   updateTextByKey=(updatedKey)=>{
+      const updatedIndex = this.getIndexById(updatedKey);
+      const newText = this.rowArray[updatedIndex].getText();
+      this.setState((state) =>
+      {
+         state.it[updatedIndex].text = newText;
+         return state;
+      });
+   };
 
    //'private' commons section. Although all public none of these should be called from outside of this object
     /**This creates the page's html (for the section)*/
@@ -71,6 +127,7 @@ class AdvantageList extends React.Component
           return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
                                               state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()} />);
        });
+       elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} />);
        return (
           //TODO: does this div show?
           <div>
@@ -89,7 +146,7 @@ class AdvantageList extends React.Component
     };
     /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
     sanitizeRows=()=>{
-       //CommonsLibrary.sanitizeRows.call(this, this.rowArray);
+       //TODO:? CommonsLibrary.sanitizeRows.call(this, this.rowArray);
     };
 
    //public functions section
@@ -131,7 +188,6 @@ class AdvantageList extends React.Component
           rowPointer.setAdvantage(nameToLoad);
           if(undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
           if(undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
-          this.addRow();
       }
        this.update();
    };
@@ -140,13 +196,16 @@ class AdvantageList extends React.Component
    /**Creates a new row at the end of the array*/
    addRow=()=>
    {
-      const key = MainObject.generateKey();
-      const advantageObject = new AdvantageObject(key);
+      //the row that was blank no longer is so use the blank key
+      const advantageObject = new AdvantageObject(this.blankKey);
+      advantageObject.setAdvantage(SelectUtil.getTextById('advantageChoices'+this.blankKey));
+      //need a new key for the new blank row
+      this.blankKey = MainObject.generateKey();
 
       this.setState((state) =>
       {
          this.rowArray.push(advantageObject);
-         state.it.push({name: 'Select Advantage'});
+         state.it.push(advantageObject.getState());
          return state;
       });
    };
@@ -164,7 +223,6 @@ class AdvantageList extends React.Component
          if(equipTotal === 0){this.equipmentMaxTotal=0; return;}  //I don't need to add a row
          equipmentRow = this.rowArray.length-1;  //index is at last existing row (which was blank)
          this.rowArray[equipmentRow].setAdvantage('Equipment');
-         this.addRow();  //add a new blank row
       }
       var newEquipmentRank = Math.ceil(equipTotal/5);
       this.equipmentMaxTotal = newEquipmentRank*5;  //rounded up to nearest 5
@@ -237,7 +295,10 @@ this.setState((state) =>
    map<uuid, index> for all on change. only need to reindex when sorting or removing which can loop over ad row list
    */
 //TODO: test
-//current state (besides a mess of to do): need to redo life cycle. for just this (somehow)
+/*current state (besides a mess of to do):
+self state edits (sort and dedup) need to be done in callbacks (before render)
+list.update should only do things that depend on other sections
+ */
 
 function createAdvantageList(callback)
 {

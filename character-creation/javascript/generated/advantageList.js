@@ -51,10 +51,17 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.getRowById = function (rowId) {
+         return _this.rowArray[_this.getIndexById(rowId)];
+      };
+
+      _this.getIndexById = function (rowId) {
+         if (rowId === _this.blankKey) {
+            throw new Error('Can\'t get blank row ' + rowId);
+         }
          //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
          for (var i = 0; i < _this.rowArray.length; i++) //include blank row
          {
-            if (_this.rowArray[i].getKey() === rowId) return _this.rowArray[i];
+            if (_this.rowArray[i].getKey() === rowId) return i;
          }
          throw new Error('No row with id ' + rowId + ' (rowArray.length=' + _this.rowArray.length + ')');
       };
@@ -65,6 +72,51 @@ var AdvantageList = function (_React$Component) {
 
       _this.update = function () {
          _this.render();
+      };
+
+      _this.updateByKey = function (updatedKey) {
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newStateRow = _this.rowArray[updatedIndex].getState();
+         _this.setState(function (state) {
+            //TODO: race conditions? merge issues?
+            state.it[updatedIndex] = newStateRow;
+            return state;
+         });
+      };
+
+      _this.updateNameByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update name of blank row ' + updatedKey);
+         }
+
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newName = _this.rowArray[updatedIndex].getName();
+         if (undefined === newName) {
+            _this.removeRow(updatedIndex);
+         } else {
+            _this.setState(function (state) {
+               state.it[updatedIndex].name = newName;
+               return state;
+            });
+         }
+      };
+
+      _this.updateRankByKey = function (updatedKey) {
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newRank = _this.rowArray[updatedIndex].getRank();
+         _this.setState(function (state) {
+            state.it[updatedIndex].rank = newRank;
+            return state;
+         });
+      };
+
+      _this.updateTextByKey = function (updatedKey) {
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newText = _this.rowArray[updatedIndex].getText();
+         _this.setState(function (state) {
+            state.it[updatedIndex].text = newText;
+            return state;
+         });
       };
 
       _this.generate = function () {
@@ -80,6 +132,7 @@ var AdvantageList = function (_React$Component) {
             return React.createElement(AdvantageRowHtml, { key: advantageObject.getKey(), myKey: advantageObject.getKey(),
                state: advantageObject.getState(), derivedValues: advantageObject.getDerivedValues() });
          });
+         elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {} }));
          return (
             //TODO: does this div show?
             React.createElement(
@@ -99,7 +152,7 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.sanitizeRows = function () {
-         //CommonsLibrary.sanitizeRows.call(this, this.rowArray);
+         //TODO:? CommonsLibrary.sanitizeRows.call(this, this.rowArray);
       };
 
       _this.calculateValues = function () {
@@ -138,18 +191,20 @@ var AdvantageList = function (_React$Component) {
             rowPointer.setAdvantage(nameToLoad);
             if (undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
             if (undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
-            _this.addRow();
          }
          _this.update();
       };
 
       _this.addRow = function () {
-         var key = MainObject.generateKey();
-         var advantageObject = new AdvantageObject(key);
+         //the row that was blank no longer is so use the blank key
+         var advantageObject = new AdvantageObject(_this.blankKey);
+         advantageObject.setAdvantage(SelectUtil.getTextById('advantageChoices' + _this.blankKey));
+         //need a new key for the new blank row
+         _this.blankKey = MainObject.generateKey();
 
          _this.setState(function (state) {
             _this.rowArray.push(advantageObject);
-            state.it.push({ name: 'Select Advantage' });
+            state.it.push(advantageObject.getState());
             return state;
          });
       };
@@ -170,7 +225,6 @@ var AdvantageList = function (_React$Component) {
                } //I don't need to add a row
                equipmentRow = _this.rowArray.length - 1; //index is at last existing row (which was blank)
                _this.rowArray[equipmentRow].setAdvantage('Equipment');
-               _this.addRow(); //add a new blank row
             }
          var newEquipmentRank = Math.ceil(equipTotal / 5);
          _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
@@ -230,8 +284,8 @@ var AdvantageList = function (_React$Component) {
       _this.pettyRulesApply = true;
       _this.rankMap = new MapDefault({}, 0);
       _this.rowArray = [];
-      CommonsLibrary.initializeRows.call(_this);
       props.callback(_this);
+      _this.blankKey = MainObject.generateKey();
       return _this;
    }
 
@@ -284,7 +338,7 @@ var AdvantageList = function (_React$Component) {
    return AdvantageList;
 }(React.Component);
 
-/*TODO: all state changes must be setState:
+/*all state changes must be setState:
 this.setState((state) =>
    {
       state.equipment.removeByValue(oldName);
@@ -301,6 +355,10 @@ list (should be named section) can have a json state list, ad row list, derivedV
 map<uuid, index> for all on change. only need to reindex when sorting or removing which can loop over ad row list
 */
 //TODO: test
+/*current state (besides a mess of to do):
+self state edits (sort and dedup) need to be done in callbacks (before render)
+list.update should only do things that depend on other sections
+ */
 
 function createAdvantageList(callback) {
    ReactDOM.render(React.createElement(AdvantageList, { callback: callback }), document.getElementById('advantage-section'));

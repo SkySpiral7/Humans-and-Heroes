@@ -2,7 +2,7 @@
 
 function AdvantageRowHtml(props)
 {
-   var state=props.state, derivedValues=props.derivedValues, key=props.myKey;
+   const state=props.state, derivedValues=props.derivedValues, key=props.myKey;
    /*
    values used:
    state: {name, rank, text};
@@ -27,12 +27,21 @@ function AdvantageRowHtml(props)
       //unshift = addFirst
       options.unshift(<option key="Select Advantage">Select Advantage</option>);
 
+      let onChange = null;
+      if (undefined === state.name)  //if blank
+      {
+         onChange = () => {Main.advantageSection.addRow();};
+      }
+      else
+      {
+         onChange = () =>
+         {
+            Main.advantageSection.getRowById(key)
+            .select();
+         };
+      }
       nameElement = (<div className="col-12 col-sm-6 col-lg-4 col-xl-auto">
-            <select id={'advantageChoices' + key} onChange={() =>
-            {
-               Main.advantageSection.getRowById(key)
-               .select();
-            }}
+            <select id={'advantageChoices' + key} onChange={onChange}
                     value={state.name}>
                {options}
             </select></div>
@@ -54,7 +63,7 @@ function AdvantageRowHtml(props)
       if (undefined !== state.text)
       {
          textElement = (<div className="col-12 col-sm-6">
-            <input type="text" style="width: 100%" id={'advantageText' + key}
+            <input type="text" style={{width: '100%'}} id={'advantageText' + key}
                    onChange={() =>
                    {
                       Main.advantageSection.getRowById(key)
