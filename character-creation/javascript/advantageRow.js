@@ -27,12 +27,24 @@ function AdvantageObject(key)
     this.isBlank=function(){return (state.name === undefined);};
 
    //Onchange section
-    /**Onchange function for selecting an advantage*/
-    this.select=function(){CommonsLibrary.select.call(this, this.setAdvantage, ('advantageChoices'+key), Main.advantageSection);};
-    /**Onchange function for changing the rank*/
-    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('advantageRank'+key), Main.advantageSection);};
-    /**Onchange function for changing the text*/
-    this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('advantageText'+key), Main.advantageSection);};
+   /**Onchange function for selecting an advantage*/
+   this.select = function ()
+   {
+      this.setAdvantage(SelectUtil.getTextById('advantageChoices' + key));
+      Main.advantageSection.updateNameByKey(key);
+   };
+   /**Onchange function for changing the rank*/
+   this.changeRank = function ()
+   {
+      this.setRank(document.getElementById('advantageRank' + key).value);
+      Main.advantageSection.updateRankByKey(key);
+   };
+   /**Onchange function for changing the text*/
+   this.changeText = function ()
+   {
+      this.setText(document.getElementById('advantageText' + key).value);
+      Main.advantageSection.updateTextByKey(key);
+   };
 
    //Value setting section
    /**Populates data of the advantage by using the name (which is validated).

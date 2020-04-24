@@ -42,14 +42,23 @@ function AdvantageRowHtml(props) {
          'Select Advantage'
       ));
 
+      var onChange = null;
+      if (undefined === state.name) //if blank
+         {
+            onChange = function onChange() {
+               Main.advantageSection.addRow();
+            };
+         } else {
+         onChange = function onChange() {
+            Main.advantageSection.getRowById(key).select();
+         };
+      }
       nameElement = React.createElement(
          'div',
          { className: 'col-12 col-sm-6 col-lg-4 col-xl-auto' },
          React.createElement(
             'select',
-            { id: 'advantageChoices' + key, onChange: function onChange() {
-                  Main.advantageSection.getRowById(key).select();
-               },
+            { id: 'advantageChoices' + key, onChange: onChange,
                value: state.name },
             options
          )
@@ -79,7 +88,7 @@ function AdvantageRowHtml(props) {
             textElement = React.createElement(
                'div',
                { className: 'col-12 col-sm-6' },
-               React.createElement('input', { type: 'text', style: 'width: 100%', id: 'advantageText' + key,
+               React.createElement('input', { type: 'text', style: { width: '100%' }, id: 'advantageText' + key,
                   onChange: function onChange() {
                      Main.advantageSection.getRowById(key).changeText();
                   }, value: state.text })
