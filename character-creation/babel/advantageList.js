@@ -14,6 +14,7 @@ class AdvantageList extends React.Component
       super(props);
       //state isn't allowed to be an array therefore everything is under the prop it
       this.state = {it: []};
+      //TODO: move all this junk into derivedValues
       this.equipmentMaxTotal=0;
       this.usingGodhoodAdvantages=false;
       this.total=0;
@@ -54,7 +55,7 @@ class AdvantageList extends React.Component
       if (rowId === this.blankKey){
          throw new Error('Can\'t get blank row ' + rowId);
       }
-      //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
+      //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
       for (var i = 0; i < this.rowArray.length; i++)
       {
          if (this.rowArray[i].getKey() === rowId) return i;
@@ -63,14 +64,17 @@ class AdvantageList extends React.Component
    };
     /**Returns an array of json objects for this section's data*/
     save=()=>{return CommonsLibrary.saveRows(this.rowArray);};
-    /**Does each step for an onChange*/
-    update=()=>{this.render();};
     updateByKey=(updatedKey)=>{
+       if (updatedKey === this.blankKey)
+       {
+          throw new Error('Can\'t update blank row ' + updatedKey);
+       }
+
        const updatedIndex = this.getIndexById(updatedKey);
        const newStateRow = this.rowArray[updatedIndex].getState();
        this.setState((state) =>
        {
-          //TODO: race conditions? merge issues?
+          //TODO: race conditions? merge issues? can this replace the others?
           state.it[updatedIndex] = newStateRow;
           return state;
        });
@@ -98,6 +102,11 @@ class AdvantageList extends React.Component
       }
    };
    updateRankByKey=(updatedKey)=>{
+      if (updatedKey === this.blankKey)
+      {
+         throw new Error('Can\'t update blank row ' + updatedKey);
+      }
+
       const updatedIndex = this.getIndexById(updatedKey);
       const newRank = this.rowArray[updatedIndex].getRank();
       this.setState((state) =>
@@ -107,6 +116,11 @@ class AdvantageList extends React.Component
       });
    };
    updateTextByKey=(updatedKey)=>{
+      if (updatedKey === this.blankKey)
+      {
+         throw new Error('Can\'t update blank row ' + updatedKey);
+      }
+
       const updatedIndex = this.getIndexById(updatedKey);
       const newText = this.rowArray[updatedIndex].getText();
       if (this.isDuplicate())
@@ -124,8 +138,6 @@ class AdvantageList extends React.Component
    };
 
    //'private' commons section. Although all public none of these should be called from outside of this object
-    /**This creates the page's html (for the section)*/
-    generate=()=>{this.render();};
     render=()=>{
        this.calculateValues();
        this.notifyDependent();
@@ -165,12 +177,10 @@ class AdvantageList extends React.Component
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    calculateValues=()=>
    {
-       //TODO: this._sort();
        this.rankMap.clear();
        this.usingGodhoodAdvantages = false;
        this.pettyRulesApply = true;
        this.total = 0;  //reset all these then recount them
-       //TODO: this._calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
 
       for (var i=0; i < this.rowArray.length; i++)
       {
@@ -194,13 +204,14 @@ class AdvantageList extends React.Component
           if(!Data.Advantage.names.contains(nameToLoad))
              {Main.messageUser('AdvantageList.load.notExist', 'Advantage #' + (i+1) + ': ' + nameToLoad + ' is not an advantage name.'); continue;}
           if(Data.Advantage[nameToLoad].isGodhood && !Main.canUseGodhood())
-             {Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i+1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.'); continue;}
+             {Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i+1) + ': ' + nameToLoad +
+                ' is not allowed because transcendence is ' + Main.getTranscendence() + '.'); continue;}
           var rowPointer = this.rowArray.last();
           rowPointer.setAdvantage(nameToLoad);
           if(undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
           if(undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
+          //TODO: setState in load
       }
-       this.update();
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
@@ -240,96 +251,56 @@ class AdvantageList extends React.Component
       }
    };
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
-   _calculateEquipmentRank=()=>
+      //TODO: re-sort these methods (calc equip should be public)
+   calculateEquipmentRank = (equipTotal) =>
    {
-      var equipmentRow;
-      for (var i=0; i < this.rowArray.length; i++)
+      const equipmentIndex = 0;  //due to sorting it is always first
+      if (this.rowArray.isEmpty() ||
+         'Equipment' !== this.rowArray[equipmentIndex].getName())  //if there is no equipment advantage
       {
-         if(this.rowArray[i].getName() === 'Equipment'){equipmentRow = i; break;}
-      }
-      var equipTotal = typeof(Main) === 'undefined' ? 0 : Main.equipmentSection.getTotal();
-      if (equipmentRow === undefined)  //if there is no equipment advantage
-      {
-         if(equipTotal === 0){this.equipmentMaxTotal=0; return;}  //I don't need to add a row
-         equipmentRow = this.rowArray.length;  //index is at last existing row +1
-         this.rowArray[equipmentRow].setAdvantage('Equipment');
-      }
-      var newEquipmentRank = Math.ceil(equipTotal/5);
-      this.equipmentMaxTotal = newEquipmentRank*5;  //rounded up to nearest 5
-      if(newEquipmentRank === 0) this.removeRow(equipmentRow);  //don't need the row any more
-      else this.rowArray[equipmentRow].setRank(newEquipmentRank);
-   };
-   _sort=()=>
-   {
-      var i, combinedArray = [];
-      for (i = 0; i < this.rowArray.length; i++)
-      {
-         combinedArray.push({
-            instance: this.rowArray[i],
-            element: this.elementArray[i]
+         if(0 === equipTotal){this.equipmentMaxTotal=0; return;}  //I don't need to add a row
+
+         //TODO: make DRY with addRow
+         //the row that was blank no longer is so use the blank key
+         const advantageObject = new AdvantageObject(this.blankKey);
+         advantageObject.setAdvantage('Equipment');
+         //need a new key for the new blank row
+         this.blankKey = MainObject.generateKey();
+
+         //unshift = addFirst
+         this.rowArray.unshift(advantageObject);
+         this.setState((state) =>
+         {
+            state.it.unshift(advantageObject.getState());
+            return state;
          });
       }
-      //TODO: can this be less stupid?
-      combinedArray.stableSort(this._sortOrder);
-      this.rowArray = [];
-      this.elementArray = [];
-      for (i = 0; i < this.rowArray.length; i++)
+      else if(0 === equipTotal) this.removeRow(equipmentIndex);  //don't need the row any more
+
+      var newEquipmentRank = Math.ceil(equipTotal / 5);
+      this.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
+
+      this.rowArray[equipmentIndex].setRank(newEquipmentRank);
+      this.setState((state) =>
       {
-         this.rowArray.push(combinedArray[i].instance);
-         this.elementArray.push(combinedArray[i].element);
-      }
+         state.it[equipmentIndex].rank = newEquipmentRank;
+         return state;
+      });
    };
-   /**Pass into Array.prototype.sort so that the automatic advantages come first (equipment then the rest).*/
-   _sortOrder=(a, b)=>
-   {
-       const aFirst = -1;
-       const bFirst = 1;
-
-       if(a.instance.isBlank()) return bFirst;
-       if(b.instance.isBlank()) return aFirst;
-
-       //TODO: bug: when first adding equipment the new advantage is placed last without sorting
-       if('Equipment' === a.instance.getName()) return aFirst;
-       if('Equipment' === b.instance.getName()) return bFirst;
-
-       return 0;
-   };
-   /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   _testSortStability=()=>{unstableSort(this.rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
    /**Updates other sections which depend on advantage section*/
-   notifyDependent=()=>
+   notifyDependent = () =>
    {
-       if(typeof(Main) !== 'undefined')
-       {
-          Main.updateInitiative();
-          Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
-          Main.defenseSection.calculateValues();
-          Main.update();  //updates totals and power level
-       }
+      if (typeof(Main) !== 'undefined')  //happens during main's creation
+      {
+         Main.updateInitiative();
+         Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
+         Main.defenseSection.calculateValues();
+         Main.update();  //updates totals and power level
+      }
    };
 }
 
-/*all state changes must be setState:
-this.setState((state) =>
-   {
-      state.equipment.removeByValue(oldName);
-      return state;
-   });
-*/
-   //TODO: how to manage instance?
-   //doesn't work doc: https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html
-   //need to pull state up 1 and steal list instance. make row pure component that edits parent state
-   /*
-   total and unique name are only ones that need to change on state change
-   AdvantageRowHtml pure function
-   list (should be named section) can have a json state list, ad row list, derivedValues (don't track total and uniq name)
-   map<uuid, index> for all on change. only need to reindex when sorting or removing which can loop over ad row list
-   */
 //TODO: test
-/*current state (besides a mess of to do):
-self state edits (sort) need to be done in callbacks (before render)
-list.update should only do things that depend on other sections
-*/
 
 function createAdvantageList(callback)
 {

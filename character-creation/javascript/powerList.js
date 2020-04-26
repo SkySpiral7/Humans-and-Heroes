@@ -131,16 +131,14 @@ function PowerListAgnostic(sectionName)
       }));
    };
    /**Updates other sections which depend on power section*/
-   this.notifyDependent=function()
+   this.notifyDependent = function ()
    {
       if (this === Main.equipmentSection)
       {
-          Main.advantageSection.calculateValues();  //in case of too low or too high equipment advantage rank
-          Main.advantageSection.generate();  //in case a new equipment row needs to be added (or removed)
-          //do not call advantageSection.update. It isn't needed: equipment doesn't affect defense and the rest is covered below
+         Main.advantageSection.calculateEquipmentRank(this.getTotal());
       }
-       Main.updateOffense();
-       Main.defenseSection.calculateValues();
+      Main.updateOffense();
+      Main.defenseSection.calculateValues();
    };
    //constructor:
    CommonsLibrary.initializeRows.call(this);

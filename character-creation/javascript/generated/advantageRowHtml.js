@@ -66,7 +66,7 @@ function AdvantageRowHtml(props) {
    }
    if (undefined !== state.name) //done for blank
       {
-         if (state.name === 'Equipment') costElement = React.createElement(
+         if ('Equipment' === state.name) costElement = React.createElement(
             'div',
             { className: 'col-6 col-sm-3 col-lg-2 col-xl-auto' },
             'Cost ',

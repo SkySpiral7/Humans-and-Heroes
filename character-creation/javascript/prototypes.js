@@ -16,7 +16,7 @@ if(Array.prototype.contains === undefined){Array.prototype.contains=function(obj
     return (this.indexOf(obj) !== -1);  //Array.prototype.indexOf is type strict (using ===)
 };}
 /**Returns true if this array contains no elements, false otherwise*/
-if(Array.prototype.isEmpty === undefined){Array.prototype.isEmpty=function(){return (this.length === 0);};}
+if(Array.prototype.isEmpty === undefined){Array.prototype.isEmpty=function(){return (0 === this.length);};}
 /**Removes all elements from an array. This must be used over ar=[]; if ar is references anywhere else.*/
 Array.prototype.clear=function(){while(this.length > 0) this.pop();};
 /**Returns a shallow copy of this array.*/

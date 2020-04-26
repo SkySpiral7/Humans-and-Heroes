@@ -49,7 +49,7 @@ function AdvantageRowHtml(props)
    }
    if (undefined !== state.name)  //done for blank
    {
-      if (state.name === 'Equipment') costElement =
+      if ('Equipment' === state.name) costElement =
          <div className="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost {' ' + state.rank}</div>;
       //state.rank is always defined but only show this if max rank is > 1
       else if (derivedValues.hasRank) costElement = <label className="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank {' '}
