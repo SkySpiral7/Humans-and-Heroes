@@ -67,7 +67,11 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.save = function () {
-         return CommonsLibrary.saveRows(_this.rowArray);
+         var json = [];
+         for (var i = 0; i < _this.rowArray.length; i++) {
+            json.push(_this.rowArray[i].save());
+         }
+         return json; //might still be empty
       };
 
       _this.updateByKey = function (updatedKey) {
@@ -186,27 +190,36 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.load = function (jsonSection) {
-         //rowArray=[new AdvantageObject(0)];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
+         //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
+         if (_this.rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
+         var newState = [];
+         if (0 !== _this.equipmentMaxTotal) newState.push(_this.rowArray[0].getState());
          for (var i = 0; i < jsonSection.length; i++) {
             var nameToLoad = jsonSection[i].name;
             if (!Data.Advantage.names.contains(nameToLoad)) {
-               Main.messageUser('AdvantageList.load.notExist', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not an advantage name.');continue;
+               Main.messageUser('AdvantageList.load.notExist', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not an advantage name.');
+               continue;
             }
             if (Data.Advantage[nameToLoad].isGodhood && !Main.canUseGodhood()) {
-               Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');continue;
+               Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
+               continue;
             }
+            _this.addRow(nameToLoad);
             var rowPointer = _this.rowArray.last();
-            rowPointer.setAdvantage(nameToLoad);
             if (undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
             if (undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
-            //TODO: setState in load
+            newState.push(rowPointer.getState());
          }
+         _this.setState(function () {
+            return { it: newState };
+         });
       };
 
-      _this.addRow = function () {
+      _this.addRow = function (newName) {
+         if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this.blankKey);
          //the row that was blank no longer is so use the blank key
          var advantageObject = new AdvantageObject(_this.blankKey);
-         advantageObject.setAdvantage(SelectUtil.getTextById('advantageChoices' + _this.blankKey));
+         advantageObject.setAdvantage(newName);
          //need a new key for the new blank row
          _this.blankKey = MainObject.generateKey();
 
@@ -234,11 +247,12 @@ var AdvantageList = function (_React$Component) {
 
       _this.calculateEquipmentRank = function (equipTotal) {
          var equipmentIndex = 0; //due to sorting it is always first
+         var newEquipmentRank = Math.ceil(equipTotal / 5);
+         _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
+
          if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
             {
-               if (0 === equipTotal) {
-                  _this.equipmentMaxTotal = 0;return;
-               } //I don't need to add a row
+               if (0 === equipTotal) return; //I don't need to add a row
 
                //TODO: make DRY with addRow
                //the row that was blank no longer is so use the blank key
@@ -253,11 +267,13 @@ var AdvantageList = function (_React$Component) {
                   state.it.unshift(advantageObject.getState());
                   return state;
                });
-            } else if (0 === equipTotal) _this.removeRow(equipmentIndex); //don't need the row any more
+            } else if (0 === equipTotal) //don't need the row any more
+            {
+               _this.removeRow(equipmentIndex);
+               return;
+            }
 
-         var newEquipmentRank = Math.ceil(equipTotal / 5);
-         _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
-
+         //don't connect with else since this happens when adding or updating
          _this.rowArray[equipmentIndex].setRank(newEquipmentRank);
          _this.setState(function (state) {
             state.it[equipmentIndex].rank = newEquipmentRank;
@@ -323,6 +339,7 @@ var AdvantageList = function (_React$Component) {
    /**Creates a new row at the end of the array*/
 
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
+   //TODO: re-sort these methods (calc equip should be public)
 
    /**Updates other sections which depend on advantage section*/
 
