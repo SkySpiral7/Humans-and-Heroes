@@ -59,7 +59,7 @@ var AdvantageList = function (_React$Component) {
          if (rowId === _this.blankKey) {
             throw new Error('Can\'t get blank row ' + rowId);
          }
-         //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
+         //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
          for (var i = 0; i < _this.rowArray.length; i++) {
             if (_this.rowArray[i].getKey() === rowId) return i;
          }
@@ -70,15 +70,15 @@ var AdvantageList = function (_React$Component) {
          return CommonsLibrary.saveRows(_this.rowArray);
       };
 
-      _this.update = function () {
-         _this.render();
-      };
-
       _this.updateByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
          var updatedIndex = _this.getIndexById(updatedKey);
          var newStateRow = _this.rowArray[updatedIndex].getState();
          _this.setState(function (state) {
-            //TODO: race conditions? merge issues?
+            //TODO: race conditions? merge issues? can this replace the others?
             state.it[updatedIndex] = newStateRow;
             return state;
          });
@@ -103,6 +103,10 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.updateRankByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
          var updatedIndex = _this.getIndexById(updatedKey);
          var newRank = _this.rowArray[updatedIndex].getRank();
          _this.setState(function (state) {
@@ -112,6 +116,10 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.updateTextByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
          var updatedIndex = _this.getIndexById(updatedKey);
          var newText = _this.rowArray[updatedIndex].getText();
          if (_this.isDuplicate()) {
@@ -122,10 +130,6 @@ var AdvantageList = function (_React$Component) {
                return state;
             });
          }
-      };
-
-      _this.generate = function () {
-         _this.render();
       };
 
       _this.render = function () {
@@ -164,12 +168,10 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.calculateValues = function () {
-         //TODO: this._sort();
          _this.rankMap.clear();
          _this.usingGodhoodAdvantages = false;
          _this.pettyRulesApply = true;
          _this.total = 0; //reset all these then recount them
-         //TODO: this._calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
 
          for (var i = 0; i < _this.rowArray.length; i++) {
             var advantageName = _this.rowArray[i].getName();
@@ -197,8 +199,8 @@ var AdvantageList = function (_React$Component) {
             rowPointer.setAdvantage(nameToLoad);
             if (undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
             if (undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
+            //TODO: setState in load
          }
-         _this.update();
       };
 
       _this.addRow = function () {
@@ -230,75 +232,51 @@ var AdvantageList = function (_React$Component) {
          }
       };
 
-      _this._calculateEquipmentRank = function () {
-         var equipmentRow;
-         for (var i = 0; i < _this.rowArray.length; i++) {
-            if (_this.rowArray[i].getName() === 'Equipment') {
-               equipmentRow = i;break;
-            }
-         }
-         var equipTotal = typeof Main === 'undefined' ? 0 : Main.equipmentSection.getTotal();
-         if (equipmentRow === undefined) //if there is no equipment advantage
+      _this.calculateEquipmentRank = function (equipTotal) {
+         var equipmentIndex = 0; //due to sorting it is always first
+         if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
             {
-               if (equipTotal === 0) {
+               if (0 === equipTotal) {
                   _this.equipmentMaxTotal = 0;return;
                } //I don't need to add a row
-               equipmentRow = _this.rowArray.length; //index is at last existing row +1
-               _this.rowArray[equipmentRow].setAdvantage('Equipment');
-            }
+
+               //TODO: make DRY with addRow
+               //the row that was blank no longer is so use the blank key
+               var advantageObject = new AdvantageObject(_this.blankKey);
+               advantageObject.setAdvantage('Equipment');
+               //need a new key for the new blank row
+               _this.blankKey = MainObject.generateKey();
+
+               //unshift = addFirst
+               _this.rowArray.unshift(advantageObject);
+               _this.setState(function (state) {
+                  state.it.unshift(advantageObject.getState());
+                  return state;
+               });
+            } else if (0 === equipTotal) _this.removeRow(equipmentIndex); //don't need the row any more
+
          var newEquipmentRank = Math.ceil(equipTotal / 5);
          _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
-         if (newEquipmentRank === 0) _this.removeRow(equipmentRow); //don't need the row any more
-         else _this.rowArray[equipmentRow].setRank(newEquipmentRank);
-      };
 
-      _this._sort = function () {
-         var i,
-             combinedArray = [];
-         for (i = 0; i < _this.rowArray.length; i++) {
-            combinedArray.push({
-               instance: _this.rowArray[i],
-               element: _this.elementArray[i]
-            });
-         }
-         //TODO: can this be less stupid?
-         combinedArray.stableSort(_this._sortOrder);
-         _this.rowArray = [];
-         _this.elementArray = [];
-         for (i = 0; i < _this.rowArray.length; i++) {
-            _this.rowArray.push(combinedArray[i].instance);
-            _this.elementArray.push(combinedArray[i].element);
-         }
-      };
-
-      _this._sortOrder = function (a, b) {
-         var aFirst = -1;
-         var bFirst = 1;
-
-         if (a.instance.isBlank()) return bFirst;
-         if (b.instance.isBlank()) return aFirst;
-
-         //TODO: bug: when first adding equipment the new advantage is placed last without sorting
-         if ('Equipment' === a.instance.getName()) return aFirst;
-         if ('Equipment' === b.instance.getName()) return bFirst;
-
-         return 0;
-      };
-
-      _this._testSortStability = function () {
-         unstableSort(_this.rowArray, _this._sortOrder);
+         _this.rowArray[equipmentIndex].setRank(newEquipmentRank);
+         _this.setState(function (state) {
+            state.it[equipmentIndex].rank = newEquipmentRank;
+            return state;
+         });
       };
 
       _this.notifyDependent = function () {
-         if (typeof Main !== 'undefined') {
-            Main.updateInitiative();
-            Main.updateOffense(); //some 1.0 advantages might affect this so it needs to be updated
-            Main.defenseSection.calculateValues();
-            Main.update(); //updates totals and power level
-         }
+         if (typeof Main !== 'undefined') //happens during main's creation
+            {
+               Main.updateInitiative();
+               Main.updateOffense(); //some 1.0 advantages might affect this so it needs to be updated
+               Main.defenseSection.calculateValues();
+               Main.update(); //updates totals and power level
+            }
       };
 
       _this.state = { it: [] };
+      //TODO: move all this junk into derivedValues
       _this.equipmentMaxTotal = 0;
       _this.usingGodhoodAdvantages = false;
       _this.total = 0;
@@ -327,11 +305,8 @@ var AdvantageList = function (_React$Component) {
 
    /**Returns an array of json objects for this section's data*/
 
-   /**Does each step for an onChange*/
-
 
    //'private' commons section. Although all public none of these should be called from outside of this object
-   /**This creates the page's html (for the section)*/
 
    /**Removes the row from the array and updates the index of all others in the list.*/
 
@@ -349,37 +324,13 @@ var AdvantageList = function (_React$Component) {
 
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
 
-   /**Pass into Array.prototype.sort so that the automatic advantages come first (equipment then the rest).*/
-
-   /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   //throws if unstableSort doesn't exist
    /**Updates other sections which depend on advantage section*/
 
 
    return AdvantageList;
 }(React.Component);
 
-/*all state changes must be setState:
-this.setState((state) =>
-   {
-      state.equipment.removeByValue(oldName);
-      return state;
-   });
-*/
-//TODO: how to manage instance?
-//doesn't work doc: https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html
-//need to pull state up 1 and steal list instance. make row pure component that edits parent state
-/*
-total and unique name are only ones that need to change on state change
-AdvantageRowHtml pure function
-list (should be named section) can have a json state list, ad row list, derivedValues (don't track total and uniq name)
-map<uuid, index> for all on change. only need to reindex when sorting or removing which can loop over ad row list
-*/
 //TODO: test
-/*current state (besides a mess of to do):
-self state edits (sort) need to be done in callbacks (before render)
-list.update should only do things that depend on other sections
-*/
 
 function createAdvantageList(callback) {
    ReactDOM.render(React.createElement(AdvantageList, { callback: callback }), document.getElementById('advantage-section'));
