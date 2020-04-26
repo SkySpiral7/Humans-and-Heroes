@@ -12,6 +12,7 @@ class AdvantageList extends React.Component
    constructor(props)
    {
       super(props);
+      //state isn't allowed to be an array therefore everything is under the prop it
       this.state = {it: []};
       this.equipmentMaxTotal=0;
       this.usingGodhoodAdvantages=false;
@@ -34,9 +35,9 @@ class AdvantageList extends React.Component
    //public common section
     /**Removes all rows then updates*/
     clear=()=>{
+       this.rowArray = [];
        this.setState(() =>
        {
-          this.rowArray = [];
           return {it: []};
        });
     };
@@ -54,7 +55,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t get blank row ' + rowId);
       }
       //TODO: could speed up with a map<uuid, index> that reindexes on sort and remove
-      for (var i = 0; i < this.rowArray.length; i++)  //include blank row
+      for (var i = 0; i < this.rowArray.length; i++)
       {
          if (this.rowArray[i].getKey() === rowId) return i;
       }
@@ -82,7 +83,8 @@ class AdvantageList extends React.Component
 
       const updatedIndex = this.getIndexById(updatedKey);
       const newName = this.rowArray[updatedIndex].getName();
-      if (undefined === newName)
+
+      if (undefined === newName || this.isDuplicate())
       {
          this.removeRow(updatedIndex);
       }
@@ -107,11 +109,18 @@ class AdvantageList extends React.Component
    updateTextByKey=(updatedKey)=>{
       const updatedIndex = this.getIndexById(updatedKey);
       const newText = this.rowArray[updatedIndex].getText();
-      this.setState((state) =>
+      if (this.isDuplicate())
       {
-         state.it[updatedIndex].text = newText;
-         return state;
-      });
+         this.removeRow(updatedIndex);
+      }
+      else
+      {
+         this.setState((state) =>
+         {
+            state.it[updatedIndex].text = newText;
+            return state;
+         });
+      }
    };
 
    //'private' commons section. Although all public none of these should be called from outside of this object
@@ -120,7 +129,6 @@ class AdvantageList extends React.Component
     render=()=>{
        this.calculateValues();
        this.notifyDependent();
-       if(typeof(Main) !== 'undefined') Main.update();  //updates totals and power level
 
        var elementArray = this.rowArray.map((advantageObject) =>
        {
@@ -137,31 +145,34 @@ class AdvantageList extends React.Component
     };
     /**Removes the row from the array and updates the index of all others in the list.*/
     removeRow=(rowIndex)=>{
+       this.rowArray.remove(rowIndex);
        this.setState((state) =>
        {
-          this.rowArray.remove(rowIndex);
           state.it.remove(rowIndex);
           return state;
        });
     };
-    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
-    sanitizeRows=()=>{
-       //TODO:? CommonsLibrary.sanitizeRows.call(this, this.rowArray);
+    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
+    isDuplicate=()=>{
+       return this.rowArray.map((item)=>item.getUniqueName())
+       .some((val, id, array) =>
+       {
+          return array.indexOf(val) !== id;
+       });
     };
 
    //public functions section
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    calculateValues=()=>
    {
-       //this.sanitizeRows();
        //TODO: this._sort();
        this.rankMap.clear();
        this.usingGodhoodAdvantages = false;
        this.pettyRulesApply = true;
        this.total = 0;  //reset all these then recount them
-       //this._calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
+       //TODO: this._calculateEquipmentRank();  //changes the rank and adds/ removes the row. therefore must be before the total is counted
 
-      for (var i=0; i < this.rowArray.length-1; i++)  //last row is blank
+      for (var i=0; i < this.rowArray.length; i++)
       {
           var advantageName = this.rowArray[i].getName();
           if(Data.Advantage[advantageName].isGodhood) this.usingGodhoodAdvantages = true;
@@ -202,18 +213,37 @@ class AdvantageList extends React.Component
       //need a new key for the new blank row
       this.blankKey = MainObject.generateKey();
 
-      this.setState((state) =>
+      this.rowArray.push(advantageObject);
+      if (this.isDuplicate())  //requires duplicate to be in this.rowArray
       {
-         this.rowArray.push(advantageObject);
-         state.it.push(advantageObject.getState());
-         return state;
-      });
+         this.rowArray.pop();
+         this.forceUpdate();  //to undo the DOM value
+      }
+      else
+      {
+         this.setState((state) =>
+         {
+            state.it.push(advantageObject.getState());
+            return state;
+         });
+      }
+
+      if (false && this.isDuplicate())
+      {
+         //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
+         this.rowArray.pop();
+         this.setState((state) =>
+         {
+            state.it.pop();
+            return state;
+         });
+      }
    };
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
    _calculateEquipmentRank=()=>
    {
       var equipmentRow;
-      for (var i=0; i < this.rowArray.length-1; i++)  //last row is blank
+      for (var i=0; i < this.rowArray.length; i++)
       {
          if(this.rowArray[i].getName() === 'Equipment'){equipmentRow = i; break;}
       }
@@ -221,7 +251,7 @@ class AdvantageList extends React.Component
       if (equipmentRow === undefined)  //if there is no equipment advantage
       {
          if(equipTotal === 0){this.equipmentMaxTotal=0; return;}  //I don't need to add a row
-         equipmentRow = this.rowArray.length-1;  //index is at last existing row (which was blank)
+         equipmentRow = this.rowArray.length;  //index is at last existing row +1
          this.rowArray[equipmentRow].setAdvantage('Equipment');
       }
       var newEquipmentRank = Math.ceil(equipTotal/5);
@@ -274,6 +304,7 @@ class AdvantageList extends React.Component
           Main.updateInitiative();
           Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
           Main.defenseSection.calculateValues();
+          Main.update();  //updates totals and power level
        }
    };
 }
@@ -296,9 +327,9 @@ this.setState((state) =>
    */
 //TODO: test
 /*current state (besides a mess of to do):
-self state edits (sort and dedup) need to be done in callbacks (before render)
+self state edits (sort) need to be done in callbacks (before render)
 list.update should only do things that depend on other sections
- */
+*/
 
 function createAdvantageList(callback)
 {
