@@ -7,7 +7,7 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
 
    assertions.push({
       Expected: true,
-      Actual: Main.advantageSection.getRow(0)
+      Actual: Main.advantageSection.getRowByIndex(0)
       .isBlank(),
       Description: 'Blank'
    });

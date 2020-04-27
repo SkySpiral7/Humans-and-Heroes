@@ -167,25 +167,3 @@ TestSuite.advantageList.load=function(testState={})
 
     return TestRunner.displayResults('TestSuite.advantageList.load', assertions, testState);
 };
-TestSuite.advantageList.sortOrder=function(testState={})
-{
-    TestRunner.clearResults(testState);
-
-    var assertions=[];
-
-    try{
-    SelectUtil.changeText('advantageChoices0', 'Connected');
-    SelectUtil.changeText('equipmentChoices0', 'Damage');
-    SelectUtil.changeText('advantageChoices2', 'Benefit');
-    Main.advantageSection._testSortStability();
-    //this test proves that the sort order forces stability and that equipment comes first
-
-    assertions.push({Expected: 'Damage', Actual: Main.equipmentSection.getRow(0).getEffect(), Description: 'equipment section row'});
-    assertions.push({Expected: 'Equipment', Actual: Main.advantageSection.getRow(0).getName(), Description: 'Advantage 1'});
-    assertions.push({Expected: 'Connected', Actual: Main.advantageSection.getRow(1).getName(), Description: 'Advantage 2'});
-    assertions.push({Expected: 'Benefit', Actual: Main.advantageSection.getRow(2).getName(), Description: 'Advantage 3'});
-    assertions.push({Expected: true, Actual: Main.advantageSection.getRow(3).isBlank(), Description: 'No more Advantages'});
-    } catch(e){assertions.push({Error: e, Description: 'sortOrder'});}
-
-    return TestRunner.displayResults('TestSuite.advantageList.sortOrder', assertions, testState);
-};

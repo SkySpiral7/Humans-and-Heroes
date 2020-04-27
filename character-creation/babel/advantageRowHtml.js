@@ -3,6 +3,7 @@
 function AdvantageRowHtml(props)
 {
    const state=props.state, derivedValues=props.derivedValues, key=props.myKey;
+   const displayGodhood=props.generateGodHood;
    /*
    values used:
    state: {name, rank, text};
@@ -17,8 +18,6 @@ function AdvantageRowHtml(props)
    if (state.name === 'Equipment') nameElement = <div className="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>;
    else
    {
-      const displayGodhood = (undefined !== Main && (Main.advantageSection.hasGodhoodAdvantages() || Main.canUseGodhood()));
-      //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
       const options = Data.Advantage.names
       .filter((name) => 'Equipment' !== name && (displayGodhood || !Data.Advantage[name].isGodhood))
       .map((name) =>

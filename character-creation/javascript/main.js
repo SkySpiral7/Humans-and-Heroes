@@ -424,9 +424,10 @@ function MainObject()
        document.getElementById('transcendence').value = transcendence;
        if(previousGodhood === this.canUseGodhood()) return;  //same transcendence so don't need to regenerate
        previousGodhood = this.canUseGodhood();
-       this.powerSection.update();  //transcendence changed so update these
-       this.advantageSection.update();
+       //transcendence changed so update these
+       this.powerSection.update();
        //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
+       this.advantageSection.setMainState(this.canUseGodhood());
    };
    //endregion public functions
 
