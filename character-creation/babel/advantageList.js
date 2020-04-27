@@ -13,7 +13,8 @@ class AdvantageList extends React.Component
    {
       super(props);
       //state isn't allowed to be an array therefore everything is under the prop it
-      this.state = {it: []};
+      //main is an external dependency
+      this.state = {it: [], main: {godhood: false}};
       //TODO: move all this junk into derivedValues
       this.equipmentMaxTotal=0;
       this.usingGodhoodAdvantages=false;
@@ -25,15 +26,24 @@ class AdvantageList extends React.Component
       this.blankKey = MainObject.generateKey();
    }
 
-   //Single line function section
-    hasGodhoodAdvantages=()=>{return this.usingGodhoodAdvantages;};  //TODO: do I ever care about hasGodhoodAdvantages?
-    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
-    isUsingPettyRules=()=>{return this.pettyRulesApply;};
-    getEquipmentMaxTotal=()=>{return this.equipmentMaxTotal;};
-    getRankMap=()=>{return this.rankMap;};
-    getTotal=()=>{return this.total;};
+   //region Single line function
+   hasGodhoodAdvantages = () => {return this.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
+   /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
+   isUsingPettyRules = () => {return this.pettyRulesApply;};
+   getEquipmentMaxTotal = () => {return this.equipmentMaxTotal;};
+   getRankMap = () => {return this.rankMap;};
+   getTotal = () => {return this.total;};
+   //endregion Single line function
 
    //public common section
+   setMainState = (value) =>
+   {
+      this.setState((state) =>
+      {
+         state.main.godhood = value;
+         return state;
+      });
+   };
     /**Removes all rows then updates*/
     clear=()=>{
        this.rowArray = [];
@@ -45,6 +55,7 @@ class AdvantageList extends React.Component
     /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
     //TODO: rename to getRowByIndex
     getRow=(rowIndex)=>{return CommonsLibrary.getRow(this.rowArray, rowIndex);};
+    getRowByIndex=this.getRow;
     /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
     getRowById=(rowId)=>
     {
@@ -56,7 +67,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t get blank row ' + rowId);
       }
       //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
-      for (var i = 0; i < this.rowArray.length; i++)
+      for (let i = 0; i < this.rowArray.length; i++)
       {
          if (this.rowArray[i].getKey() === rowId) return i;
       }
@@ -149,13 +160,16 @@ class AdvantageList extends React.Component
     render=()=>{
        this.calculateValues();
        this.notifyDependent();
+       const generateGodHood = (this.usingGodhoodAdvantages || this.state.main.godhood);
+       //must check both since they are not yet in sync
 
-       var elementArray = this.rowArray.map((advantageObject) =>
+       const elementArray = this.rowArray.map((advantageObject) =>
        {
           return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
-                                              state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()} />);
+                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
+                                    generateGodHood={generateGodHood} />);
        });
-       elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} />);
+       elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
        return (
           //TODO: does this div show?
           <div>
@@ -190,9 +204,9 @@ class AdvantageList extends React.Component
        this.pettyRulesApply = true;
        this.total = 0;  //reset all these then recount them
 
-      for (var i=0; i < this.rowArray.length; i++)
+      for (let i=0; i < this.rowArray.length; i++)
       {
-          var advantageName = this.rowArray[i].getName();
+          const advantageName = this.rowArray[i].getName();
           if(Data.Advantage[advantageName].isGodhood) this.usingGodhoodAdvantages = true;
           //do not connected with else since Petty Rules are godhood
           if(advantageName === 'Your Petty Rules Don\'t Apply to Me') this.pettyRulesApply = false;
@@ -272,12 +286,12 @@ class AdvantageList extends React.Component
          });
       }
    };
+   //TODO: re-sort these methods (calc equip should be public)
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
-      //TODO: re-sort these methods (calc equip should be public)
    calculateEquipmentRank = (equipTotal) =>
    {
       const equipmentIndex = 0;  //due to sorting it is always first
-      var newEquipmentRank = Math.ceil(equipTotal / 5);
+      const newEquipmentRank = Math.ceil(equipTotal / 5);
       this.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
 
       if (this.rowArray.isEmpty() ||
@@ -327,7 +341,7 @@ class AdvantageList extends React.Component
    };
 }
 
-//TODO: test
+//TODO: test then sort methods
 
 function createAdvantageList(callback)
 {

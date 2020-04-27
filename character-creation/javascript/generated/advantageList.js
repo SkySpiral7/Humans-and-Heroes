@@ -18,6 +18,7 @@ var AdvantageList = function (_React$Component) {
       _classCallCheck(this, AdvantageList);
 
       //state isn't allowed to be an array therefore everything is under the prop it
+      //main is an external dependency
       var _this = _possibleConstructorReturn(this, (AdvantageList.__proto__ || Object.getPrototypeOf(AdvantageList)).call(this, props));
 
       _this.hasGodhoodAdvantages = function () {
@@ -40,6 +41,13 @@ var AdvantageList = function (_React$Component) {
          return _this.total;
       };
 
+      _this.setMainState = function (value) {
+         _this.setState(function (state) {
+            state.main.godhood = value;
+            return state;
+         });
+      };
+
       _this.clear = function () {
          _this.rowArray = [];
          _this.setState(function () {
@@ -50,6 +58,8 @@ var AdvantageList = function (_React$Component) {
       _this.getRow = function (rowIndex) {
          return CommonsLibrary.getRow(_this.rowArray, rowIndex);
       };
+
+      _this.getRowByIndex = _this.getRow;
 
       _this.getRowById = function (rowId) {
          return _this.rowArray[_this.getIndexById(rowId)];
@@ -139,12 +149,15 @@ var AdvantageList = function (_React$Component) {
       _this.render = function () {
          _this.calculateValues();
          _this.notifyDependent();
+         var generateGodHood = _this.usingGodhoodAdvantages || _this.state.main.godhood;
+         //must check both since they are not yet in sync
 
          var elementArray = _this.rowArray.map(function (advantageObject) {
             return React.createElement(AdvantageRowHtml, { key: advantageObject.getKey(), myKey: advantageObject.getKey(),
-               state: advantageObject.getState(), derivedValues: advantageObject.getDerivedValues() });
+               state: advantageObject.getState(), derivedValues: advantageObject.getDerivedValues(),
+               generateGodHood: generateGodHood });
          });
-         elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {} }));
+         elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {}, generateGodHood: generateGodHood }));
          return (
             //TODO: does this div show?
             React.createElement(
@@ -291,7 +304,7 @@ var AdvantageList = function (_React$Component) {
             }
       };
 
-      _this.state = { it: [] };
+      _this.state = { it: [], main: { godhood: false } };
       //TODO: move all this junk into derivedValues
       _this.equipmentMaxTotal = 0;
       _this.usingGodhoodAdvantages = false;
@@ -304,14 +317,16 @@ var AdvantageList = function (_React$Component) {
       return _this;
    }
 
-   //Single line function section
+   //region Single line function
 
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
-   //TODO: do I ever care about hasGodhoodAdvantages?
+   //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
 
+   //endregion Single line function
 
    //public common section
+
    /**Removes all rows then updates*/
 
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
@@ -338,8 +353,8 @@ var AdvantageList = function (_React$Component) {
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
 
-   /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
    //TODO: re-sort these methods (calc equip should be public)
+   /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
 
    /**Updates other sections which depend on advantage section*/
 
@@ -347,7 +362,7 @@ var AdvantageList = function (_React$Component) {
    return AdvantageList;
 }(React.Component);
 
-//TODO: test
+//TODO: test then sort methods
 
 function createAdvantageList(callback) {
    ReactDOM.render(React.createElement(AdvantageList, { callback: callback }), document.getElementById('advantage-section'));

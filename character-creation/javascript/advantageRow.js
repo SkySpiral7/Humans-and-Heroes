@@ -88,6 +88,7 @@ function AdvantageObject(key)
    /**Get the name of the advantage appended with text to determine redundancy*/
    this.getUniqueName=function()
    {
+       //TODO: it doesn't say if you can have multiple helpers. assumed yes
        if(this.isBlank()) return;  //never hit
        if(state.name === 'Minion' || state.name === 'Sidekick') return ('Helper: '+state.text);  //you can't have the same character be a minion and sidekick
        if(derivedValues.hasText) return (state.name+': '+state.text);
