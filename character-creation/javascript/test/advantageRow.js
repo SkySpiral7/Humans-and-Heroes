@@ -5,16 +5,19 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    TestRunner.clearResults(testState);
    var assertions = [], expected;
 
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
    assertions.push({
-      Expected: true,
-      Actual: Main.advantageSection.getRowByIndex(0)
-      .isBlank(),
+      Expected: 0,
+      Actual: Main.advantageSection.getState().it.length,
       Description: 'Blank'
    });
 
-   SelectUtil.changeText('advantageChoices0', 'Lucky');
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
    expected = {
-      rowIndex: 0,
       name: 'Lucky',
       rank: 1
    };
@@ -38,11 +41,10 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
       Description: 'Lucky: derivedValues'
    });
 
-   DomUtil.changeValue('advantageRank0', 2);
+   ReactUtil.changeValue('advantageRank'+getId(0), 2);
    assertions.push({
-      Expected: false,
-      Actual: Main.advantageSection.getRow(0)
-      .isBlank(),
+      Expected: 1,
+      Actual: Main.advantageSection.getState().it.length,
       Description: 'isBlank'
    });
    assertions.push({
@@ -51,24 +53,16 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
       .getRank(),
       Description: 'getRank pre-reset'
    });
-   SelectUtil.changeText('advantageChoices0', 'Select Advantage');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Select Advantage');
    assertions.push({
-      Expected: true,
-      Actual: Main.advantageSection.getRow(0)
-      .isBlank(),
+      Expected: 0,
+      Actual: Main.advantageSection.getState().it.length,
       Description: 'reset'
-   });
-   assertions.push({
-      Expected: undefined,
-      Actual: Main.advantageSection.getRow(0)
-      .getRank(),
-      Description: 'getRank post-reset'
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
    expected = {
-      rowIndex: 0,
       name: 'Sidekick',
       rank: 1,
       text: 'Helper Name'
@@ -79,11 +73,10 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
       .getState(),
       Description: 'Sidekick: state'
    });
-   DomUtil.changeValue('advantageRank0', 2);
-   DomUtil.changeValue('advantageText0', 'I help');
-   SelectUtil.changeText('advantageChoices0', 'Minion');
+   ReactUtil.changeValue('advantageRank'+getId(0), 2);
+   ReactUtil.changeValue('advantageText'+getId(0), 'I help');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Minion');
    expected = {
-      rowIndex: 0,
       name: 'Minion',
       rank: 2,
       text: 'I help'
@@ -96,12 +89,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Minion');
-   DomUtil.changeValue('advantageRank0', 3);
-   DomUtil.changeValue('advantageText0', 'I can help');
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Minion');
+   ReactUtil.changeValue('advantageRank'+getId(0), 3);
+   ReactUtil.changeValue('advantageText'+getId(0), 'I can help');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
    expected = {
-      rowIndex: 0,
       name: 'Sidekick',
       rank: 3,
       text: 'I can help'
@@ -114,12 +106,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Minion');
-   DomUtil.changeValue('advantageRank0', 4);
-   DomUtil.changeValue('advantageText0', 'helping');
-   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Minion');
+   ReactUtil.changeValue('advantageRank'+getId(0), 4);
+   ReactUtil.changeValue('advantageText'+getId(0), 'helping');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Benefit');
    expected = {
-      rowIndex: 0,
       name: 'Benefit',
       rank: 1,
       text: 'Advantage Subtype'
@@ -132,12 +123,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Benefit');
-   DomUtil.changeValue('advantageRank0', 2);
-   DomUtil.changeValue('advantageText0', 'benny');
-   SelectUtil.changeText('advantageChoices0', 'Minion');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Benefit');
+   ReactUtil.changeValue('advantageRank'+getId(0), 2);
+   ReactUtil.changeValue('advantageText'+getId(0), 'benny');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Minion');
    expected = {
-      rowIndex: 0,
       name: 'Minion',
       rank: 1,
       text: 'Helper Name'
@@ -150,12 +140,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
-   DomUtil.changeValue('advantageRank0', 4);
-   DomUtil.changeValue('advantageText0', 'helping');
-   SelectUtil.changeText('advantageChoices0', 'Benefit');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageRank'+getId(0), 4);
+   ReactUtil.changeValue('advantageText'+getId(0), 'helping');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Benefit');
    expected = {
-      rowIndex: 0,
       name: 'Benefit',
       rank: 1,
       text: 'Advantage Subtype'
@@ -168,12 +157,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Benefit');
-   DomUtil.changeValue('advantageRank0', 2);
-   DomUtil.changeValue('advantageText0', 'benny');
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Benefit');
+   ReactUtil.changeValue('advantageRank'+getId(0), 2);
+   ReactUtil.changeValue('advantageText'+getId(0), 'benny');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
    expected = {
-      rowIndex: 0,
       name: 'Sidekick',
       rank: 1,
       text: 'Helper Name'
@@ -185,7 +173,7 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
       Description: 'Benefit to Sidekick clears rank, text'
    });
 
-   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Diehard');
    assertions.push({
       Expected: false,
       Actual: Main.advantageSection.getRow(0)
@@ -194,12 +182,11 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
-   DomUtil.changeValue('advantageRank0', 2);
-   DomUtil.changeValue('advantageText0', 'side');
-   SelectUtil.changeText('advantageChoices0', 'Diehard');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageRank'+getId(0), 2);
+   ReactUtil.changeValue('advantageText'+getId(0), 'side');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Diehard');
    expected = {
-      rowIndex: 0,
       name: 'Diehard',
       rank: 1
    };
@@ -211,10 +198,9 @@ TestSuite.advantageRow.setAdvantage=function(testState={})
    });
 
    Main.advantageSection.clear();
-   SelectUtil.changeText('advantageChoices0', 'Diehard');
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices'+getId(0), 'Sidekick');
    expected = {
-      rowIndex: 0,
       name: 'Sidekick',
       rank: 1,
       text: 'Helper Name'

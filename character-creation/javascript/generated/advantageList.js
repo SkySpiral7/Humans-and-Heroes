@@ -41,6 +41,10 @@ var AdvantageList = function (_React$Component) {
          return _this.total;
       };
 
+      _this.getState = function () {
+         return JSON.clone(_this.state);
+      };
+
       _this.setMainState = function (value) {
          _this.setState(function (state) {
             state.main.godhood = value;
@@ -60,6 +64,11 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.getRowByIndex = _this.getRow;
+
+      _this.indexToKey = function (rowIndex) {
+         if (rowIndex === _this.rowArray.length) return _this.blankKey;
+         return _this.rowArray[rowIndex].getKey();
+      };
 
       _this.getRowById = function (rowId) {
          return _this.rowArray[_this.getIndexById(rowId)];
@@ -322,7 +331,7 @@ var AdvantageList = function (_React$Component) {
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
    //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
-
+   //defensive copy is important to prevent tamper
    //endregion Single line function
 
    //public common section
