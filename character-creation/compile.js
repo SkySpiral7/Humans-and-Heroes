@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs'),
+   browserify = require('browserify');
 
 function rethrow(err) {if (err) throw err;}
 
@@ -20,6 +21,7 @@ function main()
          execSync('npm install babel-cli@6 babel-preset-react-app@3');
       }
       generateFromBabel();
+      generateFromNode();
 
       console.log('done');
    });
@@ -43,6 +45,15 @@ function generateFromBabel()
             });
       });
    });
+}
+
+function generateFromNode()
+{
+   browserify({
+      entries: ['./node/ReactUtil.js']
+   })
+   .bundle()
+   .pipe(fs.createWriteStream("javascript/generated/ReactUtil.js"));
 }
 
 main();

@@ -1,5 +1,5 @@
 'use strict';
-//TODO: auto install: react, react-dom, @testing-library/react
+//TODO: auto self install: react, react-dom, @testing-library/react
 var fireChange = require('@testing-library/react').fireEvent.change;
 
 var ReactUtil = {};
