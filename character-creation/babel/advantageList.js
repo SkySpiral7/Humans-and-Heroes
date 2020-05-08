@@ -242,11 +242,17 @@ class AdvantageList extends React.Component
                ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
             continue;
          }
-         this.addRow(nameToLoad);
-         const rowPointer = this.rowArray.last();
-         if (undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
-         if (undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
-         newState.push(rowPointer.getState());
+         //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
+         //the row that was blank no longer is so use the blank key
+         const advantageObject = new AdvantageObject(this.blankKey);
+         advantageObject.setAdvantage(nameToLoad);
+         //need a new key for the new blank row
+         this.blankKey = MainObject.generateKey();
+         this.rowArray.push(advantageObject);
+
+         if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
+         if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
+         newState.push(advantageObject.getState());
       }
       this.setState(() =>
       {
@@ -304,7 +310,7 @@ class AdvantageList extends React.Component
       {
          if(0 === equipTotal) return;  //I don't need to add a row
 
-         //TODO: make DRY with addRow
+         //TODO: make DRY with addRow (doesn't use because unshift instead of push)
          //the row that was blank no longer is so use the blank key
          const advantageObject = new AdvantageObject(this.blankKey);
          advantageObject.setAdvantage('Equipment');
@@ -341,7 +347,6 @@ class AdvantageList extends React.Component
          Main.updateInitiative();
          Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
          Main.defenseSection.calculateValues();
-         Main.update();  //updates totals and power level
       }
    };
 }
