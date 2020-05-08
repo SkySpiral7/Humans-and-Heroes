@@ -226,11 +226,17 @@ var AdvantageList = function (_React$Component) {
                Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
                continue;
             }
-            _this.addRow(nameToLoad);
-            var rowPointer = _this.rowArray.last();
-            if (undefined !== jsonSection[i].rank) rowPointer.setRank(jsonSection[i].rank);
-            if (undefined !== jsonSection[i].text) rowPointer.setText(jsonSection[i].text);
-            newState.push(rowPointer.getState());
+            //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
+            //the row that was blank no longer is so use the blank key
+            var advantageObject = new AdvantageObject(_this.blankKey);
+            advantageObject.setAdvantage(nameToLoad);
+            //need a new key for the new blank row
+            _this.blankKey = MainObject.generateKey();
+            _this.rowArray.push(advantageObject);
+
+            if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
+            if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
+            newState.push(advantageObject.getState());
          }
          _this.setState(function () {
             return { it: newState };
@@ -276,7 +282,7 @@ var AdvantageList = function (_React$Component) {
             {
                if (0 === equipTotal) return; //I don't need to add a row
 
-               //TODO: make DRY with addRow
+               //TODO: make DRY with addRow (doesn't use because unshift instead of push)
                //the row that was blank no longer is so use the blank key
                var advantageObject = new AdvantageObject(_this.blankKey);
                advantageObject.setAdvantage('Equipment');
@@ -309,7 +315,6 @@ var AdvantageList = function (_React$Component) {
                Main.updateInitiative();
                Main.updateOffense(); //some 1.0 advantages might affect this so it needs to be updated
                Main.defenseSection.calculateValues();
-               Main.update(); //updates totals and power level
             }
       };
 
