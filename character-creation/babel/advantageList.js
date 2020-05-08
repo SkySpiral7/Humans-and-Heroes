@@ -33,6 +33,7 @@ class AdvantageList extends React.Component
    getEquipmentMaxTotal = () => {return this.equipmentMaxTotal;};
    getRankMap = () => {return this.rankMap;};
    getTotal = () => {return this.total;};
+   getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
    //endregion Single line function
 
    //public common section
@@ -52,15 +53,19 @@ class AdvantageList extends React.Component
           return {it: []};
        });
     };
-    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-    //TODO: rename to getRowByIndex
-    getRow=(rowIndex)=>{return CommonsLibrary.getRow(this.rowArray, rowIndex);};
-    getRowByIndex=this.getRow;
-    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-    getRowById=(rowId)=>
-    {
-       return this.rowArray[this.getIndexById(rowId)];
-    };
+   /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
+   //TODO: rename to getRowByIndex
+   getRow=(rowIndex)=>{return CommonsLibrary.getRow(this.rowArray, rowIndex);};
+   getRowByIndex=this.getRow;
+   indexToKey=(rowIndex)=>{
+      if(rowIndex === this.rowArray.length) return this.blankKey;
+      return this.rowArray[rowIndex].getKey();
+   };
+   /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
+   getRowById=(rowId)=>
+   {
+      return this.rowArray[this.getIndexById(rowId)];
+   };
    getIndexById=(rowId)=>
    {
       if (rowId === this.blankKey){
