@@ -225,9 +225,17 @@ TestSuite.main.update=function(testState={})
    TestRunner.clearResults(testState);
    var assertions = [];
 
+   function getAdId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'Default PL 1'});
-   assertions.push(
-      {Expected: '1', Actual: document.getElementById('power-level').innerHTML, Description: 'power-level html set'});
+   assertions.push({
+      Expected: '1',
+      Actual: document.getElementById('power-level').innerHTML,
+      Description: 'power-level html set'
+   });
    assertions.push({
       Expected: '15',
       Actual: document.getElementById('grand-total-max').innerHTML,
@@ -251,7 +259,7 @@ TestSuite.main.update=function(testState={})
    assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: '16 CP = PL 2'});
 
    DomUtil.changeValue('powerRank0', 1000);
-   SelectUtil.changeText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me');
+   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Your Petty Rules Don\'t Apply to Me');
    SelectUtil.changeText('powerChoices0', 'Damage');
    SelectUtil.changeText('powerSelectRange0', 'Perception');
    //petty costs 50 + 40 damage = 90 CP /15 = 6 PL even though PL limit would require 10
@@ -309,6 +317,11 @@ TestSuite.main.updateInitiative=function(testState={})
     var assertions=[];
     var initiativeElement = document.getElementById('initiative');
 
+   function getAdId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
     assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Agility').getValue(), Description: 'Initial Agility'});
     assertions.push({Expected: '+0', Actual: initiativeElement.innerHTML, Description: 'Initial Initiative'});
 
@@ -323,28 +336,28 @@ TestSuite.main.updateInitiative=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Set Agility -3'});}
 
     try{
-    SelectUtil.changeText('advantageChoices0', 'Seize Initiative');
+    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Seize Initiative');
     assertions.push({Expected: '-3 with Seize Initiative', Actual: initiativeElement.innerHTML, Description: 'Add Seize Initiative'});
     } catch(e){assertions.push({Error: e, Description: 'Add Seize Initiative'});}
 
     try{
     Main.clear();
-    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    DomUtil.changeValue('advantageRank0', 4);
+    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Improved Initiative');
+    ReactUtil.changeValue('advantageRank' + getAdId(0), 4);
     assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '3.0+ Improved Initiative *1'});
     } catch(e){assertions.push({Error: e, Description: '3.0+ Improved Initiative *1'});}
 
     try{
     Main.setRuleset(1, 0);
-    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    DomUtil.changeValue('advantageRank0', 3);
+    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Improved Initiative');
+    ReactUtil.changeValue('advantageRank' + getAdId(0), 3);
     assertions.push({Expected: '+12', Actual: initiativeElement.innerHTML, Description: '1.0 Improved Initiative *4'});
     } catch(e){assertions.push({Error: e, Description: '1.0 Improved Initiative *4'});}
 
     try{
     Main.setRuleset(2,7);
-    SelectUtil.changeText('advantageChoices0', 'Improved Initiative');
-    DomUtil.changeValue('advantageRank0', 2);
+    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Improved Initiative');
+    ReactUtil.changeValue('advantageRank' + getAdId(0), 2);
     assertions.push({Expected: '+4', Actual: initiativeElement.innerHTML, Description: '2.7 Improved Initiative *2'});
     } catch(e){assertions.push({Error: e, Description: '2.7 Improved Initiative *2'});}
 
@@ -354,6 +367,11 @@ TestSuite.main.updateOffense=function(testState={})
 {
    TestRunner.clearResults(testState);
    var assertions = [], expected;
+
+   function getAdId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
 
    expected = [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}];
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Happy: Unarmed only by default'});
@@ -449,7 +467,7 @@ TestSuite.main.updateOffense=function(testState={})
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Accurate attack'});
 
    Main.setRuleset(1, 0);
-   SelectUtil.changeText('advantageChoices0', 'Close Attack');
+   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Close Attack');
    DomUtil.changeValue('Fighting', 1);
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerName0', 'Sword 1');
@@ -460,8 +478,8 @@ TestSuite.main.updateOffense=function(testState={})
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'v1.0 Close Attack advantage'});
 
    Main.clear();
-   SelectUtil.changeText('advantageChoices0', 'Ranged Attack');
-   DomUtil.changeValue('advantageRank0', 2);
+   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Ranged Attack');
+   ReactUtil.changeValue('advantageRank' + getAdId(0), 2);
    DomUtil.changeValue('Dexterity', 1);
 
    SelectUtil.changeText('powerChoices0', 'Damage');
