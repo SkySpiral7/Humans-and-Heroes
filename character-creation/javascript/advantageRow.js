@@ -24,6 +24,7 @@ function AdvantageObject(key)
 
    //Single line function section
     this.getKey=function(){return key;};
+    //TODO: isBlank should no longer be needed (remove it)
     this.isBlank=function(){return (state.name === undefined);};
 
    //Onchange section
