@@ -24,14 +24,14 @@ function AdvantageObject(key)
 
    //Single line function section
     this.getKey=function(){return key;};
-    //TODO: isBlank should no longer be needed (remove it)
-    this.isBlank=function(){return (state.name === undefined);};
 
    //Onchange section
    /**Onchange function for selecting an advantage*/
    this.select = function ()
    {
-      this.setAdvantage(SelectUtil.getTextById('advantageChoices' + key));
+      var nameGiven = SelectUtil.getTextById('advantageChoices' + key);
+      if (Data.Advantage.names.contains(nameGiven)) this.setAdvantage(nameGiven);
+      else state.name = undefined;  //mark for delete (since I can't delete myself)
       Main.advantageSection.updateNameByKey(key);
    };
    /**Onchange function for changing the rank*/
@@ -53,7 +53,6 @@ function AdvantageObject(key)
    The data set is independent of the document and doesn't call update.*/
    this.setAdvantage=function(nameGiven)
    {
-       if(!Data.Advantage.names.contains(nameGiven)){this._resetValues(); return;}
        var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
           //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
        state.name = nameGiven;
@@ -71,7 +70,6 @@ function AdvantageObject(key)
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
    {
-       if(this.isBlank()) return;
        if(!derivedValues.hasRank) return;  //can only happen when loading
        state.rank = sanitizeNumber(rankGiven, 1, 1);
        if(state.rank > derivedValues.maxRank) state.rank = derivedValues.maxRank;
@@ -80,7 +78,6 @@ function AdvantageObject(key)
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
    {
-       if(this.isBlank()) return;  //TODO: looks like cargo cult
        if(!derivedValues.hasText) return;  //can only happen when loading
        state.text = textGiven.trim();  //trimmed in case it needs to match up with something else
    };
@@ -90,7 +87,6 @@ function AdvantageObject(key)
    this.getUniqueName=function()
    {
        //TODO: it doesn't say if you can have multiple helpers. assumed yes
-       if(this.isBlank()) return;  //never hit
        if(state.name === 'Minion' || state.name === 'Sidekick') return ('Helper: '+state.text);  //you can't have the same character be a minion and sidekick
        if(derivedValues.hasText) return (state.name+': '+state.text);
        return state.name;
@@ -108,13 +104,7 @@ function AdvantageObject(key)
       return json;
    };
 
-   //'private' functions section. Although all public none of these should be called from outside of this object
-   this._resetValues=function()
-   {
-      //key is not reset
-      state = {};
-      derivedValues = {total: 0};
-   };
    //constructor:
-   this._resetValues();
+   state = {};
+   derivedValues = {total: 0};
 }
