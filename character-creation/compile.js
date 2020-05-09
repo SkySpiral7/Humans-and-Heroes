@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs'),
-   browserify = require('browserify');
+const fs = require('fs');
 
 function rethrow(err) {if (err) throw err;}
 
@@ -15,10 +14,13 @@ function main()
    {
       if (err)
       {
+         console.log('recreating node_modules...');
          const execSync = require('child_process').execSync;
-         //command from https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
-         //-g didn't seem to work
-         execSync('npm install babel-cli@6 babel-preset-react-app@3');
+         //babel from https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+         //the rest from guessing
+         //TODO: figure out how to upgrade to babel 7: @babel/core but couldn't get presets to work
+         //https://jestjs.io/docs/en/tutorial-react has @babel/preset-env @babel/preset-react
+         execSync('npm install babel-core@6 babel-preset-react-app@3 browserify @testing-library/react react-dom react');
       }
       generateFromBabel();
       generateFromNode();
@@ -49,7 +51,7 @@ function generateFromBabel()
 
 function generateFromNode()
 {
-   browserify({
+   require('browserify')({
       entries: ['./node/ReactUtil.js']
    })
    .bundle()

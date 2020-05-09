@@ -15,8 +15,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AdvantageList = function (_React$Component) {
    _inherits(AdvantageList, _React$Component);
 
-   //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
-
    //endregion private functions
    function AdvantageList(props) {
       _classCallCheck(this, AdvantageList);
