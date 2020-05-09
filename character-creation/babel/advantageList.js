@@ -9,10 +9,9 @@ class AdvantageList extends React.Component
 {
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
    state;
-   //TODO: rename to underscores
-   rowArray;
-   derivedValues;
-   blankKey;
+   _rowArray;
+   _derivedValues;
+   _blankKey;
 
    constructor(props)
    {
@@ -20,26 +19,26 @@ class AdvantageList extends React.Component
       //state isn't allowed to be an array therefore everything is under the prop it
       //main is an external dependency
       this.state = {it: [], main: {godhood: false}};
-      this.derivedValues = {
+      this._rowArray = [];  //state.it as custom objects
+      this._derivedValues = {
          equipmentMaxTotal: 0,
          usingGodhoodAdvantages: false,
          total: 0,
          pettyRulesApply: true,
          rankMap: new MapDefault({}, 0)  //this has toJSON defined
       };
-      this.rowArray = [];
-      this.blankKey = MainObject.generateKey();
+      this._blankKey = MainObject.generateKey();
       props.callback(this);
    }
 
    //region Single line function
-   hasGodhoodAdvantages = () => {return this.derivedValues.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
+   hasGodhoodAdvantages = () => {return this._derivedValues.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
-   isUsingPettyRules = () => {return this.derivedValues.pettyRulesApply;};
-   getDerivedValues = () => {return JSON.clone(this.derivedValues);};  //rankMap is converted to json
-   getEquipmentMaxTotal = () => {return this.derivedValues.equipmentMaxTotal;};
-   getRankMap = () => {return this.derivedValues.rankMap;};
-   getTotal = () => {return this.derivedValues.total;};
+   isUsingPettyRules = () => {return this._derivedValues.pettyRulesApply;};
+   getDerivedValues = () => {return JSON.clone(this._derivedValues);};  //rankMap is converted to json
+   getEquipmentMaxTotal = () => {return this._derivedValues.equipmentMaxTotal;};
+   getRankMap = () => {return this._derivedValues.rankMap;};
+   getTotal = () => {return this._derivedValues.total;};
    getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
    //endregion Single line function
 
@@ -47,13 +46,13 @@ class AdvantageList extends React.Component
    /**Creates a new row at the end of the array*/
    addRow = (newName) =>
    {
-      if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + this.blankKey);
+      if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + this._blankKey);
       const advantageObject = this._addRowNoPush(newName);
 
-      this.rowArray.push(advantageObject);
+      this._rowArray.push(advantageObject);
       if (this._isDuplicate())  //requires duplicate to be in this.rowArray
       {
-         this.rowArray.pop();
+         this._rowArray.pop();
          this.forceUpdate();  //to undo the DOM value
       }
       else
@@ -68,7 +67,7 @@ class AdvantageList extends React.Component
       if (false && this._isDuplicate())
       {
          //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
-         this.rowArray.pop();
+         this._rowArray.pop();
          this.setState((state) =>
          {
             state.it.pop();
@@ -81,11 +80,11 @@ class AdvantageList extends React.Component
    {
       const equipmentIndex = 0;  //due to sorting it is always first
       const newEquipmentRank = Math.ceil(equipTotal / 5);
-      this.derivedValues.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
+      this._derivedValues.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
 
       //TODO: retest things like this
-      if (this.rowArray.isEmpty() ||
-         'Equipment' !== this.rowArray[equipmentIndex].getName())  //if there is no equipment advantage
+      if (this._rowArray.isEmpty() ||
+         'Equipment' !== this._rowArray[equipmentIndex].getName())  //if there is no equipment advantage
       {
          if (0 === equipTotal) return;  //I don't need to add a row
 
@@ -93,7 +92,7 @@ class AdvantageList extends React.Component
          const advantageObject = this._addRowNoPush('Equipment');
 
          //unshift = addFirst
-         this.rowArray.unshift(advantageObject);
+         this._rowArray.unshift(advantageObject);
          this.setState((state) =>
          {
             state.it.unshift(advantageObject.getState());
@@ -107,7 +106,7 @@ class AdvantageList extends React.Component
       }
 
       //don't connect with else since this happens when adding or updating
-      this.rowArray[equipmentIndex].setRank(newEquipmentRank);
+      this._rowArray[equipmentIndex].setRank(newEquipmentRank);
       this.setState((state) =>
       {
          state.it[equipmentIndex].rank = newEquipmentRank;
@@ -117,7 +116,7 @@ class AdvantageList extends React.Component
    /**Removes all rows then updates*/
    clear = () =>
    {
-      this.rowArray = [];
+      this._rowArray = [];
       this.setState(() =>
       {
          return {it: []};
@@ -125,38 +124,38 @@ class AdvantageList extends React.Component
    };
    getIndexById = (rowId) =>
    {
-      if (rowId === this.blankKey)
+      if (rowId === this._blankKey)
       {
          //TODO: remove these throws since they are asserts until this class is re-tested
          throw new Error('Can\'t get blank row ' + rowId);
       }
       //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
-      for (let i = 0; i < this.rowArray.length; i++)
+      for (let i = 0; i < this._rowArray.length; i++)
       {
-         if (this.rowArray[i].getKey() === rowId) return i;
+         if (this._rowArray[i].getKey() === rowId) return i;
       }
-      throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this.rowArray.length + ')');
+      throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this._rowArray.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-   getRowByIndex = (rowIndex) => {return this.rowArray[rowIndex];};
+   getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
    getRowById = (rowId) =>
    {
-      return this.rowArray[this.getIndexById(rowId)];
+      return this._rowArray[this.getIndexById(rowId)];
    };
    indexToKey = (rowIndex) =>
    {
-      if (rowIndex === this.rowArray.length) return this.blankKey;
-      return this.rowArray[rowIndex].getKey();
+      if (rowIndex === this._rowArray.length) return this._blankKey;
+      return this._rowArray[rowIndex].getKey();
    };
    /**Sets data from a json object given then updates.*/
    load = (jsonSection) =>
    {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
-      if (this.rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
+      if (this._rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       const newState = [];
       const duplicateCheck = [];
-      if (0 !== this.derivedValues.equipmentMaxTotal) newState.push(this.rowArray[0].getState());
+      if (0 !== this._derivedValues.equipmentMaxTotal) newState.push(this._rowArray[0].getState());
       for (let i = 0; i < jsonSection.length; i++)
       {
          const nameToLoad = jsonSection[i].name;
@@ -181,7 +180,7 @@ class AdvantageList extends React.Component
             //TODO: need to really nail down what is a duplicate for this and message based on unique name
             continue;
          }
-         this.rowArray.push(advantageObject);
+         this._rowArray.push(advantageObject);
          duplicateCheck.push(advantageObject.getUniqueName());
 
          if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
@@ -197,9 +196,9 @@ class AdvantageList extends React.Component
    save = () =>
    {
       const json = [];
-      for (let i = 0; i < this.rowArray.length; i++)
+      for (let i = 0; i < this._rowArray.length; i++)
       {
-         json.push(this.rowArray[i].save());
+         json.push(this._rowArray[i].save());
       }
       return json;  //might still be empty
    };
@@ -213,13 +212,13 @@ class AdvantageList extends React.Component
    };
    updateByKey = (updatedKey) =>
    {
-      if (updatedKey === this.blankKey)
+      if (updatedKey === this._blankKey)
       {
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexById(updatedKey);
-      const newStateRow = this.rowArray[updatedIndex].getState();
+      const newStateRow = this._rowArray[updatedIndex].getState();
       this.setState((state) =>
       {
          //TODO: race conditions? merge issues? can this replace the others?
@@ -229,13 +228,13 @@ class AdvantageList extends React.Component
    };
    updateNameByKey = (updatedKey) =>
    {
-      if (updatedKey === this.blankKey)
+      if (updatedKey === this._blankKey)
       {
          throw new Error('Can\'t update name of blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexById(updatedKey);
-      const newName = this.rowArray[updatedIndex].getName();
+      const newName = this._rowArray[updatedIndex].getName();
 
       if (undefined === newName || this._isDuplicate())
       {
@@ -252,13 +251,13 @@ class AdvantageList extends React.Component
    };
    updateRankByKey = (updatedKey) =>
    {
-      if (updatedKey === this.blankKey)
+      if (updatedKey === this._blankKey)
       {
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexById(updatedKey);
-      const newRank = this.rowArray[updatedIndex].getRank();
+      const newRank = this._rowArray[updatedIndex].getRank();
       this.setState((state) =>
       {
          state.it[updatedIndex].rank = newRank;
@@ -267,13 +266,13 @@ class AdvantageList extends React.Component
    };
    updateTextByKey = (updatedKey) =>
    {
-      if (updatedKey === this.blankKey)
+      if (updatedKey === this._blankKey)
       {
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexById(updatedKey);
-      const newText = this.rowArray[updatedIndex].getText();
+      const newText = this._rowArray[updatedIndex].getText();
       if (this._isDuplicate())
       {
          this._removeRow(updatedIndex);
@@ -294,37 +293,37 @@ class AdvantageList extends React.Component
    _addRowNoPush = (newName) =>
    {
       //the row that was blank no longer is so use the blank key
-      const advantageObject = new AdvantageObject(this.blankKey);
+      const advantageObject = new AdvantageObject(this._blankKey);
       advantageObject.setAdvantage(newName);
       //need a new key for the new blank row
-      this.blankKey = MainObject.generateKey();
+      this._blankKey = MainObject.generateKey();
       return advantageObject;
    };
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    _calculateValues = () =>
    {
-      this.derivedValues.rankMap.clear();
-      this.derivedValues.usingGodhoodAdvantages = false;
-      this.derivedValues.pettyRulesApply = true;
-      this.derivedValues.total = 0;  //reset all these then recount them
+      this._derivedValues.rankMap.clear();
+      this._derivedValues.usingGodhoodAdvantages = false;
+      this._derivedValues.pettyRulesApply = true;
+      this._derivedValues.total = 0;  //reset all these then recount them
 
-      for (let i = 0; i < this.rowArray.length; i++)
+      for (let i = 0; i < this._rowArray.length; i++)
       {
-         const advantageName = this.rowArray[i].getName();
-         if (Data.Advantage[advantageName].isGodhood) this.derivedValues.usingGodhoodAdvantages = true;
+         const advantageName = this._rowArray[i].getName();
+         if (Data.Advantage[advantageName].isGodhood) this._derivedValues.usingGodhoodAdvantages = true;
          //do not connected with else since Petty Rules are godhood
-         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this.derivedValues.pettyRulesApply = false;
+         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this._derivedValues.pettyRulesApply = false;
          //this needs to be tracked because it changes minimum possible power level
-         if (Data.Advantage.mapThese.contains(advantageName)) this.derivedValues.rankMap.add(this.rowArray[i].getUniqueName(),
-            this.rowArray[i].getRank());
+         if (Data.Advantage.mapThese.contains(advantageName)) this._derivedValues.rankMap.add(this._rowArray[i].getUniqueName(),
+            this._rowArray[i].getRank());
          //add instead of set these since map is empty and there are no redundant rows (using unique name)
-         this.derivedValues.total += this.rowArray[i].getTotal();
+         this._derivedValues.total += this._rowArray[i].getTotal();
       }
    };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
    _isDuplicate = () =>
    {
-      return this.rowArray.map((item) => item.getUniqueName())
+      return this._rowArray.map((item) => item.getUniqueName())
       .some((val, id, array) =>
       {
          return array.indexOf(val) !== id;
@@ -343,7 +342,7 @@ class AdvantageList extends React.Component
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndex) =>
    {
-      this.rowArray.remove(rowIndex);
+      this._rowArray.remove(rowIndex);
       this.setState((state) =>
       {
          state.it.remove(rowIndex);
@@ -355,16 +354,16 @@ class AdvantageList extends React.Component
    {
       this._calculateValues();
       this._notifyDependent();
-      const generateGodHood = (this.derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
+      const generateGodHood = (this._derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
       //must check both since they are not yet in sync
 
-      const elementArray = this.rowArray.map((advantageObject) =>
+      const elementArray = this._rowArray.map((advantageObject) =>
       {
          return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
                                    generateGodHood={generateGodHood} />);
       });
-      elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
+      elementArray.push(<AdvantageRowHtml key={this._blankKey} myKey={this._blankKey} state={{}} generateGodHood={generateGodHood} />);
       return elementArray;
    };
    //endregion private functions
