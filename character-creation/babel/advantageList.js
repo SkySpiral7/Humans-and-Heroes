@@ -175,12 +175,7 @@ class AdvantageList extends React.Component
                                     generateGodHood={generateGodHood} />);
        });
        elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
-       return (
-          //TODO: does this div show? anyway to remove this for tests?
-          <div>
-             {elementArray}
-          </div>
-       );
+       return elementArray;
     };
     /**Removes the row from the array and updates the index of all others in the list.*/
     removeRow=(rowIndex)=>{

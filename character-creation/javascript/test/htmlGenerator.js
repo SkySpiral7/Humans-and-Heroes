@@ -7,7 +7,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
 
    function getSection()
    {
-      return document.getElementById('advantage-section').firstChild;
+      return document.getElementById('advantage-section');
    }
 
    function getId(index)
