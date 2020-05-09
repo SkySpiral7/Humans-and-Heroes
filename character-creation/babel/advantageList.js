@@ -176,7 +176,7 @@ class AdvantageList extends React.Component
        });
        elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
        return (
-          //TODO: does this div show?
+          //TODO: does this div show? anyway to remove this for tests?
           <div>
              {elementArray}
           </div>

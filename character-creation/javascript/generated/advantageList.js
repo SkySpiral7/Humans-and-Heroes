@@ -168,7 +168,7 @@ var AdvantageList = function (_React$Component) {
          });
          elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {}, generateGodHood: generateGodHood }));
          return (
-            //TODO: does this div show?
+            //TODO: does this div show? anyway to remove this for tests?
             React.createElement(
                'div',
                null,

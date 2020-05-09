@@ -1,103 +1,151 @@
 'use strict';
-TestSuite.HtmlGenerator={};
-TestSuite.HtmlGenerator.advantageRow=function(testState={})
+TestSuite.HtmlGenerator = {};
+TestSuite.HtmlGenerator.advantageRow = function (testState = {})
 {
    TestRunner.clearResults(testState);
-   var assertions=[], expected;
+   var assertions = [], expected, selectHtml;
+
+   function getSection()
+   {
+      return document.getElementById('advantage-section').firstChild;
+   }
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
 
    SelectUtil.changeText('equipmentChoices0', 'Feature');
    expected = '<div class="row">' +
       '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>' +
       '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost 1</div>' +
       '</div>';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'equipment row'});
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'equipment row'});
    Main.equipmentSection.clear();
 
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'blank row'});
-   Main.advantageSection.clear();  //to regenerate advantageChoices0
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'blank row'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
+   Main.advantageSection.clear();
 
    //TODO: how to test that it generates a list of rows?
 
-   assertions.push({Expected: 'Select Advantage', Actual: document.getElementById('advantageChoices0').value, Description: 'initial: default value'});
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Equipment'), Description: 'initial: Equipment not in select'});
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Ultimate Effort'), Description: 'initial: has (last advantage) Ultimate Effort'});
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: 'initial: no (first Godhood) Beyond Mortal'});
+   assertions.push({
+      Expected: 'Select Advantage',
+      Actual: document.getElementById('advantageChoices' + getId(0)).value,
+      Description: 'initial: default value'
+   });
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Equipment'),
+      Description: 'initial: Equipment not in select'
+   });
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Ultimate Effort'),
+      Description: 'initial: has (last advantage) Ultimate Effort'
+   });
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'initial: no (first Godhood) Beyond Mortal'
+   });
 
    DomUtil.changeValue('Strength', 100);  //set godhood
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Beyond Mortal'), Description: 'godhood: has (first) Beyond Mortal'});
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me'), Description: 'godhood: has (last) Your Petty Rules Don\'t Apply to Me'});
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'godhood: has (first) Beyond Mortal'
+   });
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me'),
+      Description: 'godhood: has (last) Your Petty Rules Don\'t Apply to Me'
+   });
    DomUtil.changeValue('Strength', 0);  //clear godhood
 
-   SelectUtil.changeText('advantageChoices0', 'Diehard');
-   assertions.push({Expected: 'Diehard', Actual: document.getElementById('advantageChoices0').value, Description: 'select set to value'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
+   assertions.push({
+      Expected: 'Diehard',
+      Actual: document.getElementById('advantageChoices' + getId(0)).value,
+      Description: 'select set to value'
+   });
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'no rank or text'});
-   Main.advantageSection.clear();  //regenerates advantageChoices0
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'no rank or text'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
 
-   SelectUtil.changeText('advantageChoices0', 'Defensive Roll');
-   DomUtil.changeValue('advantageRank0', '3');
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Defensive Roll');
+   ReactUtil.changeValue('advantageRank' + getId(0), '3');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
-      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
-      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();" value="3"></label>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
+      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
+      '<input type="text" size="1" id="advantageRank' + getId(0) + '" value="3"></label>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank'});
-   Main.advantageSection.clear();  //regenerates advantageChoices0
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has rank'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
 
    //text is tested in 1.0 so that I can set only text
 
    DomUtil.changeValue('Strength', 100);  //set godhood
-   SelectUtil.changeText('advantageChoices0', 'Let There Be');
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Let There Be');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
-      '<div class="col-auto">=&nbsp;40</div>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
+      '<div class="col-auto">=&nbsp;40</div>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has total'});
-   Main.clear();  //regenerates advantageChoices0
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has total'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
+   Main.clear();
 
-   SelectUtil.changeText('advantageChoices0', 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
-      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank '+
-      '<input type="text" size="1" id="advantageRank0" onchange="Main.advantageSection.getRow(0).changeRank();" value="1"></label>'+
-      '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();" value="Helper Name"></div>'+
-      '<div class="col-auto">=&nbsp;2</div>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
+      '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
+      '<input type="text" size="1" id="advantageRank' + getId(0) + '" value="1"></label>' +
+      '<div class="col-12 col-sm-6"><input type="text" ' +
+      'id="advantageText' + getId(0) + '" value="Helper Name" style="width: 100%;"></div>' +
+      '<div class="col-auto">=&nbsp;2</div>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has rank, text, total'});
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has rank, text, total'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
 
-   Main.setRuleset(1,0);
-   SelectUtil.changeText('advantageChoices0', 'Favored Environment');
-   DomUtil.changeValue('advantageText0', 'Ocean');
+   Main.setRuleset(1, 0);
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Favored Environment');
+   ReactUtil.changeValue('advantageText' + getId(0), 'Ocean');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices0" onchange="Main.advantageSection.getRow(0).select();">' +
-      '</select></div>'+
-      '<div class="col-12 col-sm-6"><input type="text" style="width: 100%" ' +
-      'id="advantageText0" onchange="Main.advantageSection.getRow(0).changeText();" value="Ocean"></div>'+
+      '<select id="advantageChoices' + getId(0) + '">' +
+      '</select></div>' +
+      '<div class="col-12 col-sm-6"><input type="text" ' +
+      'id="advantageText' + getId(0) + '" value="Ocean" style="width: 100%;"></div>' +
       '</div>';
-   document.getElementById('advantageChoices0').innerHTML = '';
-   assertions.push({Expected: expected, Actual: document.getElementById('advantage-section').firstChild.outerHTML, Description: 'has text'});
+   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
+   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has text'});
+   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };

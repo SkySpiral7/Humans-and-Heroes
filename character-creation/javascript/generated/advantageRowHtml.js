@@ -69,13 +69,13 @@ function AdvantageRowHtml(props) {
             'div',
             { className: 'col-6 col-sm-3 col-lg-2 col-xl-auto' },
             'Cost ',
-            ' ' + state.rank
+            state.rank
          );
          //state.rank is always defined but only show this if max rank is > 1
          else if (derivedValues.hasRank) costElement = React.createElement(
                'label',
                { className: 'col-5 col-sm-3 col-lg-2 col-xl-auto' },
-               'Rank ',
+               'Rank',
                ' ',
                React.createElement('input', { type: 'text', size: '1', id: 'advantageRank' + key,
                   onChange: function onChange() {
@@ -87,16 +87,16 @@ function AdvantageRowHtml(props) {
             textElement = React.createElement(
                'div',
                { className: 'col-12 col-sm-6' },
-               React.createElement('input', { type: 'text', style: { width: '100%' }, id: 'advantageText' + key,
+               React.createElement('input', { type: 'text', id: 'advantageText' + key,
                   onChange: function onChange() {
                      Main.advantageSection.getRowById(key).changeText();
-                  }, value: state.text })
+                  }, value: state.text, style: { width: '100%' } })
             );
          }
          if (derivedValues.costPerRank > 1) costPerRankElement = React.createElement(
             'div',
             { className: 'col-auto' },
-            '=\xA0 ',
+            '=\xA0',
             derivedValues.total
          );
       }

@@ -83,7 +83,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 {
    TestRunner.clearResults(testState);
 
-   function getAdId(index)
+   function getId(index)
    {
       return Main.advantageSection.indexToKey(index);
    }
@@ -120,7 +120,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       DomUtil.changeValue('Strength', 30);
       assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: actionTaken + ': Godhood is usable'});
       actionTaken = 'Set Beyond Mortal';
-      ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Beyond Mortal');
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
       assertions.push({
          Expected: 'Beyond Mortal',
          Actual: Main.advantageSection.getRow(0)
@@ -142,7 +142,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    try
    {
       actionTaken = 'Set Petty Rules';
-      ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Your Petty Rules Don\'t Apply to Me');
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
          Expected: 'Your Petty Rules Don\'t Apply to Me',
          Actual: Main.advantageSection.getRow(0)
@@ -167,7 +167,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    try
    {
       actionTaken = 'Set Improved Initiative';
-      ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Improved Initiative');
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
       assertions.push({
          Expected: 'Improved Initiative',
          Actual: Main.advantageSection.getRow(0)
@@ -185,7 +185,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
          Description: actionTaken + ': And petty rules do apply'
       });
       actionTaken = 'Set rank to 2';
-      ReactUtil.changeValue('advantageRank' + getAdId(0), 2);
+      ReactUtil.changeValue('advantageRank' + getId(0), 2);
       assertions.push({
          Expected: true,
          Actual: Main.advantageSection.getRankMap()
@@ -218,8 +218,8 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    try
    {
       actionTaken = 'Set Lucky 2';
-      ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Lucky');
-      ReactUtil.changeValue('advantageRank' + getAdId(0), 2);
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+      ReactUtil.changeValue('advantageRank' + getId(0), 2);
       assertions.push({
          Expected: 'Lucky',
          Actual: Main.advantageSection.getRow(0)
@@ -233,8 +233,8 @@ TestSuite.advantageList.calculateValues = function (testState = {})
          Description: actionTaken + ': with rank of 2'
       });
       actionTaken = 'Set Defensive Roll 3';
-      ReactUtil.changeValue('advantageChoices' + getAdId(1), 'Defensive Roll');
-      ReactUtil.changeValue('advantageRank' + getAdId(1), 3);
+      ReactUtil.changeValue('advantageChoices' + getId(1), 'Defensive Roll');
+      ReactUtil.changeValue('advantageRank' + getId(1), 3);
       assertions.push({
          Expected: 'Defensive Roll',
          Actual: Main.advantageSection.getRow(1)

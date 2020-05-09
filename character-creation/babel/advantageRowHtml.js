@@ -49,9 +49,9 @@ function AdvantageRowHtml(props)
    if (undefined !== state.name)  //done for blank
    {
       if ('Equipment' === state.name) costElement =
-         <div className="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost {' ' + state.rank}</div>;
+         <div className="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost {state.rank}</div>;
       //state.rank is always defined but only show this if max rank is > 1
-      else if (derivedValues.hasRank) costElement = <label className="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank {' '}
+      else if (derivedValues.hasRank) costElement = <label className="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank{' '}
          <input type="text" size="1" id={'advantageRank' + key}
                 onChange={() =>
                 {
@@ -62,14 +62,14 @@ function AdvantageRowHtml(props)
       if (undefined !== state.text)
       {
          textElement = (<div className="col-12 col-sm-6">
-            <input type="text" style={{width: '100%'}} id={'advantageText' + key}
+            <input type="text" id={'advantageText' + key}
                    onChange={() =>
                    {
                       Main.advantageSection.getRowById(key)
                       .changeText();
-                   }} value={state.text} /></div>);
+                   }} value={state.text} style={{width: '100%'}} /></div>);
       }
-      if (derivedValues.costPerRank > 1) costPerRankElement = <div className="col-auto">=&nbsp; {derivedValues.total}</div>;
+      if (derivedValues.costPerRank > 1) costPerRankElement = <div className="col-auto">=&nbsp;{derivedValues.total}</div>;
    }
 
    return (<div className="row">
