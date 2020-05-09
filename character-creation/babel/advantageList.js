@@ -7,12 +7,6 @@
  */
 class AdvantageList extends React.Component
 {
-   //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
-   state;
-   _rowArray;
-   _derivedValues;
-   _blankKey;
-
    constructor(props)
    {
       super(props);
