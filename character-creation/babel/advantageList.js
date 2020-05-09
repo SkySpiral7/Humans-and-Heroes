@@ -9,6 +9,9 @@ class AdvantageList extends React.Component
 {
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
    state;
+   rowArray;
+   derivedValues;
+   blankKey;
 
    constructor(props)
    {
@@ -16,24 +19,26 @@ class AdvantageList extends React.Component
       //state isn't allowed to be an array therefore everything is under the prop it
       //main is an external dependency
       this.state = {it: [], main: {godhood: false}};
-      //TODO: move all this junk into derivedValues
-      this.equipmentMaxTotal = 0;
-      this.usingGodhoodAdvantages = false;
-      this.total = 0;
-      this.pettyRulesApply = true;
-      this.rankMap = new MapDefault({}, 0);
+      this.derivedValues = {
+         equipmentMaxTotal: 0,
+         usingGodhoodAdvantages: false,
+         total: 0,
+         pettyRulesApply: true,
+         rankMap: new MapDefault({}, 0)  //this has toJSON defined
+      };
       this.rowArray = [];
-      props.callback(this);
       this.blankKey = MainObject.generateKey();
+      props.callback(this);
    }
 
    //region Single line function
-   hasGodhoodAdvantages = () => {return this.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
+   hasGodhoodAdvantages = () => {return this.derivedValues.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
-   isUsingPettyRules = () => {return this.pettyRulesApply;};
-   getEquipmentMaxTotal = () => {return this.equipmentMaxTotal;};
-   getRankMap = () => {return this.rankMap;};
-   getTotal = () => {return this.total;};
+   isUsingPettyRules = () => {return this.derivedValues.pettyRulesApply;};
+   getDerivedValues = () => {return JSON.clone(this.derivedValues);};  //rankMap is converted to json
+   getEquipmentMaxTotal = () => {return this.derivedValues.equipmentMaxTotal;};
+   getRankMap = () => {return this.derivedValues.rankMap;};
+   getTotal = () => {return this.derivedValues.total;};
    getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
    //endregion Single line function
 
@@ -75,7 +80,7 @@ class AdvantageList extends React.Component
    {
       const equipmentIndex = 0;  //due to sorting it is always first
       const newEquipmentRank = Math.ceil(equipTotal / 5);
-      this.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
+      this.derivedValues.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
 
       //TODO: retest things like this
       if (this.rowArray.isEmpty() ||
@@ -150,7 +155,7 @@ class AdvantageList extends React.Component
       if (this.rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       const newState = [];
       const duplicateCheck = [];
-      if (0 !== this.equipmentMaxTotal) newState.push(this.rowArray[0].getState());
+      if (0 !== this.derivedValues.equipmentMaxTotal) newState.push(this.rowArray[0].getState());
       for (let i = 0; i < jsonSection.length; i++)
       {
          const nameToLoad = jsonSection[i].name;
@@ -297,22 +302,22 @@ class AdvantageList extends React.Component
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    _calculateValues = () =>
    {
-      this.rankMap.clear();
-      this.usingGodhoodAdvantages = false;
-      this.pettyRulesApply = true;
-      this.total = 0;  //reset all these then recount them
+      this.derivedValues.rankMap.clear();
+      this.derivedValues.usingGodhoodAdvantages = false;
+      this.derivedValues.pettyRulesApply = true;
+      this.derivedValues.total = 0;  //reset all these then recount them
 
       for (let i = 0; i < this.rowArray.length; i++)
       {
          const advantageName = this.rowArray[i].getName();
-         if (Data.Advantage[advantageName].isGodhood) this.usingGodhoodAdvantages = true;
+         if (Data.Advantage[advantageName].isGodhood) this.derivedValues.usingGodhoodAdvantages = true;
          //do not connected with else since Petty Rules are godhood
-         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this.pettyRulesApply = false;
+         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this.derivedValues.pettyRulesApply = false;
          //this needs to be tracked because it changes minimum possible power level
-         if (Data.Advantage.mapThese.contains(advantageName)) this.rankMap.add(this.rowArray[i].getUniqueName(),
+         if (Data.Advantage.mapThese.contains(advantageName)) this.derivedValues.rankMap.add(this.rowArray[i].getUniqueName(),
             this.rowArray[i].getRank());
          //add instead of set these since map is empty and there are no redundant rows (using unique name)
-         this.total += this.rowArray[i].getTotal();
+         this.derivedValues.total += this.rowArray[i].getTotal();
       }
    };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
@@ -349,7 +354,7 @@ class AdvantageList extends React.Component
    {
       this._calculateValues();
       this._notifyDependent();
-      const generateGodHood = (this.usingGodhoodAdvantages || this.state.main.godhood);
+      const generateGodHood = (this.derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
       //must check both since they are not yet in sync
 
       const elementArray = this.rowArray.map((advantageObject) =>

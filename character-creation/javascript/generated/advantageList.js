@@ -15,6 +15,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AdvantageList = function (_React$Component) {
    _inherits(AdvantageList, _React$Component);
 
+   //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
+
    //endregion private functions
    function AdvantageList(props) {
       _classCallCheck(this, AdvantageList);
@@ -24,23 +26,27 @@ var AdvantageList = function (_React$Component) {
       var _this = _possibleConstructorReturn(this, (AdvantageList.__proto__ || Object.getPrototypeOf(AdvantageList)).call(this, props));
 
       _this.hasGodhoodAdvantages = function () {
-         return _this.usingGodhoodAdvantages;
+         return _this.derivedValues.usingGodhoodAdvantages;
       };
 
       _this.isUsingPettyRules = function () {
-         return _this.pettyRulesApply;
+         return _this.derivedValues.pettyRulesApply;
+      };
+
+      _this.getDerivedValues = function () {
+         return JSON.clone(_this.derivedValues);
       };
 
       _this.getEquipmentMaxTotal = function () {
-         return _this.equipmentMaxTotal;
+         return _this.derivedValues.equipmentMaxTotal;
       };
 
       _this.getRankMap = function () {
-         return _this.rankMap;
+         return _this.derivedValues.rankMap;
       };
 
       _this.getTotal = function () {
-         return _this.total;
+         return _this.derivedValues.total;
       };
 
       _this.getState = function () {
@@ -76,7 +82,7 @@ var AdvantageList = function (_React$Component) {
       _this.calculateEquipmentRank = function (equipTotal) {
          var equipmentIndex = 0; //due to sorting it is always first
          var newEquipmentRank = Math.ceil(equipTotal / 5);
-         _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
+         _this.derivedValues.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
 
          //TODO: retest things like this
          if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
@@ -143,7 +149,7 @@ var AdvantageList = function (_React$Component) {
          if (_this.rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
          var newState = [];
          var duplicateCheck = [];
-         if (0 !== _this.equipmentMaxTotal) newState.push(_this.rowArray[0].getState());
+         if (0 !== _this.derivedValues.equipmentMaxTotal) newState.push(_this.rowArray[0].getState());
          for (var i = 0; i < jsonSection.length; i++) {
             var nameToLoad = jsonSection[i].name;
             if (!Data.Advantage.names.contains(nameToLoad)) {
@@ -261,20 +267,20 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this._calculateValues = function () {
-         _this.rankMap.clear();
-         _this.usingGodhoodAdvantages = false;
-         _this.pettyRulesApply = true;
-         _this.total = 0; //reset all these then recount them
+         _this.derivedValues.rankMap.clear();
+         _this.derivedValues.usingGodhoodAdvantages = false;
+         _this.derivedValues.pettyRulesApply = true;
+         _this.derivedValues.total = 0; //reset all these then recount them
 
          for (var i = 0; i < _this.rowArray.length; i++) {
             var advantageName = _this.rowArray[i].getName();
-            if (Data.Advantage[advantageName].isGodhood) _this.usingGodhoodAdvantages = true;
+            if (Data.Advantage[advantageName].isGodhood) _this.derivedValues.usingGodhoodAdvantages = true;
             //do not connected with else since Petty Rules are godhood
-            if (advantageName === 'Your Petty Rules Don\'t Apply to Me') _this.pettyRulesApply = false;
+            if (advantageName === 'Your Petty Rules Don\'t Apply to Me') _this.derivedValues.pettyRulesApply = false;
             //this needs to be tracked because it changes minimum possible power level
-            if (Data.Advantage.mapThese.contains(advantageName)) _this.rankMap.add(_this.rowArray[i].getUniqueName(), _this.rowArray[i].getRank());
+            if (Data.Advantage.mapThese.contains(advantageName)) _this.derivedValues.rankMap.add(_this.rowArray[i].getUniqueName(), _this.rowArray[i].getRank());
             //add instead of set these since map is empty and there are no redundant rows (using unique name)
-            _this.total += _this.rowArray[i].getTotal();
+            _this.derivedValues.total += _this.rowArray[i].getTotal();
          }
       };
 
@@ -306,7 +312,7 @@ var AdvantageList = function (_React$Component) {
       _this.render = function () {
          _this._calculateValues();
          _this._notifyDependent();
-         var generateGodHood = _this.usingGodhoodAdvantages || _this.state.main.godhood;
+         var generateGodHood = _this.derivedValues.usingGodhoodAdvantages || _this.state.main.godhood;
          //must check both since they are not yet in sync
 
          var elementArray = _this.rowArray.map(function (advantageObject) {
@@ -319,21 +325,20 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.state = { it: [], main: { godhood: false } };
-      //TODO: move all this junk into derivedValues
-      _this.equipmentMaxTotal = 0;
-      _this.usingGodhoodAdvantages = false;
-      _this.total = 0;
-      _this.pettyRulesApply = true;
-      _this.rankMap = new MapDefault({}, 0);
+      _this.derivedValues = {
+         equipmentMaxTotal: 0,
+         usingGodhoodAdvantages: false,
+         total: 0,
+         pettyRulesApply: true,
+         rankMap: new MapDefault({}, 0) //this has toJSON defined
+      };
       _this.rowArray = [];
-      props.callback(_this);
       _this.blankKey = MainObject.generateKey();
+      props.callback(_this);
       return _this;
    }
 
    //region Single line function
-
-   //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
    //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
    //defensive copy is important to prevent tamper
