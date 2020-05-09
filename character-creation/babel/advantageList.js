@@ -305,6 +305,7 @@ class AdvantageList extends React.Component
       const newEquipmentRank = Math.ceil(equipTotal / 5);
       this.equipmentMaxTotal = newEquipmentRank * 5;  //rounded up to nearest 5
 
+      //TODO: retest things like this
       if (this.rowArray.isEmpty() ||
          'Equipment' !== this.rowArray[equipmentIndex].getName())  //if there is no equipment advantage
       {
