@@ -14,6 +14,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AdvantageList = function (_React$Component) {
    _inherits(AdvantageList, _React$Component);
 
+   //endregion private functions
    function AdvantageList(props) {
       _classCallCheck(this, AdvantageList);
 
@@ -45,9 +46,69 @@ var AdvantageList = function (_React$Component) {
          return JSON.clone(_this.state);
       };
 
-      _this.setMainState = function (value) {
+      _this.addRow = function (newName) {
+         if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this.blankKey);
+         //the row that was blank no longer is so use the blank key
+         var advantageObject = new AdvantageObject(_this.blankKey);
+         advantageObject.setAdvantage(newName);
+         //need a new key for the new blank row
+         _this.blankKey = MainObject.generateKey();
+
+         _this.rowArray.push(advantageObject);
+         if (_this._isDuplicate()) //requires duplicate to be in this.rowArray
+            {
+               _this.rowArray.pop();
+               _this.forceUpdate(); //to undo the DOM value
+            } else {
+            _this.setState(function (state) {
+               state.it.push(advantageObject.getState());
+               return state;
+            });
+         }
+
+         if (false && _this._isDuplicate()) {
+            //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
+            _this.rowArray.pop();
+            _this.setState(function (state) {
+               state.it.pop();
+               return state;
+            });
+         }
+      };
+
+      _this.calculateEquipmentRank = function (equipTotal) {
+         var equipmentIndex = 0; //due to sorting it is always first
+         var newEquipmentRank = Math.ceil(equipTotal / 5);
+         _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
+
+         //TODO: retest things like this
+         if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
+            {
+               if (0 === equipTotal) return; //I don't need to add a row
+
+               //TODO: make DRY with addRow (doesn't use because unshift instead of push)
+               //the row that was blank no longer is so use the blank key
+               var advantageObject = new AdvantageObject(_this.blankKey);
+               advantageObject.setAdvantage('Equipment');
+               //need a new key for the new blank row
+               _this.blankKey = MainObject.generateKey();
+
+               //unshift = addFirst
+               _this.rowArray.unshift(advantageObject);
+               _this.setState(function (state) {
+                  state.it.unshift(advantageObject.getState());
+                  return state;
+               });
+            } else if (0 === equipTotal) //don't need the row any more
+            {
+               _this._removeRow(equipmentIndex);
+               return;
+            }
+
+         //don't connect with else since this happens when adding or updating
+         _this.rowArray[equipmentIndex].setRank(newEquipmentRank);
          _this.setState(function (state) {
-            state.main.godhood = value;
+            state.it[equipmentIndex].rank = newEquipmentRank;
             return state;
          });
       };
@@ -57,21 +118,6 @@ var AdvantageList = function (_React$Component) {
          _this.setState(function () {
             return { it: [] };
          });
-      };
-
-      _this.getRow = function (rowIndex) {
-         return CommonsLibrary.getRow(_this.rowArray, rowIndex);
-      };
-
-      _this.getRowByIndex = _this.getRow;
-
-      _this.indexToKey = function (rowIndex) {
-         if (rowIndex === _this.rowArray.length) return _this.blankKey;
-         return _this.rowArray[rowIndex].getKey();
-      };
-
-      _this.getRowById = function (rowId) {
-         return _this.rowArray[_this.getIndexById(rowId)];
       };
 
       _this.getIndexById = function (rowId) {
@@ -85,123 +131,19 @@ var AdvantageList = function (_React$Component) {
          throw new Error('No row with id ' + rowId + ' (rowArray.length=' + _this.rowArray.length + ')');
       };
 
-      _this.save = function () {
-         var json = [];
-         for (var i = 0; i < _this.rowArray.length; i++) {
-            json.push(_this.rowArray[i].save());
-         }
-         return json; //might still be empty
+      _this.getRow = function (rowIndex) {
+         return CommonsLibrary.getRow(_this.rowArray, rowIndex);
       };
 
-      _this.updateByKey = function (updatedKey) {
-         if (updatedKey === _this.blankKey) {
-            throw new Error('Can\'t update blank row ' + updatedKey);
-         }
+      _this.getRowByIndex = _this.getRow;
 
-         var updatedIndex = _this.getIndexById(updatedKey);
-         var newStateRow = _this.rowArray[updatedIndex].getState();
-         _this.setState(function (state) {
-            //TODO: race conditions? merge issues? can this replace the others?
-            state.it[updatedIndex] = newStateRow;
-            return state;
-         });
+      _this.getRowById = function (rowId) {
+         return _this.rowArray[_this.getIndexById(rowId)];
       };
 
-      _this.updateNameByKey = function (updatedKey) {
-         if (updatedKey === _this.blankKey) {
-            throw new Error('Can\'t update name of blank row ' + updatedKey);
-         }
-
-         var updatedIndex = _this.getIndexById(updatedKey);
-         var newName = _this.rowArray[updatedIndex].getName();
-
-         if (undefined === newName || _this.isDuplicate()) {
-            _this.removeRow(updatedIndex);
-         } else {
-            _this.setState(function (state) {
-               state.it[updatedIndex].name = newName;
-               return state;
-            });
-         }
-      };
-
-      _this.updateRankByKey = function (updatedKey) {
-         if (updatedKey === _this.blankKey) {
-            throw new Error('Can\'t update blank row ' + updatedKey);
-         }
-
-         var updatedIndex = _this.getIndexById(updatedKey);
-         var newRank = _this.rowArray[updatedIndex].getRank();
-         _this.setState(function (state) {
-            state.it[updatedIndex].rank = newRank;
-            return state;
-         });
-      };
-
-      _this.updateTextByKey = function (updatedKey) {
-         if (updatedKey === _this.blankKey) {
-            throw new Error('Can\'t update blank row ' + updatedKey);
-         }
-
-         var updatedIndex = _this.getIndexById(updatedKey);
-         var newText = _this.rowArray[updatedIndex].getText();
-         if (_this.isDuplicate()) {
-            _this.removeRow(updatedIndex);
-         } else {
-            _this.setState(function (state) {
-               state.it[updatedIndex].text = newText;
-               return state;
-            });
-         }
-      };
-
-      _this.render = function () {
-         _this.calculateValues();
-         _this.notifyDependent();
-         var generateGodHood = _this.usingGodhoodAdvantages || _this.state.main.godhood;
-         //must check both since they are not yet in sync
-
-         var elementArray = _this.rowArray.map(function (advantageObject) {
-            return React.createElement(AdvantageRowHtml, { key: advantageObject.getKey(), myKey: advantageObject.getKey(),
-               state: advantageObject.getState(), derivedValues: advantageObject.getDerivedValues(),
-               generateGodHood: generateGodHood });
-         });
-         elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {}, generateGodHood: generateGodHood }));
-         return elementArray;
-      };
-
-      _this.removeRow = function (rowIndex) {
-         _this.rowArray.remove(rowIndex);
-         _this.setState(function (state) {
-            state.it.remove(rowIndex);
-            return state;
-         });
-      };
-
-      _this.isDuplicate = function () {
-         return _this.rowArray.map(function (item) {
-            return item.getUniqueName();
-         }).some(function (val, id, array) {
-            return array.indexOf(val) !== id;
-         });
-      };
-
-      _this.calculateValues = function () {
-         _this.rankMap.clear();
-         _this.usingGodhoodAdvantages = false;
-         _this.pettyRulesApply = true;
-         _this.total = 0; //reset all these then recount them
-
-         for (var i = 0; i < _this.rowArray.length; i++) {
-            var advantageName = _this.rowArray[i].getName();
-            if (Data.Advantage[advantageName].isGodhood) _this.usingGodhoodAdvantages = true;
-            //do not connected with else since Petty Rules are godhood
-            if (advantageName === 'Your Petty Rules Don\'t Apply to Me') _this.pettyRulesApply = false;
-            //this needs to be tracked because it changes minimum possible power level
-            if (Data.Advantage.mapThese.contains(advantageName)) _this.rankMap.add(_this.rowArray[i].getUniqueName(), _this.rowArray[i].getRank());
-            //add instead of set these since map is empty and there are no redundant rows (using unique name)
-            _this.total += _this.rowArray[i].getTotal();
-         }
+      _this.indexToKey = function (rowIndex) {
+         if (rowIndex === _this.rowArray.length) return _this.blankKey;
+         return _this.rowArray[rowIndex].getKey();
       };
 
       _this.load = function (jsonSection) {
@@ -237,80 +179,139 @@ var AdvantageList = function (_React$Component) {
          });
       };
 
-      _this.addRow = function (newName) {
-         if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this.blankKey);
-         //the row that was blank no longer is so use the blank key
-         var advantageObject = new AdvantageObject(_this.blankKey);
-         advantageObject.setAdvantage(newName);
-         //need a new key for the new blank row
-         _this.blankKey = MainObject.generateKey();
-
-         _this.rowArray.push(advantageObject);
-         if (_this.isDuplicate()) //requires duplicate to be in this.rowArray
-            {
-               _this.rowArray.pop();
-               _this.forceUpdate(); //to undo the DOM value
-            } else {
-            _this.setState(function (state) {
-               state.it.push(advantageObject.getState());
-               return state;
-            });
+      _this.save = function () {
+         var json = [];
+         for (var i = 0; i < _this.rowArray.length; i++) {
+            json.push(_this.rowArray[i].save());
          }
-
-         if (false && _this.isDuplicate()) {
-            //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
-            _this.rowArray.pop();
-            _this.setState(function (state) {
-               state.it.pop();
-               return state;
-            });
-         }
+         return json; //might still be empty
       };
 
-      _this.calculateEquipmentRank = function (equipTotal) {
-         var equipmentIndex = 0; //due to sorting it is always first
-         var newEquipmentRank = Math.ceil(equipTotal / 5);
-         _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
-
-         //TODO: retest things like this
-         if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
-            {
-               if (0 === equipTotal) return; //I don't need to add a row
-
-               //TODO: make DRY with addRow (doesn't use because unshift instead of push)
-               //the row that was blank no longer is so use the blank key
-               var advantageObject = new AdvantageObject(_this.blankKey);
-               advantageObject.setAdvantage('Equipment');
-               //need a new key for the new blank row
-               _this.blankKey = MainObject.generateKey();
-
-               //unshift = addFirst
-               _this.rowArray.unshift(advantageObject);
-               _this.setState(function (state) {
-                  state.it.unshift(advantageObject.getState());
-                  return state;
-               });
-            } else if (0 === equipTotal) //don't need the row any more
-            {
-               _this.removeRow(equipmentIndex);
-               return;
-            }
-
-         //don't connect with else since this happens when adding or updating
-         _this.rowArray[equipmentIndex].setRank(newEquipmentRank);
+      _this.setMainState = function (value) {
          _this.setState(function (state) {
-            state.it[equipmentIndex].rank = newEquipmentRank;
+            state.main.godhood = value;
             return state;
          });
       };
 
-      _this.notifyDependent = function () {
+      _this.updateByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newStateRow = _this.rowArray[updatedIndex].getState();
+         _this.setState(function (state) {
+            //TODO: race conditions? merge issues? can this replace the others?
+            state.it[updatedIndex] = newStateRow;
+            return state;
+         });
+      };
+
+      _this.updateNameByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update name of blank row ' + updatedKey);
+         }
+
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newName = _this.rowArray[updatedIndex].getName();
+
+         if (undefined === newName || _this._isDuplicate()) {
+            _this._removeRow(updatedIndex);
+         } else {
+            _this.setState(function (state) {
+               state.it[updatedIndex].name = newName;
+               return state;
+            });
+         }
+      };
+
+      _this.updateRankByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newRank = _this.rowArray[updatedIndex].getRank();
+         _this.setState(function (state) {
+            state.it[updatedIndex].rank = newRank;
+            return state;
+         });
+      };
+
+      _this.updateTextByKey = function (updatedKey) {
+         if (updatedKey === _this.blankKey) {
+            throw new Error('Can\'t update blank row ' + updatedKey);
+         }
+
+         var updatedIndex = _this.getIndexById(updatedKey);
+         var newText = _this.rowArray[updatedIndex].getText();
+         if (_this._isDuplicate()) {
+            _this._removeRow(updatedIndex);
+         } else {
+            _this.setState(function (state) {
+               state.it[updatedIndex].text = newText;
+               return state;
+            });
+         }
+      };
+
+      _this._calculateValues = function () {
+         _this.rankMap.clear();
+         _this.usingGodhoodAdvantages = false;
+         _this.pettyRulesApply = true;
+         _this.total = 0; //reset all these then recount them
+
+         for (var i = 0; i < _this.rowArray.length; i++) {
+            var advantageName = _this.rowArray[i].getName();
+            if (Data.Advantage[advantageName].isGodhood) _this.usingGodhoodAdvantages = true;
+            //do not connected with else since Petty Rules are godhood
+            if (advantageName === 'Your Petty Rules Don\'t Apply to Me') _this.pettyRulesApply = false;
+            //this needs to be tracked because it changes minimum possible power level
+            if (Data.Advantage.mapThese.contains(advantageName)) _this.rankMap.add(_this.rowArray[i].getUniqueName(), _this.rowArray[i].getRank());
+            //add instead of set these since map is empty and there are no redundant rows (using unique name)
+            _this.total += _this.rowArray[i].getTotal();
+         }
+      };
+
+      _this._isDuplicate = function () {
+         return _this.rowArray.map(function (item) {
+            return item.getUniqueName();
+         }).some(function (val, id, array) {
+            return array.indexOf(val) !== id;
+         });
+      };
+
+      _this._notifyDependent = function () {
          if (typeof Main !== 'undefined') //happens during main's creation
             {
                Main.updateInitiative();
                Main.updateOffense(); //some 1.0 advantages might affect this so it needs to be updated
                Main.defenseSection.calculateValues();
             }
+      };
+
+      _this._removeRow = function (rowIndex) {
+         _this.rowArray.remove(rowIndex);
+         _this.setState(function (state) {
+            state.it.remove(rowIndex);
+            return state;
+         });
+      };
+
+      _this.render = function () {
+         _this._calculateValues();
+         _this._notifyDependent();
+         var generateGodHood = _this.usingGodhoodAdvantages || _this.state.main.godhood;
+         //must check both since they are not yet in sync
+
+         var elementArray = _this.rowArray.map(function (advantageObject) {
+            return React.createElement(AdvantageRowHtml, { key: advantageObject.getKey(), myKey: advantageObject.getKey(),
+               state: advantageObject.getState(), derivedValues: advantageObject.getDerivedValues(),
+               generateGodHood: generateGodHood });
+         });
+         elementArray.push(React.createElement(AdvantageRowHtml, { key: _this.blankKey, myKey: _this.blankKey, state: {}, generateGodHood: generateGodHood }));
+         return elementArray;
       };
 
       _this.state = { it: [], main: { godhood: false } };
@@ -334,7 +335,10 @@ var AdvantageList = function (_React$Component) {
    //defensive copy is important to prevent tamper
    //endregion Single line function
 
-   //public common section
+   //region public functions
+   /**Creates a new row at the end of the array*/
+
+   /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
 
    /**Removes all rows then updates*/
 
@@ -343,35 +347,26 @@ var AdvantageList = function (_React$Component) {
 
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
 
+   /**Sets data from a json object given then updates.*/
+
    /**Returns an array of json objects for this section's data*/
 
+   //endregion public functions
 
-   //'private' commons section. Although all public none of these should be called from outside of this object
-
-   /**Removes the row from the array and updates the index of all others in the list.*/
+   //region private functions
+   /**Counts totals etc. All values that are not user set or final are created by this method*/
 
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
 
-
-   //public functions section
-   /**Counts totals etc. All values that are not user set or final are created by this method*/
-
-   /**Sets data from a json object given then updates.*/
-
-
-   //'private' functions section. Although all public none of these should be called from outside of this object
-   /**Creates a new row at the end of the array*/
-
-   //TODO: re-sort these methods (calc equip should be public)
-   /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
-
    /**Updates other sections which depend on advantage section*/
+
+   /**Removes the row from the array and updates the index of all others in the list.*/
+
+   //only called by react. so it's kinda private because no one else should call it
 
 
    return AdvantageList;
 }(React.Component);
-
-//TODO: test then sort methods
 
 function createAdvantageList(callback) {
    ReactDOM.render(React.createElement(AdvantageList, { callback: callback }), document.getElementById('advantage-section'));
