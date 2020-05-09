@@ -42,11 +42,7 @@ class AdvantageList extends React.Component
    addRow = (newName) =>
    {
       if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + this.blankKey);
-      //the row that was blank no longer is so use the blank key
-      const advantageObject = new AdvantageObject(this.blankKey);
-      advantageObject.setAdvantage(newName);
-      //need a new key for the new blank row
-      this.blankKey = MainObject.generateKey();
+      const advantageObject = this._addRowNoPush(newName);
 
       this.rowArray.push(advantageObject);
       if (this._isDuplicate())  //requires duplicate to be in this.rowArray
@@ -87,12 +83,8 @@ class AdvantageList extends React.Component
       {
          if (0 === equipTotal) return;  //I don't need to add a row
 
-         //TODO: make DRY with addRow (doesn't use because unshift instead of push)
-         //the row that was blank no longer is so use the blank key
-         const advantageObject = new AdvantageObject(this.blankKey);
-         advantageObject.setAdvantage('Equipment');
-         //need a new key for the new blank row
-         this.blankKey = MainObject.generateKey();
+         //doesn't use addRow because unshift instead of push and already did duplicate check
+         const advantageObject = this._addRowNoPush('Equipment');
 
          //unshift = addFirst
          this.rowArray.unshift(advantageObject);
@@ -173,12 +165,9 @@ class AdvantageList extends React.Component
             continue;
          }
          if ('Equipment' === nameToLoad) continue;  //allowed but ignored since it's always regenerated
-         //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
-         //the row that was blank no longer is so use the blank key
-         const advantageObject = new AdvantageObject(this.blankKey);
-         advantageObject.setAdvantage(nameToLoad);
-         //need a new key for the new blank row
-         this.blankKey = MainObject.generateKey();
+         //doesn't use addRow for sake of bulk state change
+         const advantageObject = this._addRowNoPush(nameToLoad);
+         //TODO: check for duplicates
          this.rowArray.push(advantageObject);
 
          if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
@@ -287,6 +276,16 @@ class AdvantageList extends React.Component
    //endregion public functions
 
    //region private functions
+   /**Converts blank row into AdvantageObject but doesn't update rowArray or state*/
+   _addRowNoPush = (newName) =>
+   {
+      //the row that was blank no longer is so use the blank key
+      const advantageObject = new AdvantageObject(this.blankKey);
+      advantageObject.setAdvantage(newName);
+      //need a new key for the new blank row
+      this.blankKey = MainObject.generateKey();
+      return advantageObject;
+   };
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    _calculateValues = () =>
    {

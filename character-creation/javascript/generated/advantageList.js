@@ -49,11 +49,7 @@ var AdvantageList = function (_React$Component) {
 
       _this.addRow = function (newName) {
          if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this.blankKey);
-         //the row that was blank no longer is so use the blank key
-         var advantageObject = new AdvantageObject(_this.blankKey);
-         advantageObject.setAdvantage(newName);
-         //need a new key for the new blank row
-         _this.blankKey = MainObject.generateKey();
+         var advantageObject = _this._addRowNoPush(newName);
 
          _this.rowArray.push(advantageObject);
          if (_this._isDuplicate()) //requires duplicate to be in this.rowArray
@@ -87,12 +83,8 @@ var AdvantageList = function (_React$Component) {
             {
                if (0 === equipTotal) return; //I don't need to add a row
 
-               //TODO: make DRY with addRow (doesn't use because unshift instead of push)
-               //the row that was blank no longer is so use the blank key
-               var advantageObject = new AdvantageObject(_this.blankKey);
-               advantageObject.setAdvantage('Equipment');
-               //need a new key for the new blank row
-               _this.blankKey = MainObject.generateKey();
+               //doesn't use addRow because unshift instead of push and already did duplicate check
+               var advantageObject = _this._addRowNoPush('Equipment');
 
                //unshift = addFirst
                _this.rowArray.unshift(advantageObject);
@@ -123,6 +115,7 @@ var AdvantageList = function (_React$Component) {
 
       _this.getIndexById = function (rowId) {
          if (rowId === _this.blankKey) {
+            //TODO: remove these throws since they are asserts until this class is re-tested
             throw new Error('Can\'t get blank row ' + rowId);
          }
          //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
@@ -161,12 +154,9 @@ var AdvantageList = function (_React$Component) {
                continue;
             }
             if ('Equipment' === nameToLoad) continue; //allowed but ignored since it's always regenerated
-            //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
-            //the row that was blank no longer is so use the blank key
-            var advantageObject = new AdvantageObject(_this.blankKey);
-            advantageObject.setAdvantage(nameToLoad);
-            //need a new key for the new blank row
-            _this.blankKey = MainObject.generateKey();
+            //doesn't use addRow for sake of bulk state change
+            var advantageObject = _this._addRowNoPush(nameToLoad);
+            //TODO: check for duplicates
             _this.rowArray.push(advantageObject);
 
             if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
@@ -253,6 +243,15 @@ var AdvantageList = function (_React$Component) {
                return state;
             });
          }
+      };
+
+      _this._addRowNoPush = function (newName) {
+         //the row that was blank no longer is so use the blank key
+         var advantageObject = new AdvantageObject(_this.blankKey);
+         advantageObject.setAdvantage(newName);
+         //need a new key for the new blank row
+         _this.blankKey = MainObject.generateKey();
+         return advantageObject;
       };
 
       _this._calculateValues = function () {
@@ -352,6 +351,8 @@ var AdvantageList = function (_React$Component) {
    //endregion public functions
 
    //region private functions
+   /**Converts blank row into AdvantageObject but doesn't update rowArray or state*/
+
    /**Counts totals etc. All values that are not user set or final are created by this method*/
 
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
