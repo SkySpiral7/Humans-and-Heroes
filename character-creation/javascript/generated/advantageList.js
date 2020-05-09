@@ -226,6 +226,7 @@ var AdvantageList = function (_React$Component) {
                Main.messageUser('AdvantageList.load.godhood', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
                continue;
             }
+            if ('Equipment' === nameToLoad) continue; //allowed but ignored since it's always regenerated
             //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
             //the row that was blank no longer is so use the blank key
             var advantageObject = new AdvantageObject(_this.blankKey);
@@ -278,6 +279,7 @@ var AdvantageList = function (_React$Component) {
          var newEquipmentRank = Math.ceil(equipTotal / 5);
          _this.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
 
+         //TODO: retest things like this
          if (_this.rowArray.isEmpty() || 'Equipment' !== _this.rowArray[equipmentIndex].getName()) //if there is no equipment advantage
             {
                if (0 === equipTotal) return; //I don't need to add a row

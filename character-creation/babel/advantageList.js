@@ -242,6 +242,7 @@ class AdvantageList extends React.Component
                ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
             continue;
          }
+         if ('Equipment' === nameToLoad) continue;  //allowed but ignored since it's always regenerated
          //TODO: make DRY with addRow (doesn't use for sake of bulk state change)
          //the row that was blank no longer is so use the blank key
          const advantageObject = new AdvantageObject(this.blankKey);

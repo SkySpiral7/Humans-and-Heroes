@@ -6,10 +6,16 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 
    var assertions = [];
    var actionTaken = 'Initial';
-   assertions.push(
-      {Expected: 0, Actual: Main.advantageSection.getState().it.length, Description: actionTaken + ': Equipment Row is not created'});
-   assertions.push(
-      {Expected: 0, Actual: Main.advantageSection.getEquipmentMaxTotal(), Description: actionTaken + ': Equipment Max Total is still 0'});
+   assertions.push({
+      Expected: 0,
+      Actual: Main.advantageSection.getState().it.length,
+      Description: actionTaken + ': Equipment Row is not created'
+   });
+   assertions.push({
+      Expected: 0,
+      Actual: Main.advantageSection.getEquipmentMaxTotal(),
+      Description: actionTaken + ': Equipment Max Total is still 0'
+   });
    assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is still 0'});
 
    try
