@@ -1,9 +1,10 @@
 'use strict';
+
 /**Updates:
-Main.updateInitiative();
-Main.updateOffense();
-Main.defenseSection.calculateValues();
-*/
+ Main.updateInitiative();
+ Main.updateOffense();
+ Main.defenseSection.calculateValues();
+ */
 class AdvantageList extends React.Component
 {
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
@@ -16,12 +17,12 @@ class AdvantageList extends React.Component
       //main is an external dependency
       this.state = {it: [], main: {godhood: false}};
       //TODO: move all this junk into derivedValues
-      this.equipmentMaxTotal=0;
-      this.usingGodhoodAdvantages=false;
-      this.total=0;
-      this.pettyRulesApply=true;
-      this.rankMap=new MapDefault({}, 0);
-      this.rowArray=[];
+      this.equipmentMaxTotal = 0;
+      this.usingGodhoodAdvantages = false;
+      this.total = 0;
+      this.pettyRulesApply = true;
+      this.rankMap = new MapDefault({}, 0);
+      this.rowArray = [];
       props.callback(this);
       this.blankKey = MainObject.generateKey();
    }
@@ -84,7 +85,7 @@ class AdvantageList extends React.Component
       if (this.rowArray.isEmpty() ||
          'Equipment' !== this.rowArray[equipmentIndex].getName())  //if there is no equipment advantage
       {
-         if(0 === equipTotal) return;  //I don't need to add a row
+         if (0 === equipTotal) return;  //I don't need to add a row
 
          //TODO: make DRY with addRow (doesn't use because unshift instead of push)
          //the row that was blank no longer is so use the blank key
@@ -115,17 +116,20 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-    /**Removes all rows then updates*/
-    clear=()=>{
-       this.rowArray = [];
-       this.setState(() =>
-       {
-          return {it: []};
-       });
-    };
-   getIndexById=(rowId)=>
+   /**Removes all rows then updates*/
+   clear = () =>
    {
-      if (rowId === this.blankKey){
+      this.rowArray = [];
+      this.setState(() =>
+      {
+         return {it: []};
+      });
+   };
+   getIndexById = (rowId) =>
+   {
+      if (rowId === this.blankKey)
+      {
+         //TODO: remove these throws since they are asserts until this class is re-tested
          throw new Error('Can\'t get blank row ' + rowId);
       }
       //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
@@ -136,16 +140,15 @@ class AdvantageList extends React.Component
       throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this.rowArray.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-   //TODO: rename to getRowByIndex
-   getRow=(rowIndex)=>{return CommonsLibrary.getRow(this.rowArray, rowIndex);};
-   getRowByIndex=this.getRow;
+   getRowByIndex = (rowIndex) => {return CommonsLibrary.getRow(this.rowArray, rowIndex);};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-   getRowById=(rowId)=>
+   getRowById = (rowId) =>
    {
       return this.rowArray[this.getIndexById(rowId)];
    };
-   indexToKey=(rowIndex)=>{
-      if(rowIndex === this.rowArray.length) return this.blankKey;
+   indexToKey = (rowIndex) =>
+   {
+      if (rowIndex === this.rowArray.length) return this.blankKey;
       return this.rowArray[rowIndex].getKey();
    };
    /**Sets data from a json object given then updates.*/
@@ -187,16 +190,16 @@ class AdvantageList extends React.Component
          return {it: newState};
       });
    };
-    /**Returns an array of json objects for this section's data*/
-    save = () =>
-    {
-       const json = [];
-       for (let i = 0; i < this.rowArray.length; i++)
-       {
-          json.push(this.rowArray[i].save());
-       }
-       return json;  //might still be empty
-    };
+   /**Returns an array of json objects for this section's data*/
+   save = () =>
+   {
+      const json = [];
+      for (let i = 0; i < this.rowArray.length; i++)
+      {
+         json.push(this.rowArray[i].save());
+      }
+      return json;  //might still be empty
+   };
    setMainState = (value) =>
    {
       this.setState((state) =>
@@ -205,22 +208,24 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-    updateByKey=(updatedKey)=>{
-       if (updatedKey === this.blankKey)
-       {
-          throw new Error('Can\'t update blank row ' + updatedKey);
-       }
+   updateByKey = (updatedKey) =>
+   {
+      if (updatedKey === this.blankKey)
+      {
+         throw new Error('Can\'t update blank row ' + updatedKey);
+      }
 
-       const updatedIndex = this.getIndexById(updatedKey);
-       const newStateRow = this.rowArray[updatedIndex].getState();
-       this.setState((state) =>
-       {
-          //TODO: race conditions? merge issues? can this replace the others?
-          state.it[updatedIndex] = newStateRow;
-          return state;
-       });
-    };
-   updateNameByKey=(updatedKey)=>{
+      const updatedIndex = this.getIndexById(updatedKey);
+      const newStateRow = this.rowArray[updatedIndex].getState();
+      this.setState((state) =>
+      {
+         //TODO: race conditions? merge issues? can this replace the others?
+         state.it[updatedIndex] = newStateRow;
+         return state;
+      });
+   };
+   updateNameByKey = (updatedKey) =>
+   {
       if (updatedKey === this.blankKey)
       {
          throw new Error('Can\'t update name of blank row ' + updatedKey);
@@ -242,7 +247,8 @@ class AdvantageList extends React.Component
          });
       }
    };
-   updateRankByKey=(updatedKey)=>{
+   updateRankByKey = (updatedKey) =>
+   {
       if (updatedKey === this.blankKey)
       {
          throw new Error('Can\'t update blank row ' + updatedKey);
@@ -256,7 +262,8 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-   updateTextByKey=(updatedKey)=>{
+   updateTextByKey = (updatedKey) =>
+   {
       if (updatedKey === this.blankKey)
       {
          throw new Error('Can\'t update blank row ' + updatedKey);
@@ -281,28 +288,30 @@ class AdvantageList extends React.Component
 
    //region private functions
    /**Counts totals etc. All values that are not user set or final are created by this method*/
-   _calculateValues=()=>
+   _calculateValues = () =>
    {
       this.rankMap.clear();
       this.usingGodhoodAdvantages = false;
       this.pettyRulesApply = true;
       this.total = 0;  //reset all these then recount them
 
-      for (let i=0; i < this.rowArray.length; i++)
+      for (let i = 0; i < this.rowArray.length; i++)
       {
          const advantageName = this.rowArray[i].getName();
-         if(Data.Advantage[advantageName].isGodhood) this.usingGodhoodAdvantages = true;
+         if (Data.Advantage[advantageName].isGodhood) this.usingGodhoodAdvantages = true;
          //do not connected with else since Petty Rules are godhood
-         if(advantageName === 'Your Petty Rules Don\'t Apply to Me') this.pettyRulesApply = false;
+         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this.pettyRulesApply = false;
          //this needs to be tracked because it changes minimum possible power level
-         if(Data.Advantage.mapThese.contains(advantageName)) this.rankMap.add(this.rowArray[i].getUniqueName(), this.rowArray[i].getRank());
+         if (Data.Advantage.mapThese.contains(advantageName)) this.rankMap.add(this.rowArray[i].getUniqueName(),
+            this.rowArray[i].getRank());
          //add instead of set these since map is empty and there are no redundant rows (using unique name)
-         this.total+=this.rowArray[i].getTotal();
+         this.total += this.rowArray[i].getTotal();
       }
    };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
-   _isDuplicate=()=>{
-      return this.rowArray.map((item)=>item.getUniqueName())
+   _isDuplicate = () =>
+   {
+      return this.rowArray.map((item) => item.getUniqueName())
       .some((val, id, array) =>
       {
          return array.indexOf(val) !== id;
@@ -319,7 +328,8 @@ class AdvantageList extends React.Component
       }
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
-   _removeRow=(rowIndex)=>{
+   _removeRow = (rowIndex) =>
+   {
       this.rowArray.remove(rowIndex);
       this.setState((state) =>
       {
@@ -328,21 +338,22 @@ class AdvantageList extends React.Component
       });
    };
    //only called by react. so it's kinda private because no one else should call it
-   render=()=>{
-       this._calculateValues();
-       this._notifyDependent();
-       const generateGodHood = (this.usingGodhoodAdvantages || this.state.main.godhood);
-       //must check both since they are not yet in sync
+   render = () =>
+   {
+      this._calculateValues();
+      this._notifyDependent();
+      const generateGodHood = (this.usingGodhoodAdvantages || this.state.main.godhood);
+      //must check both since they are not yet in sync
 
-       const elementArray = this.rowArray.map((advantageObject) =>
-       {
-          return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
-                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
-                                    generateGodHood={generateGodHood} />);
-       });
-       elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
-       return elementArray;
-    };
+      const elementArray = this.rowArray.map((advantageObject) =>
+      {
+         return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
+                                   state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
+                                   generateGodHood={generateGodHood} />);
+      });
+      elementArray.push(<AdvantageRowHtml key={this.blankKey} myKey={this.blankKey} state={{}} generateGodHood={generateGodHood} />);
+      return elementArray;
+   };
    //endregion private functions
 }
 
