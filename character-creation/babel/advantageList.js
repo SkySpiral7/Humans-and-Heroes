@@ -149,6 +149,7 @@ class AdvantageList extends React.Component
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
       if (this.rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       const newState = [];
+      const duplicateCheck = [];
       if (0 !== this.equipmentMaxTotal) newState.push(this.rowArray[0].getState());
       for (let i = 0; i < jsonSection.length; i++)
       {
@@ -167,8 +168,15 @@ class AdvantageList extends React.Component
          if ('Equipment' === nameToLoad) continue;  //allowed but ignored since it's always regenerated
          //doesn't use addRow for sake of bulk state change
          const advantageObject = this._addRowNoPush(nameToLoad);
-         //TODO: check for duplicates
+         if (duplicateCheck.contains(advantageObject.getUniqueName()))
+         {
+            Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad +
+               ' is not allowed because the advantage already exists.');
+            //TODO: need to really nail down what is a duplicate for this and message based on unique name
+            continue;
+         }
          this.rowArray.push(advantageObject);
+         duplicateCheck.push(advantageObject.getUniqueName());
 
          if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
          if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
