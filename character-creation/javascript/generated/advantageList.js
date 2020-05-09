@@ -132,7 +132,7 @@ var AdvantageList = function (_React$Component) {
       };
 
       _this.getRowByIndex = function (rowIndex) {
-         return CommonsLibrary.getRow(_this.rowArray, rowIndex);
+         return _this.rowArray[rowIndex];
       };
 
       _this.getRowById = function (rowId) {
@@ -339,8 +339,11 @@ var AdvantageList = function (_React$Component) {
    }
 
    //region Single line function
+
+   //TODO: rename to underscores
    //TODO: is this redundant with main?
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
+   //rankMap is converted to json
    //defensive copy is important to prevent tamper
    //endregion Single line function
 

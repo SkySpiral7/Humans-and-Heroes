@@ -21,7 +21,7 @@ function SkillList()
    /**Removes all rows then updates*/
    this.clear=function(){CommonsLibrary.clear.call(this, rowArray);};
    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-   this.getRow=function(rowIndex){return CommonsLibrary.getRow(rowArray, rowIndex);};
+   this.getRow=function(rowIndex){return rowArray[rowIndex];};
    /**Returns an array of json objects for this section's data*/
    this.save=function(){return CommonsLibrary.saveRows(rowArray);};
    /**Does each step for an onChange*/

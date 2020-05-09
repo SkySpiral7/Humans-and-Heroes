@@ -9,6 +9,7 @@ class AdvantageList extends React.Component
 {
    //TODO: upgrade to babel 7 to get real private by using # (although IDE doesn't support it?)
    state;
+   //TODO: rename to underscores
    rowArray;
    derivedValues;
    blankKey;
@@ -137,7 +138,7 @@ class AdvantageList extends React.Component
       throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this.rowArray.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-   getRowByIndex = (rowIndex) => {return CommonsLibrary.getRow(this.rowArray, rowIndex);};
+   getRowByIndex = (rowIndex) => {return this.rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
    getRowById = (rowId) =>
    {

@@ -27,15 +27,6 @@ TestSuite.CommonsLibrary.clear=function(testState={})
 
    return TestRunner.displayResults('TestSuite.CommonsLibrary.clear', assertions, testState);
 };
-TestSuite.CommonsLibrary.getRow=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.CommonsLibrary.getRow', assertions, testState);
-};
 TestSuite.CommonsLibrary.update=function(testState={})
 {
    TestRunner.clearResults(testState);
