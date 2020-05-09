@@ -30,12 +30,6 @@ CommonsLibrary.clear=function(rowArray)
     this.addRow();
     this.update();  //reset all other variables
 };
-/**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-CommonsLibrary.getRow=function(rowArray, rowIndex)
-{
-    if(rowIndex >= rowArray.length) return;
-    return rowArray[rowIndex];
-};
 /**Returns an array of json objects for this section's data*/
 CommonsLibrary.saveRows=function(rowArray)
 {
