@@ -24,7 +24,7 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
       SelectUtil.changeText('equipmentChoices0', 'Damage');  //use Damage because it has a base cost of 1
       assertions.push({
          Expected: 'Equipment',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: actionTaken + ': Equipment Row is created'
       });
@@ -123,7 +123,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
       assertions.push({
          Expected: 'Beyond Mortal',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: actionTaken + ': Beyond Mortal is set'
       });
@@ -145,7 +145,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
          Expected: 'Your Petty Rules Don\'t Apply to Me',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: actionTaken + ': Your Petty Rules Don\'t Apply to Me is set'
       });
@@ -170,7 +170,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
       assertions.push({
          Expected: 'Improved Initiative',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: actionTaken + ': Improved Initiative is set'
       });
@@ -222,13 +222,13 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageRank' + getId(0), 2);
       assertions.push({
          Expected: 'Lucky',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: actionTaken + ': Lucky is set'
       });
       assertions.push({
          Expected: 2,
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getRank(),
          Description: actionTaken + ': with rank of 2'
       });
@@ -237,13 +237,13 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageRank' + getId(1), 3);
       assertions.push({
          Expected: 'Defensive Roll',
-         Actual: Main.advantageSection.getRow(1)
+         Actual: Main.advantageSection.getRowByIndex(1)
          .getName(),
          Description: actionTaken + ': Defensive Roll is set'
       });
       assertions.push({
          Expected: 3,
-         Actual: Main.advantageSection.getRow(1)
+         Actual: Main.advantageSection.getRowByIndex(1)
          .getRank(),
          Description: actionTaken + ': with rank of 3'
       });
@@ -269,20 +269,20 @@ TestSuite.advantageList.load = function (testState = {})
 
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Happy Path: the advantage'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'Happy Path: nothing else'});
       assertions.push({
          Expected: false,
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .doesHaveRank(),
          Description: 'Happy Path: has rank'
       });
       assertions.push({
          Expected: false,
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .doesHaveText(),
          Description: 'Happy Path: has text'
       });
@@ -298,7 +298,7 @@ TestSuite.advantageList.load = function (testState = {})
       Loader.sendData(dataToLoad);
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Errors: Seize Initiative was loaded'
       });
@@ -322,7 +322,7 @@ TestSuite.advantageList.load = function (testState = {})
       assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Errors: Seize Initiative was loaded'
       });
@@ -347,13 +347,13 @@ TestSuite.advantageList.load = function (testState = {})
       assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load godhood: Godhood is on'});
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Load godhood: Seize Initiative was loaded'
       });
       assertions.push({
          Expected: 'Beyond Mortal',
-         Actual: Main.advantageSection.getRow(1)
+         Actual: Main.advantageSection.getRowByIndex(1)
          .getName(),
          Description: 'Load godhood: Beyond Mortal was loaded'
       });
@@ -370,14 +370,14 @@ TestSuite.advantageList.load = function (testState = {})
 
       assertions.push({
          Expected: 'Ultimate Effort',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Text: the advantage'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'Text: nothing else'});
       assertions.push({
          Expected: 'text',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getText(),
          Description: 'Text: getText'
       });
@@ -393,14 +393,14 @@ TestSuite.advantageList.load = function (testState = {})
 
       assertions.push({
          Expected: 'Defensive Roll',
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
          Description: 'Rank: the advantage'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'Rank: nothing else'});
       assertions.push({
          Expected: 3,
-         Actual: Main.advantageSection.getRow(0)
+         Actual: Main.advantageSection.getRowByIndex(0)
          .getRank(),
          Description: 'Rank: getRank'
       });

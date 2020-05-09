@@ -1,9 +1,10 @@
 'use strict';
+
 /**Updates:
-Main.updateInitiative();
-Main.updateOffense();
-Main.defenseSection.calculateValues();
-*/
+ Main.updateInitiative();
+ Main.updateOffense();
+ Main.defenseSection.calculateValues();
+ */
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -131,11 +132,9 @@ var AdvantageList = function (_React$Component) {
          throw new Error('No row with id ' + rowId + ' (rowArray.length=' + _this.rowArray.length + ')');
       };
 
-      _this.getRow = function (rowIndex) {
+      _this.getRowByIndex = function (rowIndex) {
          return CommonsLibrary.getRow(_this.rowArray, rowIndex);
       };
-
-      _this.getRowByIndex = _this.getRow;
 
       _this.getRowById = function (rowId) {
          return _this.rowArray[_this.getIndexById(rowId)];
@@ -343,7 +342,6 @@ var AdvantageList = function (_React$Component) {
    /**Removes all rows then updates*/
 
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-   //TODO: rename to getRowByIndex
 
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
 
