@@ -120,24 +120,3 @@ function MapDefault(obj, defaultValue)  //based on http://www.mojavelinux.com/ar
       }
    }
 }
-/**If arrayGiven is not an array it will be ignored and an empty map (with defaultValue) will be returned.
-If arrayGiven is an array it must contain entirely and only arrays of length 2 being key and value
-(the inner array is not validated and only needs to have the properties 0 and 1).
-If there are duplicate keys the first value will be used and the rest ignored.
-
-Usage examples:
-MapDefault.makeFromArray([['key', 'value'], ['key', 'value ignored']], 'Default Value');
-MapDefault.makeFromArray([[1, 'Two'], ["Blue", true], [true, 0], ['speak to me', function(){alert('hello');}]], 'Not Found');
-MapDefault.makeFromArray([], -1);
-MapDefault.makeFromArray();  //is empty and has a defaultValue of undefined
-*/
-MapDefault.makeFromArray=function(arrayGiven, defaultValue)
-{
-    var values = {};
-   if(Array.isArray(arrayGiven))  //includes && arrayGiven != undefined
-   for (var i=0; i < arrayGiven.length; i++)
-   {
-       if(!values.hasOwnProperty(arrayGiven[i][0])) values[arrayGiven[i][0]]=arrayGiven[i][1];
-   }
-    return new MapDefault(values, defaultValue);
-};
