@@ -13,41 +13,41 @@ globalThis.ReactUtil = ReactUtil;
 
 },{"@testing-library/react":63}],2:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/concat");
-},{"core-js-pure/stable/instance/concat":362}],3:[function(require,module,exports){
+},{"core-js-pure/stable/instance/concat":357}],3:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/entries");
-},{"core-js-pure/stable/instance/entries":363}],4:[function(require,module,exports){
+},{"core-js-pure/stable/instance/entries":358}],4:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/find");
-},{"core-js-pure/stable/instance/find":364}],5:[function(require,module,exports){
+},{"core-js-pure/stable/instance/find":359}],5:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/for-each");
-},{"core-js-pure/stable/instance/for-each":365}],6:[function(require,module,exports){
+},{"core-js-pure/stable/instance/for-each":360}],6:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/keys");
-},{"core-js-pure/stable/instance/keys":366}],7:[function(require,module,exports){
+},{"core-js-pure/stable/instance/keys":361}],7:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/json/stringify");
-},{"core-js-pure/stable/json/stringify":367}],8:[function(require,module,exports){
+},{"core-js-pure/stable/json/stringify":362}],8:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/map");
-},{"core-js-pure/stable/map":368}],9:[function(require,module,exports){
+},{"core-js-pure/stable/map":363}],9:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/assign");
-},{"core-js-pure/stable/object/assign":369}],10:[function(require,module,exports){
+},{"core-js-pure/stable/object/assign":364}],10:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/define-property");
-},{"core-js-pure/stable/object/define-property":370}],11:[function(require,module,exports){
+},{"core-js-pure/stable/object/define-property":365}],11:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/keys");
-},{"core-js-pure/stable/object/keys":371}],12:[function(require,module,exports){
+},{"core-js-pure/stable/object/keys":366}],12:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/set");
-},{"core-js-pure/stable/set":372}],13:[function(require,module,exports){
+},{"core-js-pure/stable/set":367}],13:[function(require,module,exports){
 module.exports = require("core-js-pure/features/array/from");
-},{"core-js-pure/features/array/from":218}],14:[function(require,module,exports){
+},{"core-js-pure/features/array/from":213}],14:[function(require,module,exports){
 module.exports = require("core-js-pure/features/array/is-array");
-},{"core-js-pure/features/array/is-array":219}],15:[function(require,module,exports){
+},{"core-js-pure/features/array/is-array":214}],15:[function(require,module,exports){
 module.exports = require("core-js-pure/features/get-iterator");
-},{"core-js-pure/features/get-iterator":220}],16:[function(require,module,exports){
+},{"core-js-pure/features/get-iterator":215}],16:[function(require,module,exports){
 module.exports = require("core-js-pure/features/instance/slice");
-},{"core-js-pure/features/instance/slice":221}],17:[function(require,module,exports){
+},{"core-js-pure/features/instance/slice":216}],17:[function(require,module,exports){
 module.exports = require("core-js-pure/features/is-iterable");
-},{"core-js-pure/features/is-iterable":222}],18:[function(require,module,exports){
+},{"core-js-pure/features/is-iterable":217}],18:[function(require,module,exports){
 module.exports = require("core-js-pure/features/object/define-property");
-},{"core-js-pure/features/object/define-property":223}],19:[function(require,module,exports){
+},{"core-js-pure/features/object/define-property":218}],19:[function(require,module,exports){
 module.exports = require("core-js-pure/features/symbol");
-},{"core-js-pure/features/symbol":224}],20:[function(require,module,exports){
+},{"core-js-pure/features/symbol":219}],20:[function(require,module,exports){
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
@@ -1628,7 +1628,7 @@ const logDOM = (...args) => console.log(prettyDOM(...args));
 
 exports.logDOM = logDOM;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./helpers":40,"@babel/runtime/helpers/interopRequireDefault":32,"_process":391,"pretty-format":381}],44:[function(require,module,exports){
+},{"./helpers":40,"@babel/runtime/helpers/interopRequireDefault":32,"_process":391,"pretty-format":376}],44:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2174,7 +2174,7 @@ exports.findAllByRole = findAllByRole;
 exports.getByRole = getByRole;
 exports.getAllByRole = getAllByRole;
 exports.queryByRole = queryByRole;
-},{"../role-helpers":55,"./all-utils":44,"aria-query":193,"dom-accessibility-api":375}],51:[function(require,module,exports){
+},{"../role-helpers":55,"./all-utils":44,"aria-query":192,"dom-accessibility-api":370}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2591,7 +2591,7 @@ function computeAriaSelected(element) {
 
   return undefined;
 }
-},{"./pretty-dom":43,"aria-query":193,"dom-accessibility-api":375}],56:[function(require,module,exports){
+},{"./pretty-dom":43,"aria-query":192,"dom-accessibility-api":370}],56:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -3325,171 +3325,6 @@ module.exports = ({onlyFirst = false} = {}) => {
 };
 
 },{}],66:[function(require,module,exports){
-'use strict';
-
-const wrapAnsi16 = (fn, offset) => (...args) => {
-	const code = fn(...args);
-	return `\u001B[${code + offset}m`;
-};
-
-const wrapAnsi256 = (fn, offset) => (...args) => {
-	const code = fn(...args);
-	return `\u001B[${38 + offset};5;${code}m`;
-};
-
-const wrapAnsi16m = (fn, offset) => (...args) => {
-	const rgb = fn(...args);
-	return `\u001B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
-};
-
-const ansi2ansi = n => n;
-const rgb2rgb = (r, g, b) => [r, g, b];
-
-const setLazyProperty = (object, property, get) => {
-	Object.defineProperty(object, property, {
-		get: () => {
-			const value = get();
-
-			Object.defineProperty(object, property, {
-				value,
-				enumerable: true,
-				configurable: true
-			});
-
-			return value;
-		},
-		enumerable: true,
-		configurable: true
-	});
-};
-
-/** @type {typeof import('color-convert')} */
-let colorConvert;
-const makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
-	if (colorConvert === undefined) {
-		colorConvert = require('color-convert');
-	}
-
-	const offset = isBackground ? 10 : 0;
-	const styles = {};
-
-	for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
-		const name = sourceSpace === 'ansi16' ? 'ansi' : sourceSpace;
-		if (sourceSpace === targetSpace) {
-			styles[name] = wrap(identity, offset);
-		} else if (typeof suite === 'object') {
-			styles[name] = wrap(suite[targetSpace], offset);
-		}
-	}
-
-	return styles;
-};
-
-function assembleStyles() {
-	const codes = new Map();
-	const styles = {
-		modifier: {
-			reset: [0, 0],
-			// 21 isn't widely supported and 22 does the same thing
-			bold: [1, 22],
-			dim: [2, 22],
-			italic: [3, 23],
-			underline: [4, 24],
-			inverse: [7, 27],
-			hidden: [8, 28],
-			strikethrough: [9, 29]
-		},
-		color: {
-			black: [30, 39],
-			red: [31, 39],
-			green: [32, 39],
-			yellow: [33, 39],
-			blue: [34, 39],
-			magenta: [35, 39],
-			cyan: [36, 39],
-			white: [37, 39],
-
-			// Bright color
-			blackBright: [90, 39],
-			redBright: [91, 39],
-			greenBright: [92, 39],
-			yellowBright: [93, 39],
-			blueBright: [94, 39],
-			magentaBright: [95, 39],
-			cyanBright: [96, 39],
-			whiteBright: [97, 39]
-		},
-		bgColor: {
-			bgBlack: [40, 49],
-			bgRed: [41, 49],
-			bgGreen: [42, 49],
-			bgYellow: [43, 49],
-			bgBlue: [44, 49],
-			bgMagenta: [45, 49],
-			bgCyan: [46, 49],
-			bgWhite: [47, 49],
-
-			// Bright color
-			bgBlackBright: [100, 49],
-			bgRedBright: [101, 49],
-			bgGreenBright: [102, 49],
-			bgYellowBright: [103, 49],
-			bgBlueBright: [104, 49],
-			bgMagentaBright: [105, 49],
-			bgCyanBright: [106, 49],
-			bgWhiteBright: [107, 49]
-		}
-	};
-
-	// Alias bright black as gray (and grey)
-	styles.color.gray = styles.color.blackBright;
-	styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
-	styles.color.grey = styles.color.blackBright;
-	styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
-
-	for (const [groupName, group] of Object.entries(styles)) {
-		for (const [styleName, style] of Object.entries(group)) {
-			styles[styleName] = {
-				open: `\u001B[${style[0]}m`,
-				close: `\u001B[${style[1]}m`
-			};
-
-			group[styleName] = styles[styleName];
-
-			codes.set(style[0], style[1]);
-		}
-
-		Object.defineProperty(styles, groupName, {
-			value: group,
-			enumerable: false
-		});
-	}
-
-	Object.defineProperty(styles, 'codes', {
-		value: codes,
-		enumerable: false
-	});
-
-	styles.color.close = '\u001B[39m';
-	styles.bgColor.close = '\u001B[49m';
-
-	setLazyProperty(styles.color, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, false));
-	setLazyProperty(styles.color, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, false));
-	setLazyProperty(styles.color, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, false));
-	setLazyProperty(styles.bgColor, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, true));
-	setLazyProperty(styles.bgColor, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, true));
-	setLazyProperty(styles.bgColor, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, true));
-
-	return styles;
-}
-
-// Make the export immutable
-Object.defineProperty(module, 'exports', {
-	enumerable: true,
-	get: assembleStyles
-});
-
-},{"color-convert":197}],67:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3616,7 +3451,7 @@ var ariaPropsMap = new _map.default([['aria-activedescendant', {
 }]]);
 var _default = ariaPropsMap;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],68:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],67:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3892,7 +3727,7 @@ var domMap = new _map.default([['a', {
 }]]);
 var _default = domMap;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],69:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],68:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3965,7 +3800,7 @@ var elementRoleMap = new _map.default([]);
 });
 var _default = elementRoleMap;
 exports.default = _default;
-},{"./rolesMap":195,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/entries":3,"@babel/runtime-corejs3/core-js-stable/instance/find":4,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/json/stringify":7,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/slicedToArray":29,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],70:[function(require,module,exports){
+},{"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/entries":3,"@babel/runtime-corejs3/core-js-stable/instance/find":4,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/json/stringify":7,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/slicedToArray":29,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],69:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3996,7 +3831,7 @@ var commandRole = {
 };
 var _default = commandRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],71:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],70:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4024,7 +3859,7 @@ var compositeRole = {
 };
 var _default = compositeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],72:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],71:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4055,7 +3890,7 @@ var inputRole = {
 };
 var _default = inputRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],73:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],72:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4081,7 +3916,7 @@ var landmarkRole = {
 };
 var _default = landmarkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],74:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],73:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4112,7 +3947,7 @@ var rangeRole = {
 };
 var _default = rangeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],75:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],74:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4175,7 +4010,7 @@ var roletypeRole = {
 };
 var _default = roletypeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],76:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],75:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4218,7 +4053,7 @@ var sectionRole = {
 };
 var _default = sectionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],77:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],76:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4246,7 +4081,7 @@ var sectionheadRole = {
 };
 var _default = sectionheadRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],78:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],77:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4274,7 +4109,7 @@ var selectRole = {
 };
 var _default = selectRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],79:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],78:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4300,7 +4135,7 @@ var structureRole = {
 };
 var _default = structureRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],80:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],79:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4326,7 +4161,7 @@ var widgetRole = {
 };
 var _default = widgetRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],81:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],80:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4355,7 +4190,7 @@ var windowRole = {
 };
 var _default = windowRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],82:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],81:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4397,7 +4232,7 @@ var _windowRole = _interopRequireDefault(require("./abstract/windowRole"));
 var ariaAbstractRoles = new _map.default([['command', _commandRole.default], ['composite', _compositeRole.default], ['input', _inputRole.default], ['landmark', _landmarkRole.default], ['range', _rangeRole.default], ['roletype', _roletypeRole.default], ['section', _sectionRole.default], ['sectionhead', _sectionheadRole.default], ['select', _selectRole.default], ['structure', _structureRole.default], ['widget', _widgetRole.default], ['window', _windowRole.default]]);
 var _default = ariaAbstractRoles;
 exports.default = _default;
-},{"./abstract/commandRole":70,"./abstract/compositeRole":71,"./abstract/inputRole":72,"./abstract/landmarkRole":73,"./abstract/rangeRole":74,"./abstract/roletypeRole":75,"./abstract/sectionRole":76,"./abstract/sectionheadRole":77,"./abstract/selectRole":78,"./abstract/structureRole":79,"./abstract/widgetRole":80,"./abstract/windowRole":81,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],83:[function(require,module,exports){
+},{"./abstract/commandRole":69,"./abstract/compositeRole":70,"./abstract/inputRole":71,"./abstract/landmarkRole":72,"./abstract/rangeRole":73,"./abstract/roletypeRole":74,"./abstract/sectionRole":75,"./abstract/sectionheadRole":76,"./abstract/selectRole":77,"./abstract/structureRole":78,"./abstract/widgetRole":79,"./abstract/windowRole":80,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],82:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4493,7 +4328,7 @@ var _docTocRole = _interopRequireDefault(require("./dpub/docTocRole"));
 var ariaDpubRoles = new _map.default([['doc-abstract', _docAbstractRole.default], ['doc-acknowledgments', _docAcknowledgmentsRole.default], ['doc-afterword', _docAfterwordRole.default], ['doc-appendix', _docAppendixRole.default], ['doc-backlink', _docBacklinkRole.default], ['doc-biblioentry', _docBiblioentryRole.default], ['doc-bibliography', _docBibliographyRole.default], ['doc-biblioref', _docBibliorefRole.default], ['doc-chapter', _docChapterRole.default], ['doc-colophon', _docColophonRole.default], ['doc-conclusion', _docConclusionRole.default], ['doc-cover', _docCoverRole.default], ['doc-credit', _docCreditRole.default], ['doc-credits', _docCreditsRole.default], ['doc-dedication', _docDedicationRole.default], ['doc-endnote', _docEndnoteRole.default], ['doc-endnotes', _docEndnotesRole.default], ['doc-epigraph', _docEpigraphRole.default], ['doc-epilogue', _docEpilogueRole.default], ['doc-errata', _docErrataRole.default], ['doc-example', _docExampleRole.default], ['doc-footnote', _docFootnoteRole.default], ['doc-foreword', _docForewordRole.default], ['doc-glossary', _docGlossaryRole.default], ['doc-glossref', _docGlossrefRole.default], ['doc-index', _docIndexRole.default], ['doc-introduction', _docIntroductionRole.default], ['doc-noteref', _docNoterefRole.default], ['doc-notice', _docNoticeRole.default], ['doc-pagebreak', _docPagebreakRole.default], ['doc-pagelist', _docPagelistRole.default], ['doc-part', _docPartRole.default], ['doc-preface', _docPrefaceRole.default], ['doc-prologue', _docPrologueRole.default], ['doc-pullquote', _docPullquoteRole.default], ['doc-qna', _docQnaRole.default], ['doc-subtitle', _docSubtitleRole.default], ['doc-tip', _docTipRole.default], ['doc-toc', _docTocRole.default]]);
 var _default = ariaDpubRoles;
 exports.default = _default;
-},{"./dpub/docAbstractRole":85,"./dpub/docAcknowledgmentsRole":86,"./dpub/docAfterwordRole":87,"./dpub/docAppendixRole":88,"./dpub/docBacklinkRole":89,"./dpub/docBiblioentryRole":90,"./dpub/docBibliographyRole":91,"./dpub/docBibliorefRole":92,"./dpub/docChapterRole":93,"./dpub/docColophonRole":94,"./dpub/docConclusionRole":95,"./dpub/docCoverRole":96,"./dpub/docCreditRole":97,"./dpub/docCreditsRole":98,"./dpub/docDedicationRole":99,"./dpub/docEndnoteRole":100,"./dpub/docEndnotesRole":101,"./dpub/docEpigraphRole":102,"./dpub/docEpilogueRole":103,"./dpub/docErrataRole":104,"./dpub/docExampleRole":105,"./dpub/docFootnoteRole":106,"./dpub/docForewordRole":107,"./dpub/docGlossaryRole":108,"./dpub/docGlossrefRole":109,"./dpub/docIndexRole":110,"./dpub/docIntroductionRole":111,"./dpub/docNoterefRole":112,"./dpub/docNoticeRole":113,"./dpub/docPagebreakRole":114,"./dpub/docPagelistRole":115,"./dpub/docPartRole":116,"./dpub/docPrefaceRole":117,"./dpub/docPrologueRole":118,"./dpub/docPullquoteRole":119,"./dpub/docQnaRole":120,"./dpub/docSubtitleRole":121,"./dpub/docTipRole":122,"./dpub/docTocRole":123,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],84:[function(require,module,exports){
+},{"./dpub/docAbstractRole":84,"./dpub/docAcknowledgmentsRole":85,"./dpub/docAfterwordRole":86,"./dpub/docAppendixRole":87,"./dpub/docBacklinkRole":88,"./dpub/docBiblioentryRole":89,"./dpub/docBibliographyRole":90,"./dpub/docBibliorefRole":91,"./dpub/docChapterRole":92,"./dpub/docColophonRole":93,"./dpub/docConclusionRole":94,"./dpub/docCoverRole":95,"./dpub/docCreditRole":96,"./dpub/docCreditsRole":97,"./dpub/docDedicationRole":98,"./dpub/docEndnoteRole":99,"./dpub/docEndnotesRole":100,"./dpub/docEpigraphRole":101,"./dpub/docEpilogueRole":102,"./dpub/docErrataRole":103,"./dpub/docExampleRole":104,"./dpub/docFootnoteRole":105,"./dpub/docForewordRole":106,"./dpub/docGlossaryRole":107,"./dpub/docGlossrefRole":108,"./dpub/docIndexRole":109,"./dpub/docIntroductionRole":110,"./dpub/docNoterefRole":111,"./dpub/docNoticeRole":112,"./dpub/docPagebreakRole":113,"./dpub/docPagelistRole":114,"./dpub/docPartRole":115,"./dpub/docPrefaceRole":116,"./dpub/docPrologueRole":117,"./dpub/docPullquoteRole":118,"./dpub/docQnaRole":119,"./dpub/docSubtitleRole":120,"./dpub/docTipRole":121,"./dpub/docTocRole":122,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],83:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4649,7 +4484,7 @@ var _treeitemRole = _interopRequireDefault(require("./literal/treeitemRole"));
 var ariaLiteralRoles = new _map.default([['alert', _alertRole.default], ['alertdialog', _alertdialogRole.default], ['application', _applicationRole.default], ['article', _articleRole.default], ['banner', _bannerRole.default], ['button', _buttonRole.default], ['cell', _cellRole.default], ['checkbox', _checkboxRole.default], ['columnheader', _columnheaderRole.default], ['combobox', _comboboxRole.default], ['complementary', _complementaryRole.default], ['contentinfo', _contentinfoRole.default], ['definition', _definitionRole.default], ['dialog', _dialogRole.default], ['directory', _directoryRole.default], ['document', _documentRole.default], ['feed', _feedRole.default], ['figure', _figureRole.default], ['form', _formRole.default], ['grid', _gridRole.default], ['gridcell', _gridcellRole.default], ['group', _groupRole.default], ['heading', _headingRole.default], ['img', _imgRole.default], ['link', _linkRole.default], ['list', _listRole.default], ['listbox', _listboxRole.default], ['listitem', _listitemRole.default], ['log', _logRole.default], ['main', _mainRole.default], ['marquee', _marqueeRole.default], ['math', _mathRole.default], ['menu', _menuRole.default], ['menubar', _menubarRole.default], ['menuitem', _menuitemRole.default], ['menuitemcheckbox', _menuitemcheckboxRole.default], ['menuitemradio', _menuitemradioRole.default], ['navigation', _navigationRole.default], ['none', _noneRole.default], ['note', _noteRole.default], ['option', _optionRole.default], ['presentation', _presentationRole.default], ['progressbar', _progressbarRole.default], ['radio', _radioRole.default], ['radiogroup', _radiogroupRole.default], ['region', _regionRole.default], ['row', _rowRole.default], ['rowgroup', _rowgroupRole.default], ['rowheader', _rowheaderRole.default], ['scrollbar', _scrollbarRole.default], ['search', _searchRole.default], ['searchbox', _searchboxRole.default], ['separator', _separatorRole.default], ['slider', _sliderRole.default], ['spinbutton', _spinbuttonRole.default], ['status', _statusRole.default], ['switch', _switchRole.default], ['tab', _tabRole.default], ['table', _tableRole.default], ['tablist', _tablistRole.default], ['tabpanel', _tabpanelRole.default], ['term', _termRole.default], ['textbox', _textboxRole.default], ['timer', _timerRole.default], ['toolbar', _toolbarRole.default], ['tooltip', _tooltipRole.default], ['tree', _treeRole.default], ['treegrid', _treegridRole.default], ['treeitem', _treeitemRole.default]]);
 var _default = ariaLiteralRoles;
 exports.default = _default;
-},{"./literal/alertRole":124,"./literal/alertdialogRole":125,"./literal/applicationRole":126,"./literal/articleRole":127,"./literal/bannerRole":128,"./literal/buttonRole":129,"./literal/cellRole":130,"./literal/checkboxRole":131,"./literal/columnheaderRole":132,"./literal/comboboxRole":133,"./literal/complementaryRole":134,"./literal/contentinfoRole":135,"./literal/definitionRole":136,"./literal/dialogRole":137,"./literal/directoryRole":138,"./literal/documentRole":139,"./literal/feedRole":140,"./literal/figureRole":141,"./literal/formRole":142,"./literal/gridRole":143,"./literal/gridcellRole":144,"./literal/groupRole":145,"./literal/headingRole":146,"./literal/imgRole":147,"./literal/linkRole":148,"./literal/listRole":149,"./literal/listboxRole":150,"./literal/listitemRole":151,"./literal/logRole":152,"./literal/mainRole":153,"./literal/marqueeRole":154,"./literal/mathRole":155,"./literal/menuRole":156,"./literal/menubarRole":157,"./literal/menuitemRole":158,"./literal/menuitemcheckboxRole":159,"./literal/menuitemradioRole":160,"./literal/navigationRole":161,"./literal/noneRole":162,"./literal/noteRole":163,"./literal/optionRole":164,"./literal/presentationRole":165,"./literal/progressbarRole":166,"./literal/radioRole":167,"./literal/radiogroupRole":168,"./literal/regionRole":169,"./literal/rowRole":170,"./literal/rowgroupRole":171,"./literal/rowheaderRole":172,"./literal/scrollbarRole":173,"./literal/searchRole":174,"./literal/searchboxRole":175,"./literal/separatorRole":176,"./literal/sliderRole":177,"./literal/spinbuttonRole":178,"./literal/statusRole":179,"./literal/switchRole":180,"./literal/tabRole":181,"./literal/tableRole":182,"./literal/tablistRole":183,"./literal/tabpanelRole":184,"./literal/termRole":185,"./literal/textboxRole":186,"./literal/timerRole":187,"./literal/toolbarRole":188,"./literal/tooltipRole":189,"./literal/treeRole":190,"./literal/treegridRole":191,"./literal/treeitemRole":192,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],85:[function(require,module,exports){
+},{"./literal/alertRole":123,"./literal/alertdialogRole":124,"./literal/applicationRole":125,"./literal/articleRole":126,"./literal/bannerRole":127,"./literal/buttonRole":128,"./literal/cellRole":129,"./literal/checkboxRole":130,"./literal/columnheaderRole":131,"./literal/comboboxRole":132,"./literal/complementaryRole":133,"./literal/contentinfoRole":134,"./literal/definitionRole":135,"./literal/dialogRole":136,"./literal/directoryRole":137,"./literal/documentRole":138,"./literal/feedRole":139,"./literal/figureRole":140,"./literal/formRole":141,"./literal/gridRole":142,"./literal/gridcellRole":143,"./literal/groupRole":144,"./literal/headingRole":145,"./literal/imgRole":146,"./literal/linkRole":147,"./literal/listRole":148,"./literal/listboxRole":149,"./literal/listitemRole":150,"./literal/logRole":151,"./literal/mainRole":152,"./literal/marqueeRole":153,"./literal/mathRole":154,"./literal/menuRole":155,"./literal/menubarRole":156,"./literal/menuitemRole":157,"./literal/menuitemcheckboxRole":158,"./literal/menuitemradioRole":159,"./literal/navigationRole":160,"./literal/noneRole":161,"./literal/noteRole":162,"./literal/optionRole":163,"./literal/presentationRole":164,"./literal/progressbarRole":165,"./literal/radioRole":166,"./literal/radiogroupRole":167,"./literal/regionRole":168,"./literal/rowRole":169,"./literal/rowgroupRole":170,"./literal/rowheaderRole":171,"./literal/scrollbarRole":172,"./literal/searchRole":173,"./literal/searchboxRole":174,"./literal/separatorRole":175,"./literal/sliderRole":176,"./literal/spinbuttonRole":177,"./literal/statusRole":178,"./literal/switchRole":179,"./literal/tabRole":180,"./literal/tableRole":181,"./literal/tablistRole":182,"./literal/tabpanelRole":183,"./literal/termRole":184,"./literal/textboxRole":185,"./literal/timerRole":186,"./literal/toolbarRole":187,"./literal/tooltipRole":188,"./literal/treeRole":189,"./literal/treegridRole":190,"./literal/treeitemRole":191,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],84:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4680,7 +4515,7 @@ var docAbstractRole = {
 };
 var _default = docAbstractRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],86:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],85:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4711,7 +4546,7 @@ var docAcknowledgmentsRole = {
 };
 var _default = docAcknowledgmentsRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],87:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],86:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4742,7 +4577,7 @@ var docAfterwordRole = {
 };
 var _default = docAfterwordRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],88:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],87:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4773,7 +4608,7 @@ var docAppendixRole = {
 };
 var _default = docAppendixRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],89:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],88:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4804,7 +4639,7 @@ var docBacklinkRole = {
 };
 var _default = docBacklinkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],90:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],89:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4835,7 +4670,7 @@ var docBiblioentryRole = {
 };
 var _default = docBiblioentryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],91:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],90:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4866,7 +4701,7 @@ var docBibliographyRole = {
 };
 var _default = docBibliographyRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],92:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],91:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4897,7 +4732,7 @@ var docBibliorefRole = {
 };
 var _default = docBibliorefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],93:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],92:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4928,7 +4763,7 @@ var docChapterRole = {
 };
 var _default = docChapterRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],94:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],93:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4959,7 +4794,7 @@ var docColophonRole = {
 };
 var _default = docColophonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],95:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],94:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4990,7 +4825,7 @@ var docConclusionRole = {
 };
 var _default = docConclusionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],96:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],95:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5021,7 +4856,7 @@ var docCoverRole = {
 };
 var _default = docCoverRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],97:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],96:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5052,7 +4887,7 @@ var docCreditRole = {
 };
 var _default = docCreditRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],98:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],97:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5083,7 +4918,7 @@ var docCreditsRole = {
 };
 var _default = docCreditsRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],99:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],98:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5114,7 +4949,7 @@ var docDedicationRole = {
 };
 var _default = docDedicationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],100:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],99:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5145,7 +4980,7 @@ var docEndnoteRole = {
 };
 var _default = docEndnoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],101:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],100:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5176,7 +5011,7 @@ var docEndnotesRole = {
 };
 var _default = docEndnotesRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],102:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],101:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5207,7 +5042,7 @@ var docEpigraphRole = {
 };
 var _default = docEpigraphRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],103:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],102:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5238,7 +5073,7 @@ var docEpilogueRole = {
 };
 var _default = docEpilogueRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],104:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],103:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5269,7 +5104,7 @@ var docErrataRole = {
 };
 var _default = docErrataRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],105:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],104:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5295,7 +5130,7 @@ var docExampleRole = {
 };
 var _default = docExampleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],106:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],105:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5326,7 +5161,7 @@ var docFootnoteRole = {
 };
 var _default = docFootnoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],107:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],106:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5357,7 +5192,7 @@ var docForewordRole = {
 };
 var _default = docForewordRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],108:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],107:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5388,7 +5223,7 @@ var docGlossaryRole = {
 };
 var _default = docGlossaryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],109:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],108:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5419,7 +5254,7 @@ var docGlossrefRole = {
 };
 var _default = docGlossrefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],110:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],109:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5450,7 +5285,7 @@ var docIndexRole = {
 };
 var _default = docIndexRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],111:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],110:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5481,7 +5316,7 @@ var docIntroductionRole = {
 };
 var _default = docIntroductionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],112:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],111:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5512,7 +5347,7 @@ var docNoterefRole = {
 };
 var _default = docNoterefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],113:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],112:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5543,7 +5378,7 @@ var docNoticeRole = {
 };
 var _default = docNoticeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],114:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],113:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5574,7 +5409,7 @@ var docPagebreakRole = {
 };
 var _default = docPagebreakRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],115:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],114:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5605,7 +5440,7 @@ var docPagelistRole = {
 };
 var _default = docPagelistRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],116:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],115:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5636,7 +5471,7 @@ var docPartRole = {
 };
 var _default = docPartRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],117:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],116:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5667,7 +5502,7 @@ var docPrefaceRole = {
 };
 var _default = docPrefaceRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],118:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],117:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5698,7 +5533,7 @@ var docPrologueRole = {
 };
 var _default = docPrologueRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],119:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],118:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5729,7 +5564,7 @@ var docPullquoteRole = {
 };
 var _default = docPullquoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],120:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],119:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5760,7 +5595,7 @@ var docQnaRole = {
 };
 var _default = docQnaRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],121:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],120:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5791,7 +5626,7 @@ var docSubtitleRole = {
 };
 var _default = docSubtitleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],122:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],121:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5822,7 +5657,7 @@ var docTipRole = {
 };
 var _default = docTipRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],123:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],122:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5853,7 +5688,7 @@ var docTocRole = {
 };
 var _default = docTocRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],124:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],123:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5887,7 +5722,7 @@ var alertRole = {
 };
 var _default = alertRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],125:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],124:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5918,7 +5753,7 @@ var alertdialogRole = {
 };
 var _default = alertdialogRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],126:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],125:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5950,7 +5785,7 @@ var applicationRole = {
 };
 var _default = applicationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],127:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],126:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5984,7 +5819,7 @@ var articleRole = {
 };
 var _default = articleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],128:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],127:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6016,7 +5851,7 @@ var bannerRole = {
 };
 var _default = bannerRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],129:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],128:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6122,7 +5957,7 @@ var buttonRole = {
 };
 var _default = buttonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],130:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],129:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6159,7 +5994,7 @@ var cellRole = {
 };
 var _default = cellRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],131:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],130:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6204,7 +6039,7 @@ var checkboxRole = {
 };
 var _default = checkboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],132:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],131:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6237,7 +6072,7 @@ var columnheaderRole = {
 };
 var _default = columnheaderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],133:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],132:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6373,7 +6208,7 @@ var comboboxRole = {
 };
 var _default = comboboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],134:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],133:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6404,7 +6239,7 @@ var complementaryRole = {
 };
 var _default = complementaryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],135:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],134:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6436,7 +6271,7 @@ var contentinfoRole = {
 };
 var _default = contentinfoRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],136:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],135:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6467,7 +6302,7 @@ var definitionRole = {
 };
 var _default = definitionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],137:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],136:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6498,7 +6333,7 @@ var dialogRole = {
 };
 var _default = dialogRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],138:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],137:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6526,7 +6361,7 @@ var directoryRole = {
 };
 var _default = directoryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],139:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],138:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6563,7 +6398,7 @@ var documentRole = {
 };
 var _default = documentRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],140:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],139:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6589,7 +6424,7 @@ var feedRole = {
 };
 var _default = feedRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],141:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],140:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6620,7 +6455,7 @@ var figureRole = {
 };
 var _default = figureRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],142:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],141:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6673,7 +6508,7 @@ var formRole = {
 };
 var _default = formRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],143:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],142:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6712,7 +6547,7 @@ var gridRole = {
 };
 var _default = gridRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],144:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],143:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6751,7 +6586,7 @@ var gridcellRole = {
 };
 var _default = gridcellRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],145:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],144:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6794,7 +6629,7 @@ var groupRole = {
 };
 var _default = groupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],146:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],145:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6852,7 +6687,7 @@ var headingRole = {
 };
 var _default = headingRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],147:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],146:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6901,7 +6736,7 @@ var imgRole = {
 };
 var _default = imgRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],148:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],147:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6953,7 +6788,7 @@ var linkRole = {
 };
 var _default = linkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],149:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],148:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6994,7 +6829,7 @@ var listRole = {
 };
 var _default = listRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],150:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],149:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7068,7 +6903,7 @@ var listboxRole = {
 };
 var _default = listboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],151:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],150:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7109,7 +6944,7 @@ var listitemRole = {
 };
 var _default = listitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],152:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],151:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7137,7 +6972,7 @@ var logRole = {
 };
 var _default = logRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],153:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],152:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7168,7 +7003,7 @@ var mainRole = {
 };
 var _default = mainRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],154:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],153:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7194,7 +7029,7 @@ var marqueeRole = {
 };
 var _default = marqueeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],155:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],154:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7225,7 +7060,7 @@ var mathRole = {
 };
 var _default = mathRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],156:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],155:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7273,7 +7108,7 @@ var menuRole = {
 };
 var _default = menuRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],157:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],156:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7306,7 +7141,7 @@ var menubarRole = {
 };
 var _default = menubarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],158:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],157:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7355,7 +7190,7 @@ var menuitemRole = {
 };
 var _default = menuitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],159:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],158:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7390,7 +7225,7 @@ var menuitemcheckboxRole = {
 };
 var _default = menuitemcheckboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],160:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],159:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7425,7 +7260,7 @@ var menuitemradioRole = {
 };
 var _default = menuitemradioRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],161:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],160:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7456,7 +7291,7 @@ var navigationRole = {
 };
 var _default = navigationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],162:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],161:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7482,7 +7317,7 @@ var noneRole = {
 };
 var _default = noneRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],163:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],162:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7508,7 +7343,7 @@ var noteRole = {
 };
 var _default = noteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],164:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],163:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7556,7 +7391,7 @@ var optionRole = {
 };
 var _default = optionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],165:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],164:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7582,7 +7417,7 @@ var presentationRole = {
 };
 var _default = presentationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],166:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],165:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7618,7 +7453,7 @@ var progressbarRole = {
 };
 var _default = progressbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],167:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],166:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7660,7 +7495,7 @@ var radioRole = {
 };
 var _default = radioRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],168:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],167:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7694,7 +7529,7 @@ var radiogroupRole = {
 };
 var _default = radiogroupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],169:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],168:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7747,7 +7582,7 @@ var regionRole = {
 };
 var _default = regionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],170:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],169:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7783,7 +7618,7 @@ var rowRole = {
 };
 var _default = rowRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],171:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],170:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7827,7 +7662,7 @@ var rowgroupRole = {
 };
 var _default = rowgroupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],172:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],171:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7864,7 +7699,7 @@ var rowheaderRole = {
 };
 var _default = rowheaderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],173:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],172:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7918,7 +7753,7 @@ var scrollbarRole = {
 };
 var _default = scrollbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],174:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],173:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7944,7 +7779,7 @@ var searchRole = {
 };
 var _default = searchRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],175:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],174:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7982,7 +7817,7 @@ var searchboxRole = {
 };
 var _default = searchboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],176:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],175:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8016,7 +7851,7 @@ var separatorRole = {
 };
 var _default = separatorRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],177:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],176:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8061,7 +7896,7 @@ var sliderRole = {
 };
 var _default = sliderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],178:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],177:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8104,7 +7939,7 @@ var spinbuttonRole = {
 };
 var _default = spinbuttonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],179:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],178:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8138,7 +7973,7 @@ var statusRole = {
 };
 var _default = statusRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],180:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],179:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8173,7 +8008,7 @@ var switchRole = {
 };
 var _default = switchRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],181:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],180:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8203,7 +8038,7 @@ var tabRole = {
 };
 var _default = tabRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],182:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],181:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8237,7 +8072,7 @@ var tableRole = {
 };
 var _default = tableRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],183:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],182:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8273,7 +8108,7 @@ var tablistRole = {
 };
 var _default = tablistRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],184:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],183:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8299,7 +8134,7 @@ var tabpanelRole = {
 };
 var _default = tabpanelRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],185:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],184:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8330,7 +8165,7 @@ var termRole = {
 };
 var _default = termRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],186:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],185:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8421,7 +8256,7 @@ var textboxRole = {
 };
 var _default = textboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],187:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],186:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8447,7 +8282,7 @@ var timerRole = {
 };
 var _default = timerRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],188:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],187:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8480,7 +8315,7 @@ var toolbarRole = {
 };
 var _default = toolbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],189:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],188:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8506,7 +8341,7 @@ var tooltipRole = {
 };
 var _default = tooltipRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],190:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],189:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8536,7 +8371,7 @@ var treeRole = {
 };
 var _default = treeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],191:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],190:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8562,7 +8397,7 @@ var treegridRole = {
 };
 var _default = treegridRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],192:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],191:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8588,7 +8423,7 @@ var treeitemRole = {
 };
 var _default = treeitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],193:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],192:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8621,7 +8456,7 @@ var elementRoles = _elementRoleMap.default;
 exports.elementRoles = elementRoles;
 var roleElements = _roleElementMap.default;
 exports.roleElements = roleElements;
-},{"./ariaPropsMap":67,"./domMap":68,"./elementRoleMap":69,"./roleElementMap":194,"./rolesMap":195,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],194:[function(require,module,exports){
+},{"./ariaPropsMap":66,"./domMap":67,"./elementRoleMap":68,"./roleElementMap":193,"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],193:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8672,7 +8507,7 @@ var roleElementMap = new _map.default([]);
 });
 var _default = roleElementMap;
 exports.default = _default;
-},{"./rolesMap":195,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],195:[function(require,module,exports){
+},{"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],194:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8771,7 +8606,6173 @@ var rolesMap = new _map.default([]);
 });
 var _default = rolesMap;
 exports.default = _default;
-},{"./etc/roles/ariaAbstractRoles":82,"./etc/roles/ariaDpubRoles":83,"./etc/roles/ariaLiteralRoles":84,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/assign":9,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/object/keys":11,"@babel/runtime-corejs3/core-js/get-iterator":15,"@babel/runtime-corejs3/helpers/defineProperty":23,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],196:[function(require,module,exports){
+},{"./etc/roles/ariaAbstractRoles":81,"./etc/roles/ariaDpubRoles":82,"./etc/roles/ariaLiteralRoles":83,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/assign":9,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/object/keys":11,"@babel/runtime-corejs3/core-js/get-iterator":15,"@babel/runtime-corejs3/helpers/defineProperty":23,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],195:[function(require,module,exports){
+require('../../modules/es.string.iterator');
+require('../../modules/es.array.from');
+var path = require('../../internals/path');
+
+module.exports = path.Array.from;
+
+},{"../../internals/path":294,"../../modules/es.array.from":319,"../../modules/es.string.iterator":332}],196:[function(require,module,exports){
+require('../../modules/es.array.is-array');
+var path = require('../../internals/path');
+
+module.exports = path.Array.isArray;
+
+},{"../../internals/path":294,"../../modules/es.array.is-array":320}],197:[function(require,module,exports){
+require('../../../modules/es.array.concat');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').concat;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.concat":316}],198:[function(require,module,exports){
+require('../../../modules/es.array.iterator');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').entries;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.iterator":321}],199:[function(require,module,exports){
+require('../../../modules/es.array.find');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').find;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.find":317}],200:[function(require,module,exports){
+require('../../../modules/es.array.for-each');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').forEach;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.for-each":318}],201:[function(require,module,exports){
+require('../../../modules/es.array.iterator');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').keys;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.iterator":321}],202:[function(require,module,exports){
+require('../../../modules/es.array.slice');
+var entryVirtual = require('../../../internals/entry-virtual');
+
+module.exports = entryVirtual('Array').slice;
+
+},{"../../../internals/entry-virtual":251,"../../../modules/es.array.slice":322}],203:[function(require,module,exports){
+var concat = require('../array/virtual/concat');
+
+var ArrayPrototype = Array.prototype;
+
+module.exports = function (it) {
+  var own = it.concat;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.concat) ? concat : own;
+};
+
+},{"../array/virtual/concat":197}],204:[function(require,module,exports){
+var find = require('../array/virtual/find');
+
+var ArrayPrototype = Array.prototype;
+
+module.exports = function (it) {
+  var own = it.find;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
+};
+
+},{"../array/virtual/find":199}],205:[function(require,module,exports){
+var slice = require('../array/virtual/slice');
+
+var ArrayPrototype = Array.prototype;
+
+module.exports = function (it) {
+  var own = it.slice;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.slice) ? slice : own;
+};
+
+},{"../array/virtual/slice":202}],206:[function(require,module,exports){
+require('../../modules/es.json.stringify');
+var core = require('../../internals/path');
+
+if (!core.JSON) core.JSON = { stringify: JSON.stringify };
+
+// eslint-disable-next-line no-unused-vars
+module.exports = function stringify(it, replacer, space) {
+  return core.JSON.stringify.apply(null, arguments);
+};
+
+},{"../../internals/path":294,"../../modules/es.json.stringify":323}],207:[function(require,module,exports){
+require('../../modules/es.map');
+require('../../modules/es.object.to-string');
+require('../../modules/es.string.iterator');
+require('../../modules/web.dom-collections.iterator');
+var path = require('../../internals/path');
+
+module.exports = path.Map;
+
+},{"../../internals/path":294,"../../modules/es.map":325,"../../modules/es.object.to-string":330,"../../modules/es.string.iterator":332,"../../modules/web.dom-collections.iterator":353}],208:[function(require,module,exports){
+require('../../modules/es.object.assign');
+var path = require('../../internals/path');
+
+module.exports = path.Object.assign;
+
+},{"../../internals/path":294,"../../modules/es.object.assign":327}],209:[function(require,module,exports){
+require('../../modules/es.object.define-property');
+var path = require('../../internals/path');
+
+var Object = path.Object;
+
+var defineProperty = module.exports = function defineProperty(it, key, desc) {
+  return Object.defineProperty(it, key, desc);
+};
+
+if (Object.defineProperty.sham) defineProperty.sham = true;
+
+},{"../../internals/path":294,"../../modules/es.object.define-property":328}],210:[function(require,module,exports){
+require('../../modules/es.object.keys');
+var path = require('../../internals/path');
+
+module.exports = path.Object.keys;
+
+},{"../../internals/path":294,"../../modules/es.object.keys":329}],211:[function(require,module,exports){
+require('../../modules/es.set');
+require('../../modules/es.object.to-string');
+require('../../modules/es.string.iterator');
+require('../../modules/web.dom-collections.iterator');
+var path = require('../../internals/path');
+
+module.exports = path.Set;
+
+},{"../../internals/path":294,"../../modules/es.object.to-string":330,"../../modules/es.set":331,"../../modules/es.string.iterator":332,"../../modules/web.dom-collections.iterator":353}],212:[function(require,module,exports){
+require('../../modules/es.array.concat');
+require('../../modules/es.object.to-string');
+require('../../modules/es.symbol');
+require('../../modules/es.symbol.async-iterator');
+require('../../modules/es.symbol.description');
+require('../../modules/es.symbol.has-instance');
+require('../../modules/es.symbol.is-concat-spreadable');
+require('../../modules/es.symbol.iterator');
+require('../../modules/es.symbol.match');
+require('../../modules/es.symbol.match-all');
+require('../../modules/es.symbol.replace');
+require('../../modules/es.symbol.search');
+require('../../modules/es.symbol.species');
+require('../../modules/es.symbol.split');
+require('../../modules/es.symbol.to-primitive');
+require('../../modules/es.symbol.to-string-tag');
+require('../../modules/es.symbol.unscopables');
+require('../../modules/es.math.to-string-tag');
+require('../../modules/es.json.to-string-tag');
+var path = require('../../internals/path');
+
+module.exports = path.Symbol;
+
+},{"../../internals/path":294,"../../modules/es.array.concat":316,"../../modules/es.json.to-string-tag":324,"../../modules/es.math.to-string-tag":326,"../../modules/es.object.to-string":330,"../../modules/es.symbol":338,"../../modules/es.symbol.async-iterator":333,"../../modules/es.symbol.description":334,"../../modules/es.symbol.has-instance":335,"../../modules/es.symbol.is-concat-spreadable":336,"../../modules/es.symbol.iterator":337,"../../modules/es.symbol.match":340,"../../modules/es.symbol.match-all":339,"../../modules/es.symbol.replace":341,"../../modules/es.symbol.search":342,"../../modules/es.symbol.species":343,"../../modules/es.symbol.split":344,"../../modules/es.symbol.to-primitive":345,"../../modules/es.symbol.to-string-tag":346,"../../modules/es.symbol.unscopables":347}],213:[function(require,module,exports){
+var parent = require('../../es/array/from');
+
+module.exports = parent;
+
+},{"../../es/array/from":195}],214:[function(require,module,exports){
+var parent = require('../../es/array/is-array');
+
+module.exports = parent;
+
+},{"../../es/array/is-array":196}],215:[function(require,module,exports){
+require('../modules/web.dom-collections.iterator');
+require('../modules/es.string.iterator');
+var getIterator = require('../internals/get-iterator');
+
+module.exports = getIterator;
+
+},{"../internals/get-iterator":259,"../modules/es.string.iterator":332,"../modules/web.dom-collections.iterator":353}],216:[function(require,module,exports){
+var parent = require('../../es/instance/slice');
+
+module.exports = parent;
+
+},{"../../es/instance/slice":205}],217:[function(require,module,exports){
+require('../modules/web.dom-collections.iterator');
+require('../modules/es.string.iterator');
+var isIterable = require('../internals/is-iterable');
+
+module.exports = isIterable;
+
+},{"../internals/is-iterable":272,"../modules/es.string.iterator":332,"../modules/web.dom-collections.iterator":353}],218:[function(require,module,exports){
+var parent = require('../../es/object/define-property');
+
+module.exports = parent;
+
+},{"../../es/object/define-property":209}],219:[function(require,module,exports){
+var parent = require('../../es/symbol');
+require('../../modules/esnext.symbol.async-dispose');
+require('../../modules/esnext.symbol.dispose');
+require('../../modules/esnext.symbol.observable');
+require('../../modules/esnext.symbol.pattern-match');
+// TODO: Remove from `core-js@4`
+require('../../modules/esnext.symbol.replace-all');
+
+module.exports = parent;
+
+},{"../../es/symbol":212,"../../modules/esnext.symbol.async-dispose":348,"../../modules/esnext.symbol.dispose":349,"../../modules/esnext.symbol.observable":350,"../../modules/esnext.symbol.pattern-match":351,"../../modules/esnext.symbol.replace-all":352}],220:[function(require,module,exports){
+module.exports = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function');
+  } return it;
+};
+
+},{}],221:[function(require,module,exports){
+var isObject = require('../internals/is-object');
+
+module.exports = function (it) {
+  if (!isObject(it) && it !== null) {
+    throw TypeError("Can't set " + String(it) + ' as a prototype');
+  } return it;
+};
+
+},{"../internals/is-object":273}],222:[function(require,module,exports){
+module.exports = function () { /* empty */ };
+
+},{}],223:[function(require,module,exports){
+module.exports = function (it, Constructor, name) {
+  if (!(it instanceof Constructor)) {
+    throw TypeError('Incorrect ' + (name ? name + ' ' : '') + 'invocation');
+  } return it;
+};
+
+},{}],224:[function(require,module,exports){
+var isObject = require('../internals/is-object');
+
+module.exports = function (it) {
+  if (!isObject(it)) {
+    throw TypeError(String(it) + ' is not an object');
+  } return it;
+};
+
+},{"../internals/is-object":273}],225:[function(require,module,exports){
+'use strict';
+var $forEach = require('../internals/array-iteration').forEach;
+var arrayMethodIsStrict = require('../internals/array-method-is-strict');
+var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
+
+var STRICT_METHOD = arrayMethodIsStrict('forEach');
+var USES_TO_LENGTH = arrayMethodUsesToLength('forEach');
+
+// `Array.prototype.forEach` method implementation
+// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
+module.exports = (!STRICT_METHOD || !USES_TO_LENGTH) ? function forEach(callbackfn /* , thisArg */) {
+  return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+} : [].forEach;
+
+},{"../internals/array-iteration":228,"../internals/array-method-is-strict":230,"../internals/array-method-uses-to-length":231}],226:[function(require,module,exports){
+'use strict';
+var bind = require('../internals/function-bind-context');
+var toObject = require('../internals/to-object');
+var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
+var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
+var toLength = require('../internals/to-length');
+var createProperty = require('../internals/create-property');
+var getIteratorMethod = require('../internals/get-iterator-method');
+
+// `Array.from` method implementation
+// https://tc39.github.io/ecma262/#sec-array.from
+module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+  var O = toObject(arrayLike);
+  var C = typeof this == 'function' ? this : Array;
+  var argumentsLength = arguments.length;
+  var mapfn = argumentsLength > 1 ? arguments[1] : undefined;
+  var mapping = mapfn !== undefined;
+  var iteratorMethod = getIteratorMethod(O);
+  var index = 0;
+  var length, result, step, iterator, next, value;
+  if (mapping) mapfn = bind(mapfn, argumentsLength > 2 ? arguments[2] : undefined, 2);
+  // if the target is not iterable or it's an array with the default iterator - use a simple case
+  if (iteratorMethod != undefined && !(C == Array && isArrayIteratorMethod(iteratorMethod))) {
+    iterator = iteratorMethod.call(O);
+    next = iterator.next;
+    result = new C();
+    for (;!(step = next.call(iterator)).done; index++) {
+      value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
+      createProperty(result, index, value);
+    }
+  } else {
+    length = toLength(O.length);
+    result = new C(length);
+    for (;length > index; index++) {
+      value = mapping ? mapfn(O[index], index) : O[index];
+      createProperty(result, index, value);
+    }
+  }
+  result.length = index;
+  return result;
+};
+
+},{"../internals/call-with-safe-iteration-closing":233,"../internals/create-property":243,"../internals/function-bind-context":256,"../internals/get-iterator-method":258,"../internals/is-array-iterator-method":269,"../internals/to-length":308,"../internals/to-object":309}],227:[function(require,module,exports){
+var toIndexedObject = require('../internals/to-indexed-object');
+var toLength = require('../internals/to-length');
+var toAbsoluteIndex = require('../internals/to-absolute-index');
+
+// `Array.prototype.{ indexOf, includes }` methods implementation
+var createMethod = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIndexedObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) {
+      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+module.exports = {
+  // `Array.prototype.includes` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
+  includes: createMethod(true),
+  // `Array.prototype.indexOf` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod(false)
+};
+
+},{"../internals/to-absolute-index":305,"../internals/to-indexed-object":306,"../internals/to-length":308}],228:[function(require,module,exports){
+var bind = require('../internals/function-bind-context');
+var IndexedObject = require('../internals/indexed-object');
+var toObject = require('../internals/to-object');
+var toLength = require('../internals/to-length');
+var arraySpeciesCreate = require('../internals/array-species-create');
+
+var push = [].push;
+
+// `Array.prototype.{ forEach, map, filter, some, every, find, findIndex }` methods implementation
+var createMethod = function (TYPE) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  return function ($this, callbackfn, that, specificCreate) {
+    var O = toObject($this);
+    var self = IndexedObject(O);
+    var boundFunction = bind(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var create = specificCreate || arraySpeciesCreate;
+    var target = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
+    var value, result;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
+      value = self[index];
+      result = boundFunction(value, index, O);
+      if (TYPE) {
+        if (IS_MAP) target[index] = result; // map
+        else if (result) switch (TYPE) {
+          case 3: return true;              // some
+          case 5: return value;             // find
+          case 6: return index;             // findIndex
+          case 2: push.call(target, value); // filter
+        } else if (IS_EVERY) return false;  // every
+      }
+    }
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
+  };
+};
+
+module.exports = {
+  // `Array.prototype.forEach` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
+  forEach: createMethod(0),
+  // `Array.prototype.map` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.map
+  map: createMethod(1),
+  // `Array.prototype.filter` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.filter
+  filter: createMethod(2),
+  // `Array.prototype.some` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.some
+  some: createMethod(3),
+  // `Array.prototype.every` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.every
+  every: createMethod(4),
+  // `Array.prototype.find` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.find
+  find: createMethod(5),
+  // `Array.prototype.findIndex` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
+  findIndex: createMethod(6)
+};
+
+},{"../internals/array-species-create":232,"../internals/function-bind-context":256,"../internals/indexed-object":265,"../internals/to-length":308,"../internals/to-object":309}],229:[function(require,module,exports){
+var fails = require('../internals/fails');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var V8_VERSION = require('../internals/engine-v8-version');
+
+var SPECIES = wellKnownSymbol('species');
+
+module.exports = function (METHOD_NAME) {
+  // We can't use this feature detection in V8 since it causes
+  // deoptimization and serious performance degradation
+  // https://github.com/zloirock/core-js/issues/677
+  return V8_VERSION >= 51 || !fails(function () {
+    var array = [];
+    var constructor = array.constructor = {};
+    constructor[SPECIES] = function () {
+      return { foo: 1 };
+    };
+    return array[METHOD_NAME](Boolean).foo !== 1;
+  });
+};
+
+},{"../internals/engine-v8-version":250,"../internals/fails":254,"../internals/well-known-symbol":315}],230:[function(require,module,exports){
+'use strict';
+var fails = require('../internals/fails');
+
+module.exports = function (METHOD_NAME, argument) {
+  var method = [][METHOD_NAME];
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call,no-throw-literal
+    method.call(null, argument || function () { throw 1; }, 1);
+  });
+};
+
+},{"../internals/fails":254}],231:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var fails = require('../internals/fails');
+var has = require('../internals/has');
+
+var defineProperty = Object.defineProperty;
+var cache = {};
+
+var thrower = function (it) { throw it; };
+
+module.exports = function (METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
+  if (!options) options = {};
+  var method = [][METHOD_NAME];
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
+  var argument0 = has(options, 0) ? options[0] : thrower;
+  var argument1 = has(options, 1) ? options[1] : undefined;
+
+  return cache[METHOD_NAME] = !!method && !fails(function () {
+    if (ACCESSORS && !DESCRIPTORS) return true;
+    var O = { length: -1 };
+
+    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
+    else O[1] = 1;
+
+    method.call(O, argument0, argument1);
+  });
+};
+
+},{"../internals/descriptors":246,"../internals/fails":254,"../internals/has":261}],232:[function(require,module,exports){
+var isObject = require('../internals/is-object');
+var isArray = require('../internals/is-array');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var SPECIES = wellKnownSymbol('species');
+
+// `ArraySpeciesCreate` abstract operation
+// https://tc39.github.io/ecma262/#sec-arrayspeciescreate
+module.exports = function (originalArray, length) {
+  var C;
+  if (isArray(originalArray)) {
+    C = originalArray.constructor;
+    // cross-realm fallback
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
+    else if (isObject(C)) {
+      C = C[SPECIES];
+      if (C === null) C = undefined;
+    }
+  } return new (C === undefined ? Array : C)(length === 0 ? 0 : length);
+};
+
+},{"../internals/is-array":270,"../internals/is-object":273,"../internals/well-known-symbol":315}],233:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+
+// call something on iterator step with safe closing on error
+module.exports = function (iterator, fn, value, ENTRIES) {
+  try {
+    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value);
+  // 7.4.6 IteratorClose(iterator, completion)
+  } catch (error) {
+    var returnMethod = iterator['return'];
+    if (returnMethod !== undefined) anObject(returnMethod.call(iterator));
+    throw error;
+  }
+};
+
+},{"../internals/an-object":224}],234:[function(require,module,exports){
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var ITERATOR = wellKnownSymbol('iterator');
+var SAFE_CLOSING = false;
+
+try {
+  var called = 0;
+  var iteratorWithReturn = {
+    next: function () {
+      return { done: !!called++ };
+    },
+    'return': function () {
+      SAFE_CLOSING = true;
+    }
+  };
+  iteratorWithReturn[ITERATOR] = function () {
+    return this;
+  };
+  // eslint-disable-next-line no-throw-literal
+  Array.from(iteratorWithReturn, function () { throw 2; });
+} catch (error) { /* empty */ }
+
+module.exports = function (exec, SKIP_CLOSING) {
+  if (!SKIP_CLOSING && !SAFE_CLOSING) return false;
+  var ITERATION_SUPPORT = false;
+  try {
+    var object = {};
+    object[ITERATOR] = function () {
+      return {
+        next: function () {
+          return { done: ITERATION_SUPPORT = true };
+        }
+      };
+    };
+    exec(object);
+  } catch (error) { /* empty */ }
+  return ITERATION_SUPPORT;
+};
+
+},{"../internals/well-known-symbol":315}],235:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+},{}],236:[function(require,module,exports){
+var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+var classofRaw = require('../internals/classof-raw');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+// ES3 wrong here
+var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (error) { /* empty */ }
+};
+
+// getting tag from ES6+ `Object.prototype.toString`
+module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
+  var O, tag, result;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (tag = tryGet(O = Object(it), TO_STRING_TAG)) == 'string' ? tag
+    // builtinTag case
+    : CORRECT_ARGUMENTS ? classofRaw(O)
+    // ES3 arguments fallback
+    : (result = classofRaw(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : result;
+};
+
+},{"../internals/classof-raw":235,"../internals/to-string-tag-support":311,"../internals/well-known-symbol":315}],237:[function(require,module,exports){
+'use strict';
+var defineProperty = require('../internals/object-define-property').f;
+var create = require('../internals/object-create');
+var redefineAll = require('../internals/redefine-all');
+var bind = require('../internals/function-bind-context');
+var anInstance = require('../internals/an-instance');
+var iterate = require('../internals/iterate');
+var defineIterator = require('../internals/define-iterator');
+var setSpecies = require('../internals/set-species');
+var DESCRIPTORS = require('../internals/descriptors');
+var fastKey = require('../internals/internal-metadata').fastKey;
+var InternalStateModule = require('../internals/internal-state');
+
+var setInternalState = InternalStateModule.set;
+var internalStateGetterFor = InternalStateModule.getterFor;
+
+module.exports = {
+  getConstructor: function (wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER) {
+    var C = wrapper(function (that, iterable) {
+      anInstance(that, C, CONSTRUCTOR_NAME);
+      setInternalState(that, {
+        type: CONSTRUCTOR_NAME,
+        index: create(null),
+        first: undefined,
+        last: undefined,
+        size: 0
+      });
+      if (!DESCRIPTORS) that.size = 0;
+      if (iterable != undefined) iterate(iterable, that[ADDER], that, IS_MAP);
+    });
+
+    var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
+
+    var define = function (that, key, value) {
+      var state = getInternalState(that);
+      var entry = getEntry(that, key);
+      var previous, index;
+      // change existing entry
+      if (entry) {
+        entry.value = value;
+      // create new entry
+      } else {
+        state.last = entry = {
+          index: index = fastKey(key, true),
+          key: key,
+          value: value,
+          previous: previous = state.last,
+          next: undefined,
+          removed: false
+        };
+        if (!state.first) state.first = entry;
+        if (previous) previous.next = entry;
+        if (DESCRIPTORS) state.size++;
+        else that.size++;
+        // add to index
+        if (index !== 'F') state.index[index] = entry;
+      } return that;
+    };
+
+    var getEntry = function (that, key) {
+      var state = getInternalState(that);
+      // fast case
+      var index = fastKey(key);
+      var entry;
+      if (index !== 'F') return state.index[index];
+      // frozen object case
+      for (entry = state.first; entry; entry = entry.next) {
+        if (entry.key == key) return entry;
+      }
+    };
+
+    redefineAll(C.prototype, {
+      // 23.1.3.1 Map.prototype.clear()
+      // 23.2.3.2 Set.prototype.clear()
+      clear: function clear() {
+        var that = this;
+        var state = getInternalState(that);
+        var data = state.index;
+        var entry = state.first;
+        while (entry) {
+          entry.removed = true;
+          if (entry.previous) entry.previous = entry.previous.next = undefined;
+          delete data[entry.index];
+          entry = entry.next;
+        }
+        state.first = state.last = undefined;
+        if (DESCRIPTORS) state.size = 0;
+        else that.size = 0;
+      },
+      // 23.1.3.3 Map.prototype.delete(key)
+      // 23.2.3.4 Set.prototype.delete(value)
+      'delete': function (key) {
+        var that = this;
+        var state = getInternalState(that);
+        var entry = getEntry(that, key);
+        if (entry) {
+          var next = entry.next;
+          var prev = entry.previous;
+          delete state.index[entry.index];
+          entry.removed = true;
+          if (prev) prev.next = next;
+          if (next) next.previous = prev;
+          if (state.first == entry) state.first = next;
+          if (state.last == entry) state.last = prev;
+          if (DESCRIPTORS) state.size--;
+          else that.size--;
+        } return !!entry;
+      },
+      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
+      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
+      forEach: function forEach(callbackfn /* , that = undefined */) {
+        var state = getInternalState(this);
+        var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3);
+        var entry;
+        while (entry = entry ? entry.next : state.first) {
+          boundFunction(entry.value, entry.key, this);
+          // revert to the last existing entry
+          while (entry && entry.removed) entry = entry.previous;
+        }
+      },
+      // 23.1.3.7 Map.prototype.has(key)
+      // 23.2.3.7 Set.prototype.has(value)
+      has: function has(key) {
+        return !!getEntry(this, key);
+      }
+    });
+
+    redefineAll(C.prototype, IS_MAP ? {
+      // 23.1.3.6 Map.prototype.get(key)
+      get: function get(key) {
+        var entry = getEntry(this, key);
+        return entry && entry.value;
+      },
+      // 23.1.3.9 Map.prototype.set(key, value)
+      set: function set(key, value) {
+        return define(this, key === 0 ? 0 : key, value);
+      }
+    } : {
+      // 23.2.3.1 Set.prototype.add(value)
+      add: function add(value) {
+        return define(this, value = value === 0 ? 0 : value, value);
+      }
+    });
+    if (DESCRIPTORS) defineProperty(C.prototype, 'size', {
+      get: function () {
+        return getInternalState(this).size;
+      }
+    });
+    return C;
+  },
+  setStrong: function (C, CONSTRUCTOR_NAME, IS_MAP) {
+    var ITERATOR_NAME = CONSTRUCTOR_NAME + ' Iterator';
+    var getInternalCollectionState = internalStateGetterFor(CONSTRUCTOR_NAME);
+    var getInternalIteratorState = internalStateGetterFor(ITERATOR_NAME);
+    // add .keys, .values, .entries, [@@iterator]
+    // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
+    defineIterator(C, CONSTRUCTOR_NAME, function (iterated, kind) {
+      setInternalState(this, {
+        type: ITERATOR_NAME,
+        target: iterated,
+        state: getInternalCollectionState(iterated),
+        kind: kind,
+        last: undefined
+      });
+    }, function () {
+      var state = getInternalIteratorState(this);
+      var kind = state.kind;
+      var entry = state.last;
+      // revert to the last existing entry
+      while (entry && entry.removed) entry = entry.previous;
+      // get next entry
+      if (!state.target || !(state.last = entry = entry ? entry.next : state.state.first)) {
+        // or finish the iteration
+        state.target = undefined;
+        return { value: undefined, done: true };
+      }
+      // return step by kind
+      if (kind == 'keys') return { value: entry.key, done: false };
+      if (kind == 'values') return { value: entry.value, done: false };
+      return { value: [entry.key, entry.value], done: false };
+    }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
+
+    // add [@@species], 23.1.2.2, 23.2.2.2
+    setSpecies(CONSTRUCTOR_NAME);
+  }
+};
+
+},{"../internals/an-instance":223,"../internals/define-iterator":244,"../internals/descriptors":246,"../internals/function-bind-context":256,"../internals/internal-metadata":267,"../internals/internal-state":268,"../internals/iterate":275,"../internals/object-create":281,"../internals/object-define-property":283,"../internals/redefine-all":295,"../internals/set-species":299}],238:[function(require,module,exports){
+'use strict';
+var $ = require('./export');
+var global = require('../internals/global');
+var InternalMetadataModule = require('../internals/internal-metadata');
+var fails = require('../internals/fails');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var iterate = require('../internals/iterate');
+var anInstance = require('../internals/an-instance');
+var isObject = require('../internals/is-object');
+var setToStringTag = require('../internals/set-to-string-tag');
+var defineProperty = require('../internals/object-define-property').f;
+var forEach = require('../internals/array-iteration').forEach;
+var DESCRIPTORS = require('../internals/descriptors');
+var InternalStateModule = require('../internals/internal-state');
+
+var setInternalState = InternalStateModule.set;
+var internalStateGetterFor = InternalStateModule.getterFor;
+
+module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
+  var IS_MAP = CONSTRUCTOR_NAME.indexOf('Map') !== -1;
+  var IS_WEAK = CONSTRUCTOR_NAME.indexOf('Weak') !== -1;
+  var ADDER = IS_MAP ? 'set' : 'add';
+  var NativeConstructor = global[CONSTRUCTOR_NAME];
+  var NativePrototype = NativeConstructor && NativeConstructor.prototype;
+  var exported = {};
+  var Constructor;
+
+  if (!DESCRIPTORS || typeof NativeConstructor != 'function'
+    || !(IS_WEAK || NativePrototype.forEach && !fails(function () { new NativeConstructor().entries().next(); }))
+  ) {
+    // create collection constructor
+    Constructor = common.getConstructor(wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER);
+    InternalMetadataModule.REQUIRED = true;
+  } else {
+    Constructor = wrapper(function (target, iterable) {
+      setInternalState(anInstance(target, Constructor, CONSTRUCTOR_NAME), {
+        type: CONSTRUCTOR_NAME,
+        collection: new NativeConstructor()
+      });
+      if (iterable != undefined) iterate(iterable, target[ADDER], target, IS_MAP);
+    });
+
+    var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
+
+    forEach(['add', 'clear', 'delete', 'forEach', 'get', 'has', 'set', 'keys', 'values', 'entries'], function (KEY) {
+      var IS_ADDER = KEY == 'add' || KEY == 'set';
+      if (KEY in NativePrototype && !(IS_WEAK && KEY == 'clear')) {
+        createNonEnumerableProperty(Constructor.prototype, KEY, function (a, b) {
+          var collection = getInternalState(this).collection;
+          if (!IS_ADDER && IS_WEAK && !isObject(a)) return KEY == 'get' ? undefined : false;
+          var result = collection[KEY](a === 0 ? 0 : a, b);
+          return IS_ADDER ? this : result;
+        });
+      }
+    });
+
+    IS_WEAK || defineProperty(Constructor.prototype, 'size', {
+      configurable: true,
+      get: function () {
+        return getInternalState(this).collection.size;
+      }
+    });
+  }
+
+  setToStringTag(Constructor, CONSTRUCTOR_NAME, false, true);
+
+  exported[CONSTRUCTOR_NAME] = Constructor;
+  $({ global: true, forced: true }, exported);
+
+  if (!IS_WEAK) common.setStrong(Constructor, CONSTRUCTOR_NAME, IS_MAP);
+
+  return Constructor;
+};
+
+},{"../internals/an-instance":223,"../internals/array-iteration":228,"../internals/create-non-enumerable-property":241,"../internals/descriptors":246,"../internals/fails":254,"../internals/global":260,"../internals/internal-metadata":267,"../internals/internal-state":268,"../internals/is-object":273,"../internals/iterate":275,"../internals/object-define-property":283,"../internals/set-to-string-tag":300,"./export":253}],239:[function(require,module,exports){
+var fails = require('../internals/fails');
+
+module.exports = !fails(function () {
+  function F() { /* empty */ }
+  F.prototype.constructor = null;
+  return Object.getPrototypeOf(new F()) !== F.prototype;
+});
+
+},{"../internals/fails":254}],240:[function(require,module,exports){
+'use strict';
+var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
+var create = require('../internals/object-create');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+var setToStringTag = require('../internals/set-to-string-tag');
+var Iterators = require('../internals/iterators');
+
+var returnThis = function () { return this; };
+
+module.exports = function (IteratorConstructor, NAME, next) {
+  var TO_STRING_TAG = NAME + ' Iterator';
+  IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(1, next) });
+  setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
+  Iterators[TO_STRING_TAG] = returnThis;
+  return IteratorConstructor;
+};
+
+},{"../internals/create-property-descriptor":242,"../internals/iterators":277,"../internals/iterators-core":276,"../internals/object-create":281,"../internals/set-to-string-tag":300}],241:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var definePropertyModule = require('../internals/object-define-property');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+
+module.exports = DESCRIPTORS ? function (object, key, value) {
+  return definePropertyModule.f(object, key, createPropertyDescriptor(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+},{"../internals/create-property-descriptor":242,"../internals/descriptors":246,"../internals/object-define-property":283}],242:[function(require,module,exports){
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+},{}],243:[function(require,module,exports){
+'use strict';
+var toPrimitive = require('../internals/to-primitive');
+var definePropertyModule = require('../internals/object-define-property');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+
+module.exports = function (object, key, value) {
+  var propertyKey = toPrimitive(key);
+  if (propertyKey in object) definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value));
+  else object[propertyKey] = value;
+};
+
+},{"../internals/create-property-descriptor":242,"../internals/object-define-property":283,"../internals/to-primitive":310}],244:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var createIteratorConstructor = require('../internals/create-iterator-constructor');
+var getPrototypeOf = require('../internals/object-get-prototype-of');
+var setPrototypeOf = require('../internals/object-set-prototype-of');
+var setToStringTag = require('../internals/set-to-string-tag');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var redefine = require('../internals/redefine');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var IS_PURE = require('../internals/is-pure');
+var Iterators = require('../internals/iterators');
+var IteratorsCore = require('../internals/iterators-core');
+
+var IteratorPrototype = IteratorsCore.IteratorPrototype;
+var BUGGY_SAFARI_ITERATORS = IteratorsCore.BUGGY_SAFARI_ITERATORS;
+var ITERATOR = wellKnownSymbol('iterator');
+var KEYS = 'keys';
+var VALUES = 'values';
+var ENTRIES = 'entries';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
+  createIteratorConstructor(IteratorConstructor, NAME, next);
+
+  var getIterationMethod = function (KIND) {
+    if (KIND === DEFAULT && defaultIterator) return defaultIterator;
+    if (!BUGGY_SAFARI_ITERATORS && KIND in IterablePrototype) return IterablePrototype[KIND];
+    switch (KIND) {
+      case KEYS: return function keys() { return new IteratorConstructor(this, KIND); };
+      case VALUES: return function values() { return new IteratorConstructor(this, KIND); };
+      case ENTRIES: return function entries() { return new IteratorConstructor(this, KIND); };
+    } return function () { return new IteratorConstructor(this); };
+  };
+
+  var TO_STRING_TAG = NAME + ' Iterator';
+  var INCORRECT_VALUES_NAME = false;
+  var IterablePrototype = Iterable.prototype;
+  var nativeIterator = IterablePrototype[ITERATOR]
+    || IterablePrototype['@@iterator']
+    || DEFAULT && IterablePrototype[DEFAULT];
+  var defaultIterator = !BUGGY_SAFARI_ITERATORS && nativeIterator || getIterationMethod(DEFAULT);
+  var anyNativeIterator = NAME == 'Array' ? IterablePrototype.entries || nativeIterator : nativeIterator;
+  var CurrentIteratorPrototype, methods, KEY;
+
+  // fix native
+  if (anyNativeIterator) {
+    CurrentIteratorPrototype = getPrototypeOf(anyNativeIterator.call(new Iterable()));
+    if (IteratorPrototype !== Object.prototype && CurrentIteratorPrototype.next) {
+      if (!IS_PURE && getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
+        if (setPrototypeOf) {
+          setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
+        } else if (typeof CurrentIteratorPrototype[ITERATOR] != 'function') {
+          createNonEnumerableProperty(CurrentIteratorPrototype, ITERATOR, returnThis);
+        }
+      }
+      // Set @@toStringTag to native iterators
+      setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
+      if (IS_PURE) Iterators[TO_STRING_TAG] = returnThis;
+    }
+  }
+
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if (DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
+    INCORRECT_VALUES_NAME = true;
+    defaultIterator = function values() { return nativeIterator.call(this); };
+  }
+
+  // define iterator
+  if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
+    createNonEnumerableProperty(IterablePrototype, ITERATOR, defaultIterator);
+  }
+  Iterators[NAME] = defaultIterator;
+
+  // export additional methods
+  if (DEFAULT) {
+    methods = {
+      values: getIterationMethod(VALUES),
+      keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
+      entries: getIterationMethod(ENTRIES)
+    };
+    if (FORCED) for (KEY in methods) {
+      if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
+        redefine(IterablePrototype, KEY, methods[KEY]);
+      }
+    } else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
+  }
+
+  return methods;
+};
+
+},{"../internals/create-iterator-constructor":240,"../internals/create-non-enumerable-property":241,"../internals/export":253,"../internals/is-pure":274,"../internals/iterators":277,"../internals/iterators-core":276,"../internals/object-get-prototype-of":288,"../internals/object-set-prototype-of":292,"../internals/redefine":296,"../internals/set-to-string-tag":300,"../internals/well-known-symbol":315}],245:[function(require,module,exports){
+var path = require('../internals/path');
+var has = require('../internals/has');
+var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
+var defineProperty = require('../internals/object-define-property').f;
+
+module.exports = function (NAME) {
+  var Symbol = path.Symbol || (path.Symbol = {});
+  if (!has(Symbol, NAME)) defineProperty(Symbol, NAME, {
+    value: wrappedWellKnownSymbolModule.f(NAME)
+  });
+};
+
+},{"../internals/has":261,"../internals/object-define-property":283,"../internals/path":294,"../internals/well-known-symbol-wrapped":314}],246:[function(require,module,exports){
+var fails = require('../internals/fails');
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !fails(function () {
+  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+});
+
+},{"../internals/fails":254}],247:[function(require,module,exports){
+var global = require('../internals/global');
+var isObject = require('../internals/is-object');
+
+var document = global.document;
+// typeof document.createElement is 'object' in old IE
+var EXISTS = isObject(document) && isObject(document.createElement);
+
+module.exports = function (it) {
+  return EXISTS ? document.createElement(it) : {};
+};
+
+},{"../internals/global":260,"../internals/is-object":273}],248:[function(require,module,exports){
+// iterable DOM collections
+// flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
+module.exports = {
+  CSSRuleList: 0,
+  CSSStyleDeclaration: 0,
+  CSSValueList: 0,
+  ClientRectList: 0,
+  DOMRectList: 0,
+  DOMStringList: 0,
+  DOMTokenList: 1,
+  DataTransferItemList: 0,
+  FileList: 0,
+  HTMLAllCollection: 0,
+  HTMLCollection: 0,
+  HTMLFormElement: 0,
+  HTMLSelectElement: 0,
+  MediaList: 0,
+  MimeTypeArray: 0,
+  NamedNodeMap: 0,
+  NodeList: 1,
+  PaintRequestList: 0,
+  Plugin: 0,
+  PluginArray: 0,
+  SVGLengthList: 0,
+  SVGNumberList: 0,
+  SVGPathSegList: 0,
+  SVGPointList: 0,
+  SVGStringList: 0,
+  SVGTransformList: 0,
+  SourceBufferList: 0,
+  StyleSheetList: 0,
+  TextTrackCueList: 0,
+  TextTrackList: 0,
+  TouchList: 0
+};
+
+},{}],249:[function(require,module,exports){
+var getBuiltIn = require('../internals/get-built-in');
+
+module.exports = getBuiltIn('navigator', 'userAgent') || '';
+
+},{"../internals/get-built-in":257}],250:[function(require,module,exports){
+var global = require('../internals/global');
+var userAgent = require('../internals/engine-user-agent');
+
+var process = global.process;
+var versions = process && process.versions;
+var v8 = versions && versions.v8;
+var match, version;
+
+if (v8) {
+  match = v8.split('.');
+  version = match[0] + match[1];
+} else if (userAgent) {
+  match = userAgent.match(/Edge\/(\d+)/);
+  if (!match || match[1] >= 74) {
+    match = userAgent.match(/Chrome\/(\d+)/);
+    if (match) version = match[1];
+  }
+}
+
+module.exports = version && +version;
+
+},{"../internals/engine-user-agent":249,"../internals/global":260}],251:[function(require,module,exports){
+var path = require('../internals/path');
+
+module.exports = function (CONSTRUCTOR) {
+  return path[CONSTRUCTOR + 'Prototype'];
+};
+
+},{"../internals/path":294}],252:[function(require,module,exports){
+// IE8- don't enum bug keys
+module.exports = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
+
+},{}],253:[function(require,module,exports){
+'use strict';
+var global = require('../internals/global');
+var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
+var isForced = require('../internals/is-forced');
+var path = require('../internals/path');
+var bind = require('../internals/function-bind-context');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var has = require('../internals/has');
+
+var wrapConstructor = function (NativeConstructor) {
+  var Wrapper = function (a, b, c) {
+    if (this instanceof NativeConstructor) {
+      switch (arguments.length) {
+        case 0: return new NativeConstructor();
+        case 1: return new NativeConstructor(a);
+        case 2: return new NativeConstructor(a, b);
+      } return new NativeConstructor(a, b, c);
+    } return NativeConstructor.apply(this, arguments);
+  };
+  Wrapper.prototype = NativeConstructor.prototype;
+  return Wrapper;
+};
+
+/*
+  options.target      - name of the target object
+  options.global      - target is the global object
+  options.stat        - export as static methods of target
+  options.proto       - export as prototype methods of target
+  options.real        - real prototype method for the `pure` version
+  options.forced      - export even if the native feature is available
+  options.bind        - bind methods to the target, required for the `pure` version
+  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
+  options.sham        - add a flag to not completely full polyfills
+  options.enumerable  - export as enumerable property
+  options.noTargetGet - prevent calling a getter on target
+*/
+module.exports = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var PROTO = options.proto;
+
+  var nativeSource = GLOBAL ? global : STATIC ? global[TARGET] : (global[TARGET] || {}).prototype;
+
+  var target = GLOBAL ? path : path[TARGET] || (path[TARGET] = {});
+  var targetPrototype = target.prototype;
+
+  var FORCED, USE_NATIVE, VIRTUAL_PROTOTYPE;
+  var key, sourceProperty, targetProperty, nativeProperty, resultProperty, descriptor;
+
+  for (key in source) {
+    FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
+    // contains in native
+    USE_NATIVE = !FORCED && nativeSource && has(nativeSource, key);
+
+    targetProperty = target[key];
+
+    if (USE_NATIVE) if (options.noTargetGet) {
+      descriptor = getOwnPropertyDescriptor(nativeSource, key);
+      nativeProperty = descriptor && descriptor.value;
+    } else nativeProperty = nativeSource[key];
+
+    // export native or implementation
+    sourceProperty = (USE_NATIVE && nativeProperty) ? nativeProperty : source[key];
+
+    if (USE_NATIVE && typeof targetProperty === typeof sourceProperty) continue;
+
+    // bind timers to global for call from export context
+    if (options.bind && USE_NATIVE) resultProperty = bind(sourceProperty, global);
+    // wrap global constructors for prevent changs in this version
+    else if (options.wrap && USE_NATIVE) resultProperty = wrapConstructor(sourceProperty);
+    // make static versions for prototype methods
+    else if (PROTO && typeof sourceProperty == 'function') resultProperty = bind(Function.call, sourceProperty);
+    // default case
+    else resultProperty = sourceProperty;
+
+    // add a flag to not completely full polyfills
+    if (options.sham || (sourceProperty && sourceProperty.sham) || (targetProperty && targetProperty.sham)) {
+      createNonEnumerableProperty(resultProperty, 'sham', true);
+    }
+
+    target[key] = resultProperty;
+
+    if (PROTO) {
+      VIRTUAL_PROTOTYPE = TARGET + 'Prototype';
+      if (!has(path, VIRTUAL_PROTOTYPE)) {
+        createNonEnumerableProperty(path, VIRTUAL_PROTOTYPE, {});
+      }
+      // export virtual prototype methods
+      path[VIRTUAL_PROTOTYPE][key] = sourceProperty;
+      // export real prototype methods
+      if (options.real && targetPrototype && !targetPrototype[key]) {
+        createNonEnumerableProperty(targetPrototype, key, sourceProperty);
+      }
+    }
+  }
+};
+
+},{"../internals/create-non-enumerable-property":241,"../internals/function-bind-context":256,"../internals/global":260,"../internals/has":261,"../internals/is-forced":271,"../internals/object-get-own-property-descriptor":284,"../internals/path":294}],254:[function(require,module,exports){
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (error) {
+    return true;
+  }
+};
+
+},{}],255:[function(require,module,exports){
+var fails = require('../internals/fails');
+
+module.exports = !fails(function () {
+  return Object.isExtensible(Object.preventExtensions({}));
+});
+
+},{"../internals/fails":254}],256:[function(require,module,exports){
+var aFunction = require('../internals/a-function');
+
+// optional / simple context binding
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 0: return function () {
+      return fn.call(that);
+    };
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+},{"../internals/a-function":220}],257:[function(require,module,exports){
+var path = require('../internals/path');
+var global = require('../internals/global');
+
+var aFunction = function (variable) {
+  return typeof variable == 'function' ? variable : undefined;
+};
+
+module.exports = function (namespace, method) {
+  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global[namespace])
+    : path[namespace] && path[namespace][method] || global[namespace] && global[namespace][method];
+};
+
+},{"../internals/global":260,"../internals/path":294}],258:[function(require,module,exports){
+var classof = require('../internals/classof');
+var Iterators = require('../internals/iterators');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var ITERATOR = wellKnownSymbol('iterator');
+
+module.exports = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+},{"../internals/classof":236,"../internals/iterators":277,"../internals/well-known-symbol":315}],259:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+var getIteratorMethod = require('../internals/get-iterator-method');
+
+module.exports = function (it) {
+  var iteratorMethod = getIteratorMethod(it);
+  if (typeof iteratorMethod != 'function') {
+    throw TypeError(String(it) + ' is not iterable');
+  } return anObject(iteratorMethod.call(it));
+};
+
+},{"../internals/an-object":224,"../internals/get-iterator-method":258}],260:[function(require,module,exports){
+(function (global){
+var check = function (it) {
+  return it && it.Math == Math && it;
+};
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+module.exports =
+  // eslint-disable-next-line no-undef
+  check(typeof globalThis == 'object' && globalThis) ||
+  check(typeof window == 'object' && window) ||
+  check(typeof self == 'object' && self) ||
+  check(typeof global == 'object' && global) ||
+  // eslint-disable-next-line no-new-func
+  Function('return this')();
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],261:[function(require,module,exports){
+var hasOwnProperty = {}.hasOwnProperty;
+
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+},{}],262:[function(require,module,exports){
+module.exports = {};
+
+},{}],263:[function(require,module,exports){
+var getBuiltIn = require('../internals/get-built-in');
+
+module.exports = getBuiltIn('document', 'documentElement');
+
+},{"../internals/get-built-in":257}],264:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var fails = require('../internals/fails');
+var createElement = require('../internals/document-create-element');
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !DESCRIPTORS && !fails(function () {
+  return Object.defineProperty(createElement('div'), 'a', {
+    get: function () { return 7; }
+  }).a != 7;
+});
+
+},{"../internals/descriptors":246,"../internals/document-create-element":247,"../internals/fails":254}],265:[function(require,module,exports){
+var fails = require('../internals/fails');
+var classof = require('../internals/classof-raw');
+
+var split = ''.split;
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+module.exports = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins
+  return !Object('z').propertyIsEnumerable(0);
+}) ? function (it) {
+  return classof(it) == 'String' ? split.call(it, '') : Object(it);
+} : Object;
+
+},{"../internals/classof-raw":235,"../internals/fails":254}],266:[function(require,module,exports){
+var store = require('../internals/shared-store');
+
+var functionToString = Function.toString;
+
+// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+if (typeof store.inspectSource != 'function') {
+  store.inspectSource = function (it) {
+    return functionToString.call(it);
+  };
+}
+
+module.exports = store.inspectSource;
+
+},{"../internals/shared-store":302}],267:[function(require,module,exports){
+var hiddenKeys = require('../internals/hidden-keys');
+var isObject = require('../internals/is-object');
+var has = require('../internals/has');
+var defineProperty = require('../internals/object-define-property').f;
+var uid = require('../internals/uid');
+var FREEZING = require('../internals/freezing');
+
+var METADATA = uid('meta');
+var id = 0;
+
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+
+var setMetadata = function (it) {
+  defineProperty(it, METADATA, { value: {
+    objectID: 'O' + ++id, // object ID
+    weakData: {}          // weak collections IDs
+  } });
+};
+
+var fastKey = function (it, create) {
+  // return a primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, METADATA)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMetadata(it);
+  // return object ID
+  } return it[METADATA].objectID;
+};
+
+var getWeakData = function (it, create) {
+  if (!has(it, METADATA)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMetadata(it);
+  // return the store of weak collections IDs
+  } return it[METADATA].weakData;
+};
+
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZING && meta.REQUIRED && isExtensible(it) && !has(it, METADATA)) setMetadata(it);
+  return it;
+};
+
+var meta = module.exports = {
+  REQUIRED: false,
+  fastKey: fastKey,
+  getWeakData: getWeakData,
+  onFreeze: onFreeze
+};
+
+hiddenKeys[METADATA] = true;
+
+},{"../internals/freezing":255,"../internals/has":261,"../internals/hidden-keys":262,"../internals/is-object":273,"../internals/object-define-property":283,"../internals/uid":312}],268:[function(require,module,exports){
+var NATIVE_WEAK_MAP = require('../internals/native-weak-map');
+var global = require('../internals/global');
+var isObject = require('../internals/is-object');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var objectHas = require('../internals/has');
+var sharedKey = require('../internals/shared-key');
+var hiddenKeys = require('../internals/hidden-keys');
+
+var WeakMap = global.WeakMap;
+var set, get, has;
+
+var enforce = function (it) {
+  return has(it) ? get(it) : set(it, {});
+};
+
+var getterFor = function (TYPE) {
+  return function (it) {
+    var state;
+    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+    } return state;
+  };
+};
+
+if (NATIVE_WEAK_MAP) {
+  var store = new WeakMap();
+  var wmget = store.get;
+  var wmhas = store.has;
+  var wmset = store.set;
+  set = function (it, metadata) {
+    wmset.call(store, it, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return wmget.call(store, it) || {};
+  };
+  has = function (it) {
+    return wmhas.call(store, it);
+  };
+} else {
+  var STATE = sharedKey('state');
+  hiddenKeys[STATE] = true;
+  set = function (it, metadata) {
+    createNonEnumerableProperty(it, STATE, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return objectHas(it, STATE) ? it[STATE] : {};
+  };
+  has = function (it) {
+    return objectHas(it, STATE);
+  };
+}
+
+module.exports = {
+  set: set,
+  get: get,
+  has: has,
+  enforce: enforce,
+  getterFor: getterFor
+};
+
+},{"../internals/create-non-enumerable-property":241,"../internals/global":260,"../internals/has":261,"../internals/hidden-keys":262,"../internals/is-object":273,"../internals/native-weak-map":279,"../internals/shared-key":301}],269:[function(require,module,exports){
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var Iterators = require('../internals/iterators');
+
+var ITERATOR = wellKnownSymbol('iterator');
+var ArrayPrototype = Array.prototype;
+
+// check on default Array iterator
+module.exports = function (it) {
+  return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
+};
+
+},{"../internals/iterators":277,"../internals/well-known-symbol":315}],270:[function(require,module,exports){
+var classof = require('../internals/classof-raw');
+
+// `IsArray` abstract operation
+// https://tc39.github.io/ecma262/#sec-isarray
+module.exports = Array.isArray || function isArray(arg) {
+  return classof(arg) == 'Array';
+};
+
+},{"../internals/classof-raw":235}],271:[function(require,module,exports){
+var fails = require('../internals/fails');
+
+var replacement = /#|\.prototype\./;
+
+var isForced = function (feature, detection) {
+  var value = data[normalize(feature)];
+  return value == POLYFILL ? true
+    : value == NATIVE ? false
+    : typeof detection == 'function' ? fails(detection)
+    : !!detection;
+};
+
+var normalize = isForced.normalize = function (string) {
+  return String(string).replace(replacement, '.').toLowerCase();
+};
+
+var data = isForced.data = {};
+var NATIVE = isForced.NATIVE = 'N';
+var POLYFILL = isForced.POLYFILL = 'P';
+
+module.exports = isForced;
+
+},{"../internals/fails":254}],272:[function(require,module,exports){
+var classof = require('../internals/classof');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var Iterators = require('../internals/iterators');
+
+var ITERATOR = wellKnownSymbol('iterator');
+
+module.exports = function (it) {
+  var O = Object(it);
+  return O[ITERATOR] !== undefined
+    || '@@iterator' in O
+    // eslint-disable-next-line no-prototype-builtins
+    || Iterators.hasOwnProperty(classof(O));
+};
+
+},{"../internals/classof":236,"../internals/iterators":277,"../internals/well-known-symbol":315}],273:[function(require,module,exports){
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+},{}],274:[function(require,module,exports){
+module.exports = true;
+
+},{}],275:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
+var toLength = require('../internals/to-length');
+var bind = require('../internals/function-bind-context');
+var getIteratorMethod = require('../internals/get-iterator-method');
+var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
+
+var Result = function (stopped, result) {
+  this.stopped = stopped;
+  this.result = result;
+};
+
+var iterate = module.exports = function (iterable, fn, that, AS_ENTRIES, IS_ITERATOR) {
+  var boundFunction = bind(fn, that, AS_ENTRIES ? 2 : 1);
+  var iterator, iterFn, index, length, result, next, step;
+
+  if (IS_ITERATOR) {
+    iterator = iterable;
+  } else {
+    iterFn = getIteratorMethod(iterable);
+    if (typeof iterFn != 'function') throw TypeError('Target is not iterable');
+    // optimisation for array iterators
+    if (isArrayIteratorMethod(iterFn)) {
+      for (index = 0, length = toLength(iterable.length); length > index; index++) {
+        result = AS_ENTRIES
+          ? boundFunction(anObject(step = iterable[index])[0], step[1])
+          : boundFunction(iterable[index]);
+        if (result && result instanceof Result) return result;
+      } return new Result(false);
+    }
+    iterator = iterFn.call(iterable);
+  }
+
+  next = iterator.next;
+  while (!(step = next.call(iterator)).done) {
+    result = callWithSafeIterationClosing(iterator, boundFunction, step.value, AS_ENTRIES);
+    if (typeof result == 'object' && result && result instanceof Result) return result;
+  } return new Result(false);
+};
+
+iterate.stop = function (result) {
+  return new Result(true, result);
+};
+
+},{"../internals/an-object":224,"../internals/call-with-safe-iteration-closing":233,"../internals/function-bind-context":256,"../internals/get-iterator-method":258,"../internals/is-array-iterator-method":269,"../internals/to-length":308}],276:[function(require,module,exports){
+'use strict';
+var getPrototypeOf = require('../internals/object-get-prototype-of');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var has = require('../internals/has');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var IS_PURE = require('../internals/is-pure');
+
+var ITERATOR = wellKnownSymbol('iterator');
+var BUGGY_SAFARI_ITERATORS = false;
+
+var returnThis = function () { return this; };
+
+// `%IteratorPrototype%` object
+// https://tc39.github.io/ecma262/#sec-%iteratorprototype%-object
+var IteratorPrototype, PrototypeOfArrayIteratorPrototype, arrayIterator;
+
+if ([].keys) {
+  arrayIterator = [].keys();
+  // Safari 8 has buggy iterators w/o `next`
+  if (!('next' in arrayIterator)) BUGGY_SAFARI_ITERATORS = true;
+  else {
+    PrototypeOfArrayIteratorPrototype = getPrototypeOf(getPrototypeOf(arrayIterator));
+    if (PrototypeOfArrayIteratorPrototype !== Object.prototype) IteratorPrototype = PrototypeOfArrayIteratorPrototype;
+  }
+}
+
+if (IteratorPrototype == undefined) IteratorPrototype = {};
+
+// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+if (!IS_PURE && !has(IteratorPrototype, ITERATOR)) {
+  createNonEnumerableProperty(IteratorPrototype, ITERATOR, returnThis);
+}
+
+module.exports = {
+  IteratorPrototype: IteratorPrototype,
+  BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
+};
+
+},{"../internals/create-non-enumerable-property":241,"../internals/has":261,"../internals/is-pure":274,"../internals/object-get-prototype-of":288,"../internals/well-known-symbol":315}],277:[function(require,module,exports){
+arguments[4][262][0].apply(exports,arguments)
+},{"dup":262}],278:[function(require,module,exports){
+var fails = require('../internals/fails');
+
+module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
+  // Chrome 38 Symbol has incorrect toString conversion
+  // eslint-disable-next-line no-undef
+  return !String(Symbol());
+});
+
+},{"../internals/fails":254}],279:[function(require,module,exports){
+var global = require('../internals/global');
+var inspectSource = require('../internals/inspect-source');
+
+var WeakMap = global.WeakMap;
+
+module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+
+},{"../internals/global":260,"../internals/inspect-source":266}],280:[function(require,module,exports){
+'use strict';
+var DESCRIPTORS = require('../internals/descriptors');
+var fails = require('../internals/fails');
+var objectKeys = require('../internals/object-keys');
+var getOwnPropertySymbolsModule = require('../internals/object-get-own-property-symbols');
+var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
+var toObject = require('../internals/to-object');
+var IndexedObject = require('../internals/indexed-object');
+
+var nativeAssign = Object.assign;
+var defineProperty = Object.defineProperty;
+
+// `Object.assign` method
+// https://tc39.github.io/ecma262/#sec-object.assign
+module.exports = !nativeAssign || fails(function () {
+  // should have correct order of operations (Edge bug)
+  if (DESCRIPTORS && nativeAssign({ b: 1 }, nativeAssign(defineProperty({}, 'a', {
+    enumerable: true,
+    get: function () {
+      defineProperty(this, 'b', {
+        value: 3,
+        enumerable: false
+      });
+    }
+  }), { b: 2 })).b !== 1) return true;
+  // should work with symbols and should have deterministic property order (V8 bug)
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var symbol = Symbol();
+  var alphabet = 'abcdefghijklmnopqrst';
+  A[symbol] = 7;
+  alphabet.split('').forEach(function (chr) { B[chr] = chr; });
+  return nativeAssign({}, A)[symbol] != 7 || objectKeys(nativeAssign({}, B)).join('') != alphabet;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var argumentsLength = arguments.length;
+  var index = 1;
+  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
+  var propertyIsEnumerable = propertyIsEnumerableModule.f;
+  while (argumentsLength > index) {
+    var S = IndexedObject(arguments[index++]);
+    var keys = getOwnPropertySymbols ? objectKeys(S).concat(getOwnPropertySymbols(S)) : objectKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || propertyIsEnumerable.call(S, key)) T[key] = S[key];
+    }
+  } return T;
+} : nativeAssign;
+
+},{"../internals/descriptors":246,"../internals/fails":254,"../internals/indexed-object":265,"../internals/object-get-own-property-symbols":287,"../internals/object-keys":290,"../internals/object-property-is-enumerable":291,"../internals/to-object":309}],281:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+var defineProperties = require('../internals/object-define-properties');
+var enumBugKeys = require('../internals/enum-bug-keys');
+var hiddenKeys = require('../internals/hidden-keys');
+var html = require('../internals/html');
+var documentCreateElement = require('../internals/document-create-element');
+var sharedKey = require('../internals/shared-key');
+
+var GT = '>';
+var LT = '<';
+var PROTOTYPE = 'prototype';
+var SCRIPT = 'script';
+var IE_PROTO = sharedKey('IE_PROTO');
+
+var EmptyConstructor = function () { /* empty */ };
+
+var scriptTag = function (content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
+};
+
+// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+var NullProtoObjectViaActiveX = function (activeXDocument) {
+  activeXDocument.write(scriptTag(''));
+  activeXDocument.close();
+  var temp = activeXDocument.parentWindow.Object;
+  activeXDocument = null; // avoid memory leak
+  return temp;
+};
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var NullProtoObjectViaIFrame = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = documentCreateElement('iframe');
+  var JS = 'java' + SCRIPT + ':';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  html.appendChild(iframe);
+  // https://github.com/zloirock/core-js/issues/475
+  iframe.src = String(JS);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(scriptTag('document.F=Object'));
+  iframeDocument.close();
+  return iframeDocument.F;
+};
+
+// Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
+var activeXDocument;
+var NullProtoObject = function () {
+  try {
+    /* global ActiveXObject */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile');
+  } catch (error) { /* ignore */ }
+  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
+  var length = enumBugKeys.length;
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
+  return NullProtoObject();
+};
+
+hiddenKeys[IE_PROTO] = true;
+
+// `Object.create` method
+// https://tc39.github.io/ecma262/#sec-object.create
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    EmptyConstructor[PROTOTYPE] = anObject(O);
+    result = new EmptyConstructor();
+    EmptyConstructor[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = NullProtoObject();
+  return Properties === undefined ? result : defineProperties(result, Properties);
+};
+
+},{"../internals/an-object":224,"../internals/document-create-element":247,"../internals/enum-bug-keys":252,"../internals/hidden-keys":262,"../internals/html":263,"../internals/object-define-properties":282,"../internals/shared-key":301}],282:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var definePropertyModule = require('../internals/object-define-property');
+var anObject = require('../internals/an-object');
+var objectKeys = require('../internals/object-keys');
+
+// `Object.defineProperties` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperties
+module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = objectKeys(Properties);
+  var length = keys.length;
+  var index = 0;
+  var key;
+  while (length > index) definePropertyModule.f(O, key = keys[index++], Properties[key]);
+  return O;
+};
+
+},{"../internals/an-object":224,"../internals/descriptors":246,"../internals/object-define-property":283,"../internals/object-keys":290}],283:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
+var anObject = require('../internals/an-object');
+var toPrimitive = require('../internals/to-primitive');
+
+var nativeDefineProperty = Object.defineProperty;
+
+// `Object.defineProperty` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperty
+exports.f = DESCRIPTORS ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return nativeDefineProperty(O, P, Attributes);
+  } catch (error) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+},{"../internals/an-object":224,"../internals/descriptors":246,"../internals/ie8-dom-define":264,"../internals/to-primitive":310}],284:[function(require,module,exports){
+var DESCRIPTORS = require('../internals/descriptors');
+var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+var toIndexedObject = require('../internals/to-indexed-object');
+var toPrimitive = require('../internals/to-primitive');
+var has = require('../internals/has');
+var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
+
+var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// `Object.getOwnPropertyDescriptor` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
+exports.f = DESCRIPTORS ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  O = toIndexedObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return nativeGetOwnPropertyDescriptor(O, P);
+  } catch (error) { /* empty */ }
+  if (has(O, P)) return createPropertyDescriptor(!propertyIsEnumerableModule.f.call(O, P), O[P]);
+};
+
+},{"../internals/create-property-descriptor":242,"../internals/descriptors":246,"../internals/has":261,"../internals/ie8-dom-define":264,"../internals/object-property-is-enumerable":291,"../internals/to-indexed-object":306,"../internals/to-primitive":310}],285:[function(require,module,exports){
+var toIndexedObject = require('../internals/to-indexed-object');
+var nativeGetOwnPropertyNames = require('../internals/object-get-own-property-names').f;
+
+var toString = {}.toString;
+
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+var getWindowNames = function (it) {
+  try {
+    return nativeGetOwnPropertyNames(it);
+  } catch (error) {
+    return windowNames.slice();
+  }
+};
+
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+module.exports.f = function getOwnPropertyNames(it) {
+  return windowNames && toString.call(it) == '[object Window]'
+    ? getWindowNames(it)
+    : nativeGetOwnPropertyNames(toIndexedObject(it));
+};
+
+},{"../internals/object-get-own-property-names":286,"../internals/to-indexed-object":306}],286:[function(require,module,exports){
+var internalObjectKeys = require('../internals/object-keys-internal');
+var enumBugKeys = require('../internals/enum-bug-keys');
+
+var hiddenKeys = enumBugKeys.concat('length', 'prototype');
+
+// `Object.getOwnPropertyNames` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return internalObjectKeys(O, hiddenKeys);
+};
+
+},{"../internals/enum-bug-keys":252,"../internals/object-keys-internal":289}],287:[function(require,module,exports){
+exports.f = Object.getOwnPropertySymbols;
+
+},{}],288:[function(require,module,exports){
+var has = require('../internals/has');
+var toObject = require('../internals/to-object');
+var sharedKey = require('../internals/shared-key');
+var CORRECT_PROTOTYPE_GETTER = require('../internals/correct-prototype-getter');
+
+var IE_PROTO = sharedKey('IE_PROTO');
+var ObjectPrototype = Object.prototype;
+
+// `Object.getPrototypeOf` method
+// https://tc39.github.io/ecma262/#sec-object.getprototypeof
+module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O) {
+  O = toObject(O);
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectPrototype : null;
+};
+
+},{"../internals/correct-prototype-getter":239,"../internals/has":261,"../internals/shared-key":301,"../internals/to-object":309}],289:[function(require,module,exports){
+var has = require('../internals/has');
+var toIndexedObject = require('../internals/to-indexed-object');
+var indexOf = require('../internals/array-includes').indexOf;
+var hiddenKeys = require('../internals/hidden-keys');
+
+module.exports = function (object, names) {
+  var O = toIndexedObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~indexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+},{"../internals/array-includes":227,"../internals/has":261,"../internals/hidden-keys":262,"../internals/to-indexed-object":306}],290:[function(require,module,exports){
+var internalObjectKeys = require('../internals/object-keys-internal');
+var enumBugKeys = require('../internals/enum-bug-keys');
+
+// `Object.keys` method
+// https://tc39.github.io/ecma262/#sec-object.keys
+module.exports = Object.keys || function keys(O) {
+  return internalObjectKeys(O, enumBugKeys);
+};
+
+},{"../internals/enum-bug-keys":252,"../internals/object-keys-internal":289}],291:[function(require,module,exports){
+'use strict';
+var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Nashorn ~ JDK8 bug
+var NASHORN_BUG = getOwnPropertyDescriptor && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
+
+// `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
+exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
+  var descriptor = getOwnPropertyDescriptor(this, V);
+  return !!descriptor && descriptor.enumerable;
+} : nativePropertyIsEnumerable;
+
+},{}],292:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+var aPossiblePrototype = require('../internals/a-possible-prototype');
+
+// `Object.setPrototypeOf` method
+// https://tc39.github.io/ecma262/#sec-object.setprototypeof
+// Works with __proto__ only. Old v8 can't work with null proto objects.
+/* eslint-disable no-proto */
+module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
+  var CORRECT_SETTER = false;
+  var test = {};
+  var setter;
+  try {
+    setter = Object.getOwnPropertyDescriptor(Object.prototype, '__proto__').set;
+    setter.call(test, []);
+    CORRECT_SETTER = test instanceof Array;
+  } catch (error) { /* empty */ }
+  return function setPrototypeOf(O, proto) {
+    anObject(O);
+    aPossiblePrototype(proto);
+    if (CORRECT_SETTER) setter.call(O, proto);
+    else O.__proto__ = proto;
+    return O;
+  };
+}() : undefined);
+
+},{"../internals/a-possible-prototype":221,"../internals/an-object":224}],293:[function(require,module,exports){
+'use strict';
+var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+var classof = require('../internals/classof');
+
+// `Object.prototype.toString` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
+module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
+  return '[object ' + classof(this) + ']';
+};
+
+},{"../internals/classof":236,"../internals/to-string-tag-support":311}],294:[function(require,module,exports){
+arguments[4][262][0].apply(exports,arguments)
+},{"dup":262}],295:[function(require,module,exports){
+var redefine = require('../internals/redefine');
+
+module.exports = function (target, src, options) {
+  for (var key in src) {
+    if (options && options.unsafe && target[key]) target[key] = src[key];
+    else redefine(target, key, src[key], options);
+  } return target;
+};
+
+},{"../internals/redefine":296}],296:[function(require,module,exports){
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+
+module.exports = function (target, key, value, options) {
+  if (options && options.enumerable) target[key] = value;
+  else createNonEnumerableProperty(target, key, value);
+};
+
+},{"../internals/create-non-enumerable-property":241}],297:[function(require,module,exports){
+// `RequireObjectCoercible` abstract operation
+// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on " + it);
+  return it;
+};
+
+},{}],298:[function(require,module,exports){
+var global = require('../internals/global');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+
+module.exports = function (key, value) {
+  try {
+    createNonEnumerableProperty(global, key, value);
+  } catch (error) {
+    global[key] = value;
+  } return value;
+};
+
+},{"../internals/create-non-enumerable-property":241,"../internals/global":260}],299:[function(require,module,exports){
+'use strict';
+var getBuiltIn = require('../internals/get-built-in');
+var definePropertyModule = require('../internals/object-define-property');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var DESCRIPTORS = require('../internals/descriptors');
+
+var SPECIES = wellKnownSymbol('species');
+
+module.exports = function (CONSTRUCTOR_NAME) {
+  var Constructor = getBuiltIn(CONSTRUCTOR_NAME);
+  var defineProperty = definePropertyModule.f;
+
+  if (DESCRIPTORS && Constructor && !Constructor[SPECIES]) {
+    defineProperty(Constructor, SPECIES, {
+      configurable: true,
+      get: function () { return this; }
+    });
+  }
+};
+
+},{"../internals/descriptors":246,"../internals/get-built-in":257,"../internals/object-define-property":283,"../internals/well-known-symbol":315}],300:[function(require,module,exports){
+var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+var defineProperty = require('../internals/object-define-property').f;
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var has = require('../internals/has');
+var toString = require('../internals/object-to-string');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+
+module.exports = function (it, TAG, STATIC, SET_METHOD) {
+  if (it) {
+    var target = STATIC ? it : it.prototype;
+    if (!has(target, TO_STRING_TAG)) {
+      defineProperty(target, TO_STRING_TAG, { configurable: true, value: TAG });
+    }
+    if (SET_METHOD && !TO_STRING_TAG_SUPPORT) {
+      createNonEnumerableProperty(target, 'toString', toString);
+    }
+  }
+};
+
+},{"../internals/create-non-enumerable-property":241,"../internals/has":261,"../internals/object-define-property":283,"../internals/object-to-string":293,"../internals/to-string-tag-support":311,"../internals/well-known-symbol":315}],301:[function(require,module,exports){
+var shared = require('../internals/shared');
+var uid = require('../internals/uid');
+
+var keys = shared('keys');
+
+module.exports = function (key) {
+  return keys[key] || (keys[key] = uid(key));
+};
+
+},{"../internals/shared":303,"../internals/uid":312}],302:[function(require,module,exports){
+var global = require('../internals/global');
+var setGlobal = require('../internals/set-global');
+
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || setGlobal(SHARED, {});
+
+module.exports = store;
+
+},{"../internals/global":260,"../internals/set-global":298}],303:[function(require,module,exports){
+var IS_PURE = require('../internals/is-pure');
+var store = require('../internals/shared-store');
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: '3.6.4',
+  mode: IS_PURE ? 'pure' : 'global',
+  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
+});
+
+},{"../internals/is-pure":274,"../internals/shared-store":302}],304:[function(require,module,exports){
+var toInteger = require('../internals/to-integer');
+var requireObjectCoercible = require('../internals/require-object-coercible');
+
+// `String.prototype.{ codePointAt, at }` methods implementation
+var createMethod = function (CONVERT_TO_STRING) {
+  return function ($this, pos) {
+    var S = String(requireObjectCoercible($this));
+    var position = toInteger(pos);
+    var size = S.length;
+    var first, second;
+    if (position < 0 || position >= size) return CONVERT_TO_STRING ? '' : undefined;
+    first = S.charCodeAt(position);
+    return first < 0xD800 || first > 0xDBFF || position + 1 === size
+      || (second = S.charCodeAt(position + 1)) < 0xDC00 || second > 0xDFFF
+        ? CONVERT_TO_STRING ? S.charAt(position) : first
+        : CONVERT_TO_STRING ? S.slice(position, position + 2) : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
+  };
+};
+
+module.exports = {
+  // `String.prototype.codePointAt` method
+  // https://tc39.github.io/ecma262/#sec-string.prototype.codepointat
+  codeAt: createMethod(false),
+  // `String.prototype.at` method
+  // https://github.com/mathiasbynens/String.prototype.at
+  charAt: createMethod(true)
+};
+
+},{"../internals/require-object-coercible":297,"../internals/to-integer":307}],305:[function(require,module,exports){
+var toInteger = require('../internals/to-integer');
+
+var max = Math.max;
+var min = Math.min;
+
+// Helper for a popular repeating case of the spec:
+// Let integer be ? ToInteger(index).
+// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
+module.exports = function (index, length) {
+  var integer = toInteger(index);
+  return integer < 0 ? max(integer + length, 0) : min(integer, length);
+};
+
+},{"../internals/to-integer":307}],306:[function(require,module,exports){
+// toObject with fallback for non-array-like ES3 strings
+var IndexedObject = require('../internals/indexed-object');
+var requireObjectCoercible = require('../internals/require-object-coercible');
+
+module.exports = function (it) {
+  return IndexedObject(requireObjectCoercible(it));
+};
+
+},{"../internals/indexed-object":265,"../internals/require-object-coercible":297}],307:[function(require,module,exports){
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `ToInteger` abstract operation
+// https://tc39.github.io/ecma262/#sec-tointeger
+module.exports = function (argument) {
+  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
+};
+
+},{}],308:[function(require,module,exports){
+var toInteger = require('../internals/to-integer');
+
+var min = Math.min;
+
+// `ToLength` abstract operation
+// https://tc39.github.io/ecma262/#sec-tolength
+module.exports = function (argument) {
+  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+},{"../internals/to-integer":307}],309:[function(require,module,exports){
+var requireObjectCoercible = require('../internals/require-object-coercible');
+
+// `ToObject` abstract operation
+// https://tc39.github.io/ecma262/#sec-toobject
+module.exports = function (argument) {
+  return Object(requireObjectCoercible(argument));
+};
+
+},{"../internals/require-object-coercible":297}],310:[function(require,module,exports){
+var isObject = require('../internals/is-object');
+
+// `ToPrimitive` abstract operation
+// https://tc39.github.io/ecma262/#sec-toprimitive
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (input, PREFERRED_STRING) {
+  if (!isObject(input)) return input;
+  var fn, val;
+  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+},{"../internals/is-object":273}],311:[function(require,module,exports){
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+var test = {};
+
+test[TO_STRING_TAG] = 'z';
+
+module.exports = String(test) === '[object z]';
+
+},{"../internals/well-known-symbol":315}],312:[function(require,module,exports){
+var id = 0;
+var postfix = Math.random();
+
+module.exports = function (key) {
+  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
+};
+
+},{}],313:[function(require,module,exports){
+var NATIVE_SYMBOL = require('../internals/native-symbol');
+
+module.exports = NATIVE_SYMBOL
+  // eslint-disable-next-line no-undef
+  && !Symbol.sham
+  // eslint-disable-next-line no-undef
+  && typeof Symbol.iterator == 'symbol';
+
+},{"../internals/native-symbol":278}],314:[function(require,module,exports){
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+exports.f = wellKnownSymbol;
+
+},{"../internals/well-known-symbol":315}],315:[function(require,module,exports){
+var global = require('../internals/global');
+var shared = require('../internals/shared');
+var has = require('../internals/has');
+var uid = require('../internals/uid');
+var NATIVE_SYMBOL = require('../internals/native-symbol');
+var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
+
+var WellKnownSymbolsStore = shared('wks');
+var Symbol = global.Symbol;
+var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol : Symbol && Symbol.withoutSetter || uid;
+
+module.exports = function (name) {
+  if (!has(WellKnownSymbolsStore, name)) {
+    if (NATIVE_SYMBOL && has(Symbol, name)) WellKnownSymbolsStore[name] = Symbol[name];
+    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
+  } return WellKnownSymbolsStore[name];
+};
+
+},{"../internals/global":260,"../internals/has":261,"../internals/native-symbol":278,"../internals/shared":303,"../internals/uid":312,"../internals/use-symbol-as-uid":313}],316:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var fails = require('../internals/fails');
+var isArray = require('../internals/is-array');
+var isObject = require('../internals/is-object');
+var toObject = require('../internals/to-object');
+var toLength = require('../internals/to-length');
+var createProperty = require('../internals/create-property');
+var arraySpeciesCreate = require('../internals/array-species-create');
+var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var V8_VERSION = require('../internals/engine-v8-version');
+
+var IS_CONCAT_SPREADABLE = wellKnownSymbol('isConcatSpreadable');
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
+var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
+
+// We can't use this feature detection in V8 since it causes
+// deoptimization and serious performance degradation
+// https://github.com/zloirock/core-js/issues/679
+var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails(function () {
+  var array = [];
+  array[IS_CONCAT_SPREADABLE] = false;
+  return array.concat()[0] !== array;
+});
+
+var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('concat');
+
+var isConcatSpreadable = function (O) {
+  if (!isObject(O)) return false;
+  var spreadable = O[IS_CONCAT_SPREADABLE];
+  return spreadable !== undefined ? !!spreadable : isArray(O);
+};
+
+var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT;
+
+// `Array.prototype.concat` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.concat
+// with adding support of @@isConcatSpreadable and @@species
+$({ target: 'Array', proto: true, forced: FORCED }, {
+  concat: function concat(arg) { // eslint-disable-line no-unused-vars
+    var O = toObject(this);
+    var A = arraySpeciesCreate(O, 0);
+    var n = 0;
+    var i, k, length, len, E;
+    for (i = -1, length = arguments.length; i < length; i++) {
+      E = i === -1 ? O : arguments[i];
+      if (isConcatSpreadable(E)) {
+        len = toLength(E.length);
+        if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
+      } else {
+        if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        createProperty(A, n++, E);
+      }
+    }
+    A.length = n;
+    return A;
+  }
+});
+
+},{"../internals/array-method-has-species-support":229,"../internals/array-species-create":232,"../internals/create-property":243,"../internals/engine-v8-version":250,"../internals/export":253,"../internals/fails":254,"../internals/is-array":270,"../internals/is-object":273,"../internals/to-length":308,"../internals/to-object":309,"../internals/well-known-symbol":315}],317:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var $find = require('../internals/array-iteration').find;
+var addToUnscopables = require('../internals/add-to-unscopables');
+var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
+
+var FIND = 'find';
+var SKIPS_HOLES = true;
+
+var USES_TO_LENGTH = arrayMethodUsesToLength(FIND);
+
+// Shouldn't skip holes
+if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
+
+// `Array.prototype.find` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
+  find: function find(callbackfn /* , that = undefined */) {
+    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables(FIND);
+
+},{"../internals/add-to-unscopables":222,"../internals/array-iteration":228,"../internals/array-method-uses-to-length":231,"../internals/export":253}],318:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var forEach = require('../internals/array-for-each');
+
+// `Array.prototype.forEach` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
+$({ target: 'Array', proto: true, forced: [].forEach != forEach }, {
+  forEach: forEach
+});
+
+},{"../internals/array-for-each":225,"../internals/export":253}],319:[function(require,module,exports){
+var $ = require('../internals/export');
+var from = require('../internals/array-from');
+var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
+
+var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
+  Array.from(iterable);
+});
+
+// `Array.from` method
+// https://tc39.github.io/ecma262/#sec-array.from
+$({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
+  from: from
+});
+
+},{"../internals/array-from":226,"../internals/check-correctness-of-iteration":234,"../internals/export":253}],320:[function(require,module,exports){
+var $ = require('../internals/export');
+var isArray = require('../internals/is-array');
+
+// `Array.isArray` method
+// https://tc39.github.io/ecma262/#sec-array.isarray
+$({ target: 'Array', stat: true }, {
+  isArray: isArray
+});
+
+},{"../internals/export":253,"../internals/is-array":270}],321:[function(require,module,exports){
+'use strict';
+var toIndexedObject = require('../internals/to-indexed-object');
+var addToUnscopables = require('../internals/add-to-unscopables');
+var Iterators = require('../internals/iterators');
+var InternalStateModule = require('../internals/internal-state');
+var defineIterator = require('../internals/define-iterator');
+
+var ARRAY_ITERATOR = 'Array Iterator';
+var setInternalState = InternalStateModule.set;
+var getInternalState = InternalStateModule.getterFor(ARRAY_ITERATOR);
+
+// `Array.prototype.entries` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.entries
+// `Array.prototype.keys` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.keys
+// `Array.prototype.values` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.values
+// `Array.prototype[@@iterator]` method
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@iterator
+// `CreateArrayIterator` internal method
+// https://tc39.github.io/ecma262/#sec-createarrayiterator
+module.exports = defineIterator(Array, 'Array', function (iterated, kind) {
+  setInternalState(this, {
+    type: ARRAY_ITERATOR,
+    target: toIndexedObject(iterated), // target
+    index: 0,                          // next index
+    kind: kind                         // kind
+  });
+// `%ArrayIteratorPrototype%.next` method
+// https://tc39.github.io/ecma262/#sec-%arrayiteratorprototype%.next
+}, function () {
+  var state = getInternalState(this);
+  var target = state.target;
+  var kind = state.kind;
+  var index = state.index++;
+  if (!target || index >= target.length) {
+    state.target = undefined;
+    return { value: undefined, done: true };
+  }
+  if (kind == 'keys') return { value: index, done: false };
+  if (kind == 'values') return { value: target[index], done: false };
+  return { value: [index, target[index]], done: false };
+}, 'values');
+
+// argumentsList[@@iterator] is %ArrayProto_values%
+// https://tc39.github.io/ecma262/#sec-createunmappedargumentsobject
+// https://tc39.github.io/ecma262/#sec-createmappedargumentsobject
+Iterators.Arguments = Iterators.Array;
+
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables('keys');
+addToUnscopables('values');
+addToUnscopables('entries');
+
+},{"../internals/add-to-unscopables":222,"../internals/define-iterator":244,"../internals/internal-state":268,"../internals/iterators":277,"../internals/to-indexed-object":306}],322:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var isObject = require('../internals/is-object');
+var isArray = require('../internals/is-array');
+var toAbsoluteIndex = require('../internals/to-absolute-index');
+var toLength = require('../internals/to-length');
+var toIndexedObject = require('../internals/to-indexed-object');
+var createProperty = require('../internals/create-property');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
+var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
+
+var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('slice');
+var USES_TO_LENGTH = arrayMethodUsesToLength('slice', { ACCESSORS: true, 0: 0, 1: 2 });
+
+var SPECIES = wellKnownSymbol('species');
+var nativeSlice = [].slice;
+var max = Math.max;
+
+// `Array.prototype.slice` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.slice
+// fallback for not array-like ES3 strings and DOM objects
+$({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGTH }, {
+  slice: function slice(start, end) {
+    var O = toIndexedObject(this);
+    var length = toLength(O.length);
+    var k = toAbsoluteIndex(start, length);
+    var fin = toAbsoluteIndex(end === undefined ? length : end, length);
+    // inline `ArraySpeciesCreate` for usage native `Array#slice` where it's possible
+    var Constructor, result, n;
+    if (isArray(O)) {
+      Constructor = O.constructor;
+      // cross-realm fallback
+      if (typeof Constructor == 'function' && (Constructor === Array || isArray(Constructor.prototype))) {
+        Constructor = undefined;
+      } else if (isObject(Constructor)) {
+        Constructor = Constructor[SPECIES];
+        if (Constructor === null) Constructor = undefined;
+      }
+      if (Constructor === Array || Constructor === undefined) {
+        return nativeSlice.call(O, k, fin);
+      }
+    }
+    result = new (Constructor === undefined ? Array : Constructor)(max(fin - k, 0));
+    for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k]);
+    result.length = n;
+    return result;
+  }
+});
+
+},{"../internals/array-method-has-species-support":229,"../internals/array-method-uses-to-length":231,"../internals/create-property":243,"../internals/export":253,"../internals/is-array":270,"../internals/is-object":273,"../internals/to-absolute-index":305,"../internals/to-indexed-object":306,"../internals/to-length":308,"../internals/well-known-symbol":315}],323:[function(require,module,exports){
+var $ = require('../internals/export');
+var getBuiltIn = require('../internals/get-built-in');
+var fails = require('../internals/fails');
+
+var $stringify = getBuiltIn('JSON', 'stringify');
+var re = /[\uD800-\uDFFF]/g;
+var low = /^[\uD800-\uDBFF]$/;
+var hi = /^[\uDC00-\uDFFF]$/;
+
+var fix = function (match, offset, string) {
+  var prev = string.charAt(offset - 1);
+  var next = string.charAt(offset + 1);
+  if ((low.test(match) && !hi.test(next)) || (hi.test(match) && !low.test(prev))) {
+    return '\\u' + match.charCodeAt(0).toString(16);
+  } return match;
+};
+
+var FORCED = fails(function () {
+  return $stringify('\uDF06\uD834') !== '"\\udf06\\ud834"'
+    || $stringify('\uDEAD') !== '"\\udead"';
+});
+
+if ($stringify) {
+  // https://github.com/tc39/proposal-well-formed-stringify
+  $({ target: 'JSON', stat: true, forced: FORCED }, {
+    // eslint-disable-next-line no-unused-vars
+    stringify: function stringify(it, replacer, space) {
+      var result = $stringify.apply(null, arguments);
+      return typeof result == 'string' ? result.replace(re, fix) : result;
+    }
+  });
+}
+
+},{"../internals/export":253,"../internals/fails":254,"../internals/get-built-in":257}],324:[function(require,module,exports){
+var global = require('../internals/global');
+var setToStringTag = require('../internals/set-to-string-tag');
+
+// JSON[@@toStringTag] property
+// https://tc39.github.io/ecma262/#sec-json-@@tostringtag
+setToStringTag(global.JSON, 'JSON', true);
+
+},{"../internals/global":260,"../internals/set-to-string-tag":300}],325:[function(require,module,exports){
+'use strict';
+var collection = require('../internals/collection');
+var collectionStrong = require('../internals/collection-strong');
+
+// `Map` constructor
+// https://tc39.github.io/ecma262/#sec-map-objects
+module.exports = collection('Map', function (init) {
+  return function Map() { return init(this, arguments.length ? arguments[0] : undefined); };
+}, collectionStrong);
+
+},{"../internals/collection":238,"../internals/collection-strong":237}],326:[function(require,module,exports){
+var setToStringTag = require('../internals/set-to-string-tag');
+
+// Math[@@toStringTag] property
+// https://tc39.github.io/ecma262/#sec-math-@@tostringtag
+setToStringTag(Math, 'Math', true);
+
+},{"../internals/set-to-string-tag":300}],327:[function(require,module,exports){
+var $ = require('../internals/export');
+var assign = require('../internals/object-assign');
+
+// `Object.assign` method
+// https://tc39.github.io/ecma262/#sec-object.assign
+$({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
+  assign: assign
+});
+
+},{"../internals/export":253,"../internals/object-assign":280}],328:[function(require,module,exports){
+var $ = require('../internals/export');
+var DESCRIPTORS = require('../internals/descriptors');
+var objectDefinePropertyModile = require('../internals/object-define-property');
+
+// `Object.defineProperty` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperty
+$({ target: 'Object', stat: true, forced: !DESCRIPTORS, sham: !DESCRIPTORS }, {
+  defineProperty: objectDefinePropertyModile.f
+});
+
+},{"../internals/descriptors":246,"../internals/export":253,"../internals/object-define-property":283}],329:[function(require,module,exports){
+var $ = require('../internals/export');
+var toObject = require('../internals/to-object');
+var nativeKeys = require('../internals/object-keys');
+var fails = require('../internals/fails');
+
+var FAILS_ON_PRIMITIVES = fails(function () { nativeKeys(1); });
+
+// `Object.keys` method
+// https://tc39.github.io/ecma262/#sec-object.keys
+$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
+  keys: function keys(it) {
+    return nativeKeys(toObject(it));
+  }
+});
+
+},{"../internals/export":253,"../internals/fails":254,"../internals/object-keys":290,"../internals/to-object":309}],330:[function(require,module,exports){
+// empty
+
+},{}],331:[function(require,module,exports){
+'use strict';
+var collection = require('../internals/collection');
+var collectionStrong = require('../internals/collection-strong');
+
+// `Set` constructor
+// https://tc39.github.io/ecma262/#sec-set-objects
+module.exports = collection('Set', function (init) {
+  return function Set() { return init(this, arguments.length ? arguments[0] : undefined); };
+}, collectionStrong);
+
+},{"../internals/collection":238,"../internals/collection-strong":237}],332:[function(require,module,exports){
+'use strict';
+var charAt = require('../internals/string-multibyte').charAt;
+var InternalStateModule = require('../internals/internal-state');
+var defineIterator = require('../internals/define-iterator');
+
+var STRING_ITERATOR = 'String Iterator';
+var setInternalState = InternalStateModule.set;
+var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
+
+// `String.prototype[@@iterator]` method
+// https://tc39.github.io/ecma262/#sec-string.prototype-@@iterator
+defineIterator(String, 'String', function (iterated) {
+  setInternalState(this, {
+    type: STRING_ITERATOR,
+    string: String(iterated),
+    index: 0
+  });
+// `%StringIteratorPrototype%.next` method
+// https://tc39.github.io/ecma262/#sec-%stringiteratorprototype%.next
+}, function next() {
+  var state = getInternalState(this);
+  var string = state.string;
+  var index = state.index;
+  var point;
+  if (index >= string.length) return { value: undefined, done: true };
+  point = charAt(string, index);
+  state.index += point.length;
+  return { value: point, done: false };
+});
+
+},{"../internals/define-iterator":244,"../internals/internal-state":268,"../internals/string-multibyte":304}],333:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.asyncIterator` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.asynciterator
+defineWellKnownSymbol('asyncIterator');
+
+},{"../internals/define-well-known-symbol":245}],334:[function(require,module,exports){
+arguments[4][330][0].apply(exports,arguments)
+},{"dup":330}],335:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.hasInstance` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.hasinstance
+defineWellKnownSymbol('hasInstance');
+
+},{"../internals/define-well-known-symbol":245}],336:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.isConcatSpreadable` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.isconcatspreadable
+defineWellKnownSymbol('isConcatSpreadable');
+
+},{"../internals/define-well-known-symbol":245}],337:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.iterator` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.iterator
+defineWellKnownSymbol('iterator');
+
+},{"../internals/define-well-known-symbol":245}],338:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var global = require('../internals/global');
+var getBuiltIn = require('../internals/get-built-in');
+var IS_PURE = require('../internals/is-pure');
+var DESCRIPTORS = require('../internals/descriptors');
+var NATIVE_SYMBOL = require('../internals/native-symbol');
+var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
+var fails = require('../internals/fails');
+var has = require('../internals/has');
+var isArray = require('../internals/is-array');
+var isObject = require('../internals/is-object');
+var anObject = require('../internals/an-object');
+var toObject = require('../internals/to-object');
+var toIndexedObject = require('../internals/to-indexed-object');
+var toPrimitive = require('../internals/to-primitive');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+var nativeObjectCreate = require('../internals/object-create');
+var objectKeys = require('../internals/object-keys');
+var getOwnPropertyNamesModule = require('../internals/object-get-own-property-names');
+var getOwnPropertyNamesExternal = require('../internals/object-get-own-property-names-external');
+var getOwnPropertySymbolsModule = require('../internals/object-get-own-property-symbols');
+var getOwnPropertyDescriptorModule = require('../internals/object-get-own-property-descriptor');
+var definePropertyModule = require('../internals/object-define-property');
+var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var redefine = require('../internals/redefine');
+var shared = require('../internals/shared');
+var sharedKey = require('../internals/shared-key');
+var hiddenKeys = require('../internals/hidden-keys');
+var uid = require('../internals/uid');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+var setToStringTag = require('../internals/set-to-string-tag');
+var InternalStateModule = require('../internals/internal-state');
+var $forEach = require('../internals/array-iteration').forEach;
+
+var HIDDEN = sharedKey('hidden');
+var SYMBOL = 'Symbol';
+var PROTOTYPE = 'prototype';
+var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
+var setInternalState = InternalStateModule.set;
+var getInternalState = InternalStateModule.getterFor(SYMBOL);
+var ObjectPrototype = Object[PROTOTYPE];
+var $Symbol = global.Symbol;
+var $stringify = getBuiltIn('JSON', 'stringify');
+var nativeGetOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
+var nativeDefineProperty = definePropertyModule.f;
+var nativeGetOwnPropertyNames = getOwnPropertyNamesExternal.f;
+var nativePropertyIsEnumerable = propertyIsEnumerableModule.f;
+var AllSymbols = shared('symbols');
+var ObjectPrototypeSymbols = shared('op-symbols');
+var StringToSymbolRegistry = shared('string-to-symbol-registry');
+var SymbolToStringRegistry = shared('symbol-to-string-registry');
+var WellKnownSymbolsStore = shared('wks');
+var QObject = global.QObject;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+var USE_SETTER = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
+
+// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+var setSymbolDescriptor = DESCRIPTORS && fails(function () {
+  return nativeObjectCreate(nativeDefineProperty({}, 'a', {
+    get: function () { return nativeDefineProperty(this, 'a', { value: 7 }).a; }
+  })).a != 7;
+}) ? function (O, P, Attributes) {
+  var ObjectPrototypeDescriptor = nativeGetOwnPropertyDescriptor(ObjectPrototype, P);
+  if (ObjectPrototypeDescriptor) delete ObjectPrototype[P];
+  nativeDefineProperty(O, P, Attributes);
+  if (ObjectPrototypeDescriptor && O !== ObjectPrototype) {
+    nativeDefineProperty(ObjectPrototype, P, ObjectPrototypeDescriptor);
+  }
+} : nativeDefineProperty;
+
+var wrap = function (tag, description) {
+  var symbol = AllSymbols[tag] = nativeObjectCreate($Symbol[PROTOTYPE]);
+  setInternalState(symbol, {
+    type: SYMBOL,
+    tag: tag,
+    description: description
+  });
+  if (!DESCRIPTORS) symbol.description = description;
+  return symbol;
+};
+
+var isSymbol = USE_SYMBOL_AS_UID ? function (it) {
+  return typeof it == 'symbol';
+} : function (it) {
+  return Object(it) instanceof $Symbol;
+};
+
+var $defineProperty = function defineProperty(O, P, Attributes) {
+  if (O === ObjectPrototype) $defineProperty(ObjectPrototypeSymbols, P, Attributes);
+  anObject(O);
+  var key = toPrimitive(P, true);
+  anObject(Attributes);
+  if (has(AllSymbols, key)) {
+    if (!Attributes.enumerable) {
+      if (!has(O, HIDDEN)) nativeDefineProperty(O, HIDDEN, createPropertyDescriptor(1, {}));
+      O[HIDDEN][key] = true;
+    } else {
+      if (has(O, HIDDEN) && O[HIDDEN][key]) O[HIDDEN][key] = false;
+      Attributes = nativeObjectCreate(Attributes, { enumerable: createPropertyDescriptor(0, false) });
+    } return setSymbolDescriptor(O, key, Attributes);
+  } return nativeDefineProperty(O, key, Attributes);
+};
+
+var $defineProperties = function defineProperties(O, Properties) {
+  anObject(O);
+  var properties = toIndexedObject(Properties);
+  var keys = objectKeys(properties).concat($getOwnPropertySymbols(properties));
+  $forEach(keys, function (key) {
+    if (!DESCRIPTORS || $propertyIsEnumerable.call(properties, key)) $defineProperty(O, key, properties[key]);
+  });
+  return O;
+};
+
+var $create = function create(O, Properties) {
+  return Properties === undefined ? nativeObjectCreate(O) : $defineProperties(nativeObjectCreate(O), Properties);
+};
+
+var $propertyIsEnumerable = function propertyIsEnumerable(V) {
+  var P = toPrimitive(V, true);
+  var enumerable = nativePropertyIsEnumerable.call(this, P);
+  if (this === ObjectPrototype && has(AllSymbols, P) && !has(ObjectPrototypeSymbols, P)) return false;
+  return enumerable || !has(this, P) || !has(AllSymbols, P) || has(this, HIDDEN) && this[HIDDEN][P] ? enumerable : true;
+};
+
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(O, P) {
+  var it = toIndexedObject(O);
+  var key = toPrimitive(P, true);
+  if (it === ObjectPrototype && has(AllSymbols, key) && !has(ObjectPrototypeSymbols, key)) return;
+  var descriptor = nativeGetOwnPropertyDescriptor(it, key);
+  if (descriptor && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) {
+    descriptor.enumerable = true;
+  }
+  return descriptor;
+};
+
+var $getOwnPropertyNames = function getOwnPropertyNames(O) {
+  var names = nativeGetOwnPropertyNames(toIndexedObject(O));
+  var result = [];
+  $forEach(names, function (key) {
+    if (!has(AllSymbols, key) && !has(hiddenKeys, key)) result.push(key);
+  });
+  return result;
+};
+
+var $getOwnPropertySymbols = function getOwnPropertySymbols(O) {
+  var IS_OBJECT_PROTOTYPE = O === ObjectPrototype;
+  var names = nativeGetOwnPropertyNames(IS_OBJECT_PROTOTYPE ? ObjectPrototypeSymbols : toIndexedObject(O));
+  var result = [];
+  $forEach(names, function (key) {
+    if (has(AllSymbols, key) && (!IS_OBJECT_PROTOTYPE || has(ObjectPrototype, key))) {
+      result.push(AllSymbols[key]);
+    }
+  });
+  return result;
+};
+
+// `Symbol` constructor
+// https://tc39.github.io/ecma262/#sec-symbol-constructor
+if (!NATIVE_SYMBOL) {
+  $Symbol = function Symbol() {
+    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor');
+    var description = !arguments.length || arguments[0] === undefined ? undefined : String(arguments[0]);
+    var tag = uid(description);
+    var setter = function (value) {
+      if (this === ObjectPrototype) setter.call(ObjectPrototypeSymbols, value);
+      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
+      setSymbolDescriptor(this, tag, createPropertyDescriptor(1, value));
+    };
+    if (DESCRIPTORS && USE_SETTER) setSymbolDescriptor(ObjectPrototype, tag, { configurable: true, set: setter });
+    return wrap(tag, description);
+  };
+
+  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
+    return getInternalState(this).tag;
+  });
+
+  redefine($Symbol, 'withoutSetter', function (description) {
+    return wrap(uid(description), description);
+  });
+
+  propertyIsEnumerableModule.f = $propertyIsEnumerable;
+  definePropertyModule.f = $defineProperty;
+  getOwnPropertyDescriptorModule.f = $getOwnPropertyDescriptor;
+  getOwnPropertyNamesModule.f = getOwnPropertyNamesExternal.f = $getOwnPropertyNames;
+  getOwnPropertySymbolsModule.f = $getOwnPropertySymbols;
+
+  wrappedWellKnownSymbolModule.f = function (name) {
+    return wrap(wellKnownSymbol(name), name);
+  };
+
+  if (DESCRIPTORS) {
+    // https://github.com/tc39/proposal-Symbol-description
+    nativeDefineProperty($Symbol[PROTOTYPE], 'description', {
+      configurable: true,
+      get: function description() {
+        return getInternalState(this).description;
+      }
+    });
+    if (!IS_PURE) {
+      redefine(ObjectPrototype, 'propertyIsEnumerable', $propertyIsEnumerable, { unsafe: true });
+    }
+  }
+}
+
+$({ global: true, wrap: true, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, {
+  Symbol: $Symbol
+});
+
+$forEach(objectKeys(WellKnownSymbolsStore), function (name) {
+  defineWellKnownSymbol(name);
+});
+
+$({ target: SYMBOL, stat: true, forced: !NATIVE_SYMBOL }, {
+  // `Symbol.for` method
+  // https://tc39.github.io/ecma262/#sec-symbol.for
+  'for': function (key) {
+    var string = String(key);
+    if (has(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
+    var symbol = $Symbol(string);
+    StringToSymbolRegistry[string] = symbol;
+    SymbolToStringRegistry[symbol] = string;
+    return symbol;
+  },
+  // `Symbol.keyFor` method
+  // https://tc39.github.io/ecma262/#sec-symbol.keyfor
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol');
+    if (has(SymbolToStringRegistry, sym)) return SymbolToStringRegistry[sym];
+  },
+  useSetter: function () { USE_SETTER = true; },
+  useSimple: function () { USE_SETTER = false; }
+});
+
+$({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL, sham: !DESCRIPTORS }, {
+  // `Object.create` method
+  // https://tc39.github.io/ecma262/#sec-object.create
+  create: $create,
+  // `Object.defineProperty` method
+  // https://tc39.github.io/ecma262/#sec-object.defineproperty
+  defineProperty: $defineProperty,
+  // `Object.defineProperties` method
+  // https://tc39.github.io/ecma262/#sec-object.defineproperties
+  defineProperties: $defineProperties,
+  // `Object.getOwnPropertyDescriptor` method
+  // https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptors
+  getOwnPropertyDescriptor: $getOwnPropertyDescriptor
+});
+
+$({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL }, {
+  // `Object.getOwnPropertyNames` method
+  // https://tc39.github.io/ecma262/#sec-object.getownpropertynames
+  getOwnPropertyNames: $getOwnPropertyNames,
+  // `Object.getOwnPropertySymbols` method
+  // https://tc39.github.io/ecma262/#sec-object.getownpropertysymbols
+  getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+$({ target: 'Object', stat: true, forced: fails(function () { getOwnPropertySymbolsModule.f(1); }) }, {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return getOwnPropertySymbolsModule.f(toObject(it));
+  }
+});
+
+// `JSON.stringify` method behavior with symbols
+// https://tc39.github.io/ecma262/#sec-json.stringify
+if ($stringify) {
+  var FORCED_JSON_STRINGIFY = !NATIVE_SYMBOL || fails(function () {
+    var symbol = $Symbol();
+    // MS Edge converts symbol values to JSON as {}
+    return $stringify([symbol]) != '[null]'
+      // WebKit converts symbol values to JSON as null
+      || $stringify({ a: symbol }) != '{}'
+      // V8 throws on boxed symbols
+      || $stringify(Object(symbol)) != '{}';
+  });
+
+  $({ target: 'JSON', stat: true, forced: FORCED_JSON_STRINGIFY }, {
+    // eslint-disable-next-line no-unused-vars
+    stringify: function stringify(it, replacer, space) {
+      var args = [it];
+      var index = 1;
+      var $replacer;
+      while (arguments.length > index) args.push(arguments[index++]);
+      $replacer = replacer;
+      if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
+      if (!isArray(replacer)) replacer = function (key, value) {
+        if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
+        if (!isSymbol(value)) return value;
+      };
+      args[1] = replacer;
+      return $stringify.apply(null, args);
+    }
+  });
+}
+
+// `Symbol.prototype[@@toPrimitive]` method
+// https://tc39.github.io/ecma262/#sec-symbol.prototype-@@toprimitive
+if (!$Symbol[PROTOTYPE][TO_PRIMITIVE]) {
+  createNonEnumerableProperty($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+}
+// `Symbol.prototype[@@toStringTag]` property
+// https://tc39.github.io/ecma262/#sec-symbol.prototype-@@tostringtag
+setToStringTag($Symbol, SYMBOL);
+
+hiddenKeys[HIDDEN] = true;
+
+},{"../internals/an-object":224,"../internals/array-iteration":228,"../internals/create-non-enumerable-property":241,"../internals/create-property-descriptor":242,"../internals/define-well-known-symbol":245,"../internals/descriptors":246,"../internals/export":253,"../internals/fails":254,"../internals/get-built-in":257,"../internals/global":260,"../internals/has":261,"../internals/hidden-keys":262,"../internals/internal-state":268,"../internals/is-array":270,"../internals/is-object":273,"../internals/is-pure":274,"../internals/native-symbol":278,"../internals/object-create":281,"../internals/object-define-property":283,"../internals/object-get-own-property-descriptor":284,"../internals/object-get-own-property-names":286,"../internals/object-get-own-property-names-external":285,"../internals/object-get-own-property-symbols":287,"../internals/object-keys":290,"../internals/object-property-is-enumerable":291,"../internals/redefine":296,"../internals/set-to-string-tag":300,"../internals/shared":303,"../internals/shared-key":301,"../internals/to-indexed-object":306,"../internals/to-object":309,"../internals/to-primitive":310,"../internals/uid":312,"../internals/use-symbol-as-uid":313,"../internals/well-known-symbol":315,"../internals/well-known-symbol-wrapped":314}],339:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.matchAll` well-known symbol
+defineWellKnownSymbol('matchAll');
+
+},{"../internals/define-well-known-symbol":245}],340:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.match` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.match
+defineWellKnownSymbol('match');
+
+},{"../internals/define-well-known-symbol":245}],341:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.replace` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.replace
+defineWellKnownSymbol('replace');
+
+},{"../internals/define-well-known-symbol":245}],342:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.search` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.search
+defineWellKnownSymbol('search');
+
+},{"../internals/define-well-known-symbol":245}],343:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.species` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.species
+defineWellKnownSymbol('species');
+
+},{"../internals/define-well-known-symbol":245}],344:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.split` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.split
+defineWellKnownSymbol('split');
+
+},{"../internals/define-well-known-symbol":245}],345:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.toPrimitive` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.toprimitive
+defineWellKnownSymbol('toPrimitive');
+
+},{"../internals/define-well-known-symbol":245}],346:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.toStringTag` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.tostringtag
+defineWellKnownSymbol('toStringTag');
+
+},{"../internals/define-well-known-symbol":245}],347:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.unscopables` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.unscopables
+defineWellKnownSymbol('unscopables');
+
+},{"../internals/define-well-known-symbol":245}],348:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.asyncDispose` well-known symbol
+// https://github.com/tc39/proposal-using-statement
+defineWellKnownSymbol('asyncDispose');
+
+},{"../internals/define-well-known-symbol":245}],349:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.dispose` well-known symbol
+// https://github.com/tc39/proposal-using-statement
+defineWellKnownSymbol('dispose');
+
+},{"../internals/define-well-known-symbol":245}],350:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.observable` well-known symbol
+// https://github.com/tc39/proposal-observable
+defineWellKnownSymbol('observable');
+
+},{"../internals/define-well-known-symbol":245}],351:[function(require,module,exports){
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+// `Symbol.patternMatch` well-known symbol
+// https://github.com/tc39/proposal-pattern-matching
+defineWellKnownSymbol('patternMatch');
+
+},{"../internals/define-well-known-symbol":245}],352:[function(require,module,exports){
+// TODO: remove from `core-js@4`
+var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+
+defineWellKnownSymbol('replaceAll');
+
+},{"../internals/define-well-known-symbol":245}],353:[function(require,module,exports){
+require('./es.array.iterator');
+var DOMIterables = require('../internals/dom-iterables');
+var global = require('../internals/global');
+var classof = require('../internals/classof');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var Iterators = require('../internals/iterators');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+
+for (var COLLECTION_NAME in DOMIterables) {
+  var Collection = global[COLLECTION_NAME];
+  var CollectionPrototype = Collection && Collection.prototype;
+  if (CollectionPrototype && classof(CollectionPrototype) !== TO_STRING_TAG) {
+    createNonEnumerableProperty(CollectionPrototype, TO_STRING_TAG, COLLECTION_NAME);
+  }
+  Iterators[COLLECTION_NAME] = Iterators.Array;
+}
+
+},{"../internals/classof":236,"../internals/create-non-enumerable-property":241,"../internals/dom-iterables":248,"../internals/global":260,"../internals/iterators":277,"../internals/well-known-symbol":315,"./es.array.iterator":321}],354:[function(require,module,exports){
+var parent = require('../../../es/array/virtual/entries');
+
+module.exports = parent;
+
+},{"../../../es/array/virtual/entries":198}],355:[function(require,module,exports){
+var parent = require('../../../es/array/virtual/for-each');
+
+module.exports = parent;
+
+},{"../../../es/array/virtual/for-each":200}],356:[function(require,module,exports){
+var parent = require('../../../es/array/virtual/keys');
+
+module.exports = parent;
+
+},{"../../../es/array/virtual/keys":201}],357:[function(require,module,exports){
+var parent = require('../../es/instance/concat');
+
+module.exports = parent;
+
+},{"../../es/instance/concat":203}],358:[function(require,module,exports){
+require('../../modules/web.dom-collections.iterator');
+var entries = require('../array/virtual/entries');
+var classof = require('../../internals/classof');
+var ArrayPrototype = Array.prototype;
+
+var DOMIterables = {
+  DOMTokenList: true,
+  NodeList: true
+};
+
+module.exports = function (it) {
+  var own = it.entries;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.entries)
+    // eslint-disable-next-line no-prototype-builtins
+    || DOMIterables.hasOwnProperty(classof(it)) ? entries : own;
+};
+
+},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/entries":354}],359:[function(require,module,exports){
+var parent = require('../../es/instance/find');
+
+module.exports = parent;
+
+},{"../../es/instance/find":204}],360:[function(require,module,exports){
+require('../../modules/web.dom-collections.iterator');
+var forEach = require('../array/virtual/for-each');
+var classof = require('../../internals/classof');
+var ArrayPrototype = Array.prototype;
+
+var DOMIterables = {
+  DOMTokenList: true,
+  NodeList: true
+};
+
+module.exports = function (it) {
+  var own = it.forEach;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.forEach)
+    // eslint-disable-next-line no-prototype-builtins
+    || DOMIterables.hasOwnProperty(classof(it)) ? forEach : own;
+};
+
+},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/for-each":355}],361:[function(require,module,exports){
+require('../../modules/web.dom-collections.iterator');
+var keys = require('../array/virtual/keys');
+var classof = require('../../internals/classof');
+var ArrayPrototype = Array.prototype;
+
+var DOMIterables = {
+  DOMTokenList: true,
+  NodeList: true
+};
+
+module.exports = function (it) {
+  var own = it.keys;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.keys)
+    // eslint-disable-next-line no-prototype-builtins
+    || DOMIterables.hasOwnProperty(classof(it)) ? keys : own;
+};
+
+},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/keys":356}],362:[function(require,module,exports){
+var parent = require('../../es/json/stringify');
+
+module.exports = parent;
+
+},{"../../es/json/stringify":206}],363:[function(require,module,exports){
+var parent = require('../../es/map');
+
+module.exports = parent;
+
+},{"../../es/map":207}],364:[function(require,module,exports){
+var parent = require('../../es/object/assign');
+
+module.exports = parent;
+
+},{"../../es/object/assign":208}],365:[function(require,module,exports){
+arguments[4][218][0].apply(exports,arguments)
+},{"../../es/object/define-property":209,"dup":218}],366:[function(require,module,exports){
+var parent = require('../../es/object/keys');
+
+module.exports = parent;
+
+},{"../../es/object/keys":210}],367:[function(require,module,exports){
+var parent = require('../../es/set');
+
+module.exports = parent;
+
+},{"../../es/set":211}],368:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.computeAccessibleName = computeAccessibleName;
+
+var _array = _interopRequireDefault(require("./polyfills/array.from"));
+
+var _SetLike = _interopRequireDefault(require("./polyfills/SetLike"));
+
+var _getRole = _interopRequireDefault(require("./getRole"));
+
+var _util = require("./util");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/**
+ * Small utility that handles all the JS quirks with `this` which is important
+ * if no mock is provided.
+ * @param element
+ * @param options - These are not optional to prevent accidentally calling it without options in `computeAccessibleName`
+ */
+function createGetComputedStyle(element, options) {
+  var window = (0, _util.safeWindow)(element);
+  var _options$getComputedS = options.getComputedStyle,
+      getComputedStyle = _options$getComputedS === void 0 ? window.getComputedStyle.bind(window) : _options$getComputedS;
+  return getComputedStyle;
+}
+/**
+ *
+ * @param {string} string -
+ * @returns {FlatString} -
+ */
+
+
+function asFlatString(s) {
+  return s.trim().replace(/\s\s+/g, " ");
+}
+/**
+ * https://w3c.github.io/aria/#namefromprohibited
+ */
+
+
+function prohibitsNaming(node) {
+  return hasAnyConcreteRoles(node, ["caption", "code", "deletion", "emphasis", "generic", "insertion", "paragraph", "presentation", "strong", "subscript", "superscript"]);
+}
+/**
+ *
+ * @param node -
+ * @param options - These are not optional to prevent accidentally calling it without options in `computeAccessibleName`
+ * @returns {boolean} -
+ */
+
+
+function isHidden(node, options) {
+  if (!(0, _util.isElement)(node)) {
+    return false;
+  }
+
+  if (node.hasAttribute("hidden") || node.getAttribute("aria-hidden") === "true") {
+    return true;
+  }
+
+  var style = createGetComputedStyle(node, options)(node);
+  return style.getPropertyValue("display") === "none" || style.getPropertyValue("visibility") === "hidden";
+}
+/**
+ *
+ * @param {Node} node -
+ * @param {string} attributeName -
+ * @returns {Element[]} -
+ */
+
+
+function idRefs(node, attributeName) {
+  if ((0, _util.isElement)(node) && node.hasAttribute(attributeName)) {
+    // safe due to hasAttribute check
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    var ids = node.getAttribute(attributeName).split(" ");
+    return ids // safe since it can't be null for an Element
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    .map(function (id) {
+      return node.ownerDocument.getElementById(id);
+    }).filter(function (element) {
+      return element !== null;
+    } // TODO: why does this not narrow?
+    );
+  }
+
+  return [];
+}
+/**
+ * All defined children. This include childNodes as well as owned (portaled) trees
+ * via aria-owns
+ * @param node
+ */
+
+
+function queryChildNodes(node) {
+  return (0, _array.default)(node.childNodes).concat(idRefs(node, "aria-owns"));
+}
+/**
+ * @param {Node} node -
+ * @returns {boolean} - As defined in step 2E of https://w3c.github.io/accname/#mapping_additional_nd_te
+ */
+
+
+function isControl(node) {
+  return hasAnyConcreteRoles(node, ["button", "combobox", "listbox", "textbox"]) || hasAbstractRole(node, "range");
+}
+
+function hasAbstractRole(node, role) {
+  if (!(0, _util.isElement)(node)) {
+    return false;
+  }
+
+  switch (role) {
+    case "range":
+      return hasAnyConcreteRoles(node, ["meter", "progressbar", "scrollbar", "slider", "spinbutton"]);
+
+    default:
+      throw new TypeError("No knowledge about abstract role '".concat(role, "'. This is likely a bug :("));
+  }
+}
+
+function hasAnyConcreteRoles(node, roles) {
+  if ((0, _util.isElement)(node)) {
+    return roles.indexOf((0, _getRole.default)(node)) !== -1;
+  }
+
+  return false;
+}
+/**
+ * element.querySelectorAll but also considers owned tree
+ * @param element
+ * @param selectors
+ */
+
+
+function querySelectorAllSubtree(element, selectors) {
+  var elements = [];
+
+  for (var _i = 0, _arr = [element].concat(_toConsumableArray(idRefs(element, "aria-owns"))); _i < _arr.length; _i++) {
+    var root = _arr[_i];
+    elements.push.apply(elements, _toConsumableArray((0, _array.default)(root.querySelectorAll(selectors))));
+  }
+
+  return elements;
+}
+
+function querySelectedOptions(listbox) {
+  if ((0, _util.isHTMLSelectElement)(listbox)) {
+    // IE11 polyfill
+    return listbox.selectedOptions || querySelectorAllSubtree(listbox, "[selected]");
+  }
+
+  return querySelectorAllSubtree(listbox, '[aria-selected="true"]');
+}
+
+function isMarkedPresentational(node) {
+  return hasAnyConcreteRoles(node, ["none", "presentation"]);
+}
+/**
+ * TODO https://github.com/eps1lon/dom-accessibility-api/issues/99
+ */
+
+
+function isNativeHostLanguageTextAlternativeElement(node) {
+  return false;
+}
+/**
+ * https://w3c.github.io/aria/#namefromcontent
+ */
+
+
+function allowsNameFromContent(node) {
+  return hasAnyConcreteRoles(node, ["button", "cell", "checkbox", "columnheader", "gridcell", "heading", "label", "legend", "link", "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio", "row", "rowheader", "switch", "tab", "tooltip", "treeitem"]);
+}
+/**
+ * TODO https://github.com/eps1lon/dom-accessibility-api/issues/100
+ */
+
+
+function isDescendantOfNativeHostLanguageTextAlternativeElement(node) {
+  return false;
+}
+/**
+ * TODO https://github.com/eps1lon/dom-accessibility-api/issues/101
+ */
+
+
+function computeTooltipAttributeValue(node) {
+  return null;
+}
+
+function getValueOfTextbox(element) {
+  if ((0, _util.isHTMLInputElement)(element) || (0, _util.isHTMLTextAreaElement)(element)) {
+    return element.value;
+  } // https://github.com/eps1lon/dom-accessibility-api/issues/4
+
+
+  return element.textContent || "";
+}
+
+function getTextualContent(declaration) {
+  var content = declaration.getPropertyValue("content");
+
+  if (/^["'].*["']$/.test(content)) {
+    return content.slice(1, -1);
+  }
+
+  return "";
+}
+/**
+ * implements https://w3c.github.io/accname/#mapping_additional_nd_te
+ * @param root
+ * @param [options]
+ * @parma [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
+ */
+
+
+function computeAccessibleName(root) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var consultedNodes = new _SetLike.default();
+
+  if (prohibitsNaming(root)) {
+    return "";
+  } // 2F.i
+
+
+  function computeMiscTextAlternative(node, context) {
+    var accumulatedText = "";
+
+    if ((0, _util.isElement)(node)) {
+      var pseudoBefore = createGetComputedStyle(node, options)(node, "::before");
+      var beforeContent = getTextualContent(pseudoBefore);
+      accumulatedText = "".concat(beforeContent, " ").concat(accumulatedText);
+    }
+
+    var _iterator = _createForOfIteratorHelper(queryChildNodes(node)),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var child = _step.value;
+        var result = computeTextAlternative(child, {
+          isEmbeddedInLabel: context.isEmbeddedInLabel,
+          isReferenced: false,
+          recursion: true
+        }); // TODO: Unclear why display affects delimiter
+
+        var display = (0, _util.isElement)(node) && createGetComputedStyle(node, options)(node).getPropertyValue("display");
+        var separator = display !== "inline" ? " " : "";
+        accumulatedText += "".concat(separator).concat(result);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    if ((0, _util.isElement)(node)) {
+      var pseudoAfter = createGetComputedStyle(node, options)(node, ":after");
+      var afterContent = getTextualContent(pseudoAfter);
+      accumulatedText = "".concat(accumulatedText, " ").concat(afterContent);
+    }
+
+    return accumulatedText;
+  }
+
+  function computeAttributeTextAlternative(node) {
+    if (!(0, _util.isElement)(node)) {
+      return null;
+    }
+
+    var titleAttribute = node.getAttributeNode("title");
+
+    if (titleAttribute !== null && !consultedNodes.has(titleAttribute)) {
+      consultedNodes.add(titleAttribute);
+      return titleAttribute.value;
+    }
+
+    var altAttribute = node.getAttributeNode("alt");
+
+    if (altAttribute !== null && !consultedNodes.has(altAttribute)) {
+      consultedNodes.add(altAttribute);
+      return altAttribute.value;
+    }
+
+    if ((0, _util.isHTMLInputElement)(node) && node.type === "button") {
+      consultedNodes.add(node);
+      return node.getAttribute("value") || "";
+    }
+
+    return null;
+  }
+
+  function computeElementTextAlternative(node) {
+    if (!((0, _util.isHTMLInputElement)(node) || (0, _util.isHTMLSelectElement)(node) || (0, _util.isHTMLTextAreaElement)(node))) {
+      return null;
+    }
+
+    var input = node; // https://w3c.github.io/html-aam/#input-type-text-input-type-password-input-type-search-input-type-tel-input-type-email-input-type-url-and-textarea-element-accessible-description-computation
+
+    if (input.type === "submit") {
+      return "Submit";
+    }
+
+    if (input.type === "reset") {
+      return "Reset";
+    }
+
+    var labels = input.labels; // IE11 does not implement labels, TODO: verify with caniuse instead of mdn
+
+    if (labels === null || labels === undefined || labels.length === 0) {
+      return null;
+    }
+
+    consultedNodes.add(input);
+    return (0, _array.default)(labels).map(function (element) {
+      return computeTextAlternative(element, {
+        isEmbeddedInLabel: true,
+        isReferenced: false,
+        recursion: true
+      });
+    }).filter(function (label) {
+      return label.length > 0;
+    }).join(" ");
+  }
+
+  function computeTextAlternative(current, context) {
+    if (consultedNodes.has(current)) {
+      return "";
+    } // special casing, cheating to make tests pass
+    // https://github.com/w3c/accname/issues/67
+
+
+    if (hasAnyConcreteRoles(current, ["menu"])) {
+      consultedNodes.add(current);
+      return "";
+    } // 2A
+
+
+    if (isHidden(current, options) && !context.isReferenced) {
+      consultedNodes.add(current);
+      return "";
+    } // 2B
+
+
+    var labelElements = idRefs(current, "aria-labelledby");
+
+    if (!context.isReferenced && labelElements.length > 0) {
+      return labelElements.map(function (element) {
+        return computeTextAlternative(element, {
+          isEmbeddedInLabel: context.isEmbeddedInLabel,
+          isReferenced: true,
+          // thais isn't recursion as specified, otherwise we would skip
+          // `aria-label` in
+          // <input id="myself" aria-label="foo" aria-labelledby="myself"
+          recursion: false
+        });
+      }).join(" ");
+    } // 2C
+    // Changed from the spec in anticipation of https://github.com/w3c/accname/issues/64
+    // spec says we should only consider skipping if we have a non-empty label
+
+
+    var skipToStep2E = context.recursion && isControl(current);
+
+    if (!skipToStep2E) {
+      var ariaLabel = ((0, _util.isElement)(current) && current.getAttribute("aria-label") || "").trim();
+
+      if (ariaLabel !== "") {
+        consultedNodes.add(current);
+        return ariaLabel;
+      } // 2D
+
+
+      if (!isMarkedPresentational(current)) {
+        var elementTextAlternative = computeElementTextAlternative(current);
+
+        if (elementTextAlternative !== null) {
+          consultedNodes.add(current);
+          return elementTextAlternative;
+        }
+
+        var attributeTextAlternative = computeAttributeTextAlternative(current);
+
+        if (attributeTextAlternative !== null) {
+          consultedNodes.add(current);
+          return attributeTextAlternative;
+        }
+      }
+    } // 2E
+
+
+    if (skipToStep2E || context.isEmbeddedInLabel || context.isReferenced) {
+      if (hasAnyConcreteRoles(current, ["combobox", "listbox"])) {
+        consultedNodes.add(current);
+        var selectedOptions = querySelectedOptions(current);
+
+        if (selectedOptions.length === 0) {
+          // defined per test `name_heading_combobox`
+          return (0, _util.isHTMLInputElement)(current) ? current.value : "";
+        }
+
+        return (0, _array.default)(selectedOptions).map(function (selectedOption) {
+          return computeTextAlternative(selectedOption, {
+            isEmbeddedInLabel: context.isEmbeddedInLabel,
+            isReferenced: false,
+            recursion: true
+          });
+        }).join(" ");
+      }
+
+      if (hasAbstractRole(current, "range")) {
+        consultedNodes.add(current);
+
+        if (current.hasAttribute("aria-valuetext")) {
+          // safe due to hasAttribute guard
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return current.getAttribute("aria-valuetext");
+        }
+
+        if (current.hasAttribute("aria-valuenow")) {
+          // safe due to hasAttribute guard
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return current.getAttribute("aria-valuenow");
+        } // Otherwise, use the value as specified by a host language attribute.
+
+
+        return current.getAttribute("value") || "";
+      }
+
+      if (hasAnyConcreteRoles(current, ["textbox"])) {
+        consultedNodes.add(current);
+        return getValueOfTextbox(current);
+      }
+    } // 2F: https://w3c.github.io/accname/#step2F
+
+
+    if (allowsNameFromContent(current) || (0, _util.isElement)(current) && context.isReferenced || isNativeHostLanguageTextAlternativeElement(current) || isDescendantOfNativeHostLanguageTextAlternativeElement(current)) {
+      consultedNodes.add(current);
+      return computeMiscTextAlternative(current, {
+        isEmbeddedInLabel: context.isEmbeddedInLabel,
+        isReferenced: false
+      });
+    }
+
+    if (current.nodeType === current.TEXT_NODE) {
+      consultedNodes.add(current);
+      return current.textContent || "";
+    }
+
+    if (context.recursion) {
+      consultedNodes.add(current);
+      return computeMiscTextAlternative(current, {
+        isEmbeddedInLabel: context.isEmbeddedInLabel,
+        isReferenced: false
+      });
+    }
+
+    var tooltipAttributeValue = computeTooltipAttributeValue(current);
+
+    if (tooltipAttributeValue !== null) {
+      consultedNodes.add(current);
+      return tooltipAttributeValue;
+    } // TODO should this be reachable?
+
+
+    consultedNodes.add(current);
+    return "";
+  }
+
+  return asFlatString(computeTextAlternative(root, {
+    isEmbeddedInLabel: false,
+    isReferenced: false,
+    recursion: false
+  }));
+}
+
+},{"./getRole":369,"./polyfills/SetLike":371,"./polyfills/array.from":372,"./util":373}],369:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.default = getRole;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// https://w3c.github.io/html-aria/#document-conformance-requirements-for-use-of-aria-attributes-in-html
+function getRole(element) {
+  var explicitRole = getExplicitRole(element);
+
+  if (explicitRole !== null) {
+    return explicitRole;
+  }
+
+  return getImplicitRole(element);
+}
+
+var tagToRoleMappings = {
+  ARTICLE: "article",
+  ASIDE: "complementary",
+  BODY: "document",
+  BUTTON: "button",
+  DATALIST: "listbox",
+  DD: "definition",
+  DETAILS: "group",
+  DIALOG: "dialog",
+  DT: "term",
+  FIELDSET: "group",
+  FIGURE: "figure",
+  // WARNING: Only with an accessible name
+  FORM: "form",
+  FOOTER: "contentinfo",
+  H1: "heading",
+  H2: "heading",
+  H3: "heading",
+  H4: "heading",
+  H5: "heading",
+  H6: "heading",
+  HEADER: "banner",
+  HR: "separator",
+  LEGEND: "legend",
+  LI: "listitem",
+  MATH: "math",
+  MAIN: "main",
+  MENU: "list",
+  NAV: "navigation",
+  OL: "list",
+  OPTGROUP: "group",
+  // WARNING: Only in certain context
+  OPTION: "option",
+  OUTPUT: "status",
+  PROGRESS: "progressbar",
+  // WARNING: Only with an accessible name
+  SECTION: "region",
+  SUMMARY: "button",
+  TABLE: "table",
+  TBODY: "rowgroup",
+  TEXTAREA: "textbox",
+  TFOOT: "rowgroup",
+  // WARNING: Only in certain context
+  TD: "cell",
+  TH: "columnheader",
+  THEAD: "rowgroup",
+  TR: "row",
+  UL: "list"
+};
+
+function getImplicitRole(element) {
+  var mappedByTag = tagToRoleMappings[element.tagName];
+
+  if (mappedByTag !== undefined) {
+    return mappedByTag;
+  }
+
+  switch (element.tagName) {
+    case "A":
+    case "AREA":
+    case "LINK":
+      if (element.hasAttribute("href")) {
+        return "link";
+      }
+
+      break;
+
+    case "IMG":
+      if ((element.getAttribute("alt") || "").length > 0) {
+        return "img";
+      }
+
+      break;
+
+    case "INPUT":
+      {
+        var _ref = element,
+            type = _ref.type;
+
+        switch (type) {
+          case "button":
+          case "image":
+          case "reset":
+          case "submit":
+            return "button";
+
+          case "checkbox":
+          case "radio":
+            return type;
+
+          case "range":
+            return "slider";
+
+          case "email":
+          case "tel":
+          case "text":
+          case "url":
+            if (element.hasAttribute("list")) {
+              return "combobox";
+            }
+
+            return "textbox";
+
+          case "search":
+            if (element.hasAttribute("list")) {
+              return "combobox";
+            }
+
+            return "searchbox";
+
+          default:
+            return null;
+        }
+      }
+
+    case "SELECT":
+      if (element.hasAttribute("multiple") || element.size > 1) {
+        return "listbox";
+      }
+
+      return "combobox";
+  }
+
+  return null;
+}
+
+function getExplicitRole(element) {
+  if (element.hasAttribute("role")) {
+    // safe due to hasAttribute check
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    var _trim$split = element.getAttribute("role").trim().split(" "),
+        _trim$split2 = _slicedToArray(_trim$split, 1),
+        explicitRole = _trim$split2[0];
+
+    if (explicitRole !== undefined && explicitRole.length > 0) {
+      return explicitRole;
+    }
+  }
+
+  return null;
+}
+
+},{}],370:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.getRole = exports.computeAccessibleName = void 0;
+
+var _accessibleName = require("./accessible-name");
+
+exports.computeAccessibleName = _accessibleName.computeAccessibleName;
+
+var _getRole = _interopRequireDefault(require("./getRole"));
+
+exports.getRole = _getRole.default;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+},{"./accessible-name":368,"./getRole":369}],371:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// for environments without Set we fallback to arrays with unique members
+var SetLike = /*#__PURE__*/function (_Set) {
+  _inherits(SetLike, _Set);
+
+  var _super = _createSuper(SetLike);
+
+  function SetLike() {
+    var _this;
+
+    _classCallCheck(this, SetLike);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "items", []);
+
+    return _this;
+  }
+
+  _createClass(SetLike, [{
+    key: "add",
+    value: function add(value) {
+      if (this.has(value) === false) {
+        this.items.push(value);
+      }
+
+      return this;
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      this.items = [];
+    }
+  }, {
+    key: "delete",
+    value: function _delete(value) {
+      var previousLength = this.items.length;
+      this.items = this.items.filter(function (item) {
+        return item !== value;
+      });
+      return previousLength !== this.items.length;
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(callbackfn) {
+      var _this2 = this;
+
+      this.items.forEach(function (item) {
+        callbackfn(item, item, _this2);
+      });
+    }
+  }, {
+    key: "has",
+    value: function has(value) {
+      return this.items.indexOf(value) !== -1;
+    }
+  }, {
+    key: "size",
+    get: function get() {
+      return this.items.length;
+    }
+  }]);
+
+  return SetLike;
+}( /*#__PURE__*/_wrapNativeSuper(Set));
+
+var _default = typeof Set === "undefined" ? Set : SetLike;
+
+exports.default = _default;
+
+},{}],372:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.default = arrayFrom;
+
+/**
+ * @source {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill}
+ * but without thisArg (too hard to type, no need to `this`)
+ */
+var toStr = Object.prototype.toString;
+
+function isCallable(fn) {
+  return typeof fn === "function" || toStr.call(fn) === "[object Function]";
+}
+
+function toInteger(value) {
+  var number = Number(value);
+
+  if (isNaN(number)) {
+    return 0;
+  }
+
+  if (number === 0 || !isFinite(number)) {
+    return number;
+  }
+
+  return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+}
+
+var maxSafeInteger = Math.pow(2, 53) - 1;
+
+function toLength(value) {
+  var len = toInteger(value);
+  return Math.min(Math.max(len, 0), maxSafeInteger);
+}
+/**
+ * Creates an array from an iterable object.
+ * @param iterable An iterable object to convert to an array.
+ */
+
+
+/**
+ * Creates an array from an iterable object.
+ * @param iterable An iterable object to convert to an array.
+ * @param mapfn A mapping function to call on every element of the array.
+ * @param thisArg Value of 'this' used to invoke the mapfn.
+ */
+function arrayFrom(arrayLike, mapFn) {
+  // 1. Let C be the this value.
+  // edit(@eps1lon): we're not calling it as Array.from
+  var C = Array; // 2. Let items be ToObject(arrayLike).
+
+  var items = Object(arrayLike); // 3. ReturnIfAbrupt(items).
+
+  if (arrayLike == null) {
+    throw new TypeError("Array.from requires an array-like object - not null or undefined");
+  } // 4. If mapfn is undefined, then let mapping be false.
+  // const mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+
+
+  if (typeof mapFn !== "undefined") {
+    // 5. else
+    // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
+    if (!isCallable(mapFn)) {
+      throw new TypeError("Array.from: when provided, the second argument must be a function");
+    }
+  } // 10. Let lenValue be Get(items, "length").
+  // 11. Let len be ToLength(lenValue).
+
+
+  var len = toLength(items.length); // 13. If IsConstructor(C) is true, then
+  // 13. a. Let A be the result of calling the [[Construct]] internal method
+  // of C with an argument list containing the single item len.
+  // 14. a. Else, Let A be ArrayCreate(len).
+
+  var A = isCallable(C) ? Object(new C(len)) : new Array(len); // 16. Let k be 0.
+
+  var k = 0; // 17. Repeat, while k < len… (also steps a - h)
+
+  var kValue;
+
+  while (k < len) {
+    kValue = items[k];
+
+    if (mapFn) {
+      A[k] = mapFn(kValue, k);
+    } else {
+      A[k] = kValue;
+    }
+
+    k += 1;
+  } // 18. Let putStatus be Put(A, "length", len, true).
+
+
+  A.length = len; // 20. Return A.
+
+  return A;
+}
+
+},{}],373:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.isElement = isElement;
+exports.isHTMLInputElement = isHTMLInputElement;
+exports.isHTMLSelectElement = isHTMLSelectElement;
+exports.isHTMLTextAreaElement = isHTMLTextAreaElement;
+exports.safeWindow = safeWindow;
+
+function isElement(node) {
+  return (// @ts-ignore
+    node !== null && node instanceof node.ownerDocument.defaultView.Element
+  );
+}
+
+function isHTMLInputElement(node) {
+  return isElement(node) && // @ts-ignore
+  node instanceof node.ownerDocument.defaultView.HTMLInputElement;
+}
+
+function isHTMLSelectElement(node) {
+  return isElement(node) && // @ts-ignore
+  node instanceof node.ownerDocument.defaultView.HTMLSelectElement;
+}
+
+function isHTMLTextAreaElement(node) {
+  return isElement(node) && // @ts-ignore
+  node instanceof node.ownerDocument.defaultView.HTMLTextAreaElement;
+}
+
+function safeWindow(node) {
+  var _ref = node.ownerDocument === null ? node : node.ownerDocument,
+      defaultView = _ref.defaultView;
+
+  if (defaultView === null) {
+    throw new TypeError("no window available");
+  }
+
+  return defaultView;
+}
+
+},{}],374:[function(require,module,exports){
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],375:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.printIteratorEntries = printIteratorEntries;
+exports.printIteratorValues = printIteratorValues;
+exports.printListItems = printListItems;
+exports.printObjectProperties = printObjectProperties;
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+const getKeysOfEnumerableProperties = object => {
+  const keys = Object.keys(object).sort();
+
+  if (Object.getOwnPropertySymbols) {
+    Object.getOwnPropertySymbols(object).forEach(symbol => {
+      if (Object.getOwnPropertyDescriptor(object, symbol).enumerable) {
+        keys.push(symbol);
+      }
+    });
+  }
+
+  return keys;
+};
+/**
+ * Return entries (for example, of a map)
+ * with spacing, indentation, and comma
+ * without surrounding punctuation (for example, braces)
+ */
+
+function printIteratorEntries(
+  iterator,
+  config,
+  indentation,
+  depth,
+  refs,
+  printer, // Too bad, so sad that separator for ECMAScript Map has been ' => '
+  // What a distracting diff if you change a data structure to/from
+  // ECMAScript Object or Immutable.Map/OrderedMap which use the default.
+  separator = ': '
+) {
+  let result = '';
+  let current = iterator.next();
+
+  if (!current.done) {
+    result += config.spacingOuter;
+    const indentationNext = indentation + config.indent;
+
+    while (!current.done) {
+      const name = printer(
+        current.value[0],
+        config,
+        indentationNext,
+        depth,
+        refs
+      );
+      const value = printer(
+        current.value[1],
+        config,
+        indentationNext,
+        depth,
+        refs
+      );
+      result += indentationNext + name + separator + value;
+      current = iterator.next();
+
+      if (!current.done) {
+        result += ',' + config.spacingInner;
+      } else if (!config.min) {
+        result += ',';
+      }
+    }
+
+    result += config.spacingOuter + indentation;
+  }
+
+  return result;
+}
+/**
+ * Return values (for example, of a set)
+ * with spacing, indentation, and comma
+ * without surrounding punctuation (braces or brackets)
+ */
+
+function printIteratorValues(
+  iterator,
+  config,
+  indentation,
+  depth,
+  refs,
+  printer
+) {
+  let result = '';
+  let current = iterator.next();
+
+  if (!current.done) {
+    result += config.spacingOuter;
+    const indentationNext = indentation + config.indent;
+
+    while (!current.done) {
+      result +=
+        indentationNext +
+        printer(current.value, config, indentationNext, depth, refs);
+      current = iterator.next();
+
+      if (!current.done) {
+        result += ',' + config.spacingInner;
+      } else if (!config.min) {
+        result += ',';
+      }
+    }
+
+    result += config.spacingOuter + indentation;
+  }
+
+  return result;
+}
+/**
+ * Return items (for example, of an array)
+ * with spacing, indentation, and comma
+ * without surrounding punctuation (for example, brackets)
+ **/
+
+function printListItems(list, config, indentation, depth, refs, printer) {
+  let result = '';
+
+  if (list.length) {
+    result += config.spacingOuter;
+    const indentationNext = indentation + config.indent;
+
+    for (let i = 0; i < list.length; i++) {
+      result +=
+        indentationNext +
+        printer(list[i], config, indentationNext, depth, refs);
+
+      if (i < list.length - 1) {
+        result += ',' + config.spacingInner;
+      } else if (!config.min) {
+        result += ',';
+      }
+    }
+
+    result += config.spacingOuter + indentation;
+  }
+
+  return result;
+}
+/**
+ * Return properties of an object
+ * with spacing, indentation, and comma
+ * without surrounding punctuation (for example, braces)
+ */
+
+function printObjectProperties(val, config, indentation, depth, refs, printer) {
+  let result = '';
+  const keys = getKeysOfEnumerableProperties(val);
+
+  if (keys.length) {
+    result += config.spacingOuter;
+    const indentationNext = indentation + config.indent;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const name = printer(key, config, indentationNext, depth, refs);
+      const value = printer(val[key], config, indentationNext, depth, refs);
+      result += indentationNext + name + ': ' + value;
+
+      if (i < keys.length - 1) {
+        result += ',' + config.spacingInner;
+      } else if (!config.min) {
+        result += ',';
+      }
+    }
+
+    result += config.spacingOuter + indentation;
+  }
+
+  return result;
+}
+
+},{}],376:[function(require,module,exports){
+'use strict';
+
+var _ansiStyles = _interopRequireDefault(require('ansi-styles'));
+
+var _collections = require('./collections');
+
+var _AsymmetricMatcher = _interopRequireDefault(
+  require('./plugins/AsymmetricMatcher')
+);
+
+var _ConvertAnsi = _interopRequireDefault(require('./plugins/ConvertAnsi'));
+
+var _DOMCollection = _interopRequireDefault(require('./plugins/DOMCollection'));
+
+var _DOMElement = _interopRequireDefault(require('./plugins/DOMElement'));
+
+var _Immutable = _interopRequireDefault(require('./plugins/Immutable'));
+
+var _ReactElement = _interopRequireDefault(require('./plugins/ReactElement'));
+
+var _ReactTestComponent = _interopRequireDefault(
+  require('./plugins/ReactTestComponent')
+);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj};
+}
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+const toString = Object.prototype.toString;
+const toISOString = Date.prototype.toISOString;
+const errorToString = Error.prototype.toString;
+const regExpToString = RegExp.prototype.toString;
+/**
+ * Explicitly comparing typeof constructor to function avoids undefined as name
+ * when mock identity-obj-proxy returns the key as the value for any key.
+ */
+
+const getConstructorName = val =>
+  (typeof val.constructor === 'function' && val.constructor.name) || 'Object';
+/* global window */
+
+/** Is val is equal to global window object? Works even if it does not exist :) */
+
+const isWindow = val => typeof window !== 'undefined' && val === window;
+
+const SYMBOL_REGEXP = /^Symbol\((.*)\)(.*)$/;
+const NEWLINE_REGEXP = /\n/gi;
+
+class PrettyFormatPluginError extends Error {
+  constructor(message, stack) {
+    super(message);
+    this.stack = stack;
+    this.name = this.constructor.name;
+  }
+}
+
+function isToStringedArrayType(toStringed) {
+  return (
+    toStringed === '[object Array]' ||
+    toStringed === '[object ArrayBuffer]' ||
+    toStringed === '[object DataView]' ||
+    toStringed === '[object Float32Array]' ||
+    toStringed === '[object Float64Array]' ||
+    toStringed === '[object Int8Array]' ||
+    toStringed === '[object Int16Array]' ||
+    toStringed === '[object Int32Array]' ||
+    toStringed === '[object Uint8Array]' ||
+    toStringed === '[object Uint8ClampedArray]' ||
+    toStringed === '[object Uint16Array]' ||
+    toStringed === '[object Uint32Array]'
+  );
+}
+
+function printNumber(val) {
+  return Object.is(val, -0) ? '-0' : String(val);
+}
+
+function printBigInt(val) {
+  return String(`${val}n`);
+}
+
+function printFunction(val, printFunctionName) {
+  if (!printFunctionName) {
+    return '[Function]';
+  }
+
+  return '[Function ' + (val.name || 'anonymous') + ']';
+}
+
+function printSymbol(val) {
+  return String(val).replace(SYMBOL_REGEXP, 'Symbol($1)');
+}
+
+function printError(val) {
+  return '[' + errorToString.call(val) + ']';
+}
+/**
+ * The first port of call for printing an object, handles most of the
+ * data-types in JS.
+ */
+
+function printBasicValue(val, printFunctionName, escapeRegex, escapeString) {
+  if (val === true || val === false) {
+    return '' + val;
+  }
+
+  if (val === undefined) {
+    return 'undefined';
+  }
+
+  if (val === null) {
+    return 'null';
+  }
+
+  const typeOf = typeof val;
+
+  if (typeOf === 'number') {
+    return printNumber(val);
+  }
+
+  if (typeOf === 'bigint') {
+    return printBigInt(val);
+  }
+
+  if (typeOf === 'string') {
+    if (escapeString) {
+      return '"' + val.replace(/"|\\/g, '\\$&') + '"';
+    }
+
+    return '"' + val + '"';
+  }
+
+  if (typeOf === 'function') {
+    return printFunction(val, printFunctionName);
+  }
+
+  if (typeOf === 'symbol') {
+    return printSymbol(val);
+  }
+
+  const toStringed = toString.call(val);
+
+  if (toStringed === '[object WeakMap]') {
+    return 'WeakMap {}';
+  }
+
+  if (toStringed === '[object WeakSet]') {
+    return 'WeakSet {}';
+  }
+
+  if (
+    toStringed === '[object Function]' ||
+    toStringed === '[object GeneratorFunction]'
+  ) {
+    return printFunction(val, printFunctionName);
+  }
+
+  if (toStringed === '[object Symbol]') {
+    return printSymbol(val);
+  }
+
+  if (toStringed === '[object Date]') {
+    return isNaN(+val) ? 'Date { NaN }' : toISOString.call(val);
+  }
+
+  if (toStringed === '[object Error]') {
+    return printError(val);
+  }
+
+  if (toStringed === '[object RegExp]') {
+    if (escapeRegex) {
+      // https://github.com/benjamingr/RegExp.escape/blob/master/polyfill.js
+      return regExpToString.call(val).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+    return regExpToString.call(val);
+  }
+
+  if (val instanceof Error) {
+    return printError(val);
+  }
+
+  return null;
+}
+/**
+ * Handles more complex objects ( such as objects with circular references.
+ * maps and sets etc )
+ */
+
+function printComplexValue(
+  val,
+  config,
+  indentation,
+  depth,
+  refs,
+  hasCalledToJSON
+) {
+  if (refs.indexOf(val) !== -1) {
+    return '[Circular]';
+  }
+
+  refs = refs.slice();
+  refs.push(val);
+  const hitMaxDepth = ++depth > config.maxDepth;
+  const min = config.min;
+
+  if (
+    config.callToJSON &&
+    !hitMaxDepth &&
+    val.toJSON &&
+    typeof val.toJSON === 'function' &&
+    !hasCalledToJSON
+  ) {
+    return printer(val.toJSON(), config, indentation, depth, refs, true);
+  }
+
+  const toStringed = toString.call(val);
+
+  if (toStringed === '[object Arguments]') {
+    return hitMaxDepth
+      ? '[Arguments]'
+      : (min ? '' : 'Arguments ') +
+          '[' +
+          (0, _collections.printListItems)(
+            val,
+            config,
+            indentation,
+            depth,
+            refs,
+            printer
+          ) +
+          ']';
+  }
+
+  if (isToStringedArrayType(toStringed)) {
+    return hitMaxDepth
+      ? '[' + val.constructor.name + ']'
+      : (min ? '' : val.constructor.name + ' ') +
+          '[' +
+          (0, _collections.printListItems)(
+            val,
+            config,
+            indentation,
+            depth,
+            refs,
+            printer
+          ) +
+          ']';
+  }
+
+  if (toStringed === '[object Map]') {
+    return hitMaxDepth
+      ? '[Map]'
+      : 'Map {' +
+          (0, _collections.printIteratorEntries)(
+            val.entries(),
+            config,
+            indentation,
+            depth,
+            refs,
+            printer,
+            ' => '
+          ) +
+          '}';
+  }
+
+  if (toStringed === '[object Set]') {
+    return hitMaxDepth
+      ? '[Set]'
+      : 'Set {' +
+          (0, _collections.printIteratorValues)(
+            val.values(),
+            config,
+            indentation,
+            depth,
+            refs,
+            printer
+          ) +
+          '}';
+  } // Avoid failure to serialize global window object in jsdom test environment.
+  // For example, not even relevant if window is prop of React element.
+
+  return hitMaxDepth || isWindow(val)
+    ? '[' + getConstructorName(val) + ']'
+    : (min ? '' : getConstructorName(val) + ' ') +
+        '{' +
+        (0, _collections.printObjectProperties)(
+          val,
+          config,
+          indentation,
+          depth,
+          refs,
+          printer
+        ) +
+        '}';
+}
+
+function isNewPlugin(plugin) {
+  return plugin.serialize != null;
+}
+
+function printPlugin(plugin, val, config, indentation, depth, refs) {
+  let printed;
+
+  try {
+    printed = isNewPlugin(plugin)
+      ? plugin.serialize(val, config, indentation, depth, refs, printer)
+      : plugin.print(
+          val,
+          valChild => printer(valChild, config, indentation, depth, refs),
+          str => {
+            const indentationNext = indentation + config.indent;
+            return (
+              indentationNext +
+              str.replace(NEWLINE_REGEXP, '\n' + indentationNext)
+            );
+          },
+          {
+            edgeSpacing: config.spacingOuter,
+            min: config.min,
+            spacing: config.spacingInner
+          },
+          config.colors
+        );
+  } catch (error) {
+    throw new PrettyFormatPluginError(error.message, error.stack);
+  }
+
+  if (typeof printed !== 'string') {
+    throw new Error(
+      `pretty-format: Plugin must return type "string" but instead returned "${typeof printed}".`
+    );
+  }
+
+  return printed;
+}
+
+function findPlugin(plugins, val) {
+  for (let p = 0; p < plugins.length; p++) {
+    try {
+      if (plugins[p].test(val)) {
+        return plugins[p];
+      }
+    } catch (error) {
+      throw new PrettyFormatPluginError(error.message, error.stack);
+    }
+  }
+
+  return null;
+}
+
+function printer(val, config, indentation, depth, refs, hasCalledToJSON) {
+  const plugin = findPlugin(config.plugins, val);
+
+  if (plugin !== null) {
+    return printPlugin(plugin, val, config, indentation, depth, refs);
+  }
+
+  const basicResult = printBasicValue(
+    val,
+    config.printFunctionName,
+    config.escapeRegex,
+    config.escapeString
+  );
+
+  if (basicResult !== null) {
+    return basicResult;
+  }
+
+  return printComplexValue(
+    val,
+    config,
+    indentation,
+    depth,
+    refs,
+    hasCalledToJSON
+  );
+}
+
+const DEFAULT_THEME = {
+  comment: 'gray',
+  content: 'reset',
+  prop: 'yellow',
+  tag: 'cyan',
+  value: 'green'
+};
+const DEFAULT_THEME_KEYS = Object.keys(DEFAULT_THEME);
+const DEFAULT_OPTIONS = {
+  callToJSON: true,
+  escapeRegex: false,
+  escapeString: true,
+  highlight: false,
+  indent: 2,
+  maxDepth: Infinity,
+  min: false,
+  plugins: [],
+  printFunctionName: true,
+  theme: DEFAULT_THEME
+};
+
+function validateOptions(options) {
+  Object.keys(options).forEach(key => {
+    if (!DEFAULT_OPTIONS.hasOwnProperty(key)) {
+      throw new Error(`pretty-format: Unknown option "${key}".`);
+    }
+  });
+
+  if (options.min && options.indent !== undefined && options.indent !== 0) {
+    throw new Error(
+      'pretty-format: Options "min" and "indent" cannot be used together.'
+    );
+  }
+
+  if (options.theme !== undefined) {
+    if (options.theme === null) {
+      throw new Error(`pretty-format: Option "theme" must not be null.`);
+    }
+
+    if (typeof options.theme !== 'object') {
+      throw new Error(
+        `pretty-format: Option "theme" must be of type "object" but instead received "${typeof options.theme}".`
+      );
+    }
+  }
+}
+
+const getColorsHighlight = options =>
+  DEFAULT_THEME_KEYS.reduce((colors, key) => {
+    const value =
+      options.theme && options.theme[key] !== undefined
+        ? options.theme[key]
+        : DEFAULT_THEME[key];
+    const color = value && _ansiStyles.default[value];
+
+    if (
+      color &&
+      typeof color.close === 'string' &&
+      typeof color.open === 'string'
+    ) {
+      colors[key] = color;
+    } else {
+      throw new Error(
+        `pretty-format: Option "theme" has a key "${key}" whose value "${value}" is undefined in ansi-styles.`
+      );
+    }
+
+    return colors;
+  }, Object.create(null));
+
+const getColorsEmpty = () =>
+  DEFAULT_THEME_KEYS.reduce((colors, key) => {
+    colors[key] = {
+      close: '',
+      open: ''
+    };
+    return colors;
+  }, Object.create(null));
+
+const getPrintFunctionName = options =>
+  options && options.printFunctionName !== undefined
+    ? options.printFunctionName
+    : DEFAULT_OPTIONS.printFunctionName;
+
+const getEscapeRegex = options =>
+  options && options.escapeRegex !== undefined
+    ? options.escapeRegex
+    : DEFAULT_OPTIONS.escapeRegex;
+
+const getEscapeString = options =>
+  options && options.escapeString !== undefined
+    ? options.escapeString
+    : DEFAULT_OPTIONS.escapeString;
+
+const getConfig = options => ({
+  callToJSON:
+    options && options.callToJSON !== undefined
+      ? options.callToJSON
+      : DEFAULT_OPTIONS.callToJSON,
+  colors:
+    options && options.highlight
+      ? getColorsHighlight(options)
+      : getColorsEmpty(),
+  escapeRegex: getEscapeRegex(options),
+  escapeString: getEscapeString(options),
+  indent:
+    options && options.min
+      ? ''
+      : createIndent(
+          options && options.indent !== undefined
+            ? options.indent
+            : DEFAULT_OPTIONS.indent
+        ),
+  maxDepth:
+    options && options.maxDepth !== undefined
+      ? options.maxDepth
+      : DEFAULT_OPTIONS.maxDepth,
+  min: options && options.min !== undefined ? options.min : DEFAULT_OPTIONS.min,
+  plugins:
+    options && options.plugins !== undefined
+      ? options.plugins
+      : DEFAULT_OPTIONS.plugins,
+  printFunctionName: getPrintFunctionName(options),
+  spacingInner: options && options.min ? ' ' : '\n',
+  spacingOuter: options && options.min ? '' : '\n'
+});
+
+function createIndent(indent) {
+  return new Array(indent + 1).join(' ');
+}
+/**
+ * Returns a presentation string of your `val` object
+ * @param val any potential JavaScript object
+ * @param options Custom settings
+ */
+
+function prettyFormat(val, options) {
+  if (options) {
+    validateOptions(options);
+
+    if (options.plugins) {
+      const plugin = findPlugin(options.plugins, val);
+
+      if (plugin !== null) {
+        return printPlugin(plugin, val, getConfig(options), '', 0, []);
+      }
+    }
+  }
+
+  const basicResult = printBasicValue(
+    val,
+    getPrintFunctionName(options),
+    getEscapeRegex(options),
+    getEscapeString(options)
+  );
+
+  if (basicResult !== null) {
+    return basicResult;
+  }
+
+  return printComplexValue(val, getConfig(options), '', 0, []);
+}
+
+prettyFormat.plugins = {
+  AsymmetricMatcher: _AsymmetricMatcher.default,
+  ConvertAnsi: _ConvertAnsi.default,
+  DOMCollection: _DOMCollection.default,
+  DOMElement: _DOMElement.default,
+  Immutable: _Immutable.default,
+  ReactElement: _ReactElement.default,
+  ReactTestComponent: _ReactTestComponent.default
+}; // eslint-disable-next-line no-redeclare
+
+module.exports = prettyFormat;
+
+},{"./collections":375,"./plugins/AsymmetricMatcher":377,"./plugins/ConvertAnsi":378,"./plugins/DOMCollection":379,"./plugins/DOMElement":380,"./plugins/Immutable":381,"./plugins/ReactElement":382,"./plugins/ReactTestComponent":383,"ansi-styles":386}],377:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.test = exports.serialize = void 0;
+
+var _collections = require('../collections');
+
+var Symbol = global['jest-symbol-do-not-touch'] || global.Symbol;
+const asymmetricMatcher =
+  typeof Symbol === 'function' && Symbol.for
+    ? Symbol.for('jest.asymmetricMatcher')
+    : 0x1357a5;
+const SPACE = ' ';
+
+const serialize = (val, config, indentation, depth, refs, printer) => {
+  const stringedValue = val.toString();
+
+  if (
+    stringedValue === 'ArrayContaining' ||
+    stringedValue === 'ArrayNotContaining'
+  ) {
+    if (++depth > config.maxDepth) {
+      return '[' + stringedValue + ']';
+    }
+
+    return (
+      stringedValue +
+      SPACE +
+      '[' +
+      (0, _collections.printListItems)(
+        val.sample,
+        config,
+        indentation,
+        depth,
+        refs,
+        printer
+      ) +
+      ']'
+    );
+  }
+
+  if (
+    stringedValue === 'ObjectContaining' ||
+    stringedValue === 'ObjectNotContaining'
+  ) {
+    if (++depth > config.maxDepth) {
+      return '[' + stringedValue + ']';
+    }
+
+    return (
+      stringedValue +
+      SPACE +
+      '{' +
+      (0, _collections.printObjectProperties)(
+        val.sample,
+        config,
+        indentation,
+        depth,
+        refs,
+        printer
+      ) +
+      '}'
+    );
+  }
+
+  if (
+    stringedValue === 'StringMatching' ||
+    stringedValue === 'StringNotMatching'
+  ) {
+    return (
+      stringedValue +
+      SPACE +
+      printer(val.sample, config, indentation, depth, refs)
+    );
+  }
+
+  if (
+    stringedValue === 'StringContaining' ||
+    stringedValue === 'StringNotContaining'
+  ) {
+    return (
+      stringedValue +
+      SPACE +
+      printer(val.sample, config, indentation, depth, refs)
+    );
+  }
+
+  return val.toAsymmetricMatcher();
+};
+
+exports.serialize = serialize;
+
+const test = val => val && val.$$typeof === asymmetricMatcher;
+
+exports.test = test;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../collections":375}],378:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.serialize = exports.test = void 0;
+
+var _ansiRegex = _interopRequireDefault(require('ansi-regex'));
+
+var _ansiStyles = _interopRequireDefault(require('ansi-styles'));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj};
+}
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+const toHumanReadableAnsi = text =>
+  text.replace((0, _ansiRegex.default)(), match => {
+    switch (match) {
+      case _ansiStyles.default.red.close:
+      case _ansiStyles.default.green.close:
+      case _ansiStyles.default.cyan.close:
+      case _ansiStyles.default.gray.close:
+      case _ansiStyles.default.white.close:
+      case _ansiStyles.default.yellow.close:
+      case _ansiStyles.default.bgRed.close:
+      case _ansiStyles.default.bgGreen.close:
+      case _ansiStyles.default.bgYellow.close:
+      case _ansiStyles.default.inverse.close:
+      case _ansiStyles.default.dim.close:
+      case _ansiStyles.default.bold.close:
+      case _ansiStyles.default.reset.open:
+      case _ansiStyles.default.reset.close:
+        return '</>';
+
+      case _ansiStyles.default.red.open:
+        return '<red>';
+
+      case _ansiStyles.default.green.open:
+        return '<green>';
+
+      case _ansiStyles.default.cyan.open:
+        return '<cyan>';
+
+      case _ansiStyles.default.gray.open:
+        return '<gray>';
+
+      case _ansiStyles.default.white.open:
+        return '<white>';
+
+      case _ansiStyles.default.yellow.open:
+        return '<yellow>';
+
+      case _ansiStyles.default.bgRed.open:
+        return '<bgRed>';
+
+      case _ansiStyles.default.bgGreen.open:
+        return '<bgGreen>';
+
+      case _ansiStyles.default.bgYellow.open:
+        return '<bgYellow>';
+
+      case _ansiStyles.default.inverse.open:
+        return '<inverse>';
+
+      case _ansiStyles.default.dim.open:
+        return '<dim>';
+
+      case _ansiStyles.default.bold.open:
+        return '<bold>';
+
+      default:
+        return '';
+    }
+  });
+
+const test = val =>
+  typeof val === 'string' && !!val.match((0, _ansiRegex.default)());
+
+exports.test = test;
+
+const serialize = (val, config, indentation, depth, refs, printer) =>
+  printer(toHumanReadableAnsi(val), config, indentation, depth, refs);
+
+exports.serialize = serialize;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+},{"ansi-regex":65,"ansi-styles":386}],379:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.serialize = exports.test = void 0;
+
+var _collections = require('../collections');
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+const SPACE = ' ';
+const OBJECT_NAMES = ['DOMStringMap', 'NamedNodeMap'];
+const ARRAY_REGEXP = /^(HTML\w*Collection|NodeList)$/;
+
+const testName = name =>
+  OBJECT_NAMES.indexOf(name) !== -1 || ARRAY_REGEXP.test(name);
+
+const test = val =>
+  val &&
+  val.constructor &&
+  !!val.constructor.name &&
+  testName(val.constructor.name);
+
+exports.test = test;
+
+const isNamedNodeMap = collection =>
+  collection.constructor.name === 'NamedNodeMap';
+
+const serialize = (collection, config, indentation, depth, refs, printer) => {
+  const name = collection.constructor.name;
+
+  if (++depth > config.maxDepth) {
+    return '[' + name + ']';
+  }
+
+  return (
+    (config.min ? '' : name + SPACE) +
+    (OBJECT_NAMES.indexOf(name) !== -1
+      ? '{' +
+        (0, _collections.printObjectProperties)(
+          isNamedNodeMap(collection)
+            ? Array.from(collection).reduce((props, attribute) => {
+                props[attribute.name] = attribute.value;
+                return props;
+              }, {})
+            : {...collection},
+          config,
+          indentation,
+          depth,
+          refs,
+          printer
+        ) +
+        '}'
+      : '[' +
+        (0, _collections.printListItems)(
+          Array.from(collection),
+          config,
+          indentation,
+          depth,
+          refs,
+          printer
+        ) +
+        ']')
+  );
+};
+
+exports.serialize = serialize;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+},{"../collections":375}],380:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.serialize = exports.test = void 0;
+
+var _markup = require('./lib/markup');
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+const ELEMENT_NODE = 1;
+const TEXT_NODE = 3;
+const COMMENT_NODE = 8;
+const FRAGMENT_NODE = 11;
+const ELEMENT_REGEXP = /^((HTML|SVG)\w*)?Element$/;
+
+const testNode = (nodeType, name) =>
+  (nodeType === ELEMENT_NODE && ELEMENT_REGEXP.test(name)) ||
+  (nodeType === TEXT_NODE && name === 'Text') ||
+  (nodeType === COMMENT_NODE && name === 'Comment') ||
+  (nodeType === FRAGMENT_NODE && name === 'DocumentFragment');
+
+const test = val =>
+  val &&
+  val.constructor &&
+  val.constructor.name &&
+  testNode(val.nodeType, val.constructor.name);
+
+exports.test = test;
+
+function nodeIsText(node) {
+  return node.nodeType === TEXT_NODE;
+}
+
+function nodeIsComment(node) {
+  return node.nodeType === COMMENT_NODE;
+}
+
+function nodeIsFragment(node) {
+  return node.nodeType === FRAGMENT_NODE;
+}
+
+const serialize = (node, config, indentation, depth, refs, printer) => {
+  if (nodeIsText(node)) {
+    return (0, _markup.printText)(node.data, config);
+  }
+
+  if (nodeIsComment(node)) {
+    return (0, _markup.printComment)(node.data, config);
+  }
+
+  const type = nodeIsFragment(node)
+    ? `DocumentFragment`
+    : node.tagName.toLowerCase();
+
+  if (++depth > config.maxDepth) {
+    return (0, _markup.printElementAsLeaf)(type, config);
+  }
+
+  return (0, _markup.printElement)(
+    type,
+    (0, _markup.printProps)(
+      nodeIsFragment(node)
+        ? []
+        : Array.from(node.attributes)
+            .map(attr => attr.name)
+            .sort(),
+      nodeIsFragment(node)
+        ? {}
+        : Array.from(node.attributes).reduce((props, attribute) => {
+            props[attribute.name] = attribute.value;
+            return props;
+          }, {}),
+      config,
+      indentation + config.indent,
+      depth,
+      refs,
+      printer
+    ),
+    (0, _markup.printChildren)(
+      Array.prototype.slice.call(node.childNodes || node.children),
+      config,
+      indentation + config.indent,
+      depth,
+      refs,
+      printer
+    ),
+    config,
+    indentation
+  );
+};
+
+exports.serialize = serialize;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+},{"./lib/markup":385}],381:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.test = exports.serialize = void 0;
+
+var _collections = require('../collections');
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+// SENTINEL constants are from https://github.com/facebook/immutable-js
+const IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';
+const IS_LIST_SENTINEL = '@@__IMMUTABLE_LIST__@@';
+const IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@';
+const IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
+const IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
+const IS_RECORD_SENTINEL = '@@__IMMUTABLE_RECORD__@@'; // immutable v4
+
+const IS_SEQ_SENTINEL = '@@__IMMUTABLE_SEQ__@@';
+const IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
+const IS_STACK_SENTINEL = '@@__IMMUTABLE_STACK__@@';
+
+const getImmutableName = name => 'Immutable.' + name;
+
+const printAsLeaf = name => '[' + name + ']';
+
+const SPACE = ' ';
+const LAZY = '…'; // Seq is lazy if it calls a method like filter
+
+const printImmutableEntries = (
+  val,
+  config,
+  indentation,
+  depth,
+  refs,
+  printer,
+  type
+) =>
+  ++depth > config.maxDepth
+    ? printAsLeaf(getImmutableName(type))
+    : getImmutableName(type) +
+      SPACE +
+      '{' +
+      (0, _collections.printIteratorEntries)(
+        val.entries(),
+        config,
+        indentation,
+        depth,
+        refs,
+        printer
+      ) +
+      '}'; // Record has an entries method because it is a collection in immutable v3.
+// Return an iterator for Immutable Record from version v3 or v4.
+
+function getRecordEntries(val) {
+  let i = 0;
+  return {
+    next() {
+      if (i < val._keys.length) {
+        const key = val._keys[i++];
+        return {
+          done: false,
+          value: [key, val.get(key)]
+        };
+      }
+
+      return {
+        done: true,
+        value: undefined
+      };
+    }
+  };
+}
+
+const printImmutableRecord = (
+  val,
+  config,
+  indentation,
+  depth,
+  refs,
+  printer
+) => {
+  // _name property is defined only for an Immutable Record instance
+  // which was constructed with a second optional descriptive name arg
+  const name = getImmutableName(val._name || 'Record');
+  return ++depth > config.maxDepth
+    ? printAsLeaf(name)
+    : name +
+        SPACE +
+        '{' +
+        (0, _collections.printIteratorEntries)(
+          getRecordEntries(val),
+          config,
+          indentation,
+          depth,
+          refs,
+          printer
+        ) +
+        '}';
+};
+
+const printImmutableSeq = (val, config, indentation, depth, refs, printer) => {
+  const name = getImmutableName('Seq');
+
+  if (++depth > config.maxDepth) {
+    return printAsLeaf(name);
+  }
+
+  if (val[IS_KEYED_SENTINEL]) {
+    return (
+      name +
+      SPACE +
+      '{' + // from Immutable collection of entries or from ECMAScript object
+      (val._iter || val._object
+        ? (0, _collections.printIteratorEntries)(
+            val.entries(),
+            config,
+            indentation,
+            depth,
+            refs,
+            printer
+          )
+        : LAZY) +
+      '}'
+    );
+  }
+
+  return (
+    name +
+    SPACE +
+    '[' +
+    (val._iter || // from Immutable collection of values
+    val._array || // from ECMAScript array
+    val._collection || // from ECMAScript collection in immutable v4
+    val._iterable // from ECMAScript collection in immutable v3
+      ? (0, _collections.printIteratorValues)(
+          val.values(),
+          config,
+          indentation,
+          depth,
+          refs,
+          printer
+        )
+      : LAZY) +
+    ']'
+  );
+};
+
+const printImmutableValues = (
+  val,
+  config,
+  indentation,
+  depth,
+  refs,
+  printer,
+  type
+) =>
+  ++depth > config.maxDepth
+    ? printAsLeaf(getImmutableName(type))
+    : getImmutableName(type) +
+      SPACE +
+      '[' +
+      (0, _collections.printIteratorValues)(
+        val.values(),
+        config,
+        indentation,
+        depth,
+        refs,
+        printer
+      ) +
+      ']';
+
+const serialize = (val, config, indentation, depth, refs, printer) => {
+  if (val[IS_MAP_SENTINEL]) {
+    return printImmutableEntries(
+      val,
+      config,
+      indentation,
+      depth,
+      refs,
+      printer,
+      val[IS_ORDERED_SENTINEL] ? 'OrderedMap' : 'Map'
+    );
+  }
+
+  if (val[IS_LIST_SENTINEL]) {
+    return printImmutableValues(
+      val,
+      config,
+      indentation,
+      depth,
+      refs,
+      printer,
+      'List'
+    );
+  }
+
+  if (val[IS_SET_SENTINEL]) {
+    return printImmutableValues(
+      val,
+      config,
+      indentation,
+      depth,
+      refs,
+      printer,
+      val[IS_ORDERED_SENTINEL] ? 'OrderedSet' : 'Set'
+    );
+  }
+
+  if (val[IS_STACK_SENTINEL]) {
+    return printImmutableValues(
+      val,
+      config,
+      indentation,
+      depth,
+      refs,
+      printer,
+      'Stack'
+    );
+  }
+
+  if (val[IS_SEQ_SENTINEL]) {
+    return printImmutableSeq(val, config, indentation, depth, refs, printer);
+  } // For compatibility with immutable v3 and v4, let record be the default.
+
+  return printImmutableRecord(val, config, indentation, depth, refs, printer);
+}; // Explicitly comparing sentinel properties to true avoids false positive
+// when mock identity-obj-proxy returns the key as the value for any key.
+
+exports.serialize = serialize;
+
+const test = val =>
+  val &&
+  (val[IS_ITERABLE_SENTINEL] === true || val[IS_RECORD_SENTINEL] === true);
+
+exports.test = test;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+},{"../collections":375}],382:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.test = exports.serialize = void 0;
+
+var ReactIs = _interopRequireWildcard(require('react-is'));
+
+var _markup = require('./lib/markup');
+
+function _getRequireWildcardCache() {
+  if (typeof WeakMap !== 'function') return null;
+  var cache = new WeakMap();
+  _getRequireWildcardCache = function () {
+    return cache;
+  };
+  return cache;
+}
+
+function _interopRequireWildcard(obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  }
+  if (obj === null || (typeof obj !== 'object' && typeof obj !== 'function')) {
+    return {default: obj};
+  }
+  var cache = _getRequireWildcardCache();
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+  var newObj = {};
+  var hasPropertyDescriptor =
+    Object.defineProperty && Object.getOwnPropertyDescriptor;
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor
+        ? Object.getOwnPropertyDescriptor(obj, key)
+        : null;
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  newObj.default = obj;
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+  return newObj;
+}
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+// Given element.props.children, or subtree during recursive traversal,
+// return flattened array of children.
+const getChildren = (arg, children = []) => {
+  if (Array.isArray(arg)) {
+    arg.forEach(item => {
+      getChildren(item, children);
+    });
+  } else if (arg != null && arg !== false) {
+    children.push(arg);
+  }
+
+  return children;
+};
+
+const getType = element => {
+  const type = element.type;
+
+  if (typeof type === 'string') {
+    return type;
+  }
+
+  if (typeof type === 'function') {
+    return type.displayName || type.name || 'Unknown';
+  }
+
+  if (ReactIs.isFragment(element)) {
+    return 'React.Fragment';
+  }
+
+  if (ReactIs.isSuspense(element)) {
+    return 'React.Suspense';
+  }
+
+  if (typeof type === 'object' && type !== null) {
+    if (ReactIs.isContextProvider(element)) {
+      return 'Context.Provider';
+    }
+
+    if (ReactIs.isContextConsumer(element)) {
+      return 'Context.Consumer';
+    }
+
+    if (ReactIs.isForwardRef(element)) {
+      if (type.displayName) {
+        return type.displayName;
+      }
+
+      const functionName = type.render.displayName || type.render.name || '';
+      return functionName !== ''
+        ? 'ForwardRef(' + functionName + ')'
+        : 'ForwardRef';
+    }
+
+    if (ReactIs.isMemo(element)) {
+      const functionName =
+        type.displayName || type.type.displayName || type.type.name || '';
+      return functionName !== '' ? 'Memo(' + functionName + ')' : 'Memo';
+    }
+  }
+
+  return 'UNDEFINED';
+};
+
+const getPropKeys = element => {
+  const {props} = element;
+  return Object.keys(props)
+    .filter(key => key !== 'children' && props[key] !== undefined)
+    .sort();
+};
+
+const serialize = (element, config, indentation, depth, refs, printer) =>
+  ++depth > config.maxDepth
+    ? (0, _markup.printElementAsLeaf)(getType(element), config)
+    : (0, _markup.printElement)(
+        getType(element),
+        (0, _markup.printProps)(
+          getPropKeys(element),
+          element.props,
+          config,
+          indentation + config.indent,
+          depth,
+          refs,
+          printer
+        ),
+        (0, _markup.printChildren)(
+          getChildren(element.props.children),
+          config,
+          indentation + config.indent,
+          depth,
+          refs,
+          printer
+        ),
+        config,
+        indentation
+      );
+
+exports.serialize = serialize;
+
+const test = val => val && ReactIs.isElement(val);
+
+exports.test = test;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+},{"./lib/markup":385,"react-is":402}],383:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = exports.test = exports.serialize = void 0;
+
+var _markup = require('./lib/markup');
+
+var Symbol = global['jest-symbol-do-not-touch'] || global.Symbol;
+const testSymbol =
+  typeof Symbol === 'function' && Symbol.for
+    ? Symbol.for('react.test.json')
+    : 0xea71357;
+
+const getPropKeys = object => {
+  const {props} = object;
+  return props
+    ? Object.keys(props)
+        .filter(key => props[key] !== undefined)
+        .sort()
+    : [];
+};
+
+const serialize = (object, config, indentation, depth, refs, printer) =>
+  ++depth > config.maxDepth
+    ? (0, _markup.printElementAsLeaf)(object.type, config)
+    : (0, _markup.printElement)(
+        object.type,
+        object.props
+          ? (0, _markup.printProps)(
+              getPropKeys(object),
+              object.props,
+              config,
+              indentation + config.indent,
+              depth,
+              refs,
+              printer
+            )
+          : '',
+        object.children
+          ? (0, _markup.printChildren)(
+              object.children,
+              config,
+              indentation + config.indent,
+              depth,
+              refs,
+              printer
+            )
+          : '',
+        config,
+        indentation
+      );
+
+exports.serialize = serialize;
+
+const test = val => val && val.$$typeof === testSymbol;
+
+exports.test = test;
+const plugin = {
+  serialize,
+  test
+};
+var _default = plugin;
+exports.default = _default;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./lib/markup":385}],384:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.default = escapeHTML;
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+function escapeHTML(str) {
+  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+},{}],385:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.printElementAsLeaf = exports.printElement = exports.printComment = exports.printText = exports.printChildren = exports.printProps = void 0;
+
+var _escapeHTML = _interopRequireDefault(require('./escapeHTML'));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj};
+}
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+// Return empty string if keys is empty.
+const printProps = (keys, props, config, indentation, depth, refs, printer) => {
+  const indentationNext = indentation + config.indent;
+  const colors = config.colors;
+  return keys
+    .map(key => {
+      const value = props[key];
+      let printed = printer(value, config, indentationNext, depth, refs);
+
+      if (typeof value !== 'string') {
+        if (printed.indexOf('\n') !== -1) {
+          printed =
+            config.spacingOuter +
+            indentationNext +
+            printed +
+            config.spacingOuter +
+            indentation;
+        }
+
+        printed = '{' + printed + '}';
+      }
+
+      return (
+        config.spacingInner +
+        indentation +
+        colors.prop.open +
+        key +
+        colors.prop.close +
+        '=' +
+        colors.value.open +
+        printed +
+        colors.value.close
+      );
+    })
+    .join('');
+}; // Return empty string if children is empty.
+
+exports.printProps = printProps;
+
+const printChildren = (children, config, indentation, depth, refs, printer) =>
+  children
+    .map(
+      child =>
+        config.spacingOuter +
+        indentation +
+        (typeof child === 'string'
+          ? printText(child, config)
+          : printer(child, config, indentation, depth, refs))
+    )
+    .join('');
+
+exports.printChildren = printChildren;
+
+const printText = (text, config) => {
+  const contentColor = config.colors.content;
+  return (
+    contentColor.open + (0, _escapeHTML.default)(text) + contentColor.close
+  );
+};
+
+exports.printText = printText;
+
+const printComment = (comment, config) => {
+  const commentColor = config.colors.comment;
+  return (
+    commentColor.open +
+    '<!--' +
+    (0, _escapeHTML.default)(comment) +
+    '-->' +
+    commentColor.close
+  );
+}; // Separate the functions to format props, children, and element,
+// so a plugin could override a particular function, if needed.
+// Too bad, so sad: the traditional (but unnecessary) space
+// in a self-closing tagColor requires a second test of printedProps.
+
+exports.printComment = printComment;
+
+const printElement = (
+  type,
+  printedProps,
+  printedChildren,
+  config,
+  indentation
+) => {
+  const tagColor = config.colors.tag;
+  return (
+    tagColor.open +
+    '<' +
+    type +
+    (printedProps &&
+      tagColor.close +
+        printedProps +
+        config.spacingOuter +
+        indentation +
+        tagColor.open) +
+    (printedChildren
+      ? '>' +
+        tagColor.close +
+        printedChildren +
+        config.spacingOuter +
+        indentation +
+        tagColor.open +
+        '</' +
+        type
+      : (printedProps && !config.min ? '' : ' ') + '/') +
+    '>' +
+    tagColor.close
+  );
+};
+
+exports.printElement = printElement;
+
+const printElementAsLeaf = (type, config) => {
+  const tagColor = config.colors.tag;
+  return (
+    tagColor.open +
+    '<' +
+    type +
+    tagColor.close +
+    ' …' +
+    tagColor.open +
+    ' />' +
+    tagColor.close
+  );
+};
+
+exports.printElementAsLeaf = printElementAsLeaf;
+
+},{"./escapeHTML":384}],386:[function(require,module,exports){
+'use strict';
+
+const wrapAnsi16 = (fn, offset) => (...args) => {
+	const code = fn(...args);
+	return `\u001B[${code + offset}m`;
+};
+
+const wrapAnsi256 = (fn, offset) => (...args) => {
+	const code = fn(...args);
+	return `\u001B[${38 + offset};5;${code}m`;
+};
+
+const wrapAnsi16m = (fn, offset) => (...args) => {
+	const rgb = fn(...args);
+	return `\u001B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
+};
+
+const ansi2ansi = n => n;
+const rgb2rgb = (r, g, b) => [r, g, b];
+
+const setLazyProperty = (object, property, get) => {
+	Object.defineProperty(object, property, {
+		get: () => {
+			const value = get();
+
+			Object.defineProperty(object, property, {
+				value,
+				enumerable: true,
+				configurable: true
+			});
+
+			return value;
+		},
+		enumerable: true,
+		configurable: true
+	});
+};
+
+/** @type {typeof import('color-convert')} */
+let colorConvert;
+const makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
+	if (colorConvert === undefined) {
+		colorConvert = require('color-convert');
+	}
+
+	const offset = isBackground ? 10 : 0;
+	const styles = {};
+
+	for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
+		const name = sourceSpace === 'ansi16' ? 'ansi' : sourceSpace;
+		if (sourceSpace === targetSpace) {
+			styles[name] = wrap(identity, offset);
+		} else if (typeof suite === 'object') {
+			styles[name] = wrap(suite[targetSpace], offset);
+		}
+	}
+
+	return styles;
+};
+
+function assembleStyles() {
+	const codes = new Map();
+	const styles = {
+		modifier: {
+			reset: [0, 0],
+			// 21 isn't widely supported and 22 does the same thing
+			bold: [1, 22],
+			dim: [2, 22],
+			italic: [3, 23],
+			underline: [4, 24],
+			inverse: [7, 27],
+			hidden: [8, 28],
+			strikethrough: [9, 29]
+		},
+		color: {
+			black: [30, 39],
+			red: [31, 39],
+			green: [32, 39],
+			yellow: [33, 39],
+			blue: [34, 39],
+			magenta: [35, 39],
+			cyan: [36, 39],
+			white: [37, 39],
+
+			// Bright color
+			blackBright: [90, 39],
+			redBright: [91, 39],
+			greenBright: [92, 39],
+			yellowBright: [93, 39],
+			blueBright: [94, 39],
+			magentaBright: [95, 39],
+			cyanBright: [96, 39],
+			whiteBright: [97, 39]
+		},
+		bgColor: {
+			bgBlack: [40, 49],
+			bgRed: [41, 49],
+			bgGreen: [42, 49],
+			bgYellow: [43, 49],
+			bgBlue: [44, 49],
+			bgMagenta: [45, 49],
+			bgCyan: [46, 49],
+			bgWhite: [47, 49],
+
+			// Bright color
+			bgBlackBright: [100, 49],
+			bgRedBright: [101, 49],
+			bgGreenBright: [102, 49],
+			bgYellowBright: [103, 49],
+			bgBlueBright: [104, 49],
+			bgMagentaBright: [105, 49],
+			bgCyanBright: [106, 49],
+			bgWhiteBright: [107, 49]
+		}
+	};
+
+	// Alias bright black as gray (and grey)
+	styles.color.gray = styles.color.blackBright;
+	styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
+	styles.color.grey = styles.color.blackBright;
+	styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
+
+	for (const [groupName, group] of Object.entries(styles)) {
+		for (const [styleName, style] of Object.entries(group)) {
+			styles[styleName] = {
+				open: `\u001B[${style[0]}m`,
+				close: `\u001B[${style[1]}m`
+			};
+
+			group[styleName] = styles[styleName];
+
+			codes.set(style[0], style[1]);
+		}
+
+		Object.defineProperty(styles, groupName, {
+			value: group,
+			enumerable: false
+		});
+	}
+
+	Object.defineProperty(styles, 'codes', {
+		value: codes,
+		enumerable: false
+	});
+
+	styles.color.close = '\u001B[39m';
+	styles.bgColor.close = '\u001B[49m';
+
+	setLazyProperty(styles.color, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, false));
+	setLazyProperty(styles.color, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, false));
+	setLazyProperty(styles.color, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, false));
+	setLazyProperty(styles.bgColor, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, true));
+	setLazyProperty(styles.bgColor, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, true));
+	setLazyProperty(styles.bgColor, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, true));
+
+	return styles;
+}
+
+// Make the export immutable
+Object.defineProperty(module, 'exports', {
+	enumerable: true,
+	get: assembleStyles
+});
+
+},{"color-convert":388}],387:[function(require,module,exports){
 /* MIT license */
 /* eslint-disable no-mixed-operators */
 const cssKeywords = require('color-name');
@@ -9612,7 +15613,7 @@ convert.rgb.gray = function (rgb) {
 	return [val / 255 * 100];
 };
 
-},{"color-name":199}],197:[function(require,module,exports){
+},{"color-name":390}],388:[function(require,module,exports){
 const conversions = require('./conversions');
 const route = require('./route');
 
@@ -9695,7 +15696,7 @@ models.forEach(fromModel => {
 
 module.exports = convert;
 
-},{"./conversions":196,"./route":198}],198:[function(require,module,exports){
+},{"./conversions":387,"./route":389}],389:[function(require,module,exports){
 const conversions = require('./conversions');
 
 /*
@@ -9794,7 +15795,7 @@ module.exports = function (fromModel) {
 };
 
 
-},{"./conversions":196}],199:[function(require,module,exports){
+},{"./conversions":387}],390:[function(require,module,exports){
 'use strict'
 
 module.exports = {
@@ -9948,6008 +15949,7 @@ module.exports = {
 	"yellowgreen": [154, 205, 50]
 };
 
-},{}],200:[function(require,module,exports){
-require('../../modules/es.string.iterator');
-require('../../modules/es.array.from');
-var path = require('../../internals/path');
-
-module.exports = path.Array.from;
-
-},{"../../internals/path":299,"../../modules/es.array.from":324,"../../modules/es.string.iterator":337}],201:[function(require,module,exports){
-require('../../modules/es.array.is-array');
-var path = require('../../internals/path');
-
-module.exports = path.Array.isArray;
-
-},{"../../internals/path":299,"../../modules/es.array.is-array":325}],202:[function(require,module,exports){
-require('../../../modules/es.array.concat');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').concat;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.concat":321}],203:[function(require,module,exports){
-require('../../../modules/es.array.iterator');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').entries;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.iterator":326}],204:[function(require,module,exports){
-require('../../../modules/es.array.find');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').find;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.find":322}],205:[function(require,module,exports){
-require('../../../modules/es.array.for-each');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').forEach;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.for-each":323}],206:[function(require,module,exports){
-require('../../../modules/es.array.iterator');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').keys;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.iterator":326}],207:[function(require,module,exports){
-require('../../../modules/es.array.slice');
-var entryVirtual = require('../../../internals/entry-virtual');
-
-module.exports = entryVirtual('Array').slice;
-
-},{"../../../internals/entry-virtual":256,"../../../modules/es.array.slice":327}],208:[function(require,module,exports){
-var concat = require('../array/virtual/concat');
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.concat;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.concat) ? concat : own;
-};
-
-},{"../array/virtual/concat":202}],209:[function(require,module,exports){
-var find = require('../array/virtual/find');
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.find;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
-};
-
-},{"../array/virtual/find":204}],210:[function(require,module,exports){
-var slice = require('../array/virtual/slice');
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.slice;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.slice) ? slice : own;
-};
-
-},{"../array/virtual/slice":207}],211:[function(require,module,exports){
-require('../../modules/es.json.stringify');
-var core = require('../../internals/path');
-
-if (!core.JSON) core.JSON = { stringify: JSON.stringify };
-
-// eslint-disable-next-line no-unused-vars
-module.exports = function stringify(it, replacer, space) {
-  return core.JSON.stringify.apply(null, arguments);
-};
-
-},{"../../internals/path":299,"../../modules/es.json.stringify":328}],212:[function(require,module,exports){
-require('../../modules/es.map');
-require('../../modules/es.object.to-string');
-require('../../modules/es.string.iterator');
-require('../../modules/web.dom-collections.iterator');
-var path = require('../../internals/path');
-
-module.exports = path.Map;
-
-},{"../../internals/path":299,"../../modules/es.map":330,"../../modules/es.object.to-string":335,"../../modules/es.string.iterator":337,"../../modules/web.dom-collections.iterator":358}],213:[function(require,module,exports){
-require('../../modules/es.object.assign');
-var path = require('../../internals/path');
-
-module.exports = path.Object.assign;
-
-},{"../../internals/path":299,"../../modules/es.object.assign":332}],214:[function(require,module,exports){
-require('../../modules/es.object.define-property');
-var path = require('../../internals/path');
-
-var Object = path.Object;
-
-var defineProperty = module.exports = function defineProperty(it, key, desc) {
-  return Object.defineProperty(it, key, desc);
-};
-
-if (Object.defineProperty.sham) defineProperty.sham = true;
-
-},{"../../internals/path":299,"../../modules/es.object.define-property":333}],215:[function(require,module,exports){
-require('../../modules/es.object.keys');
-var path = require('../../internals/path');
-
-module.exports = path.Object.keys;
-
-},{"../../internals/path":299,"../../modules/es.object.keys":334}],216:[function(require,module,exports){
-require('../../modules/es.set');
-require('../../modules/es.object.to-string');
-require('../../modules/es.string.iterator');
-require('../../modules/web.dom-collections.iterator');
-var path = require('../../internals/path');
-
-module.exports = path.Set;
-
-},{"../../internals/path":299,"../../modules/es.object.to-string":335,"../../modules/es.set":336,"../../modules/es.string.iterator":337,"../../modules/web.dom-collections.iterator":358}],217:[function(require,module,exports){
-require('../../modules/es.array.concat');
-require('../../modules/es.object.to-string');
-require('../../modules/es.symbol');
-require('../../modules/es.symbol.async-iterator');
-require('../../modules/es.symbol.description');
-require('../../modules/es.symbol.has-instance');
-require('../../modules/es.symbol.is-concat-spreadable');
-require('../../modules/es.symbol.iterator');
-require('../../modules/es.symbol.match');
-require('../../modules/es.symbol.match-all');
-require('../../modules/es.symbol.replace');
-require('../../modules/es.symbol.search');
-require('../../modules/es.symbol.species');
-require('../../modules/es.symbol.split');
-require('../../modules/es.symbol.to-primitive');
-require('../../modules/es.symbol.to-string-tag');
-require('../../modules/es.symbol.unscopables');
-require('../../modules/es.math.to-string-tag');
-require('../../modules/es.json.to-string-tag');
-var path = require('../../internals/path');
-
-module.exports = path.Symbol;
-
-},{"../../internals/path":299,"../../modules/es.array.concat":321,"../../modules/es.json.to-string-tag":329,"../../modules/es.math.to-string-tag":331,"../../modules/es.object.to-string":335,"../../modules/es.symbol":343,"../../modules/es.symbol.async-iterator":338,"../../modules/es.symbol.description":339,"../../modules/es.symbol.has-instance":340,"../../modules/es.symbol.is-concat-spreadable":341,"../../modules/es.symbol.iterator":342,"../../modules/es.symbol.match":345,"../../modules/es.symbol.match-all":344,"../../modules/es.symbol.replace":346,"../../modules/es.symbol.search":347,"../../modules/es.symbol.species":348,"../../modules/es.symbol.split":349,"../../modules/es.symbol.to-primitive":350,"../../modules/es.symbol.to-string-tag":351,"../../modules/es.symbol.unscopables":352}],218:[function(require,module,exports){
-var parent = require('../../es/array/from');
-
-module.exports = parent;
-
-},{"../../es/array/from":200}],219:[function(require,module,exports){
-var parent = require('../../es/array/is-array');
-
-module.exports = parent;
-
-},{"../../es/array/is-array":201}],220:[function(require,module,exports){
-require('../modules/web.dom-collections.iterator');
-require('../modules/es.string.iterator');
-var getIterator = require('../internals/get-iterator');
-
-module.exports = getIterator;
-
-},{"../internals/get-iterator":264,"../modules/es.string.iterator":337,"../modules/web.dom-collections.iterator":358}],221:[function(require,module,exports){
-var parent = require('../../es/instance/slice');
-
-module.exports = parent;
-
-},{"../../es/instance/slice":210}],222:[function(require,module,exports){
-require('../modules/web.dom-collections.iterator');
-require('../modules/es.string.iterator');
-var isIterable = require('../internals/is-iterable');
-
-module.exports = isIterable;
-
-},{"../internals/is-iterable":277,"../modules/es.string.iterator":337,"../modules/web.dom-collections.iterator":358}],223:[function(require,module,exports){
-var parent = require('../../es/object/define-property');
-
-module.exports = parent;
-
-},{"../../es/object/define-property":214}],224:[function(require,module,exports){
-var parent = require('../../es/symbol');
-require('../../modules/esnext.symbol.async-dispose');
-require('../../modules/esnext.symbol.dispose');
-require('../../modules/esnext.symbol.observable');
-require('../../modules/esnext.symbol.pattern-match');
-// TODO: Remove from `core-js@4`
-require('../../modules/esnext.symbol.replace-all');
-
-module.exports = parent;
-
-},{"../../es/symbol":217,"../../modules/esnext.symbol.async-dispose":353,"../../modules/esnext.symbol.dispose":354,"../../modules/esnext.symbol.observable":355,"../../modules/esnext.symbol.pattern-match":356,"../../modules/esnext.symbol.replace-all":357}],225:[function(require,module,exports){
-module.exports = function (it) {
-  if (typeof it != 'function') {
-    throw TypeError(String(it) + ' is not a function');
-  } return it;
-};
-
-},{}],226:[function(require,module,exports){
-var isObject = require('../internals/is-object');
-
-module.exports = function (it) {
-  if (!isObject(it) && it !== null) {
-    throw TypeError("Can't set " + String(it) + ' as a prototype');
-  } return it;
-};
-
-},{"../internals/is-object":278}],227:[function(require,module,exports){
-module.exports = function () { /* empty */ };
-
-},{}],228:[function(require,module,exports){
-module.exports = function (it, Constructor, name) {
-  if (!(it instanceof Constructor)) {
-    throw TypeError('Incorrect ' + (name ? name + ' ' : '') + 'invocation');
-  } return it;
-};
-
-},{}],229:[function(require,module,exports){
-var isObject = require('../internals/is-object');
-
-module.exports = function (it) {
-  if (!isObject(it)) {
-    throw TypeError(String(it) + ' is not an object');
-  } return it;
-};
-
-},{"../internals/is-object":278}],230:[function(require,module,exports){
-'use strict';
-var $forEach = require('../internals/array-iteration').forEach;
-var arrayMethodIsStrict = require('../internals/array-method-is-strict');
-var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
-
-var STRICT_METHOD = arrayMethodIsStrict('forEach');
-var USES_TO_LENGTH = arrayMethodUsesToLength('forEach');
-
-// `Array.prototype.forEach` method implementation
-// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-module.exports = (!STRICT_METHOD || !USES_TO_LENGTH) ? function forEach(callbackfn /* , thisArg */) {
-  return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-} : [].forEach;
-
-},{"../internals/array-iteration":233,"../internals/array-method-is-strict":235,"../internals/array-method-uses-to-length":236}],231:[function(require,module,exports){
-'use strict';
-var bind = require('../internals/function-bind-context');
-var toObject = require('../internals/to-object');
-var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
-var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
-var toLength = require('../internals/to-length');
-var createProperty = require('../internals/create-property');
-var getIteratorMethod = require('../internals/get-iterator-method');
-
-// `Array.from` method implementation
-// https://tc39.github.io/ecma262/#sec-array.from
-module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
-  var O = toObject(arrayLike);
-  var C = typeof this == 'function' ? this : Array;
-  var argumentsLength = arguments.length;
-  var mapfn = argumentsLength > 1 ? arguments[1] : undefined;
-  var mapping = mapfn !== undefined;
-  var iteratorMethod = getIteratorMethod(O);
-  var index = 0;
-  var length, result, step, iterator, next, value;
-  if (mapping) mapfn = bind(mapfn, argumentsLength > 2 ? arguments[2] : undefined, 2);
-  // if the target is not iterable or it's an array with the default iterator - use a simple case
-  if (iteratorMethod != undefined && !(C == Array && isArrayIteratorMethod(iteratorMethod))) {
-    iterator = iteratorMethod.call(O);
-    next = iterator.next;
-    result = new C();
-    for (;!(step = next.call(iterator)).done; index++) {
-      value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
-      createProperty(result, index, value);
-    }
-  } else {
-    length = toLength(O.length);
-    result = new C(length);
-    for (;length > index; index++) {
-      value = mapping ? mapfn(O[index], index) : O[index];
-      createProperty(result, index, value);
-    }
-  }
-  result.length = index;
-  return result;
-};
-
-},{"../internals/call-with-safe-iteration-closing":238,"../internals/create-property":248,"../internals/function-bind-context":261,"../internals/get-iterator-method":263,"../internals/is-array-iterator-method":274,"../internals/to-length":313,"../internals/to-object":314}],232:[function(require,module,exports){
-var toIndexedObject = require('../internals/to-indexed-object');
-var toLength = require('../internals/to-length');
-var toAbsoluteIndex = require('../internals/to-absolute-index');
-
-// `Array.prototype.{ indexOf, includes }` methods implementation
-var createMethod = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIndexedObject($this);
-    var length = toLength(O.length);
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare
-      if (value != value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) {
-      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
-module.exports = {
-  // `Array.prototype.includes` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
-  includes: createMethod(true),
-  // `Array.prototype.indexOf` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
-  indexOf: createMethod(false)
-};
-
-},{"../internals/to-absolute-index":310,"../internals/to-indexed-object":311,"../internals/to-length":313}],233:[function(require,module,exports){
-var bind = require('../internals/function-bind-context');
-var IndexedObject = require('../internals/indexed-object');
-var toObject = require('../internals/to-object');
-var toLength = require('../internals/to-length');
-var arraySpeciesCreate = require('../internals/array-species-create');
-
-var push = [].push;
-
-// `Array.prototype.{ forEach, map, filter, some, every, find, findIndex }` methods implementation
-var createMethod = function (TYPE) {
-  var IS_MAP = TYPE == 1;
-  var IS_FILTER = TYPE == 2;
-  var IS_SOME = TYPE == 3;
-  var IS_EVERY = TYPE == 4;
-  var IS_FIND_INDEX = TYPE == 6;
-  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
-  return function ($this, callbackfn, that, specificCreate) {
-    var O = toObject($this);
-    var self = IndexedObject(O);
-    var boundFunction = bind(callbackfn, that, 3);
-    var length = toLength(self.length);
-    var index = 0;
-    var create = specificCreate || arraySpeciesCreate;
-    var target = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
-    var value, result;
-    for (;length > index; index++) if (NO_HOLES || index in self) {
-      value = self[index];
-      result = boundFunction(value, index, O);
-      if (TYPE) {
-        if (IS_MAP) target[index] = result; // map
-        else if (result) switch (TYPE) {
-          case 3: return true;              // some
-          case 5: return value;             // find
-          case 6: return index;             // findIndex
-          case 2: push.call(target, value); // filter
-        } else if (IS_EVERY) return false;  // every
-      }
-    }
-    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
-  };
-};
-
-module.exports = {
-  // `Array.prototype.forEach` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-  forEach: createMethod(0),
-  // `Array.prototype.map` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.map
-  map: createMethod(1),
-  // `Array.prototype.filter` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.filter
-  filter: createMethod(2),
-  // `Array.prototype.some` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.some
-  some: createMethod(3),
-  // `Array.prototype.every` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.every
-  every: createMethod(4),
-  // `Array.prototype.find` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.find
-  find: createMethod(5),
-  // `Array.prototype.findIndex` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
-  findIndex: createMethod(6)
-};
-
-},{"../internals/array-species-create":237,"../internals/function-bind-context":261,"../internals/indexed-object":270,"../internals/to-length":313,"../internals/to-object":314}],234:[function(require,module,exports){
-var fails = require('../internals/fails');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var V8_VERSION = require('../internals/engine-v8-version');
-
-var SPECIES = wellKnownSymbol('species');
-
-module.exports = function (METHOD_NAME) {
-  // We can't use this feature detection in V8 since it causes
-  // deoptimization and serious performance degradation
-  // https://github.com/zloirock/core-js/issues/677
-  return V8_VERSION >= 51 || !fails(function () {
-    var array = [];
-    var constructor = array.constructor = {};
-    constructor[SPECIES] = function () {
-      return { foo: 1 };
-    };
-    return array[METHOD_NAME](Boolean).foo !== 1;
-  });
-};
-
-},{"../internals/engine-v8-version":255,"../internals/fails":259,"../internals/well-known-symbol":320}],235:[function(require,module,exports){
-'use strict';
-var fails = require('../internals/fails');
-
-module.exports = function (METHOD_NAME, argument) {
-  var method = [][METHOD_NAME];
-  return !!method && fails(function () {
-    // eslint-disable-next-line no-useless-call,no-throw-literal
-    method.call(null, argument || function () { throw 1; }, 1);
-  });
-};
-
-},{"../internals/fails":259}],236:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var fails = require('../internals/fails');
-var has = require('../internals/has');
-
-var defineProperty = Object.defineProperty;
-var cache = {};
-
-var thrower = function (it) { throw it; };
-
-module.exports = function (METHOD_NAME, options) {
-  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
-  if (!options) options = {};
-  var method = [][METHOD_NAME];
-  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
-  var argument0 = has(options, 0) ? options[0] : thrower;
-  var argument1 = has(options, 1) ? options[1] : undefined;
-
-  return cache[METHOD_NAME] = !!method && !fails(function () {
-    if (ACCESSORS && !DESCRIPTORS) return true;
-    var O = { length: -1 };
-
-    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
-    else O[1] = 1;
-
-    method.call(O, argument0, argument1);
-  });
-};
-
-},{"../internals/descriptors":251,"../internals/fails":259,"../internals/has":266}],237:[function(require,module,exports){
-var isObject = require('../internals/is-object');
-var isArray = require('../internals/is-array');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var SPECIES = wellKnownSymbol('species');
-
-// `ArraySpeciesCreate` abstract operation
-// https://tc39.github.io/ecma262/#sec-arrayspeciescreate
-module.exports = function (originalArray, length) {
-  var C;
-  if (isArray(originalArray)) {
-    C = originalArray.constructor;
-    // cross-realm fallback
-    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
-    else if (isObject(C)) {
-      C = C[SPECIES];
-      if (C === null) C = undefined;
-    }
-  } return new (C === undefined ? Array : C)(length === 0 ? 0 : length);
-};
-
-},{"../internals/is-array":275,"../internals/is-object":278,"../internals/well-known-symbol":320}],238:[function(require,module,exports){
-var anObject = require('../internals/an-object');
-
-// call something on iterator step with safe closing on error
-module.exports = function (iterator, fn, value, ENTRIES) {
-  try {
-    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value);
-  // 7.4.6 IteratorClose(iterator, completion)
-  } catch (error) {
-    var returnMethod = iterator['return'];
-    if (returnMethod !== undefined) anObject(returnMethod.call(iterator));
-    throw error;
-  }
-};
-
-},{"../internals/an-object":229}],239:[function(require,module,exports){
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var ITERATOR = wellKnownSymbol('iterator');
-var SAFE_CLOSING = false;
-
-try {
-  var called = 0;
-  var iteratorWithReturn = {
-    next: function () {
-      return { done: !!called++ };
-    },
-    'return': function () {
-      SAFE_CLOSING = true;
-    }
-  };
-  iteratorWithReturn[ITERATOR] = function () {
-    return this;
-  };
-  // eslint-disable-next-line no-throw-literal
-  Array.from(iteratorWithReturn, function () { throw 2; });
-} catch (error) { /* empty */ }
-
-module.exports = function (exec, SKIP_CLOSING) {
-  if (!SKIP_CLOSING && !SAFE_CLOSING) return false;
-  var ITERATION_SUPPORT = false;
-  try {
-    var object = {};
-    object[ITERATOR] = function () {
-      return {
-        next: function () {
-          return { done: ITERATION_SUPPORT = true };
-        }
-      };
-    };
-    exec(object);
-  } catch (error) { /* empty */ }
-  return ITERATION_SUPPORT;
-};
-
-},{"../internals/well-known-symbol":320}],240:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-},{}],241:[function(require,module,exports){
-var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-var classofRaw = require('../internals/classof-raw');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-// ES3 wrong here
-var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
-
-// fallback for IE11 Script Access Denied error
-var tryGet = function (it, key) {
-  try {
-    return it[key];
-  } catch (error) { /* empty */ }
-};
-
-// getting tag from ES6+ `Object.prototype.toString`
-module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
-  var O, tag, result;
-  return it === undefined ? 'Undefined' : it === null ? 'Null'
-    // @@toStringTag case
-    : typeof (tag = tryGet(O = Object(it), TO_STRING_TAG)) == 'string' ? tag
-    // builtinTag case
-    : CORRECT_ARGUMENTS ? classofRaw(O)
-    // ES3 arguments fallback
-    : (result = classofRaw(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : result;
-};
-
-},{"../internals/classof-raw":240,"../internals/to-string-tag-support":316,"../internals/well-known-symbol":320}],242:[function(require,module,exports){
-'use strict';
-var defineProperty = require('../internals/object-define-property').f;
-var create = require('../internals/object-create');
-var redefineAll = require('../internals/redefine-all');
-var bind = require('../internals/function-bind-context');
-var anInstance = require('../internals/an-instance');
-var iterate = require('../internals/iterate');
-var defineIterator = require('../internals/define-iterator');
-var setSpecies = require('../internals/set-species');
-var DESCRIPTORS = require('../internals/descriptors');
-var fastKey = require('../internals/internal-metadata').fastKey;
-var InternalStateModule = require('../internals/internal-state');
-
-var setInternalState = InternalStateModule.set;
-var internalStateGetterFor = InternalStateModule.getterFor;
-
-module.exports = {
-  getConstructor: function (wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER) {
-    var C = wrapper(function (that, iterable) {
-      anInstance(that, C, CONSTRUCTOR_NAME);
-      setInternalState(that, {
-        type: CONSTRUCTOR_NAME,
-        index: create(null),
-        first: undefined,
-        last: undefined,
-        size: 0
-      });
-      if (!DESCRIPTORS) that.size = 0;
-      if (iterable != undefined) iterate(iterable, that[ADDER], that, IS_MAP);
-    });
-
-    var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
-
-    var define = function (that, key, value) {
-      var state = getInternalState(that);
-      var entry = getEntry(that, key);
-      var previous, index;
-      // change existing entry
-      if (entry) {
-        entry.value = value;
-      // create new entry
-      } else {
-        state.last = entry = {
-          index: index = fastKey(key, true),
-          key: key,
-          value: value,
-          previous: previous = state.last,
-          next: undefined,
-          removed: false
-        };
-        if (!state.first) state.first = entry;
-        if (previous) previous.next = entry;
-        if (DESCRIPTORS) state.size++;
-        else that.size++;
-        // add to index
-        if (index !== 'F') state.index[index] = entry;
-      } return that;
-    };
-
-    var getEntry = function (that, key) {
-      var state = getInternalState(that);
-      // fast case
-      var index = fastKey(key);
-      var entry;
-      if (index !== 'F') return state.index[index];
-      // frozen object case
-      for (entry = state.first; entry; entry = entry.next) {
-        if (entry.key == key) return entry;
-      }
-    };
-
-    redefineAll(C.prototype, {
-      // 23.1.3.1 Map.prototype.clear()
-      // 23.2.3.2 Set.prototype.clear()
-      clear: function clear() {
-        var that = this;
-        var state = getInternalState(that);
-        var data = state.index;
-        var entry = state.first;
-        while (entry) {
-          entry.removed = true;
-          if (entry.previous) entry.previous = entry.previous.next = undefined;
-          delete data[entry.index];
-          entry = entry.next;
-        }
-        state.first = state.last = undefined;
-        if (DESCRIPTORS) state.size = 0;
-        else that.size = 0;
-      },
-      // 23.1.3.3 Map.prototype.delete(key)
-      // 23.2.3.4 Set.prototype.delete(value)
-      'delete': function (key) {
-        var that = this;
-        var state = getInternalState(that);
-        var entry = getEntry(that, key);
-        if (entry) {
-          var next = entry.next;
-          var prev = entry.previous;
-          delete state.index[entry.index];
-          entry.removed = true;
-          if (prev) prev.next = next;
-          if (next) next.previous = prev;
-          if (state.first == entry) state.first = next;
-          if (state.last == entry) state.last = prev;
-          if (DESCRIPTORS) state.size--;
-          else that.size--;
-        } return !!entry;
-      },
-      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
-      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
-      forEach: function forEach(callbackfn /* , that = undefined */) {
-        var state = getInternalState(this);
-        var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3);
-        var entry;
-        while (entry = entry ? entry.next : state.first) {
-          boundFunction(entry.value, entry.key, this);
-          // revert to the last existing entry
-          while (entry && entry.removed) entry = entry.previous;
-        }
-      },
-      // 23.1.3.7 Map.prototype.has(key)
-      // 23.2.3.7 Set.prototype.has(value)
-      has: function has(key) {
-        return !!getEntry(this, key);
-      }
-    });
-
-    redefineAll(C.prototype, IS_MAP ? {
-      // 23.1.3.6 Map.prototype.get(key)
-      get: function get(key) {
-        var entry = getEntry(this, key);
-        return entry && entry.value;
-      },
-      // 23.1.3.9 Map.prototype.set(key, value)
-      set: function set(key, value) {
-        return define(this, key === 0 ? 0 : key, value);
-      }
-    } : {
-      // 23.2.3.1 Set.prototype.add(value)
-      add: function add(value) {
-        return define(this, value = value === 0 ? 0 : value, value);
-      }
-    });
-    if (DESCRIPTORS) defineProperty(C.prototype, 'size', {
-      get: function () {
-        return getInternalState(this).size;
-      }
-    });
-    return C;
-  },
-  setStrong: function (C, CONSTRUCTOR_NAME, IS_MAP) {
-    var ITERATOR_NAME = CONSTRUCTOR_NAME + ' Iterator';
-    var getInternalCollectionState = internalStateGetterFor(CONSTRUCTOR_NAME);
-    var getInternalIteratorState = internalStateGetterFor(ITERATOR_NAME);
-    // add .keys, .values, .entries, [@@iterator]
-    // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
-    defineIterator(C, CONSTRUCTOR_NAME, function (iterated, kind) {
-      setInternalState(this, {
-        type: ITERATOR_NAME,
-        target: iterated,
-        state: getInternalCollectionState(iterated),
-        kind: kind,
-        last: undefined
-      });
-    }, function () {
-      var state = getInternalIteratorState(this);
-      var kind = state.kind;
-      var entry = state.last;
-      // revert to the last existing entry
-      while (entry && entry.removed) entry = entry.previous;
-      // get next entry
-      if (!state.target || !(state.last = entry = entry ? entry.next : state.state.first)) {
-        // or finish the iteration
-        state.target = undefined;
-        return { value: undefined, done: true };
-      }
-      // return step by kind
-      if (kind == 'keys') return { value: entry.key, done: false };
-      if (kind == 'values') return { value: entry.value, done: false };
-      return { value: [entry.key, entry.value], done: false };
-    }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
-
-    // add [@@species], 23.1.2.2, 23.2.2.2
-    setSpecies(CONSTRUCTOR_NAME);
-  }
-};
-
-},{"../internals/an-instance":228,"../internals/define-iterator":249,"../internals/descriptors":251,"../internals/function-bind-context":261,"../internals/internal-metadata":272,"../internals/internal-state":273,"../internals/iterate":280,"../internals/object-create":286,"../internals/object-define-property":288,"../internals/redefine-all":300,"../internals/set-species":304}],243:[function(require,module,exports){
-'use strict';
-var $ = require('./export');
-var global = require('../internals/global');
-var InternalMetadataModule = require('../internals/internal-metadata');
-var fails = require('../internals/fails');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var iterate = require('../internals/iterate');
-var anInstance = require('../internals/an-instance');
-var isObject = require('../internals/is-object');
-var setToStringTag = require('../internals/set-to-string-tag');
-var defineProperty = require('../internals/object-define-property').f;
-var forEach = require('../internals/array-iteration').forEach;
-var DESCRIPTORS = require('../internals/descriptors');
-var InternalStateModule = require('../internals/internal-state');
-
-var setInternalState = InternalStateModule.set;
-var internalStateGetterFor = InternalStateModule.getterFor;
-
-module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
-  var IS_MAP = CONSTRUCTOR_NAME.indexOf('Map') !== -1;
-  var IS_WEAK = CONSTRUCTOR_NAME.indexOf('Weak') !== -1;
-  var ADDER = IS_MAP ? 'set' : 'add';
-  var NativeConstructor = global[CONSTRUCTOR_NAME];
-  var NativePrototype = NativeConstructor && NativeConstructor.prototype;
-  var exported = {};
-  var Constructor;
-
-  if (!DESCRIPTORS || typeof NativeConstructor != 'function'
-    || !(IS_WEAK || NativePrototype.forEach && !fails(function () { new NativeConstructor().entries().next(); }))
-  ) {
-    // create collection constructor
-    Constructor = common.getConstructor(wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER);
-    InternalMetadataModule.REQUIRED = true;
-  } else {
-    Constructor = wrapper(function (target, iterable) {
-      setInternalState(anInstance(target, Constructor, CONSTRUCTOR_NAME), {
-        type: CONSTRUCTOR_NAME,
-        collection: new NativeConstructor()
-      });
-      if (iterable != undefined) iterate(iterable, target[ADDER], target, IS_MAP);
-    });
-
-    var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
-
-    forEach(['add', 'clear', 'delete', 'forEach', 'get', 'has', 'set', 'keys', 'values', 'entries'], function (KEY) {
-      var IS_ADDER = KEY == 'add' || KEY == 'set';
-      if (KEY in NativePrototype && !(IS_WEAK && KEY == 'clear')) {
-        createNonEnumerableProperty(Constructor.prototype, KEY, function (a, b) {
-          var collection = getInternalState(this).collection;
-          if (!IS_ADDER && IS_WEAK && !isObject(a)) return KEY == 'get' ? undefined : false;
-          var result = collection[KEY](a === 0 ? 0 : a, b);
-          return IS_ADDER ? this : result;
-        });
-      }
-    });
-
-    IS_WEAK || defineProperty(Constructor.prototype, 'size', {
-      configurable: true,
-      get: function () {
-        return getInternalState(this).collection.size;
-      }
-    });
-  }
-
-  setToStringTag(Constructor, CONSTRUCTOR_NAME, false, true);
-
-  exported[CONSTRUCTOR_NAME] = Constructor;
-  $({ global: true, forced: true }, exported);
-
-  if (!IS_WEAK) common.setStrong(Constructor, CONSTRUCTOR_NAME, IS_MAP);
-
-  return Constructor;
-};
-
-},{"../internals/an-instance":228,"../internals/array-iteration":233,"../internals/create-non-enumerable-property":246,"../internals/descriptors":251,"../internals/fails":259,"../internals/global":265,"../internals/internal-metadata":272,"../internals/internal-state":273,"../internals/is-object":278,"../internals/iterate":280,"../internals/object-define-property":288,"../internals/set-to-string-tag":305,"./export":258}],244:[function(require,module,exports){
-var fails = require('../internals/fails');
-
-module.exports = !fails(function () {
-  function F() { /* empty */ }
-  F.prototype.constructor = null;
-  return Object.getPrototypeOf(new F()) !== F.prototype;
-});
-
-},{"../internals/fails":259}],245:[function(require,module,exports){
-'use strict';
-var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
-var create = require('../internals/object-create');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-var setToStringTag = require('../internals/set-to-string-tag');
-var Iterators = require('../internals/iterators');
-
-var returnThis = function () { return this; };
-
-module.exports = function (IteratorConstructor, NAME, next) {
-  var TO_STRING_TAG = NAME + ' Iterator';
-  IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(1, next) });
-  setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
-  Iterators[TO_STRING_TAG] = returnThis;
-  return IteratorConstructor;
-};
-
-},{"../internals/create-property-descriptor":247,"../internals/iterators":282,"../internals/iterators-core":281,"../internals/object-create":286,"../internals/set-to-string-tag":305}],246:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var definePropertyModule = require('../internals/object-define-property');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-
-module.exports = DESCRIPTORS ? function (object, key, value) {
-  return definePropertyModule.f(object, key, createPropertyDescriptor(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-},{"../internals/create-property-descriptor":247,"../internals/descriptors":251,"../internals/object-define-property":288}],247:[function(require,module,exports){
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-},{}],248:[function(require,module,exports){
-'use strict';
-var toPrimitive = require('../internals/to-primitive');
-var definePropertyModule = require('../internals/object-define-property');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-
-module.exports = function (object, key, value) {
-  var propertyKey = toPrimitive(key);
-  if (propertyKey in object) definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value));
-  else object[propertyKey] = value;
-};
-
-},{"../internals/create-property-descriptor":247,"../internals/object-define-property":288,"../internals/to-primitive":315}],249:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var createIteratorConstructor = require('../internals/create-iterator-constructor');
-var getPrototypeOf = require('../internals/object-get-prototype-of');
-var setPrototypeOf = require('../internals/object-set-prototype-of');
-var setToStringTag = require('../internals/set-to-string-tag');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var redefine = require('../internals/redefine');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var IS_PURE = require('../internals/is-pure');
-var Iterators = require('../internals/iterators');
-var IteratorsCore = require('../internals/iterators-core');
-
-var IteratorPrototype = IteratorsCore.IteratorPrototype;
-var BUGGY_SAFARI_ITERATORS = IteratorsCore.BUGGY_SAFARI_ITERATORS;
-var ITERATOR = wellKnownSymbol('iterator');
-var KEYS = 'keys';
-var VALUES = 'values';
-var ENTRIES = 'entries';
-
-var returnThis = function () { return this; };
-
-module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
-  createIteratorConstructor(IteratorConstructor, NAME, next);
-
-  var getIterationMethod = function (KIND) {
-    if (KIND === DEFAULT && defaultIterator) return defaultIterator;
-    if (!BUGGY_SAFARI_ITERATORS && KIND in IterablePrototype) return IterablePrototype[KIND];
-    switch (KIND) {
-      case KEYS: return function keys() { return new IteratorConstructor(this, KIND); };
-      case VALUES: return function values() { return new IteratorConstructor(this, KIND); };
-      case ENTRIES: return function entries() { return new IteratorConstructor(this, KIND); };
-    } return function () { return new IteratorConstructor(this); };
-  };
-
-  var TO_STRING_TAG = NAME + ' Iterator';
-  var INCORRECT_VALUES_NAME = false;
-  var IterablePrototype = Iterable.prototype;
-  var nativeIterator = IterablePrototype[ITERATOR]
-    || IterablePrototype['@@iterator']
-    || DEFAULT && IterablePrototype[DEFAULT];
-  var defaultIterator = !BUGGY_SAFARI_ITERATORS && nativeIterator || getIterationMethod(DEFAULT);
-  var anyNativeIterator = NAME == 'Array' ? IterablePrototype.entries || nativeIterator : nativeIterator;
-  var CurrentIteratorPrototype, methods, KEY;
-
-  // fix native
-  if (anyNativeIterator) {
-    CurrentIteratorPrototype = getPrototypeOf(anyNativeIterator.call(new Iterable()));
-    if (IteratorPrototype !== Object.prototype && CurrentIteratorPrototype.next) {
-      if (!IS_PURE && getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
-        if (setPrototypeOf) {
-          setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
-        } else if (typeof CurrentIteratorPrototype[ITERATOR] != 'function') {
-          createNonEnumerableProperty(CurrentIteratorPrototype, ITERATOR, returnThis);
-        }
-      }
-      // Set @@toStringTag to native iterators
-      setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
-      if (IS_PURE) Iterators[TO_STRING_TAG] = returnThis;
-    }
-  }
-
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if (DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
-    INCORRECT_VALUES_NAME = true;
-    defaultIterator = function values() { return nativeIterator.call(this); };
-  }
-
-  // define iterator
-  if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
-    createNonEnumerableProperty(IterablePrototype, ITERATOR, defaultIterator);
-  }
-  Iterators[NAME] = defaultIterator;
-
-  // export additional methods
-  if (DEFAULT) {
-    methods = {
-      values: getIterationMethod(VALUES),
-      keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
-      entries: getIterationMethod(ENTRIES)
-    };
-    if (FORCED) for (KEY in methods) {
-      if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
-        redefine(IterablePrototype, KEY, methods[KEY]);
-      }
-    } else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
-  }
-
-  return methods;
-};
-
-},{"../internals/create-iterator-constructor":245,"../internals/create-non-enumerable-property":246,"../internals/export":258,"../internals/is-pure":279,"../internals/iterators":282,"../internals/iterators-core":281,"../internals/object-get-prototype-of":293,"../internals/object-set-prototype-of":297,"../internals/redefine":301,"../internals/set-to-string-tag":305,"../internals/well-known-symbol":320}],250:[function(require,module,exports){
-var path = require('../internals/path');
-var has = require('../internals/has');
-var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
-var defineProperty = require('../internals/object-define-property').f;
-
-module.exports = function (NAME) {
-  var Symbol = path.Symbol || (path.Symbol = {});
-  if (!has(Symbol, NAME)) defineProperty(Symbol, NAME, {
-    value: wrappedWellKnownSymbolModule.f(NAME)
-  });
-};
-
-},{"../internals/has":266,"../internals/object-define-property":288,"../internals/path":299,"../internals/well-known-symbol-wrapped":319}],251:[function(require,module,exports){
-var fails = require('../internals/fails');
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !fails(function () {
-  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
-});
-
-},{"../internals/fails":259}],252:[function(require,module,exports){
-var global = require('../internals/global');
-var isObject = require('../internals/is-object');
-
-var document = global.document;
-// typeof document.createElement is 'object' in old IE
-var EXISTS = isObject(document) && isObject(document.createElement);
-
-module.exports = function (it) {
-  return EXISTS ? document.createElement(it) : {};
-};
-
-},{"../internals/global":265,"../internals/is-object":278}],253:[function(require,module,exports){
-// iterable DOM collections
-// flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
-module.exports = {
-  CSSRuleList: 0,
-  CSSStyleDeclaration: 0,
-  CSSValueList: 0,
-  ClientRectList: 0,
-  DOMRectList: 0,
-  DOMStringList: 0,
-  DOMTokenList: 1,
-  DataTransferItemList: 0,
-  FileList: 0,
-  HTMLAllCollection: 0,
-  HTMLCollection: 0,
-  HTMLFormElement: 0,
-  HTMLSelectElement: 0,
-  MediaList: 0,
-  MimeTypeArray: 0,
-  NamedNodeMap: 0,
-  NodeList: 1,
-  PaintRequestList: 0,
-  Plugin: 0,
-  PluginArray: 0,
-  SVGLengthList: 0,
-  SVGNumberList: 0,
-  SVGPathSegList: 0,
-  SVGPointList: 0,
-  SVGStringList: 0,
-  SVGTransformList: 0,
-  SourceBufferList: 0,
-  StyleSheetList: 0,
-  TextTrackCueList: 0,
-  TextTrackList: 0,
-  TouchList: 0
-};
-
-},{}],254:[function(require,module,exports){
-var getBuiltIn = require('../internals/get-built-in');
-
-module.exports = getBuiltIn('navigator', 'userAgent') || '';
-
-},{"../internals/get-built-in":262}],255:[function(require,module,exports){
-var global = require('../internals/global');
-var userAgent = require('../internals/engine-user-agent');
-
-var process = global.process;
-var versions = process && process.versions;
-var v8 = versions && versions.v8;
-var match, version;
-
-if (v8) {
-  match = v8.split('.');
-  version = match[0] + match[1];
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/);
-  if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/);
-    if (match) version = match[1];
-  }
-}
-
-module.exports = version && +version;
-
-},{"../internals/engine-user-agent":254,"../internals/global":265}],256:[function(require,module,exports){
-var path = require('../internals/path');
-
-module.exports = function (CONSTRUCTOR) {
-  return path[CONSTRUCTOR + 'Prototype'];
-};
-
-},{"../internals/path":299}],257:[function(require,module,exports){
-// IE8- don't enum bug keys
-module.exports = [
-  'constructor',
-  'hasOwnProperty',
-  'isPrototypeOf',
-  'propertyIsEnumerable',
-  'toLocaleString',
-  'toString',
-  'valueOf'
-];
-
-},{}],258:[function(require,module,exports){
-'use strict';
-var global = require('../internals/global');
-var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
-var isForced = require('../internals/is-forced');
-var path = require('../internals/path');
-var bind = require('../internals/function-bind-context');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var has = require('../internals/has');
-
-var wrapConstructor = function (NativeConstructor) {
-  var Wrapper = function (a, b, c) {
-    if (this instanceof NativeConstructor) {
-      switch (arguments.length) {
-        case 0: return new NativeConstructor();
-        case 1: return new NativeConstructor(a);
-        case 2: return new NativeConstructor(a, b);
-      } return new NativeConstructor(a, b, c);
-    } return NativeConstructor.apply(this, arguments);
-  };
-  Wrapper.prototype = NativeConstructor.prototype;
-  return Wrapper;
-};
-
-/*
-  options.target      - name of the target object
-  options.global      - target is the global object
-  options.stat        - export as static methods of target
-  options.proto       - export as prototype methods of target
-  options.real        - real prototype method for the `pure` version
-  options.forced      - export even if the native feature is available
-  options.bind        - bind methods to the target, required for the `pure` version
-  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
-  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
-  options.sham        - add a flag to not completely full polyfills
-  options.enumerable  - export as enumerable property
-  options.noTargetGet - prevent calling a getter on target
-*/
-module.exports = function (options, source) {
-  var TARGET = options.target;
-  var GLOBAL = options.global;
-  var STATIC = options.stat;
-  var PROTO = options.proto;
-
-  var nativeSource = GLOBAL ? global : STATIC ? global[TARGET] : (global[TARGET] || {}).prototype;
-
-  var target = GLOBAL ? path : path[TARGET] || (path[TARGET] = {});
-  var targetPrototype = target.prototype;
-
-  var FORCED, USE_NATIVE, VIRTUAL_PROTOTYPE;
-  var key, sourceProperty, targetProperty, nativeProperty, resultProperty, descriptor;
-
-  for (key in source) {
-    FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
-    // contains in native
-    USE_NATIVE = !FORCED && nativeSource && has(nativeSource, key);
-
-    targetProperty = target[key];
-
-    if (USE_NATIVE) if (options.noTargetGet) {
-      descriptor = getOwnPropertyDescriptor(nativeSource, key);
-      nativeProperty = descriptor && descriptor.value;
-    } else nativeProperty = nativeSource[key];
-
-    // export native or implementation
-    sourceProperty = (USE_NATIVE && nativeProperty) ? nativeProperty : source[key];
-
-    if (USE_NATIVE && typeof targetProperty === typeof sourceProperty) continue;
-
-    // bind timers to global for call from export context
-    if (options.bind && USE_NATIVE) resultProperty = bind(sourceProperty, global);
-    // wrap global constructors for prevent changs in this version
-    else if (options.wrap && USE_NATIVE) resultProperty = wrapConstructor(sourceProperty);
-    // make static versions for prototype methods
-    else if (PROTO && typeof sourceProperty == 'function') resultProperty = bind(Function.call, sourceProperty);
-    // default case
-    else resultProperty = sourceProperty;
-
-    // add a flag to not completely full polyfills
-    if (options.sham || (sourceProperty && sourceProperty.sham) || (targetProperty && targetProperty.sham)) {
-      createNonEnumerableProperty(resultProperty, 'sham', true);
-    }
-
-    target[key] = resultProperty;
-
-    if (PROTO) {
-      VIRTUAL_PROTOTYPE = TARGET + 'Prototype';
-      if (!has(path, VIRTUAL_PROTOTYPE)) {
-        createNonEnumerableProperty(path, VIRTUAL_PROTOTYPE, {});
-      }
-      // export virtual prototype methods
-      path[VIRTUAL_PROTOTYPE][key] = sourceProperty;
-      // export real prototype methods
-      if (options.real && targetPrototype && !targetPrototype[key]) {
-        createNonEnumerableProperty(targetPrototype, key, sourceProperty);
-      }
-    }
-  }
-};
-
-},{"../internals/create-non-enumerable-property":246,"../internals/function-bind-context":261,"../internals/global":265,"../internals/has":266,"../internals/is-forced":276,"../internals/object-get-own-property-descriptor":289,"../internals/path":299}],259:[function(require,module,exports){
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (error) {
-    return true;
-  }
-};
-
-},{}],260:[function(require,module,exports){
-var fails = require('../internals/fails');
-
-module.exports = !fails(function () {
-  return Object.isExtensible(Object.preventExtensions({}));
-});
-
-},{"../internals/fails":259}],261:[function(require,module,exports){
-var aFunction = require('../internals/a-function');
-
-// optional / simple context binding
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 0: return function () {
-      return fn.call(that);
-    };
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-},{"../internals/a-function":225}],262:[function(require,module,exports){
-var path = require('../internals/path');
-var global = require('../internals/global');
-
-var aFunction = function (variable) {
-  return typeof variable == 'function' ? variable : undefined;
-};
-
-module.exports = function (namespace, method) {
-  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global[namespace])
-    : path[namespace] && path[namespace][method] || global[namespace] && global[namespace][method];
-};
-
-},{"../internals/global":265,"../internals/path":299}],263:[function(require,module,exports){
-var classof = require('../internals/classof');
-var Iterators = require('../internals/iterators');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var ITERATOR = wellKnownSymbol('iterator');
-
-module.exports = function (it) {
-  if (it != undefined) return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-
-},{"../internals/classof":241,"../internals/iterators":282,"../internals/well-known-symbol":320}],264:[function(require,module,exports){
-var anObject = require('../internals/an-object');
-var getIteratorMethod = require('../internals/get-iterator-method');
-
-module.exports = function (it) {
-  var iteratorMethod = getIteratorMethod(it);
-  if (typeof iteratorMethod != 'function') {
-    throw TypeError(String(it) + ' is not iterable');
-  } return anObject(iteratorMethod.call(it));
-};
-
-},{"../internals/an-object":229,"../internals/get-iterator-method":263}],265:[function(require,module,exports){
-(function (global){
-var check = function (it) {
-  return it && it.Math == Math && it;
-};
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-module.exports =
-  // eslint-disable-next-line no-undef
-  check(typeof globalThis == 'object' && globalThis) ||
-  check(typeof window == 'object' && window) ||
-  check(typeof self == 'object' && self) ||
-  check(typeof global == 'object' && global) ||
-  // eslint-disable-next-line no-new-func
-  Function('return this')();
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],266:[function(require,module,exports){
-var hasOwnProperty = {}.hasOwnProperty;
-
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-},{}],267:[function(require,module,exports){
-module.exports = {};
-
-},{}],268:[function(require,module,exports){
-var getBuiltIn = require('../internals/get-built-in');
-
-module.exports = getBuiltIn('document', 'documentElement');
-
-},{"../internals/get-built-in":262}],269:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var fails = require('../internals/fails');
-var createElement = require('../internals/document-create-element');
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !DESCRIPTORS && !fails(function () {
-  return Object.defineProperty(createElement('div'), 'a', {
-    get: function () { return 7; }
-  }).a != 7;
-});
-
-},{"../internals/descriptors":251,"../internals/document-create-element":252,"../internals/fails":259}],270:[function(require,module,exports){
-var fails = require('../internals/fails');
-var classof = require('../internals/classof-raw');
-
-var split = ''.split;
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-module.exports = fails(function () {
-  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins
-  return !Object('z').propertyIsEnumerable(0);
-}) ? function (it) {
-  return classof(it) == 'String' ? split.call(it, '') : Object(it);
-} : Object;
-
-},{"../internals/classof-raw":240,"../internals/fails":259}],271:[function(require,module,exports){
-var store = require('../internals/shared-store');
-
-var functionToString = Function.toString;
-
-// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
-if (typeof store.inspectSource != 'function') {
-  store.inspectSource = function (it) {
-    return functionToString.call(it);
-  };
-}
-
-module.exports = store.inspectSource;
-
-},{"../internals/shared-store":307}],272:[function(require,module,exports){
-var hiddenKeys = require('../internals/hidden-keys');
-var isObject = require('../internals/is-object');
-var has = require('../internals/has');
-var defineProperty = require('../internals/object-define-property').f;
-var uid = require('../internals/uid');
-var FREEZING = require('../internals/freezing');
-
-var METADATA = uid('meta');
-var id = 0;
-
-var isExtensible = Object.isExtensible || function () {
-  return true;
-};
-
-var setMetadata = function (it) {
-  defineProperty(it, METADATA, { value: {
-    objectID: 'O' + ++id, // object ID
-    weakData: {}          // weak collections IDs
-  } });
-};
-
-var fastKey = function (it, create) {
-  // return a primitive with prefix
-  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if (!has(it, METADATA)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return 'F';
-    // not necessary to add metadata
-    if (!create) return 'E';
-    // add missing metadata
-    setMetadata(it);
-  // return object ID
-  } return it[METADATA].objectID;
-};
-
-var getWeakData = function (it, create) {
-  if (!has(it, METADATA)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return true;
-    // not necessary to add metadata
-    if (!create) return false;
-    // add missing metadata
-    setMetadata(it);
-  // return the store of weak collections IDs
-  } return it[METADATA].weakData;
-};
-
-// add metadata on freeze-family methods calling
-var onFreeze = function (it) {
-  if (FREEZING && meta.REQUIRED && isExtensible(it) && !has(it, METADATA)) setMetadata(it);
-  return it;
-};
-
-var meta = module.exports = {
-  REQUIRED: false,
-  fastKey: fastKey,
-  getWeakData: getWeakData,
-  onFreeze: onFreeze
-};
-
-hiddenKeys[METADATA] = true;
-
-},{"../internals/freezing":260,"../internals/has":266,"../internals/hidden-keys":267,"../internals/is-object":278,"../internals/object-define-property":288,"../internals/uid":317}],273:[function(require,module,exports){
-var NATIVE_WEAK_MAP = require('../internals/native-weak-map');
-var global = require('../internals/global');
-var isObject = require('../internals/is-object');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var objectHas = require('../internals/has');
-var sharedKey = require('../internals/shared-key');
-var hiddenKeys = require('../internals/hidden-keys');
-
-var WeakMap = global.WeakMap;
-var set, get, has;
-
-var enforce = function (it) {
-  return has(it) ? get(it) : set(it, {});
-};
-
-var getterFor = function (TYPE) {
-  return function (it) {
-    var state;
-    if (!isObject(it) || (state = get(it)).type !== TYPE) {
-      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
-    } return state;
-  };
-};
-
-if (NATIVE_WEAK_MAP) {
-  var store = new WeakMap();
-  var wmget = store.get;
-  var wmhas = store.has;
-  var wmset = store.set;
-  set = function (it, metadata) {
-    wmset.call(store, it, metadata);
-    return metadata;
-  };
-  get = function (it) {
-    return wmget.call(store, it) || {};
-  };
-  has = function (it) {
-    return wmhas.call(store, it);
-  };
-} else {
-  var STATE = sharedKey('state');
-  hiddenKeys[STATE] = true;
-  set = function (it, metadata) {
-    createNonEnumerableProperty(it, STATE, metadata);
-    return metadata;
-  };
-  get = function (it) {
-    return objectHas(it, STATE) ? it[STATE] : {};
-  };
-  has = function (it) {
-    return objectHas(it, STATE);
-  };
-}
-
-module.exports = {
-  set: set,
-  get: get,
-  has: has,
-  enforce: enforce,
-  getterFor: getterFor
-};
-
-},{"../internals/create-non-enumerable-property":246,"../internals/global":265,"../internals/has":266,"../internals/hidden-keys":267,"../internals/is-object":278,"../internals/native-weak-map":284,"../internals/shared-key":306}],274:[function(require,module,exports){
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var Iterators = require('../internals/iterators');
-
-var ITERATOR = wellKnownSymbol('iterator');
-var ArrayPrototype = Array.prototype;
-
-// check on default Array iterator
-module.exports = function (it) {
-  return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
-};
-
-},{"../internals/iterators":282,"../internals/well-known-symbol":320}],275:[function(require,module,exports){
-var classof = require('../internals/classof-raw');
-
-// `IsArray` abstract operation
-// https://tc39.github.io/ecma262/#sec-isarray
-module.exports = Array.isArray || function isArray(arg) {
-  return classof(arg) == 'Array';
-};
-
-},{"../internals/classof-raw":240}],276:[function(require,module,exports){
-var fails = require('../internals/fails');
-
-var replacement = /#|\.prototype\./;
-
-var isForced = function (feature, detection) {
-  var value = data[normalize(feature)];
-  return value == POLYFILL ? true
-    : value == NATIVE ? false
-    : typeof detection == 'function' ? fails(detection)
-    : !!detection;
-};
-
-var normalize = isForced.normalize = function (string) {
-  return String(string).replace(replacement, '.').toLowerCase();
-};
-
-var data = isForced.data = {};
-var NATIVE = isForced.NATIVE = 'N';
-var POLYFILL = isForced.POLYFILL = 'P';
-
-module.exports = isForced;
-
-},{"../internals/fails":259}],277:[function(require,module,exports){
-var classof = require('../internals/classof');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var Iterators = require('../internals/iterators');
-
-var ITERATOR = wellKnownSymbol('iterator');
-
-module.exports = function (it) {
-  var O = Object(it);
-  return O[ITERATOR] !== undefined
-    || '@@iterator' in O
-    // eslint-disable-next-line no-prototype-builtins
-    || Iterators.hasOwnProperty(classof(O));
-};
-
-},{"../internals/classof":241,"../internals/iterators":282,"../internals/well-known-symbol":320}],278:[function(require,module,exports){
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-},{}],279:[function(require,module,exports){
-module.exports = true;
-
-},{}],280:[function(require,module,exports){
-var anObject = require('../internals/an-object');
-var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
-var toLength = require('../internals/to-length');
-var bind = require('../internals/function-bind-context');
-var getIteratorMethod = require('../internals/get-iterator-method');
-var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
-
-var Result = function (stopped, result) {
-  this.stopped = stopped;
-  this.result = result;
-};
-
-var iterate = module.exports = function (iterable, fn, that, AS_ENTRIES, IS_ITERATOR) {
-  var boundFunction = bind(fn, that, AS_ENTRIES ? 2 : 1);
-  var iterator, iterFn, index, length, result, next, step;
-
-  if (IS_ITERATOR) {
-    iterator = iterable;
-  } else {
-    iterFn = getIteratorMethod(iterable);
-    if (typeof iterFn != 'function') throw TypeError('Target is not iterable');
-    // optimisation for array iterators
-    if (isArrayIteratorMethod(iterFn)) {
-      for (index = 0, length = toLength(iterable.length); length > index; index++) {
-        result = AS_ENTRIES
-          ? boundFunction(anObject(step = iterable[index])[0], step[1])
-          : boundFunction(iterable[index]);
-        if (result && result instanceof Result) return result;
-      } return new Result(false);
-    }
-    iterator = iterFn.call(iterable);
-  }
-
-  next = iterator.next;
-  while (!(step = next.call(iterator)).done) {
-    result = callWithSafeIterationClosing(iterator, boundFunction, step.value, AS_ENTRIES);
-    if (typeof result == 'object' && result && result instanceof Result) return result;
-  } return new Result(false);
-};
-
-iterate.stop = function (result) {
-  return new Result(true, result);
-};
-
-},{"../internals/an-object":229,"../internals/call-with-safe-iteration-closing":238,"../internals/function-bind-context":261,"../internals/get-iterator-method":263,"../internals/is-array-iterator-method":274,"../internals/to-length":313}],281:[function(require,module,exports){
-'use strict';
-var getPrototypeOf = require('../internals/object-get-prototype-of');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var has = require('../internals/has');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var IS_PURE = require('../internals/is-pure');
-
-var ITERATOR = wellKnownSymbol('iterator');
-var BUGGY_SAFARI_ITERATORS = false;
-
-var returnThis = function () { return this; };
-
-// `%IteratorPrototype%` object
-// https://tc39.github.io/ecma262/#sec-%iteratorprototype%-object
-var IteratorPrototype, PrototypeOfArrayIteratorPrototype, arrayIterator;
-
-if ([].keys) {
-  arrayIterator = [].keys();
-  // Safari 8 has buggy iterators w/o `next`
-  if (!('next' in arrayIterator)) BUGGY_SAFARI_ITERATORS = true;
-  else {
-    PrototypeOfArrayIteratorPrototype = getPrototypeOf(getPrototypeOf(arrayIterator));
-    if (PrototypeOfArrayIteratorPrototype !== Object.prototype) IteratorPrototype = PrototypeOfArrayIteratorPrototype;
-  }
-}
-
-if (IteratorPrototype == undefined) IteratorPrototype = {};
-
-// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-if (!IS_PURE && !has(IteratorPrototype, ITERATOR)) {
-  createNonEnumerableProperty(IteratorPrototype, ITERATOR, returnThis);
-}
-
-module.exports = {
-  IteratorPrototype: IteratorPrototype,
-  BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
-};
-
-},{"../internals/create-non-enumerable-property":246,"../internals/has":266,"../internals/is-pure":279,"../internals/object-get-prototype-of":293,"../internals/well-known-symbol":320}],282:[function(require,module,exports){
-arguments[4][267][0].apply(exports,arguments)
-},{"dup":267}],283:[function(require,module,exports){
-var fails = require('../internals/fails');
-
-module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
-  // Chrome 38 Symbol has incorrect toString conversion
-  // eslint-disable-next-line no-undef
-  return !String(Symbol());
-});
-
-},{"../internals/fails":259}],284:[function(require,module,exports){
-var global = require('../internals/global');
-var inspectSource = require('../internals/inspect-source');
-
-var WeakMap = global.WeakMap;
-
-module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
-
-},{"../internals/global":265,"../internals/inspect-source":271}],285:[function(require,module,exports){
-'use strict';
-var DESCRIPTORS = require('../internals/descriptors');
-var fails = require('../internals/fails');
-var objectKeys = require('../internals/object-keys');
-var getOwnPropertySymbolsModule = require('../internals/object-get-own-property-symbols');
-var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
-var toObject = require('../internals/to-object');
-var IndexedObject = require('../internals/indexed-object');
-
-var nativeAssign = Object.assign;
-var defineProperty = Object.defineProperty;
-
-// `Object.assign` method
-// https://tc39.github.io/ecma262/#sec-object.assign
-module.exports = !nativeAssign || fails(function () {
-  // should have correct order of operations (Edge bug)
-  if (DESCRIPTORS && nativeAssign({ b: 1 }, nativeAssign(defineProperty({}, 'a', {
-    enumerable: true,
-    get: function () {
-      defineProperty(this, 'b', {
-        value: 3,
-        enumerable: false
-      });
-    }
-  }), { b: 2 })).b !== 1) return true;
-  // should work with symbols and should have deterministic property order (V8 bug)
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var symbol = Symbol();
-  var alphabet = 'abcdefghijklmnopqrst';
-  A[symbol] = 7;
-  alphabet.split('').forEach(function (chr) { B[chr] = chr; });
-  return nativeAssign({}, A)[symbol] != 7 || objectKeys(nativeAssign({}, B)).join('') != alphabet;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var argumentsLength = arguments.length;
-  var index = 1;
-  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
-  var propertyIsEnumerable = propertyIsEnumerableModule.f;
-  while (argumentsLength > index) {
-    var S = IndexedObject(arguments[index++]);
-    var keys = getOwnPropertySymbols ? objectKeys(S).concat(getOwnPropertySymbols(S)) : objectKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) {
-      key = keys[j++];
-      if (!DESCRIPTORS || propertyIsEnumerable.call(S, key)) T[key] = S[key];
-    }
-  } return T;
-} : nativeAssign;
-
-},{"../internals/descriptors":251,"../internals/fails":259,"../internals/indexed-object":270,"../internals/object-get-own-property-symbols":292,"../internals/object-keys":295,"../internals/object-property-is-enumerable":296,"../internals/to-object":314}],286:[function(require,module,exports){
-var anObject = require('../internals/an-object');
-var defineProperties = require('../internals/object-define-properties');
-var enumBugKeys = require('../internals/enum-bug-keys');
-var hiddenKeys = require('../internals/hidden-keys');
-var html = require('../internals/html');
-var documentCreateElement = require('../internals/document-create-element');
-var sharedKey = require('../internals/shared-key');
-
-var GT = '>';
-var LT = '<';
-var PROTOTYPE = 'prototype';
-var SCRIPT = 'script';
-var IE_PROTO = sharedKey('IE_PROTO');
-
-var EmptyConstructor = function () { /* empty */ };
-
-var scriptTag = function (content) {
-  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
-};
-
-// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
-var NullProtoObjectViaActiveX = function (activeXDocument) {
-  activeXDocument.write(scriptTag(''));
-  activeXDocument.close();
-  var temp = activeXDocument.parentWindow.Object;
-  activeXDocument = null; // avoid memory leak
-  return temp;
-};
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var NullProtoObjectViaIFrame = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = documentCreateElement('iframe');
-  var JS = 'java' + SCRIPT + ':';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  html.appendChild(iframe);
-  // https://github.com/zloirock/core-js/issues/475
-  iframe.src = String(JS);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(scriptTag('document.F=Object'));
-  iframeDocument.close();
-  return iframeDocument.F;
-};
-
-// Check for document.domain and active x support
-// No need to use active x approach when document.domain is not set
-// see https://github.com/es-shims/es5-shim/issues/150
-// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
-// avoid IE GC bug
-var activeXDocument;
-var NullProtoObject = function () {
-  try {
-    /* global ActiveXObject */
-    activeXDocument = document.domain && new ActiveXObject('htmlfile');
-  } catch (error) { /* ignore */ }
-  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
-  var length = enumBugKeys.length;
-  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
-  return NullProtoObject();
-};
-
-hiddenKeys[IE_PROTO] = true;
-
-// `Object.create` method
-// https://tc39.github.io/ecma262/#sec-object.create
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    EmptyConstructor[PROTOTYPE] = anObject(O);
-    result = new EmptyConstructor();
-    EmptyConstructor[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = NullProtoObject();
-  return Properties === undefined ? result : defineProperties(result, Properties);
-};
-
-},{"../internals/an-object":229,"../internals/document-create-element":252,"../internals/enum-bug-keys":257,"../internals/hidden-keys":267,"../internals/html":268,"../internals/object-define-properties":287,"../internals/shared-key":306}],287:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var definePropertyModule = require('../internals/object-define-property');
-var anObject = require('../internals/an-object');
-var objectKeys = require('../internals/object-keys');
-
-// `Object.defineProperties` method
-// https://tc39.github.io/ecma262/#sec-object.defineproperties
-module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = objectKeys(Properties);
-  var length = keys.length;
-  var index = 0;
-  var key;
-  while (length > index) definePropertyModule.f(O, key = keys[index++], Properties[key]);
-  return O;
-};
-
-},{"../internals/an-object":229,"../internals/descriptors":251,"../internals/object-define-property":288,"../internals/object-keys":295}],288:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
-var anObject = require('../internals/an-object');
-var toPrimitive = require('../internals/to-primitive');
-
-var nativeDefineProperty = Object.defineProperty;
-
-// `Object.defineProperty` method
-// https://tc39.github.io/ecma262/#sec-object.defineproperty
-exports.f = DESCRIPTORS ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return nativeDefineProperty(O, P, Attributes);
-  } catch (error) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-},{"../internals/an-object":229,"../internals/descriptors":251,"../internals/ie8-dom-define":269,"../internals/to-primitive":315}],289:[function(require,module,exports){
-var DESCRIPTORS = require('../internals/descriptors');
-var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-var toIndexedObject = require('../internals/to-indexed-object');
-var toPrimitive = require('../internals/to-primitive');
-var has = require('../internals/has');
-var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
-
-var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-
-// `Object.getOwnPropertyDescriptor` method
-// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
-exports.f = DESCRIPTORS ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
-  O = toIndexedObject(O);
-  P = toPrimitive(P, true);
-  if (IE8_DOM_DEFINE) try {
-    return nativeGetOwnPropertyDescriptor(O, P);
-  } catch (error) { /* empty */ }
-  if (has(O, P)) return createPropertyDescriptor(!propertyIsEnumerableModule.f.call(O, P), O[P]);
-};
-
-},{"../internals/create-property-descriptor":247,"../internals/descriptors":251,"../internals/has":266,"../internals/ie8-dom-define":269,"../internals/object-property-is-enumerable":296,"../internals/to-indexed-object":311,"../internals/to-primitive":315}],290:[function(require,module,exports){
-var toIndexedObject = require('../internals/to-indexed-object');
-var nativeGetOwnPropertyNames = require('../internals/object-get-own-property-names').f;
-
-var toString = {}.toString;
-
-var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
-  ? Object.getOwnPropertyNames(window) : [];
-
-var getWindowNames = function (it) {
-  try {
-    return nativeGetOwnPropertyNames(it);
-  } catch (error) {
-    return windowNames.slice();
-  }
-};
-
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-module.exports.f = function getOwnPropertyNames(it) {
-  return windowNames && toString.call(it) == '[object Window]'
-    ? getWindowNames(it)
-    : nativeGetOwnPropertyNames(toIndexedObject(it));
-};
-
-},{"../internals/object-get-own-property-names":291,"../internals/to-indexed-object":311}],291:[function(require,module,exports){
-var internalObjectKeys = require('../internals/object-keys-internal');
-var enumBugKeys = require('../internals/enum-bug-keys');
-
-var hiddenKeys = enumBugKeys.concat('length', 'prototype');
-
-// `Object.getOwnPropertyNames` method
-// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-  return internalObjectKeys(O, hiddenKeys);
-};
-
-},{"../internals/enum-bug-keys":257,"../internals/object-keys-internal":294}],292:[function(require,module,exports){
-exports.f = Object.getOwnPropertySymbols;
-
-},{}],293:[function(require,module,exports){
-var has = require('../internals/has');
-var toObject = require('../internals/to-object');
-var sharedKey = require('../internals/shared-key');
-var CORRECT_PROTOTYPE_GETTER = require('../internals/correct-prototype-getter');
-
-var IE_PROTO = sharedKey('IE_PROTO');
-var ObjectPrototype = Object.prototype;
-
-// `Object.getPrototypeOf` method
-// https://tc39.github.io/ecma262/#sec-object.getprototypeof
-module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O) {
-  O = toObject(O);
-  if (has(O, IE_PROTO)) return O[IE_PROTO];
-  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectPrototype : null;
-};
-
-},{"../internals/correct-prototype-getter":244,"../internals/has":266,"../internals/shared-key":306,"../internals/to-object":314}],294:[function(require,module,exports){
-var has = require('../internals/has');
-var toIndexedObject = require('../internals/to-indexed-object');
-var indexOf = require('../internals/array-includes').indexOf;
-var hiddenKeys = require('../internals/hidden-keys');
-
-module.exports = function (object, names) {
-  var O = toIndexedObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (has(O, key = names[i++])) {
-    ~indexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-
-},{"../internals/array-includes":232,"../internals/has":266,"../internals/hidden-keys":267,"../internals/to-indexed-object":311}],295:[function(require,module,exports){
-var internalObjectKeys = require('../internals/object-keys-internal');
-var enumBugKeys = require('../internals/enum-bug-keys');
-
-// `Object.keys` method
-// https://tc39.github.io/ecma262/#sec-object.keys
-module.exports = Object.keys || function keys(O) {
-  return internalObjectKeys(O, enumBugKeys);
-};
-
-},{"../internals/enum-bug-keys":257,"../internals/object-keys-internal":294}],296:[function(require,module,exports){
-'use strict';
-var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-
-// Nashorn ~ JDK8 bug
-var NASHORN_BUG = getOwnPropertyDescriptor && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
-
-// `Object.prototype.propertyIsEnumerable` method implementation
-// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
-exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
-  var descriptor = getOwnPropertyDescriptor(this, V);
-  return !!descriptor && descriptor.enumerable;
-} : nativePropertyIsEnumerable;
-
-},{}],297:[function(require,module,exports){
-var anObject = require('../internals/an-object');
-var aPossiblePrototype = require('../internals/a-possible-prototype');
-
-// `Object.setPrototypeOf` method
-// https://tc39.github.io/ecma262/#sec-object.setprototypeof
-// Works with __proto__ only. Old v8 can't work with null proto objects.
-/* eslint-disable no-proto */
-module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
-  var CORRECT_SETTER = false;
-  var test = {};
-  var setter;
-  try {
-    setter = Object.getOwnPropertyDescriptor(Object.prototype, '__proto__').set;
-    setter.call(test, []);
-    CORRECT_SETTER = test instanceof Array;
-  } catch (error) { /* empty */ }
-  return function setPrototypeOf(O, proto) {
-    anObject(O);
-    aPossiblePrototype(proto);
-    if (CORRECT_SETTER) setter.call(O, proto);
-    else O.__proto__ = proto;
-    return O;
-  };
-}() : undefined);
-
-},{"../internals/a-possible-prototype":226,"../internals/an-object":229}],298:[function(require,module,exports){
-'use strict';
-var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-var classof = require('../internals/classof');
-
-// `Object.prototype.toString` method implementation
-// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
-module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
-  return '[object ' + classof(this) + ']';
-};
-
-},{"../internals/classof":241,"../internals/to-string-tag-support":316}],299:[function(require,module,exports){
-arguments[4][267][0].apply(exports,arguments)
-},{"dup":267}],300:[function(require,module,exports){
-var redefine = require('../internals/redefine');
-
-module.exports = function (target, src, options) {
-  for (var key in src) {
-    if (options && options.unsafe && target[key]) target[key] = src[key];
-    else redefine(target, key, src[key], options);
-  } return target;
-};
-
-},{"../internals/redefine":301}],301:[function(require,module,exports){
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-
-module.exports = function (target, key, value, options) {
-  if (options && options.enumerable) target[key] = value;
-  else createNonEnumerableProperty(target, key, value);
-};
-
-},{"../internals/create-non-enumerable-property":246}],302:[function(require,module,exports){
-// `RequireObjectCoercible` abstract operation
-// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on " + it);
-  return it;
-};
-
-},{}],303:[function(require,module,exports){
-var global = require('../internals/global');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-
-module.exports = function (key, value) {
-  try {
-    createNonEnumerableProperty(global, key, value);
-  } catch (error) {
-    global[key] = value;
-  } return value;
-};
-
-},{"../internals/create-non-enumerable-property":246,"../internals/global":265}],304:[function(require,module,exports){
-'use strict';
-var getBuiltIn = require('../internals/get-built-in');
-var definePropertyModule = require('../internals/object-define-property');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var DESCRIPTORS = require('../internals/descriptors');
-
-var SPECIES = wellKnownSymbol('species');
-
-module.exports = function (CONSTRUCTOR_NAME) {
-  var Constructor = getBuiltIn(CONSTRUCTOR_NAME);
-  var defineProperty = definePropertyModule.f;
-
-  if (DESCRIPTORS && Constructor && !Constructor[SPECIES]) {
-    defineProperty(Constructor, SPECIES, {
-      configurable: true,
-      get: function () { return this; }
-    });
-  }
-};
-
-},{"../internals/descriptors":251,"../internals/get-built-in":262,"../internals/object-define-property":288,"../internals/well-known-symbol":320}],305:[function(require,module,exports){
-var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-var defineProperty = require('../internals/object-define-property').f;
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var has = require('../internals/has');
-var toString = require('../internals/object-to-string');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-
-module.exports = function (it, TAG, STATIC, SET_METHOD) {
-  if (it) {
-    var target = STATIC ? it : it.prototype;
-    if (!has(target, TO_STRING_TAG)) {
-      defineProperty(target, TO_STRING_TAG, { configurable: true, value: TAG });
-    }
-    if (SET_METHOD && !TO_STRING_TAG_SUPPORT) {
-      createNonEnumerableProperty(target, 'toString', toString);
-    }
-  }
-};
-
-},{"../internals/create-non-enumerable-property":246,"../internals/has":266,"../internals/object-define-property":288,"../internals/object-to-string":298,"../internals/to-string-tag-support":316,"../internals/well-known-symbol":320}],306:[function(require,module,exports){
-var shared = require('../internals/shared');
-var uid = require('../internals/uid');
-
-var keys = shared('keys');
-
-module.exports = function (key) {
-  return keys[key] || (keys[key] = uid(key));
-};
-
-},{"../internals/shared":308,"../internals/uid":317}],307:[function(require,module,exports){
-var global = require('../internals/global');
-var setGlobal = require('../internals/set-global');
-
-var SHARED = '__core-js_shared__';
-var store = global[SHARED] || setGlobal(SHARED, {});
-
-module.exports = store;
-
-},{"../internals/global":265,"../internals/set-global":303}],308:[function(require,module,exports){
-var IS_PURE = require('../internals/is-pure');
-var store = require('../internals/shared-store');
-
-(module.exports = function (key, value) {
-  return store[key] || (store[key] = value !== undefined ? value : {});
-})('versions', []).push({
-  version: '3.6.4',
-  mode: IS_PURE ? 'pure' : 'global',
-  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
-});
-
-},{"../internals/is-pure":279,"../internals/shared-store":307}],309:[function(require,module,exports){
-var toInteger = require('../internals/to-integer');
-var requireObjectCoercible = require('../internals/require-object-coercible');
-
-// `String.prototype.{ codePointAt, at }` methods implementation
-var createMethod = function (CONVERT_TO_STRING) {
-  return function ($this, pos) {
-    var S = String(requireObjectCoercible($this));
-    var position = toInteger(pos);
-    var size = S.length;
-    var first, second;
-    if (position < 0 || position >= size) return CONVERT_TO_STRING ? '' : undefined;
-    first = S.charCodeAt(position);
-    return first < 0xD800 || first > 0xDBFF || position + 1 === size
-      || (second = S.charCodeAt(position + 1)) < 0xDC00 || second > 0xDFFF
-        ? CONVERT_TO_STRING ? S.charAt(position) : first
-        : CONVERT_TO_STRING ? S.slice(position, position + 2) : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
-  };
-};
-
-module.exports = {
-  // `String.prototype.codePointAt` method
-  // https://tc39.github.io/ecma262/#sec-string.prototype.codepointat
-  codeAt: createMethod(false),
-  // `String.prototype.at` method
-  // https://github.com/mathiasbynens/String.prototype.at
-  charAt: createMethod(true)
-};
-
-},{"../internals/require-object-coercible":302,"../internals/to-integer":312}],310:[function(require,module,exports){
-var toInteger = require('../internals/to-integer');
-
-var max = Math.max;
-var min = Math.min;
-
-// Helper for a popular repeating case of the spec:
-// Let integer be ? ToInteger(index).
-// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
-module.exports = function (index, length) {
-  var integer = toInteger(index);
-  return integer < 0 ? max(integer + length, 0) : min(integer, length);
-};
-
-},{"../internals/to-integer":312}],311:[function(require,module,exports){
-// toObject with fallback for non-array-like ES3 strings
-var IndexedObject = require('../internals/indexed-object');
-var requireObjectCoercible = require('../internals/require-object-coercible');
-
-module.exports = function (it) {
-  return IndexedObject(requireObjectCoercible(it));
-};
-
-},{"../internals/indexed-object":270,"../internals/require-object-coercible":302}],312:[function(require,module,exports){
-var ceil = Math.ceil;
-var floor = Math.floor;
-
-// `ToInteger` abstract operation
-// https://tc39.github.io/ecma262/#sec-tointeger
-module.exports = function (argument) {
-  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
-};
-
-},{}],313:[function(require,module,exports){
-var toInteger = require('../internals/to-integer');
-
-var min = Math.min;
-
-// `ToLength` abstract operation
-// https://tc39.github.io/ecma262/#sec-tolength
-module.exports = function (argument) {
-  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
-};
-
-},{"../internals/to-integer":312}],314:[function(require,module,exports){
-var requireObjectCoercible = require('../internals/require-object-coercible');
-
-// `ToObject` abstract operation
-// https://tc39.github.io/ecma262/#sec-toobject
-module.exports = function (argument) {
-  return Object(requireObjectCoercible(argument));
-};
-
-},{"../internals/require-object-coercible":302}],315:[function(require,module,exports){
-var isObject = require('../internals/is-object');
-
-// `ToPrimitive` abstract operation
-// https://tc39.github.io/ecma262/#sec-toprimitive
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (input, PREFERRED_STRING) {
-  if (!isObject(input)) return input;
-  var fn, val;
-  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-},{"../internals/is-object":278}],316:[function(require,module,exports){
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-var test = {};
-
-test[TO_STRING_TAG] = 'z';
-
-module.exports = String(test) === '[object z]';
-
-},{"../internals/well-known-symbol":320}],317:[function(require,module,exports){
-var id = 0;
-var postfix = Math.random();
-
-module.exports = function (key) {
-  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
-};
-
-},{}],318:[function(require,module,exports){
-var NATIVE_SYMBOL = require('../internals/native-symbol');
-
-module.exports = NATIVE_SYMBOL
-  // eslint-disable-next-line no-undef
-  && !Symbol.sham
-  // eslint-disable-next-line no-undef
-  && typeof Symbol.iterator == 'symbol';
-
-},{"../internals/native-symbol":283}],319:[function(require,module,exports){
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-exports.f = wellKnownSymbol;
-
-},{"../internals/well-known-symbol":320}],320:[function(require,module,exports){
-var global = require('../internals/global');
-var shared = require('../internals/shared');
-var has = require('../internals/has');
-var uid = require('../internals/uid');
-var NATIVE_SYMBOL = require('../internals/native-symbol');
-var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
-
-var WellKnownSymbolsStore = shared('wks');
-var Symbol = global.Symbol;
-var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol : Symbol && Symbol.withoutSetter || uid;
-
-module.exports = function (name) {
-  if (!has(WellKnownSymbolsStore, name)) {
-    if (NATIVE_SYMBOL && has(Symbol, name)) WellKnownSymbolsStore[name] = Symbol[name];
-    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
-  } return WellKnownSymbolsStore[name];
-};
-
-},{"../internals/global":265,"../internals/has":266,"../internals/native-symbol":283,"../internals/shared":308,"../internals/uid":317,"../internals/use-symbol-as-uid":318}],321:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var fails = require('../internals/fails');
-var isArray = require('../internals/is-array');
-var isObject = require('../internals/is-object');
-var toObject = require('../internals/to-object');
-var toLength = require('../internals/to-length');
-var createProperty = require('../internals/create-property');
-var arraySpeciesCreate = require('../internals/array-species-create');
-var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var V8_VERSION = require('../internals/engine-v8-version');
-
-var IS_CONCAT_SPREADABLE = wellKnownSymbol('isConcatSpreadable');
-var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
-var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
-
-// We can't use this feature detection in V8 since it causes
-// deoptimization and serious performance degradation
-// https://github.com/zloirock/core-js/issues/679
-var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails(function () {
-  var array = [];
-  array[IS_CONCAT_SPREADABLE] = false;
-  return array.concat()[0] !== array;
-});
-
-var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('concat');
-
-var isConcatSpreadable = function (O) {
-  if (!isObject(O)) return false;
-  var spreadable = O[IS_CONCAT_SPREADABLE];
-  return spreadable !== undefined ? !!spreadable : isArray(O);
-};
-
-var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT;
-
-// `Array.prototype.concat` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.concat
-// with adding support of @@isConcatSpreadable and @@species
-$({ target: 'Array', proto: true, forced: FORCED }, {
-  concat: function concat(arg) { // eslint-disable-line no-unused-vars
-    var O = toObject(this);
-    var A = arraySpeciesCreate(O, 0);
-    var n = 0;
-    var i, k, length, len, E;
-    for (i = -1, length = arguments.length; i < length; i++) {
-      E = i === -1 ? O : arguments[i];
-      if (isConcatSpreadable(E)) {
-        len = toLength(E.length);
-        if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
-        for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
-      } else {
-        if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
-        createProperty(A, n++, E);
-      }
-    }
-    A.length = n;
-    return A;
-  }
-});
-
-},{"../internals/array-method-has-species-support":234,"../internals/array-species-create":237,"../internals/create-property":248,"../internals/engine-v8-version":255,"../internals/export":258,"../internals/fails":259,"../internals/is-array":275,"../internals/is-object":278,"../internals/to-length":313,"../internals/to-object":314,"../internals/well-known-symbol":320}],322:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var $find = require('../internals/array-iteration').find;
-var addToUnscopables = require('../internals/add-to-unscopables');
-var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
-
-var FIND = 'find';
-var SKIPS_HOLES = true;
-
-var USES_TO_LENGTH = arrayMethodUsesToLength(FIND);
-
-// Shouldn't skip holes
-if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.find` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
-  find: function find(callbackfn /* , that = undefined */) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND);
-
-},{"../internals/add-to-unscopables":227,"../internals/array-iteration":233,"../internals/array-method-uses-to-length":236,"../internals/export":258}],323:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var forEach = require('../internals/array-for-each');
-
-// `Array.prototype.forEach` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-$({ target: 'Array', proto: true, forced: [].forEach != forEach }, {
-  forEach: forEach
-});
-
-},{"../internals/array-for-each":230,"../internals/export":258}],324:[function(require,module,exports){
-var $ = require('../internals/export');
-var from = require('../internals/array-from');
-var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
-
-var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
-  Array.from(iterable);
-});
-
-// `Array.from` method
-// https://tc39.github.io/ecma262/#sec-array.from
-$({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
-  from: from
-});
-
-},{"../internals/array-from":231,"../internals/check-correctness-of-iteration":239,"../internals/export":258}],325:[function(require,module,exports){
-var $ = require('../internals/export');
-var isArray = require('../internals/is-array');
-
-// `Array.isArray` method
-// https://tc39.github.io/ecma262/#sec-array.isarray
-$({ target: 'Array', stat: true }, {
-  isArray: isArray
-});
-
-},{"../internals/export":258,"../internals/is-array":275}],326:[function(require,module,exports){
-'use strict';
-var toIndexedObject = require('../internals/to-indexed-object');
-var addToUnscopables = require('../internals/add-to-unscopables');
-var Iterators = require('../internals/iterators');
-var InternalStateModule = require('../internals/internal-state');
-var defineIterator = require('../internals/define-iterator');
-
-var ARRAY_ITERATOR = 'Array Iterator';
-var setInternalState = InternalStateModule.set;
-var getInternalState = InternalStateModule.getterFor(ARRAY_ITERATOR);
-
-// `Array.prototype.entries` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.entries
-// `Array.prototype.keys` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.keys
-// `Array.prototype.values` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.values
-// `Array.prototype[@@iterator]` method
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@iterator
-// `CreateArrayIterator` internal method
-// https://tc39.github.io/ecma262/#sec-createarrayiterator
-module.exports = defineIterator(Array, 'Array', function (iterated, kind) {
-  setInternalState(this, {
-    type: ARRAY_ITERATOR,
-    target: toIndexedObject(iterated), // target
-    index: 0,                          // next index
-    kind: kind                         // kind
-  });
-// `%ArrayIteratorPrototype%.next` method
-// https://tc39.github.io/ecma262/#sec-%arrayiteratorprototype%.next
-}, function () {
-  var state = getInternalState(this);
-  var target = state.target;
-  var kind = state.kind;
-  var index = state.index++;
-  if (!target || index >= target.length) {
-    state.target = undefined;
-    return { value: undefined, done: true };
-  }
-  if (kind == 'keys') return { value: index, done: false };
-  if (kind == 'values') return { value: target[index], done: false };
-  return { value: [index, target[index]], done: false };
-}, 'values');
-
-// argumentsList[@@iterator] is %ArrayProto_values%
-// https://tc39.github.io/ecma262/#sec-createunmappedargumentsobject
-// https://tc39.github.io/ecma262/#sec-createmappedargumentsobject
-Iterators.Arguments = Iterators.Array;
-
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables('keys');
-addToUnscopables('values');
-addToUnscopables('entries');
-
-},{"../internals/add-to-unscopables":227,"../internals/define-iterator":249,"../internals/internal-state":273,"../internals/iterators":282,"../internals/to-indexed-object":311}],327:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var isObject = require('../internals/is-object');
-var isArray = require('../internals/is-array');
-var toAbsoluteIndex = require('../internals/to-absolute-index');
-var toLength = require('../internals/to-length');
-var toIndexedObject = require('../internals/to-indexed-object');
-var createProperty = require('../internals/create-property');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
-var arrayMethodUsesToLength = require('../internals/array-method-uses-to-length');
-
-var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('slice');
-var USES_TO_LENGTH = arrayMethodUsesToLength('slice', { ACCESSORS: true, 0: 0, 1: 2 });
-
-var SPECIES = wellKnownSymbol('species');
-var nativeSlice = [].slice;
-var max = Math.max;
-
-// `Array.prototype.slice` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.slice
-// fallback for not array-like ES3 strings and DOM objects
-$({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGTH }, {
-  slice: function slice(start, end) {
-    var O = toIndexedObject(this);
-    var length = toLength(O.length);
-    var k = toAbsoluteIndex(start, length);
-    var fin = toAbsoluteIndex(end === undefined ? length : end, length);
-    // inline `ArraySpeciesCreate` for usage native `Array#slice` where it's possible
-    var Constructor, result, n;
-    if (isArray(O)) {
-      Constructor = O.constructor;
-      // cross-realm fallback
-      if (typeof Constructor == 'function' && (Constructor === Array || isArray(Constructor.prototype))) {
-        Constructor = undefined;
-      } else if (isObject(Constructor)) {
-        Constructor = Constructor[SPECIES];
-        if (Constructor === null) Constructor = undefined;
-      }
-      if (Constructor === Array || Constructor === undefined) {
-        return nativeSlice.call(O, k, fin);
-      }
-    }
-    result = new (Constructor === undefined ? Array : Constructor)(max(fin - k, 0));
-    for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k]);
-    result.length = n;
-    return result;
-  }
-});
-
-},{"../internals/array-method-has-species-support":234,"../internals/array-method-uses-to-length":236,"../internals/create-property":248,"../internals/export":258,"../internals/is-array":275,"../internals/is-object":278,"../internals/to-absolute-index":310,"../internals/to-indexed-object":311,"../internals/to-length":313,"../internals/well-known-symbol":320}],328:[function(require,module,exports){
-var $ = require('../internals/export');
-var getBuiltIn = require('../internals/get-built-in');
-var fails = require('../internals/fails');
-
-var $stringify = getBuiltIn('JSON', 'stringify');
-var re = /[\uD800-\uDFFF]/g;
-var low = /^[\uD800-\uDBFF]$/;
-var hi = /^[\uDC00-\uDFFF]$/;
-
-var fix = function (match, offset, string) {
-  var prev = string.charAt(offset - 1);
-  var next = string.charAt(offset + 1);
-  if ((low.test(match) && !hi.test(next)) || (hi.test(match) && !low.test(prev))) {
-    return '\\u' + match.charCodeAt(0).toString(16);
-  } return match;
-};
-
-var FORCED = fails(function () {
-  return $stringify('\uDF06\uD834') !== '"\\udf06\\ud834"'
-    || $stringify('\uDEAD') !== '"\\udead"';
-});
-
-if ($stringify) {
-  // https://github.com/tc39/proposal-well-formed-stringify
-  $({ target: 'JSON', stat: true, forced: FORCED }, {
-    // eslint-disable-next-line no-unused-vars
-    stringify: function stringify(it, replacer, space) {
-      var result = $stringify.apply(null, arguments);
-      return typeof result == 'string' ? result.replace(re, fix) : result;
-    }
-  });
-}
-
-},{"../internals/export":258,"../internals/fails":259,"../internals/get-built-in":262}],329:[function(require,module,exports){
-var global = require('../internals/global');
-var setToStringTag = require('../internals/set-to-string-tag');
-
-// JSON[@@toStringTag] property
-// https://tc39.github.io/ecma262/#sec-json-@@tostringtag
-setToStringTag(global.JSON, 'JSON', true);
-
-},{"../internals/global":265,"../internals/set-to-string-tag":305}],330:[function(require,module,exports){
-'use strict';
-var collection = require('../internals/collection');
-var collectionStrong = require('../internals/collection-strong');
-
-// `Map` constructor
-// https://tc39.github.io/ecma262/#sec-map-objects
-module.exports = collection('Map', function (init) {
-  return function Map() { return init(this, arguments.length ? arguments[0] : undefined); };
-}, collectionStrong);
-
-},{"../internals/collection":243,"../internals/collection-strong":242}],331:[function(require,module,exports){
-var setToStringTag = require('../internals/set-to-string-tag');
-
-// Math[@@toStringTag] property
-// https://tc39.github.io/ecma262/#sec-math-@@tostringtag
-setToStringTag(Math, 'Math', true);
-
-},{"../internals/set-to-string-tag":305}],332:[function(require,module,exports){
-var $ = require('../internals/export');
-var assign = require('../internals/object-assign');
-
-// `Object.assign` method
-// https://tc39.github.io/ecma262/#sec-object.assign
-$({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
-  assign: assign
-});
-
-},{"../internals/export":258,"../internals/object-assign":285}],333:[function(require,module,exports){
-var $ = require('../internals/export');
-var DESCRIPTORS = require('../internals/descriptors');
-var objectDefinePropertyModile = require('../internals/object-define-property');
-
-// `Object.defineProperty` method
-// https://tc39.github.io/ecma262/#sec-object.defineproperty
-$({ target: 'Object', stat: true, forced: !DESCRIPTORS, sham: !DESCRIPTORS }, {
-  defineProperty: objectDefinePropertyModile.f
-});
-
-},{"../internals/descriptors":251,"../internals/export":258,"../internals/object-define-property":288}],334:[function(require,module,exports){
-var $ = require('../internals/export');
-var toObject = require('../internals/to-object');
-var nativeKeys = require('../internals/object-keys');
-var fails = require('../internals/fails');
-
-var FAILS_ON_PRIMITIVES = fails(function () { nativeKeys(1); });
-
-// `Object.keys` method
-// https://tc39.github.io/ecma262/#sec-object.keys
-$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
-  keys: function keys(it) {
-    return nativeKeys(toObject(it));
-  }
-});
-
-},{"../internals/export":258,"../internals/fails":259,"../internals/object-keys":295,"../internals/to-object":314}],335:[function(require,module,exports){
-// empty
-
-},{}],336:[function(require,module,exports){
-'use strict';
-var collection = require('../internals/collection');
-var collectionStrong = require('../internals/collection-strong');
-
-// `Set` constructor
-// https://tc39.github.io/ecma262/#sec-set-objects
-module.exports = collection('Set', function (init) {
-  return function Set() { return init(this, arguments.length ? arguments[0] : undefined); };
-}, collectionStrong);
-
-},{"../internals/collection":243,"../internals/collection-strong":242}],337:[function(require,module,exports){
-'use strict';
-var charAt = require('../internals/string-multibyte').charAt;
-var InternalStateModule = require('../internals/internal-state');
-var defineIterator = require('../internals/define-iterator');
-
-var STRING_ITERATOR = 'String Iterator';
-var setInternalState = InternalStateModule.set;
-var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
-
-// `String.prototype[@@iterator]` method
-// https://tc39.github.io/ecma262/#sec-string.prototype-@@iterator
-defineIterator(String, 'String', function (iterated) {
-  setInternalState(this, {
-    type: STRING_ITERATOR,
-    string: String(iterated),
-    index: 0
-  });
-// `%StringIteratorPrototype%.next` method
-// https://tc39.github.io/ecma262/#sec-%stringiteratorprototype%.next
-}, function next() {
-  var state = getInternalState(this);
-  var string = state.string;
-  var index = state.index;
-  var point;
-  if (index >= string.length) return { value: undefined, done: true };
-  point = charAt(string, index);
-  state.index += point.length;
-  return { value: point, done: false };
-});
-
-},{"../internals/define-iterator":249,"../internals/internal-state":273,"../internals/string-multibyte":309}],338:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.asyncIterator` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.asynciterator
-defineWellKnownSymbol('asyncIterator');
-
-},{"../internals/define-well-known-symbol":250}],339:[function(require,module,exports){
-arguments[4][335][0].apply(exports,arguments)
-},{"dup":335}],340:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.hasInstance` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.hasinstance
-defineWellKnownSymbol('hasInstance');
-
-},{"../internals/define-well-known-symbol":250}],341:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.isConcatSpreadable` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.isconcatspreadable
-defineWellKnownSymbol('isConcatSpreadable');
-
-},{"../internals/define-well-known-symbol":250}],342:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.iterator` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.iterator
-defineWellKnownSymbol('iterator');
-
-},{"../internals/define-well-known-symbol":250}],343:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var global = require('../internals/global');
-var getBuiltIn = require('../internals/get-built-in');
-var IS_PURE = require('../internals/is-pure');
-var DESCRIPTORS = require('../internals/descriptors');
-var NATIVE_SYMBOL = require('../internals/native-symbol');
-var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
-var fails = require('../internals/fails');
-var has = require('../internals/has');
-var isArray = require('../internals/is-array');
-var isObject = require('../internals/is-object');
-var anObject = require('../internals/an-object');
-var toObject = require('../internals/to-object');
-var toIndexedObject = require('../internals/to-indexed-object');
-var toPrimitive = require('../internals/to-primitive');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-var nativeObjectCreate = require('../internals/object-create');
-var objectKeys = require('../internals/object-keys');
-var getOwnPropertyNamesModule = require('../internals/object-get-own-property-names');
-var getOwnPropertyNamesExternal = require('../internals/object-get-own-property-names-external');
-var getOwnPropertySymbolsModule = require('../internals/object-get-own-property-symbols');
-var getOwnPropertyDescriptorModule = require('../internals/object-get-own-property-descriptor');
-var definePropertyModule = require('../internals/object-define-property');
-var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var redefine = require('../internals/redefine');
-var shared = require('../internals/shared');
-var sharedKey = require('../internals/shared-key');
-var hiddenKeys = require('../internals/hidden-keys');
-var uid = require('../internals/uid');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-var setToStringTag = require('../internals/set-to-string-tag');
-var InternalStateModule = require('../internals/internal-state');
-var $forEach = require('../internals/array-iteration').forEach;
-
-var HIDDEN = sharedKey('hidden');
-var SYMBOL = 'Symbol';
-var PROTOTYPE = 'prototype';
-var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
-var setInternalState = InternalStateModule.set;
-var getInternalState = InternalStateModule.getterFor(SYMBOL);
-var ObjectPrototype = Object[PROTOTYPE];
-var $Symbol = global.Symbol;
-var $stringify = getBuiltIn('JSON', 'stringify');
-var nativeGetOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
-var nativeDefineProperty = definePropertyModule.f;
-var nativeGetOwnPropertyNames = getOwnPropertyNamesExternal.f;
-var nativePropertyIsEnumerable = propertyIsEnumerableModule.f;
-var AllSymbols = shared('symbols');
-var ObjectPrototypeSymbols = shared('op-symbols');
-var StringToSymbolRegistry = shared('string-to-symbol-registry');
-var SymbolToStringRegistry = shared('symbol-to-string-registry');
-var WellKnownSymbolsStore = shared('wks');
-var QObject = global.QObject;
-// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
-var USE_SETTER = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
-
-// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
-var setSymbolDescriptor = DESCRIPTORS && fails(function () {
-  return nativeObjectCreate(nativeDefineProperty({}, 'a', {
-    get: function () { return nativeDefineProperty(this, 'a', { value: 7 }).a; }
-  })).a != 7;
-}) ? function (O, P, Attributes) {
-  var ObjectPrototypeDescriptor = nativeGetOwnPropertyDescriptor(ObjectPrototype, P);
-  if (ObjectPrototypeDescriptor) delete ObjectPrototype[P];
-  nativeDefineProperty(O, P, Attributes);
-  if (ObjectPrototypeDescriptor && O !== ObjectPrototype) {
-    nativeDefineProperty(ObjectPrototype, P, ObjectPrototypeDescriptor);
-  }
-} : nativeDefineProperty;
-
-var wrap = function (tag, description) {
-  var symbol = AllSymbols[tag] = nativeObjectCreate($Symbol[PROTOTYPE]);
-  setInternalState(symbol, {
-    type: SYMBOL,
-    tag: tag,
-    description: description
-  });
-  if (!DESCRIPTORS) symbol.description = description;
-  return symbol;
-};
-
-var isSymbol = USE_SYMBOL_AS_UID ? function (it) {
-  return typeof it == 'symbol';
-} : function (it) {
-  return Object(it) instanceof $Symbol;
-};
-
-var $defineProperty = function defineProperty(O, P, Attributes) {
-  if (O === ObjectPrototype) $defineProperty(ObjectPrototypeSymbols, P, Attributes);
-  anObject(O);
-  var key = toPrimitive(P, true);
-  anObject(Attributes);
-  if (has(AllSymbols, key)) {
-    if (!Attributes.enumerable) {
-      if (!has(O, HIDDEN)) nativeDefineProperty(O, HIDDEN, createPropertyDescriptor(1, {}));
-      O[HIDDEN][key] = true;
-    } else {
-      if (has(O, HIDDEN) && O[HIDDEN][key]) O[HIDDEN][key] = false;
-      Attributes = nativeObjectCreate(Attributes, { enumerable: createPropertyDescriptor(0, false) });
-    } return setSymbolDescriptor(O, key, Attributes);
-  } return nativeDefineProperty(O, key, Attributes);
-};
-
-var $defineProperties = function defineProperties(O, Properties) {
-  anObject(O);
-  var properties = toIndexedObject(Properties);
-  var keys = objectKeys(properties).concat($getOwnPropertySymbols(properties));
-  $forEach(keys, function (key) {
-    if (!DESCRIPTORS || $propertyIsEnumerable.call(properties, key)) $defineProperty(O, key, properties[key]);
-  });
-  return O;
-};
-
-var $create = function create(O, Properties) {
-  return Properties === undefined ? nativeObjectCreate(O) : $defineProperties(nativeObjectCreate(O), Properties);
-};
-
-var $propertyIsEnumerable = function propertyIsEnumerable(V) {
-  var P = toPrimitive(V, true);
-  var enumerable = nativePropertyIsEnumerable.call(this, P);
-  if (this === ObjectPrototype && has(AllSymbols, P) && !has(ObjectPrototypeSymbols, P)) return false;
-  return enumerable || !has(this, P) || !has(AllSymbols, P) || has(this, HIDDEN) && this[HIDDEN][P] ? enumerable : true;
-};
-
-var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(O, P) {
-  var it = toIndexedObject(O);
-  var key = toPrimitive(P, true);
-  if (it === ObjectPrototype && has(AllSymbols, key) && !has(ObjectPrototypeSymbols, key)) return;
-  var descriptor = nativeGetOwnPropertyDescriptor(it, key);
-  if (descriptor && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) {
-    descriptor.enumerable = true;
-  }
-  return descriptor;
-};
-
-var $getOwnPropertyNames = function getOwnPropertyNames(O) {
-  var names = nativeGetOwnPropertyNames(toIndexedObject(O));
-  var result = [];
-  $forEach(names, function (key) {
-    if (!has(AllSymbols, key) && !has(hiddenKeys, key)) result.push(key);
-  });
-  return result;
-};
-
-var $getOwnPropertySymbols = function getOwnPropertySymbols(O) {
-  var IS_OBJECT_PROTOTYPE = O === ObjectPrototype;
-  var names = nativeGetOwnPropertyNames(IS_OBJECT_PROTOTYPE ? ObjectPrototypeSymbols : toIndexedObject(O));
-  var result = [];
-  $forEach(names, function (key) {
-    if (has(AllSymbols, key) && (!IS_OBJECT_PROTOTYPE || has(ObjectPrototype, key))) {
-      result.push(AllSymbols[key]);
-    }
-  });
-  return result;
-};
-
-// `Symbol` constructor
-// https://tc39.github.io/ecma262/#sec-symbol-constructor
-if (!NATIVE_SYMBOL) {
-  $Symbol = function Symbol() {
-    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor');
-    var description = !arguments.length || arguments[0] === undefined ? undefined : String(arguments[0]);
-    var tag = uid(description);
-    var setter = function (value) {
-      if (this === ObjectPrototype) setter.call(ObjectPrototypeSymbols, value);
-      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
-      setSymbolDescriptor(this, tag, createPropertyDescriptor(1, value));
-    };
-    if (DESCRIPTORS && USE_SETTER) setSymbolDescriptor(ObjectPrototype, tag, { configurable: true, set: setter });
-    return wrap(tag, description);
-  };
-
-  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
-    return getInternalState(this).tag;
-  });
-
-  redefine($Symbol, 'withoutSetter', function (description) {
-    return wrap(uid(description), description);
-  });
-
-  propertyIsEnumerableModule.f = $propertyIsEnumerable;
-  definePropertyModule.f = $defineProperty;
-  getOwnPropertyDescriptorModule.f = $getOwnPropertyDescriptor;
-  getOwnPropertyNamesModule.f = getOwnPropertyNamesExternal.f = $getOwnPropertyNames;
-  getOwnPropertySymbolsModule.f = $getOwnPropertySymbols;
-
-  wrappedWellKnownSymbolModule.f = function (name) {
-    return wrap(wellKnownSymbol(name), name);
-  };
-
-  if (DESCRIPTORS) {
-    // https://github.com/tc39/proposal-Symbol-description
-    nativeDefineProperty($Symbol[PROTOTYPE], 'description', {
-      configurable: true,
-      get: function description() {
-        return getInternalState(this).description;
-      }
-    });
-    if (!IS_PURE) {
-      redefine(ObjectPrototype, 'propertyIsEnumerable', $propertyIsEnumerable, { unsafe: true });
-    }
-  }
-}
-
-$({ global: true, wrap: true, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, {
-  Symbol: $Symbol
-});
-
-$forEach(objectKeys(WellKnownSymbolsStore), function (name) {
-  defineWellKnownSymbol(name);
-});
-
-$({ target: SYMBOL, stat: true, forced: !NATIVE_SYMBOL }, {
-  // `Symbol.for` method
-  // https://tc39.github.io/ecma262/#sec-symbol.for
-  'for': function (key) {
-    var string = String(key);
-    if (has(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
-    var symbol = $Symbol(string);
-    StringToSymbolRegistry[string] = symbol;
-    SymbolToStringRegistry[symbol] = string;
-    return symbol;
-  },
-  // `Symbol.keyFor` method
-  // https://tc39.github.io/ecma262/#sec-symbol.keyfor
-  keyFor: function keyFor(sym) {
-    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol');
-    if (has(SymbolToStringRegistry, sym)) return SymbolToStringRegistry[sym];
-  },
-  useSetter: function () { USE_SETTER = true; },
-  useSimple: function () { USE_SETTER = false; }
-});
-
-$({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL, sham: !DESCRIPTORS }, {
-  // `Object.create` method
-  // https://tc39.github.io/ecma262/#sec-object.create
-  create: $create,
-  // `Object.defineProperty` method
-  // https://tc39.github.io/ecma262/#sec-object.defineproperty
-  defineProperty: $defineProperty,
-  // `Object.defineProperties` method
-  // https://tc39.github.io/ecma262/#sec-object.defineproperties
-  defineProperties: $defineProperties,
-  // `Object.getOwnPropertyDescriptor` method
-  // https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptors
-  getOwnPropertyDescriptor: $getOwnPropertyDescriptor
-});
-
-$({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL }, {
-  // `Object.getOwnPropertyNames` method
-  // https://tc39.github.io/ecma262/#sec-object.getownpropertynames
-  getOwnPropertyNames: $getOwnPropertyNames,
-  // `Object.getOwnPropertySymbols` method
-  // https://tc39.github.io/ecma262/#sec-object.getownpropertysymbols
-  getOwnPropertySymbols: $getOwnPropertySymbols
-});
-
-// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
-// https://bugs.chromium.org/p/v8/issues/detail?id=3443
-$({ target: 'Object', stat: true, forced: fails(function () { getOwnPropertySymbolsModule.f(1); }) }, {
-  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
-    return getOwnPropertySymbolsModule.f(toObject(it));
-  }
-});
-
-// `JSON.stringify` method behavior with symbols
-// https://tc39.github.io/ecma262/#sec-json.stringify
-if ($stringify) {
-  var FORCED_JSON_STRINGIFY = !NATIVE_SYMBOL || fails(function () {
-    var symbol = $Symbol();
-    // MS Edge converts symbol values to JSON as {}
-    return $stringify([symbol]) != '[null]'
-      // WebKit converts symbol values to JSON as null
-      || $stringify({ a: symbol }) != '{}'
-      // V8 throws on boxed symbols
-      || $stringify(Object(symbol)) != '{}';
-  });
-
-  $({ target: 'JSON', stat: true, forced: FORCED_JSON_STRINGIFY }, {
-    // eslint-disable-next-line no-unused-vars
-    stringify: function stringify(it, replacer, space) {
-      var args = [it];
-      var index = 1;
-      var $replacer;
-      while (arguments.length > index) args.push(arguments[index++]);
-      $replacer = replacer;
-      if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
-      if (!isArray(replacer)) replacer = function (key, value) {
-        if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
-        if (!isSymbol(value)) return value;
-      };
-      args[1] = replacer;
-      return $stringify.apply(null, args);
-    }
-  });
-}
-
-// `Symbol.prototype[@@toPrimitive]` method
-// https://tc39.github.io/ecma262/#sec-symbol.prototype-@@toprimitive
-if (!$Symbol[PROTOTYPE][TO_PRIMITIVE]) {
-  createNonEnumerableProperty($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
-}
-// `Symbol.prototype[@@toStringTag]` property
-// https://tc39.github.io/ecma262/#sec-symbol.prototype-@@tostringtag
-setToStringTag($Symbol, SYMBOL);
-
-hiddenKeys[HIDDEN] = true;
-
-},{"../internals/an-object":229,"../internals/array-iteration":233,"../internals/create-non-enumerable-property":246,"../internals/create-property-descriptor":247,"../internals/define-well-known-symbol":250,"../internals/descriptors":251,"../internals/export":258,"../internals/fails":259,"../internals/get-built-in":262,"../internals/global":265,"../internals/has":266,"../internals/hidden-keys":267,"../internals/internal-state":273,"../internals/is-array":275,"../internals/is-object":278,"../internals/is-pure":279,"../internals/native-symbol":283,"../internals/object-create":286,"../internals/object-define-property":288,"../internals/object-get-own-property-descriptor":289,"../internals/object-get-own-property-names":291,"../internals/object-get-own-property-names-external":290,"../internals/object-get-own-property-symbols":292,"../internals/object-keys":295,"../internals/object-property-is-enumerable":296,"../internals/redefine":301,"../internals/set-to-string-tag":305,"../internals/shared":308,"../internals/shared-key":306,"../internals/to-indexed-object":311,"../internals/to-object":314,"../internals/to-primitive":315,"../internals/uid":317,"../internals/use-symbol-as-uid":318,"../internals/well-known-symbol":320,"../internals/well-known-symbol-wrapped":319}],344:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.matchAll` well-known symbol
-defineWellKnownSymbol('matchAll');
-
-},{"../internals/define-well-known-symbol":250}],345:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.match` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.match
-defineWellKnownSymbol('match');
-
-},{"../internals/define-well-known-symbol":250}],346:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.replace` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.replace
-defineWellKnownSymbol('replace');
-
-},{"../internals/define-well-known-symbol":250}],347:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.search` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.search
-defineWellKnownSymbol('search');
-
-},{"../internals/define-well-known-symbol":250}],348:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.species` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.species
-defineWellKnownSymbol('species');
-
-},{"../internals/define-well-known-symbol":250}],349:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.split` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.split
-defineWellKnownSymbol('split');
-
-},{"../internals/define-well-known-symbol":250}],350:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.toPrimitive` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.toprimitive
-defineWellKnownSymbol('toPrimitive');
-
-},{"../internals/define-well-known-symbol":250}],351:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.toStringTag` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.tostringtag
-defineWellKnownSymbol('toStringTag');
-
-},{"../internals/define-well-known-symbol":250}],352:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.unscopables` well-known symbol
-// https://tc39.github.io/ecma262/#sec-symbol.unscopables
-defineWellKnownSymbol('unscopables');
-
-},{"../internals/define-well-known-symbol":250}],353:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.asyncDispose` well-known symbol
-// https://github.com/tc39/proposal-using-statement
-defineWellKnownSymbol('asyncDispose');
-
-},{"../internals/define-well-known-symbol":250}],354:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.dispose` well-known symbol
-// https://github.com/tc39/proposal-using-statement
-defineWellKnownSymbol('dispose');
-
-},{"../internals/define-well-known-symbol":250}],355:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.observable` well-known symbol
-// https://github.com/tc39/proposal-observable
-defineWellKnownSymbol('observable');
-
-},{"../internals/define-well-known-symbol":250}],356:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.patternMatch` well-known symbol
-// https://github.com/tc39/proposal-pattern-matching
-defineWellKnownSymbol('patternMatch');
-
-},{"../internals/define-well-known-symbol":250}],357:[function(require,module,exports){
-// TODO: remove from `core-js@4`
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-defineWellKnownSymbol('replaceAll');
-
-},{"../internals/define-well-known-symbol":250}],358:[function(require,module,exports){
-require('./es.array.iterator');
-var DOMIterables = require('../internals/dom-iterables');
-var global = require('../internals/global');
-var classof = require('../internals/classof');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var Iterators = require('../internals/iterators');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-
-var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-
-for (var COLLECTION_NAME in DOMIterables) {
-  var Collection = global[COLLECTION_NAME];
-  var CollectionPrototype = Collection && Collection.prototype;
-  if (CollectionPrototype && classof(CollectionPrototype) !== TO_STRING_TAG) {
-    createNonEnumerableProperty(CollectionPrototype, TO_STRING_TAG, COLLECTION_NAME);
-  }
-  Iterators[COLLECTION_NAME] = Iterators.Array;
-}
-
-},{"../internals/classof":241,"../internals/create-non-enumerable-property":246,"../internals/dom-iterables":253,"../internals/global":265,"../internals/iterators":282,"../internals/well-known-symbol":320,"./es.array.iterator":326}],359:[function(require,module,exports){
-var parent = require('../../../es/array/virtual/entries');
-
-module.exports = parent;
-
-},{"../../../es/array/virtual/entries":203}],360:[function(require,module,exports){
-var parent = require('../../../es/array/virtual/for-each');
-
-module.exports = parent;
-
-},{"../../../es/array/virtual/for-each":205}],361:[function(require,module,exports){
-var parent = require('../../../es/array/virtual/keys');
-
-module.exports = parent;
-
-},{"../../../es/array/virtual/keys":206}],362:[function(require,module,exports){
-var parent = require('../../es/instance/concat');
-
-module.exports = parent;
-
-},{"../../es/instance/concat":208}],363:[function(require,module,exports){
-require('../../modules/web.dom-collections.iterator');
-var entries = require('../array/virtual/entries');
-var classof = require('../../internals/classof');
-var ArrayPrototype = Array.prototype;
-
-var DOMIterables = {
-  DOMTokenList: true,
-  NodeList: true
-};
-
-module.exports = function (it) {
-  var own = it.entries;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.entries)
-    // eslint-disable-next-line no-prototype-builtins
-    || DOMIterables.hasOwnProperty(classof(it)) ? entries : own;
-};
-
-},{"../../internals/classof":241,"../../modules/web.dom-collections.iterator":358,"../array/virtual/entries":359}],364:[function(require,module,exports){
-var parent = require('../../es/instance/find');
-
-module.exports = parent;
-
-},{"../../es/instance/find":209}],365:[function(require,module,exports){
-require('../../modules/web.dom-collections.iterator');
-var forEach = require('../array/virtual/for-each');
-var classof = require('../../internals/classof');
-var ArrayPrototype = Array.prototype;
-
-var DOMIterables = {
-  DOMTokenList: true,
-  NodeList: true
-};
-
-module.exports = function (it) {
-  var own = it.forEach;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.forEach)
-    // eslint-disable-next-line no-prototype-builtins
-    || DOMIterables.hasOwnProperty(classof(it)) ? forEach : own;
-};
-
-},{"../../internals/classof":241,"../../modules/web.dom-collections.iterator":358,"../array/virtual/for-each":360}],366:[function(require,module,exports){
-require('../../modules/web.dom-collections.iterator');
-var keys = require('../array/virtual/keys');
-var classof = require('../../internals/classof');
-var ArrayPrototype = Array.prototype;
-
-var DOMIterables = {
-  DOMTokenList: true,
-  NodeList: true
-};
-
-module.exports = function (it) {
-  var own = it.keys;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.keys)
-    // eslint-disable-next-line no-prototype-builtins
-    || DOMIterables.hasOwnProperty(classof(it)) ? keys : own;
-};
-
-},{"../../internals/classof":241,"../../modules/web.dom-collections.iterator":358,"../array/virtual/keys":361}],367:[function(require,module,exports){
-var parent = require('../../es/json/stringify');
-
-module.exports = parent;
-
-},{"../../es/json/stringify":211}],368:[function(require,module,exports){
-var parent = require('../../es/map');
-
-module.exports = parent;
-
-},{"../../es/map":212}],369:[function(require,module,exports){
-var parent = require('../../es/object/assign');
-
-module.exports = parent;
-
-},{"../../es/object/assign":213}],370:[function(require,module,exports){
-arguments[4][223][0].apply(exports,arguments)
-},{"../../es/object/define-property":214,"dup":223}],371:[function(require,module,exports){
-var parent = require('../../es/object/keys');
-
-module.exports = parent;
-
-},{"../../es/object/keys":215}],372:[function(require,module,exports){
-var parent = require('../../es/set');
-
-module.exports = parent;
-
-},{"../../es/set":216}],373:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.computeAccessibleName = computeAccessibleName;
-
-var _array = _interopRequireDefault(require("./polyfills/array.from"));
-
-var _SetLike = _interopRequireDefault(require("./polyfills/SetLike"));
-
-var _getRole = _interopRequireDefault(require("./getRole"));
-
-var _util = require("./util");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-/**
- * Small utility that handles all the JS quirks with `this` which is important
- * if no mock is provided.
- * @param element
- * @param options - These are not optional to prevent accidentally calling it without options in `computeAccessibleName`
- */
-function createGetComputedStyle(element, options) {
-  var window = (0, _util.safeWindow)(element);
-  var _options$getComputedS = options.getComputedStyle,
-      getComputedStyle = _options$getComputedS === void 0 ? window.getComputedStyle.bind(window) : _options$getComputedS;
-  return getComputedStyle;
-}
-/**
- *
- * @param {string} string -
- * @returns {FlatString} -
- */
-
-
-function asFlatString(s) {
-  return s.trim().replace(/\s\s+/g, " ");
-}
-/**
- * https://w3c.github.io/aria/#namefromprohibited
- */
-
-
-function prohibitsNaming(node) {
-  return hasAnyConcreteRoles(node, ["caption", "code", "deletion", "emphasis", "generic", "insertion", "paragraph", "presentation", "strong", "subscript", "superscript"]);
-}
-/**
- *
- * @param node -
- * @param options - These are not optional to prevent accidentally calling it without options in `computeAccessibleName`
- * @returns {boolean} -
- */
-
-
-function isHidden(node, options) {
-  if (!(0, _util.isElement)(node)) {
-    return false;
-  }
-
-  if (node.hasAttribute("hidden") || node.getAttribute("aria-hidden") === "true") {
-    return true;
-  }
-
-  var style = createGetComputedStyle(node, options)(node);
-  return style.getPropertyValue("display") === "none" || style.getPropertyValue("visibility") === "hidden";
-}
-/**
- *
- * @param {Node} node -
- * @param {string} attributeName -
- * @returns {Element[]} -
- */
-
-
-function idRefs(node, attributeName) {
-  if ((0, _util.isElement)(node) && node.hasAttribute(attributeName)) {
-    // safe due to hasAttribute check
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    var ids = node.getAttribute(attributeName).split(" ");
-    return ids // safe since it can't be null for an Element
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    .map(function (id) {
-      return node.ownerDocument.getElementById(id);
-    }).filter(function (element) {
-      return element !== null;
-    } // TODO: why does this not narrow?
-    );
-  }
-
-  return [];
-}
-/**
- * All defined children. This include childNodes as well as owned (portaled) trees
- * via aria-owns
- * @param node
- */
-
-
-function queryChildNodes(node) {
-  return (0, _array.default)(node.childNodes).concat(idRefs(node, "aria-owns"));
-}
-/**
- * @param {Node} node -
- * @returns {boolean} - As defined in step 2E of https://w3c.github.io/accname/#mapping_additional_nd_te
- */
-
-
-function isControl(node) {
-  return hasAnyConcreteRoles(node, ["button", "combobox", "listbox", "textbox"]) || hasAbstractRole(node, "range");
-}
-
-function hasAbstractRole(node, role) {
-  if (!(0, _util.isElement)(node)) {
-    return false;
-  }
-
-  switch (role) {
-    case "range":
-      return hasAnyConcreteRoles(node, ["meter", "progressbar", "scrollbar", "slider", "spinbutton"]);
-
-    default:
-      throw new TypeError("No knowledge about abstract role '".concat(role, "'. This is likely a bug :("));
-  }
-}
-
-function hasAnyConcreteRoles(node, roles) {
-  if ((0, _util.isElement)(node)) {
-    return roles.indexOf((0, _getRole.default)(node)) !== -1;
-  }
-
-  return false;
-}
-/**
- * element.querySelectorAll but also considers owned tree
- * @param element
- * @param selectors
- */
-
-
-function querySelectorAllSubtree(element, selectors) {
-  var elements = [];
-
-  for (var _i = 0, _arr = [element].concat(_toConsumableArray(idRefs(element, "aria-owns"))); _i < _arr.length; _i++) {
-    var root = _arr[_i];
-    elements.push.apply(elements, _toConsumableArray((0, _array.default)(root.querySelectorAll(selectors))));
-  }
-
-  return elements;
-}
-
-function querySelectedOptions(listbox) {
-  if ((0, _util.isHTMLSelectElement)(listbox)) {
-    // IE11 polyfill
-    return listbox.selectedOptions || querySelectorAllSubtree(listbox, "[selected]");
-  }
-
-  return querySelectorAllSubtree(listbox, '[aria-selected="true"]');
-}
-
-function isMarkedPresentational(node) {
-  return hasAnyConcreteRoles(node, ["none", "presentation"]);
-}
-/**
- * TODO https://github.com/eps1lon/dom-accessibility-api/issues/99
- */
-
-
-function isNativeHostLanguageTextAlternativeElement(node) {
-  return false;
-}
-/**
- * https://w3c.github.io/aria/#namefromcontent
- */
-
-
-function allowsNameFromContent(node) {
-  return hasAnyConcreteRoles(node, ["button", "cell", "checkbox", "columnheader", "gridcell", "heading", "label", "legend", "link", "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio", "row", "rowheader", "switch", "tab", "tooltip", "treeitem"]);
-}
-/**
- * TODO https://github.com/eps1lon/dom-accessibility-api/issues/100
- */
-
-
-function isDescendantOfNativeHostLanguageTextAlternativeElement(node) {
-  return false;
-}
-/**
- * TODO https://github.com/eps1lon/dom-accessibility-api/issues/101
- */
-
-
-function computeTooltipAttributeValue(node) {
-  return null;
-}
-
-function getValueOfTextbox(element) {
-  if ((0, _util.isHTMLInputElement)(element) || (0, _util.isHTMLTextAreaElement)(element)) {
-    return element.value;
-  } // https://github.com/eps1lon/dom-accessibility-api/issues/4
-
-
-  return element.textContent || "";
-}
-
-function getTextualContent(declaration) {
-  var content = declaration.getPropertyValue("content");
-
-  if (/^["'].*["']$/.test(content)) {
-    return content.slice(1, -1);
-  }
-
-  return "";
-}
-/**
- * implements https://w3c.github.io/accname/#mapping_additional_nd_te
- * @param root
- * @param [options]
- * @parma [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
- */
-
-
-function computeAccessibleName(root) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var consultedNodes = new _SetLike.default();
-
-  if (prohibitsNaming(root)) {
-    return "";
-  } // 2F.i
-
-
-  function computeMiscTextAlternative(node, context) {
-    var accumulatedText = "";
-
-    if ((0, _util.isElement)(node)) {
-      var pseudoBefore = createGetComputedStyle(node, options)(node, "::before");
-      var beforeContent = getTextualContent(pseudoBefore);
-      accumulatedText = "".concat(beforeContent, " ").concat(accumulatedText);
-    }
-
-    var _iterator = _createForOfIteratorHelper(queryChildNodes(node)),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var child = _step.value;
-        var result = computeTextAlternative(child, {
-          isEmbeddedInLabel: context.isEmbeddedInLabel,
-          isReferenced: false,
-          recursion: true
-        }); // TODO: Unclear why display affects delimiter
-
-        var display = (0, _util.isElement)(node) && createGetComputedStyle(node, options)(node).getPropertyValue("display");
-        var separator = display !== "inline" ? " " : "";
-        accumulatedText += "".concat(separator).concat(result);
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    if ((0, _util.isElement)(node)) {
-      var pseudoAfter = createGetComputedStyle(node, options)(node, ":after");
-      var afterContent = getTextualContent(pseudoAfter);
-      accumulatedText = "".concat(accumulatedText, " ").concat(afterContent);
-    }
-
-    return accumulatedText;
-  }
-
-  function computeAttributeTextAlternative(node) {
-    if (!(0, _util.isElement)(node)) {
-      return null;
-    }
-
-    var titleAttribute = node.getAttributeNode("title");
-
-    if (titleAttribute !== null && !consultedNodes.has(titleAttribute)) {
-      consultedNodes.add(titleAttribute);
-      return titleAttribute.value;
-    }
-
-    var altAttribute = node.getAttributeNode("alt");
-
-    if (altAttribute !== null && !consultedNodes.has(altAttribute)) {
-      consultedNodes.add(altAttribute);
-      return altAttribute.value;
-    }
-
-    if ((0, _util.isHTMLInputElement)(node) && node.type === "button") {
-      consultedNodes.add(node);
-      return node.getAttribute("value") || "";
-    }
-
-    return null;
-  }
-
-  function computeElementTextAlternative(node) {
-    if (!((0, _util.isHTMLInputElement)(node) || (0, _util.isHTMLSelectElement)(node) || (0, _util.isHTMLTextAreaElement)(node))) {
-      return null;
-    }
-
-    var input = node; // https://w3c.github.io/html-aam/#input-type-text-input-type-password-input-type-search-input-type-tel-input-type-email-input-type-url-and-textarea-element-accessible-description-computation
-
-    if (input.type === "submit") {
-      return "Submit";
-    }
-
-    if (input.type === "reset") {
-      return "Reset";
-    }
-
-    var labels = input.labels; // IE11 does not implement labels, TODO: verify with caniuse instead of mdn
-
-    if (labels === null || labels === undefined || labels.length === 0) {
-      return null;
-    }
-
-    consultedNodes.add(input);
-    return (0, _array.default)(labels).map(function (element) {
-      return computeTextAlternative(element, {
-        isEmbeddedInLabel: true,
-        isReferenced: false,
-        recursion: true
-      });
-    }).filter(function (label) {
-      return label.length > 0;
-    }).join(" ");
-  }
-
-  function computeTextAlternative(current, context) {
-    if (consultedNodes.has(current)) {
-      return "";
-    } // special casing, cheating to make tests pass
-    // https://github.com/w3c/accname/issues/67
-
-
-    if (hasAnyConcreteRoles(current, ["menu"])) {
-      consultedNodes.add(current);
-      return "";
-    } // 2A
-
-
-    if (isHidden(current, options) && !context.isReferenced) {
-      consultedNodes.add(current);
-      return "";
-    } // 2B
-
-
-    var labelElements = idRefs(current, "aria-labelledby");
-
-    if (!context.isReferenced && labelElements.length > 0) {
-      return labelElements.map(function (element) {
-        return computeTextAlternative(element, {
-          isEmbeddedInLabel: context.isEmbeddedInLabel,
-          isReferenced: true,
-          // thais isn't recursion as specified, otherwise we would skip
-          // `aria-label` in
-          // <input id="myself" aria-label="foo" aria-labelledby="myself"
-          recursion: false
-        });
-      }).join(" ");
-    } // 2C
-    // Changed from the spec in anticipation of https://github.com/w3c/accname/issues/64
-    // spec says we should only consider skipping if we have a non-empty label
-
-
-    var skipToStep2E = context.recursion && isControl(current);
-
-    if (!skipToStep2E) {
-      var ariaLabel = ((0, _util.isElement)(current) && current.getAttribute("aria-label") || "").trim();
-
-      if (ariaLabel !== "") {
-        consultedNodes.add(current);
-        return ariaLabel;
-      } // 2D
-
-
-      if (!isMarkedPresentational(current)) {
-        var elementTextAlternative = computeElementTextAlternative(current);
-
-        if (elementTextAlternative !== null) {
-          consultedNodes.add(current);
-          return elementTextAlternative;
-        }
-
-        var attributeTextAlternative = computeAttributeTextAlternative(current);
-
-        if (attributeTextAlternative !== null) {
-          consultedNodes.add(current);
-          return attributeTextAlternative;
-        }
-      }
-    } // 2E
-
-
-    if (skipToStep2E || context.isEmbeddedInLabel || context.isReferenced) {
-      if (hasAnyConcreteRoles(current, ["combobox", "listbox"])) {
-        consultedNodes.add(current);
-        var selectedOptions = querySelectedOptions(current);
-
-        if (selectedOptions.length === 0) {
-          // defined per test `name_heading_combobox`
-          return (0, _util.isHTMLInputElement)(current) ? current.value : "";
-        }
-
-        return (0, _array.default)(selectedOptions).map(function (selectedOption) {
-          return computeTextAlternative(selectedOption, {
-            isEmbeddedInLabel: context.isEmbeddedInLabel,
-            isReferenced: false,
-            recursion: true
-          });
-        }).join(" ");
-      }
-
-      if (hasAbstractRole(current, "range")) {
-        consultedNodes.add(current);
-
-        if (current.hasAttribute("aria-valuetext")) {
-          // safe due to hasAttribute guard
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return current.getAttribute("aria-valuetext");
-        }
-
-        if (current.hasAttribute("aria-valuenow")) {
-          // safe due to hasAttribute guard
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return current.getAttribute("aria-valuenow");
-        } // Otherwise, use the value as specified by a host language attribute.
-
-
-        return current.getAttribute("value") || "";
-      }
-
-      if (hasAnyConcreteRoles(current, ["textbox"])) {
-        consultedNodes.add(current);
-        return getValueOfTextbox(current);
-      }
-    } // 2F: https://w3c.github.io/accname/#step2F
-
-
-    if (allowsNameFromContent(current) || (0, _util.isElement)(current) && context.isReferenced || isNativeHostLanguageTextAlternativeElement(current) || isDescendantOfNativeHostLanguageTextAlternativeElement(current)) {
-      consultedNodes.add(current);
-      return computeMiscTextAlternative(current, {
-        isEmbeddedInLabel: context.isEmbeddedInLabel,
-        isReferenced: false
-      });
-    }
-
-    if (current.nodeType === current.TEXT_NODE) {
-      consultedNodes.add(current);
-      return current.textContent || "";
-    }
-
-    if (context.recursion) {
-      consultedNodes.add(current);
-      return computeMiscTextAlternative(current, {
-        isEmbeddedInLabel: context.isEmbeddedInLabel,
-        isReferenced: false
-      });
-    }
-
-    var tooltipAttributeValue = computeTooltipAttributeValue(current);
-
-    if (tooltipAttributeValue !== null) {
-      consultedNodes.add(current);
-      return tooltipAttributeValue;
-    } // TODO should this be reachable?
-
-
-    consultedNodes.add(current);
-    return "";
-  }
-
-  return asFlatString(computeTextAlternative(root, {
-    isEmbeddedInLabel: false,
-    isReferenced: false,
-    recursion: false
-  }));
-}
-
-},{"./getRole":374,"./polyfills/SetLike":376,"./polyfills/array.from":377,"./util":378}],374:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.default = getRole;
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-// https://w3c.github.io/html-aria/#document-conformance-requirements-for-use-of-aria-attributes-in-html
-function getRole(element) {
-  var explicitRole = getExplicitRole(element);
-
-  if (explicitRole !== null) {
-    return explicitRole;
-  }
-
-  return getImplicitRole(element);
-}
-
-var tagToRoleMappings = {
-  ARTICLE: "article",
-  ASIDE: "complementary",
-  BODY: "document",
-  BUTTON: "button",
-  DATALIST: "listbox",
-  DD: "definition",
-  DETAILS: "group",
-  DIALOG: "dialog",
-  DT: "term",
-  FIELDSET: "group",
-  FIGURE: "figure",
-  // WARNING: Only with an accessible name
-  FORM: "form",
-  FOOTER: "contentinfo",
-  H1: "heading",
-  H2: "heading",
-  H3: "heading",
-  H4: "heading",
-  H5: "heading",
-  H6: "heading",
-  HEADER: "banner",
-  HR: "separator",
-  LEGEND: "legend",
-  LI: "listitem",
-  MATH: "math",
-  MAIN: "main",
-  MENU: "list",
-  NAV: "navigation",
-  OL: "list",
-  OPTGROUP: "group",
-  // WARNING: Only in certain context
-  OPTION: "option",
-  OUTPUT: "status",
-  PROGRESS: "progressbar",
-  // WARNING: Only with an accessible name
-  SECTION: "region",
-  SUMMARY: "button",
-  TABLE: "table",
-  TBODY: "rowgroup",
-  TEXTAREA: "textbox",
-  TFOOT: "rowgroup",
-  // WARNING: Only in certain context
-  TD: "cell",
-  TH: "columnheader",
-  THEAD: "rowgroup",
-  TR: "row",
-  UL: "list"
-};
-
-function getImplicitRole(element) {
-  var mappedByTag = tagToRoleMappings[element.tagName];
-
-  if (mappedByTag !== undefined) {
-    return mappedByTag;
-  }
-
-  switch (element.tagName) {
-    case "A":
-    case "AREA":
-    case "LINK":
-      if (element.hasAttribute("href")) {
-        return "link";
-      }
-
-      break;
-
-    case "IMG":
-      if ((element.getAttribute("alt") || "").length > 0) {
-        return "img";
-      }
-
-      break;
-
-    case "INPUT":
-      {
-        var _ref = element,
-            type = _ref.type;
-
-        switch (type) {
-          case "button":
-          case "image":
-          case "reset":
-          case "submit":
-            return "button";
-
-          case "checkbox":
-          case "radio":
-            return type;
-
-          case "range":
-            return "slider";
-
-          case "email":
-          case "tel":
-          case "text":
-          case "url":
-            if (element.hasAttribute("list")) {
-              return "combobox";
-            }
-
-            return "textbox";
-
-          case "search":
-            if (element.hasAttribute("list")) {
-              return "combobox";
-            }
-
-            return "searchbox";
-
-          default:
-            return null;
-        }
-      }
-
-    case "SELECT":
-      if (element.hasAttribute("multiple") || element.size > 1) {
-        return "listbox";
-      }
-
-      return "combobox";
-  }
-
-  return null;
-}
-
-function getExplicitRole(element) {
-  if (element.hasAttribute("role")) {
-    // safe due to hasAttribute check
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    var _trim$split = element.getAttribute("role").trim().split(" "),
-        _trim$split2 = _slicedToArray(_trim$split, 1),
-        explicitRole = _trim$split2[0];
-
-    if (explicitRole !== undefined && explicitRole.length > 0) {
-      return explicitRole;
-    }
-  }
-
-  return null;
-}
-
-},{}],375:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.getRole = exports.computeAccessibleName = void 0;
-
-var _accessibleName = require("./accessible-name");
-
-exports.computeAccessibleName = _accessibleName.computeAccessibleName;
-
-var _getRole = _interopRequireDefault(require("./getRole"));
-
-exports.getRole = _getRole.default;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-},{"./accessible-name":373,"./getRole":374}],376:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.default = void 0;
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
-
-function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-// for environments without Set we fallback to arrays with unique members
-var SetLike = /*#__PURE__*/function (_Set) {
-  _inherits(SetLike, _Set);
-
-  var _super = _createSuper(SetLike);
-
-  function SetLike() {
-    var _this;
-
-    _classCallCheck(this, SetLike);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _super.call.apply(_super, [this].concat(args));
-
-    _defineProperty(_assertThisInitialized(_this), "items", []);
-
-    return _this;
-  }
-
-  _createClass(SetLike, [{
-    key: "add",
-    value: function add(value) {
-      if (this.has(value) === false) {
-        this.items.push(value);
-      }
-
-      return this;
-    }
-  }, {
-    key: "clear",
-    value: function clear() {
-      this.items = [];
-    }
-  }, {
-    key: "delete",
-    value: function _delete(value) {
-      var previousLength = this.items.length;
-      this.items = this.items.filter(function (item) {
-        return item !== value;
-      });
-      return previousLength !== this.items.length;
-    }
-  }, {
-    key: "forEach",
-    value: function forEach(callbackfn) {
-      var _this2 = this;
-
-      this.items.forEach(function (item) {
-        callbackfn(item, item, _this2);
-      });
-    }
-  }, {
-    key: "has",
-    value: function has(value) {
-      return this.items.indexOf(value) !== -1;
-    }
-  }, {
-    key: "size",
-    get: function get() {
-      return this.items.length;
-    }
-  }]);
-
-  return SetLike;
-}( /*#__PURE__*/_wrapNativeSuper(Set));
-
-var _default = typeof Set === "undefined" ? Set : SetLike;
-
-exports.default = _default;
-
-},{}],377:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.default = arrayFrom;
-
-/**
- * @source {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill}
- * but without thisArg (too hard to type, no need to `this`)
- */
-var toStr = Object.prototype.toString;
-
-function isCallable(fn) {
-  return typeof fn === "function" || toStr.call(fn) === "[object Function]";
-}
-
-function toInteger(value) {
-  var number = Number(value);
-
-  if (isNaN(number)) {
-    return 0;
-  }
-
-  if (number === 0 || !isFinite(number)) {
-    return number;
-  }
-
-  return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
-}
-
-var maxSafeInteger = Math.pow(2, 53) - 1;
-
-function toLength(value) {
-  var len = toInteger(value);
-  return Math.min(Math.max(len, 0), maxSafeInteger);
-}
-/**
- * Creates an array from an iterable object.
- * @param iterable An iterable object to convert to an array.
- */
-
-
-/**
- * Creates an array from an iterable object.
- * @param iterable An iterable object to convert to an array.
- * @param mapfn A mapping function to call on every element of the array.
- * @param thisArg Value of 'this' used to invoke the mapfn.
- */
-function arrayFrom(arrayLike, mapFn) {
-  // 1. Let C be the this value.
-  // edit(@eps1lon): we're not calling it as Array.from
-  var C = Array; // 2. Let items be ToObject(arrayLike).
-
-  var items = Object(arrayLike); // 3. ReturnIfAbrupt(items).
-
-  if (arrayLike == null) {
-    throw new TypeError("Array.from requires an array-like object - not null or undefined");
-  } // 4. If mapfn is undefined, then let mapping be false.
-  // const mapFn = arguments.length > 1 ? arguments[1] : void undefined;
-
-
-  if (typeof mapFn !== "undefined") {
-    // 5. else
-    // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
-    if (!isCallable(mapFn)) {
-      throw new TypeError("Array.from: when provided, the second argument must be a function");
-    }
-  } // 10. Let lenValue be Get(items, "length").
-  // 11. Let len be ToLength(lenValue).
-
-
-  var len = toLength(items.length); // 13. If IsConstructor(C) is true, then
-  // 13. a. Let A be the result of calling the [[Construct]] internal method
-  // of C with an argument list containing the single item len.
-  // 14. a. Else, Let A be ArrayCreate(len).
-
-  var A = isCallable(C) ? Object(new C(len)) : new Array(len); // 16. Let k be 0.
-
-  var k = 0; // 17. Repeat, while k < len… (also steps a - h)
-
-  var kValue;
-
-  while (k < len) {
-    kValue = items[k];
-
-    if (mapFn) {
-      A[k] = mapFn(kValue, k);
-    } else {
-      A[k] = kValue;
-    }
-
-    k += 1;
-  } // 18. Let putStatus be Put(A, "length", len, true).
-
-
-  A.length = len; // 20. Return A.
-
-  return A;
-}
-
-},{}],378:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-exports.isElement = isElement;
-exports.isHTMLInputElement = isHTMLInputElement;
-exports.isHTMLSelectElement = isHTMLSelectElement;
-exports.isHTMLTextAreaElement = isHTMLTextAreaElement;
-exports.safeWindow = safeWindow;
-
-function isElement(node) {
-  return (// @ts-ignore
-    node !== null && node instanceof node.ownerDocument.defaultView.Element
-  );
-}
-
-function isHTMLInputElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLInputElement;
-}
-
-function isHTMLSelectElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLSelectElement;
-}
-
-function isHTMLTextAreaElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLTextAreaElement;
-}
-
-function safeWindow(node) {
-  var _ref = node.ownerDocument === null ? node : node.ownerDocument,
-      defaultView = _ref.defaultView;
-
-  if (defaultView === null) {
-    throw new TypeError("no window available");
-  }
-
-  return defaultView;
-}
-
-},{}],379:[function(require,module,exports){
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-'use strict';
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],380:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.printIteratorEntries = printIteratorEntries;
-exports.printIteratorValues = printIteratorValues;
-exports.printListItems = printListItems;
-exports.printObjectProperties = printObjectProperties;
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-const getKeysOfEnumerableProperties = object => {
-  const keys = Object.keys(object).sort();
-
-  if (Object.getOwnPropertySymbols) {
-    Object.getOwnPropertySymbols(object).forEach(symbol => {
-      if (Object.getOwnPropertyDescriptor(object, symbol).enumerable) {
-        keys.push(symbol);
-      }
-    });
-  }
-
-  return keys;
-};
-/**
- * Return entries (for example, of a map)
- * with spacing, indentation, and comma
- * without surrounding punctuation (for example, braces)
- */
-
-function printIteratorEntries(
-  iterator,
-  config,
-  indentation,
-  depth,
-  refs,
-  printer, // Too bad, so sad that separator for ECMAScript Map has been ' => '
-  // What a distracting diff if you change a data structure to/from
-  // ECMAScript Object or Immutable.Map/OrderedMap which use the default.
-  separator = ': '
-) {
-  let result = '';
-  let current = iterator.next();
-
-  if (!current.done) {
-    result += config.spacingOuter;
-    const indentationNext = indentation + config.indent;
-
-    while (!current.done) {
-      const name = printer(
-        current.value[0],
-        config,
-        indentationNext,
-        depth,
-        refs
-      );
-      const value = printer(
-        current.value[1],
-        config,
-        indentationNext,
-        depth,
-        refs
-      );
-      result += indentationNext + name + separator + value;
-      current = iterator.next();
-
-      if (!current.done) {
-        result += ',' + config.spacingInner;
-      } else if (!config.min) {
-        result += ',';
-      }
-    }
-
-    result += config.spacingOuter + indentation;
-  }
-
-  return result;
-}
-/**
- * Return values (for example, of a set)
- * with spacing, indentation, and comma
- * without surrounding punctuation (braces or brackets)
- */
-
-function printIteratorValues(
-  iterator,
-  config,
-  indentation,
-  depth,
-  refs,
-  printer
-) {
-  let result = '';
-  let current = iterator.next();
-
-  if (!current.done) {
-    result += config.spacingOuter;
-    const indentationNext = indentation + config.indent;
-
-    while (!current.done) {
-      result +=
-        indentationNext +
-        printer(current.value, config, indentationNext, depth, refs);
-      current = iterator.next();
-
-      if (!current.done) {
-        result += ',' + config.spacingInner;
-      } else if (!config.min) {
-        result += ',';
-      }
-    }
-
-    result += config.spacingOuter + indentation;
-  }
-
-  return result;
-}
-/**
- * Return items (for example, of an array)
- * with spacing, indentation, and comma
- * without surrounding punctuation (for example, brackets)
- **/
-
-function printListItems(list, config, indentation, depth, refs, printer) {
-  let result = '';
-
-  if (list.length) {
-    result += config.spacingOuter;
-    const indentationNext = indentation + config.indent;
-
-    for (let i = 0; i < list.length; i++) {
-      result +=
-        indentationNext +
-        printer(list[i], config, indentationNext, depth, refs);
-
-      if (i < list.length - 1) {
-        result += ',' + config.spacingInner;
-      } else if (!config.min) {
-        result += ',';
-      }
-    }
-
-    result += config.spacingOuter + indentation;
-  }
-
-  return result;
-}
-/**
- * Return properties of an object
- * with spacing, indentation, and comma
- * without surrounding punctuation (for example, braces)
- */
-
-function printObjectProperties(val, config, indentation, depth, refs, printer) {
-  let result = '';
-  const keys = getKeysOfEnumerableProperties(val);
-
-  if (keys.length) {
-    result += config.spacingOuter;
-    const indentationNext = indentation + config.indent;
-
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const name = printer(key, config, indentationNext, depth, refs);
-      const value = printer(val[key], config, indentationNext, depth, refs);
-      result += indentationNext + name + ': ' + value;
-
-      if (i < keys.length - 1) {
-        result += ',' + config.spacingInner;
-      } else if (!config.min) {
-        result += ',';
-      }
-    }
-
-    result += config.spacingOuter + indentation;
-  }
-
-  return result;
-}
-
-},{}],381:[function(require,module,exports){
-'use strict';
-
-var _ansiStyles = _interopRequireDefault(require('ansi-styles'));
-
-var _collections = require('./collections');
-
-var _AsymmetricMatcher = _interopRequireDefault(
-  require('./plugins/AsymmetricMatcher')
-);
-
-var _ConvertAnsi = _interopRequireDefault(require('./plugins/ConvertAnsi'));
-
-var _DOMCollection = _interopRequireDefault(require('./plugins/DOMCollection'));
-
-var _DOMElement = _interopRequireDefault(require('./plugins/DOMElement'));
-
-var _Immutable = _interopRequireDefault(require('./plugins/Immutable'));
-
-var _ReactElement = _interopRequireDefault(require('./plugins/ReactElement'));
-
-var _ReactTestComponent = _interopRequireDefault(
-  require('./plugins/ReactTestComponent')
-);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj};
-}
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-const toString = Object.prototype.toString;
-const toISOString = Date.prototype.toISOString;
-const errorToString = Error.prototype.toString;
-const regExpToString = RegExp.prototype.toString;
-/**
- * Explicitly comparing typeof constructor to function avoids undefined as name
- * when mock identity-obj-proxy returns the key as the value for any key.
- */
-
-const getConstructorName = val =>
-  (typeof val.constructor === 'function' && val.constructor.name) || 'Object';
-/* global window */
-
-/** Is val is equal to global window object? Works even if it does not exist :) */
-
-const isWindow = val => typeof window !== 'undefined' && val === window;
-
-const SYMBOL_REGEXP = /^Symbol\((.*)\)(.*)$/;
-const NEWLINE_REGEXP = /\n/gi;
-
-class PrettyFormatPluginError extends Error {
-  constructor(message, stack) {
-    super(message);
-    this.stack = stack;
-    this.name = this.constructor.name;
-  }
-}
-
-function isToStringedArrayType(toStringed) {
-  return (
-    toStringed === '[object Array]' ||
-    toStringed === '[object ArrayBuffer]' ||
-    toStringed === '[object DataView]' ||
-    toStringed === '[object Float32Array]' ||
-    toStringed === '[object Float64Array]' ||
-    toStringed === '[object Int8Array]' ||
-    toStringed === '[object Int16Array]' ||
-    toStringed === '[object Int32Array]' ||
-    toStringed === '[object Uint8Array]' ||
-    toStringed === '[object Uint8ClampedArray]' ||
-    toStringed === '[object Uint16Array]' ||
-    toStringed === '[object Uint32Array]'
-  );
-}
-
-function printNumber(val) {
-  return Object.is(val, -0) ? '-0' : String(val);
-}
-
-function printBigInt(val) {
-  return String(`${val}n`);
-}
-
-function printFunction(val, printFunctionName) {
-  if (!printFunctionName) {
-    return '[Function]';
-  }
-
-  return '[Function ' + (val.name || 'anonymous') + ']';
-}
-
-function printSymbol(val) {
-  return String(val).replace(SYMBOL_REGEXP, 'Symbol($1)');
-}
-
-function printError(val) {
-  return '[' + errorToString.call(val) + ']';
-}
-/**
- * The first port of call for printing an object, handles most of the
- * data-types in JS.
- */
-
-function printBasicValue(val, printFunctionName, escapeRegex, escapeString) {
-  if (val === true || val === false) {
-    return '' + val;
-  }
-
-  if (val === undefined) {
-    return 'undefined';
-  }
-
-  if (val === null) {
-    return 'null';
-  }
-
-  const typeOf = typeof val;
-
-  if (typeOf === 'number') {
-    return printNumber(val);
-  }
-
-  if (typeOf === 'bigint') {
-    return printBigInt(val);
-  }
-
-  if (typeOf === 'string') {
-    if (escapeString) {
-      return '"' + val.replace(/"|\\/g, '\\$&') + '"';
-    }
-
-    return '"' + val + '"';
-  }
-
-  if (typeOf === 'function') {
-    return printFunction(val, printFunctionName);
-  }
-
-  if (typeOf === 'symbol') {
-    return printSymbol(val);
-  }
-
-  const toStringed = toString.call(val);
-
-  if (toStringed === '[object WeakMap]') {
-    return 'WeakMap {}';
-  }
-
-  if (toStringed === '[object WeakSet]') {
-    return 'WeakSet {}';
-  }
-
-  if (
-    toStringed === '[object Function]' ||
-    toStringed === '[object GeneratorFunction]'
-  ) {
-    return printFunction(val, printFunctionName);
-  }
-
-  if (toStringed === '[object Symbol]') {
-    return printSymbol(val);
-  }
-
-  if (toStringed === '[object Date]') {
-    return isNaN(+val) ? 'Date { NaN }' : toISOString.call(val);
-  }
-
-  if (toStringed === '[object Error]') {
-    return printError(val);
-  }
-
-  if (toStringed === '[object RegExp]') {
-    if (escapeRegex) {
-      // https://github.com/benjamingr/RegExp.escape/blob/master/polyfill.js
-      return regExpToString.call(val).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-    }
-
-    return regExpToString.call(val);
-  }
-
-  if (val instanceof Error) {
-    return printError(val);
-  }
-
-  return null;
-}
-/**
- * Handles more complex objects ( such as objects with circular references.
- * maps and sets etc )
- */
-
-function printComplexValue(
-  val,
-  config,
-  indentation,
-  depth,
-  refs,
-  hasCalledToJSON
-) {
-  if (refs.indexOf(val) !== -1) {
-    return '[Circular]';
-  }
-
-  refs = refs.slice();
-  refs.push(val);
-  const hitMaxDepth = ++depth > config.maxDepth;
-  const min = config.min;
-
-  if (
-    config.callToJSON &&
-    !hitMaxDepth &&
-    val.toJSON &&
-    typeof val.toJSON === 'function' &&
-    !hasCalledToJSON
-  ) {
-    return printer(val.toJSON(), config, indentation, depth, refs, true);
-  }
-
-  const toStringed = toString.call(val);
-
-  if (toStringed === '[object Arguments]') {
-    return hitMaxDepth
-      ? '[Arguments]'
-      : (min ? '' : 'Arguments ') +
-          '[' +
-          (0, _collections.printListItems)(
-            val,
-            config,
-            indentation,
-            depth,
-            refs,
-            printer
-          ) +
-          ']';
-  }
-
-  if (isToStringedArrayType(toStringed)) {
-    return hitMaxDepth
-      ? '[' + val.constructor.name + ']'
-      : (min ? '' : val.constructor.name + ' ') +
-          '[' +
-          (0, _collections.printListItems)(
-            val,
-            config,
-            indentation,
-            depth,
-            refs,
-            printer
-          ) +
-          ']';
-  }
-
-  if (toStringed === '[object Map]') {
-    return hitMaxDepth
-      ? '[Map]'
-      : 'Map {' +
-          (0, _collections.printIteratorEntries)(
-            val.entries(),
-            config,
-            indentation,
-            depth,
-            refs,
-            printer,
-            ' => '
-          ) +
-          '}';
-  }
-
-  if (toStringed === '[object Set]') {
-    return hitMaxDepth
-      ? '[Set]'
-      : 'Set {' +
-          (0, _collections.printIteratorValues)(
-            val.values(),
-            config,
-            indentation,
-            depth,
-            refs,
-            printer
-          ) +
-          '}';
-  } // Avoid failure to serialize global window object in jsdom test environment.
-  // For example, not even relevant if window is prop of React element.
-
-  return hitMaxDepth || isWindow(val)
-    ? '[' + getConstructorName(val) + ']'
-    : (min ? '' : getConstructorName(val) + ' ') +
-        '{' +
-        (0, _collections.printObjectProperties)(
-          val,
-          config,
-          indentation,
-          depth,
-          refs,
-          printer
-        ) +
-        '}';
-}
-
-function isNewPlugin(plugin) {
-  return plugin.serialize != null;
-}
-
-function printPlugin(plugin, val, config, indentation, depth, refs) {
-  let printed;
-
-  try {
-    printed = isNewPlugin(plugin)
-      ? plugin.serialize(val, config, indentation, depth, refs, printer)
-      : plugin.print(
-          val,
-          valChild => printer(valChild, config, indentation, depth, refs),
-          str => {
-            const indentationNext = indentation + config.indent;
-            return (
-              indentationNext +
-              str.replace(NEWLINE_REGEXP, '\n' + indentationNext)
-            );
-          },
-          {
-            edgeSpacing: config.spacingOuter,
-            min: config.min,
-            spacing: config.spacingInner
-          },
-          config.colors
-        );
-  } catch (error) {
-    throw new PrettyFormatPluginError(error.message, error.stack);
-  }
-
-  if (typeof printed !== 'string') {
-    throw new Error(
-      `pretty-format: Plugin must return type "string" but instead returned "${typeof printed}".`
-    );
-  }
-
-  return printed;
-}
-
-function findPlugin(plugins, val) {
-  for (let p = 0; p < plugins.length; p++) {
-    try {
-      if (plugins[p].test(val)) {
-        return plugins[p];
-      }
-    } catch (error) {
-      throw new PrettyFormatPluginError(error.message, error.stack);
-    }
-  }
-
-  return null;
-}
-
-function printer(val, config, indentation, depth, refs, hasCalledToJSON) {
-  const plugin = findPlugin(config.plugins, val);
-
-  if (plugin !== null) {
-    return printPlugin(plugin, val, config, indentation, depth, refs);
-  }
-
-  const basicResult = printBasicValue(
-    val,
-    config.printFunctionName,
-    config.escapeRegex,
-    config.escapeString
-  );
-
-  if (basicResult !== null) {
-    return basicResult;
-  }
-
-  return printComplexValue(
-    val,
-    config,
-    indentation,
-    depth,
-    refs,
-    hasCalledToJSON
-  );
-}
-
-const DEFAULT_THEME = {
-  comment: 'gray',
-  content: 'reset',
-  prop: 'yellow',
-  tag: 'cyan',
-  value: 'green'
-};
-const DEFAULT_THEME_KEYS = Object.keys(DEFAULT_THEME);
-const DEFAULT_OPTIONS = {
-  callToJSON: true,
-  escapeRegex: false,
-  escapeString: true,
-  highlight: false,
-  indent: 2,
-  maxDepth: Infinity,
-  min: false,
-  plugins: [],
-  printFunctionName: true,
-  theme: DEFAULT_THEME
-};
-
-function validateOptions(options) {
-  Object.keys(options).forEach(key => {
-    if (!DEFAULT_OPTIONS.hasOwnProperty(key)) {
-      throw new Error(`pretty-format: Unknown option "${key}".`);
-    }
-  });
-
-  if (options.min && options.indent !== undefined && options.indent !== 0) {
-    throw new Error(
-      'pretty-format: Options "min" and "indent" cannot be used together.'
-    );
-  }
-
-  if (options.theme !== undefined) {
-    if (options.theme === null) {
-      throw new Error(`pretty-format: Option "theme" must not be null.`);
-    }
-
-    if (typeof options.theme !== 'object') {
-      throw new Error(
-        `pretty-format: Option "theme" must be of type "object" but instead received "${typeof options.theme}".`
-      );
-    }
-  }
-}
-
-const getColorsHighlight = options =>
-  DEFAULT_THEME_KEYS.reduce((colors, key) => {
-    const value =
-      options.theme && options.theme[key] !== undefined
-        ? options.theme[key]
-        : DEFAULT_THEME[key];
-    const color = value && _ansiStyles.default[value];
-
-    if (
-      color &&
-      typeof color.close === 'string' &&
-      typeof color.open === 'string'
-    ) {
-      colors[key] = color;
-    } else {
-      throw new Error(
-        `pretty-format: Option "theme" has a key "${key}" whose value "${value}" is undefined in ansi-styles.`
-      );
-    }
-
-    return colors;
-  }, Object.create(null));
-
-const getColorsEmpty = () =>
-  DEFAULT_THEME_KEYS.reduce((colors, key) => {
-    colors[key] = {
-      close: '',
-      open: ''
-    };
-    return colors;
-  }, Object.create(null));
-
-const getPrintFunctionName = options =>
-  options && options.printFunctionName !== undefined
-    ? options.printFunctionName
-    : DEFAULT_OPTIONS.printFunctionName;
-
-const getEscapeRegex = options =>
-  options && options.escapeRegex !== undefined
-    ? options.escapeRegex
-    : DEFAULT_OPTIONS.escapeRegex;
-
-const getEscapeString = options =>
-  options && options.escapeString !== undefined
-    ? options.escapeString
-    : DEFAULT_OPTIONS.escapeString;
-
-const getConfig = options => ({
-  callToJSON:
-    options && options.callToJSON !== undefined
-      ? options.callToJSON
-      : DEFAULT_OPTIONS.callToJSON,
-  colors:
-    options && options.highlight
-      ? getColorsHighlight(options)
-      : getColorsEmpty(),
-  escapeRegex: getEscapeRegex(options),
-  escapeString: getEscapeString(options),
-  indent:
-    options && options.min
-      ? ''
-      : createIndent(
-          options && options.indent !== undefined
-            ? options.indent
-            : DEFAULT_OPTIONS.indent
-        ),
-  maxDepth:
-    options && options.maxDepth !== undefined
-      ? options.maxDepth
-      : DEFAULT_OPTIONS.maxDepth,
-  min: options && options.min !== undefined ? options.min : DEFAULT_OPTIONS.min,
-  plugins:
-    options && options.plugins !== undefined
-      ? options.plugins
-      : DEFAULT_OPTIONS.plugins,
-  printFunctionName: getPrintFunctionName(options),
-  spacingInner: options && options.min ? ' ' : '\n',
-  spacingOuter: options && options.min ? '' : '\n'
-});
-
-function createIndent(indent) {
-  return new Array(indent + 1).join(' ');
-}
-/**
- * Returns a presentation string of your `val` object
- * @param val any potential JavaScript object
- * @param options Custom settings
- */
-
-function prettyFormat(val, options) {
-  if (options) {
-    validateOptions(options);
-
-    if (options.plugins) {
-      const plugin = findPlugin(options.plugins, val);
-
-      if (plugin !== null) {
-        return printPlugin(plugin, val, getConfig(options), '', 0, []);
-      }
-    }
-  }
-
-  const basicResult = printBasicValue(
-    val,
-    getPrintFunctionName(options),
-    getEscapeRegex(options),
-    getEscapeString(options)
-  );
-
-  if (basicResult !== null) {
-    return basicResult;
-  }
-
-  return printComplexValue(val, getConfig(options), '', 0, []);
-}
-
-prettyFormat.plugins = {
-  AsymmetricMatcher: _AsymmetricMatcher.default,
-  ConvertAnsi: _ConvertAnsi.default,
-  DOMCollection: _DOMCollection.default,
-  DOMElement: _DOMElement.default,
-  Immutable: _Immutable.default,
-  ReactElement: _ReactElement.default,
-  ReactTestComponent: _ReactTestComponent.default
-}; // eslint-disable-next-line no-redeclare
-
-module.exports = prettyFormat;
-
-},{"./collections":380,"./plugins/AsymmetricMatcher":382,"./plugins/ConvertAnsi":383,"./plugins/DOMCollection":384,"./plugins/DOMElement":385,"./plugins/Immutable":386,"./plugins/ReactElement":387,"./plugins/ReactTestComponent":388,"ansi-styles":66}],382:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.test = exports.serialize = void 0;
-
-var _collections = require('../collections');
-
-var Symbol = global['jest-symbol-do-not-touch'] || global.Symbol;
-const asymmetricMatcher =
-  typeof Symbol === 'function' && Symbol.for
-    ? Symbol.for('jest.asymmetricMatcher')
-    : 0x1357a5;
-const SPACE = ' ';
-
-const serialize = (val, config, indentation, depth, refs, printer) => {
-  const stringedValue = val.toString();
-
-  if (
-    stringedValue === 'ArrayContaining' ||
-    stringedValue === 'ArrayNotContaining'
-  ) {
-    if (++depth > config.maxDepth) {
-      return '[' + stringedValue + ']';
-    }
-
-    return (
-      stringedValue +
-      SPACE +
-      '[' +
-      (0, _collections.printListItems)(
-        val.sample,
-        config,
-        indentation,
-        depth,
-        refs,
-        printer
-      ) +
-      ']'
-    );
-  }
-
-  if (
-    stringedValue === 'ObjectContaining' ||
-    stringedValue === 'ObjectNotContaining'
-  ) {
-    if (++depth > config.maxDepth) {
-      return '[' + stringedValue + ']';
-    }
-
-    return (
-      stringedValue +
-      SPACE +
-      '{' +
-      (0, _collections.printObjectProperties)(
-        val.sample,
-        config,
-        indentation,
-        depth,
-        refs,
-        printer
-      ) +
-      '}'
-    );
-  }
-
-  if (
-    stringedValue === 'StringMatching' ||
-    stringedValue === 'StringNotMatching'
-  ) {
-    return (
-      stringedValue +
-      SPACE +
-      printer(val.sample, config, indentation, depth, refs)
-    );
-  }
-
-  if (
-    stringedValue === 'StringContaining' ||
-    stringedValue === 'StringNotContaining'
-  ) {
-    return (
-      stringedValue +
-      SPACE +
-      printer(val.sample, config, indentation, depth, refs)
-    );
-  }
-
-  return val.toAsymmetricMatcher();
-};
-
-exports.serialize = serialize;
-
-const test = val => val && val.$$typeof === asymmetricMatcher;
-
-exports.test = test;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../collections":380}],383:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.serialize = exports.test = void 0;
-
-var _ansiRegex = _interopRequireDefault(require('ansi-regex'));
-
-var _ansiStyles = _interopRequireDefault(require('ansi-styles'));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj};
-}
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-const toHumanReadableAnsi = text =>
-  text.replace((0, _ansiRegex.default)(), match => {
-    switch (match) {
-      case _ansiStyles.default.red.close:
-      case _ansiStyles.default.green.close:
-      case _ansiStyles.default.cyan.close:
-      case _ansiStyles.default.gray.close:
-      case _ansiStyles.default.white.close:
-      case _ansiStyles.default.yellow.close:
-      case _ansiStyles.default.bgRed.close:
-      case _ansiStyles.default.bgGreen.close:
-      case _ansiStyles.default.bgYellow.close:
-      case _ansiStyles.default.inverse.close:
-      case _ansiStyles.default.dim.close:
-      case _ansiStyles.default.bold.close:
-      case _ansiStyles.default.reset.open:
-      case _ansiStyles.default.reset.close:
-        return '</>';
-
-      case _ansiStyles.default.red.open:
-        return '<red>';
-
-      case _ansiStyles.default.green.open:
-        return '<green>';
-
-      case _ansiStyles.default.cyan.open:
-        return '<cyan>';
-
-      case _ansiStyles.default.gray.open:
-        return '<gray>';
-
-      case _ansiStyles.default.white.open:
-        return '<white>';
-
-      case _ansiStyles.default.yellow.open:
-        return '<yellow>';
-
-      case _ansiStyles.default.bgRed.open:
-        return '<bgRed>';
-
-      case _ansiStyles.default.bgGreen.open:
-        return '<bgGreen>';
-
-      case _ansiStyles.default.bgYellow.open:
-        return '<bgYellow>';
-
-      case _ansiStyles.default.inverse.open:
-        return '<inverse>';
-
-      case _ansiStyles.default.dim.open:
-        return '<dim>';
-
-      case _ansiStyles.default.bold.open:
-        return '<bold>';
-
-      default:
-        return '';
-    }
-  });
-
-const test = val =>
-  typeof val === 'string' && !!val.match((0, _ansiRegex.default)());
-
-exports.test = test;
-
-const serialize = (val, config, indentation, depth, refs, printer) =>
-  printer(toHumanReadableAnsi(val), config, indentation, depth, refs);
-
-exports.serialize = serialize;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-},{"ansi-regex":65,"ansi-styles":66}],384:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.serialize = exports.test = void 0;
-
-var _collections = require('../collections');
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-const SPACE = ' ';
-const OBJECT_NAMES = ['DOMStringMap', 'NamedNodeMap'];
-const ARRAY_REGEXP = /^(HTML\w*Collection|NodeList)$/;
-
-const testName = name =>
-  OBJECT_NAMES.indexOf(name) !== -1 || ARRAY_REGEXP.test(name);
-
-const test = val =>
-  val &&
-  val.constructor &&
-  !!val.constructor.name &&
-  testName(val.constructor.name);
-
-exports.test = test;
-
-const isNamedNodeMap = collection =>
-  collection.constructor.name === 'NamedNodeMap';
-
-const serialize = (collection, config, indentation, depth, refs, printer) => {
-  const name = collection.constructor.name;
-
-  if (++depth > config.maxDepth) {
-    return '[' + name + ']';
-  }
-
-  return (
-    (config.min ? '' : name + SPACE) +
-    (OBJECT_NAMES.indexOf(name) !== -1
-      ? '{' +
-        (0, _collections.printObjectProperties)(
-          isNamedNodeMap(collection)
-            ? Array.from(collection).reduce((props, attribute) => {
-                props[attribute.name] = attribute.value;
-                return props;
-              }, {})
-            : {...collection},
-          config,
-          indentation,
-          depth,
-          refs,
-          printer
-        ) +
-        '}'
-      : '[' +
-        (0, _collections.printListItems)(
-          Array.from(collection),
-          config,
-          indentation,
-          depth,
-          refs,
-          printer
-        ) +
-        ']')
-  );
-};
-
-exports.serialize = serialize;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-},{"../collections":380}],385:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.serialize = exports.test = void 0;
-
-var _markup = require('./lib/markup');
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-const ELEMENT_NODE = 1;
-const TEXT_NODE = 3;
-const COMMENT_NODE = 8;
-const FRAGMENT_NODE = 11;
-const ELEMENT_REGEXP = /^((HTML|SVG)\w*)?Element$/;
-
-const testNode = (nodeType, name) =>
-  (nodeType === ELEMENT_NODE && ELEMENT_REGEXP.test(name)) ||
-  (nodeType === TEXT_NODE && name === 'Text') ||
-  (nodeType === COMMENT_NODE && name === 'Comment') ||
-  (nodeType === FRAGMENT_NODE && name === 'DocumentFragment');
-
-const test = val =>
-  val &&
-  val.constructor &&
-  val.constructor.name &&
-  testNode(val.nodeType, val.constructor.name);
-
-exports.test = test;
-
-function nodeIsText(node) {
-  return node.nodeType === TEXT_NODE;
-}
-
-function nodeIsComment(node) {
-  return node.nodeType === COMMENT_NODE;
-}
-
-function nodeIsFragment(node) {
-  return node.nodeType === FRAGMENT_NODE;
-}
-
-const serialize = (node, config, indentation, depth, refs, printer) => {
-  if (nodeIsText(node)) {
-    return (0, _markup.printText)(node.data, config);
-  }
-
-  if (nodeIsComment(node)) {
-    return (0, _markup.printComment)(node.data, config);
-  }
-
-  const type = nodeIsFragment(node)
-    ? `DocumentFragment`
-    : node.tagName.toLowerCase();
-
-  if (++depth > config.maxDepth) {
-    return (0, _markup.printElementAsLeaf)(type, config);
-  }
-
-  return (0, _markup.printElement)(
-    type,
-    (0, _markup.printProps)(
-      nodeIsFragment(node)
-        ? []
-        : Array.from(node.attributes)
-            .map(attr => attr.name)
-            .sort(),
-      nodeIsFragment(node)
-        ? {}
-        : Array.from(node.attributes).reduce((props, attribute) => {
-            props[attribute.name] = attribute.value;
-            return props;
-          }, {}),
-      config,
-      indentation + config.indent,
-      depth,
-      refs,
-      printer
-    ),
-    (0, _markup.printChildren)(
-      Array.prototype.slice.call(node.childNodes || node.children),
-      config,
-      indentation + config.indent,
-      depth,
-      refs,
-      printer
-    ),
-    config,
-    indentation
-  );
-};
-
-exports.serialize = serialize;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-},{"./lib/markup":390}],386:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.test = exports.serialize = void 0;
-
-var _collections = require('../collections');
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-// SENTINEL constants are from https://github.com/facebook/immutable-js
-const IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';
-const IS_LIST_SENTINEL = '@@__IMMUTABLE_LIST__@@';
-const IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@';
-const IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
-const IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
-const IS_RECORD_SENTINEL = '@@__IMMUTABLE_RECORD__@@'; // immutable v4
-
-const IS_SEQ_SENTINEL = '@@__IMMUTABLE_SEQ__@@';
-const IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
-const IS_STACK_SENTINEL = '@@__IMMUTABLE_STACK__@@';
-
-const getImmutableName = name => 'Immutable.' + name;
-
-const printAsLeaf = name => '[' + name + ']';
-
-const SPACE = ' ';
-const LAZY = '…'; // Seq is lazy if it calls a method like filter
-
-const printImmutableEntries = (
-  val,
-  config,
-  indentation,
-  depth,
-  refs,
-  printer,
-  type
-) =>
-  ++depth > config.maxDepth
-    ? printAsLeaf(getImmutableName(type))
-    : getImmutableName(type) +
-      SPACE +
-      '{' +
-      (0, _collections.printIteratorEntries)(
-        val.entries(),
-        config,
-        indentation,
-        depth,
-        refs,
-        printer
-      ) +
-      '}'; // Record has an entries method because it is a collection in immutable v3.
-// Return an iterator for Immutable Record from version v3 or v4.
-
-function getRecordEntries(val) {
-  let i = 0;
-  return {
-    next() {
-      if (i < val._keys.length) {
-        const key = val._keys[i++];
-        return {
-          done: false,
-          value: [key, val.get(key)]
-        };
-      }
-
-      return {
-        done: true,
-        value: undefined
-      };
-    }
-  };
-}
-
-const printImmutableRecord = (
-  val,
-  config,
-  indentation,
-  depth,
-  refs,
-  printer
-) => {
-  // _name property is defined only for an Immutable Record instance
-  // which was constructed with a second optional descriptive name arg
-  const name = getImmutableName(val._name || 'Record');
-  return ++depth > config.maxDepth
-    ? printAsLeaf(name)
-    : name +
-        SPACE +
-        '{' +
-        (0, _collections.printIteratorEntries)(
-          getRecordEntries(val),
-          config,
-          indentation,
-          depth,
-          refs,
-          printer
-        ) +
-        '}';
-};
-
-const printImmutableSeq = (val, config, indentation, depth, refs, printer) => {
-  const name = getImmutableName('Seq');
-
-  if (++depth > config.maxDepth) {
-    return printAsLeaf(name);
-  }
-
-  if (val[IS_KEYED_SENTINEL]) {
-    return (
-      name +
-      SPACE +
-      '{' + // from Immutable collection of entries or from ECMAScript object
-      (val._iter || val._object
-        ? (0, _collections.printIteratorEntries)(
-            val.entries(),
-            config,
-            indentation,
-            depth,
-            refs,
-            printer
-          )
-        : LAZY) +
-      '}'
-    );
-  }
-
-  return (
-    name +
-    SPACE +
-    '[' +
-    (val._iter || // from Immutable collection of values
-    val._array || // from ECMAScript array
-    val._collection || // from ECMAScript collection in immutable v4
-    val._iterable // from ECMAScript collection in immutable v3
-      ? (0, _collections.printIteratorValues)(
-          val.values(),
-          config,
-          indentation,
-          depth,
-          refs,
-          printer
-        )
-      : LAZY) +
-    ']'
-  );
-};
-
-const printImmutableValues = (
-  val,
-  config,
-  indentation,
-  depth,
-  refs,
-  printer,
-  type
-) =>
-  ++depth > config.maxDepth
-    ? printAsLeaf(getImmutableName(type))
-    : getImmutableName(type) +
-      SPACE +
-      '[' +
-      (0, _collections.printIteratorValues)(
-        val.values(),
-        config,
-        indentation,
-        depth,
-        refs,
-        printer
-      ) +
-      ']';
-
-const serialize = (val, config, indentation, depth, refs, printer) => {
-  if (val[IS_MAP_SENTINEL]) {
-    return printImmutableEntries(
-      val,
-      config,
-      indentation,
-      depth,
-      refs,
-      printer,
-      val[IS_ORDERED_SENTINEL] ? 'OrderedMap' : 'Map'
-    );
-  }
-
-  if (val[IS_LIST_SENTINEL]) {
-    return printImmutableValues(
-      val,
-      config,
-      indentation,
-      depth,
-      refs,
-      printer,
-      'List'
-    );
-  }
-
-  if (val[IS_SET_SENTINEL]) {
-    return printImmutableValues(
-      val,
-      config,
-      indentation,
-      depth,
-      refs,
-      printer,
-      val[IS_ORDERED_SENTINEL] ? 'OrderedSet' : 'Set'
-    );
-  }
-
-  if (val[IS_STACK_SENTINEL]) {
-    return printImmutableValues(
-      val,
-      config,
-      indentation,
-      depth,
-      refs,
-      printer,
-      'Stack'
-    );
-  }
-
-  if (val[IS_SEQ_SENTINEL]) {
-    return printImmutableSeq(val, config, indentation, depth, refs, printer);
-  } // For compatibility with immutable v3 and v4, let record be the default.
-
-  return printImmutableRecord(val, config, indentation, depth, refs, printer);
-}; // Explicitly comparing sentinel properties to true avoids false positive
-// when mock identity-obj-proxy returns the key as the value for any key.
-
-exports.serialize = serialize;
-
-const test = val =>
-  val &&
-  (val[IS_ITERABLE_SENTINEL] === true || val[IS_RECORD_SENTINEL] === true);
-
-exports.test = test;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-},{"../collections":380}],387:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.test = exports.serialize = void 0;
-
-var ReactIs = _interopRequireWildcard(require('react-is'));
-
-var _markup = require('./lib/markup');
-
-function _getRequireWildcardCache() {
-  if (typeof WeakMap !== 'function') return null;
-  var cache = new WeakMap();
-  _getRequireWildcardCache = function () {
-    return cache;
-  };
-  return cache;
-}
-
-function _interopRequireWildcard(obj) {
-  if (obj && obj.__esModule) {
-    return obj;
-  }
-  if (obj === null || (typeof obj !== 'object' && typeof obj !== 'function')) {
-    return {default: obj};
-  }
-  var cache = _getRequireWildcardCache();
-  if (cache && cache.has(obj)) {
-    return cache.get(obj);
-  }
-  var newObj = {};
-  var hasPropertyDescriptor =
-    Object.defineProperty && Object.getOwnPropertyDescriptor;
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      var desc = hasPropertyDescriptor
-        ? Object.getOwnPropertyDescriptor(obj, key)
-        : null;
-      if (desc && (desc.get || desc.set)) {
-        Object.defineProperty(newObj, key, desc);
-      } else {
-        newObj[key] = obj[key];
-      }
-    }
-  }
-  newObj.default = obj;
-  if (cache) {
-    cache.set(obj, newObj);
-  }
-  return newObj;
-}
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-// Given element.props.children, or subtree during recursive traversal,
-// return flattened array of children.
-const getChildren = (arg, children = []) => {
-  if (Array.isArray(arg)) {
-    arg.forEach(item => {
-      getChildren(item, children);
-    });
-  } else if (arg != null && arg !== false) {
-    children.push(arg);
-  }
-
-  return children;
-};
-
-const getType = element => {
-  const type = element.type;
-
-  if (typeof type === 'string') {
-    return type;
-  }
-
-  if (typeof type === 'function') {
-    return type.displayName || type.name || 'Unknown';
-  }
-
-  if (ReactIs.isFragment(element)) {
-    return 'React.Fragment';
-  }
-
-  if (ReactIs.isSuspense(element)) {
-    return 'React.Suspense';
-  }
-
-  if (typeof type === 'object' && type !== null) {
-    if (ReactIs.isContextProvider(element)) {
-      return 'Context.Provider';
-    }
-
-    if (ReactIs.isContextConsumer(element)) {
-      return 'Context.Consumer';
-    }
-
-    if (ReactIs.isForwardRef(element)) {
-      if (type.displayName) {
-        return type.displayName;
-      }
-
-      const functionName = type.render.displayName || type.render.name || '';
-      return functionName !== ''
-        ? 'ForwardRef(' + functionName + ')'
-        : 'ForwardRef';
-    }
-
-    if (ReactIs.isMemo(element)) {
-      const functionName =
-        type.displayName || type.type.displayName || type.type.name || '';
-      return functionName !== '' ? 'Memo(' + functionName + ')' : 'Memo';
-    }
-  }
-
-  return 'UNDEFINED';
-};
-
-const getPropKeys = element => {
-  const {props} = element;
-  return Object.keys(props)
-    .filter(key => key !== 'children' && props[key] !== undefined)
-    .sort();
-};
-
-const serialize = (element, config, indentation, depth, refs, printer) =>
-  ++depth > config.maxDepth
-    ? (0, _markup.printElementAsLeaf)(getType(element), config)
-    : (0, _markup.printElement)(
-        getType(element),
-        (0, _markup.printProps)(
-          getPropKeys(element),
-          element.props,
-          config,
-          indentation + config.indent,
-          depth,
-          refs,
-          printer
-        ),
-        (0, _markup.printChildren)(
-          getChildren(element.props.children),
-          config,
-          indentation + config.indent,
-          depth,
-          refs,
-          printer
-        ),
-        config,
-        indentation
-      );
-
-exports.serialize = serialize;
-
-const test = val => val && ReactIs.isElement(val);
-
-exports.test = test;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-},{"./lib/markup":390,"react-is":402}],388:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = exports.test = exports.serialize = void 0;
-
-var _markup = require('./lib/markup');
-
-var Symbol = global['jest-symbol-do-not-touch'] || global.Symbol;
-const testSymbol =
-  typeof Symbol === 'function' && Symbol.for
-    ? Symbol.for('react.test.json')
-    : 0xea71357;
-
-const getPropKeys = object => {
-  const {props} = object;
-  return props
-    ? Object.keys(props)
-        .filter(key => props[key] !== undefined)
-        .sort()
-    : [];
-};
-
-const serialize = (object, config, indentation, depth, refs, printer) =>
-  ++depth > config.maxDepth
-    ? (0, _markup.printElementAsLeaf)(object.type, config)
-    : (0, _markup.printElement)(
-        object.type,
-        object.props
-          ? (0, _markup.printProps)(
-              getPropKeys(object),
-              object.props,
-              config,
-              indentation + config.indent,
-              depth,
-              refs,
-              printer
-            )
-          : '',
-        object.children
-          ? (0, _markup.printChildren)(
-              object.children,
-              config,
-              indentation + config.indent,
-              depth,
-              refs,
-              printer
-            )
-          : '',
-        config,
-        indentation
-      );
-
-exports.serialize = serialize;
-
-const test = val => val && val.$$typeof === testSymbol;
-
-exports.test = test;
-const plugin = {
-  serialize,
-  test
-};
-var _default = plugin;
-exports.default = _default;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/markup":390}],389:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = escapeHTML;
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-function escapeHTML(str) {
-  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-},{}],390:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.printElementAsLeaf = exports.printElement = exports.printComment = exports.printText = exports.printChildren = exports.printProps = void 0;
-
-var _escapeHTML = _interopRequireDefault(require('./escapeHTML'));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj};
-}
-
-/**
- * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-// Return empty string if keys is empty.
-const printProps = (keys, props, config, indentation, depth, refs, printer) => {
-  const indentationNext = indentation + config.indent;
-  const colors = config.colors;
-  return keys
-    .map(key => {
-      const value = props[key];
-      let printed = printer(value, config, indentationNext, depth, refs);
-
-      if (typeof value !== 'string') {
-        if (printed.indexOf('\n') !== -1) {
-          printed =
-            config.spacingOuter +
-            indentationNext +
-            printed +
-            config.spacingOuter +
-            indentation;
-        }
-
-        printed = '{' + printed + '}';
-      }
-
-      return (
-        config.spacingInner +
-        indentation +
-        colors.prop.open +
-        key +
-        colors.prop.close +
-        '=' +
-        colors.value.open +
-        printed +
-        colors.value.close
-      );
-    })
-    .join('');
-}; // Return empty string if children is empty.
-
-exports.printProps = printProps;
-
-const printChildren = (children, config, indentation, depth, refs, printer) =>
-  children
-    .map(
-      child =>
-        config.spacingOuter +
-        indentation +
-        (typeof child === 'string'
-          ? printText(child, config)
-          : printer(child, config, indentation, depth, refs))
-    )
-    .join('');
-
-exports.printChildren = printChildren;
-
-const printText = (text, config) => {
-  const contentColor = config.colors.content;
-  return (
-    contentColor.open + (0, _escapeHTML.default)(text) + contentColor.close
-  );
-};
-
-exports.printText = printText;
-
-const printComment = (comment, config) => {
-  const commentColor = config.colors.comment;
-  return (
-    commentColor.open +
-    '<!--' +
-    (0, _escapeHTML.default)(comment) +
-    '-->' +
-    commentColor.close
-  );
-}; // Separate the functions to format props, children, and element,
-// so a plugin could override a particular function, if needed.
-// Too bad, so sad: the traditional (but unnecessary) space
-// in a self-closing tagColor requires a second test of printedProps.
-
-exports.printComment = printComment;
-
-const printElement = (
-  type,
-  printedProps,
-  printedChildren,
-  config,
-  indentation
-) => {
-  const tagColor = config.colors.tag;
-  return (
-    tagColor.open +
-    '<' +
-    type +
-    (printedProps &&
-      tagColor.close +
-        printedProps +
-        config.spacingOuter +
-        indentation +
-        tagColor.open) +
-    (printedChildren
-      ? '>' +
-        tagColor.close +
-        printedChildren +
-        config.spacingOuter +
-        indentation +
-        tagColor.open +
-        '</' +
-        type
-      : (printedProps && !config.min ? '' : ' ') + '/') +
-    '>' +
-    tagColor.close
-  );
-};
-
-exports.printElement = printElement;
-
-const printElementAsLeaf = (type, config) => {
-  const tagColor = config.colors.tag;
-  return (
-    tagColor.open +
-    '<' +
-    type +
-    tagColor.close +
-    ' …' +
-    tagColor.open +
-    ' />' +
-    tagColor.close
-  );
-};
-
-exports.printElementAsLeaf = printElementAsLeaf;
-
-},{"./escapeHTML":389}],391:[function(require,module,exports){
+},{}],391:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -17739,7 +17739,7 @@ module.exports = testUtils;
 }
 
 }).call(this,require('_process'))
-},{"_process":391,"object-assign":379,"react":405,"react-dom":398,"scheduler":410}],395:[function(require,module,exports){
+},{"_process":391,"object-assign":374,"react":405,"react-dom":398,"scheduler":410}],395:[function(require,module,exports){
 /** @license React v16.13.1
  * react-dom-test-utils.production.min.js
  *
@@ -17776,7 +17776,7 @@ function oa(a,b){return function(c,e){var d=new W(a);g(d,e);Y.isDOMComponent(c)?
 ["mouseout","mouseOut"],["mouseover","mouseOver"],["mouseup","mouseUp"],["paste","paste"],["pause","pause"],["play","play"],["playing","playing"],["progress","progress"],["ratechange","rateChange"],["scroll","scroll"],["seeked","seeked"],["seeking","seeking"],["selectionchange","selectionChange"],["stalled","stalled"],["suspend","suspend"],["textInput","textInput"],["timeupdate","timeUpdate"],["toggle","toggle"],["touchcancel","touchCancel"],["touchend","touchEnd"],["touchmove","touchMove"],["touchstart",
 "touchStart"],[aa,"transitionEnd"],["volumechange","volumeChange"],["waiting","waiting"],["wheel","wheel"]].forEach(function(a){var b=a[1];Y.SimulateNative[b]=oa(b,a[0])});module.exports=Y.default||Y;
 
-},{"object-assign":379,"react":405,"react-dom":398,"scheduler":410}],396:[function(require,module,exports){
+},{"object-assign":374,"react":405,"react-dom":398,"scheduler":410}],396:[function(require,module,exports){
 (function (process){
 /** @license React v16.13.1
  * react-dom.development.js
@@ -42792,7 +42792,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this,require('_process'))
-},{"_process":391,"object-assign":379,"prop-types/checkPropTypes":392,"react":405,"scheduler":410,"scheduler/tracing":411}],397:[function(require,module,exports){
+},{"_process":391,"object-assign":374,"prop-types/checkPropTypes":392,"react":405,"scheduler":410,"scheduler/tracing":411}],397:[function(require,module,exports){
 /** @license React v16.13.1
  * react-dom.production.min.js
  *
@@ -43086,7 +43086,7 @@ exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.13.1";
 
-},{"object-assign":379,"react":405,"scheduler":410}],398:[function(require,module,exports){
+},{"object-assign":374,"react":405,"scheduler":410}],398:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -45268,7 +45268,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this,require('_process'))
-},{"_process":391,"object-assign":379,"prop-types/checkPropTypes":392}],404:[function(require,module,exports){
+},{"_process":391,"object-assign":374,"prop-types/checkPropTypes":392}],404:[function(require,module,exports){
 /** @license React v16.13.1
  * react.production.min.js
  *
@@ -45295,7 +45295,7 @@ key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.13.1";
 
-},{"object-assign":379}],405:[function(require,module,exports){
+},{"object-assign":374}],405:[function(require,module,exports){
 (function (process){
 'use strict';
 
