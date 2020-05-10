@@ -86,9 +86,9 @@ function AdvantageObject(key)
    /**Get the name of the advantage appended with text to determine redundancy*/
    this.getUniqueName=function()
    {
-       //TODO: it doesn't say if you can have multiple helpers. assumed yes
-       if(state.name === 'Minion' || state.name === 'Sidekick') return ('Helper: '+state.text);  //you can't have the same character be a minion and sidekick
-       if(derivedValues.hasText) return (state.name+': '+state.text);
+       //you can't have the same character be a minion and sidekick
+       if('Minion' === state.name || 'Sidekick' === state.name) return ('Helper: ' + state.text);
+       if(derivedValues.hasText) return (state.name + ': ' + state.text);
        return state.name;
    };
    /**Returns a json object of this row's data*/
