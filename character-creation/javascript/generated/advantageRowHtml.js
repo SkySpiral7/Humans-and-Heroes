@@ -1,10 +1,10 @@
 'use strict';
 
 function AdvantageRowHtml(props) {
-  const state = props.state,
-        derivedValues = props.derivedValues,
-        key = props.myKey;
-  const displayGodhood = props.generateGodHood;
+  var state = props.state,
+      derivedValues = props.derivedValues,
+      key = props.myKey;
+  var displayGodhood = props.generateGodHood;
   /*
   values used:
   state: {name, rank, text};
@@ -12,29 +12,33 @@ function AdvantageRowHtml(props) {
   key
   */
 
-  let nameElement = null;
-  let costElement = null;
-  let textElement = null;
-  let costPerRankElement = null;
+  var nameElement = null;
+  var costElement = null;
+  var textElement = null;
+  var costPerRankElement = null;
   if (state.name === 'Equipment') nameElement = /*#__PURE__*/React.createElement("div", {
     className: "col-6 col-lg-4 col-xl-auto"
   }, /*#__PURE__*/React.createElement("b", null, "Equipment"));else {
-    const options = Data.Advantage.names.filter(name => 'Equipment' !== name && (displayGodhood || !Data.Advantage[name].isGodhood)).map(name => /*#__PURE__*/React.createElement("option", {
-      key: name
-    }, name)); //unshift = addFirst
+    var options = Data.Advantage.names.filter(function (name) {
+      return 'Equipment' !== name && (displayGodhood || !Data.Advantage[name].isGodhood);
+    }).map(function (name) {
+      return /*#__PURE__*/React.createElement("option", {
+        key: name
+      }, name);
+    }); //unshift = addFirst
 
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Advantage"
     }, "Select Advantage"));
-    let onChange = null;
+    var onChange = null;
 
     if (undefined === state.name) //if blank
       {
-        onChange = () => {
+        onChange = function onChange() {
           Main.advantageSection.addRow();
         };
       } else {
-      onChange = () => {
+      onChange = function onChange() {
         Main.advantageSection.getRowById(key).select();
       };
     }
@@ -59,7 +63,7 @@ function AdvantageRowHtml(props) {
           type: "text",
           size: "1",
           id: 'advantageRank' + key,
-          onChange: () => {
+          onChange: function onChange() {
             Main.advantageSection.getRowById(key).changeRank();
           },
           value: state.rank
@@ -71,7 +75,7 @@ function AdvantageRowHtml(props) {
         }, /*#__PURE__*/React.createElement("input", {
           type: "text",
           id: 'advantageText' + key,
-          onChange: () => {
+          onChange: function onChange() {
             Main.advantageSection.getRowById(key).changeText();
           },
           value: state.text,

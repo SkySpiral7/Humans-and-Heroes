@@ -14,6 +14,7 @@ function main()
    {
       if (err)
       {
+         //TODO: just npm install
          console.log('recreating node_modules...');
          const execSync = require('child_process').execSync;
          execSync('npm install @babel/core @babel/preset-react @babel/plugin-proposal-class-properties ' +
@@ -35,9 +36,10 @@ function generateFromBabel()
       if (err) throw err;
       files.forEach(fileName =>
       {
-         //TODO: generated code has arrows. double check all browser support
          babel.transformFile('./babel/' + fileName, {
-               presets: ['@babel/preset-react'],
+               presets: ['@babel/preset-react', ['@babel/preset-env', {"targets": {
+                  "browsers": ["IE 11"]
+               }}]],
                plugins: ['@babel/plugin-proposal-class-properties']
             },
             function (err, result)
@@ -52,6 +54,7 @@ function generateFromBabel()
 
 function generateFromNode()
 {
+   //TODO: generated code has arrows. fix then double check all browser support
    require('browserify')({
       entries: ['./node/ReactUtil.js']
    })
