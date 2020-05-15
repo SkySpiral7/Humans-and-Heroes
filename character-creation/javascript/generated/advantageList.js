@@ -197,8 +197,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         var advantageObject = _this._addRowNoPush(nameToLoad);
 
         if (duplicateCheck.contains(advantageObject.getUniqueName())) {
-          Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because the advantage already exists.'); //TODO: need to really nail down what is a duplicate for this and message based on unique name
-
+          Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because the advantage already exists. Increase the rank instead or use different text.');
           continue;
         }
 
@@ -409,7 +408,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component);
+}(React.Component); //next items: retest everything, add map, complain about browserify
+
 
 function createAdvantageList(callback) {
   ReactDOM.render( /*#__PURE__*/React.createElement(AdvantageList, {

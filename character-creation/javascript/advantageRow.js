@@ -1,31 +1,30 @@
 'use strict';
+
 /**Call List onChange
-Select Advantage: select();
-Rank: changeRank();
-Text: changeText();
-*/
+ Select Advantage: select();
+ Rank: changeRank();
+ Text: changeText();
+ */
 function AdvantageObject(key)
 {
    //private variable section:
    var state, derivedValues;
 
-   //Basic getter section (all single line)
-   this.getState=function(){return JSON.clone(state);};  //defensive copy is important to prevent tamper
-   this.getDerivedValues=function(){return JSON.clone(derivedValues);};  //clone is for tests
+   //region Basic getter (all single line)
+   this.getState = function () {return JSON.clone(state);};  //defensive copy is important to prevent tamper
+   this.getDerivedValues = function () {return JSON.clone(derivedValues);};  //clone is for tests
+   this.doesHaveRank = function () {return derivedValues.hasRank;};
+   this.doesHaveText = function () {return derivedValues.hasText;};
+   this.getCostPerRank = function () {return derivedValues.costPerRank;};
+   this.getMaxRank = function () {return derivedValues.maxRank;};
+   this.getName = function () {return state.name;};
+   this.getRank = function () {return state.rank;};
+   this.getText = function () {return state.text;};
+   this.getTotal = function () {return derivedValues.total;};
+   this.getKey = function () {return key;};
+   //endregion Basic getter
 
-    this.doesHaveRank=function(){return derivedValues.hasRank;};
-    this.doesHaveText=function(){return derivedValues.hasText;};
-    this.getCostPerRank=function(){return derivedValues.costPerRank;};
-    this.getMaxRank=function(){return derivedValues.maxRank;};
-    this.getName=function(){return state.name;};
-    this.getRank=function(){return state.rank;};
-    this.getText=function(){return state.text;};
-    this.getTotal=function(){return derivedValues.total;};
-
-   //Single line function section
-    this.getKey=function(){return key;};
-
-   //Onchange section
+   //region Onchange
    /**Onchange function for selecting an advantage*/
    this.select = function ()
    {
@@ -46,53 +45,56 @@ function AdvantageObject(key)
       this.setText(document.getElementById('advantageText' + key).value);
       Main.advantageSection.updateTextByKey(key);
    };
+   //endregion Onchange
 
-   //Value setting section
+   //region Value setting
    /**Populates data of the advantage by using the name (which is validated).
-   This must be called before any other data of this row is set.
-   The data set is independent of the document and doesn't call update.*/
-   this.setAdvantage=function(nameGiven)
+    This must be called before any other data of this row is set.
+    The data set is independent of the document and doesn't call update.*/
+   this.setAdvantage = function (nameGiven)
    {
-       var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
-          //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
-       state.name = nameGiven;
-       derivedValues.maxRank = Data.Advantage[state.name].maxRank;
-       derivedValues.hasRank = (1 !== derivedValues.maxRank);  //if max rank is 1 then there are no ranks
-       if(useNewData) state.rank = 1;
-       derivedValues.costPerRank = Data.Advantage[state.name].costPerRank;
-       derivedValues.total = derivedValues.costPerRank * state.rank;
-       derivedValues.hasText = Data.Advantage[state.name].hasText;
-       if(derivedValues.hasText && useNewData) state.text = Data.Advantage[state.name].defaultText;
-       //!derivedValues.hasText && useNewData (useNewData always true when !hasText):
-       else if(useNewData) state.text = undefined;  //needs to be explicit so that the previous data is destroyed
-       //else (!useNewData which always hasText) keep using the current text
+      var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
+      //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
+      state.name = nameGiven;
+      derivedValues.maxRank = Data.Advantage[state.name].maxRank;
+      derivedValues.hasRank = (1 !== derivedValues.maxRank);  //if max rank is 1 then there are no ranks
+      if (useNewData) state.rank = 1;
+      derivedValues.costPerRank = Data.Advantage[state.name].costPerRank;
+      derivedValues.total = derivedValues.costPerRank * state.rank;
+      derivedValues.hasText = Data.Advantage[state.name].hasText;
+      if (derivedValues.hasText && useNewData) state.text = Data.Advantage[state.name].defaultText;
+      //!derivedValues.hasText && useNewData (useNewData always true when !hasText):
+      else if (useNewData) state.text = undefined;  //needs to be explicit so that the previous data is destroyed
+      //else (!useNewData which always hasText) keep using the current text
    };
    /**Used to set data independent of the document and without calling update*/
-   this.setRank=function(rankGiven)
+   this.setRank = function (rankGiven)
    {
-       if(!derivedValues.hasRank) return;  //can only happen when loading
-       state.rank = sanitizeNumber(rankGiven, 1, 1);
-       if(state.rank > derivedValues.maxRank) state.rank = derivedValues.maxRank;
-       derivedValues.total=derivedValues.costPerRank*state.rank;
+      if (!derivedValues.hasRank) return;  //can only happen when loading
+      state.rank = sanitizeNumber(rankGiven, 1, 1);
+      if (state.rank > derivedValues.maxRank) state.rank = derivedValues.maxRank;
+      derivedValues.total = derivedValues.costPerRank * state.rank;
    };
    /**Used to set data independent of the document and without calling update*/
-   this.setText=function(textGiven)
+   this.setText = function (textGiven)
    {
-       if(!derivedValues.hasText) return;  //can only happen when loading
-       state.text = textGiven.trim();  //trimmed in case it needs to match up with something else
+      if (!derivedValues.hasText) return;  //can only happen when loading
+      state.text = textGiven.trim();  //trimmed in case it needs to match up with something else (eg helper, +Crit, skill master)
    };
+   //endregion Value setting
 
-   //public function section
+   //region public function
    /**Get the name of the advantage appended with text to determine redundancy*/
-   this.getUniqueName=function()
+   this.getUniqueName = function ()
    {
-       //you can't have the same character be a minion and sidekick
-       if('Minion' === state.name || 'Sidekick' === state.name) return ('Helper: ' + state.text);
-       if(derivedValues.hasText) return (state.name + ': ' + state.text);
-       return state.name;
+      //you can't have the same character be a minion and sidekick
+      if ('Minion' === state.name || 'Sidekick' === state.name) return ('Helper: ' + state.text);
+      //technically having ': undefined' is still unique but doesn't look as nice
+      if (derivedValues.hasText) return (state.name + ': ' + state.text);
+      return state.name;
    };
    /**Returns a json object of this row's data*/
-   this.save=function()
+   this.save = function ()
    {
       //don't just clone state: rank is different
       var json = {};
@@ -103,6 +105,7 @@ function AdvantageObject(key)
       if (derivedValues.hasText) json.text = state.text;
       return json;
    };
+   //endregion public function
 
    //constructor:
    state = {};

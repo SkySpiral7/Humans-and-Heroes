@@ -170,8 +170,7 @@ class AdvantageList extends React.Component
          if (duplicateCheck.contains(advantageObject.getUniqueName()))
          {
             Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad +
-               ' is not allowed because the advantage already exists.');
-            //TODO: need to really nail down what is a duplicate for this and message based on unique name
+               ' is not allowed because the advantage already exists. Increase the rank instead or use different text.');
             continue;
          }
          this._rowArray.push(advantageObject);
@@ -362,6 +361,8 @@ class AdvantageList extends React.Component
    };
    //endregion private functions
 }
+
+//next items: retest everything, add map, complain about browserify
 
 function createAdvantageList(callback)
 {
