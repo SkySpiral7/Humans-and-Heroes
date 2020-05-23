@@ -135,6 +135,7 @@ function PowerListAgnostic(sectionName)
    {
       if (this === Main.equipmentSection)
       {
+         //always call it even if total is 0 because the row may need to be removed
          Main.advantageSection.calculateEquipmentRank(this.getTotal());
       }
       Main.updateOffense();

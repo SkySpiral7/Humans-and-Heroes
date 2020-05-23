@@ -2,80 +2,87 @@
 TestSuite.advantageList = {};
 TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 {
+   /*if (undefined === testState) testState = {};  //TODO: have tests support IE 11?
+   IE 11 has strict, let, const but not ... spread, => arrow, and default parameters
+   also promise https://stackoverflow.com/questions/36016327/how-to-make-promises-work-in-ie11
+   might have to transpile tests in babel
+   maybe I need https://create-react-app.dev/docs/supported-browsers-features/
+   or at least polyfill: https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md
+   */
    TestRunner.clearResults(testState);
+   /*TODO: better? test runner API:
+   fewer args but has more functionality. now requires DSL instead of []
+   TestSuite.advantageList.calculateEquipmentRank = function (testState)
+   {
+   testState = TestRunner.init(testState);
 
-   var assertions = [];
-   var actionTaken = 'Initial';
+   testState.assert({});  //immediately convert to results. this allows very short lived equals
+   testState.assertAll([{}, {}]);
+   testState.failedToThrow('because it should');
+   testState.error(e, 'input is copied over on change');
+
+   return testState.determineResultsFor('TestSuite.abilityList.calculateValues');
+   }*/
+
+   const assertions = [];
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
-      Description: actionTaken + ': Equipment Row is not created'
+      Description: 'Equipment Row does not exist'
    });
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getEquipmentMaxTotal(),
-      Description: actionTaken + ': Equipment Max Total is still 0'
+      Description: 'Equipment Max Total is 0'
    });
-   assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is still 0'});
 
    try
    {
-      actionTaken = 'Damage Added';
       SelectUtil.changeText('equipmentChoices0', 'Damage');  //use Damage because it has a base cost of 1
       assertions.push({
          Expected: 'Equipment',
          Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
-         Description: actionTaken + ': Equipment Row is created'
+         Description: 'Damage Added: Equipment Row is created'
       });
       assertions.push({
          Expected: 5,
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
-         Description: actionTaken + ': Equipment Max Total is now the minimum'
+         Description: 'Damage Added: Equipment Max Total is now the minimum'
       });
-      assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is now 1'});
+      assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Added: Equipment rank is 1'});
 
-      actionTaken = 'Damage Rank 5';
       DomUtil.changeValue('equipmentRank0', 5);
       assertions.push({
          Expected: 5,
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
-         Description: actionTaken + ': Equipment Max Total is the maximum of 5'
+         Description: 'Damage Rank 5: Equipment Max Total still 5'
       });
-      assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is still 1'});
-      actionTaken = 'Damage Rank 6';
+      assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Rank 5: Equipment rank still 1'});
+
       DomUtil.changeValue('equipmentRank0', 6);
       assertions.push({
          Expected: 10,
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
-         Description: actionTaken + ': Equipment Max Total is now 10'
+         Description: 'Damage Rank 6: Equipment Max Total is now 10'
       });
-      assertions.push({Expected: 2, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is now 2'});
-      actionTaken = 'Damage Rank 5';
-      DomUtil.changeValue('equipmentRank0', 5);
-      assertions.push({
-         Expected: 5,
-         Actual: Main.advantageSection.getEquipmentMaxTotal(),
-         Description: actionTaken + ': Equipment Max Total is back to the maximum of 5'
-      });
-      assertions.push({Expected: 1, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is back to 1'});
+      assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Rank 6: Equipment rank now 2'});
    }
    catch (e)
-   {assertions.push({Error: e, Description: actionTaken});}
+   {assertions.push({Error: e, Description: 'Add Damage'});}
 
-   actionTaken = 'Damage Removed';
-   Main.equipmentSection.clear();  //no need for a catch here: if this fails everything will fail
+   Main.equipmentSection.clear();
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
-      Description: actionTaken + ': Equipment Row is removed'
+      Description: 'Damage Removed: Equipment Row is removed'
    });
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getEquipmentMaxTotal(),
-      Description: actionTaken + ': Equipment Max Total is now 0'
+      Description: 'Damage Removed: Equipment Max Total is now 0'
    });
-   assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage Total is now 0'});
+   assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: 'Damage Removed: Advantage Total is now 0'});
 
    return TestRunner.displayResults('TestSuite.advantageList.calculateEquipmentRank', assertions, testState);
 };
@@ -88,8 +95,8 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       return Main.advantageSection.indexToKey(index);
    }
 
-   var assertions = [];
-   var actionTaken = 'Initial';
+   const assertions = [];
+   let actionTaken = 'Initial';
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
@@ -258,8 +265,8 @@ TestSuite.advantageList.load = function (testState = {})
 {
    TestRunner.clearResults(testState);
 
-   var dataToLoad;
-   var assertions = [];
+   let dataToLoad;
+   const assertions = [];
 
    try
    {

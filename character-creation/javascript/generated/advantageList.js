@@ -102,36 +102,44 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
       var newEquipmentRank = Math.ceil(equipTotal / 5);
       _this._derivedValues.equipmentMaxTotal = newEquipmentRank * 5; //rounded up to nearest 5
-      //TODO: retest things like this
 
-      if (_this._rowArray.isEmpty() || 'Equipment' !== _this._rowArray[equipmentIndex].getName()) //if there is no equipment advantage
-        {
-          if (0 === equipTotal) return; //I don't need to add a row
-          //doesn't use addRow because unshift instead of push and already did duplicate check
+      var equipAdvDoesExists = !_this._rowArray.isEmpty() && 'Equipment' === _this._rowArray[equipmentIndex].getName();
 
-          var advantageObject = _this._addRowNoPush('Equipment'); //unshift = addFirst
+      var equipAdvShouldExist = 0 !== newEquipmentRank;
+
+      if (equipAdvDoesExists && equipAdvShouldExist) {
+        /*update the rank is the only thing to do
+        if rank is already correct don't trigger an update
+        this happens when equipment updates something that doesn't change the rank*/
+        if (_this._rowArray[equipmentIndex].getRank() === newEquipmentRank) return;
+
+        _this._rowArray[equipmentIndex].setRank(newEquipmentRank);
+
+        _this.setState(function (state) {
+          state.it[equipmentIndex].rank = newEquipmentRank;
+          return state;
+        });
+      } else if (equipAdvDoesExists && !equipAdvShouldExist) {
+        _this._removeRow(equipmentIndex);
+      } else if (!equipAdvDoesExists && equipAdvShouldExist) {
+        //doesn't use addRow because unshift instead of push and already did duplicate check
+        var advantageObject = _this._addRowNoPush('Equipment'); //unshift = addFirst
 
 
-          _this._rowArray.unshift(advantageObject);
+        _this._rowArray.unshift(advantageObject);
 
-          _this.setState(function (state) {
-            state.it.unshift(advantageObject.getState());
-            return state;
-          });
-        } else if (0 === equipTotal) //don't need the row any more
-        {
-          _this._removeRow(equipmentIndex);
+        advantageObject.setRank(newEquipmentRank);
 
-          return;
-        } //don't connect with else since this happens when adding or updating
+        _this.setState(function (state) {
+          state.it.unshift(advantageObject.getState());
+          return state;
+        });
+      }
+      /*else if(!equipAdvDoesExists && !equipAdvShouldExist)
+      equipment section was empty and an update was triggered but nothing changed
+      so do nothing because there's nothing to do.
+      power list clear does this for now (react should fix)*/
 
-
-      _this._rowArray[equipmentIndex].setRank(newEquipmentRank);
-
-      _this.setState(function (state) {
-        state.it[equipmentIndex].rank = newEquipmentRank;
-        return state;
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "clear", function () {
@@ -175,8 +183,9 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
       if (_this._rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       var newState = [];
-      var duplicateCheck = [];
-      if (0 !== _this._derivedValues.equipmentMaxTotal) newState.push(_this._rowArray[0].getState());
+      var duplicateCheck = []; //keep the Equipment advantage if it exists
+
+      if (1 === _this.state.it.length) newState.push(_this._rowArray[0].getState());
 
       for (var i = 0; i < jsonSection.length; i++) {
         var nameToLoad = jsonSection[i].name;
@@ -203,7 +212,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
         _this._rowArray.push(advantageObject);
 
-        duplicateCheck.push(advantageObject.getUniqueName());
+        duplicateCheck.push(advantageObject.getUniqueName()); //leave value as default if not in json. advantageObject will make sure the value is valid
+
         if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
         if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
         newState.push(advantageObject.getState());
@@ -408,7 +418,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: retest everything, add map, complain about browserify
+}(React.Component); //next items: retest list, add map
 
 
 function createAdvantageList(callback) {
