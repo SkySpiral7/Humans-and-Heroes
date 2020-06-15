@@ -73,7 +73,7 @@ function DefenseList()
       //make Main.getEnhancedToughness which adds both sections and stamina
       var staminaValue = Main.abilitySection.getByName('Stamina').getZeroedValue();  //Zeroed because you can't lack toughness
       var protectionValue = Main.getProtectionTotal();
-      var defensiveRollValue = Main.advantageSection.getRankMap().get('Defensive Roll');
+      var defensiveRollValue = Main.advantageSection.getRankFromMap('Defensive Roll');
       //defensiveRollValue defaults to 0 but this is fine because it isn't compared to anything
 
       var toughnessWithoutDefensiveRoll;

@@ -199,12 +199,12 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageRank' + getId(0), 2);
       assertions.push({
          Expected: 2,
-         Actual: Main.advantageSection.getRank('Improved Initiative'),
+         Actual: Main.advantageSection.getRankFromMap('Improved Initiative'),
          Description: 'RankMap has Improved Initiative rank 2'
       });
       assertions.push({
          Expected: 0,
-         Actual: Main.advantageSection.getRank('Defensive Roll'),
+         Actual: Main.advantageSection.getRankFromMap('Defensive Roll'),
          Description: 'Defensive Roll default rank of 0'
       });
    }
@@ -234,12 +234,12 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageText' + getId(1), 'sword');
       assertions.push({
          Expected: 1,
-         Actual: Main.advantageSection.getRank('Improved Critical: xxyba'),
+         Actual: Main.advantageSection.getRankFromMap('Improved Critical: xxyba'),
          Description: 'RankMap has crit 1'
       });
       assertions.push({
          Expected: 1,
-         Actual: Main.advantageSection.getRank('Improved Critical: sword'),
+         Actual: Main.advantageSection.getRankFromMap('Improved Critical: sword'),
          Description: 'RankMap unique name'
       });
    }

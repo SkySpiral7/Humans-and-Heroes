@@ -307,7 +307,7 @@ function MainObject()
    this.updateInitiative=function()
    {
        var agilityScore = this.abilitySection.getByName('Agility').getZeroedValue();  //used zeroed because even absent agility has initiative
-       var initiative = this.advantageSection.getRankMap().get('Improved Initiative');
+       var initiative = this.advantageSection.getRankFromMap('Improved Initiative');
        if(1 === activeRuleset.major) initiative *= 4;
        else if(2 === activeRuleset.major) initiative *= 2;
        //else v3.0 initiative *1 (defaults to 0)
@@ -316,7 +316,7 @@ function MainObject()
        var stringUsed;
        if(initiative >= 0) stringUsed = '+' + initiative;
        else stringUsed = initiative;
-       if(1 === this.advantageSection.getRankMap().get('Seize Initiative')) stringUsed += ' with Seize Initiative';  //if has Seize Initiative
+       if(this.advantageSection.hasSeizeInitiative()) stringUsed += ' with Seize Initiative';
        document.getElementById('initiative').innerHTML = stringUsed;
    };
    /**Calculates and creates the offense section of the document.*/
@@ -328,8 +328,8 @@ function MainObject()
       derivedValues.Offense = [];
       var closeSkillMap = this.skillSection.getCloseCombatMap();
       var rangeSkillMap = this.skillSection.getRangedCombatMap();
-      var closeAttackBonus = this.advantageSection.getRankMap().get('Close Attack');  //these only exist in ruleset 1.0. will be 0 otherwise
-      var rangedAttackBonus = this.advantageSection.getRankMap().get('Ranged Attack');
+      var closeAttackBonus = this.advantageSection.getRankFromMap('Close Attack');  //these only exist in ruleset 1.0. will be 0 otherwise
+      var rangedAttackBonus = this.advantageSection.getRankFromMap('Ranged Attack');
       var effectRank;
 
       //if Unarmed is possible then it will be the first row
@@ -591,7 +591,7 @@ function MainObject()
 
       //Improved Critical only exists when it was d20
       //TODO: move crit range to arg
-      var minCritNum = (20 - this.advantageSection.getRankMap().get('Improved Critical: '+skillName));
+      var minCritNum = (20 - this.advantageSection.getRankFromMap('Improved Critical: '+skillName));
       if(minCritNum < 20) thisOffensiveRow+=', Crit. '+minCritNum+'-20';  //the '-20' is a range through 20
 
       thisOffensiveRow+='</div></div>\n';

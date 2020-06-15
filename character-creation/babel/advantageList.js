@@ -32,8 +32,8 @@ class AdvantageList extends React.Component
    isUsingPettyRules = () => {return this._derivedValues.pettyRulesApply;};
    getDerivedValues = () => {return JSON.clone(this._derivedValues);};  //rankMap is converted to json
    getEquipmentMaxTotal = () => {return this._derivedValues.equipmentMaxTotal;};
-   //TODO: switch to getRank and hasSeizeInitiative (all use advantageSection.getRankMap)
-   getRank = (name) => {return this._derivedValues.rankMap.get(name);};
+   /**the rank of the row with that unique name (if in map)*/
+   getRankFromMap = (uniqueName) => {return this._derivedValues.rankMap.get(uniqueName);};
    getRankMap = () => {return this._derivedValues.rankMap;};
    getTotal = () => {return this._derivedValues.total;};
    getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper

@@ -58,8 +58,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       return _this._derivedValues.equipmentMaxTotal;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRank", function (name) {
-      return _this._derivedValues.rankMap.get(name);
+    _defineProperty(_assertThisInitialized(_this), "getRankFromMap", function (uniqueName) {
+      return _this._derivedValues.rankMap.get(uniqueName);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getRankMap", function () {
