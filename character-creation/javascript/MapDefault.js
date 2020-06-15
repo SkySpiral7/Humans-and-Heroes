@@ -1,8 +1,8 @@
 'use strict';
 //thanks to hasOwnProperty the map is safe from Object.prototype tampering. assuming Object.hasOwnProperty hasn't been changed
 /**There are 2 reasons to use this over the built in object.
-1) this is strict and therefore safe
-2) this allows a default value which is returned by get if the key doesn't exist
+1) this allows a default value which is returned by get if the key doesn't exist
+2) there are specific methods
 If obj is passed in it must be a non-null object. defaultValue can be anything.
 If obj has any inherited properties they will be ignored.
 
@@ -31,6 +31,12 @@ function MapDefault(obj, defaultValue)  //based on http://www.mojavelinux.com/ar
    {
        if(!this.containsKey(key)) return;
        items[key]=value;
+   };
+
+   /**Will add or set the value.*/
+   this.put=function(key, value)
+   {
+      items[key]=value;
    };
 
    /**Returns the value of that key or the default value if the key does not exist*/
@@ -80,11 +86,15 @@ function MapDefault(obj, defaultValue)  //based on http://www.mojavelinux.com/ar
    /**Returns JSON that represents this object. The keys of items are not sorted.*/
    this.toJSON=function(){return {items: items, defaultValue: defaultValue};};
 
-   /**Returns true if other has the same keys, values, and defaultValue.*/
+   /**Returns true if other has the same keys, values, and defaultValue.
+    * Limitation: only supports JSON keys, values, and defaultValue.
+    */
    this.equals=function(other)
    {
       if(!(other instanceof MapDefault)) return false;
       if(this === other) return true;
+      //use toSource instead of toJSON to ignore the key order
+      //TODO: looping over it would be faster (without string building) and would allow non-JSON equality
       return (this.toSource() === other.toSource());
    };
 

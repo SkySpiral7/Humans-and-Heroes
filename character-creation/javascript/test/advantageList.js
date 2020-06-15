@@ -58,7 +58,11 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
          Description: 'Damage Rank 5: Equipment Max Total still 5'
       });
-      assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Rank 5: Equipment rank still 1'});
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getState().it[0].rank,
+         Description: 'Damage Rank 5: Equipment rank still 1'
+      });
 
       DomUtil.changeValue('equipmentRank0', 6);
       assertions.push({
@@ -66,7 +70,11 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
          Description: 'Damage Rank 6: Equipment Max Total is now 10'
       });
-      assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Rank 6: Equipment rank now 2'});
+      assertions.push({
+         Expected: 2,
+         Actual: Main.advantageSection.getState().it[0].rank,
+         Description: 'Damage Rank 6: Equipment rank now 2'
+      });
    }
    catch (e)
    {assertions.push({Error: e, Description: 'Add Damage'});}
@@ -96,168 +104,147 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    }
 
    const assertions = [];
-   let actionTaken = 'Initial';
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
-      Description: actionTaken + ': There are no Advantage Rows'
-   });
-   assertions.push({
-      Expected: false,
-      Actual: Main.advantageSection.hasGodhoodAdvantages(),
-      Description: actionTaken + ': Advantage section has no godhood'
-   });
-   assertions.push({
-      Expected: true,
-      Actual: Main.advantageSection.isUsingPettyRules(),
-      Description: actionTaken + ': And petty rules apply'
+      Description: 'no Advantages'
    });
    assertions.push({
       Expected: true,
       Actual: Main.advantageSection.getRankMap()
       .isEmpty(),
-      Description: actionTaken + ': RankMap is empty'
+      Description: 'RankMap is empty'
    });
-   assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage total is 0'});
+   assertions.push({
+      Expected: false,
+      Actual: Main.advantageSection.hasGodhoodAdvantages(),
+      Description: 'Advantage section has no godhood'
+   });
+   assertions.push({
+      Expected: true,
+      Actual: Main.advantageSection.isUsingPettyRules(),
+      Description: 'petty rules apply'
+   });
+   assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: 'Advantage total is 0'});
 
-   //test non petty godhood
    try
    {
-      actionTaken = 'Set Godhood';
+      //Set Godhood
       DomUtil.changeValue('Strength', 30);
-      assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: actionTaken + ': Godhood is usable'});
-      actionTaken = 'Set Beyond Mortal';
+      assertions.push({
+         Expected: false,
+         Actual: Main.advantageSection.hasGodhoodAdvantages(),
+         Description: 'has godhood not based on main'
+      });
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
       assertions.push({
          Expected: 'Beyond Mortal',
          Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
-         Description: actionTaken + ': Beyond Mortal is set'
+         Description: 'Beyond Mortal is set'
       });
       assertions.push({
          Expected: true,
          Actual: Main.advantageSection.hasGodhoodAdvantages(),
-         Description: actionTaken + ': Advantage section has godhood'
+         Description: 'Advantage section has godhood'
       });
-      assertions.push(
-         {Expected: true, Actual: Main.advantageSection.isUsingPettyRules(), Description: actionTaken + ': But petty rules still apply'});
+      assertions.push({
+         Expected: true,
+         Actual: Main.advantageSection.isUsingPettyRules(),
+         Description: 'But petty rules still apply'
+      });
    }
    catch (e)
-   {assertions.push({Error: e, Description: actionTaken});}
+   {assertions.push({Error: e, Description: 'non petty godhood'});}
+   Main.clear();
 
-   //test petty godhood
    try
    {
-      actionTaken = 'Set Petty Rules';
+      DomUtil.changeValue('Strength', 30);
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
          Expected: 'Your Petty Rules Don\'t Apply to Me',
          Actual: Main.advantageSection.getRowByIndex(0)
          .getName(),
-         Description: actionTaken + ': Your Petty Rules Don\'t Apply to Me is set'
+         Description: 'Petty Rules ad is set'
       });
       assertions.push({
          Expected: true,
          Actual: Main.advantageSection.hasGodhoodAdvantages(),
-         Description: actionTaken + ': Advantage section has godhood'
+         Description: 'Advantage section has godhood'
       });
       assertions.push({
          Expected: false,
          Actual: Main.advantageSection.isUsingPettyRules(),
-         Description: actionTaken + ': And petty rules don\'t apply'
+         Description: 'And petty rules don\'t apply'
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: actionTaken});}
+   {assertions.push({Error: e, Description: 'petty godhood'});}
+   Main.clear();
 
-   //test rank map
    try
    {
-      actionTaken = 'Set Improved Initiative';
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
-      assertions.push({
-         Expected: 'Improved Initiative',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
-         Description: actionTaken + ': Improved Initiative is set'
-      });
       assertions.push({
          Expected: false,
          Actual: Main.advantageSection.hasGodhoodAdvantages(),
-         Description: actionTaken + ': Advantage section has no godhood'
+         Description: 'Advantage section has no godhood'
       });
       assertions.push({
          Expected: true,
          Actual: Main.advantageSection.isUsingPettyRules(),
-         Description: actionTaken + ': And petty rules do apply'
+         Description: 'And petty rules do apply'
       });
-      actionTaken = 'Set rank to 2';
       ReactUtil.changeValue('advantageRank' + getId(0), 2);
       assertions.push({
-         Expected: true,
-         Actual: Main.advantageSection.getRankMap()
-         .containsKey('Improved Initiative'),
-         Description: actionTaken + ': RankMap has Improved Initiative'
-      });
-      assertions.push({
          Expected: 2,
-         Actual: Main.advantageSection.getRankMap()
-         .get('Improved Initiative'),
-         Description: actionTaken + ': with rank of 2'
-      });
-      assertions.push({
-         Expected: false,
-         Actual: Main.advantageSection.getRankMap()
-         .containsKey('Defensive Roll'),
-         Description: actionTaken + ': RankMap doesn\'t have Defensive Roll'
+         Actual: Main.advantageSection.getRank('Improved Initiative'),
+         Description: 'RankMap has Improved Initiative rank 2'
       });
       assertions.push({
          Expected: 0,
-         Actual: Main.advantageSection.getRankMap()
-         .get('Defensive Roll'),
-         Description: actionTaken + ': with default rank of 0'
+         Actual: Main.advantageSection.getRank('Defensive Roll'),
+         Description: 'Defensive Roll default rank of 0'
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: actionTaken});}
+   {assertions.push({Error: e, Description: 'rank map'});}
 
-   //test total
+   Main.advantageSection.clear();
    try
    {
-      actionTaken = 'Set Lucky 2';
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
       ReactUtil.changeValue('advantageRank' + getId(0), 2);
-      assertions.push({
-         Expected: 'Lucky',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
-         Description: actionTaken + ': Lucky is set'
-      });
-      assertions.push({
-         Expected: 2,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getRank(),
-         Description: actionTaken + ': with rank of 2'
-      });
-      actionTaken = 'Set Defensive Roll 3';
+      assertions.push({Expected: 10, Actual: Main.advantageSection.getTotal(), Description: 'lucky subtotal 5*2=10'});
       ReactUtil.changeValue('advantageChoices' + getId(1), 'Defensive Roll');
       ReactUtil.changeValue('advantageRank' + getId(1), 3);
-      assertions.push({
-         Expected: 'Defensive Roll',
-         Actual: Main.advantageSection.getRowByIndex(1)
-         .getName(),
-         Description: actionTaken + ': Defensive Roll is set'
-      });
-      assertions.push({
-         Expected: 3,
-         Actual: Main.advantageSection.getRowByIndex(1)
-         .getRank(),
-         Description: actionTaken + ': with rank of 3'
-      });
-      assertions.push({Expected: 13, Actual: Main.advantageSection.getTotal(), Description: actionTaken + ': Advantage total is 13'});
+      assertions.push({Expected: 13, Actual: Main.advantageSection.getTotal(), Description: 'Advantage total is 13'});
    }
    catch (e)
-   {assertions.push({Error: e, Description: actionTaken});}
+   {assertions.push({Error: e, Description: 'total'});}
+
+   //Improved Critical is the only one where unique name matters so have to test on v1.0
+   Main.setRuleset(1, 0);
+   try
+   {
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Critical');
+      ReactUtil.changeValue('advantageText' + getId(0), 'xxyba');
+      ReactUtil.changeValue('advantageChoices' + getId(1), 'Improved Critical');
+      ReactUtil.changeValue('advantageText' + getId(1), 'sword');
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getRank('Improved Critical: xxyba'),
+         Description: 'RankMap has crit 1'
+      });
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getRank('Improved Critical: sword'),
+         Description: 'RankMap unique name'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'rank map getUniqueName'});}
 
    return TestRunner.displayResults('TestSuite.advantageList.calculateValues', assertions, testState);
 };

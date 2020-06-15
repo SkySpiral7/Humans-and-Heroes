@@ -27,10 +27,13 @@ class AdvantageList extends React.Component
 
    //region Single line function
    hasGodhoodAdvantages = () => {return this._derivedValues.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
+   hasSeizeInitiative = () => {return this._derivedValues.rankMap.containsKey('Seize Initiative');};
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
    isUsingPettyRules = () => {return this._derivedValues.pettyRulesApply;};
    getDerivedValues = () => {return JSON.clone(this._derivedValues);};  //rankMap is converted to json
    getEquipmentMaxTotal = () => {return this._derivedValues.equipmentMaxTotal;};
+   //TODO: switch to getRank and hasSeizeInitiative (all use advantageSection.getRankMap)
+   getRank = (name) => {return this._derivedValues.rankMap.get(name);};
    getRankMap = () => {return this._derivedValues.rankMap;};
    getTotal = () => {return this._derivedValues.total;};
    getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
@@ -317,11 +320,13 @@ class AdvantageList extends React.Component
          const advantageName = this._rowArray[i].getName();
          if (Data.Advantage[advantageName].isGodhood) this._derivedValues.usingGodhoodAdvantages = true;
          //do not connected with else since Petty Rules are godhood
-         if (advantageName === 'Your Petty Rules Don\'t Apply to Me') this._derivedValues.pettyRulesApply = false;
-         //this needs to be tracked because it changes minimum possible power level
-         if (Data.Advantage.mapThese.contains(advantageName)) this._derivedValues.rankMap.add(this._rowArray[i].getUniqueName(),
-            this._rowArray[i].getRank());
-         //add instead of set these since map is empty and there are no redundant rows (using unique name)
+         //petty rules needs to be tracked because it changes minimum possible power level
+         if ('Your Petty Rules Don\'t Apply to Me' === advantageName) this._derivedValues.pettyRulesApply = false;
+         if (Data.Advantage.mapThese.contains(advantageName))
+         {
+            //add instead of set these since map was empty and there are no redundant rows (using unique name)
+            this._derivedValues.rankMap.add(this._rowArray[i].getUniqueName(), this._rowArray[i].getRank());
+         }
          this._derivedValues.total += this._rowArray[i].getTotal();
       }
    };

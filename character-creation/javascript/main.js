@@ -310,7 +310,7 @@ function MainObject()
        var initiative = this.advantageSection.getRankMap().get('Improved Initiative');
        if(1 === activeRuleset.major) initiative *= 4;
        else if(2 === activeRuleset.major) initiative *= 2;
-       //else v3.0 initiative *1
+       //else v3.0 initiative *1 (defaults to 0)
        initiative += agilityScore;
 
        var stringUsed;

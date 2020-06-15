@@ -42,6 +42,10 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       return _this._derivedValues.usingGodhoodAdvantages;
     });
 
+    _defineProperty(_assertThisInitialized(_this), "hasSeizeInitiative", function () {
+      return _this._derivedValues.rankMap.containsKey('Seize Initiative');
+    });
+
     _defineProperty(_assertThisInitialized(_this), "isUsingPettyRules", function () {
       return _this._derivedValues.pettyRulesApply;
     });
@@ -52,6 +56,10 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "getEquipmentMaxTotal", function () {
       return _this._derivedValues.equipmentMaxTotal;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getRank", function (name) {
+      return _this._derivedValues.rankMap.get(name);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getRankMap", function () {
@@ -332,10 +340,14 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         var advantageName = _this._rowArray[i].getName();
 
         if (Data.Advantage[advantageName].isGodhood) _this._derivedValues.usingGodhoodAdvantages = true; //do not connected with else since Petty Rules are godhood
+        //petty rules needs to be tracked because it changes minimum possible power level
 
-        if (advantageName === 'Your Petty Rules Don\'t Apply to Me') _this._derivedValues.pettyRulesApply = false; //this needs to be tracked because it changes minimum possible power level
+        if ('Your Petty Rules Don\'t Apply to Me' === advantageName) _this._derivedValues.pettyRulesApply = false;
 
-        if (Data.Advantage.mapThese.contains(advantageName)) _this._derivedValues.rankMap.add(_this._rowArray[i].getUniqueName(), _this._rowArray[i].getRank()); //add instead of set these since map is empty and there are no redundant rows (using unique name)
+        if (Data.Advantage.mapThese.contains(advantageName)) {
+          //add instead of set these since map was empty and there are no redundant rows (using unique name)
+          _this._derivedValues.rankMap.add(_this._rowArray[i].getUniqueName(), _this._rowArray[i].getRank());
+        }
 
         _this._derivedValues.total += _this._rowArray[i].getTotal();
       }
