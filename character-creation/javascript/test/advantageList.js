@@ -160,6 +160,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 
    try
    {
+      //Set Godhood
       DomUtil.changeValue('Strength', 30);
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
