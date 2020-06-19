@@ -120,14 +120,33 @@ class AdvantageList extends React.Component
       so do nothing because there's nothing to do.
       power list clear does this for now (react should fix)*/
    };
-   /**Removes all rows then updates*/
+   /**Removes all rows except equipment. Equipment needs to stay as long as equipment section has points.*/
    clear = () =>
    {
-      this._rowArray = [];
-      this.setState(() =>
+      const equipmentIndex = 0;  //due to sorting it is always first
+      const equipAdvDoesExists = !this._rowArray.isEmpty() &&
+         'Equipment' === this._rowArray[equipmentIndex].getName();
+      if (equipAdvDoesExists)
       {
-         return {it: []};
-      });
+         //slice makes an array with only Equipment
+         this._rowArray = this._rowArray.slice(equipmentIndex, 1);
+         this.setState((state) =>
+         {
+            state.it = state.it.slice(equipmentIndex, 1);
+            //doesn't change state.main
+            return state;
+         });
+      }
+      else
+      {
+         this._rowArray = [];
+         this.setState((state) =>
+         {
+            state.it = [];
+            //doesn't change state.main
+            return state;
+         });
+      }
    };
    getIndexById = (rowId) =>
    {
@@ -195,9 +214,10 @@ class AdvantageList extends React.Component
          if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
          newState.push(advantageObject.getState());
       }
-      this.setState(() =>
+      this.setState((state) =>
       {
-         return {it: newState};
+         state.it = newState;
+         return state;
       });
    };
    /**Returns an array of json objects for this section's data*/

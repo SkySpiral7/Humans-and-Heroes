@@ -249,6 +249,32 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.calculateValues', assertions, testState);
 };
+TestSuite.advantageList.clear = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   const assertions = [];
+
+   try
+   {
+      DomUtil.changeValue('equipmentChoices0', 'Damage');
+      Main.advantageSection.clear();
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getState().it.length,
+         Description: 'clear doesn\'t remove equipment'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'clear doesn\'t remove equipment'});}
+
+   return TestRunner.displayResults('TestSuite.advantageList.clear', assertions, testState);
+};
 TestSuite.advantageList.load = function (testState = {})
 {
    TestRunner.clearResults(testState);

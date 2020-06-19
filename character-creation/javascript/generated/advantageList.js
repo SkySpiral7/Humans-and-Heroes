@@ -151,13 +151,28 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "clear", function () {
-      _this._rowArray = [];
+      var equipmentIndex = 0; //due to sorting it is always first
 
-      _this.setState(function () {
-        return {
-          it: []
-        };
-      });
+      var equipAdvDoesExists = !_this._rowArray.isEmpty() && 'Equipment' === _this._rowArray[equipmentIndex].getName();
+
+      if (equipAdvDoesExists) {
+        //slice makes an array with only Equipment
+        _this._rowArray = _this._rowArray.slice(equipmentIndex, 1);
+
+        _this.setState(function (state) {
+          state.it = state.it.slice(equipmentIndex, 1); //doesn't change state.main
+
+          return state;
+        });
+      } else {
+        _this._rowArray = [];
+
+        _this.setState(function (state) {
+          state.it = []; //doesn't change state.main
+
+          return state;
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "getIndexById", function (rowId) {
@@ -227,10 +242,9 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         newState.push(advantageObject.getState());
       }
 
-      _this.setState(function () {
-        return {
-          it: newState
-        };
+      _this.setState(function (state) {
+        state.it = newState;
+        return state;
       });
     });
 
