@@ -206,7 +206,10 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
       if (_this._rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       var newState = [];
-      var duplicateCheck = []; //keep the Equipment advantage if it exists
+      var duplicateCheck = [];
+      /*keep the Equipment advantage if it exists
+      if equipment section was loaded first then it would've created Equipment advantage so keep it
+      if equipment section was loaded second then it will add/remove Equipment advantage next*/
 
       if (1 === _this.state.it.length) newState.push(_this._rowArray[0].getState());
 
@@ -226,7 +229,11 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         if ('Equipment' === nameToLoad) continue; //allowed but ignored since it's always regenerated
         //doesn't use addRow for sake of bulk state change
 
-        var advantageObject = _this._addRowNoPush(nameToLoad);
+        var advantageObject = _this._addRowNoPush(nameToLoad); //leave value as default if not in json. advantageObject will make sure the value is valid
+
+
+        if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
+        if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text); //duplicateCheck after setting all values for the sake of getUniqueName
 
         if (duplicateCheck.contains(advantageObject.getUniqueName())) {
           Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because the advantage already exists. Increase the rank instead or use different text.');
@@ -235,10 +242,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
         _this._rowArray.push(advantageObject);
 
-        duplicateCheck.push(advantageObject.getUniqueName()); //leave value as default if not in json. advantageObject will make sure the value is valid
-
-        if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
-        if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
+        duplicateCheck.push(advantageObject.getUniqueName());
         newState.push(advantageObject.getState());
       }
 

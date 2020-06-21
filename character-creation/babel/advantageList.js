@@ -181,7 +181,9 @@ class AdvantageList extends React.Component
       if (this._rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       const newState = [];
       const duplicateCheck = [];
-      //keep the Equipment advantage if it exists
+      /*keep the Equipment advantage if it exists
+      if equipment section was loaded first then it would've created Equipment advantage so keep it
+      if equipment section was loaded second then it will add/remove Equipment advantage next*/
       if (1 === this.state.it.length) newState.push(this._rowArray[0].getState());
       for (let i = 0; i < jsonSection.length; i++)
       {
@@ -200,6 +202,12 @@ class AdvantageList extends React.Component
          if ('Equipment' === nameToLoad) continue;  //allowed but ignored since it's always regenerated
          //doesn't use addRow for sake of bulk state change
          const advantageObject = this._addRowNoPush(nameToLoad);
+
+         //leave value as default if not in json. advantageObject will make sure the value is valid
+         if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
+         if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
+
+         //duplicateCheck after setting all values for the sake of getUniqueName
          if (duplicateCheck.contains(advantageObject.getUniqueName()))
          {
             Main.messageUser('AdvantageList.load.duplicate', 'Advantage #' + (i + 1) + ': ' + nameToLoad +
@@ -208,10 +216,6 @@ class AdvantageList extends React.Component
          }
          this._rowArray.push(advantageObject);
          duplicateCheck.push(advantageObject.getUniqueName());
-
-         //leave value as default if not in json. advantageObject will make sure the value is valid
-         if (undefined !== jsonSection[i].rank) advantageObject.setRank(jsonSection[i].rank);
-         if (undefined !== jsonSection[i].text) advantageObject.setText(jsonSection[i].text);
          newState.push(advantageObject.getState());
       }
       this.setState((state) =>

@@ -57,26 +57,26 @@ TestSuite.powerList.load=function(testState={})
     var dataToLoad;
     var assertions=[];
 
-    Main.setRuleset(3,3);  //TODO: need modern tests
-
     try{
     dataToLoad = Loader.resetData();
-    dataToLoad.Powers.push({"effect":"Flight","text":"Text test","action":"Free","range":"Personal","duration":"Sustained",
-       "Modifiers":[{"name":"Selective"}], "rank":2});
+    dataToLoad.Powers.push({"effect":"Flight","text":"Text test","action":"Move","range":"Personal","duration":"Sustained",
+       "Modifiers":[{"name":"Other Rank Extra"}], "rank":2});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Happy Path: Effect'});
     assertions.push({Expected: true, Actual: Main.powerSection.getRow(1).isBlank(), Description: 'Happy Path: 1 row'});
     assertions.push({Expected: [], Actual: Messages.list, Description: 'Happy Path: no errors'});
     assertions.push({Expected: false, Actual: Main.powerSection.getRow(0).isBaseCostSettable(), Description: 'Happy Path: isBaseCostSettable'});
     assertions.push({Expected: 'Text test', Actual: Main.powerSection.getRow(0).getText(), Description: 'Happy Path: text'});
-    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Happy Path: default action'});
+    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRow(0).getAction(), Description: 'Happy Path: default action'});
     assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRow(0).getRange(), Description: 'Happy Path: default range'});
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRow(0).getDuration(), Description: 'Happy Path: default duration'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Happy Path: simple modifier'});
+    assertions.push({Expected: 'Other Rank Extra', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Happy Path: simple modifier'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Happy Path: no others modifiers'});
     assertions.push({Expected: 2, Actual: Main.powerSection.getRow(0).getRank(), Description: 'Happy Path: rank'});
     assertions.push({Expected: 6, Actual: Main.powerSection.getTotal(), Description: 'Happy Path: Make sure update was called'});
     } catch(e){assertions.push({Error: e, Description: 'Happy Path'});}
+
+    Main.setRuleset(3,3);  //TODO: need modern tests
 
     try{
     dataToLoad = Loader.resetData();
