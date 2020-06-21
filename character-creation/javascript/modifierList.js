@@ -2,6 +2,7 @@
 function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 {
    //private variable section:
+   //this could be just {} but I don't want this to be the only non-JSON place using objects as a map
    var autoModifierNameToRowIndex = new MapDefault({}, undefined);
    var rowArray = [];
    var rankTotal, flatTotal;  //undefined by default

@@ -1,5 +1,31 @@
 'use strict';
 TestSuite.advantageList = {};
+TestSuite.advantageList.addRow = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   try
+   {
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getState().it.length,
+         Description: 'removes Duplicate'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'removes Duplicate'});}
+
+   return TestRunner.displayResults('TestSuite.advantageList.addRow', assertions, testState);
+};
 TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 {
    /*if (undefined === testState) testState = {};  //TODO: have tests support IE 11?
@@ -269,6 +295,36 @@ TestSuite.advantageList.clear = function (testState = {})
    {assertions.push({Error: e, Description: 'clear doesn\'t remove equipment'});}
 
    return TestRunner.displayResults('TestSuite.advantageList.clear', assertions, testState);
+};
+TestSuite.advantageList.hasSeizeInitiative = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   try
+   {
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
+      assertions.push({
+         Expected: false,
+         Actual: Main.advantageSection.hasSeizeInitiative(),
+         Description: '!hasSeizeInitiative'
+      });
+      ReactUtil.changeValue('advantageChoices' + getId(1), 'Seize Initiative');
+      assertions.push({
+         Expected: true,
+         Actual: Main.advantageSection.hasSeizeInitiative(),
+         Description: 'hasSeizeInitiative'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'hasSeizeInitiative'});}
+
+   return TestRunner.displayResults('TestSuite.advantageList.hasSeizeInitiative', assertions, testState);
 };
 TestSuite.advantageList.load = function (testState = {})
 {

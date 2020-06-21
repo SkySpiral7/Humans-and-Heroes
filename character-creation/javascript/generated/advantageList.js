@@ -75,13 +75,14 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
+      //if coming from blank row's onChange then grab the added name from UI
       if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this._blankKey);
 
       var advantageObject = _this._addRowNoPush(newName);
 
       _this._rowArray.push(advantageObject);
 
-      if (_this._isDuplicate()) //requires duplicate to be in this.rowArray
+      if (_this._hasDuplicate()) //requires duplicate to be in this.rowArray
         {
           _this._rowArray.pop();
 
@@ -94,7 +95,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      if (false && _this._isDuplicate()) {
+      if (false && _this._hasDuplicate()) {
         //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
         _this._rowArray.pop();
 
@@ -294,7 +295,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
       var newName = _this._rowArray[updatedIndex].getName();
 
-      if (undefined === newName || _this._isDuplicate()) {
+      if (undefined === newName || _this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
         _this.setState(function (state) {
@@ -328,7 +329,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
       var newText = _this._rowArray[updatedIndex].getText();
 
-      if (_this._isDuplicate()) {
+      if (_this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
         _this.setState(function (state) {
@@ -371,7 +372,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_isDuplicate", function () {
+    _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
       return _this._rowArray.map(function (item) {
         return item.getUniqueName();
       }).some(function (val, id, array) {

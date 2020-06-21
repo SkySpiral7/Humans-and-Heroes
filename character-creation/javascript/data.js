@@ -19,7 +19,7 @@ Object.freeze(Data.SharedHtml);
 
 /**This method changes all of the data to the version passed in.
 The constructor of Main also calls this to initialize the rule dependant data.*/
-Data.change = function(version)
+Data.change = function(version)  //TODO: rename to set or something since it isn't always changing
 {
    Data.Advantage = {
       mapThese: ['Close Attack', 'Defensive Roll', 'Improved Critical', 'Improved Initiative', 'Ranged Attack', 'Seize Initiative'],
@@ -69,6 +69,7 @@ Data.change = function(version)
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
+      //could use just {} instead but that would be different than the rest and it won't matter once this function ends
       cost: new MapDefault({'Ammunition': -1, 'Aura': 2, 'Fragile': -1, 'Other Flat Flaw': -1, 'Other Rank Flaw': -1, 'System Dependent': -2,
          'Uncontrollable Entirely': -5, 'Uncontrollable Result': -1, 'Uncontrollable Target': -1}, undefined),
       defaultText: new MapDefault({'Activation': 'Action Required', 'Alternate Effect': 'To What', 'Alternate Resistance (Cost)': 'Name of Resistance',
@@ -355,6 +356,7 @@ Data.change = function(version)
          isGodhood: advantageLookup.godhoodNames.contains(nameToAdd),
          maxRank: advantageLookup.maxRank.get(nameToAdd)
       };
+      //TODO: remove defaultText when !hasText to avoid confusion. same for others.
    }
    function addPower(nameToAdd)
    {

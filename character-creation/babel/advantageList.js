@@ -43,11 +43,12 @@ class AdvantageList extends React.Component
    /**Creates a new row at the end of the array*/
    addRow = (newName) =>
    {
+      //if coming from blank row's onChange then grab the added name from UI
       if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + this._blankKey);
       const advantageObject = this._addRowNoPush(newName);
 
       this._rowArray.push(advantageObject);
-      if (this._isDuplicate())  //requires duplicate to be in this.rowArray
+      if (this._hasDuplicate())  //requires duplicate to be in this.rowArray
       {
          this._rowArray.pop();
          this.forceUpdate();  //to undo the DOM value
@@ -61,7 +62,7 @@ class AdvantageList extends React.Component
          });
       }
 
-      if (false && this._isDuplicate())
+      if (false && this._hasDuplicate())
       {
          //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
          this._rowArray.pop();
@@ -268,7 +269,7 @@ class AdvantageList extends React.Component
       const updatedIndex = this.getIndexById(updatedKey);
       const newName = this._rowArray[updatedIndex].getName();
 
-      if (undefined === newName || this._isDuplicate())
+      if (undefined === newName || this._hasDuplicate())
       {
          this._removeRow(updatedIndex);
       }
@@ -305,7 +306,7 @@ class AdvantageList extends React.Component
 
       const updatedIndex = this.getIndexById(updatedKey);
       const newText = this._rowArray[updatedIndex].getText();
-      if (this._isDuplicate())
+      if (this._hasDuplicate())
       {
          this._removeRow(updatedIndex);
       }
@@ -355,7 +356,7 @@ class AdvantageList extends React.Component
       }
    };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
-   _isDuplicate = () =>
+   _hasDuplicate = () =>
    {
       return this._rowArray.map((item) => item.getUniqueName())
       .some((val, id, array) =>
