@@ -633,3 +633,41 @@ TestSuite.advantageList.notifyDependent = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.notifyDependent', assertions, testState);
 };
+TestSuite.advantageList.save = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   assertions.push({
+      Expected: [],
+      Actual: Main.advantageSection.save(),
+      Description: 'save empty'
+   });
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Beginner\'s Luck');
+   ReactUtil.changeValue('advantageChoices' + getId(1), 'Diehard');
+   assertions.push({
+      Expected: [{name: 'Beginner\'s Luck'}, {name: 'Diehard'}],
+      Actual: Main.advantageSection.save(),
+      Description: 'save list'
+   });
+
+   return TestRunner.displayResults('TestSuite.advantageList.save', assertions, testState);
+};
+TestSuite.advantageList.setMainState = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   assertions.push({Expected: false, Actual: Main.advantageSection.getState().main.godhood, Description: 'before'});
+   DomUtil.changeValue('Strength', 20);
+   assertions.push({Expected: true, Actual: Main.advantageSection.getState().main.godhood, Description: 'after'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.setMainState', assertions, testState);
+};
+//TODO: sort based on main so it's easy to tell what's missing

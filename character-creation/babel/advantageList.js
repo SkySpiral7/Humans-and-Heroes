@@ -241,6 +241,7 @@ class AdvantageList extends React.Component
          return state;
       });
    };
+   /**Unused until safe or deleted*/
    updateByKey = (updatedKey) =>
    {
       if (updatedKey === this._blankKey)
