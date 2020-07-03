@@ -30,7 +30,8 @@ class AdvantageList extends React.Component
    hasSeizeInitiative = () => {return this._derivedValues.rankMap.containsKey('Seize Initiative');};
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
    isUsingPettyRules = () => {return this._derivedValues.pettyRulesApply;};
-   getDerivedValues = () => {return JSON.clone(this._derivedValues);};  //rankMap is converted to json
+   //rankMap is converted to json. defensive copy required since always same object
+   getDerivedValues = () => {return JSON.clone(this._derivedValues);};
    getEquipmentMaxTotal = () => {return this._derivedValues.equipmentMaxTotal;};
    /**the rank of the row with that unique name (if in map)*/
    getRankFromMap = (uniqueName) => {return this._derivedValues.rankMap.get(uniqueName);};
@@ -258,6 +259,7 @@ class AdvantageList extends React.Component
          return state;
       });
    };
+   //TODO: next test
    updateNameByKey = (updatedKey) =>
    {
       if (updatedKey === this._blankKey)
