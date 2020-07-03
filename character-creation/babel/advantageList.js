@@ -26,7 +26,7 @@ class AdvantageList extends React.Component
    }
 
    //region Single line function
-   hasGodhoodAdvantages = () => {return this._derivedValues.usingGodhoodAdvantages;};  //TODO: is this redundant with main?
+   hasGodhoodAdvantages = () => {return this._derivedValues.usingGodhoodAdvantages;};
    hasSeizeInitiative = () => {return this._derivedValues.rankMap.containsKey('Seize Initiative');};
    /**Returns false if the advantage "Your Petty Rules Don't Apply to Me" exists and true otherwise*/
    isUsingPettyRules = () => {return this._derivedValues.pettyRulesApply;};
@@ -259,7 +259,6 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-   //TODO: next test
    updateNameByKey = (updatedKey) =>
    {
       if (updatedKey === this._blankKey)
@@ -359,7 +358,8 @@ class AdvantageList extends React.Component
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
    _hasDuplicate = () =>
    {
-      return this._rowArray.map((item) => item.getUniqueName())
+      //TODO: would make more sense to take an arg of unique name before adding to state. or keep a running set of names
+      return this._rowArray.map(item => item.getUniqueName())
       .some((val, id, array) =>
       {
          return array.indexOf(val) !== id;
@@ -392,21 +392,21 @@ class AdvantageList extends React.Component
       this._calculateValues();
       this._notifyDependent();
       const generateGodHood = (this._derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
-      //must check both since they are not yet in sync
+      //must check both since state (although queued) may not be updated yet
 
       const elementArray = this._rowArray.map((advantageObject) =>
       {
-         return (<AdvantageRowHtml key={advantageObject.getKey()} myKey={advantageObject.getKey()}
+         return (<AdvantageRowHtml key={advantageObject.getKey()} keyCopy={advantageObject.getKey()}
                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
                                    generateGodHood={generateGodHood} />);
       });
-      elementArray.push(<AdvantageRowHtml key={this._blankKey} myKey={this._blankKey} state={{}} generateGodHood={generateGodHood} />);
+      elementArray.push(<AdvantageRowHtml key={this._blankKey} keyCopy={this._blankKey} state={{}} generateGodHood={generateGodHood} />);
       return elementArray;
    };
    //endregion private functions
 }
 
-//next items: retest list, add map
+//next items: fix/test godhood, add map
 
 function createAdvantageList(callback)
 {

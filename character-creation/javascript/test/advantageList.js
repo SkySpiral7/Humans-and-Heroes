@@ -479,6 +479,46 @@ TestSuite.advantageList.setMainState = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.setMainState', assertions, testState);
 };
+TestSuite.advantageList.updateNameByKey = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Select Advantage');
+   assertions.push({Expected: 0, Actual: Main.advantageSection.getState().it.length, Description: 'removed'});
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+   ReactUtil.changeValue('advantageChoices' + getId(1), 'Lucky');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate removed'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.updateNameByKey', assertions, testState);
+};
+TestSuite.advantageList.updateTextByKey = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
+   ReactUtil.changeValue('advantageText' + getId(0), 'Benefit 1');
+   ReactUtil.changeValue('advantageChoices' + getId(1), 'Benefit');
+   assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
+   ReactUtil.changeValue('advantageText' + getId(1), 'Benefit 1');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate removed'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.updateTextByKey', assertions, testState);
+};
 TestSuite.advantageList.calculateValues = function (testState = {})
 {
    TestRunner.clearResults(testState);
@@ -634,6 +674,25 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.calculateValues', assertions, testState);
 };
+TestSuite.advantageList.hasDuplicate = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices' + getId(1), 'Benefit');
+   ReactUtil.changeValue('advantageChoices' + getId(2), 'Lucky');
+   assertions.push({Expected: 3, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+   assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it.length, Description: 'non adjacent duplicate removed'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.hasDuplicate', assertions, testState);
+};
 TestSuite.advantageList.notifyDependent = function (testState = {})
 {
    TestRunner.clearResults(testState);
@@ -669,4 +728,37 @@ TestSuite.advantageList.notifyDependent = function (testState = {})
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().Offense[0].attackBonus, Description: 'calls updateOffense'});
 
    return TestRunner.displayResults('TestSuite.advantageList.notifyDependent', assertions, testState);
+};
+TestSuite.advantageList.render = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'pre: no godhood'});
+   DomUtil.changeValue('Strength', 30);
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'set godhood'});
+
+   //TODO: how to fix godhood sharing?
+   SelectUtil.changeText('powerChoices0', 'A God I Am');
+   DomUtil.changeValue('Strength', 0);
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'godhood?'});
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'ad godhood?'
+   });
+   assertions.push({
+      Expected: 'A God I Am',
+      Actual: Main.powerSection.getRow(0)
+      .getEffect(),
+      Description: 'pow state?'
+   });
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerChoices1', 'A God I Am'), Description: 'pow godhood?'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.render', assertions, testState);
 };

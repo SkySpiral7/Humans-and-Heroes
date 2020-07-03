@@ -2,7 +2,7 @@
 
 function AdvantageRowHtml(props)
 {
-   const state = props.state, derivedValues = props.derivedValues, key = props.myKey;
+   const state = props.state, derivedValues = props.derivedValues, key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
    /*
    values used:

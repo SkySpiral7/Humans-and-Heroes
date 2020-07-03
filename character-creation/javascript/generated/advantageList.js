@@ -370,6 +370,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
+      //TODO: would make more sense to take an arg of unique name before adding to state. or keep a running set of names
       return _this._rowArray.map(function (item) {
         return item.getUniqueName();
       }).some(function (val, id, array) {
@@ -404,12 +405,12 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
       _this._notifyDependent();
 
-      var generateGodHood = _this._derivedValues.usingGodhoodAdvantages || _this.state.main.godhood; //must check both since they are not yet in sync
+      var generateGodHood = _this._derivedValues.usingGodhoodAdvantages || _this.state.main.godhood; //must check both since state (although queued) may not be updated yet
 
       var elementArray = _this._rowArray.map(function (advantageObject) {
         return /*#__PURE__*/React.createElement(AdvantageRowHtml, {
           key: advantageObject.getKey(),
-          myKey: advantageObject.getKey(),
+          keyCopy: advantageObject.getKey(),
           state: advantageObject.getState(),
           derivedValues: advantageObject.getDerivedValues(),
           generateGodHood: generateGodHood
@@ -418,7 +419,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
       elementArray.push( /*#__PURE__*/React.createElement(AdvantageRowHtml, {
         key: _this._blankKey,
-        myKey: _this._blankKey,
+        keyCopy: _this._blankKey,
         state: {},
         generateGodHood: generateGodHood
       }));
@@ -449,7 +450,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: retest list, add map
+}(React.Component); //next items: fix/test godhood, add map
 
 
 function createAdvantageList(callback) {
