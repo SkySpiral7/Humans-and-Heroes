@@ -56,7 +56,8 @@ class AdvantageList extends React.Component
       }
       else
       {
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it.push(advantageObject.getState());
             return state;
@@ -67,7 +68,8 @@ class AdvantageList extends React.Component
       {
          //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
          this._rowArray.pop();
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it.pop();
             return state;
@@ -93,7 +95,8 @@ class AdvantageList extends React.Component
          if (this._rowArray[equipmentIndex].getRank() === newEquipmentRank) return;
 
          this._rowArray[equipmentIndex].setRank(newEquipmentRank);
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it[equipmentIndex].rank = newEquipmentRank;
             return state;
@@ -111,7 +114,8 @@ class AdvantageList extends React.Component
          //unshift = addFirst
          this._rowArray.unshift(advantageObject);
          advantageObject.setRank(newEquipmentRank);
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it.unshift(advantageObject.getState());
             return state;
@@ -132,7 +136,8 @@ class AdvantageList extends React.Component
       {
          //slice makes an array with only Equipment
          this._rowArray = this._rowArray.slice(equipmentIndex, 1);
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it = state.it.slice(equipmentIndex, 1);
             //doesn't change state.main
@@ -142,7 +147,8 @@ class AdvantageList extends React.Component
       else
       {
          this._rowArray = [];
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it = [];
             //doesn't change state.main
@@ -218,7 +224,8 @@ class AdvantageList extends React.Component
          duplicateCheck.push(advantageObject.getUniqueName());
          newState.push(advantageObject.getState());
       }
-      this.setState((state) =>
+      this._prerender();
+      this.setState(state =>
       {
          state.it = newState;
          return state;
@@ -236,7 +243,8 @@ class AdvantageList extends React.Component
    };
    setMainState = (value) =>
    {
-      this.setState((state) =>
+      this._prerender();  //TODO: resolvable circle. can it be non circle? probably requires fixing godhood
+      this.setState(state =>
       {
          state.main.godhood = value;
          return state;
@@ -252,7 +260,8 @@ class AdvantageList extends React.Component
 
       const updatedIndex = this.getIndexByKey(updatedKey);
       const newStateRow = this._rowArray[updatedIndex].getState();
-      this.setState((state) =>
+      this._prerender();
+      this.setState(state =>
       {
          //TODO: race conditions? merge issues? can this replace the others?
          state.it[updatedIndex] = newStateRow;
@@ -275,7 +284,8 @@ class AdvantageList extends React.Component
       }
       else
       {
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it[updatedIndex].name = newName;
             return state;
@@ -291,7 +301,8 @@ class AdvantageList extends React.Component
 
       const updatedIndex = this.getIndexByKey(updatedKey);
       const newRank = this._rowArray[updatedIndex].getRank();
-      this.setState((state) =>
+      this._prerender();
+      this.setState(state =>
       {
          state.it[updatedIndex].rank = newRank;
          return state;
@@ -312,7 +323,8 @@ class AdvantageList extends React.Component
       }
       else
       {
-         this.setState((state) =>
+         this._prerender();
+         this.setState(state =>
          {
             state.it[updatedIndex].text = newText;
             return state;
@@ -376,11 +388,20 @@ class AdvantageList extends React.Component
          Main.update();  //updates totals and power level
       }
    };
+   /**Call this after updating rowArray but before setState*/
+   _prerender = () =>
+   {
+      //don't update other's state in render
+      //can't update total because circle: CP -> PL -> T -> render
+      this._calculateValues();
+      this._notifyDependent();
+   };
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndex) =>
    {
       this._rowArray.remove(rowIndex);
-      this.setState((state) =>
+      this._prerender();
+      this.setState(state =>
       {
          state.it.remove(rowIndex);
          return state;
@@ -389,12 +410,10 @@ class AdvantageList extends React.Component
    //only called by react. so it's kinda private because no one else should call it
    render = () =>
    {
-      this._calculateValues();
-      this._notifyDependent();
       const generateGodHood = (this._derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
       //must check both since state (although queued) may not be updated yet
 
-      const elementArray = this._rowArray.map((advantageObject) =>
+      const elementArray = this._rowArray.map(advantageObject =>
       {
          return (<AdvantageRowHtml key={advantageObject.getKey()} keyCopy={advantageObject.getKey()}
                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
@@ -406,7 +425,7 @@ class AdvantageList extends React.Component
    //endregion private functions
 }
 
-//next items: fix/test godhood, add map
+//next items: fix/test godhood, is circle fixed?, add map
 
 function createAdvantageList(callback)
 {

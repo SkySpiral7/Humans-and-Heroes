@@ -89,6 +89,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
           _this.forceUpdate(); //to undo the DOM value
 
         } else {
+        _this._prerender();
+
         _this.setState(function (state) {
           state.it.push(advantageObject.getState());
           return state;
@@ -98,6 +100,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       if (false && _this._hasDuplicate()) {
         //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
         _this._rowArray.pop();
+
+        _this._prerender();
 
         _this.setState(function (state) {
           state.it.pop();
@@ -124,6 +128,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
         _this._rowArray[equipmentIndex].setRank(newEquipmentRank);
 
+        _this._prerender();
+
         _this.setState(function (state) {
           state.it[equipmentIndex].rank = newEquipmentRank;
           return state;
@@ -138,6 +144,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         _this._rowArray.unshift(advantageObject);
 
         advantageObject.setRank(newEquipmentRank);
+
+        _this._prerender();
 
         _this.setState(function (state) {
           state.it.unshift(advantageObject.getState());
@@ -160,6 +168,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         //slice makes an array with only Equipment
         _this._rowArray = _this._rowArray.slice(equipmentIndex, 1);
 
+        _this._prerender();
+
         _this.setState(function (state) {
           state.it = state.it.slice(equipmentIndex, 1); //doesn't change state.main
 
@@ -167,6 +177,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         });
       } else {
         _this._rowArray = [];
+
+        _this._prerender();
 
         _this.setState(function (state) {
           state.it = []; //doesn't change state.main
@@ -244,6 +256,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         newState.push(advantageObject.getState());
       }
 
+      _this._prerender();
+
       _this.setState(function (state) {
         state.it = newState;
         return state;
@@ -261,6 +275,9 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setMainState", function (value) {
+      _this._prerender(); //TODO: resolvable circle. can it be non circle? probably requires fixing godhood
+
+
       _this.setState(function (state) {
         state.main.godhood = value;
         return state;
@@ -275,6 +292,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newStateRow = _this._rowArray[updatedIndex].getState();
+
+      _this._prerender();
 
       _this.setState(function (state) {
         //TODO: race conditions? merge issues? can this replace the others?
@@ -295,6 +314,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       if (undefined === newName || _this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
+        _this._prerender();
+
         _this.setState(function (state) {
           state.it[updatedIndex].name = newName;
           return state;
@@ -310,6 +331,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newRank = _this._rowArray[updatedIndex].getRank();
+
+      _this._prerender();
 
       _this.setState(function (state) {
         state.it[updatedIndex].rank = newRank;
@@ -329,6 +352,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       if (_this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
+        _this._prerender();
+
         _this.setState(function (state) {
           state.it[updatedIndex].text = newText;
           return state;
@@ -391,8 +416,18 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
+      //don't update other's state in render
+      //can't update total because circle: CP -> PL -> T -> render
+      _this._calculateValues();
+
+      _this._notifyDependent();
+    });
+
     _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndex) {
       _this._rowArray.remove(rowIndex);
+
+      _this._prerender();
 
       _this.setState(function (state) {
         state.it.remove(rowIndex);
@@ -401,10 +436,6 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      _this._calculateValues();
-
-      _this._notifyDependent();
-
       var generateGodHood = _this._derivedValues.usingGodhoodAdvantages || _this.state.main.godhood; //must check both since state (although queued) may not be updated yet
 
       var elementArray = _this._rowArray.map(function (advantageObject) {
@@ -450,7 +481,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: fix/test godhood, add map
+}(React.Component); //next items: fix/test godhood, is circle fixed?, add map
 
 
 function createAdvantageList(callback) {

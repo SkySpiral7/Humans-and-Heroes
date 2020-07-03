@@ -744,6 +744,25 @@ TestSuite.advantageList.render = function (testState = {})
    assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'set godhood'});
 
    //TODO: how to fix godhood sharing?
+   /*
+   main.canUseGodhood {
+      if(user T min godhood) return true
+      if(PL godhood) return true
+      if(power godhood) return true
+      if(ad godhood) return true
+      return false
+   }
+   problem is rendering ad list requires updating state
+   maybe a setter for each and a previousGodhood
+   each setter: {
+      powerGodhood = value
+      if(canUseGodhood != previousGodhood) ad list.setMain
+      previousGodhood = canUseGodhood
+   }
+   technically I can just always setMain and not worry. that would be easier and about the same performance
+   would still need those setters
+   every render would ask main.canUseGodhood (or state copy) and not it's own state (needs to be total state not just section)
+   */
    SelectUtil.changeText('powerChoices0', 'A God I Am');
    DomUtil.changeValue('Strength', 0);
    assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'godhood?'});
