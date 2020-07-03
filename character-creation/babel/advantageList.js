@@ -149,8 +149,7 @@ class AdvantageList extends React.Component
          });
       }
    };
-   //TODO: rename getIndexById, getRowById to ByKey
-   getIndexById = (rowId) =>
+   getIndexByKey = (rowId) =>
    {
       if (rowId === this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index');
       //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
@@ -163,9 +162,9 @@ class AdvantageList extends React.Component
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-   getRowById = (rowId) =>
+   getRowByKey = (rowId) =>
    {
-      return this._rowArray[this.getIndexById(rowId)];
+      return this._rowArray[this.getIndexByKey(rowId)];
    };
    /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    indexToKey = (rowIndex) =>
@@ -249,7 +248,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      const updatedIndex = this.getIndexById(updatedKey);
+      const updatedIndex = this.getIndexByKey(updatedKey);
       const newStateRow = this._rowArray[updatedIndex].getState();
       this.setState((state) =>
       {
@@ -265,7 +264,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t update name of blank row ' + updatedKey);
       }
 
-      const updatedIndex = this.getIndexById(updatedKey);
+      const updatedIndex = this.getIndexByKey(updatedKey);
       const newName = this._rowArray[updatedIndex].getName();
 
       if (undefined === newName || this._hasDuplicate())
@@ -288,7 +287,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      const updatedIndex = this.getIndexById(updatedKey);
+      const updatedIndex = this.getIndexByKey(updatedKey);
       const newRank = this._rowArray[updatedIndex].getRank();
       this.setState((state) =>
       {
@@ -303,7 +302,7 @@ class AdvantageList extends React.Component
          throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      const updatedIndex = this.getIndexById(updatedKey);
+      const updatedIndex = this.getIndexByKey(updatedKey);
       const newText = this._rowArray[updatedIndex].getText();
       if (this._hasDuplicate())
       {

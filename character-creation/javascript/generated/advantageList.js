@@ -176,7 +176,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getIndexById", function (rowId) {
+    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (rowId) {
       if (rowId === _this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index'); //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
 
       for (var i = 0; i < _this._rowArray.length; i++) {
@@ -190,8 +190,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       return _this._rowArray[rowIndex];
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRowById", function (rowId) {
-      return _this._rowArray[_this.getIndexById(rowId)];
+    _defineProperty(_assertThisInitialized(_this), "getRowByKey", function (rowId) {
+      return _this._rowArray[_this.getIndexByKey(rowId)];
     });
 
     _defineProperty(_assertThisInitialized(_this), "indexToKey", function (rowIndex) {
@@ -272,7 +272,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      var updatedIndex = _this.getIndexById(updatedKey);
+      var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newStateRow = _this._rowArray[updatedIndex].getState();
 
@@ -288,7 +288,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         throw new Error('Can\'t update name of blank row ' + updatedKey);
       }
 
-      var updatedIndex = _this.getIndexById(updatedKey);
+      var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newName = _this._rowArray[updatedIndex].getName();
 
@@ -307,7 +307,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      var updatedIndex = _this.getIndexById(updatedKey);
+      var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newRank = _this._rowArray[updatedIndex].getRank();
 
@@ -322,7 +322,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         throw new Error('Can\'t update blank row ' + updatedKey);
       }
 
-      var updatedIndex = _this.getIndexById(updatedKey);
+      var updatedIndex = _this.getIndexByKey(updatedKey);
 
       var newText = _this._rowArray[updatedIndex].getText();
 

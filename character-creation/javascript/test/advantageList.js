@@ -613,9 +613,17 @@ TestSuite.advantageList.notifyDependent = function (testState = {})
 
    Main.clear();
    assertions.push({Expected: 0, Actual: Main.getDerivedValues().characterPointsSpent, Description: 'Before: total'});
-   assertions.push({Expected: 0, Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus, Description: 'Before Defensive Roll'});
+   assertions.push({
+      Expected: 0,
+      Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus,
+      Description: 'Before Defensive Roll'
+   });
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Defensive Roll');
-   assertions.push({Expected: 1, Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus, Description: 'calls defenseSection.calculateValues'});
+   assertions.push({
+      Expected: 1,
+      Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus,
+      Description: 'calls defenseSection.calculateValues'
+   });
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().characterPointsSpent, Description: 'calls Main.update'});
 
    Main.setRuleset(1, 0);

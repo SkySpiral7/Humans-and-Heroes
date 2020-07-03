@@ -39,7 +39,7 @@ function AdvantageRowHtml(props) {
         };
       } else {
       onChange = function onChange() {
-        Main.advantageSection.getRowById(key).select();
+        Main.advantageSection.getRowByKey(key).select();
       };
     }
 
@@ -64,7 +64,7 @@ function AdvantageRowHtml(props) {
           size: "1",
           id: 'advantageRank' + key,
           onChange: function onChange() {
-            Main.advantageSection.getRowById(key).changeRank();
+            Main.advantageSection.getRowByKey(key).changeRank();
           },
           value: state.rank
         }));
@@ -76,7 +76,7 @@ function AdvantageRowHtml(props) {
           type: "text",
           id: 'advantageText' + key,
           onChange: function onChange() {
-            Main.advantageSection.getRowById(key).changeText();
+            Main.advantageSection.getRowByKey(key).changeText();
           },
           value: state.text,
           style: {

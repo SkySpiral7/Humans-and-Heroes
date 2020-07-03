@@ -2,8 +2,8 @@
 
 function AdvantageRowHtml(props)
 {
-   const state=props.state, derivedValues=props.derivedValues, key=props.myKey;
-   const displayGodhood=props.generateGodHood;
+   const state = props.state, derivedValues = props.derivedValues, key = props.myKey;
+   const displayGodhood = props.generateGodHood;
    /*
    values used:
    state: {name, rank, text};
@@ -35,7 +35,7 @@ function AdvantageRowHtml(props)
       {
          onChange = () =>
          {
-            Main.advantageSection.getRowById(key)
+            Main.advantageSection.getRowByKey(key)
             .select();
          };
       }
@@ -55,7 +55,7 @@ function AdvantageRowHtml(props)
          <input type="text" size="1" id={'advantageRank' + key}
                 onChange={() =>
                 {
-                   Main.advantageSection.getRowById(key)
+                   Main.advantageSection.getRowByKey(key)
                    .changeRank();
                 }} value={state.rank} /></label>;
 
@@ -65,7 +65,7 @@ function AdvantageRowHtml(props)
             <input type="text" id={'advantageText' + key}
                    onChange={() =>
                    {
-                      Main.advantageSection.getRowById(key)
+                      Main.advantageSection.getRowByKey(key)
                       .changeText();
                    }} value={state.text} style={{width: '100%'}} /></div>);
       }
