@@ -22,7 +22,7 @@ function MainObject()
    this.getActiveRuleset=function(){return activeRuleset.clone();};
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
    this.getTranscendence=function(){return transcendence;};
-   //clone is needed for tests
+   //clone is needed for tests since these are updated without a new object
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
    /**This sets the code-box with the saved text.*/
    this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
@@ -307,16 +307,18 @@ function MainObject()
    this.updateInitiative=function()
    {
        var agilityScore = this.abilitySection.getByName('Agility').getZeroedValue();  //used zeroed because even absent agility has initiative
-       var initiative = this.advantageSection.getRankFromMap('Improved Initiative');
-       if(1 === activeRuleset.major) initiative *= 4;
-       else if(2 === activeRuleset.major) initiative *= 2;
+       derivedValues.Initiative = this.advantageSection.getRankFromMap('Improved Initiative');
+       if(1 === activeRuleset.major) derivedValues.Initiative *= 4;
+       else if(2 === activeRuleset.major) derivedValues.Initiative *= 2;
        //else v3.0 initiative *1 (defaults to 0)
-       initiative += agilityScore;
+       derivedValues.Initiative += agilityScore;
 
        var stringUsed;
-       if(initiative >= 0) stringUsed = '+' + initiative;
-       else stringUsed = initiative;
-       if(this.advantageSection.hasSeizeInitiative()) stringUsed += ' with Seize Initiative';
+       if(derivedValues.Initiative >= 0) stringUsed = '+' + derivedValues.Initiative;
+       else stringUsed = '' + derivedValues.Initiative;
+       //derivedValues.hasSeizeInitiative exists for tests and so in future UI can use it
+       derivedValues.hasSeizeInitiative = this.advantageSection.hasSeizeInitiative();
+       if(derivedValues.hasSeizeInitiative) stringUsed += ' with Seize Initiative';
        document.getElementById('initiative').innerHTML = stringUsed;
    };
    /**Calculates and creates the offense section of the document.*/
@@ -602,6 +604,8 @@ function MainObject()
       derivedValues = {
          characterPointsSpent: -Infinity,
          powerLevel: -Infinity,
+         Initiative: 0,
+         hasSeizeInitiative: false,
          Offense: []
       };
    };
@@ -627,8 +631,11 @@ function MainObject()
    this._constructor();
 }
 //static:
-MainObject.keyCount = 0;
-MainObject.generateKey=function(){return ++MainObject.keyCount;};
+/**Value (should be private) is the previous key used.
+ * First key used is 1 in contrast to the indexed ones that start at 0.
+ * This is used to keep track but the keys are actually opaque strings.*/
+MainObject._keyCount = 0;
+MainObject.generateKey=function(){++MainObject._keyCount; return '' + MainObject._keyCount;};
 
 /*Map of objects that update others:
 everything (except modifier) calls Main.update();  //updates totals and power level

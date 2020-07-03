@@ -14,6 +14,7 @@ function DefenseList()
    //getByName is not validated because I want an error thrown so I can debug
    /**Get the defense row based on its name. Will return undefined if not found so that an error will occur.*/
    this.getByName=function(defenseName){return defenseArray[Data.Defense.names.indexOf(defenseName)];};
+   //doesn't need to be cloned because calculateValues (the only write) uses new object each time
    this.getDerivedValues=function(){return derivedValues;};
    /**Get the total toughness including defensive roll*/
    this.getMaxToughness=function(){return toughnessMaxValue;};

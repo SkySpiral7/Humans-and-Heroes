@@ -58,7 +58,6 @@ TestSuite.defenseList.calculateValues=function(testState={})
    assertions.push({Expected: '4', Actual: document.getElementById('Will-final').innerHTML, Description: actionTaken+': Will defense bonus says 4'});
    assertions.push({Expected: 4, Actual: Main.defenseSection.getByName('Will').getTotalBonus(), Description: actionTaken+': And it is 4'});
    assertions.push({Expected: 1, Actual: Main.defenseSection.getTotal(), Description: actionTaken+': The defense section total cost is 1'});
-   Main.setRuleset(2, 7);
 
    return TestRunner.displayResults('TestSuite.defenseList.calculateValues', assertions, testState);
 };

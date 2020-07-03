@@ -306,23 +306,9 @@ TestSuite.advantageList.hasSeizeInitiative = function (testState = {})
       return Main.advantageSection.indexToKey(index);
    }
 
-   try
-   {
-      ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
-      assertions.push({
-         Expected: false,
-         Actual: Main.advantageSection.hasSeizeInitiative(),
-         Description: '!hasSeizeInitiative'
-      });
-      ReactUtil.changeValue('advantageChoices' + getId(1), 'Seize Initiative');
-      assertions.push({
-         Expected: true,
-         Actual: Main.advantageSection.hasSeizeInitiative(),
-         Description: 'hasSeizeInitiative'
-      });
-   }
-   catch (e)
-   {assertions.push({Error: e, Description: 'hasSeizeInitiative'});}
+   assertions.push({Expected: false, Actual: Main.getDerivedValues().hasSeizeInitiative, Description: '!hasSeizeInitiative'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Seize Initiative');
+   assertions.push({Expected: true, Actual: Main.getDerivedValues().hasSeizeInitiative, Description: 'hasSeizeInitiative'});
 
    return TestRunner.displayResults('TestSuite.advantageList.hasSeizeInitiative', assertions, testState);
 };
@@ -610,4 +596,32 @@ TestSuite.advantageList.load = function (testState = {})
    {assertions.push({Error: e, Description: 'defaults to rank 1'});}
 
    return TestRunner.displayResults('TestSuite.advantageList.load', assertions, testState);
+};
+TestSuite.advantageList.notifyDependent = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().Initiative, Description: 'Before Improved Initiative'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Improved Initiative');
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().Initiative, Description: 'calls updateInitiative'});
+
+   Main.clear();
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().characterPointsSpent, Description: 'Before: total'});
+   assertions.push({Expected: 0, Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus, Description: 'Before Defensive Roll'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Defensive Roll');
+   assertions.push({Expected: 1, Actual: Main.defenseSection.getDerivedValues().Toughness.totalBonus, Description: 'calls defenseSection.calculateValues'});
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().characterPointsSpent, Description: 'calls Main.update'});
+
+   Main.setRuleset(1, 0);
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().Offense[0].attackBonus, Description: 'Before Close Attack'});
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Close Attack');
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().Offense[0].attackBonus, Description: 'calls updateOffense'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.notifyDependent', assertions, testState);
 };

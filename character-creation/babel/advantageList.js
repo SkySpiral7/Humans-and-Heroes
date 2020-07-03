@@ -149,14 +149,11 @@ class AdvantageList extends React.Component
          });
       }
    };
+   //TODO: rename getIndexById, getRowById to ByKey
    getIndexById = (rowId) =>
    {
-      if (rowId === this._blankKey)
-      {
-         //TODO: remove these throws since they are asserts until this class is re-tested
-         throw new Error('Can\'t get blank row ' + rowId);
-      }
-      //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
+      if (rowId === this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index');
+      //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
       for (let i = 0; i < this._rowArray.length; i++)
       {
          if (this._rowArray[i].getKey() === rowId) return i;
@@ -170,6 +167,7 @@ class AdvantageList extends React.Component
    {
       return this._rowArray[this.getIndexById(rowId)];
    };
+   /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    indexToKey = (rowIndex) =>
    {
       if (rowIndex === this._rowArray.length) return this._blankKey;
@@ -179,6 +177,7 @@ class AdvantageList extends React.Component
    load = (jsonSection) =>
    {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
+      //TODO: remove these throws since they are asserts until this class is re-tested
       if (this._rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       const newState = [];
       const duplicateCheck = [];
@@ -369,9 +368,10 @@ class AdvantageList extends React.Component
    {
       if (typeof(Main) !== 'undefined')  //happens during main's creation
       {
-         Main.updateInitiative();
-         Main.updateOffense();  //some 1.0 advantages might affect this so it needs to be updated
-         Main.defenseSection.calculateValues();
+         Main.updateInitiative();  //Improved/Seize Initiative
+         Main.updateOffense();  //some 1.0 advantages affect this so it needs to be updated
+         Main.defenseSection.calculateValues();  //Defensive Roll
+         Main.update();  //updates totals and power level
       }
    };
    /**Removes the row from the array and updates the index of all others in the list.*/

@@ -177,11 +177,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "getIndexById", function (rowId) {
-      if (rowId === _this._blankKey) {
-        //TODO: remove these throws since they are asserts until this class is re-tested
-        throw new Error('Can\'t get blank row ' + rowId);
-      } //TODO: could speed up with a map<uuid, index> that reindexes on equipment and remove
-
+      if (rowId === _this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index'); //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
 
       for (var i = 0; i < _this._rowArray.length; i++) {
         if (_this._rowArray[i].getKey() === rowId) return i;
@@ -205,6 +201,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
+      //TODO: remove these throws since they are asserts until this class is re-tested
       if (_this._rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
       var newState = [];
       var duplicateCheck = [];
@@ -383,10 +380,13 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "_notifyDependent", function () {
       if (typeof Main !== 'undefined') //happens during main's creation
         {
-          Main.updateInitiative();
-          Main.updateOffense(); //some 1.0 advantages might affect this so it needs to be updated
+          Main.updateInitiative(); //Improved/Seize Initiative
 
-          Main.defenseSection.calculateValues();
+          Main.updateOffense(); //some 1.0 advantages affect this so it needs to be updated
+
+          Main.defenseSection.calculateValues(); //Defensive Roll
+
+          Main.update(); //updates totals and power level
         }
     });
 
