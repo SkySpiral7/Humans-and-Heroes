@@ -188,41 +188,6 @@ TestSuite.main.changeTranscendence=function(testState={})
 
    return TestRunner.displayResults('TestSuite.main.changeTranscendence', assertions, testState);
 };
-TestSuite.main.canUseGodhood = function (testState = {})
-{
-   TestRunner.clearResults(testState);
-   const assertions = [];
-
-   function getAdId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'initial'});
-
-   DomUtil.changeValue('transcendence', 1);
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'userTranscendence'});
-   DomUtil.changeValue('transcendence', -1);
-   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'userTranscendence -1'});
-   DomUtil.changeValue('transcendence', 0);
-   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'userTranscendence 0'});
-
-   DomUtil.changeValue('Strength', 200);
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'powerLevelTranscendence'});
-
-   SelectUtil.changeText('powerChoices0', 'A God I Am');
-   DomUtil.changeValue('Strength', 0);
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'powerGodhood'});
-
-   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Beyond Mortal');
-   Main.powerSection.clear();
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'advantageGodhood'});
-
-   Main.advantageSection.clear();
-   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'final'});
-
-   return TestRunner.displayResults('TestSuite.main.canUseGodhood', assertions, testState);
-};
 TestSuite.main.clear=function(testState={})
 {
    TestRunner.clearResults(testState);
@@ -610,11 +575,18 @@ TestSuite.main.updateTranscendence = function (testState = {})
 
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
    DomUtil.changeValue('Strength', 0);
-   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'canUseGodhood used for min T'});
+   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'advantageGodhood used for min T'});
 
+   SelectUtil.changeText('powerChoices0', 'A God I Am');
    Main.advantageSection.clear();
+   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'powerGodhood used for min T'});
+   Main.powerSection.clear();
+
    assertions.push({Expected: -1, Actual: Main.getTranscendence(), Description: 'user T not forgotten'});
    assertions.push({Expected: '-1', Actual: document.getElementById('transcendence').value, Description: 'DOM updated'});
+
+   DomUtil.changeValue('transcendence', 3);
+   assertions.push({Expected: 3, Actual: Main.getTranscendence(), Description: 'user T can be high'});
 
    Main.clear();
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power no T'});

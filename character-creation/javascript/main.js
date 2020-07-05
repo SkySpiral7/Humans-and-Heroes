@@ -19,6 +19,7 @@ function MainObject()
    //endregion private variable
 
    //region Single line function
+   this.canUseGodhood=function(){return transcendence > 0;};
    //does a defensive copy so that yoda conditions function
    this.getActiveRuleset=function(){return activeRuleset.clone();};
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
@@ -76,17 +77,6 @@ function MainObject()
    //endregion Onchange
 
    //region public functions
-   this.canUseGodhood=function()
-   {
-      //TODO: actually this logic should set T but canUse should only read T
-      //which is why test is weak for now
-      if (1 === activeRuleset.major) return false;
-      if (userTranscendence > 0) return true;
-      if (powerLevelTranscendence > 0) return true;
-      if (powerGodhood) return true;
-      if (advantageGodhood) return true;
-      return false;
-   };
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
@@ -476,15 +466,15 @@ function MainObject()
       do nothing to keep everything in the T 0 state (for all vars)*/
       if (1 === activeRuleset.major) return;
 
-      var minTranscendence = -1;  //PLT has min 0 so min T being -1 is for show
-      var currentGodhood = this.canUseGodhood();
-      if (currentGodhood) minTranscendence = 1;
-      transcendence = Math.max(minTranscendence, userTranscendence, powerLevelTranscendence);
+      var inUseTranscendence = 0;
+      if (advantageGodhood || powerGodhood) inUseTranscendence = 1;
+      transcendence = Math.max(inUseTranscendence, userTranscendence, powerLevelTranscendence);
       //only way to get T -1 is by request. need to set here because PL T is min 0
       if(-1 === userTranscendence && 0 === transcendence) transcendence = -1;
 
       document.getElementById('transcendence').value = transcendence;
 
+      var currentGodhood = this.canUseGodhood();
       if(previousGodhood === currentGodhood) return;  //same transcendence so don't need to regenerate (also ad would be infinite recur)
       previousGodhood = currentGodhood;
       //transcendence changed so update these
