@@ -9,8 +9,8 @@ TestSuite.main.changeRuleset=function(testState={})
     var latestRuleString = Main.getLatestRuleset().toString();
 
     DomUtil.changeValue('ruleset', latestRuleString);
-    //unfortunately I can't test the default values because by test runner resets the version every test
-    //it needs to do this so that a test for 1.0 doesn't mess up a test for 2.7
+    //unfortunately I can't test the default values because test runner resets the version every test
+    //it needs to do this so that a test for 1.0 doesn't mess up the next test using latest
     //assertions.push({Expected: latestRuleString, Actual: Main.getActiveRuleset().toString(), Description: 'Default ActiveRuleset is LatestRuleset'});
     //assertions.push({Expected: latestRuleString, Actual: rulesetElement.value, Description: 'Default value of element'});
 
@@ -136,18 +136,107 @@ TestSuite.main.changeRuleset=function(testState={})
 TestSuite.main.changeTranscendence=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   const assertions = [];
 
-   //ADD TESTS
+   assertions.push({
+      Expected: '0',
+      Actual: document.getElementById('transcendence').value,
+      Description: 'initial DOM T 0'
+   });
+   assertions.push({
+      Expected: 0,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'initial user T 0'
+   });
+
+   DomUtil.changeValue('transcendence', -5);
+   assertions.push({
+      Expected: -1,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'user T min -1'
+   });
+   DomUtil.changeValue('transcendence', 500);
+   assertions.push({
+      Expected: 500,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'user T no max'
+   });
+   DomUtil.changeValue('transcendence', 'blah');
+   assertions.push({
+      Expected: 0,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'user T default 0'
+   });
+
+   Main.setRuleset(1, 0);
+   assertions.push({
+      Expected: 0,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'before user Transcendence'
+   });
+   DomUtil.changeValue('transcendence', 5);
+   assertions.push({
+      Expected: '0',
+      Actual: document.getElementById('transcendence').value,
+      Description: 'DOM set back'
+   });
+   assertions.push({
+      Expected: 0,
+      Actual: Main.getEveryVar().userTranscendence,
+      Description: 'after user Transcendence'
+   });
 
    return TestRunner.displayResults('TestSuite.main.changeTranscendence', assertions, testState);
+};
+TestSuite.main.canUseGodhood = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getAdId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'initial'});
+
+   DomUtil.changeValue('transcendence', 1);
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'userTranscendence'});
+   DomUtil.changeValue('transcendence', -1);
+   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'userTranscendence -1'});
+   DomUtil.changeValue('transcendence', 0);
+   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'userTranscendence 0'});
+
+   DomUtil.changeValue('Strength', 200);
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'powerLevelTranscendence'});
+
+   SelectUtil.changeText('powerChoices0', 'A God I Am');
+   DomUtil.changeValue('Strength', 0);
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'powerGodhood'});
+
+   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Beyond Mortal');
+   Main.powerSection.clear();
+   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'advantageGodhood'});
+
+   Main.advantageSection.clear();
+   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'final'});
+
+   return TestRunner.displayResults('TestSuite.main.canUseGodhood', assertions, testState);
 };
 TestSuite.main.clear=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   const assertions = [];
 
-   //ADD TESTS
+   function getAdId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   DomUtil.changeValue('transcendence', 1);
+   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Beyond Mortal');
+   Main.clear();
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('advantageChoices' + getAdId(0), 'Beyond Mortal'), Description: 'reset ad state'});
 
    return TestRunner.displayResults('TestSuite.main.clear', assertions, testState);
 };
@@ -223,7 +312,7 @@ TestSuite.main.getProtectionTotal=function(testState={})
 TestSuite.main.update=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions = [];
+   const assertions = [];
 
    function getAdId(index)
    {
@@ -248,7 +337,8 @@ TestSuite.main.update=function(testState={})
    DomUtil.changeValue('Fighting', -5);
    DomUtil.changeValue('Agility', -5);
    DomUtil.changeValue('Dexterity', -5);
-   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '-35 CP = PL 1'});
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '-30 CP = PL 1'});
+   assertions.push({Expected: 0, Actual: Main.getEveryVar().powerLevelTranscendence, Description: '-CP but PL T min 0'});
    Main.abilitySection.clear();
 
    SelectUtil.changeText('powerChoices0', 'Feature');
@@ -501,6 +591,57 @@ TestSuite.main.updateOffense=function(testState={})
 
    return TestRunner.displayResults('TestSuite.main.updateOffense', assertions, testState);
 };
+TestSuite.main.updateTranscendence = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   function getId(index)
+   {
+      return Main.advantageSection.indexToKey(index);
+   }
+
+   DomUtil.changeValue('transcendence', -1);
+   assertions.push({Expected: -1, Actual: Main.getTranscendence(), Description: 'set T -1'});
+
+   DomUtil.changeValue('Strength', 20);
+   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'PL set T 1'});
+   assertions.push({Expected: '1', Actual: document.getElementById('transcendence').value, Description: 'DOM updated'});
+
+   ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
+   DomUtil.changeValue('Strength', 0);
+   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'canUseGodhood used for min T'});
+
+   Main.advantageSection.clear();
+   assertions.push({Expected: -1, Actual: Main.getTranscendence(), Description: 'user T not forgotten'});
+   assertions.push({Expected: '-1', Actual: document.getElementById('transcendence').value, Description: 'DOM updated'});
+
+   Main.clear();
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power no T'});
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'ad no T'
+   });
+
+   DomUtil.changeValue('transcendence', 1);
+   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T refresh'});
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'ad T refresh'
+   });
+
+   DomUtil.changeValue('transcendence', 0);
+   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T reset'});
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Description: 'ad T reset'
+   });
+
+   return TestRunner.displayResults('TestSuite.main.updateTranscendence', assertions, testState);
+};
 TestSuite.main._calculatePowerLevelLimitations=function(testState={})
 {
    TestRunner.clearResults(testState);
@@ -720,7 +861,8 @@ TestSuite.main.load=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var assertions=[], dataToLoad;
+   const assertions = [];
+   let dataToLoad;
 
    DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
@@ -740,9 +882,17 @@ TestSuite.main.load=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true again when loading'});
 
+   dataToLoad = Loader.resetData();
+   dataToLoad.Hero.transcendence = -1;
+   dataToLoad.Abilities.Strength = 200;
+   Loader.sendData(dataToLoad);
+   assertions.push({Expected: 10, Actual: Main.getTranscendence(), Description: 'loads T but determines real T'});
+   Main.abilitySection.clear();
+   assertions.push({Expected: -1, Actual: Main.getTranscendence(), Description: 'uses loaded T as user T'});
+
    //ADD TESTS. currently only tests amLoading
 
-   return TestRunner.displayResults('TestSuite.main.loadFromString', assertions, testState);
+   return TestRunner.displayResults('TestSuite.main.load', assertions, testState);
 };
 TestSuite.main.loadFromString=function(testState={})
 {

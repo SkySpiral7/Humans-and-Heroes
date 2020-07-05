@@ -20,12 +20,6 @@ TestSuite.test.example = function (testState = {})
    });
 
    Main.setRuleset(2, 7);
-   assertions.push({
-      Expected: true,
-      Actual: Main.advantageSection.getRow(0)
-      .isBlank(),
-      Description: 'Equipment Row is not created'
-   });
    ReactUtil.changeValue('powerChoices' + getId(0), 'Feature');
    SelectUtil.changeText('powerChoices0', 'Feature');
    DomUtil.changeValue('equipmentRank0', 5);

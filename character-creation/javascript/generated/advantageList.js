@@ -275,9 +275,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setMainState", function (value) {
-      _this._prerender(); //TODO: resolvable circle. can it be non circle? probably requires fixing godhood
-
-
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render
+      plus calling prerender causes a resolvable circle*/
       _this.setState(function (state) {
         state.main.godhood = value;
         return state;
@@ -392,6 +391,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
         _this._derivedValues.total += _this._rowArray[i].getTotal();
       }
+
+      Main.setAdvantageGodhood(_this._derivedValues.usingGodhoodAdvantages);
     });
 
     _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
@@ -436,7 +437,9 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var generateGodHood = _this._derivedValues.usingGodhoodAdvantages || _this.state.main.godhood; //must check both since state (although queued) may not be updated yet
+      /*don't check this.hasGodhoodAdvantages because global includes that
+      don't call a main method for this because render should be pure*/
+      var generateGodHood = _this.state.main.godhood;
 
       var elementArray = _this._rowArray.map(function (advantageObject) {
         return /*#__PURE__*/React.createElement(AdvantageRowHtml, {
@@ -446,7 +449,8 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
           derivedValues: advantageObject.getDerivedValues(),
           generateGodHood: generateGodHood
         });
-      });
+      }); //derivedValues is undefined and unused for blank
+
 
       elementArray.push( /*#__PURE__*/React.createElement(AdvantageRowHtml, {
         key: _this._blankKey,
@@ -481,7 +485,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: fix/test godhood, is circle fixed?, add map
+}(React.Component); //next items: test godhood, add map
 
 
 function createAdvantageList(callback) {

@@ -110,9 +110,10 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
       idFor('Choices') + '" onChange="' + onChangeFor('select') + '">';
    htmlString += '<option>Select Power</option>';
    var displayGodhood = (undefined !== Main && props.powerListParent !== Main.equipmentSection &&
-      (Main.powerSection.isUsingGodhoodPowers() || Main.canUseGodhood()));
-   //equipment can't be god-like so I only need to check power section's switch
-   //must check both hasGodhoodAdvantages and canUseGodhood since they are not yet in sync
+      Main.canUseGodhood());
+   /*displayGodhood is false during main's constructor
+   equipment can't be god-like so exclude it
+   don't check isUsingGodhoodPowers because global includes that (more relevant with react)*/
    for (i = 0; i < Data.Power.names.length; ++i)
    {
       if (displayGodhood || !Data.Power[Data.Power.names[i]].isGodhood)

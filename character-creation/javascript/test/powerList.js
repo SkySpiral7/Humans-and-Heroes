@@ -5,27 +5,34 @@ TestSuite.powerList.calculateValues=function(testState={})
    TestRunner.clearResults(testState);
    var assertions = [];
 
-   function getActual()
+   function getProtectionRank()
    {
       return Main.powerSection.getProtectionRankTotal();
    }
 
-   assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
+   assertions.push({Expected: null, Actual: getProtectionRank(), Description: 'Protection default: null'});
 
    SelectUtil.changeText('powerChoices0', 'Protection');
    DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
-   assertions.push({Expected: 1, Actual: getActual(), Description: 'picks up protection'});
+   assertions.push({Expected: 1, Actual: getProtectionRank(), Description: 'picks up protection'});
 
    SelectUtil.changeText('powerChoices1', 'Protection');
    DomUtil.changeValue('powerRank1', 2);
-   assertions.push({Expected: 2, Actual: getActual(), Description: 'protection doesn\'t stack'});
+   assertions.push({Expected: 2, Actual: getProtectionRank(), Description: 'protection doesn\'t stack'});
+   Main.clear();
+
+   DomUtil.changeValue('transcendence', 1);
+   SelectUtil.changeText('powerChoices0', 'A God I Am');
+   assertions.push({Expected: true, Actual: Main.getEveryVar().powerGodhood, Description: 'sets powerGodhood to true'});
+   SelectUtil.changeText('powerChoices0', 'Create');
+   assertions.push({Expected: false, Actual: Main.getEveryVar().powerGodhood, Description: 'sets powerGodhood to false'});
 
    Main.setRuleset(1, 0);
    SelectUtil.changeText('powerChoices0', 'Protection');
    DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
    SelectUtil.changeText('powerChoices1', 'Protection');
    DomUtil.changeValue('powerRank1', 2);
-   assertions.push({Expected: 3, Actual: getActual(), Description: 'v1: protection stacks'});
+   assertions.push({Expected: 3, Actual: getProtectionRank(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.powerList.calculateValues', assertions, testState);
 };

@@ -126,7 +126,9 @@ class AdvantageList extends React.Component
       so do nothing because there's nothing to do.
       power list clear does this for now (react should fix)*/
    };
-   /**Removes all rows except equipment. Equipment needs to stay as long as equipment section has points.*/
+   /**Removes all rows except equipment (main.godhood untouched too).
+    * Equipment needs to stay as long as equipment section has points.
+    * main.godhood is also foreign so it stays with main*/
    clear = () =>
    {
       const equipmentIndex = 0;  //due to sorting it is always first
@@ -243,7 +245,8 @@ class AdvantageList extends React.Component
    };
    setMainState = (value) =>
    {
-      this._prerender();  //TODO: resolvable circle. can it be non circle? probably requires fixing godhood
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render
+      plus calling prerender causes a resolvable circle*/
       this.setState(state =>
       {
          state.main.godhood = value;
@@ -366,6 +369,7 @@ class AdvantageList extends React.Component
          }
          this._derivedValues.total += this._rowArray[i].getTotal();
       }
+      Main.setAdvantageGodhood(this._derivedValues.usingGodhoodAdvantages);
    };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
    _hasDuplicate = () =>
@@ -410,8 +414,9 @@ class AdvantageList extends React.Component
    //only called by react. so it's kinda private because no one else should call it
    render = () =>
    {
-      const generateGodHood = (this._derivedValues.usingGodhoodAdvantages || this.state.main.godhood);
-      //must check both since state (although queued) may not be updated yet
+      /*don't check this.hasGodhoodAdvantages because global includes that
+      don't call a main method for this because render should be pure*/
+      const generateGodHood = this.state.main.godhood;
 
       const elementArray = this._rowArray.map(advantageObject =>
       {
@@ -419,13 +424,14 @@ class AdvantageList extends React.Component
                                    state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
                                    generateGodHood={generateGodHood} />);
       });
+      //derivedValues is undefined and unused for blank
       elementArray.push(<AdvantageRowHtml key={this._blankKey} keyCopy={this._blankKey} state={{}} generateGodHood={generateGodHood} />);
       return elementArray;
    };
    //endregion private functions
 }
 
-//next items: fix/test godhood, is circle fixed?, add map
+//next items: test godhood, add map
 
 function createAdvantageList(callback)
 {

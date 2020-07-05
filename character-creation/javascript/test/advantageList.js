@@ -545,6 +545,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       Actual: Main.advantageSection.hasGodhoodAdvantages(),
       Description: 'Advantage section has no godhood'
    });
+   assertions.push({Expected: false, Actual: Main.getEveryVar().advantageGodhood, Description: 'advantageGodhood starts false'});
    assertions.push({
       Expected: true,
       Actual: Main.advantageSection.isUsingPettyRules(),
@@ -554,8 +555,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 
    try
    {
-      //Set Godhood
-      DomUtil.changeValue('Strength', 30);
+      DomUtil.changeValue('transcendence', 1);
       assertions.push({
          Expected: false,
          Actual: Main.advantageSection.hasGodhoodAdvantages(),
@@ -568,6 +568,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
          .getName(),
          Description: 'Beyond Mortal is set'
       });
+      assertions.push({Expected: true, Actual: Main.getEveryVar().advantageGodhood, Description: 'sets advantageGodhood to true'});
       assertions.push({
          Expected: true,
          Actual: Main.advantageSection.hasGodhoodAdvantages(),
@@ -578,6 +579,9 @@ TestSuite.advantageList.calculateValues = function (testState = {})
          Actual: Main.advantageSection.isUsingPettyRules(),
          Description: 'But petty rules still apply'
       });
+
+      ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+      assertions.push({Expected: false, Actual: Main.getEveryVar().advantageGodhood, Description: 'sets advantageGodhood to false'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'non petty godhood'});}
@@ -585,8 +589,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
 
    try
    {
-      //Set Godhood
-      DomUtil.changeValue('Strength', 30);
+      DomUtil.changeValue('transcendence', 1);
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
          Expected: 'Your Petty Rules Don\'t Apply to Me',
@@ -728,56 +731,4 @@ TestSuite.advantageList.notifyDependent = function (testState = {})
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().Offense[0].attackBonus, Description: 'calls updateOffense'});
 
    return TestRunner.displayResults('TestSuite.advantageList.notifyDependent', assertions, testState);
-};
-TestSuite.advantageList.render = function (testState = {})
-{
-   TestRunner.clearResults(testState);
-   const assertions = [];
-
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'pre: no godhood'});
-   DomUtil.changeValue('Strength', 30);
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'set godhood'});
-
-   //TODO: how to fix godhood sharing?
-   /*
-   main.canUseGodhood {
-      if(user T min godhood) return true
-      if(PL godhood) return true
-      if(power godhood) return true
-      if(ad godhood) return true
-      return false
-   }
-   problem is rendering ad list requires updating state
-   maybe a setter for each and a previousGodhood
-   each setter: {
-      powerGodhood = value
-      if(canUseGodhood != previousGodhood) ad list.setMain
-      previousGodhood = canUseGodhood
-   }
-   technically I can just always setMain and not worry. that would be easier and about the same performance
-   would still need those setters
-   every render would ask main.canUseGodhood (or state copy) and not it's own state (needs to be total state not just section)
-   */
-   SelectUtil.changeText('powerChoices0', 'A God I Am');
-   DomUtil.changeValue('Strength', 0);
-   assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'godhood?'});
-   assertions.push({
-      Expected: true,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
-      Description: 'ad godhood?'
-   });
-   assertions.push({
-      Expected: 'A God I Am',
-      Actual: Main.powerSection.getRow(0)
-      .getEffect(),
-      Description: 'pow state?'
-   });
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerChoices1', 'A God I Am'), Description: 'pow godhood?'});
-
-   return TestRunner.displayResults('TestSuite.advantageList.render', assertions, testState);
 };

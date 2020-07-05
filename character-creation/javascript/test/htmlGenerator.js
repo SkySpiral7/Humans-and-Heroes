@@ -1,13 +1,27 @@
 'use strict';
 TestSuite.HtmlGenerator = {};
-TestSuite.HtmlGenerator.advantageRow = function (testState = {})
+TestSuite.HtmlGenerator.advantageRow = function (testState = {})  //TODO: move to own file
 {
    TestRunner.clearResults(testState);
-   var assertions = [], expected, selectHtml;
+   const assertions = [];
+   let expected, selectHtml;
 
    function getSection()
    {
       return document.getElementById('advantage-section');
+   }
+
+   function getSectionFirstRowHtml()
+   {
+      /*don't edit the DOM because react will die if it tries to change options that are different
+      objects even though they are identical HTML.
+      even though there should be only 1 child, can't do section.innerHTML because of blank row*/
+      let html = document.getElementById('advantage-section').firstChild.outerHTML;
+      //TODO: switch to this. it's react friendly and hits all selects
+      /*this removes all options from every select to make it easy to test the html (options tested elsewhere).
+      this regex avoids catastrophic backtracking because all aggregates are bound (can't overlap)*/
+      html = html.replace(/(<select\b[^>]+>)(?:<option>[^<]+<\/option>)+<\/select>/g, '$1</select>');
+      return html;
    }
 
    function getId(index)
@@ -57,7 +71,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
       Description: 'initial: no (first Godhood) Beyond Mortal'
    });
 
-   DomUtil.changeValue('Strength', 100);  //set godhood
+   DomUtil.changeValue('transcendence', 1);
    assertions.push({
       Expected: true,
       Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
@@ -68,7 +82,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
       Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me'),
       Description: 'godhood: has (last) Your Petty Rules Don\'t Apply to Me'
    });
-   DomUtil.changeValue('Strength', 0);  //clear godhood
+   DomUtil.changeValue('transcendence', 0);
 
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
    assertions.push({
@@ -102,7 +116,8 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
 
    //text is tested in 1.0 so that I can set only text
 
-   DomUtil.changeValue('Strength', 100);  //set godhood
+   //TODO: everywhere: should really be setting #transcendence instead of Strength for godhood. more clear, less side affect
+   DomUtil.changeValue('transcendence', 1);
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Let There Be');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
@@ -110,10 +125,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
       '</select></div>' +
       '<div class="col-auto">=&nbsp;40</div>' +
       '</div>';
-   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
-   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has total'});
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
+   assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has total'});
    Main.clear();
 
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
@@ -127,10 +139,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
       'id="advantageText' + getId(0) + '" value="Helper Name" style="width: 100%;"></div>' +
       '<div class="col-auto">=&nbsp;2</div>' +
       '</div>';
-   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
-   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has rank, text, total'});
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
+   assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has rank, text, total'});
 
    Main.setRuleset(1, 0);
    ReactUtil.changeValue('advantageChoices' + getId(0), 'Favored Environment');
@@ -142,10 +151,7 @@ TestSuite.HtmlGenerator.advantageRow = function (testState = {})
       '<div class="col-12 col-sm-6"><input type="text" ' +
       'id="advantageText' + getId(0) + '" value="Ocean" style="width: 100%;"></div>' +
       '</div>';
-   selectHtml = document.getElementById('advantageChoices' + getId(0)).innerHTML;
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = '';
-   assertions.push({Expected: expected, Actual: getSection().firstChild.outerHTML, Description: 'has text'});
-   document.getElementById('advantageChoices' + getId(0)).innerHTML = selectHtml;
+   assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has text'});
 
    return TestRunner.displayResults('TestSuite.HtmlGenerator.advantageRow', assertions, testState);
 };
@@ -392,7 +398,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'),
       Description: 'power: godhood false: no option'
    });
-   DomUtil.changeValue('Strength', 100);
+   DomUtil.changeValue('transcendence', 1);
    assertions.push({
       Expected: true,
       Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'),

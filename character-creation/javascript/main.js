@@ -8,7 +8,9 @@ function MainObject()
 {
    //region private variable
    const latestRuleset = new VersionObject(3, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
-   var transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
+   /*transcendence would be state but derived is made from state so the rest would need to be something new like partialState, contributor,
+   nonUiState, localState, preliminaryState, intermediateState, stateFoundation, stateBasis*/
+   var transcendence = 0, userTranscendence = 0, powerLevelTranscendence = 0, powerGodhood = false, advantageGodhood = false, previousGodhood = false;
    var powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
@@ -17,7 +19,6 @@ function MainObject()
    //endregion private variable
 
    //region Single line function
-   this.canUseGodhood=function(){return (transcendence > 0);};
    //does a defensive copy so that yoda conditions function
    this.getActiveRuleset=function(){return activeRuleset.clone();};
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
@@ -50,7 +51,7 @@ function MainObject()
          {
              if(ruleset.major < 1) ruleset = new VersionObject(1, 0);  //easy way to change to the oldest version
              else if(ruleset.isGreaterThan(latestRuleset)) ruleset = latestRuleset.clone();  //easy way to change to the latest version
-             if(ruleset.minor > largestPossibleMinorRulesets[ruleset.major]) ruleset.minor = largestPossibleMinorRulesets[ruleset.major];
+             else if(ruleset.minor > largestPossibleMinorRulesets[ruleset.major]) ruleset.minor = largestPossibleMinorRulesets[ruleset.major];
 
             if (!ruleset.equals(activeRuleset))  //if changed
             {
@@ -67,22 +68,39 @@ function MainObject()
    /**Onchange function for changing the transcendence. Sets the document values as needed*/
    this.changeTranscendence=function()
    {
-       if(1 === activeRuleset.major){transcendence = 0; return;}  //1.0 doesn't have transcendence
-       transcendence = sanitizeNumber(document.getElementById('transcendence').value, -1, 0);
-       if((this.powerSection.isUsingGodhoodPowers() || this.advantageSection.hasGodhoodAdvantages()) && transcendence <= 0)
-          transcendence = 1;  //must raise the minimum due to currently using god-like powers
-       minimumTranscendence = transcendence;
-       this.updateTranscendence();
+      //1.0 doesn't have transcendence (input not hidden)
+      if(1 === activeRuleset.major){document.getElementById('transcendence').value = 0; return;}
+      userTranscendence = sanitizeNumber(document.getElementById('transcendence').value, -1, 0);
+      this.updateTranscendence();
    };
    //endregion Onchange
 
    //region public functions
+   this.canUseGodhood=function()
+   {
+      //TODO: actually this logic should set T but canUse should only read T
+      //which is why test is weak for now
+      if (1 === activeRuleset.major) return false;
+      if (userTranscendence > 0) return true;
+      if (powerLevelTranscendence > 0) return true;
+      if (powerGodhood) return true;
+      if (advantageGodhood) return true;
+      return false;
+   };
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
       this._resetDerivedValues();
       document.getElementById('hero-name').value = 'Hero Name';
-      document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
+      transcendence = userTranscendence = powerLevelTranscendence = 0;
+      powerGodhood = advantageGodhood = false;
+      if (previousGodhood)
+      {
+         this.advantageSection.setMainState(false);
+         previousGodhood = false;
+      }
+      //else previousGodhood, advantageSection.MainState are already correctly false
+      document.getElementById('transcendence').value = 0;
       this.abilitySection.clear();
       document.getElementById('img-file-path').value='';
       this.loadImageFromPath();  //after setting the image path to blank this will reset the image
@@ -119,11 +137,8 @@ function MainObject()
       //clear does not change activeRuleset
       this.clear();  //must clear out all other data first so not to have any remain
       document.getElementById('hero-name').value = jsonDoc.Hero.name;
-      if (activeRuleset.major > 1)
-      {
-         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
-         document.getElementById('transcendence').value = transcendence;
-      }
+      if (activeRuleset.major > 1) userTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
+      //every section calls main update which will update T and set the DOM
       document.getElementById('img-file-path').value = jsonDoc.Hero.image;
       this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
       document.getElementById('bio-box').value = jsonDoc.Information;
@@ -145,6 +160,7 @@ function MainObject()
          }
          else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
       }
+      //don't need to call Main.update because every section does
       amLoading = false;
    };
    /**Loads the file's data*/
@@ -201,6 +217,30 @@ function MainObject()
        if(document.getElementById('img-file-path').value === '')  //the reason for this is because the user doesn't know this default image path
           document.getElementById('img-file-path').value = '../images/Sirocco.png';
        document.getElementById('character-image').src = document.getElementById('img-file-path').value;
+   };
+   /**A dump of every variable (even ones that already have getters) for the sake of testing.
+    * Can be deleted once everything is under state or derived*/
+   this.getEveryVar=function ()
+   {
+      return {
+         //everything not cloned is primitive
+         latestRuleset: latestRuleset.clone(),
+         latestSchemaVersion: latestSchemaVersion,
+         transcendence: transcendence,
+         userTranscendence: userTranscendence,
+         powerLevelTranscendence: powerLevelTranscendence,
+         powerGodhood: powerGodhood,
+         advantageGodhood: advantageGodhood,
+         previousGodhood: previousGodhood,
+         powerLevelMaxAttack: powerLevelMaxAttack,
+         powerLevelMaxEffect: powerLevelMaxEffect,
+         powerLevelAttackEffect: powerLevelAttackEffect,
+         powerLevelPerceptionEffect: powerLevelPerceptionEffect,
+         activeRuleset: activeRuleset.clone(),
+         mockMessenger: mockMessenger,  //a function
+         amLoading: amLoading,
+         derivedValues: JSON.clone(derivedValues)
+      };
    };
    /**Gets the total protection value of the sections power and equipment.*/
    this.getProtectionTotal=function()
@@ -265,15 +305,25 @@ function MainObject()
       //This doesn't work in IE (even 12)
       //TODO: use a form internet submit because it works in all browsers and the data is small
    };
+   this.setAdvantageGodhood = function (value)
+   {
+      advantageGodhood = value;
+      this.updateTranscendence();
+   };
+   this.setPowerGodhood = function (value)
+   {
+      powerGodhood = value;
+      this.updateTranscendence();
+   };
    /**This function handles all changes needed when switching between rules. Main.clear() is called unless no change is needed.*/
    this.setRuleset=function(major, minor)
    {
-       if(activeRuleset.major === major && activeRuleset.minor === minor) return;  //done. don't clear out everything
-       activeRuleset.major = major;
-       activeRuleset.minor = minor;
+      if (activeRuleset.major === major && activeRuleset.minor === minor) return;  //done. don't clear out everything
+      activeRuleset.major = major;
+      activeRuleset.minor = minor;
 
-       Data.change(activeRuleset);
-       this.clear();  //needed to regenerate advantages etc
+      Data.change(activeRuleset);
+      this.clear();  //needed to regenerate advantages etc
    };
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
    this.update=function()
@@ -297,10 +347,9 @@ function MainObject()
       document.getElementById('grand-total-max').innerHTML = (derivedValues.powerLevel * 15).toString();
       if (activeRuleset.major > 1)
       {
-         transcendence = Math.floor(derivedValues.powerLevel / 20);  //gain a transcendence every 20 PL
-         //don't auto-set below the user requested value
-         if (transcendence < minimumTranscendence) transcendence = minimumTranscendence;
-         this.updateTranscendence();  //to regenerate as needed
+         //PL is min 0 above so negative CP can't give you -1 T
+         powerLevelTranscendence = Math.floor(derivedValues.powerLevel / 20);  //gain a transcendence every 20 PL
+         this.updateTranscendence();
       }
    };
    /**Calculates initiative and sets the document.*/
@@ -423,13 +472,25 @@ function MainObject()
    /**Updates the document for transcendence field and might regenerate powers and advantages.*/
    this.updateTranscendence=function()
    {
-       document.getElementById('transcendence').value = transcendence;
-       if(previousGodhood === this.canUseGodhood()) return;  //same transcendence so don't need to regenerate
-       previousGodhood = this.canUseGodhood();
-       //transcendence changed so update these
-       this.powerSection.update();
-       //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
-       this.advantageSection.setMainState(this.canUseGodhood());
+      /*only hit from the power/ad setters (which always pass false)
+      do nothing to keep everything in the T 0 state (for all vars)*/
+      if (1 === activeRuleset.major) return;
+
+      var minTranscendence = -1;  //PLT has min 0 so min T being -1 is for show
+      var currentGodhood = this.canUseGodhood();
+      if (currentGodhood) minTranscendence = 1;
+      transcendence = Math.max(minTranscendence, userTranscendence, powerLevelTranscendence);
+      //only way to get T -1 is by request. need to set here because PL T is min 0
+      if(-1 === userTranscendence && 0 === transcendence) transcendence = -1;
+
+      document.getElementById('transcendence').value = transcendence;
+
+      if(previousGodhood === currentGodhood) return;  //same transcendence so don't need to regenerate (also ad would be infinite recur)
+      previousGodhood = currentGodhood;
+      //transcendence changed so update these
+      this.powerSection.update();
+      //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
+      this.advantageSection.setMainState(currentGodhood);
    };
    //endregion public functions
 

@@ -13,7 +13,7 @@ Main.defenseSection.calculateValues();
 function PowerListAgnostic(sectionName)
 {
    //private variable section:
-   var total=0, protectionRankTotal=null, usingGodhoodPowers=false;
+   var total=0, protectionRankTotal=null;
    var rowArray=[];
    var attackEffectRanks=new MapDefault({}, 0);
 
@@ -21,7 +21,6 @@ function PowerListAgnostic(sectionName)
    this.getAttackEffectRanks=function(){return attackEffectRanks;};
    this.getProtectionRankTotal=function(){return protectionRankTotal;};
    this.getTotal=function(){return total;};
-   this.isUsingGodhoodPowers=function(){return usingGodhoodPowers;};
 
    //public common section
    /**Removes all rows then updates*/
@@ -49,7 +48,7 @@ function PowerListAgnostic(sectionName)
       this.sanitizeRows();
       attackEffectRanks.clear();
       protectionRankTotal = 0;  //this makes math easier. will be set to null at bottom as needed
-      usingGodhoodPowers = false;
+      var usingGodhoodPowers = false;
       total = 0;
       for (var i = 0; i < rowArray.length - 1; i++)  //the last row is always blank
       {
@@ -67,6 +66,8 @@ function PowerListAgnostic(sectionName)
       }
       //rank 0 is impossible. if it doesn't exist then use null instead
       if (0 === protectionRankTotal) protectionRankTotal = null;
+      //equipment is always Godhood false. excluded to avoid messing up power Godhood
+      if (this !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
    };
    /**Short hand version of Main.powerSection.getRow(0).getModifierList().getRow(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
    this.getModifierRowShort=function(powerRowIndex, modifierRowIndex)
