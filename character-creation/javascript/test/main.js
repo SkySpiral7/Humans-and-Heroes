@@ -168,24 +168,6 @@ TestSuite.main.changeTranscendence=function(testState={})
       Description: 'user T default 0'
    });
 
-   Main.setRuleset(1, 0);
-   assertions.push({
-      Expected: 0,
-      Actual: Main.getEveryVar().userTranscendence,
-      Description: 'before user Transcendence'
-   });
-   DomUtil.changeValue('transcendence', 5);
-   assertions.push({
-      Expected: '0',
-      Actual: document.getElementById('transcendence').value,
-      Description: 'DOM set back'
-   });
-   assertions.push({
-      Expected: 0,
-      Actual: Main.getEveryVar().userTranscendence,
-      Description: 'after user Transcendence'
-   });
-
    return TestRunner.displayResults('TestSuite.main.changeTranscendence', assertions, testState);
 };
 TestSuite.main.clear=function(testState={})
@@ -274,6 +256,33 @@ TestSuite.main.getProtectionTotal=function(testState={})
 
    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', assertions, testState);
 };
+TestSuite.main.setRuleset = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   assertions.push({
+      Expected: '',
+      Actual: document.getElementById('transcendence-span').style.display,
+      Description: 'has Transcendence span'
+   });
+
+   Main.setRuleset(1, 0);
+   assertions.push({
+      Expected: 'none',
+      Actual: document.getElementById('transcendence-span').style.display,
+      Description: 'v1 removes Transcendence span'
+   });
+
+   Main.setRuleset(3, latestMinorRuleset);
+   assertions.push({
+      Expected: '',
+      Actual: document.getElementById('transcendence-span').style.display,
+      Description: 'v3 adds back'
+   });
+
+   return TestRunner.displayResults('TestSuite.main.setRuleset', assertions, testState);
+};
 TestSuite.main.update=function(testState={})
 {
    TestRunner.clearResults(testState);
@@ -360,8 +369,11 @@ TestSuite.main.update=function(testState={})
 
    SelectUtil.changeText('powerChoices0', 'Feature');
    DomUtil.changeValue('powerRank0', 15 * 20);
-   assertions.push(
-      {Expected: 0, Actual: Main.getTranscendence(), Description: 'v1.0 PL 20 = still transcendence 0'});
+   assertions.push({
+      Expected: 0,
+      Actual: Main.getTranscendence(),
+      Description: 'v1.0 PL 20 = still transcendence 0'
+   });
 
    return TestRunner.displayResults('TestSuite.main.update', assertions, testState);
 };

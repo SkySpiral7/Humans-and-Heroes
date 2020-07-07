@@ -57,20 +57,17 @@ function MainObject()
             if (!ruleset.equals(activeRuleset))  //if changed
             {
                 var jsonDoc = this.save();
-                this.setRuleset(ruleset.major, ruleset.minor);
-                jsonDoc.ruleset = activeRuleset.toString();  //so that the activeRuleset isn't reverted on load
+                jsonDoc.ruleset = ruleset.toString();  //the only change to current state
                 this.load(jsonDoc);
             }
          }
       }
        document.getElementById('ruleset').value = activeRuleset.toString();
-       //TODO: make transcendence-span be visibility:hidden when possible
    };
    /**Onchange function for changing the transcendence. Sets the document values as needed*/
    this.changeTranscendence=function()
    {
-      //1.0 doesn't have transcendence (input not hidden)
-      if(1 === activeRuleset.major){document.getElementById('transcendence').value = 0; return;}
+      //1.0 hides input so doesn't call this
       userTranscendence = sanitizeNumber(document.getElementById('transcendence').value, -1, 0);
       this.updateTranscendence();
    };
@@ -308,11 +305,17 @@ function MainObject()
    /**This function handles all changes needed when switching between rules. Main.clear() is called unless no change is needed.*/
    this.setRuleset=function(major, minor)
    {
-      if (activeRuleset.major === major && activeRuleset.minor === minor) return;  //done. don't clear out everything
+      //only hit by loading twice since setRuleset is only called there and on change
+      if (activeRuleset.major === major && activeRuleset.minor === minor) return;  //done. don't clear out everything (even though load will)
       activeRuleset.major = major;
       activeRuleset.minor = minor;
 
       Data.change(activeRuleset);
+
+      //display:none is better than visibility: hidden; so that its height will be 0 (div's width is same due to col)
+      if (1 === activeRuleset.major) document.getElementById('transcendence-span').style.display = 'none';
+      else document.getElementById('transcendence-span').style.display = '';
+
       this.clear();  //needed to regenerate advantages etc
    };
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/

@@ -485,7 +485,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: test godhood, add map
+}(React.Component); //next items: tasks here (add map)
 
 
 function createAdvantageList(callback) {

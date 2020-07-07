@@ -431,7 +431,7 @@ class AdvantageList extends React.Component
    //endregion private functions
 }
 
-//next items: test godhood, add map
+//next items: tasks here (add map)
 
 function createAdvantageList(callback)
 {
