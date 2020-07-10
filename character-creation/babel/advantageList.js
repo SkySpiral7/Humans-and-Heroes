@@ -160,13 +160,12 @@ class AdvantageList extends React.Component
    };
    getIndexByKey = (rowId) =>
    {
-      if (rowId === this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index');
-      //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
+      if (rowId === this._blankKey) throw new AssertionError('Blank row (' + rowId + ') has no row index');
       for (let i = 0; i < this._rowArray.length; i++)
       {
          if (this._rowArray[i].getKey() === rowId) return i;
       }
-      throw new Error('No row with id ' + rowId + ' (rowArray.length=' + this._rowArray.length + ')');
+      throw new AssertionError('No row with id ' + rowId + ' (rowArray.length=' + this._rowArray.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
@@ -185,8 +184,7 @@ class AdvantageList extends React.Component
    load = (jsonSection) =>
    {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
-      //TODO: remove these throws since they are asserts until this class is re-tested
-      if (this._rowArray.length > 1 || this.state.it.length > 1) throw new Error('Should\'ve cleared first');
+      if (this._rowArray.length > 1 || this.state.it.length > 1) throw new AssertionError('Should\'ve cleared first');
       const newState = [];
       const duplicateCheck = [];
       /*keep the Equipment advantage if it exists
@@ -258,7 +256,7 @@ class AdvantageList extends React.Component
    {
       if (updatedKey === this._blankKey)
       {
-         throw new Error('Can\'t update blank row ' + updatedKey);
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
@@ -275,7 +273,7 @@ class AdvantageList extends React.Component
    {
       if (updatedKey === this._blankKey)
       {
-         throw new Error('Can\'t update name of blank row ' + updatedKey);
+         throw new AssertionError('Can\'t update name of blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
@@ -299,7 +297,7 @@ class AdvantageList extends React.Component
    {
       if (updatedKey === this._blankKey)
       {
-         throw new Error('Can\'t update blank row ' + updatedKey);
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
@@ -315,7 +313,7 @@ class AdvantageList extends React.Component
    {
       if (updatedKey === this._blankKey)
       {
-         throw new Error('Can\'t update blank row ' + updatedKey);
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
@@ -374,7 +372,7 @@ class AdvantageList extends React.Component
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
    _hasDuplicate = () =>
    {
-      //TODO: would make more sense to take an arg of unique name before adding to state. or keep a running set of names
+      //can't change this to take an arg because update name/text will already be in state
       return this._rowArray.map(item => item.getUniqueName())
       .some((val, id, array) =>
       {
@@ -430,8 +428,6 @@ class AdvantageList extends React.Component
    };
    //endregion private functions
 }
-
-//next items: tasks here (add map)
 
 function createAdvantageList(callback)
 {

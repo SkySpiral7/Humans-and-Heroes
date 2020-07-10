@@ -47,3 +47,28 @@ Array.prototype.stableSort=function(compare)
 };
 
 if(undefined === JSON.clone){JSON.clone = function(obj){return JSON.parse(JSON.stringify(obj));};}
+
+//from https://stackoverflow.com/a/43595019 pure ES5 version
+function AssertionError(message, fileName, lineNumber)
+{
+   var instance = new Error(message, fileName, lineNumber);
+   Object.setPrototypeOf(instance, Object.getPrototypeOf(this));
+   return instance;
+}
+
+AssertionError.prototype = Object.create(Error.prototype, {
+   constructor: {
+      value: Error,
+      enumerable: false,
+      writable: true,
+      configurable: true
+   }
+});
+if (Object.setPrototypeOf)
+{
+   Object.setPrototypeOf(AssertionError, Error);
+}
+else
+{
+   AssertionError.__proto__ = Error;
+}

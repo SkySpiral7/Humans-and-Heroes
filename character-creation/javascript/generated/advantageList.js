@@ -189,13 +189,13 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (rowId) {
-      if (rowId === _this._blankKey) throw new Error('Blank row (' + rowId + ') has no row index'); //TODO: could speed up with a map<uuid, index> that reindexes on equipment add/remove and remove row
+      if (rowId === _this._blankKey) throw new AssertionError('Blank row (' + rowId + ') has no row index');
 
       for (var i = 0; i < _this._rowArray.length; i++) {
         if (_this._rowArray[i].getKey() === rowId) return i;
       }
 
-      throw new Error('No row with id ' + rowId + ' (rowArray.length=' + _this._rowArray.length + ')');
+      throw new AssertionError('No row with id ' + rowId + ' (rowArray.length=' + _this._rowArray.length + ')');
     });
 
     _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
@@ -213,8 +213,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
       //rowArray=[];  //not needed since Main.load calls Main.clear. and shouldn't be here in case equipment caused an advantage
-      //TODO: remove these throws since they are asserts until this class is re-tested
-      if (_this._rowArray.length > 1 || _this.state.it.length > 1) throw new Error('Should\'ve cleared first');
+      if (_this._rowArray.length > 1 || _this.state.it.length > 1) throw new AssertionError('Should\'ve cleared first');
       var newState = [];
       var duplicateCheck = [];
       /*keep the Equipment advantage if it exists
@@ -285,7 +284,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updateByKey", function (updatedKey) {
       if (updatedKey === _this._blankKey) {
-        throw new Error('Can\'t update blank row ' + updatedKey);
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
@@ -303,7 +302,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updateNameByKey", function (updatedKey) {
       if (updatedKey === _this._blankKey) {
-        throw new Error('Can\'t update name of blank row ' + updatedKey);
+        throw new AssertionError('Can\'t update name of blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
@@ -324,7 +323,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (updatedKey) {
       if (updatedKey === _this._blankKey) {
-        throw new Error('Can\'t update blank row ' + updatedKey);
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
@@ -341,7 +340,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (updatedKey) {
       if (updatedKey === _this._blankKey) {
-        throw new Error('Can\'t update blank row ' + updatedKey);
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
@@ -396,7 +395,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
-      //TODO: would make more sense to take an arg of unique name before adding to state. or keep a running set of names
+      //can't change this to take an arg because update name/text will already be in state
       return _this._rowArray.map(function (item) {
         return item.getUniqueName();
       }).some(function (val, id, array) {
@@ -485,8 +484,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
 
   return AdvantageList;
-}(React.Component); //next items: tasks here (add map)
-
+}(React.Component);
 
 function createAdvantageList(callback) {
   ReactDOM.render( /*#__PURE__*/React.createElement(AdvantageList, {
