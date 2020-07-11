@@ -58,7 +58,12 @@ function PowerObjectAgnostic(props)
        return Data.Power[state.effect].defaultRange;
    };
     /**Get the name of the power appended with text and modifiers to determine redundancy*/
-    this.getUniqueName=function(){return state.effect+': '+state.text+'; '+modifierSection.getUniqueName();};  //text might be empty
+    this.getUniqueName=function()
+    {
+       var modListName = '';
+       if(undefined !== modifierSection) modListName = modifierSection.getUniqueName();
+       return state.effect+': '+state.text+'; '+ modListName;  //text might be empty
+    };
     /**If true then getAutoTotal must be called*/
     this.hasAutoTotal=function(){return modifierSection.hasAutoTotal();};
     /**True if this row has no data*/
@@ -105,7 +110,7 @@ function PowerObjectAgnostic(props)
    The data set is independent of the document and doesn't call update.*/
    this.setPower=function(effectNameGiven)
    {
-       modifierSection.clear();  //always clear them out on select
+       if(undefined !== modifierSection) modifierSection.clear();  //always clear them out on select
        if(!Data.Power.names.contains(effectNameGiven)){this._resetValues(); return;}
           //this is only reachable if you select the default value in the drop down
 
@@ -241,6 +246,7 @@ function PowerObjectAgnostic(props)
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues=function()
    {
+      if(undefined === modifierSection) return;  //nothing to calculate for before rendering
       modifierSection.calculateValues();
       var costPerRank = (state.baseCost + modifierSection.getRankTotal());
       if(Main.getActiveRuleset().isGreaterThanOrEqualTo(3,5) && 'Variable' === state.effect && costPerRank < 5) costPerRank = 5;
@@ -262,6 +268,11 @@ function PowerObjectAgnostic(props)
       else if('Reality Warp' === state.effect) state.total += 75;
       state.total = modifierSection.calculateGrandTotal(state.total);  //used to calculate all auto modifiers
    };
+   this.createModifierList=function()
+   {
+      var callback = function(newThing){modifierSection = newThing;};
+      createModifierList(callback, this, props.sectionName, state.rowIndex);
+   };
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
    {
@@ -274,7 +285,6 @@ function PowerObjectAgnostic(props)
          derivedValues.possibleActions = this._validateAndGetPossibleActions();
          derivedValues.possibleRanges = this._getPossibleRanges();
          derivedValues.possibleDurations = this._validateAndGetPossibleDurations();
-         derivedValues.modifierHtml = modifierSection.generate();
       }
       return HtmlGenerator.powerRow(props, state, derivedValues);
    };
@@ -345,11 +355,6 @@ function PowerObjectAgnostic(props)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   this._createModifierList=function()  //TODO: unused until row converted
-   {
-      var callback = function(newThing){modifierSection = newThing;};
-      createModifierList(callback, this, props.sectionName, state.rowIndex);
-   };
    this._constructor=function()
    {
       state = {rowIndex: props.initialRowIndex};

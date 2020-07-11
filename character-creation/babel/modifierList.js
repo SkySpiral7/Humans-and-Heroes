@@ -313,7 +313,6 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
    ReactDOM.render(
       <ModifierList callback={callback} powerRowParent={powerRowParent} sectionName={sectionName} sectionRowIndex={sectionRowIndex} />,
       //TODO: if sectionRowIndex updates the whole thing will die
-      //also won't currently render because it needs the div from generate
       document.getElementById(sectionName + 'ModifierSection' + sectionRowIndex)
    );
 }
@@ -321,7 +320,7 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
 /*next:
 convert mod list
    row array +1
-   html?
+   html
    replace sanitizeRows with duplicate check
    sort on add?
    test all

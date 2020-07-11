@@ -34,7 +34,14 @@ function PowerListAgnostic(sectionName)
 
    //'private' commons section. Although all public none of these should be called from outside of this object
    /**This creates the page's html (for the section)*/
-   this.generate=function(){CommonsLibrary.generate.call(this, rowArray, sectionName);};
+   this.generate=function()
+   {
+      CommonsLibrary.generate.call(this, rowArray, sectionName);
+      for (var i = 0; i < rowArray.length - 1; i++)  //the last row is always blank (no mod list)
+      {
+         rowArray[i].createModifierList();
+      }
+   };
    /**Removes the row from the array and updates the index of all others in the list.*/
    this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/

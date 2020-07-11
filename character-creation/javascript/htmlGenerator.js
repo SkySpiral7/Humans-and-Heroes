@@ -91,7 +91,7 @@ HtmlGenerator.modifierRow=function(props, state, derivedValues)
 values used:
 var props = {powerListParent, sectionName};
 var state = {rowIndex, effect, skillUsed};
-var derivedValues = {possibleActions, possibleRanges, possibleDurations, canSetBaseCost, modifierHtml};
+var derivedValues = {possibleActions, possibleRanges, possibleDurations, canSetBaseCost};
 */
 HtmlGenerator.powerRow = function (props, state, derivedValues)
 {
@@ -214,7 +214,7 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    }
 
    htmlString += '<div id="' + props.sectionName + 'ModifierSection' + state.rowIndex + '">';
-   htmlString += derivedValues.modifierHtml;
+   //modifiers will hook into here
    htmlString += '</div>';
 
    htmlString += '<div class="row">';
