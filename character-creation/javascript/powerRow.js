@@ -345,10 +345,15 @@ function PowerObjectAgnostic(props)
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
+   this._createModifierList=function()  //TODO: unused until row converted
+   {
+      var callback = function(newThing){modifierSection = newThing;};
+      createModifierList(callback, this, props.sectionName, state.rowIndex);
+   };
    this._constructor=function()
    {
       state = {rowIndex: props.initialRowIndex};
-      modifierSection = new ModifierList(this, state.rowIndex, props.sectionName);
+      //createModifierList is lazy because it needs the div from generate
       this._resetValues();
    };
    /**@returns {Array} of all ranges that are possible for this power based on current state.*/

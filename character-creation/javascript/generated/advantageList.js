@@ -3,6 +3,7 @@
  Main.updateInitiative();
  Main.updateOffense();
  Main.defenseSection.calculateValues();
+ Main.update();
  */
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -417,7 +418,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
-      //don't update other's state in render
+      //don't update any state in render
       //can't update total because circle: CP -> PL -> T -> render
       _this._calculateValues();
 

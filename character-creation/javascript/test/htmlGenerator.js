@@ -317,7 +317,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       'Duration <span id="powerSelectDuration0" style="display: inline-block; width: 80px; text-align: center;"><b>Instant</b></span>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
@@ -329,7 +329,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -384,7 +384,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</select></label>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
@@ -398,7 +398,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    document.getElementById('powerSelectAction0').innerHTML = '';
    document.getElementById('powerSelectRange0').innerHTML = '';
    document.getElementById('powerSelectDuration0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -458,7 +458,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</select></label>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
@@ -470,7 +470,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectDuration0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -521,7 +521,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       expectedSharedHtml('powerSkill', 'power', 0, 'my skill 2') +
       '</div>' +
       '</div>' +
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
@@ -534,7 +534,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectAction0').innerHTML = '';
    document.getElementById('powerSelectRange0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -575,7 +575,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       expectedSharedHtml('powerName', 'power', 0, 'my name 3') +
       '</div>' +
       '</div>' +
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
@@ -589,7 +589,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectAction0').innerHTML = '';
    document.getElementById('powerSelectRange0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -623,7 +623,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       'Duration <span id="powerSelectDuration0" style="display: inline-block; width: 80px; text-align: center;"><b>Instant</b></span>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="4"></label>' +
@@ -635,7 +635,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -670,7 +670,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       'Duration <span id="powerSelectDuration0" style="display: inline-block; width: 80px; text-align: center;"><b>Instant</b></span>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
-      '<div>modifiers</div>' +  //set below
+      '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
       '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="8"></label>' +
@@ -682,7 +682,7 @@ TestSuite.HtmlGenerator.powerRow = function (testState={})
       '</div>';  //<hr> is next child
    document.getElementById('powerChoices0').innerHTML = '';
    document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').outerHTML = '<div>modifiers</div>';
+   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,

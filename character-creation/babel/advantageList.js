@@ -4,6 +4,7 @@
  Main.updateInitiative();
  Main.updateOffense();
  Main.defenseSection.calculateValues();
+ Main.update();
  */
 class AdvantageList extends React.Component
 {
@@ -393,7 +394,7 @@ class AdvantageList extends React.Component
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>
    {
-      //don't update other's state in render
+      //don't update any state in render
       //can't update total because circle: CP -> PL -> T -> render
       this._calculateValues();
       this._notifyDependent();

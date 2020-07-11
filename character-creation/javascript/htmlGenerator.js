@@ -213,7 +213,9 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
       htmlString += '</div>';
    }
 
+   htmlString += '<div id="' + props.sectionName + 'ModifierSection' + state.rowIndex + '">';
    htmlString += derivedValues.modifierHtml;
+   htmlString += '</div>';
 
    htmlString += '<div class="row">';
    htmlString += '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ';
