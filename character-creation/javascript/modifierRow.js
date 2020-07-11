@@ -24,6 +24,7 @@ function ModifierObject(props)
    this.getRank=function(){return state.rank;};
    /**This total will be either flat or rank (or 0). If hasAutoTotal then the total is 0.*/
    this.getRawTotal=function(){return derivedValues.rawTotal;};
+   this.getState=function(){return JSON.clone(state);};  //defensive copy is important to prevent tamper
    this.getText=function(){return state.text;};
 
    //Single line function section

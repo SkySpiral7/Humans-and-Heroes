@@ -59,6 +59,7 @@ class ModifierList extends React.Component
    calculateGrandTotal = (powerRowRawTotal) =>
    {
       if (this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect') !== undefined)
+      //TODO: is AutoRank state?
          powerRowRawTotal = this._rowArray[this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect')].setAutoRank(
             powerRowRawTotal);
       else if (this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect') !== undefined)
@@ -78,12 +79,13 @@ class ModifierList extends React.Component
    calculateValues = () =>
    {
       this._sanitizeRows();
-      this._rowArray.sort(this._sortOrder);
-      this._reindex();
+      //TODO: fix sort/indexing
+      //this._rowArray.sort(this._sortOrder);
+      //this._reindex();
       this._derivedValues.autoModifierNameToRowIndex.clear();
       this._derivedValues.rankTotal = 0;
       this._derivedValues.flatTotal = 0;
-      for (let i = 0; i < this._rowArray.length - 1; i++)  //the last row is always blank
+      for (let i = 0; i < this._rowArray.length; i++)
       {
          if (Data.Modifier[this._rowArray[i].getName()].hasAutoTotal) this._derivedValues.autoModifierNameToRowIndex.add(
             this._rowArray[i].getName(), i);
@@ -97,18 +99,21 @@ class ModifierList extends React.Component
       let rowIndex = this.findRowByName(rowName);
       if (rowIndex === undefined)
       {
-         rowIndex = this._rowArray.length - 1;  //becomes the last row if doesn't exist yet
-         this._rowArray[rowIndex].setModifier(rowName);  //set the last row (which is blank) to become the new modifier
-         this._addRow();
-         //add a new blank row so that this method can be called twice in a row
+         rowIndex = this._rowArray.length;  //becomes the last row if doesn't exist yet
+         this._addRow(rowName);
       }
       this._rowArray[rowIndex].setRank(rowRank);
+      this.setState(state =>
+      {
+         state.it[rowIndex].rank = rowRank;
+         return state;
+      });
    };
    /**This will search each row for the name given and return the row's array index or undefined if not found.
     Note that this should only be called with modifiers that don't have text.*/
    findRowByName = (rowName) =>
    {
-      for (let i = 0; i < this._rowArray.length; i++)  //no -1 because the last row isn't blank while it is being created
+      for (let i = 0; i < this._rowArray.length; i++)
       {if (this._rowArray[i].getName() === rowName) return i;}  //found it
       //else return undefined
    };
@@ -116,7 +121,7 @@ class ModifierList extends React.Component
    generate = () =>
    {
       let allModifierRows = '';
-      for (let i = 0; i < this._rowArray.length; i++)  //last row is always blank but needs to be generated
+      for (let i = 0; i < this._rowArray.length; i++)
       {allModifierRows += this._rowArray[i].generate();}
       return allModifierRows;
    };
@@ -124,7 +129,7 @@ class ModifierList extends React.Component
    getUniqueName = () =>
    {
       const nameArray = [];
-      for (let i = 0; i < this._rowArray.length - 1; i++)
+      for (let i = 0; i < this._rowArray.length; i++)
       {nameArray.push(this._rowArray[i].getUniqueName(true));}
       nameArray.sort();  //must be sorted because order doesn't matter when considering uniqueness
       //note that the rows are not sorted only this name array
@@ -134,14 +139,14 @@ class ModifierList extends React.Component
    /**@returns {boolean} true if any modifier in the list doesHaveAutoTotal*/
    hasAutoTotal = () =>
    {
-      for (let i = 0; i < this._rowArray.length - 1; i++)
+      for (let i = 0; i < this._rowArray.length; i++)
       {if (this._rowArray[i].doesHaveAutoTotal()) return true;}
       return false;
    };
    /**@returns {boolean} true if there exists a modifier that changes range from being Personal*/
    isNonPersonalModifierPresent = () =>
    {
-      for (let i = 0; i < this._rowArray.length; ++i)  //no -1 because the last row isn't blank while it is being created
+      for (let i = 0; i < this._rowArray.length; ++i)
       {
          if ('Attack' === this._rowArray[i].getName() ||
             'Affects Others Also' === this._rowArray[i].getName() ||
@@ -156,25 +161,40 @@ class ModifierList extends React.Component
       if (this.props.powerRowParent.isBlank()) return;
       //the row array isn't cleared in case some have been auto set
       //Main.clear() is called at the start of Main.load()
+      const newState = [];
+      const duplicateCheck = [];
       for (let i = 0; i < jsonSection.length; i++)
       {
-         const newName = jsonSection[i].name;
-         if (!Data.Modifier.names.contains(newName))
+         const nameToLoad = jsonSection[i].name;
+         const loadLocation = (this.props.sectionName.toTitleCase() + ' #' + (this.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1));
+         if (!Data.Modifier.names.contains(nameToLoad))
          {
             Main.messageUser(
-               'ModifierList.load.notExist', this.props.sectionName.toTitleCase() + ' #' + (this.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1) + ': ' +
-               newName + ' is not a modifier name. Did you mean "Other" with text?');
+               'ModifierList.load.notExist', loadLocation + ': ' +
+               nameToLoad + ' is not a modifier name. Did you mean "Other" with text?');
             continue;
          }
-         this._rowArray.last()
-         .setModifier(newName);
-         if (undefined !== jsonSection[i].applications) this._rowArray.last()
-         .setRank(jsonSection[i].applications);
-         if (undefined !== jsonSection[i].text) this._rowArray.last()
-         .setText(jsonSection[i].text);
-         this._addRow();
+         const modifierObject = this._addRowNoPush(nameToLoad);
+         if (undefined !== jsonSection[i].applications) modifierObject.setRank(jsonSection[i].applications);
+         if (undefined !== jsonSection[i].text) modifierObject.setText(jsonSection[i].text);
+
+         //duplicateCheck after setting all values for the sake of getUniqueName
+         if (duplicateCheck.contains(modifierObject.getUniqueName()))
+         {
+            Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + nameToLoad +
+               ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
+            continue;
+         }
+         this._rowArray.push(modifierObject);
+         duplicateCheck.push(modifierObject.getUniqueName());
+         newState.push(modifierObject.getState());
       }
-      //doesn't call update. Power must do that
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it = newState;
+         return state;
+      });
    };
    /**This will remove a row of the given name. Note that this should only be called with modifiers that don't have text.*/
    removeByName = (rowName) =>
@@ -185,13 +205,16 @@ class ModifierList extends React.Component
    /**Needs to be updated for document reasons. This will update all dependent indexing*/
    setSectionRowIndex = (sectionRowIndexGiven) =>
    {
+      for (let i = 0; i < this._rowArray.length; i++)
+      {this._rowArray[i].setPowerRowIndex(sectionRowIndexGiven);}
+      //correct all indexing. ModifierRowIndex is still correct
       this.setState(state =>
       {
          state.sectionRowIndex = sectionRowIndexGiven;
+         for (let i = 0; i < state.it.length; i++)
+         {state.it[i].powerRowIndex = sectionRowIndexGiven;}
          return state;
       });
-      for (let i = 0; i < this._rowArray.length; i++)  //even blank row
-      {this._rowArray[i].setPowerRowIndex(this.state.sectionRowIndex);}  //correct all indexing. ModifierRowIndex is still correct
    };
    /**Does each step for an onChange*/
    update = () =>
@@ -204,15 +227,32 @@ class ModifierList extends React.Component
 
    //region 'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   _addRow = () =>
+   _addRow = (newName) =>
    {
-      this._rowArray.push(new ModifierObject({
+      this._addRowNoPush(newName);
+      const modifierObject = this._addRowNoPush(newName);
+      this._rowArray.push(modifierObject);
+      this.setState(state =>
+      {
+         state.it.push(modifierObject.getState());
+         return state;
+      });
+   };
+   _addRowNoPush = (newName) =>
+   {
+      //the row that was blank no longer is so use the blank key
+      const modifierObject = new ModifierObject({
+         key: this._blankKey,
          powerRowParent: this.props.powerRowParent,
          modifierListParent: this,
          initialPowerRowIndex: this.state.sectionRowIndex,
          initialModifierRowIndex: this._rowArray.length,
          sectionName: this.props.sectionName
-      }));
+      });
+      modifierObject.setModifier(newName);
+      //need a new key for the new blank row
+      this._blankKey = MainObject.generateKey();
+      return modifierObject;
    };
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>
@@ -226,9 +266,9 @@ class ModifierList extends React.Component
       const namesSoFar = [];
       let canHaveAttack = true;
       if (this.props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false;  //feature has a default range of Personal
-      for (let i = 0; i < this._rowArray.length; i++)  //last row might not be blank
+      for (let i = 0; i < this._rowArray.length; i++)
       {
-         if (this._rowArray[i].isBlank() && i < this._rowArray.length - 1)
+         if (this._rowArray[i].isBlank() && i < this._rowArray.length)
          {
             this._removeRow(i);
             i--;
@@ -264,9 +304,6 @@ class ModifierList extends React.Component
          }
          namesSoFar.push(modifierName);
       }
-      if (this._rowArray.isEmpty() || !this._rowArray.last()
-         .isBlank())
-         this._addRow();  //if last row isn't blank add one
    };
    /**Pass into Array.prototype.sort so that the automatic modifiers come first. With action, range, duration, then others.*/
    _sortOrder = (a, b) =>
@@ -296,13 +333,25 @@ class ModifierList extends React.Component
    /**This will re-index all modifier rows. PowerRowIndex is not affected.*/
    _reindex = () =>
    {
-      for (let i = 0; i < this._rowArray.length; i++)  //even blank row
-      {this._rowArray[i].setModifierRowIndex(i);}  //correct all indexing. PowerRowIndex is still correct
+      for (let i = 0; i < this._rowArray.length; i++)
+      {this._rowArray[i].setModifierRowIndex(i);}
+      //correct all indexing. PowerRowIndex is still correct
+      this.setState(state =>
+      {
+         for (let i = 0; i < state.it.length; i++)
+         {state.it[i].modifierRowIndex = i;}
+         return state;
+      });
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndexToRemove) =>
    {
       this._rowArray.remove(rowIndexToRemove);
+      this.setState(state =>
+      {
+         state.it.remove(rowIndexToRemove);
+         return state;
+      });
       this._reindex();
    };
    //endregion 'private' functions section. Although all public none of these should be called from outside of this object
@@ -319,7 +368,6 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
 
 /*next:
 convert mod list
-   row array +1
    html
    replace sanitizeRows with duplicate check
    sort on add?
