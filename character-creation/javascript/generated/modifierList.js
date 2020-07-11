@@ -94,11 +94,10 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "calculateValues", function () {
-      _this._sanitizeRows(); //TODO: fix sort/indexing
+      //this._sanitizeRows();
+      //TODO: fix sort/indexing
       //this._rowArray.sort(this._sortOrder);
       //this._reindex();
-
-
       _this._derivedValues.autoModifierNameToRowIndex.clear();
 
       _this._derivedValues.rankTotal = 0;
@@ -228,17 +227,73 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "update", function () {
-      _this.calculateValues(); //TODO: test
+    _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {
+      if (undefined === modifierRow) {
+        _this.addRow(newName);
 
+        return;
+      }
 
-      _this.props.powerRowParent.getSection().update();
+      var updatedIndex = _this.getIndexByKey(modifierRow.getKey());
+
+      if (!Data.Modifier.names.contains(newName) || _this._hasDuplicate()) {
+        _this._removeRow(updatedIndex);
+      } else {
+        modifierRow.setModifier(newName);
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[updatedIndex].name = newName;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
+      if (updatedKey === _this._blankKey) {
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      var updatedIndex = _this.getIndexByKey(updatedKey);
+
+      _this._rowArray[updatedIndex].setRank(newRank);
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[updatedIndex].rank = newRank;
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (newText, updatedKey) {
+      if (updatedKey === _this._blankKey) {
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      var updatedIndex = _this.getIndexByKey(updatedKey);
+
+      _this._rowArray[updatedIndex].setText(newText);
+
+      if (_this._hasDuplicate()) {
+        _this._removeRow(updatedIndex);
+      } else {
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[updatedIndex].text = newText;
+          return state;
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
       var modifierObject = _this._addRowNoPush(newName);
 
       _this._rowArray.push(modifierObject);
+
+      _this._prerender();
 
       _this.setState(function (state) {
         state.it.push(modifierObject.getState());
@@ -261,9 +316,20 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       return modifierObject;
     });
 
+    _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
+      //can't change this to take an arg because update name/text will already be in state
+      return _this._rowArray.map(function (item) {
+        return item.getUniqueName();
+      }).some(function (val, id, array) {
+        return array.indexOf(val) !== id;
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
       //don't update any state in render
       _this.calculateValues();
+
+      _this.props.powerRowParent.getSection().update();
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
@@ -382,7 +448,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     _this._blankKey = MainObject.generateKey();
     props.callback(_assertThisInitialized(_this));
     return _this;
-  } //region Single line function
+  } //region basic getter
 
   /**This total will be the sum of all flat modifiers*/
   //endregion 'private' functions section. Although all public none of these should be called from outside of this object
@@ -397,12 +463,12 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
     powerRowParent: powerRowParent,
     sectionName: sectionName,
     sectionRowIndex: sectionRowIndex
-  }), //TODO: if sectionRowIndex updates the whole thing will die
+  }), //TODO: if sectionRowIndex updates the whole thing will die. vanishes on generate so can't be used at all
   document.getElementById(sectionName + 'ModifierSection' + sectionRowIndex));
 }
 /*next:
+how to keep mod list: maybe pow row saves element
 convert mod list
-   html
    replace sanitizeRows with duplicate check
    sort on add?
    test all

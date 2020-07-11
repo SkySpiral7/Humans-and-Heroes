@@ -46,17 +46,6 @@ function ModifierObject(props)
    this.isRank=function(){return (derivedValues.modifierType === 'Rank');};
    this.setPowerRowIndex=function(newPowerRowIndex){state.powerRowIndex=newPowerRowIndex;};
 
-   //Onchange section
-   /**Onchange function for selecting a modifier*/
-   this.select=function(){CommonsLibrary.select.call(this, this.setModifier,
-      (props.sectionName+'ModifierChoices'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
-   /**Onchange function for changing the rank*/
-   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank,
-      (props.sectionName+'ModifierRank'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
-   /**Onchange function for changing the text*/
-   this.changeText=function(){CommonsLibrary.change.call(this, this.setText,
-      (props.sectionName+'ModifierText'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
-
    //Value setting section
    /**Populates data of the modifier by using the name (which is validated).
    This must be called before any other data of this row is set.
@@ -70,6 +59,7 @@ function ModifierObject(props)
       if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, ie: 'Select Modifier'
       {
          this._resetValues();
+         //TODO: move this
          if(wasAttack) props.powerRowParent.generateNameAndSkill();  //technically only necessary if 'Attack' === state.name
          return;
       }

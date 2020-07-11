@@ -272,8 +272,11 @@ function PowerObjectAgnostic(props)
    };
    this.createModifierList=function()
    {
-      var callback = function(newThing){modifierSection = newThing;};
-      createModifierList(callback, this, props.sectionName, state.rowIndex);
+      if (undefined === modifierSection)
+      {
+         var callback = function (newThing) {modifierSection = newThing;};
+         createModifierList(callback, this, props.sectionName, state.rowIndex);
+      }
    };
    /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()

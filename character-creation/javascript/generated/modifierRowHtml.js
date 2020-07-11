@@ -18,7 +18,8 @@ function ModifierRowHtml(props) {
   derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
   */
 
-  var nameElement = null;
+  var elementList = [];
+  var onChange = null;
   var amReadOnly = 'Selective' === state.name && 'Triggered' === props.powerRow.getAction(); //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
   //Triggered's Selective is amReadOnly even for Feature
 
@@ -36,42 +37,37 @@ function ModifierRowHtml(props) {
       }, name);
     });
 
-    var onChange = function onChange(event) {
+    onChange = function onChange(event) {
       var nameGiven = event.target.value;
-      if (undefined === state.name) props.powerRow.getModifierList().addRow(event.target.value);else if (Data.Advantage.names.contains(nameGiven)) {
-        props.modifierRow.setModifier(nameGiven);
-        props.modifierRow.getSection().updateNameByKey(key);
-      } //TODO: define updateNameByKey, removeByKey
-      else props.modifierRow.getSection().removeByKey(key);
+      props.powerRow.getModifierList().updateNameByRow(nameGiven, props.modifierRow);
     }; //unshift = addFirst
 
 
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Modifier"
     }, "Select Modifier"));
-    nameElement = /*#__PURE__*/React.createElement("div", {
-      className: "col-12 col-sm-5 col-lg-4 col-xl-auto"
+    elementList.push( /*#__PURE__*/React.createElement("div", {
+      className: "col-12 col-sm-5 col-lg-4 col-xl-auto",
+      key: "name"
     }, /*#__PURE__*/React.createElement("select", {
       id: idFor('Choices'),
       onChange: onChange,
       value: state.name
-    }, options));
+    }, options)));
   } else {
     //TODO: className un-DRY here
-    nameElement = /*#__PURE__*/React.createElement("div", {
-      className: "col-12 col-sm-5 col-lg-4 col-xl-auto"
-    }, /*#__PURE__*/React.createElement("b", null, state.name));
+    elementList.push( /*#__PURE__*/React.createElement("div", {
+      className: "col-12 col-sm-5 col-lg-4 col-xl-auto",
+      key: "name"
+    }, /*#__PURE__*/React.createElement("b", null, state.name)));
   }
-
-  var remainingElements = [];
 
   if (undefined !== state.name) //done for blank
     {
       var derivedValues = props.modifierRow.getDerivedValues();
 
       if ('Attack' === state.name) {
-        //TODO: changeName, changeSkill need update
-        remainingElements.push( /*#__PURE__*/React.createElement("div", {
+        elementList.push( /*#__PURE__*/React.createElement("div", {
           className: "col-12 col-sm-6 col-lg-4",
           key: "powerNameDiv"
         }, /*#__PURE__*/React.createElement(PowerNameHtml, {
@@ -84,7 +80,7 @@ function ModifierRowHtml(props) {
         })));
 
         if (props.powerRow.getRange() !== 'Perception') {
-          remainingElements.push( /*#__PURE__*/React.createElement("div", {
+          elementList.push( /*#__PURE__*/React.createElement("div", {
             className: "col-12 col-sm-6 col-lg-4",
             key: "powerSkillDiv"
           }, /*#__PURE__*/React.createElement(PowerSkillHtml, {
@@ -102,50 +98,57 @@ function ModifierRowHtml(props) {
           if (derivedValues.hasRank) {
             //only Feature can change the ranks of these
             if (props.powerRow.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) {
-              remainingElements.push( /*#__PURE__*/React.createElement("div", {
+              elementList.push( /*#__PURE__*/React.createElement("div", {
                 className: "col-6 col-sm-3 col-xl-auto",
                 key: "rank"
               }, 'Cost ' + state.rank));
             } else {
-              remainingElements.push( /*#__PURE__*/React.createElement("label", {
+              onChange = function onChange(event) {
+                var rankGiven = event.target.value;
+                props.modifierRow.updateRankByKey(rankGiven, key);
+              }; //TODO: confirm spaces and non-breaking
+
+
+              elementList.push( /*#__PURE__*/React.createElement("label", {
                 className: "col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto",
                 key: "rank"
               }, "Applications", ' ', /*#__PURE__*/React.createElement("input", {
                 type: "text",
                 size: "1",
                 id: idFor('Rank'),
-                onChange: function onChange() {
-                  return props.modifierRow.changeRank();
-                },
+                onChange: onChange,
                 value: state.rank
               })));
             }
           }
 
           if (derivedValues.hasText) {
-            remainingElements.push( /*#__PURE__*/React.createElement("label", {
+            onChange = function onChange(event) {
+              var textGiven = event.target.value;
+              props.modifierRow.updateTextByKey(textGiven, key);
+            };
+
+            elementList.push( /*#__PURE__*/React.createElement("label", {
               className: "col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining",
               key: "text"
             }, "Text\xA0", /*#__PURE__*/React.createElement("input", {
               type: "text",
               id: idFor('Text'),
-              onChange: function onChange() {
-                return props.modifierRow.changeText();
-              },
+              onChange: onChange,
               value: state.text
             })));
           } //auto total must see total (it doesn't show ranks)
 
 
           if (derivedValues.hasAutoTotal) {
-            remainingElements.push( /*#__PURE__*/React.createElement("div", {
+            elementList.push( /*#__PURE__*/React.createElement("div", {
               className: "col-auto",
               key: "total"
             }, '=&nbsp;' + derivedValues.autoTotal));
           } //if costPerRank isn't 1 then show total to show how much its worth,
           //if total doesn't match then it has had some cost quirk so show the total
           else if (Math.abs(derivedValues.costPerRank) > 1 || derivedValues.rawTotal !== derivedValues.costPerRank * state.rank) {
-              remainingElements.push( /*#__PURE__*/React.createElement("div", {
+              elementList.push( /*#__PURE__*/React.createElement("div", {
                 className: "col-auto",
                 key: "total"
               }, '=&nbsp;' + derivedValues.rawTotal));
@@ -155,5 +158,5 @@ function ModifierRowHtml(props) {
 
   return /*#__PURE__*/React.createElement("div", {
     className: "row"
-  }, nameElement, remainingElements);
+  }, elementList);
 }

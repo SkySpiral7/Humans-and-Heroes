@@ -19,15 +19,15 @@ class ModifierList extends React.Component
       props.callback(this);
    }
 
-   //region Single line function
+   //region basic getter
    /**This total will be the sum of all flat modifiers*/
    getFlatTotal = () => {return this._derivedValues.flatTotal;};  //TODO: make sure these are not called before they are defined
    /**This total will be the sum of all rank modifiers*/
    getRankTotal = () => {return this._derivedValues.rankTotal;};
    getPower = () => {return this.props.powerRowParent;};
-   //endregion Single line function
+   //endregion basic getter
 
-   //region public common
+   //TODO: sort this section
    /**Removes all rows then updates*/
    clear = () =>
    {
@@ -53,7 +53,6 @@ class ModifierList extends React.Component
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
    getRowByKey = (key) => {return this._rowArray[this.getIndexByKey(key)];};
-
    /**Returns an array of json objects for this section's data*/
    save = () =>
    {
@@ -64,7 +63,6 @@ class ModifierList extends React.Component
       }
       return json;  //might still be empty
    };
-   //endregion public common
 
    //region public functions
    /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
@@ -90,7 +88,7 @@ class ModifierList extends React.Component
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    calculateValues = () =>
    {
-      this._sanitizeRows();
+      //this._sanitizeRows();
       //TODO: fix sort/indexing
       //this._rowArray.sort(this._sortOrder);
       //this._reindex();
@@ -220,12 +218,70 @@ class ModifierList extends React.Component
          return state;
       });
    };
-   /**Does each step for an onChange*/
-   update = () =>
+   updateNameByRow = (newName, modifierRow) =>
    {
-      this.calculateValues();  //TODO: test
-      this.props.powerRowParent.getSection()
-      .update();
+      if (undefined === modifierRow)
+      {
+         this.addRow(newName);
+         return;
+      }
+
+      const updatedIndex = this.getIndexByKey(modifierRow.getKey());
+
+      if (!Data.Modifier.names.contains(newName) || this._hasDuplicate())
+      {
+         this._removeRow(updatedIndex);
+      }
+      else
+      {
+         modifierRow.setModifier(newName);
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it[updatedIndex].name = newName;
+            return state;
+         });
+      }
+   };
+   updateRankByKey = (newRank, updatedKey) =>
+   {
+      if (updatedKey === this._blankKey)
+      {
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      const updatedIndex = this.getIndexByKey(updatedKey);
+      this._rowArray[updatedIndex].setRank(newRank);
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it[updatedIndex].rank = newRank;
+         return state;
+      });
+   };
+   updateTextByKey = (newText, updatedKey) =>
+   {
+      if (updatedKey === this._blankKey)
+      {
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      const updatedIndex = this.getIndexByKey(updatedKey);
+      this._rowArray[updatedIndex].setText(newText);
+
+      if (this._hasDuplicate())
+      {
+         this._removeRow(updatedIndex);
+      }
+      else
+      {
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it[updatedIndex].text = newText;
+            return state;
+         });
+      }
    };
    //endregion public functions
 
@@ -235,6 +291,7 @@ class ModifierList extends React.Component
    {
       const modifierObject = this._addRowNoPush(newName);
       this._rowArray.push(modifierObject);
+      this._prerender();
       this.setState(state =>
       {
          state.it.push(modifierObject.getState());
@@ -256,11 +313,23 @@ class ModifierList extends React.Component
       this._blankKey = MainObject.generateKey();
       return modifierObject;
    };
+   /**@returns true if 2+ rows in rowArray have the same UniqueName*/
+   _hasDuplicate = () =>
+   {
+      //can't change this to take an arg because update name/text will already be in state
+      return this._rowArray.map(item => item.getUniqueName())
+      .some((val, id, array) =>
+      {
+         return array.indexOf(val) !== id;
+      });
+   };
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>
    {
       //don't update any state in render
       this.calculateValues();
+      this.props.powerRowParent.getSection()
+      .update();
    };
    //only called by react. so it's kinda private because no one else should call it
    render = () =>
@@ -362,14 +431,14 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
 {
    ReactDOM.render(
       <ModifierList callback={callback} powerRowParent={powerRowParent} sectionName={sectionName} sectionRowIndex={sectionRowIndex} />,
-      //TODO: if sectionRowIndex updates the whole thing will die
+      //TODO: if sectionRowIndex updates the whole thing will die. vanishes on generate so can't be used at all
       document.getElementById(sectionName + 'ModifierSection' + sectionRowIndex)
    );
 }
 
 /*next:
+how to keep mod list: maybe pow row saves element
 convert mod list
-   html: on change
    replace sanitizeRows with duplicate check
    sort on add?
    test all
