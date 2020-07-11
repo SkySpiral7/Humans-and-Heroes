@@ -159,22 +159,19 @@ class AdvantageList extends React.Component
          });
       }
    };
-   getIndexByKey = (rowId) =>
+   getIndexByKey = (key) =>
    {
-      if (rowId === this._blankKey) throw new AssertionError('Blank row (' + rowId + ') has no row index');
+      if (key === this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
       for (let i = 0; i < this._rowArray.length; i++)
       {
-         if (this._rowArray[i].getKey() === rowId) return i;
+         if (this._rowArray[i].getKey() === key) return i;
       }
-      throw new AssertionError('No row with id ' + rowId + ' (rowArray.length=' + this._rowArray.length + ')');
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + this._rowArray.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-   getRowByKey = (rowId) =>
-   {
-      return this._rowArray[this.getIndexByKey(rowId)];
-   };
+   getRowByKey = (key) => {return this._rowArray[this.getIndexByKey(key)];};
    /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    indexToKey = (rowIndex) =>
    {

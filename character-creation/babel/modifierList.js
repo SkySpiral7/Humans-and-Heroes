@@ -40,8 +40,20 @@ class ModifierList extends React.Component
          return state;
       });
    };
-   /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-   getRow = (rowIndex) => {return this._rowArray[rowIndex];};
+   getIndexByKey = (key) =>
+   {
+      if (key === this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+      for (let i = 0; i < this._rowArray.length; i++)
+      {
+         if (this._rowArray[i].getKey() === key) return i;
+      }
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + this._rowArray.length + ')');
+   };
+   /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
+   getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
+   /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
+   getRowByKey = (key) => {return this._rowArray[this.getIndexByKey(key)];};
+
    /**Returns an array of json objects for this section's data*/
    save = () =>
    {
@@ -100,7 +112,7 @@ class ModifierList extends React.Component
       if (rowIndex === undefined)
       {
          rowIndex = this._rowArray.length;  //becomes the last row if doesn't exist yet
-         this._addRow(rowName);
+         this.addRow(rowName);
       }
       this._rowArray[rowIndex].setRank(rowRank);
       this.setState(state =>
@@ -116,14 +128,6 @@ class ModifierList extends React.Component
       for (let i = 0; i < this._rowArray.length; i++)
       {if (this._rowArray[i].getName() === rowName) return i;}  //found it
       //else return undefined
-   };
-   /**This returns the page's html (for the section) as a string. called by power row object only*/
-   generate = () =>
-   {
-      let allModifierRows = '';
-      for (let i = 0; i < this._rowArray.length; i++)
-      {allModifierRows += this._rowArray[i].generate();}
-      return allModifierRows;
    };
    /**Return the unique name of the section. In this case it returns a sorted array of modifier unique names*/
    getUniqueName = () =>
@@ -207,7 +211,7 @@ class ModifierList extends React.Component
    {
       for (let i = 0; i < this._rowArray.length; i++)
       {this._rowArray[i].setPowerRowIndex(sectionRowIndexGiven);}
-      //correct all indexing. ModifierRowIndex is still correct
+      //correct all indexing
       this.setState(state =>
       {
          state.sectionRowIndex = sectionRowIndexGiven;
@@ -227,9 +231,8 @@ class ModifierList extends React.Component
 
    //region 'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   _addRow = (newName) =>
+   addRow = (newName) =>
    {
-      this._addRowNoPush(newName);
       const modifierObject = this._addRowNoPush(newName);
       this._rowArray.push(modifierObject);
       this.setState(state =>
@@ -246,7 +249,6 @@ class ModifierList extends React.Component
          powerRowParent: this.props.powerRowParent,
          modifierListParent: this,
          initialPowerRowIndex: this.state.sectionRowIndex,
-         initialModifierRowIndex: this._rowArray.length,
          sectionName: this.props.sectionName
       });
       modifierObject.setModifier(newName);
@@ -259,6 +261,19 @@ class ModifierList extends React.Component
    {
       //don't update any state in render
       this.calculateValues();
+   };
+   //only called by react. so it's kinda private because no one else should call it
+   render = () =>
+   {
+      const elementArray = this._rowArray.map(modifierObject =>
+      {
+         return (<ModifierRowHtml key={modifierObject.getKey()} keyCopy={modifierObject.getKey()} powerRow={this.props.powerRowParent}
+                                  modifierRow={modifierObject} />);
+      });
+      //derivedValues is undefined and unused for blank
+      elementArray.push(<ModifierRowHtml key={this._blankKey} keyCopy={this._blankKey} powerRow={this.props.powerRowParent}
+                                         modifierRow={undefined} />);
+      return elementArray;
    };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    _sanitizeRows = () =>
@@ -330,19 +345,6 @@ class ModifierList extends React.Component
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
    _testSortStability = () => {unstableSort(this._rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
-   /**This will re-index all modifier rows. PowerRowIndex is not affected.*/
-   _reindex = () =>
-   {
-      for (let i = 0; i < this._rowArray.length; i++)
-      {this._rowArray[i].setModifierRowIndex(i);}
-      //correct all indexing. PowerRowIndex is still correct
-      this.setState(state =>
-      {
-         for (let i = 0; i < state.it.length; i++)
-         {state.it[i].modifierRowIndex = i;}
-         return state;
-      });
-   };
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndexToRemove) =>
    {
@@ -352,7 +354,6 @@ class ModifierList extends React.Component
          state.it.remove(rowIndexToRemove);
          return state;
       });
-      this._reindex();
    };
    //endregion 'private' functions section. Although all public none of these should be called from outside of this object
 }
@@ -368,7 +369,7 @@ function createModifierList(callback, powerRowParent, sectionName, sectionRowInd
 
 /*next:
 convert mod list
-   html
+   html: on change
    replace sanitizeRows with duplicate check
    sort on add?
    test all

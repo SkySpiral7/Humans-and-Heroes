@@ -17,6 +17,8 @@ function ModifierObject(props)
    /**Should be used only for testing not point calculations*/
    this.getAutoTotal=function(){return derivedValues.autoTotal;};
    this.getCostPerRank=function(){return derivedValues.costPerRank;};
+   this.getDerivedValues = function () {return JSON.clone(derivedValues);};  //clone is for tests
+   this.getKey = function () {return props.key;};
    this.getMaxRank=function(){return derivedValues.maxRank;};
    this.getModifierType=function(){return derivedValues.modifierType;};
    /**Get the name of the modifier*/
@@ -28,8 +30,8 @@ function ModifierObject(props)
    this.getText=function(){return state.text;};
 
    //Single line function section
-   this.getModifierRowIndex=function(){return state.modifierRowIndex;};
    this.getPower=function(){return props.powerRowParent;};
+   this.getSection=function(){return props.modifierListParent;};
    /**True if this row has no data*/
    this.isBlank=function(){return (state.name === undefined);};
    /**True if this modifier increases the total power cost in any way*/
@@ -43,18 +45,17 @@ function ModifierObject(props)
    /**True if this modifier changes the cost per rank*/
    this.isRank=function(){return (derivedValues.modifierType === 'Rank');};
    this.setPowerRowIndex=function(newPowerRowIndex){state.powerRowIndex=newPowerRowIndex;};
-   this.setModifierRowIndex=function(newModifierRowIndex){state.modifierRowIndex=newModifierRowIndex;};
 
    //Onchange section
    /**Onchange function for selecting a modifier*/
    this.select=function(){CommonsLibrary.select.call(this, this.setModifier,
-      (props.sectionName+'ModifierChoices'+state.powerRowIndex+'.'+state.modifierRowIndex), props.modifierListParent);};
+      (props.sectionName+'ModifierChoices'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
    /**Onchange function for changing the rank*/
    this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank,
-      (props.sectionName+'ModifierRank'+state.powerRowIndex+'.'+state.modifierRowIndex), props.modifierListParent);};
+      (props.sectionName+'ModifierRank'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
    /**Onchange function for changing the text*/
    this.changeText=function(){CommonsLibrary.change.call(this, this.setText,
-      (props.sectionName+'ModifierText'+state.powerRowIndex+'.'+state.modifierRowIndex), props.modifierListParent);};
+      (props.sectionName+'ModifierText'+state.powerRowIndex+'.'+props.key), props.modifierListParent);};
 
    //Value setting section
    /**Populates data of the modifier by using the name (which is validated).
@@ -122,11 +123,6 @@ function ModifierObject(props)
        if((state.name === 'Reduced Range' && props.powerRowParent.getDefaultRange() === 'Perception') ||
           (state.name === 'Increased Range' && props.powerRowParent.getRange() === 'Perception')) derivedValues.rawTotal=derivedValues.costPerRank*(state.rank+1);
    };
-   /**This creates the page's html (for the row). called by modifier section only*/
-   this.generate=function()
-   {
-      return HtmlGenerator.modifierRow(props, state, derivedValues);
-   };
    /**Get the name of the modifier appended with text to determine redundancy*/
    this.getUniqueName=function(includeText)
    {
@@ -180,13 +176,13 @@ function ModifierObject(props)
    //'private' functions section. Although all public none of these should be called from outside of this object
    this._constructor=function()
    {
-      state = {powerRowIndex: props.initialPowerRowIndex, modifierRowIndex: props.initialModifierRowIndex};
+      state = {powerRowIndex: props.initialPowerRowIndex};
       this._resetValues();
    };
    this._resetValues=function()
    {
       //props and indexes are not reset
-      state = {powerRowIndex: state.powerRowIndex, modifierRowIndex: state.modifierRowIndex};
+      state = {powerRowIndex: state.powerRowIndex};
       derivedValues = {hasAutoTotal: false, rawTotal: 0};
    };
    //constructor:

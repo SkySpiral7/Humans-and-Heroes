@@ -20,6 +20,7 @@ function PowerListAgnostic(sectionName)
    //Single line function section
    this.getAttackEffectRanks=function(){return attackEffectRanks;};
    this.getProtectionRankTotal=function(){return protectionRankTotal;};
+   this.getSectionName=function(){return sectionName;};
    this.getTotal=function(){return total;};
 
    //public common section
@@ -76,11 +77,11 @@ function PowerListAgnostic(sectionName)
       //equipment is always Godhood false. excluded to avoid messing up power Godhood
       if (this !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
    };
-   /**Short hand version of Main.powerSection.getRow(0).getModifierList().getRow(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
+   /**Short hand version of Main.powerSection.getRow(0).getModifierList().getRowByIndex(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
    this.getModifierRowShort=function(powerRowIndex, modifierRowIndex)
    {
        if(powerRowIndex >= powerRowIndex.length) return;  //range checking of modifierRowIndex will be handled in getRow
-       return rowArray[powerRowIndex].getModifierList().getRow(modifierRowIndex);
+       return rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
    };
    /**Sets data from a json object given then updates*/
    this.load=function(jsonSection)

@@ -57,8 +57,22 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRow", function (rowIndex) {
+    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
+      if (key === _this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+
+      for (var i = 0; i < _this._rowArray.length; i++) {
+        if (_this._rowArray[i].getKey() === key) return i;
+      }
+
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + _this._rowArray.length + ')');
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
       return _this._rowArray[rowIndex];
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getRowByKey", function (key) {
+      return _this._rowArray[_this.getIndexByKey(key)];
     });
 
     _defineProperty(_assertThisInitialized(_this), "save", function () {
@@ -102,7 +116,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       if (rowIndex === undefined) {
         rowIndex = _this._rowArray.length; //becomes the last row if doesn't exist yet
 
-        _this._addRow(rowName);
+        _this.addRow(rowName);
       }
 
       _this._rowArray[rowIndex].setRank(rowRank);
@@ -119,16 +133,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       } //found it
       //else return undefined
 
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "generate", function () {
-      var allModifierRows = '';
-
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        allModifierRows += _this._rowArray[i].generate();
-      }
-
-      return allModifierRows;
     });
 
     _defineProperty(_assertThisInitialized(_this), "getUniqueName", function () {
@@ -210,7 +214,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "setSectionRowIndex", function (sectionRowIndexGiven) {
       for (var i = 0; i < _this._rowArray.length; i++) {
         _this._rowArray[i].setPowerRowIndex(sectionRowIndexGiven);
-      } //correct all indexing. ModifierRowIndex is still correct
+      } //correct all indexing
 
 
       _this.setState(function (state) {
@@ -231,9 +235,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       _this.props.powerRowParent.getSection().update();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_addRow", function (newName) {
-      _this._addRowNoPush(newName);
-
+    _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
       var modifierObject = _this._addRowNoPush(newName);
 
       _this._rowArray.push(modifierObject);
@@ -251,7 +253,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
         powerRowParent: _this.props.powerRowParent,
         modifierListParent: _assertThisInitialized(_this),
         initialPowerRowIndex: _this.state.sectionRowIndex,
-        initialModifierRowIndex: _this._rowArray.length,
         sectionName: _this.props.sectionName
       });
       modifierObject.setModifier(newName); //need a new key for the new blank row
@@ -263,6 +264,26 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
       //don't update any state in render
       _this.calculateValues();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      var elementArray = _this._rowArray.map(function (modifierObject) {
+        return /*#__PURE__*/React.createElement(ModifierRowHtml, {
+          key: modifierObject.getKey(),
+          keyCopy: modifierObject.getKey(),
+          powerRow: _this.props.powerRowParent,
+          modifierRow: modifierObject
+        });
+      }); //derivedValues is undefined and unused for blank
+
+
+      elementArray.push( /*#__PURE__*/React.createElement(ModifierRowHtml, {
+        key: _this._blankKey,
+        keyCopy: _this._blankKey,
+        powerRow: _this.props.powerRowParent,
+        modifierRow: undefined
+      }));
+      return elementArray;
     });
 
     _defineProperty(_assertThisInitialized(_this), "_sanitizeRows", function () {
@@ -337,21 +358,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       unstableSort(_this._rowArray, _this._sortOrder);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_reindex", function () {
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        _this._rowArray[i].setModifierRowIndex(i);
-      } //correct all indexing. PowerRowIndex is still correct
-
-
-      _this.setState(function (state) {
-        for (var _i2 = 0; _i2 < state.it.length; _i2++) {
-          state.it[_i2].modifierRowIndex = _i2;
-        }
-
-        return state;
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndexToRemove) {
       _this._rowArray.remove(rowIndexToRemove);
 
@@ -359,8 +365,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
         state.it.remove(rowIndexToRemove);
         return state;
       });
-
-      _this._reindex();
     });
 
     _this.state = {

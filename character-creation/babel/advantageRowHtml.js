@@ -2,6 +2,7 @@
 
 function AdvantageRowHtml(props)
 {
+   //TODO: combine all 3 by just passing in ad row object
    const state = props.state, derivedValues = props.derivedValues, key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
    /*
@@ -19,11 +20,12 @@ function AdvantageRowHtml(props)
    else
    {
       const options = Data.Advantage.names
-      .filter((name) => 'Equipment' !== name && (displayGodhood || !Data.Advantage[name].isGodhood))
-      .map((name) =>
+      .filter(name => 'Equipment' !== name && (displayGodhood || !Data.Advantage[name].isGodhood))
+      .map(name =>
          <option key={name}>{name}</option>
       );
       //unshift = addFirst
+      //TODO: technically should key be undefined?
       options.unshift(<option key="Select Advantage">Select Advantage</option>);
 
       let onChange = null;

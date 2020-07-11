@@ -28,6 +28,8 @@ function PowerObjectAgnostic(props)
    this.getName=function(){return state.name;};
    this.getRange=function(){return state.range;};
    this.getRank=function(){return state.rank;};
+   this.getRowIndex=function(){return state.rowIndex;};
+   this.getSectionName=function(){return props.sectionName;};
    this.getSkillUsed=function(){return state.skillUsed;};
    this.getText=function(){return state.text;};
    /**The total with respect to auto changes and raw total*/

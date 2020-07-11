@@ -1,6 +1,7 @@
 'use strict';
 
 function AdvantageRowHtml(props) {
+  //TODO: combine all 3 by just passing in ad row object
   var state = props.state,
       derivedValues = props.derivedValues,
       key = props.keyCopy;
@@ -26,6 +27,7 @@ function AdvantageRowHtml(props) {
         key: name
       }, name);
     }); //unshift = addFirst
+    //TODO: technically should key be undefined?
 
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Advantage"

@@ -189,22 +189,22 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (rowId) {
-      if (rowId === _this._blankKey) throw new AssertionError('Blank row (' + rowId + ') has no row index');
+    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
+      if (key === _this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
 
       for (var i = 0; i < _this._rowArray.length; i++) {
-        if (_this._rowArray[i].getKey() === rowId) return i;
+        if (_this._rowArray[i].getKey() === key) return i;
       }
 
-      throw new AssertionError('No row with id ' + rowId + ' (rowArray.length=' + _this._rowArray.length + ')');
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + _this._rowArray.length + ')');
     });
 
     _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
       return _this._rowArray[rowIndex];
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRowByKey", function (rowId) {
-      return _this._rowArray[_this.getIndexByKey(rowId)];
+    _defineProperty(_assertThisInitialized(_this), "getRowByKey", function (key) {
+      return _this._rowArray[_this.getIndexByKey(key)];
     });
 
     _defineProperty(_assertThisInitialized(_this), "indexToKey", function (rowIndex) {
