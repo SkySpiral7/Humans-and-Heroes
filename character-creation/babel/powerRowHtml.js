@@ -21,7 +21,7 @@ function PowerRowHtml(props)
    function onChangeFor(nextFunctionName)
    {
       //TODO: onChange
-      return null;
+      return function () {};
       //return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
    }
 
@@ -46,7 +46,7 @@ function PowerRowHtml(props)
    options.unshift(<option key="Select Power">Select Power</option>);
 
    rowElementList.push(<div className="col-12 col-sm-6 col-xl-auto" key="Choices">
-      <select id={idFor('Choices')} onChange={onChangeFor('select')} value={state.name}>
+      <select id={idFor('Choices')} onChange={onChangeFor('select')} value={state.effect}>
          {options}
       </select>
    </div>);
@@ -63,7 +63,7 @@ function PowerRowHtml(props)
       else
       {
          rowElementList.push(<div className="col" key="BaseCost">{'Base Cost per Rank: '}
-            <span id={idFor('BaseCost')} style="display: inline-block; width: 50px; text-align: center;">{state.baseCost}</span>;
+            <span id={idFor('BaseCost')} style={{display: 'inline-block', width: '50px', textAlign: 'center'}}>{state.baseCost}</span>
          </div>);
       }
    }
@@ -76,7 +76,7 @@ function PowerRowHtml(props)
    if (undefined !== state.effect)
    {
       rowList.push(<div className="row" key="Text">
-         <input type="text" style="width: 100%" id={idFor('Text')} onChange={onChangeFor('changeText')}
+         <input type="text" style={{width: '100%'}} id={idFor('Text')} onChange={onChangeFor('changeText')}
                 value={state.text} />
       </div>);
 
@@ -86,7 +86,7 @@ function PowerRowHtml(props)
          //TODO: if only diff is span width I could sub-function to have a single ARD
          rowElementList.push(<div className="col-12 col-sm-4 col-lg-3" key="Action">
                {'Action '}<span id={idFor('SelectAction')}
-                                style="display: inline-block; width: 85px; text-align: center;"><b>{state.action}</b></span>
+                                style={{display: 'inline-block', width: '85px', textAlign: 'center'}}><b>{state.action}</b></span>
             </div>
          );
          //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
@@ -112,7 +112,7 @@ function PowerRowHtml(props)
          rowElementList.push(
             <div className="col-12 col-sm-4 col-lg-3" key="Range">
                {'Range '}<span id={idFor('SelectRange')}
-                               style="display: inline-block; width: 90px; text-align: center;"><b>{state.range}</b></span>
+                               style={{display: 'inline-block', width: '90px', textAlign: 'center'}}><b>{state.range}</b></span>
             </div>);
       }
       else
@@ -136,7 +136,7 @@ function PowerRowHtml(props)
          rowElementList.push(
             <div className="col-12 col-sm-4 col-lg-3" key="Duration">
                {'Duration '}<span id={idFor('SelectDuration')}
-                                  style="display: inline-block; width: 80px; text-align: center;"><b>{state.duration}</b></span>
+                                  style={{display: 'inline-block', width: '80px', textAlign: 'center'}}><b>{state.duration}</b></span>
             </div>);
       }
       else
@@ -183,7 +183,7 @@ function PowerRowHtml(props)
       }
 
       rowList.push(<div id={props.sectionName + 'ModifierSection' + state.rowIndex} key="ModifierSection">
-         <ModifierList callback={props.modCallback} powerRowParent={props.powerRowParent} sectionName={props.sectionName} />
+         <ModifierList callback={props.modCallback} powerRowParent={props.powerRow} sectionName={props.sectionName} />
       </div>);
 
       let costPerRankDisplay;
@@ -223,9 +223,34 @@ function testPowerRowHtml()
 {
    const key = MainObject.generateKey();
    let modCallback = function () {};
+
+   let dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push(
+      {
+         "effect": "Feature",
+         "cost": 1,
+         "text": "my text",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      }
+   );
+   Loader.sendData(dataToLoad);
+
+   let powerRow = Main.powerSection.getRow(0);
+   let state = powerRow.getState();
+   let derivedValues = powerRow.getDerivedValues();
+
+   //cheating!
+   derivedValues.possibleActions = powerRow._validateAndGetPossibleActions();
+   derivedValues.possibleRanges = powerRow._getPossibleRanges();
+   derivedValues.possibleDurations = powerRow._validateAndGetPossibleDurations();
+
    ReactDOM.render(
-      <PowerRowHtml sectionName={"power"} powerRowParent={Main.powerSection} state={{}}
-                    derivedValues={{}} key={key} keyCopy={key}
+      <PowerRowHtml sectionName={"power"} powerRow={powerRow} state={state}
+                    derivedValues={derivedValues} key={key} keyCopy={key}
                     modCallback={modCallback} />,
       document.getElementById('power-section')
    );

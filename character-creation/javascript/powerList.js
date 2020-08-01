@@ -105,15 +105,17 @@ function PowerListAgnostic(sectionName)
          rowPointer.setText(jsonSection[i].text);  //they all have text because descriptors
 
          rowPointer.disableValidationForActivationInfo();
-         rowPointer.getModifierList().load(jsonSection[i].Modifiers);
+         //TODO: turn on loading mod list
+         //rowPointer.getModifierList().load(jsonSection[i].Modifiers);
          //modifiers are loaded first so that I can use isNonPersonalModifierPresent and reset the activation modifiers
 
          //blindly set activation info then validate
          rowPointer.setAction(jsonSection[i].action);
          rowPointer.setRange(jsonSection[i].range);
          rowPointer.setDuration(jsonSection[i].duration);
-         rowPointer.validateActivationInfo();
-         rowPointer.updateActivationModifiers();
+         //TODO: turn on these
+         //rowPointer.validateActivationInfo();
+         //rowPointer.updateActivationModifiers();
 
          if(undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
          if(undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);  //skill requires name however perception range has name without skill

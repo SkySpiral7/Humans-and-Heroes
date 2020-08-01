@@ -16,7 +16,7 @@ function PowerRowHtml(props) {
 
   function onChangeFor(nextFunctionName) {
     //TODO: onChange
-    return null; //return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
+    return function () {}; //return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
   }
 
   var topElementList = [];
@@ -47,7 +47,7 @@ function PowerRowHtml(props) {
   }, /*#__PURE__*/React.createElement("select", {
     id: idFor('Choices'),
     onChange: onChangeFor('select'),
-    value: state.name
+    value: state.effect
   }, options)));
 
   if (undefined !== state.effect) {
@@ -68,8 +68,12 @@ function PowerRowHtml(props) {
         key: "BaseCost"
       }, 'Base Cost per Rank: ', /*#__PURE__*/React.createElement("span", {
         id: idFor('BaseCost'),
-        style: "display: inline-block; width: 50px; text-align: center;"
-      }, state.baseCost), ";"));
+        style: {
+          display: 'inline-block',
+          width: '50px',
+          textAlign: 'center'
+        }
+      }, state.baseCost)));
     }
   }
 
@@ -85,7 +89,9 @@ function PowerRowHtml(props) {
       key: "Text"
     }, /*#__PURE__*/React.createElement("input", {
       type: "text",
-      style: "width: 100%",
+      style: {
+        width: '100%'
+      },
       id: idFor('Text'),
       onChange: onChangeFor('changeText'),
       value: state.text
@@ -99,7 +105,11 @@ function PowerRowHtml(props) {
         key: "Action"
       }, 'Action ', /*#__PURE__*/React.createElement("span", {
         id: idFor('SelectAction'),
-        style: "display: inline-block; width: 85px; text-align: center;"
+        style: {
+          display: 'inline-block',
+          width: '85px',
+          textAlign: 'center'
+        }
       }, /*#__PURE__*/React.createElement("b", null, state.action)))); //although triggered is not in old rules, the difference in width is 79 to 80 so ignore it
     } else {
       options = derivedValues.possibleActions.map(function (name) {
@@ -123,7 +133,11 @@ function PowerRowHtml(props) {
         key: "Range"
       }, 'Range ', /*#__PURE__*/React.createElement("span", {
         id: idFor('SelectRange'),
-        style: "display: inline-block; width: 90px; text-align: center;"
+        style: {
+          display: 'inline-block',
+          width: '90px',
+          textAlign: 'center'
+        }
       }, /*#__PURE__*/React.createElement("b", null, state.range))));
     } else {
       options = derivedValues.possibleRanges.map(function (name) {
@@ -147,7 +161,11 @@ function PowerRowHtml(props) {
         key: "Duration"
       }, 'Duration ', /*#__PURE__*/React.createElement("span", {
         id: idFor('SelectDuration'),
-        style: "display: inline-block; width: 80px; text-align: center;"
+        style: {
+          display: 'inline-block',
+          width: '80px',
+          textAlign: 'center'
+        }
       }, /*#__PURE__*/React.createElement("b", null, state.duration))));
     } else {
       options = derivedValues.possibleDurations.map(function (name) {
@@ -210,7 +228,7 @@ function PowerRowHtml(props) {
       key: "ModifierSection"
     }, /*#__PURE__*/React.createElement(ModifierList, {
       callback: props.modCallback,
-      powerRowParent: props.powerRowParent,
+      powerRowParent: props.powerRow,
       sectionName: props.sectionName
     })));
     var costPerRankDisplay;
@@ -261,11 +279,30 @@ function testPowerRowHtml() {
 
   var modCallback = function modCallback() {};
 
+  var dataToLoad = Loader.resetData();
+  dataToLoad.Powers.push({
+    "effect": "Feature",
+    "cost": 1,
+    "text": "my text",
+    "action": "None",
+    "range": "Personal",
+    "duration": "Permanent",
+    "Modifiers": [],
+    "rank": 1
+  });
+  Loader.sendData(dataToLoad);
+  var powerRow = Main.powerSection.getRow(0);
+  var state = powerRow.getState();
+  var derivedValues = powerRow.getDerivedValues(); //cheating!
+
+  derivedValues.possibleActions = powerRow._validateAndGetPossibleActions();
+  derivedValues.possibleRanges = powerRow._getPossibleRanges();
+  derivedValues.possibleDurations = powerRow._validateAndGetPossibleDurations();
   ReactDOM.render( /*#__PURE__*/React.createElement(PowerRowHtml, {
     sectionName: "power",
-    powerRowParent: Main.powerSection,
-    state: {},
-    derivedValues: {},
+    powerRow: powerRow,
+    state: state,
+    derivedValues: derivedValues,
     key: key,
     keyCopy: key,
     modCallback: modCallback

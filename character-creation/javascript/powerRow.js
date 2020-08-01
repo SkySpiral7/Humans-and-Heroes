@@ -24,6 +24,8 @@ function PowerObjectAgnostic(props)
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
    /**Get the effect name of the power*/
    this.getEffect=function(){return state.effect;};
+   //TODO: mocked getKey
+   this.getKey=function(){return '0';};
    /**Get the user's name for the power*/
    this.getName=function(){return state.name;};
    this.getRange=function(){return state.range;};
@@ -31,6 +33,7 @@ function PowerObjectAgnostic(props)
    this.getRowIndex=function(){return state.rowIndex;};
    this.getSectionName=function(){return props.sectionName;};
    this.getSkillUsed=function(){return state.skillUsed;};
+   this.getState=function(){return JSON.clone(state);};
    this.getText=function(){return state.text;};
    /**The total with respect to auto changes and raw total*/
    this.getTotal=function(){return state.total;};
@@ -294,6 +297,7 @@ function PowerObjectAgnostic(props)
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
    this.generateNameAndSkill=function()
    {
+      return;  //TODO: disabled generateNameAndSkill
       if (!Data.Power[state.effect].isAttack && undefined === modifierSection.findRowByName('Attack'))
       {
          state.name = state.skillUsed = undefined;

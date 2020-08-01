@@ -414,14 +414,12 @@ class ModifierList extends React.Component
 }
 
 /*next:
-how to keep mod list: give up. convert power row/list instead
-convert power html
-   set some data and confirm that
-   ignore onchange for now
+convert power row
+convert power list
+hook up power html
+   onChange
 convert mod list
    replace sanitizeRows with duplicate check
    sort on add?
-   test all
-convert power row
-convert power list
+test all
 */
