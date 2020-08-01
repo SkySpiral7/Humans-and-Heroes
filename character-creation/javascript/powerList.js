@@ -37,11 +37,7 @@ function PowerListAgnostic(sectionName)
    /**This creates the page's html (for the section)*/
    this.generate=function()
    {
-      CommonsLibrary.generate.call(this, rowArray, sectionName);
-      for (var i = 0; i < rowArray.length - 1; i++)  //the last row is always blank (no mod list)
-      {
-         rowArray[i].createModifierList();
-      }
+      //disabled
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
    this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};

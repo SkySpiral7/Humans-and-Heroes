@@ -1,18 +1,6 @@
 'use strict';
 const Data = {};
 Data.Ability = {names: ['Strength', 'Agility', 'Fighting', 'Dexterity', 'Stamina', 'Intellect', 'Awareness', 'Presence']};
-Data.SharedHtml = {
-   powerName: function (sectionName, rowIndex, currentValue)
-   {
-      return '<label class="fill-remaining">Name&nbsp;<input type="text" id="' + sectionName + 'Name' + rowIndex + '" ' +
-         'onChange="Main.' + sectionName + 'Section.getRow(' + rowIndex + ').changeName();" value="' + currentValue + '" /></label>';
-   },
-   powerSkill: function (sectionName, rowIndex, currentValue)
-   {
-      return '<label class="fill-remaining">Skill&nbsp;<input type="text" id="' + sectionName + 'Skill' + rowIndex + '" ' +
-         'onChange="Main.' + sectionName + 'Section.getRow(' + rowIndex + ').changeSkill();" value="' + currentValue + '" /></label>';
-   }
-};
 //freeze the only ones that are never changed so that I don't accidentally change them
 Object.freeze(Data.Ability);
 Object.freeze(Data.SharedHtml);

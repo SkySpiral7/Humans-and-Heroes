@@ -2,12 +2,12 @@
 
 class ModifierList extends React.Component
 {
-   /**props: callback, powerRowParent, sectionName, sectionRowIndex*/
+   /**props: callback, powerRowParent, sectionName*/
    constructor(props)
    {
       super(props);
       //state isn't allowed to be an array therefore everything is under the prop it
-      this.state = {it: [], sectionRowIndex: props.sectionRowIndex};
+      this.state = {it: []};
       this._rowArray = [];  //state.it as custom objects
       this._derivedValues = {
          //this could be just {} but I don't want this to be the only non-JSON place using objects as a map
@@ -25,6 +25,7 @@ class ModifierList extends React.Component
    /**This total will be the sum of all rank modifiers*/
    getRankTotal = () => {return this._derivedValues.rankTotal;};
    getPower = () => {return this.props.powerRowParent;};
+   getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
    //endregion basic getter
 
    //TODO: sort this section
@@ -36,7 +37,6 @@ class ModifierList extends React.Component
       this.setState(state =>
       {
          state.it = [];
-         //doesn't change state.sectionRowIndex
          return state;
       });
    };
@@ -168,6 +168,7 @@ class ModifierList extends React.Component
       for (let i = 0; i < jsonSection.length; i++)
       {
          const nameToLoad = jsonSection[i].name;
+         //TODO: call a fun to get current power index
          const loadLocation = (this.props.sectionName.toTitleCase() + ' #' + (this.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1));
          if (!Data.Modifier.names.contains(nameToLoad))
          {
@@ -203,20 +204,6 @@ class ModifierList extends React.Component
    {
       const rowIndex = this.findRowByName(rowName);
       if (rowIndex !== undefined) this._removeRow(rowIndex);
-   };
-   /**Needs to be updated for document reasons. This will update all dependent indexing*/
-   setSectionRowIndex = (sectionRowIndexGiven) =>
-   {
-      for (let i = 0; i < this._rowArray.length; i++)
-      {this._rowArray[i].setPowerRowIndex(sectionRowIndexGiven);}
-      //correct all indexing
-      this.setState(state =>
-      {
-         state.sectionRowIndex = sectionRowIndexGiven;
-         for (let i = 0; i < state.it.length; i++)
-         {state.it[i].powerRowIndex = sectionRowIndexGiven;}
-         return state;
-      });
    };
    updateNameByRow = (newName, modifierRow) =>
    {
@@ -305,7 +292,6 @@ class ModifierList extends React.Component
          key: this._blankKey,
          powerRowParent: this.props.powerRowParent,
          modifierListParent: this,
-         initialPowerRowIndex: this.state.sectionRowIndex,
          sectionName: this.props.sectionName
       });
       modifierObject.setModifier(newName);
@@ -427,17 +413,11 @@ class ModifierList extends React.Component
    //endregion 'private' functions section. Although all public none of these should be called from outside of this object
 }
 
-function createModifierList(callback, powerRowParent, sectionName, sectionRowIndex)
-{
-   ReactDOM.render(
-      <ModifierList callback={callback} powerRowParent={powerRowParent} sectionName={sectionName} sectionRowIndex={sectionRowIndex} />,
-      //TODO: if sectionRowIndex updates the whole thing will die. vanishes on generate so can't be used at all
-      document.getElementById(sectionName + 'ModifierSection' + sectionRowIndex)
-   );
-}
-
 /*next:
-how to keep mod list: maybe pow row saves element
+how to keep mod list: give up. convert power row/list instead
+convert power html
+   set some data and confirm that
+   ignore onchange for now
 convert mod list
    replace sanitizeRows with duplicate check
    sort on add?

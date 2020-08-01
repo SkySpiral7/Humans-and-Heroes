@@ -2,11 +2,11 @@
 
 function ModifierRowHtml(props) {
   var sectionName = props.powerRow.getSectionName();
-  var powerRowIndex = props.powerRow.getRowIndex();
+  var powerKey = props.powerRow.getKey();
   var key = props.keyCopy;
 
   function idFor(elementLabel) {
-    return sectionName + 'Modifier' + elementLabel + powerRowIndex + '.' + key;
+    return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
   }
 
   var state = undefined !== props.modifierRow ? props.modifierRow.getState() : {
@@ -14,7 +14,7 @@ function ModifierRowHtml(props) {
   };
   /*
   mod row values used: TODO: update chart
-  state: {powerRowIndex, name, rank};
+  state: {name, rank};
   derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
   */
 
@@ -27,6 +27,7 @@ function ModifierRowHtml(props) {
 
   if (!amReadOnly) {
     var options = Data.Modifier.names //equipment has removable built in and can't have the modifiers
+    //TODO: checking Main isn't an issue because it will exist for mod. but should check constant name instead
     .filter(function (name) {
       return !(props.powerRow.getSection() === Main.equipmentSection && (name === 'Removable' || name === 'Easily Removable'));
     }).filter(function (name) {
@@ -72,7 +73,7 @@ function ModifierRowHtml(props) {
           key: "powerNameDiv"
         }, /*#__PURE__*/React.createElement(PowerNameHtml, {
           sectionName: sectionName,
-          rowIndex: powerRowIndex,
+          powerKey: powerKey,
           currentValue: props.powerRow.getName(),
           onChange: function onChange() {
             return props.powerRow.changeName();
@@ -85,7 +86,7 @@ function ModifierRowHtml(props) {
             key: "powerSkillDiv"
           }, /*#__PURE__*/React.createElement(PowerSkillHtml, {
             sectionName: sectionName,
-            rowIndex: powerRowIndex,
+            powerKey: powerKey,
             currentValue: props.powerRow.getSkillUsed(),
             onChange: function onChange() {
               return props.powerRow.changeSkill();

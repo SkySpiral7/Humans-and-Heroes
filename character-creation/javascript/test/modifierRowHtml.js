@@ -1,5 +1,5 @@
 'use strict';
-TestSuite.advantageRowHtml = function (testState = {})
+TestSuite.modifierRowHtml = function (testState = {})
 {
    TestRunner.clearResults(testState);
    const assertions = [];
@@ -213,5 +213,5 @@ TestSuite.advantageRowHtml = function (testState = {})
    //there's no Faster Action
    assertions.push({Expected: expected, Actual: document.getElementById('powerModifierSection0').firstChild.outerHTML, Description: 'Feature: Selective ReadOnly'});
 
-   return TestRunner.displayResults('TestSuite.advantageRowHtml', assertions, testState);
+   return TestRunner.displayResults('TestSuite.modifierRowHtml', assertions, testState);
 };

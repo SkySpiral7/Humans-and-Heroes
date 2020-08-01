@@ -5,7 +5,7 @@ function PowerNameHtml(props) {
     className: "fill-remaining"
   }, "Name\xA0", /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: props.sectionName + 'Name' + props.rowIndex,
+    id: props.sectionName + 'Name' + props.powerKey,
     onChange: props.onChange,
     value: props.currentValue
   }));
@@ -16,7 +16,7 @@ function PowerSkillHtml(props) {
     className: "fill-remaining"
   }, "Skill\xA0", /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: props.sectionName + 'Skill' + props.rowIndex,
+    id: props.sectionName + 'Skill' + props.powerKey,
     onChange: props.onChange,
     value: props.currentValue
   }));

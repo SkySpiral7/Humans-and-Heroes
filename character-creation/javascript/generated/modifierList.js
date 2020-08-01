@@ -25,7 +25,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ModifierList);
 
-  /**props: callback, powerRowParent, sectionName, sectionRowIndex*/
+  /**props: callback, powerRowParent, sectionName*/
   function ModifierList(props) {
     var _this;
 
@@ -45,14 +45,17 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       return _this.props.powerRowParent;
     });
 
+    _defineProperty(_assertThisInitialized(_this), "getState", function () {
+      return JSON.clone(_this.state);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "clear", function () {
       _this._rowArray = [];
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it = []; //doesn't change state.sectionRowIndex
-
+        state.it = [];
         return state;
       });
     });
@@ -172,7 +175,8 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       var duplicateCheck = [];
 
       for (var i = 0; i < jsonSection.length; i++) {
-        var nameToLoad = jsonSection[i].name;
+        var nameToLoad = jsonSection[i].name; //TODO: call a fun to get current power index
+
         var loadLocation = _this.props.sectionName.toTitleCase() + ' #' + (_this.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1);
 
         if (!Data.Modifier.names.contains(nameToLoad)) {
@@ -208,23 +212,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       var rowIndex = _this.findRowByName(rowName);
 
       if (rowIndex !== undefined) _this._removeRow(rowIndex);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "setSectionRowIndex", function (sectionRowIndexGiven) {
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        _this._rowArray[i].setPowerRowIndex(sectionRowIndexGiven);
-      } //correct all indexing
-
-
-      _this.setState(function (state) {
-        state.sectionRowIndex = sectionRowIndexGiven;
-
-        for (var _i = 0; _i < state.it.length; _i++) {
-          state.it[_i].powerRowIndex = sectionRowIndexGiven;
-        }
-
-        return state;
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {
@@ -307,7 +294,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
         key: _this._blankKey,
         powerRowParent: _this.props.powerRowParent,
         modifierListParent: _assertThisInitialized(_this),
-        initialPowerRowIndex: _this.state.sectionRowIndex,
         sectionName: _this.props.sectionName
       });
       modifierObject.setModifier(newName); //need a new key for the new blank row
@@ -434,8 +420,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _this.state = {
-      it: [],
-      sectionRowIndex: props.sectionRowIndex
+      it: []
     };
     _this._rowArray = []; //state.it as custom objects
 
@@ -456,18 +441,11 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
   return ModifierList;
 }(React.Component);
-
-function createModifierList(callback, powerRowParent, sectionName, sectionRowIndex) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(ModifierList, {
-    callback: callback,
-    powerRowParent: powerRowParent,
-    sectionName: sectionName,
-    sectionRowIndex: sectionRowIndex
-  }), //TODO: if sectionRowIndex updates the whole thing will die. vanishes on generate so can't be used at all
-  document.getElementById(sectionName + 'ModifierSection' + sectionRowIndex));
-}
 /*next:
-how to keep mod list: maybe pow row saves element
+how to keep mod list: give up. convert power row/list instead
+convert power html
+   set some data and confirm that
+   ignore onchange for now
 convert mod list
    replace sanitizeRows with duplicate check
    sort on add?

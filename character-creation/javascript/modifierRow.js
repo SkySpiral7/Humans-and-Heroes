@@ -44,7 +44,6 @@ function ModifierObject(props)
    this.isFree=function(){return (derivedValues.modifierType === 'Free');};
    /**True if this modifier changes the cost per rank*/
    this.isRank=function(){return (derivedValues.modifierType === 'Rank');};
-   this.setPowerRowIndex=function(newPowerRowIndex){state.powerRowIndex=newPowerRowIndex;};
 
    //Value setting section
    /**Populates data of the modifier by using the name (which is validated).
@@ -166,13 +165,12 @@ function ModifierObject(props)
    //'private' functions section. Although all public none of these should be called from outside of this object
    this._constructor=function()
    {
-      state = {powerRowIndex: props.initialPowerRowIndex};
       this._resetValues();
    };
    this._resetValues=function()
    {
-      //props and indexes are not reset
-      state = {powerRowIndex: state.powerRowIndex};
+      //props are not reset
+      state = {};
       derivedValues = {hasAutoTotal: false, rawTotal: 0};
    };
    //constructor:

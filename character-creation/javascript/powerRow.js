@@ -270,17 +270,10 @@ function PowerObjectAgnostic(props)
       else if('Reality Warp' === state.effect) state.total += 75;
       state.total = modifierSection.calculateGrandTotal(state.total);  //used to calculate all auto modifiers
    };
-   this.createModifierList=function()
-   {
-      if (undefined === modifierSection)
-      {
-         var callback = function (newThing) {modifierSection = newThing;};
-         createModifierList(callback, this, props.sectionName, state.rowIndex);
-      }
-   };
-   /**This creates the page's html (for the row). called by power section only*/
    this.generate=function()
    {
+      return;  //disabled
+      //TODO: make this render when converted to react
       derivedValues.possibleActions = [];
       derivedValues.possibleRanges = [];
       derivedValues.possibleDurations = [];
@@ -291,7 +284,12 @@ function PowerObjectAgnostic(props)
          derivedValues.possibleRanges = this._getPossibleRanges();
          derivedValues.possibleDurations = this._validateAndGetPossibleDurations();
       }
-      return HtmlGenerator.powerRow(props, state, derivedValues);
+      //this needs to be create power row with callback
+      if (undefined === modifierSection)
+      {
+         var callback = function (newThing) {modifierSection = newThing;};
+         createModifierList(callback, this, props.sectionName, state.rowIndex);
+      }
    };
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
    this.generateNameAndSkill=function()
@@ -363,7 +361,7 @@ function PowerObjectAgnostic(props)
    this._constructor=function()
    {
       state = {rowIndex: props.initialRowIndex};
-      //createModifierList is lazy because it needs the div from generate
+      //modifierSection is lazy because it is re-created each render
       this._resetValues();
    };
    /**@returns {Array} of all ranges that are possible for this power based on current state.*/
@@ -380,7 +378,7 @@ function PowerObjectAgnostic(props)
    };
    this._resetValues=function()
    {
-      //props and indexes are not reset
+      //props, indexes, modifierSection are not reset
       state = {rowIndex: state.rowIndex};
       derivedValues = {shouldValidateActivationInfo: true, total: 0};
    };

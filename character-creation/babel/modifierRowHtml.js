@@ -4,12 +4,12 @@
 function ModifierRowHtml(props)
 {
    const sectionName = props.powerRow.getSectionName();
-   const powerRowIndex = props.powerRow.getRowIndex();
+   const powerKey = props.powerRow.getKey();
    const key = props.keyCopy;
 
    function idFor(elementLabel)
    {
-      return sectionName + 'Modifier' + elementLabel + powerRowIndex + '.' + key;
+      return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
    }
 
    const state = (undefined !== props.modifierRow)
@@ -18,7 +18,7 @@ function ModifierRowHtml(props)
 
    /*
    mod row values used: TODO: update chart
-   state: {powerRowIndex, name, rank};
+   state: {name, rank};
    derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
    */
 
@@ -34,6 +34,7 @@ function ModifierRowHtml(props)
    {
       const options = Data.Modifier.names
       //equipment has removable built in and can't have the modifiers
+      //TODO: checking Main isn't an issue because it will exist for mod. but should check constant name instead
       .filter(name => !(props.powerRow.getSection() === Main.equipmentSection &&
          (name === 'Removable' || name === 'Easily Removable')))
       .filter(name => props.powerRow.getEffect() === 'Feature' || !Data.Modifier[name].isReadOnly)
@@ -73,13 +74,13 @@ function ModifierRowHtml(props)
       if ('Attack' === state.name)
       {
          elementList.push(<div className="col-12 col-sm-6 col-lg-4" key="powerNameDiv">
-            <PowerNameHtml sectionName={sectionName} rowIndex={powerRowIndex} currentValue={props.powerRow.getName()}
+            <PowerNameHtml sectionName={sectionName} powerKey={powerKey} currentValue={props.powerRow.getName()}
                            onChange={() => props.powerRow.changeName()} />
          </div>);
          if (props.powerRow.getRange() !== 'Perception')
          {
             elementList.push(<div className="col-12 col-sm-6 col-lg-4" key="powerSkillDiv">
-               <PowerSkillHtml sectionName={sectionName} rowIndex={powerRowIndex} currentValue={props.powerRow.getSkillUsed()}
+               <PowerSkillHtml sectionName={sectionName} powerKey={powerKey} currentValue={props.powerRow.getSkillUsed()}
                                onChange={() => props.powerRow.changeSkill()} />
             </div>);
          }
