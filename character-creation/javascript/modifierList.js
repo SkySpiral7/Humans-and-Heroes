@@ -26,8 +26,6 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    //don't use CommonsLibrary.generate.call(this, rowArray, 'modifier'); because this isn't a section and the generate must return a string
    //don't use CommonsLibrary.removeRow(rowArray, rowIndex); because the way index is updated is different
    //don't use CommonsLibrary.sanitizeRows.call(this, rowArray); because getUniqueName takes a boolean
-   /**This set the page's data. called only by power row generate*/
-   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
@@ -85,9 +83,10 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
    /**This returns the page's html (for the section) as a string. called by power row object only*/
    this.generate=function()
    {
-       var allModifierRows='';
+       var allModifierRows='<div id="'+sectionName+'ModifierSection'+sectionRowIndex+'">';
       for(var i=0; i < rowArray.length; i++)  //last row is always blank but needs to be generated
           {allModifierRows+=rowArray[i].generate();}
+      allModifierRows+='</div>';
        return allModifierRows;
    };
    /**Return the unique name of the section. In this case it returns a sorted array of modifier unique names*/
@@ -161,7 +160,16 @@ function ModifierList(powerRowParent, sectionRowIndex, sectionName)
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**Creates a new row at the end of the array*/
-   this.addRow=function(){rowArray.push(new ModifierObject(this, sectionRowIndex, rowArray.length, sectionName));};
+   this.addRow = function ()
+   {
+      rowArray.push(new ModifierObject({
+         powerRowParent: powerRowParent,
+         modifierListParent: this,
+         initialPowerRowIndex: sectionRowIndex,
+         initialModifierRowIndex: rowArray.length,
+         sectionName: sectionName
+      }));
+   };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this._sanitizeRows=function()
    {

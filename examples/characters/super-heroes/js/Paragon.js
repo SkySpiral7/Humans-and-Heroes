@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 var knowledge = '(Choose One)';
 if(undefined !== queryParameters['names'][0]) knowledge = queryParameters['names'][0];
+=======
+var expertise = '(Choose One)';
+if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
+>>>>>>> gh-pages
 
 var json = {
    "Hero": {
@@ -8,11 +13,17 @@ var json = {
       "image": "../images/Paragon.jpg"
    },
    "Abilities": {
-      "Strength": 12,
+      "Strength": 10,
       "Agility": 3,
+<<<<<<< HEAD
       "Fighting": 8,
       "Dexterity": 7,
       "Stamina": 12,
+=======
+      "Fighting": 10,
+      "Dexterity": 3,
+      "Stamina": 10,
+>>>>>>> gh-pages
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 5
@@ -48,12 +59,12 @@ var json = {
       {
          "effect": "Feature",
          "cost": 2,
-         "text": "Impervious Toughness 6",
+         "text": "Impervious Toughness 5",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 6
+         "rank": 5
       },
       {
          "effect": "Quickness",
@@ -67,7 +78,7 @@ var json = {
       {
          "effect": "Enhanced Trait",
          "cost": 2,
-         "text": "Lifting Str 14; 410 tons",
+         "text": "Power Lifting: Enhanced Strength 4. Lifting Str 14; 410 tons",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -78,7 +89,7 @@ var json = {
                "text": "to Lifting"
             }
          ],
-         "rank": 2
+         "rank": 4
       }
    ],
    "Equipment": [],
@@ -107,16 +118,28 @@ var json = {
       {
          "name": "Ranged Combat",
          "subtype": "Throwing",
+<<<<<<< HEAD
          "rank": "Trained"
+=======
+         "rank": 7,
+         "ability": "Dexterity"
+>>>>>>> gh-pages
       }
    ],
    "Defenses": {
-      "Dodge": 5,
+      "Dodge": 7,
       "Parry": 0,
+<<<<<<< HEAD
       "Will": 3,
       "Fortitude": 0
    },
    "ruleset": "4.0",
+=======
+      "Will": 8,
+      "Fortitude": 0
+   },
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

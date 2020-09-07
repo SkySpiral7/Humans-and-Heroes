@@ -2,7 +2,7 @@ var json = {
    "Hero": {
       "name": "Hawk",
       "transcendence": 0,
-      "image": "../images/Sirocco.jpg"
+      "image": "../images/Sirocco.png"
    },
    "Abilities": {
       "Strength": 0,
@@ -70,12 +70,6 @@ var json = {
    "Advantages": [],
    "Skills": [
       {
-         "name": "Close Combat",
-         "subtype": "Unarmed",
-         "rank": 4,
-         "ability": "Fighting"
-      },
-      {
          "name": "Perception",
          "rank": 6,
          "ability": "Awareness"
@@ -87,7 +81,7 @@ var json = {
       "Will": 2,
       "Fortitude": 4
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": ""
 };

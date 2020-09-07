@@ -27,7 +27,7 @@ SelectUtil.containsText=function(optionID, textToFind)  //only used for testing 
     return false;
 };
 /**This searches each option text of the select id given for the text given, when found the select is set to that index*/
-SelectUtil.setText=function(optionID, textToSet)  //called in each row.setAll
+SelectUtil.setText=function(optionID, textToSet)  //only called by SelectUtil.changeText
 {
     if(!SelectUtil.isSelect(optionID)) throw new Error(optionID + ' is not a select');
     var element = document.getElementById(optionID);

@@ -5,38 +5,38 @@ Text: changeText(rowIndex);
 Rank: changeRank(rowIndex);
 Select Ability: selectAbility(rowIndex);  //needs to be saved for generating reasons
 */
-function SkillObject(rowIndex)
+function SkillObject(initialRowIndex)
 {
    //private variable section:
-   var name, rank, hasText, text, abilityName, totalBonus;
+   var state, derivedValues;
 
    //Basic getter section (all single line)
-   this.doesHaveText=function(){return hasText;};
-   this.getAbilityName=function(){return abilityName;};
-   this.getName=function(){return name;};
-   this.getRank=function(){return rank;};
-   this.getText=function(){return text;};
-   this.getTotalBonus=function(){return totalBonus;};
+   this.doesHaveText=function(){return derivedValues.hasText;};
+   this.getAbilityName=function(){return state.abilityName;};
+   this.getName=function(){return state.name;};
+   this.getRank=function(){return state.rank;};
+   this.getText=function(){return state.text;};
+   this.getTotalBonus=function(){return derivedValues.totalBonus;};
 
    //Single line function section (ignoring isBlank check)
-   this.isBlank=function(){return (name === undefined);};
+   this.isBlank=function(){return (undefined === state.name);};
    /**Simple setter for totalBonus which is the sum of the ability value and skill rank. Or a string indicator if the ability is --.*/
    this.setTotalBonus=function(bonusGiven)
    {
        if(this.isBlank()) return;
-       totalBonus = bonusGiven;  //number or string
+       derivedValues.totalBonus = bonusGiven;  //number or string
    };
-   this.setRowIndex=function(indexGiven){rowIndex=indexGiven;};
+   this.setRowIndex=function(indexGiven){state.rowIndex=indexGiven;};
 
    //Onchange section
    /**Onchange function for selecting a skill*/
-   this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+rowIndex), Main.skillSection);};
+   this.select=function(){CommonsLibrary.select.call(this, this.setSkill, ('skillChoices'+state.rowIndex), Main.skillSection);};
    /**Onchange function for changing the text*/
-   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+rowIndex), Main.skillSection);};
+   this.changeText=function(){CommonsLibrary.change.call(this, this.setText, ('skillText'+state.rowIndex), Main.skillSection);};
    /**Onchange function for changing the rank*/
-   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+rowIndex), Main.skillSection);};
+   this.changeRank=function(){CommonsLibrary.change.call(this, this.setRank, ('skillRank'+state.rowIndex), Main.skillSection);};
    /**Onchange function for selecting an ability*/
-   this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+rowIndex), Main.skillSection);};
+   this.selectAbility=function(){CommonsLibrary.select.call(this, this.setAbility, ('skillAbility'+state.rowIndex), Main.skillSection);};
 
    //Value setting section
    /**Populates data of the skill by using the name (which is validated).
@@ -44,30 +44,30 @@ function SkillObject(rowIndex)
    The data set is independent of the document and doesn't call update.*/
    this.setSkill=function(nameGiven)
    {
-      if(!Data.Skill.names.contains(nameGiven)){this.constructor(); return;}
-      name = nameGiven;
+      if(!Data.Skill.names.contains(nameGiven)){this._resetValues(); return;}
+      state.name = nameGiven;
       //TODO: update v4.0 tests?
-      if(Main.getActiveRuleset().isLessThan(4,0)) rank = 1;
-      else rank = 'Trained';
-      abilityName = Data.Skill[name].ability;
-      hasText = Data.Skill[name].hasText;
-      if('Other' === name) text = 'Skill Name and Subtype';  //doesn't exist in v1.0
-      else if(hasText) text = 'Skill Subtype';
-      else text = undefined;
+      if(Main.getActiveRuleset().isLessThan(4,0)) state.rank = 1;
+      else state.rank = 'Trained';
+      state.abilityName = Data.Skill[state.name].ability;
+      derivedValues.hasText = Data.Skill[state.name].hasText;
+      if('Other' === state.name) state.text = 'Skill Name and Subtype';  //doesn't exist in v1.0
+      else if(derivedValues.hasText) state.text = 'Skill Subtype';
+      else state.text = undefined;
    };
    /**Used to set data independent of the document and without calling update*/
    this.setText=function(textGiven)
    {
        if(this.isBlank()) return;
-       if(!hasText) return;  //can only happen when loading
-       text = textGiven.trim();  //trimmed in case it needs to match up with something else
+       if(!derivedValues.hasText) return;  //can only happen when loading
+       state.text = textGiven.trim();  //trimmed in case it needs to match up with something else
    };
    /**Used to set data independent of the document and without calling update*/
    this.setRank=function(rankGiven)
    {
       if(this.isBlank()) return;
-      if(Main.getActiveRuleset().isLessThan(4,0)) rank = sanitizeNumber(rankGiven, 1, 1);
-      else rank = rankGiven;  //string
+      if(Main.getActiveRuleset().isLessThan(4,0)) state.rank = sanitizeNumber(rankGiven, 1, 1);
+      else state.rank = rankGiven;  //string
       //TODO: update v4.0 tests?
    };
    /**Used to set data independent of the document and without calling update. This function takes the ability's name*/
@@ -75,103 +75,45 @@ function SkillObject(rowIndex)
    {
        if(this.isBlank()) return;
        if(!Data.Ability.names.contains(abilityNameGiven)) return;  //only happens when loading bad data
-       abilityName = abilityNameGiven;
+       state.abilityName = abilityNameGiven;
    };
 
    //public function section
    /**This creates the page's html (for the row). called by skill section only*/
    this.generate=function()
    {
-      var htmlString = '<div class="row">\n';
-      htmlString+='<div class="col-12 col-sm-4 col-lg-3 col-xl-auto">';
-      htmlString+='<select id="skillChoices'+rowIndex+'" onChange="Main.skillSection.getRow('+rowIndex+').select();">\n';
-      htmlString+='   <option>Select Skill</option>\n';
-      for (var i=0; i < Data.Skill.names.length; i++)
-      {
-         htmlString+='   <option>'+Data.Skill.names[i]+'</option>\n';
-      }
-      htmlString+='</select></div>\n';
-      if(this.isBlank()) return htmlString + '</div>';  //done
-
-      if (hasText)
-      {
-         htmlString += '<div class="col-12 col-sm-8 col-md-5">';
-         htmlString += '<input type="text" style="width: 100%" id="skillText' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeText();" />';
-         htmlString += '</div>\n';
-      }
-      if (Main.getActiveRuleset().isLessThan(4,0))
-      {
-         if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
-         else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
-         htmlString += '<label>Ranks <input type="text" size="1" id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();" /></label>\n';
-         //v1 Expertise can use any ability but PL sounds like Int only. Also sounds like the rest are set
-         htmlString += '+&nbsp;<select id="skillAbility' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').selectAbility();">\n';
-         htmlString += '   <option>Strength</option>\n';  //hard coding is more readable and Data.Ability.names doesn't change
-         htmlString += '   <option>Agility</option>\n';
-         htmlString += '   <option>Fighting</option>\n';
-         htmlString += '   <option>Dexterity</option>\n';
-         htmlString += '   <option>Stamina</option>\n';
-         htmlString += '   <option>Intellect</option>\n';
-         htmlString += '   <option>Awareness</option>\n';
-         htmlString += '   <option>Presence</option>\n';
-         htmlString += '</select>\n';
-         htmlString += '(+<span id="skillBonus' + rowIndex + '"></span>)\n';
-         htmlString += '</div>\n';
-      }
-      else  //v4.0+
-      {
-         //skills in 4.0 still use ability but it's misleading to associate them
-         //TODO: format this for rankless only
-         if(hasText) htmlString += '<div class="col-12 col-md-3 col-lg-4 col-xl-auto">';
-         else htmlString+='<div class="col-12 col-sm-8 col-xl-auto">';
-         htmlString += '<select id="skillRank' + rowIndex + '" onChange="Main.skillSection.getRow(' + rowIndex + ').changeRank();">\n';
-         htmlString += '   <option>Trained</option>\n';
-         htmlString += '   <option>Mastered</option>\n';
-         htmlString += '</select>\n';
-         htmlString += '</div>\n';
-         //TODO: should have = 2 for mastered?
-      }
-      htmlString += '</div>\n';  //end row
-      return htmlString;
+      return HtmlGenerator.skillRow(state, derivedValues);
    };
    /**Get the name of the skill appended with text to determine redundancy*/
    this.getUniqueName=function()
    {
-       if(name === 'Close Combat' || name === 'Ranged Combat') return ('Combat: '+text);  //must not have the same text as each other
-       if(hasText) return (name+': '+text);
-       return name;
+       if(state.name === 'Close Combat' || state.name === 'Ranged Combat') return ('Combat: '+state.text);  //must not have the same text as each other
+       if(derivedValues.hasText) return (state.name+': '+state.text);
+       return state.name;
    };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
-       var json={};
-       json.name=name;
-       if(hasText) json.subtype=text;
-       json.rank=rank;
-       json.ability=abilityName;
-       return json;
+      //don't just clone state: text is different
+      var json = {};
+      json.name = state.name;
+      if (derivedValues.hasText) json.subtype = state.text;
+      json.rank = state.rank;
+      json.ability = state.abilityName;
+      return json;
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   /**This sets the page's data. called only by section generate*/
-   this.setValues=function()
-   {
-      if(this.isBlank()) return;  //already set (to default)
-      SelectUtil.setText(('skillChoices'+rowIndex), name);
-      if(hasText) document.getElementById('skillText'+rowIndex).value=text;
-      //setting value works for 1.0-4.0+ since the select has no value the text is used by default
-      document.getElementById('skillRank'+rowIndex).value = rank;
-      if(null !== document.getElementById('skillAbility'+rowIndex)) SelectUtil.setText(('skillAbility'+rowIndex), abilityName);
-      if(null !== document.getElementById('skillBonus'+rowIndex)) document.getElementById('skillBonus'+rowIndex).innerHTML = totalBonus;
-   };
    this._constructor=function()
    {
-       name=undefined;
-       rank=undefined;
-       hasText=undefined;
-       text=undefined;
-       abilityName=undefined;
-       totalBonus=undefined;
+      state = {rowIndex: initialRowIndex};
+      this._resetValues();
+   };
+   this._resetValues=function()
+   {
+      //index is not reset
+      state = {rowIndex: state.rowIndex};
+      derivedValues = {};
    };
    //constructor:
    this._constructor();

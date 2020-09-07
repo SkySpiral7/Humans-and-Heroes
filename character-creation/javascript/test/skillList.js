@@ -5,7 +5,7 @@ TestSuite.skillList.calculateValues=function(testState={})
    TestRunner.clearResults(testState);
    var assertions=[];
 
-   Main.setRuleset(3, 14);
+   Main.setRuleset(3, 16);
    DomUtil.changeValue('Strength', '--');
    SelectUtil.changeText('skillChoices0', 'Athletics');
    assertions.push({Expected: 'Always Fail', Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Missing ability always fail'});
@@ -66,19 +66,19 @@ TestSuite.skillList.load=function(testState={})
 
    try{
       Main.skillSection.clear();  //TODO: this shouldn't be needed but is because otherwise setRuleset fails: clear ability, update skill
-      Main.setRuleset(3, 14);
+      Main.setRuleset(3, 16);
       dataToLoad = Loader.resetData();
       dataToLoad.Skills.push({"name":"Insight","subtype":"Reading faces","rank":2,"ability":"Strength"});
       Loader.sendData(dataToLoad);
-      assertions.push({Expected: 'Insight', Actual: Main.skillSection.getRow(0).getName(), Description: 'Happy Path 3.14: skill'});
-      assertions.push({Expected: true, Actual: Main.skillSection.getRow(1).isBlank(), Description: 'Happy Path 3.14: 1 row'});
-      assertions.push({Expected: [], Actual: Messages.list, Description: 'Happy Path 3.14: no errors'});
-      assertions.push({Expected: 'Reading faces', Actual: Main.skillSection.getRow(0).getText(), Description: 'Happy Path 3.14: getText'});
-      assertions.push({Expected: 2, Actual: Main.skillSection.getRow(0).getRank(), Description: 'Happy Path 3.14: getRank'});
-      assertions.push({Expected: 'Strength', Actual: Main.skillSection.getRow(0).getAbilityName(), Description: 'Happy Path 3.14: getAbilityName'});
-      assertions.push({Expected: '+2', Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Happy Path 3.14: getTotalBonus'});
-      assertions.push({Expected: 1, Actual: Main.skillSection.getTotal(), Description: 'Happy Path 3.14: Make sure update was called'});
-   } catch(e){assertions.push({Error: e, Description: 'Happy Path 3.14'});}
+      assertions.push({Expected: 'Insight', Actual: Main.skillSection.getRow(0).getName(), Description: 'Happy Path 3.16: skill'});
+      assertions.push({Expected: true, Actual: Main.skillSection.getRow(1).isBlank(), Description: 'Happy Path 3.16: 1 row'});
+      assertions.push({Expected: [], Actual: Messages.list, Description: 'Happy Path 3.16: no errors'});
+      assertions.push({Expected: 'Reading faces', Actual: Main.skillSection.getRow(0).getText(), Description: 'Happy Path 3.16: getText'});
+      assertions.push({Expected: 2, Actual: Main.skillSection.getRow(0).getRank(), Description: 'Happy Path 3.16: getRank'});
+      assertions.push({Expected: 'Strength', Actual: Main.skillSection.getRow(0).getAbilityName(), Description: 'Happy Path 3.16: getAbilityName'});
+      assertions.push({Expected: '+2', Actual: Main.skillSection.getRow(0).getTotalBonus(), Description: 'Happy Path 3.16: getTotalBonus'});
+      assertions.push({Expected: 1, Actual: Main.skillSection.getTotal(), Description: 'Happy Path 3.16: Make sure update was called'});
+   } catch(e){assertions.push({Error: e, Description: 'Happy Path 3.16'});}
 
    return TestRunner.displayResults('TestSuite.skillList.load', assertions, testState);
 };

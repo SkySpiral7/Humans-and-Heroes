@@ -5,13 +5,20 @@ var json = {
       "image": "../images/Martial-Artist.jpg"
    },
    "Abilities": {
-      "Strength": 8,
+      "Strength": 10,
       "Agility": 6,
       "Fighting": 8,
+<<<<<<< HEAD
       "Dexterity": 9,
       "Stamina": 3,
       "Intellect": 0,
       "Awareness": 6,
+=======
+      "Dexterity": 4,
+      "Stamina": 8,
+      "Intellect": 2,
+      "Awareness": 5,
+>>>>>>> gh-pages
       "Presence": 5
    },
    "Powers": [
@@ -49,7 +56,7 @@ var json = {
       },
       {
          "name": "Defensive Roll",
-         "rank": 4
+         "rank": 2
       },
       {
          "name": "Evasion",
@@ -98,16 +105,39 @@ var json = {
       },
       {
          "name": "Athletics",
+<<<<<<< HEAD
          "rank": "Mastered"
+=======
+         "subtype": "",
+         "rank": 7,
+         "ability": "Strength"
+>>>>>>> gh-pages
       },
       {
          "name": "Close Combat",
          "subtype": "Unarmed",
+<<<<<<< HEAD
          "rank": "Mastered"
       },
       {
          "name": "Contortion",
          "rank": "Trained"
+=======
+         "rank": 2,
+         "ability": "Fighting"
+      },
+      {
+         "name": "Expertise",
+         "subtype": "Philosophy",
+         "rank": 1,
+         "ability": "Intellect"
+      },
+      {
+         "name": "Insight",
+         "subtype": "",
+         "rank": 5,
+         "ability": "Awareness"
+>>>>>>> gh-pages
       },
       {
          "name": "Knowledge",
@@ -128,12 +158,16 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 7,
-      "Parry": 5,
+      "Dodge": 4,
+      "Parry": 2,
       "Will": 4,
-      "Fortitude": 8
+      "Fortitude": 1
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

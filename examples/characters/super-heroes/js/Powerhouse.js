@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+var expertise = '(Choose One)';
+if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
+
+>>>>>>> gh-pages
 var json = {
    "Hero": {
       "name": "Powerhouse",
@@ -5,11 +11,19 @@ var json = {
       "image": "../images/Powerhouse.jpg"
    },
    "Abilities": {
+<<<<<<< HEAD
       "Strength": 12,
       "Agility": 0,
       "Fighting": 7,
       "Dexterity": 7,
       "Stamina": 13,
+=======
+      "Strength": 10,
+      "Agility": 1,
+      "Fighting": 6,
+      "Dexterity": 1,
+      "Stamina": 10,
+>>>>>>> gh-pages
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 1
@@ -85,17 +99,17 @@ var json = {
       {
          "effect": "Feature",
          "cost": 2,
-         "text": "Impervious Toughness 6",
+         "text": "Impervious Toughness 5",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 6
+         "rank": 5
       },
       {
          "effect": "Enhanced Trait",
          "cost": 2,
-         "text": "Power Lifting: Enhanced Trait 4. Lifting Str 16; 1,600 tons",
+         "text": "Power Lifting: Enhanced Strength 6. Lifting Str 16; 1,600 tons",
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -106,7 +120,7 @@ var json = {
                "text": "to Lifting"
             }
          ],
-         "rank": 4
+         "rank": 6
       }
    ],
    "Equipment": [],
@@ -124,8 +138,21 @@ var json = {
    ],
    "Skills": [
       {
+<<<<<<< HEAD
          "name": "Athletics",
          "rank": "Mastered"
+=======
+         "name": "Close Combat",
+         "subtype": "Unarmed",
+         "rank": 4,
+         "ability": "Fighting"
+      },
+      {
+         "name": "Expertise",
+         "subtype": expertise,
+         "rank": 6,
+         "ability": "Intellect"
+>>>>>>> gh-pages
       },
       {
          "name": "Close Combat",
@@ -139,12 +166,16 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 5,
-      "Parry": 0,
-      "Will": 5,
+      "Dodge": 9,
+      "Parry": 4,
+      "Will": 8,
       "Fortitude": 0
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

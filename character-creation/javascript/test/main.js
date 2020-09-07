@@ -76,8 +76,8 @@ TestSuite.main.changeRuleset=function(testState={})
 
     try{
     DomUtil.changeValue('ruleset', '3.20');
-    assertions.push({Expected: '3.14', Actual: Main.getActiveRuleset().toString(), Description: '3.x Minor too large: ActiveRuleset 3.20 -> 14'});
-    assertions.push({Expected: '3.14', Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.20 -> 14'});
+    assertions.push({Expected: '3.16', Actual: Main.getActiveRuleset().toString(), Description: '3.x Minor too large: ActiveRuleset 3.20 -> 16'});
+    assertions.push({Expected: '3.16', Actual: rulesetElement.value, Description: '3.x Minor too large: Element 3.20 -> 16'});
     } catch(e){assertions.push({Error: e, Description: '3.x Minor too large'});}
 
     try{
@@ -193,21 +193,118 @@ TestSuite.main.loadImageFromFile=function(testState={})
 TestSuite.main.getProtectionTotal=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   function getActual()
+   {
+      return Main.getProtectionTotal();
+   }
+
+   assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
+
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'uses equip when power is null'});
+
+   Main.equipmentSection.clear();
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'uses power when equip is null'});
+
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   assertions.push({Expected: 1, Actual: getActual(), Description: 'does not stack'});
+
+   DomUtil.changeValue('equipmentRank0', 2);
+   assertions.push({Expected: 2, Actual: getActual(), Description: 'use equip if greater'});
+
+   DomUtil.changeValue('powerRank0', 3);
+   assertions.push({Expected: 3, Actual: getActual(), Description: 'use power if greater'});
+
+   Main.setRuleset(1, 0);
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   DomUtil.changeValue('powerRank0', 2);
+   assertions.push({Expected: 3, Actual: getActual(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', assertions, testState);
-
-    //be sure to call Main.setRuleset(1, 0); inside tests and:
-    //return TestRunner.displayResults('TestSuite.powerRow.setDuration. Rules: '+Main.getActiveRuleset(), assertions, testState);
 };
 TestSuite.main.update=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'Default PL 1'});
+   assertions.push(
+      {Expected: '1', Actual: document.getElementById('power-level').innerHTML, Description: 'power-level html set'});
+   assertions.push({
+      Expected: '15',
+      Actual: document.getElementById('grand-total-max').innerHTML,
+      Description: 'grand-total-max html set'
+   });
+
+   DomUtil.changeValue('Strength', -5);
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '-10 CP = PL 1'});
+
+   DomUtil.changeValue('Fighting', -5);
+   DomUtil.changeValue('Agility', -5);
+   DomUtil.changeValue('Dexterity', -5);
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '-35 CP = PL 1'});
+   Main.abilitySection.clear();
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15);
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '15 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 16);
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: '16 CP = PL 2'});
+
+   DomUtil.changeValue('powerRank0', 1000);
+   SelectUtil.changeText('advantageChoices0', 'Your Petty Rules Don\'t Apply to Me');
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   //petty costs 50 + 40 damage = 90 CP /15 = 6 PL even though PL limit would require 10
+   DomUtil.changeValue('powerRank0', 10);
+   assertions.push(
+      {Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'Petty rules has PL from CP only'});
+
+   Main.clear();
+   assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'Default transcendence 0'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15 * 19);
+   assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'PL 19 = transcendence 0'});
+
+   DomUtil.changeValue('powerRank0', 15 * 20);
+   assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'PL 20 = transcendence 1'});
+
+   //v3.15
+   Main.setRuleset(3, 15);
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Default PL 0'});
+
+   DomUtil.changeValue('Strength', -5);
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 -10 CP = PL 0'});
+
+   DomUtil.changeValue('Fighting', -5);
+   DomUtil.changeValue('Agility', -5);
+   DomUtil.changeValue('Dexterity', -5);
+   assertions.push({Expected: 0, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 -35 CP = PL 0'});
+   Main.abilitySection.clear();
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 1 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 15);
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 15 CP = PL 1'});
+
+   DomUtil.changeValue('powerRank0', 16);
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 16 CP = PL 2'});
+
+   //v1.0
+   Main.setRuleset(1, 0);
+   assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'v1.0 Default transcendence 0'});
+
+   SelectUtil.changeText('powerChoices0', 'Feature');
+   DomUtil.changeValue('powerRank0', 15 * 20);
+   assertions.push(
+      {Expected: 0, Actual: Main.getTranscendence(), Description: 'v1.0 PL 20 = still transcendence 0'});
 
    return TestRunner.displayResults('TestSuite.main.update', assertions, testState);
 };
@@ -262,39 +359,38 @@ TestSuite.main.updateInitiative=function(testState={})
 TestSuite.main.updateOffense=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
-   var expected;
+   var assertions = [], expected;
 
-   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy: Unarmed only by default'});
+   expected = [{skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0}];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Happy: Unarmed only by default'});
 
-   Main.setRuleset(3, 14);
+   Main.setRuleset(3, 16);
 
    DomUtil.changeValue('Strength', 4);
    DomUtil.changeValue('Fighting', 2);
-   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 4}]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Default Unarmed uses abilities'});
+   expected = [{skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 4}];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Default Unarmed uses abilities'});
 
    Main.clear();
    DomUtil.changeValue('Fighting', '--');
-   expected = {Offense: []};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Absent Fighting: no Unarmed by default'});
+   expected = [];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Absent Fighting: no Unarmed by default'});
 
    SelectUtil.changeText('skillChoices0', 'Close Combat');
    DomUtil.changeValue('skillText0', 'Unarmed');
    //because Unarmed defaults to Fighting
-   expected = {Offense: []};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Absent Fighting with Unarmed: still no Unarmed'});
+   expected = [];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Absent Fighting with Unarmed: still no Unarmed'});
 
    DomUtil.changeValue('skillAbility0', 'Awareness');
    DomUtil.changeValue('Strength', 4);
    DomUtil.changeValue('Awareness', 2);
-   expected = {Offense: [{skillName: 'Unarmed', attackBonus: 3, range: 'Close', effect: 'Damage', rank: 4}]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'No Fgt, Awe Unarmed: has Unarmed with attack/rank'});
+   expected = [{skillName: 'Unarmed', attackBonus: 3, range: 'Close', effect: 'Damage', rank: 4}];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'No Fgt, Awe Unarmed: has Unarmed with attack/rank'});
 
    DomUtil.changeValue('Strength', '--');
-   expected = {Offense: []};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'No Str, Awe Unarmed: no Unarmed'});
+   expected = [];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'No Str, Awe Unarmed: no Unarmed'});
 
    Main.clear();
    SelectUtil.changeText('powerChoices0', 'Damage');
@@ -305,48 +401,48 @@ TestSuite.main.updateOffense=function(testState={})
    DomUtil.changeValue('equipmentSkill0', 'Sword');
    DomUtil.changeValue('equipmentRank0', 2);
    DomUtil.changeValue('Fighting', 2);
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Sword 1', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 1},
       {skillName: 'Sword 2', attackBonus: 2, range: 'Close', effect: 'Affliction', rank: 2}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Happy Power, Equip, no skill: has attack/rank using ability'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Happy Power, Equip, no skill: has attack/rank using ability'});
 
    SelectUtil.changeText('skillChoices0', 'Close Combat');
    DomUtil.changeValue('skillText0', 'Sword');
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Sword 1', attackBonus: 3, range: 'Close', effect: 'Damage', rank: 1},
       {skillName: 'Sword 2', attackBonus: 3, range: 'Close', effect: 'Affliction', rank: 2}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Power/Equip with skill'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Power/Equip with skill'});
 
    Main.clear();
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerSelectRange0', 'Perception');
    DomUtil.changeValue('powerName0', 'Attack 1');
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Attack 1', attackBonus: '--', range: 'Perception', effect: 'Damage', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Perception attack'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Perception attack'});
 
    DomUtil.changeValue('powerSelectRange0', 'Ranged');
    DomUtil.changeValue('powerSkill0', 'Gun');
    DomUtil.changeValue('Dexterity', 5);
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Attack 1', attackBonus: 5, range: 'Ranged', effect: 'Damage', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged attack no skill'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Ranged attack no skill'});
 
    SelectUtil.changeText('skillChoices0', 'Ranged Combat');
    DomUtil.changeValue('skillText0', 'Gun');
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Attack 1', attackBonus: 6, range: 'Ranged', effect: 'Damage', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged attack with skill'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Ranged attack with skill'});
 
    Main.clear();
    SelectUtil.changeText('powerChoices0', 'Damage');
@@ -354,22 +450,22 @@ TestSuite.main.updateOffense=function(testState={})
    DomUtil.changeValue('powerModifierChoices0.0', 'Accurate');
    DomUtil.changeValue('powerModifierRank0.0', 2);
    DomUtil.changeValue('Fighting', 1);
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 1, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Sword 1', attackBonus: 5, range: 'Close', effect: 'Damage', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Accurate attack'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Accurate attack'});
 
    Main.setRuleset(1, 0);
    SelectUtil.changeText('advantageChoices0', 'Close Attack');
    DomUtil.changeValue('Fighting', 1);
    SelectUtil.changeText('powerChoices0', 'Damage');
    DomUtil.changeValue('powerName0', 'Sword 1');
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Sword 1', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Close Attack advantage'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'v1.0 Close Attack advantage'});
 
    Main.clear();
    SelectUtil.changeText('advantageChoices0', 'Ranged Attack');
@@ -386,23 +482,138 @@ TestSuite.main.updateOffense=function(testState={})
    DomUtil.changeValue('powerName1', 'Attack 2');
    SelectUtil.changeText('powerSelectRange1', 'Ranged');
 
-   expected = {Offense: [
+   expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Attack 1', attackBonus: 3, range: 'Ranged', effect: 'Damage', rank: 1},
       {skillName: 'Attack 2', attackBonus: 3, range: 'Ranged', effect: 'Affliction', rank: 1}
-   ]};
-   assertions.push({Expected: expected, Actual: Main.getDerivedValues(), Description: 'Ranged Attack advantage'});
+   ];
+   assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'v1.0 Ranged Attack advantage'});
 
    return TestRunner.displayResults('TestSuite.main.updateOffense', assertions, testState);
 };
-TestSuite.main.calculatePowerLevelLimitations=function(testState={})
+TestSuite.main._calculatePowerLevelLimitations=function(testState={})
 {
    TestRunner.clearResults(testState);
-   var assertions=[];
+   var assertions = [];
 
-   //ADD TESTS
+   //TODO: test for v4.0
+   Main.setRuleset(3, 16);
+   DomUtil.changeValue('Awareness', 11);
+   //Ability 11 = 22 CP /15 = PL 2
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'Ability 11 = PL by CP'});
 
-   return TestRunner.displayResults('TestSuite.main.calculatePowerLevelLimitations', assertions, testState);
+   DomUtil.changeValue('Awareness', 13);
+   assertions.push({Expected: 3, Actual: Main.getDerivedValues().powerLevel, Description: 'Ability 13 = PL 3'});
+
+   Main.abilitySection.clear();
+   SelectUtil.changeText('skillChoices0', 'Athletics');
+   DomUtil.changeValue('skillRank0', 11);
+   //Skill 11 = 5.5 CP /15 = PL 1
+   assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'Skill 11 = PL by CP'});
+
+   DomUtil.changeValue('skillRank0', 12);
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'Skill 12 = PL 2'});
+
+   Main.skillSection.clear();
+   SelectUtil.changeText('skillChoices0', 'Close Combat');
+   DomUtil.changeValue('skillText0', 'Unarmed');
+   DomUtil.changeValue('skillRank0', 10);
+   //Skill 10 = 5 CP /15 = PL 1
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Unarmed Attack to PL'});
+
+   DomUtil.changeValue('Strength', 2);
+   //9 CP /15 = PL 1
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'PL doesn\'t Attack+Damage'});
+
+   Main.skillSection.clear();
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'Unarmed Damage to PL'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   //10 CP /15 = 1 PL
+   DomUtil.changeValue('powerRank0', 10);
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Power Damage to PL'});
+
+   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   //40 CP /15 = 3 PL
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Perception Damage to PL'});
+
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   DomUtil.changeValue('powerRank0', 10);
+   //10 CP /15 = PL 1
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Toughness to PL'});
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Dodge-input', 2);
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'PL doesn\'t Dodge+Toughness'});
+
+   Main.clear();
+   //2 CP /15 = PL 1
+   DomUtil.changeValue('Dodge-input', 2);
+   assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'Dodge to PL'});
+   DomUtil.changeValue('Dodge-input', 0);
+
+   //4 CP /15 = PL 1
+   DomUtil.changeValue('Parry-input', 4);
+   assertions.push({Expected: 4, Actual: Main.getDerivedValues().powerLevel, Description: 'Parry to PL'});
+   DomUtil.changeValue('Parry-input', 0);
+
+   DomUtil.changeValue('Fortitude-input', 5);
+   //5 CP /15 = PL 1
+   assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'Fortitude to PL'});
+   DomUtil.changeValue('Fortitude-input', 0);
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Will-input', 12);
+   assertions.push({Expected: 12, Actual: Main.getDerivedValues().powerLevel, Description: 'Will to PL'});
+   //Toughness to PL is above
+
+   //v3.15
+   Main.setRuleset(3, 15);
+   SelectUtil.changeText('skillChoices0', 'Close Combat');
+   DomUtil.changeValue('skillText0', 'Unarmed');
+   DomUtil.changeValue('skillRank0', 10);
+   //Skill 10 = 5 CP /15 = PL 1 vs attack 10 + 0 damage /2 = PL 5
+   assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Unarmed Attack+0 to PL'});
+
+   DomUtil.changeValue('Strength', 2);
+   //9 CP /15 = PL 1 vs attack 10 + 2 damage /2 = PL 6
+   assertions.push({Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Unarmed Attack+Damage to PL'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Damage');
+   //10 CP /15 = 1 PL
+   DomUtil.changeValue('powerRank0', 10);
+   assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Power Damage to PL'});
+
+   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   //40 CP /15 = 3 PL
+   assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Perception Damage to PL'});
+
+   Main.clear();
+   SelectUtil.changeText('powerChoices0', 'Protection');
+   DomUtil.changeValue('powerRank0', 10);
+   //10 CP /15 = PL 1
+   assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 0+Toughness to PL'});
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Dodge-input', 2);
+   assertions.push({Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Dodge+Toughness to PL'});
+   DomUtil.changeValue('Dodge-input', 0);
+
+   DomUtil.changeValue('Parry-input', 4);
+   assertions.push({Expected: 7, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Parry+Toughness to PL'});
+
+   Main.clear();
+   DomUtil.changeValue('Fortitude-input', 10);
+   //10 CP /15 = PL 1
+   assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 0+Fortitude to PL'});
+
+   //12 CP /15 = PL 1
+   DomUtil.changeValue('Will-input', 2);
+   assertions.push({Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Will+Fortitude to PL'});
+
+   return TestRunner.displayResults('TestSuite.main._calculatePowerLevelLimitations', assertions, testState);
 };
 TestSuite.main.calculateTotal=function(testState={})
 {

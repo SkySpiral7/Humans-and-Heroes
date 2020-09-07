@@ -3,7 +3,7 @@ var json = {
    "Hero": {
       "name": "Hero Name",
       "transcendence": 0,
-      "image": "../images/Sirocco.jpg"
+      "image": "../images/Sirocco.png"
    },
    "Abilities": {
       "Strength": 0,

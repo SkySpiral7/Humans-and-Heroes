@@ -2,7 +2,7 @@ var json = {
    "Hero": {
       "name": "Government Agent",
       "transcendence": 0,
-      "image": "../images/Sirocco.jpg"
+      "image": "../images/Sirocco.png"
    },
    "Abilities": {
       "Strength": 1,
@@ -143,7 +143,7 @@ var json = {
       "Will": 1,
       "Fortitude": 1
    },
-   "ruleset": "3.11",
+   "ruleset": "3.16",
    "version": 2,
    "Information": ""
 };

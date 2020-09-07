@@ -34,8 +34,6 @@ function SkillList()
    this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
-   /**This set the page's data. called only by generate*/
-   this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Counts totals etc. All values that are not user set or final are created by this method*/
@@ -75,6 +73,7 @@ function SkillList()
             if ('--' !== abilityValue)
             {
                //missing doesn't affect power levels so it isn't added to max skill map
+               //attacks have a lower PL limit therefore being in maxSkillRanks is fine (for every ruleset)
                if(bonusValue > maxSkillRanks.get(abilityNameUsed)) maxSkillRanks.set(abilityNameUsed, bonusValue);
 
                if(rowArray[i].getName() === 'Close Combat') closeCombatMap.add(rowArray[i].getText(), bonusValue);  //add, there is no redundancy

@@ -113,12 +113,12 @@ function xmlToJson(xmlString)
 
 /**This function converts a json object (of valid internal data) into plain text as markdown and returns it
 This is used to export as plain text since json is used internally*/
-function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
+function jsonToMarkdown(jsonDoc, derivedValues)
 {
    var i;  //loop variable used throughout
    var markdownString='# ' + jsonDoc.Hero.name + '\n';
-   markdownString+='A character for Humans and Heroes v' + jsonDoc.ruleset+'\n';
-   markdownString+='PL ' + powerLevel;
+   markdownString+='A character for Humans and Heroes v' + jsonDoc.ruleset + '\n';
+   markdownString+='PL ' + derivedValues.powerLevel;
    if(undefined !== jsonDoc.Hero.transcendence) markdownString+=' (transcendence ' + jsonDoc.Hero.transcendence + ')';
    markdownString+='\n\n';
 
@@ -149,6 +149,7 @@ function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
    if (!jsonDoc.Skills.isEmpty())
    {
       markdownString+='## Skills\n';
+      //TODO: make v4.0 version
       for (i=0; i < jsonDoc.Skills.length; i++)
       {
          var skillRow = jsonDoc.Skills[i];
@@ -162,27 +163,28 @@ function jsonToMarkdown(jsonDoc, powerLevel, characterPointsSpent)
    }
 
    markdownString+='## Defenses\n';
-   var defenseCalculations = Main.defenseSection.getCalculations();
+   var defenseDerivedValues = Main.defenseSection.getDerivedValues();
    for (i=0; i < Data.Defense.names.length-1; i++)  //-1 to avoid toughness
    {
       var defenseName = Data.Defense.names[i];
-      markdownString+='* ' + defenseName + ': ' + defenseCalculations[defenseName].totalBonus +' ('
+      markdownString+='* ' + defenseName + ': ' + defenseDerivedValues[defenseName].totalBonus +' ('
          + jsonDoc.Defenses[defenseName] + ' ranks + '
-         + defenseCalculations[defenseName].abilityValue + ' ' + Data.Defense[defenseName].ability + ')\n';
+         + defenseDerivedValues[defenseName].abilityValue + ' ' + Data.Defense[defenseName].ability + ')\n';
    }
-   markdownString+='* Toughness: ' + defenseCalculations.Toughness.totalBonus;
-   if(undefined !== defenseCalculations.Toughness.withoutDefensiveRoll)
-      markdownString+=' ('+defenseCalculations.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
+   markdownString+='* Toughness: ' + defenseDerivedValues.Toughness.totalBonus;
+   if(undefined !== defenseDerivedValues.Toughness.withoutDefensiveRoll)
+      markdownString+=' ('+defenseDerivedValues.Toughness.withoutDefensiveRoll+' without Defensive Roll)';
    markdownString+='\n\n';
 
    markdownString+='## Point Totals\n';
+   //TODO: should use derivedValues without calling methods (but requires top level state)
    if(0 !== Main.abilitySection.getTotal()) markdownString+='* Ability: '+Main.abilitySection.getTotal()+'\n';
    if(0 !== Main.powerSection.getTotal()) markdownString+='* Power: '+Main.powerSection.getTotal()+'\n';
    if(0 !== Main.advantageSection.getTotal()) markdownString+='* Advantage: '+Main.advantageSection.getTotal()+'\n';
    if(0 !== Main.skillSection.getTotal()) markdownString+='* Skill: '+Math.ceil(Main.skillSection.getTotal())+'\n';
    if(0 !== Main.defenseSection.getTotal()) markdownString+='* Defense: '+Main.defenseSection.getTotal()+'\n';
-   if(0 !== characterPointsSpent) markdownString+='\n';
-   markdownString+='Grand Total: '+Math.ceil(characterPointsSpent)+'/'+(powerLevel * 15)+'\n';
+   if(0 !== derivedValues.characterPointsSpent) markdownString+='\n';
+   markdownString+='Grand Total: '+Math.ceil(derivedValues.characterPointsSpent)+'/'+(derivedValues.powerLevel * 15)+'\n';
    markdownString+='Equipment Points: '+Main.equipmentSection.getTotal()+'/'+Main.advantageSection.getEquipmentMaxTotal()+'\n';
    //if skill total contains a half point
    if(0 !== Main.skillSection.getTotal() % 1) markdownString+='Unused skill rank: 1\n';  //it can only be 1 or 0

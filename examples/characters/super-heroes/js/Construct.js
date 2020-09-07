@@ -1,5 +1,5 @@
 var rangedAttackName = '(Name of Ranged Attack)';
-if(undefined !== queryParameters['names'][0]) rangedAttackName = queryParameters['names'][0];
+if (undefined !== queryParameters.strings[0]) rangedAttackName = queryParameters.strings[0];
 
 var json = {
    "Hero": {
@@ -34,7 +34,7 @@ var json = {
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [{"name": "Impervious", "applications": 3}],
-         "rank": 11
+         "rank": 10
       }
    ],
    "Equipment": [],
@@ -43,17 +43,11 @@ var json = {
          "name": "Perfect Memory"
       }
    ],
-   "Skills": [
-      {
-         "name": "Ranged Combat",
-         "subtype": rangedAttackName,
-         "rank": "Trained"
-      }
-   ],
+   "Skills": [],
    "Defenses": {
-      "Dodge": 6,
-      "Parry": 0,
-      "Will": 9,
+      "Dodge": 5,
+      "Parry": 3,
+      "Will": 8,
       "Fortitude": 8
    },
    "ruleset": "4.0",
@@ -61,40 +55,65 @@ var json = {
    "Information": "Complications, background and other information"
 };
 
-if('3' === queryParameters['options'][0]) json.Powers = json.Powers.concat([
-   {
-      "effect": "Immortality",
-      "text": "Undead Revenant Option",
-      "action": "None",
+//TODO: not conflicted but unarmed versions (3/4) have too low attack
+if ('3' === queryParameters.options[0])
+{
+   json.Abilities.Strength += 3;
+   json.Abilities.Intellect -= 3;
+   json.Skills.push({
+      "name": "Close Combat",
+      "subtype": "Unarmed",
+      "rank": "Trained"
+   });
+   json.Powers = json.Powers.concat([
+      {
+         "effect": "Immortality",
+         "text": "Undead Revenant Option. Back to life in 4.8 months",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 1
+      },
+      {
+         "effect": "Regeneration",
+         "text": "Undead Revenant Option. 1 HP every other round",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 5
+      }
+   ]);
+}
+else if ('4' === queryParameters.options[0])
+{
+   json.Abilities.Strength += 3;
+   json.Abilities.Intellect -= 3;
+   json.Skills.push({
+      "name": "Close Combat",
+      "subtype": "Unarmed",
+      "rank": "Trained"
+   });
+   json.Powers.push({
+      "effect": "Insubstantial",
+      "text": "Wraith Option",
+      "action": "Free",
       "range": "Personal",
-      "duration": "Permanent",
+      "duration": "Sustained",
       "Modifiers": [],
-      "rank": 1
-   },
-   {
-      "effect": "Regeneration",
-      "text": "Undead Revenant Option",
-      "action": "None",
-      "range": "Personal",
-      "duration": "Permanent",
-      "Modifiers": [],
-      "rank": 5
-   }
-]);
-else if('4' === queryParameters['options'][0]) json.Powers.push({
-   "effect": "Insubstantial",
-   "text": "Wraith Option",
-   "action": "Free",
-   "range": "Personal",
-   "duration": "Sustained",
-   "Modifiers": [],
-   "rank": 4
-});
+      "rank": 4
+   });
+}
 else
 {
-   var text = ('2' === queryParameters['options'][0]) ?
-      'Soldier Option (built-in weapon)' :
-      'Elemental Option (See Elemental Control)';
+   json.Skills.push({
+      "name": "Ranged Combat",
+      "subtype": rangedAttackName,
+      "rank": "Trained"
+   });
+   var text = ('2' === queryParameters.options[0]) ? 'Soldier Option (built-in weapon)'
+      : 'Elemental Option (See Elemental Control for Alternate Effect examples)';
    json.Powers.push({
       "effect": "Damage",
       "text": text,

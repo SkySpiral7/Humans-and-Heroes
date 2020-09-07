@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+var expertise = '(Choose One)';
+if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
+
+>>>>>>> gh-pages
 var json = {
    "Hero": {
       "name": "Mimic",
@@ -92,7 +98,11 @@ var json = {
       "Will": 6,
       "Fortitude": 6
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

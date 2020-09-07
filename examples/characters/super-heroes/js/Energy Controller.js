@@ -1,5 +1,5 @@
 var energyType = 'Energy';
-if(undefined !== queryParameters['names'][0]) energyType = queryParameters['names'][0];
+if (undefined !== queryParameters.strings[0]) energyType = queryParameters.strings[0];
 
 var json = {
    "Hero": {
@@ -49,7 +49,7 @@ var json = {
                "applications": 1
             }
          ],
-         "rank": 12
+         "rank": 10
       },
       {
          "effect": "Nullify",
@@ -125,21 +125,31 @@ var json = {
       },
       {
          "name": "Ranged Combat",
+<<<<<<< HEAD
          "subtype": "Energy Control",
          "rank": "Mastered"
       },
       {
          "name": "Sleight of Hand",
          "rank": "Trained"
+=======
+         "subtype": energyType + " Control",
+         "rank": 7,
+         "ability": "Dexterity"
+>>>>>>> gh-pages
       }
    ],
    "Defenses": {
       "Dodge": 4,
-      "Parry": 0,
+      "Parry": 3,
       "Will": 6,
       "Fortitude": 5
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

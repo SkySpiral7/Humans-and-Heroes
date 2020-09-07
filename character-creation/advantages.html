@@ -12,8 +12,13 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-12 col-md-3 col-xl-2 sites-layout-sidebar-left">
-<script type="text/javascript" src="../themes/sideBar.js"></script>
+<p>Please enable JavaScript in order to see the generated sidebar.
+Without it you'll have to use the <a href="../site-map.html">sitemap</a> in order easily navigate.</p>
+
+<p>sideBar.js is harmless: it simply generates hyperlinks to major pages. It exists in a single place so that
+I don't have to update 100+ html pages with relative links whenever I want to change it.</p>
 </div>
+<script type="text/javascript" src="../themes/sideBar.js"></script>
 <main class="col-12 col-md-9 col-xl-10">
 <h1>Advantages</h1>
 <p>Heroes are more than just skilled, they often have amazing <b>advantages</b>, beyond the
@@ -22,8 +27,8 @@ Unlike powers, advantages can't have modifiers. Most advantages cost 1 character
 and are acquired only once, effectively at rank 1.</p>
 <p>Each advantage's description explains the benefit it provides. It also says if the advantage
 can be acquired in ranks and the effects of doing so. Ranks in a advantage are noted with a number after the advantage's
-name, such as "Defensive Roll 2" (for a
-character who has taken two ranks in the Defensive Roll advantage), just like skill and power ranks. Some advantages
+name, such as "<a href="#TOC-DEFENSIVE-ROLL">Defensive Roll</a> 2" (for a
+character who has taken two ranks in the <a href="#TOC-DEFENSIVE-ROLL">Defensive Roll</a> advantage), just like skill and power ranks. Some advantages
 have a maximum number of ranks a character can take and some cost more than 1 point, everything is listed under the advantage.
 In some cases an advantage's description mentions the normal conditions for characters who do not have the
 advantage for comparison.</p>
@@ -72,7 +77,7 @@ advantage for comparison.</p>
 </tr>
 <tr>
 <td><a href="#TOC-IMPROVED-DEFENSE">Improved Defense</a></td>
-<td>+2 bonus to active defense when you take the defend action.</td>
+<td>The active defense not chosen by defend has a minimum of 0.</td>
 </tr>
 <tr>
 <td><a href="#TOC-IMPROVED-DISARM">Improved Disarm</a></td>
@@ -178,7 +183,7 @@ advantage for comparison.</p>
 </tr>
 <tr>
 <td><a href="#TOC-MEEKNESS">Meekness</a></td>
-<td>You can choose a number to be used for ranks and dice rolled (if lower).</td>
+<td>You can choose a lower number to be used for ranks and dice rolled.</td>
 </tr>
 <tr>
 <td><a href="#TOC-MINION">Minion</a></td>
@@ -244,7 +249,7 @@ your active defenses (Dodge and Parry) and add the same number (up to +3) to you
 <p>You're particularly attractive, giving you a +1 circumstance bonus on Deception and Persuasion
 checks to deceive, seduce, or change the attitude of anyone who finds your looks appealing. With a second rank, you are
 Very Attractive, giving you a +2 circumstance bonus. This bonus is
-<a href="index.html#TOC-POWER-LEVEL-LIMITATIONS">limited by the series power level</a>
+<a href="power-level.html#TOC-POWER-LEVEL-LIMITATIONS">limited by the series power level</a>
 counted as part of a skill. This bonus does not apply to people or situations which (in the GM's opinion) would not
 be influenced by your appearance.</p>
 <p>While superheroes tend to be a fairly good-looking lot, this advantage is generally reserved
@@ -327,7 +332,8 @@ href="powers/index.html">Powers</a> for details.</p>
 <p>When you make a defensive attack (see <b>Maneuvers</b>), you can take a penalty of up to -3 on
 your attack bonus and add the same number (up to +3) to both your active defenses (Dodge and Parry).</p>
 <h2 class="generated-class-17" id="TOC-DEFENSIVE-ROLL">Defensive Roll (Combat)</h2>
-<span class="info-banner"><b>Cost:</b> 1 point per rank &#8226; <b>Ranked?</b> Yes &#8226; <b>Max rank:</b> By <a href="index.html#TOC-POWER-LEVEL-LIMITATIONS">power level limitation</a></span>
+<span class="info-banner"><b>Cost:</b> 1 point per rank &#8226; <b>Ranked?</b> Yes &#8226; <b>Max rank:</b> By
+<a href="power-level.html#TOC-POWER-LEVEL-LIMITATIONS">power level limitation</a></span>
 <p>You can avoid damage through agility and "rolling" with an attack. You receive a bonus to your
 Toughness equal to your advantage rank, but it is considered an active defense similar to Dodge and Parry (see <b>Active
 Defenses</b> in <a href="abilities.html">Abilities</a>), so you lose this bonus whenever you are vulnerable or
@@ -359,7 +365,10 @@ can gain two of the listed benefits, even stacking two of the same type of benef
 the effort; you're exhausted starting the turn after your extraordinary effort. If you are already fatigued, you are
 incapacitated. If you are already exhausted, you cannot use extraordinary effort. Spending a Victory point at the start
 of your next turn reduces the cost of your extraordinary effort to merely fatigued, the same as a regular extra
-effort.</p>
+effort. You may spend multiple Victory points to recover further. You can choose to only gain 1 benefit from
+<b>Extra Effort</b> in which case <b>Extra Effort</b> functions as though you didn't have this advantage.</p>
+<p>This advantage is not ranked and <b>Extra Effort</b> is still only possible once per turn therefore it is
+impossible to get more than 2 benefits per turn.</p>
 <h2 id="TOC-FAST-GRAB">Fast Grab (Combat)</h2>
 <span class="info-banner"><b>Cost:</b> 1 point &#8226; <b>Ranked?</b> No</span>
 <p>When you hit with an unarmed attack you can immediately make a grab check against that opponent

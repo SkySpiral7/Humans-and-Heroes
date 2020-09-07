@@ -59,7 +59,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
    //blank character (no need to load)
    expected = '# Hero Name\n' +
       'A character for Humans and Heroes v4.' + latestMinorRuleset + '\n' +
-      'PL 0 (transcendence 0)\n' +
+      'PL 1 (transcendence 0)\n' +
       '\n' +
       '## Abilities\n' +
       '* Strength: 0\n' +
@@ -79,12 +79,12 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Toughness: 0\n' +
       '\n' +
       '## Point Totals\n' +
-      'Grand Total: 0/0\n' +
+      'Grand Total: 0/15\n' +
       'Equipment Points: 0/0\n' +
       '\n' +
       '\n' +
       '## More Info\n' +
-      '![Character Image](../images/Sirocco.jpg)\n' +
+      '![Character Image](../images/Sirocco.png)\n' +
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
@@ -171,14 +171,16 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
             }
          ],
          "Defenses": {"Dodge": 2, "Parry": 1, "Will": 3, "Fortitude": 4},
-         "ruleset": "3." + latestMinorRuleset,
+         //TODO: make 4.0 test (was "3." + latestMinorRuleset)
+         "ruleset": "3.16",
          "version": 2,
          "Information": "my bio"
       };
    Loader.sendData(dataToLoad);
    expected = '# New Name\n' +
-      'A character for Humans and Heroes v3.' + latestMinorRuleset + '\n' +
-      'PL 10 (transcendence 0)\n' +
+      //was: v4.' + latestMinorRuleset
+      'A character for Humans and Heroes v3.16\n' +
+      'PL 11 (transcendence 0)\n' +
       '\n' +
       '## Abilities\n' +
       '* Strength: 1\n' +
@@ -225,7 +227,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '* Skill: 2\n' +
       '* Defense: 10\n' +
       '\n' +
-      'Grand Total: 95/150\n' +
+      'Grand Total: 95/165\n' +
       'Equipment Points: 6/10\n' +
       'Unused skill rank: 1\n' +
       '\n' +
@@ -240,10 +242,12 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
 
    dataToLoad = Loader.resetData();
    dataToLoad.Hero.transcendence = 1;
+   dataToLoad.ruleset = "3.16";
    dataToLoad.Skills = [{"name": "Perception", "rank": 2, "ability": "Awareness"}];
    Loader.sendData(dataToLoad);
    expected = '# Hero Name\n' +
-      'A character for Humans and Heroes v3.' + latestMinorRuleset + '\n' +
+      //was: v4.' + latestMinorRuleset
+      'A character for Humans and Heroes v3.16\n' +
       'PL 1 (transcendence 1)\n' +
       '\n' +
       '## Abilities\n' +
@@ -274,12 +278,12 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       '\n' +
       '\n' +
       '## More Info\n' +
-      '![Character Image](../images/Sirocco.jpg)\n' +
+      '![Character Image](../images/Sirocco.png)\n' +
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
-   assertions.push({Expected: expected, Actual: actual, Description: 'transcendence, no extra skill: value'});
+   assertions.push({Expected: [], Actual: Messages.list, Description: 'just transcendence, +something (skill): load errors'});
+   assertions.push({Expected: expected, Actual: actual, Description: 'just transcendence, +something (skill): value'});
 
    return TestRunner.displayResults('TestSuite.conversions.jsonToMarkdown', assertions, testState);
 };

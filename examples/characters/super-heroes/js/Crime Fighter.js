@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+var expertise = '(Choose One)';
+if (undefined !== queryParameters.strings[1]) expertise = queryParameters.strings[1];
+
+var equipmentAdvantage = {
+   "name": "Equipment",
+   "rank": 13
+};
+
+>>>>>>> gh-pages
 var json = {
    "Hero": {
       "name": "Crime Fighter",
@@ -5,17 +16,35 @@ var json = {
       "image": "../images/Crime-Fighter.jpg"
    },
    "Abilities": {
-      "Strength": 7,
+      "Strength": 8,
       "Agility": 6,
+<<<<<<< HEAD
       "Fighting": 12,
       "Dexterity": 9,
       "Stamina": 3,
       "Intellect": 5,
       "Awareness": 6,
       "Presence": 6
+=======
+      "Fighting": 10,
+      "Dexterity": 6,
+      "Stamina": 1,
+      "Intellect": 3,
+      "Awareness": 4,
+      "Presence": 3
+>>>>>>> gh-pages
    },
    "Powers": [],
    "Equipment": [
+      {
+         "effect": "Protection",
+         "text": "Costume",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 7
+      },
       {
          "effect": "Feature",
          "cost": 1,
@@ -25,15 +54,6 @@ var json = {
          "duration": "Permanent",
          "Modifiers": [],
          "rank": 1
-      },
-      {
-         "effect": "Protection",
-         "text": "Costume",
-         "action": "None",
-         "range": "Personal",
-         "duration": "Permanent",
-         "Modifiers": [],
-         "rank": 2
       },
       {
          "effect": "Movement",
@@ -46,55 +66,8 @@ var json = {
          "rank": 1
       },
       {
-         "effect": "Affliction",
-         "text": "Flash-Bangs (much smaller than normal). Fortitude Dazzle (Impaired, Disabled, Unaware) Visual and Auditory",
-         "action": "Standard",
-         "range": "Ranged",
-         "duration": "Instant",
-         "name": "Flash-Bangs",
-         "skill": "Grenades",
-         "Modifiers": [
-            {
-               "name": "Increased Range",
-               "applications": 1
-            },
-            {
-               "name": "Other Rank Extra",
-               "applications": 2,
-               "text": "Cumulative, Extra Condition"
-            },
-            {
-               "name": "Area",
-               "applications": 1,
-               "text": "Burst"
-            }
-         ],
-         "rank": 2
-      },
-      {
-         "effect": "Affliction",
-         "text": "Sleep Gas Pellets. Fortitude; Daze, Stun, Asleep",
-         "action": "Standard",
-         "range": "Ranged",
-         "duration": "Instant",
-         "name": "Sleep Gas Pellets",
-         "skill": "Grenades",
-         "Modifiers": [
-            {
-               "name": "Increased Range",
-               "applications": 1
-            },
-            {
-               "name": "Area",
-               "applications": 1,
-               "text": "Cloud"
-            }
-         ],
-         "rank": 4
-      },
-      {
          "effect": "Damage",
-         "text": "Boomerangs (Total Damage 4)",
+         "text": "Boomerangs (Total Damage 10)",
          "action": "Standard",
          "range": "Ranged",
          "duration": "Instant",
@@ -110,7 +83,7 @@ var json = {
                "text": "Strength-Based"
             }
          ],
-         "rank": 1
+         "rank": 2
       },
       {
          "effect": "Feature",
@@ -124,10 +97,7 @@ var json = {
       }
    ],
    "Advantages": [
-      {
-         "name": "Equipment",
-         "rank": 6
-      },
+      equipmentAdvantage,
       {
          "name": "Defensive Roll",
          "rank": 3
@@ -164,9 +134,16 @@ var json = {
          "rank": "Trained"
       },
       {
+<<<<<<< HEAD
          "name": "Knowledge",
          "subtype": "Criminal",
          "rank": "Trained"
+=======
+         "name": "Investigation",
+         "subtype": "",
+         "rank": 6,
+         "ability": "Intellect"
+>>>>>>> gh-pages
       },
       {
          "name": "Perception",
@@ -182,11 +159,14 @@ var json = {
          "rank": "Trained"
       },
       {
+<<<<<<< HEAD
          "name": "Ranged Combat",
          "subtype": "Grenades",
          "rank": "Trained"
       },
       {
+=======
+>>>>>>> gh-pages
          "name": "Sleight of Hand",
          "rank": "Trained"
       },
@@ -196,20 +176,60 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 6,
+      "Dodge": 4,
       "Parry": 0,
       "Will": 6,
-      "Fortitude": 3
+      "Fortitude": 7
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
 
-if ('2' === queryParameters['options'][0])
+//2 removes these. requirement: this must run when there's no query params
+if ('2' !== queryParameters.options[0])
 {
-   json.Equipment = [];
-   json.Advantages.remove(0);
+   json.Equipment.push({
+      "effect": "Affliction",
+      "text": "Flash-Bangs (much stronger than normal). Fortitude Dazzle (Impaired, Disabled, Unaware) Visual and Auditory",
+      "action": "Standard",
+      "range": "Ranged",
+      "duration": "Instant",
+      "name": "Flash-Bangs",
+      "skill": "Grenades",
+      "Modifiers": [
+         {
+            "name": "Increased Range",
+            "applications": 1
+         },
+         {
+            "name": "Other Rank Extra",
+            "applications": 2,
+            "text": "Cumulative, Extra Condition"
+         },
+         {
+            "name": "Area",
+            "applications": 1,
+            "text": "Burst"
+         }
+      ],
+      "rank": 10
+   });
+   json.Skills.push({
+      "name": "Ranged Combat",
+      "subtype": "Grenades",
+      "rank": 4,
+      "ability": "Dexterity"
+   });
+}
+
+if ('2' === queryParameters.options[0])
+{
+   equipmentAdvantage.rank -= 10;
    json.Powers.push({
       "effect": "Healing",
       "text": "(Device of your choice)",
@@ -222,49 +242,26 @@ if ('2' === queryParameters['options'][0])
             "text": "Amulet"
          }
       ],
-      "rank": 5
+      "rank": 8
    });
 }
-else if ('3' === queryParameters['options'][0])
+else if ('3' === queryParameters.options[0])
 {
-   ++json.Advantages[0].rank;
-   json.Powers.push({
-      "effect": "Senses",
+   ++equipmentAdvantage.rank;
+   json.Equipment.push({
+      "effect": "Feature",
       "cost": 1,
-      "text": "Low-light Vision",
+      "text": "Camo Clothing, Multi-tool, Binoculars, Parabolic Microphone, Night Vision Goggles",
       "action": "None",
       "range": "Personal",
       "duration": "Permanent",
       "Modifiers": [],
-      "rank": 1
+      "rank": 5
    });
-   json.Equipment = json.Equipment.concat([
-      {
-         "effect": "Damage",
-         "text": "piercing",
-         "action": "Standard",
-         "range": "Close",
-         "duration": "Instant",
-         "name": "Knife",
-         "skill": "Knives",
-         "Modifiers": [],
-         "rank": 1
-      },
-      {
-         "effect": "Feature",
-         "cost": 1,
-         "text": "Camo Clothing, Multi-tool, Binoculars, Mini-Tracer",
-         "action": "None",
-         "range": "Personal",
-         "duration": "Permanent",
-         "Modifiers": [],
-         "rank": 4
-      }
-   ]);
 }
-else if ('4' === queryParameters['options'][0])
+else if ('4' === queryParameters.options[0])
 {
-   json.Advantages[0].rank += 3;
+   equipmentAdvantage.rank += 3;
    json.Equipment.push({
       "effect": "Feature",
       "cost": 1,
@@ -276,26 +273,33 @@ else if ('4' === queryParameters['options'][0])
       "rank": 15
    });
 }
-//1 === option[0] is the default (no changes)
 
-if (queryParameters['checkboxes'][0])
+if (queryParameters.checkboxes[0])
 {
    var benefitText = '(Choose One)';
-   if(undefined !== queryParameters['names'][0]) benefitText = queryParameters['names'][0];
+   if (undefined !== queryParameters.strings[0]) benefitText = queryParameters.strings[0];
    json.Advantages.push({
       "name": "Benefit",
       "rank": 1,
       "text": benefitText
    });
 }
-if(queryParameters['checkboxes'][1]) json.Advantages.push({"name": "Defensive Attack"});
-if(queryParameters['checkboxes'][2]) json.Advantages.push({"name": "Jack of All Trades"});
-if(queryParameters['checkboxes'][3]) json.Advantages.push({"name": "Power Attack"});
-if(queryParameters['checkboxes'][4]) json.Advantages.push({
-   "name":"Skill Mastery",
-   "text":"Stealth"
-});
-if(queryParameters['checkboxes'][5]) json.Advantages.push({
-   "name": "Ultimate Effort",
-   "text": "Investigation"
-});
+if (queryParameters.checkboxes[1]) json.Advantages.push({"name": "Defensive Attack"});
+//0 === queryParameters.checkboxes.length is only possible if there are no queryParameters
+if (queryParameters.checkboxes[2] || 0 === queryParameters.checkboxes.length)
+   json.Advantages.push({"name": "Jack of All Trades"});
+if (queryParameters.checkboxes[3]) json.Advantages.push({"name": "Power Attack"});
+if (queryParameters.checkboxes[4] || 0 === queryParameters.checkboxes.length)
+{
+   json.Advantages.push({
+      "name": "Skill Mastery",
+      "text": "Stealth"
+   });
+}
+if (queryParameters.checkboxes[5] || 0 === queryParameters.checkboxes.length)
+{
+   json.Advantages.push({
+      "name": "Ultimate Effort",
+      "text": "Investigation"
+   });
+}

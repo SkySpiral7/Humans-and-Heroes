@@ -30,11 +30,11 @@ var json = {
             },
             {
                "name": "Other Flat Flaw",
-               "applications": 14,
+               "applications": 12,
                "text": "Easily Removable. Can't use the actual flaw because this calculator can't include alternate effects"
             }
          ],
-         "rank": 12
+         "rank": 10
       },
       {
          "effect": "Affliction",
@@ -74,32 +74,36 @@ var json = {
             },
             {
                "name": "Impervious",
-               "applications": 5
+               "applications": 4
             },
             {
                "name": "Removable",
                "text": "Belt"
             }
          ],
-         "rank": 10
+         "rank": 8
       },
       {
          "effect": "Flight",
-         "text": "Jet-Pack. 60 MPH",
+         "text": "Jet-Pack. 93 MPH",
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [
             {
                "name": "Removable",
-               "text": "Like a Back-back"
+               "text": "Like a Back-pack"
             }
          ],
          "rank": 5
       },
       {
          "effect": "Quickness",
+<<<<<<< HEAD
          "text": "Quick-Thinking. 6 and a half minutes of thought in 6 seconds",
+=======
+         "text": "Quick-Thinking: 24 seconds of thought in 6 seconds",
+>>>>>>> gh-pages
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -165,12 +169,16 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 6,
-      "Parry": 3,
+      "Dodge": 9,
+      "Parry": 5,
       "Will": 7,
       "Fortitude": 6
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -36,8 +36,6 @@ function AdvantageList()
     this.removeRow=function(rowIndex){CommonsLibrary.removeRow(rowArray, rowIndex);};
     /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
     this.sanitizeRows=function(){CommonsLibrary.sanitizeRows.call(this, rowArray);};
-    /**This set the page's data. called only by generate*/
-    this.setAll=function(){CommonsLibrary.setAll(rowArray);};
 
    //public functions section
    /**Counts totals etc. All values that are not user set or final are created by this method*/

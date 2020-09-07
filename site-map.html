@@ -37,7 +37,7 @@ There's also https://gist.github.com/dylancwood/7368914 for comparison
 
 /* horizontal line on inner list items */
 .tree li::before {
-   border-top: 1px solid black;
+   border-top: 1px solid #666666;
    top: 10px;
    width: 10px;
    height: 0;
@@ -45,7 +45,7 @@ There's also https://gist.github.com/dylancwood/7368914 for comparison
 
 /* vertical line on list items */
 .tree li:after {
-   border-left: 1px solid black;
+   border-left: 1px solid #666666;
    height: 100%;
    width: 0;
    top: -10px;
@@ -66,8 +66,13 @@ There's also https://gist.github.com/dylancwood/7368914 for comparison
 <div class="container-fluid">
 <div class="row">
 <div class="col-12 col-md-3 col-xl-2 sites-layout-sidebar-left">
-<script type="text/javascript" src="themes/sideBar.js"></script>
+<p>Please enable JavaScript in order to see the generated sidebar.
+Without it you'll have to use the <a href="site-map.html">sitemap</a> in order easily navigate.</p>
+
+<p>sideBar.js is harmless: it simply generates hyperlinks to major pages. It exists in a single place so that
+I don't have to update 100+ html pages with relative links whenever I want to change it.</p>
 </div>
+<script type="text/javascript" src="themes/sideBar.js"></script>
 <main class="col-12 col-md-9 col-xl-10">
 <h1 class="page-header-folder">Site Map</h1>
 <p>This page is a site map: it contains a link to all other pages.</p>
@@ -76,10 +81,12 @@ There's also https://gist.github.com/dylancwood/7368914 for comparison
 <ul>
 <li><a href="character-creation/abilities.html">Abilities (character-creation/abilities.html)</a></li>
 <li><a href="character-creation/advantages.html">Advantages (character-creation/advantages.html)</a></li>
+<li><a href="character-creation/character-points.html">Character Points (character-creation/character-points.html)</a></li>
 <li><a href="character-creation/complications.html">Complications (character-creation/complications.html)</a></li>
 <li><a href="character-creation/constructs.html">Constructs (character-creation/constructs.html)</a></li>
 <li><a href="character-creation/defenses.html">Defenses (character-creation/defenses.html)</a></li>
 <li><a href="character-creation/point-counter.html">Point Counter (character-creation/point-counter.html)</a></li>
+<li><a href="character-creation/power-level.html">Power Level (character-creation/power-level.html)</a></li>
 <li><a href="character-creation/skills.html">Skills (character-creation/skills.html)</a></li>
 <li><a href="character-creation/gadgets-gear/index.html">Gadgets &amp; Gear (character-creation/gadgets-gear/index.html)</a>
 <ul>
@@ -239,7 +246,7 @@ There's also https://gist.github.com/dylancwood/7368914 for comparison
 <ul>
 <li><a href="meta/calculations.html">Calculations (meta/calculations.html)</a></li>
 <li><a href="meta/known-issues.html">Known Issues (meta/known-issues.html)</a></li>
-<li><a href="meta/open-game-license.html">Open Game License (meta/open-game-license.html)</a></li>
+<li><a href="meta/license.html">License (meta/license.html)</a></li>
 <li><a href="meta/statistics.html">Statistics (meta/statistics.html)</a></li>
 <li><a href="meta/survey.html">Survey (meta/survey.html)</a></li>
 <li><a href="meta/versioning.html">Versioning (meta/versioning.html)</a></li>

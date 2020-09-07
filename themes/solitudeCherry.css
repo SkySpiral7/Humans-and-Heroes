@@ -5,20 +5,37 @@ Um was I allowed to copy this? Because I did then stripped most of it out (like 
 official colors: https://www.w3.org/TR/css3-color/
 
 These are all of the colors used:
-white (for font color against dark background)
-grey (for most borders)
-black (for the huge stamp border)
+grey
+   #000000 (black): bg
+   #101010: scroll tray, stripe
+   #202020: scroll handle, borders
+   #575757: side bar grey dot (not a hr), magnifying glass, menu bars
+   #A0A0A0: text
+red
+   #450000: bg
+   #700000: under, red-img-border
+   #FF2020: text, text border, hr
+blue
+   #000040: bg, alt-rows
+   #79AAFF: text (only table-name)
+green
+   #002500: bg
+   #113A11: under
+purple (only the info banner)
+   #1A0029: bg
 
-darkred
-pink (under red)
+good example pages:
+character-creation/powers/descriptors.html
+character-creation/powers/effects/create.html
+gameplay/the-basics.html
 
-navajowhite (under orange. info-banner)
-
-darkgreen
-palegreen (under green)
-
-darkblue
-lightskyblue (under blue. used for alt table)
+special pages:
+examples/characters/super-heroes/crime-fighter.html
+character-creation/point-counter.html
+character-creation/index.html
+meta/statistics.html
+gameplay/conditions.html
+site-map.html
 */
 
 /* ========Font reference========
@@ -45,10 +62,6 @@ xl: 1200px+ (1835px maximized window)
 */
 
 /* TODO: more css clean up
-dark mode:
-   background needs to be dark eg: #17181C
-   text color eg: #d2d0ca
-   replace image background strips with https://css-tricks.com/stripes-css/
 h1 should only be 1 per page
 calc: add headers and explanation for save/load (should come before usage)
 make characters look like a character sheet (see M&M 3e)
@@ -97,6 +110,51 @@ although for some reason it prevents disabling the page's right margin (see belo
    max-height: 100%;
 }
 
+html, body, input, textarea, select, button {
+   background-color: black;
+   border-color: #202020;
+   color: #A0A0A0;
+}
+
+/**Search box. Uses a bootstrap class name.*/
+.form-control, .form-control:focus {
+   background-color: black;
+   border-color: #202020;
+   color: #A0A0A0;
+}
+
+.search-form > button > svg {
+   vertical-align: middle;
+}
+
+.btn {
+   padding: 6px;
+}
+
+::-webkit-scrollbar {
+   background-color: #101010;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #202020;
+}
+
+/*
+TODO: figure out how to have different buttons for up/down
+unfortunately disabled and read-only don't work and I'd have to be silly to get it: https://stackoverflow.com/questions/16422124/javascript-detect-browser-scroll-to-the-top
+*
+::-webkit-scrollbar-button {
+   background-image: url("../images/arrow-down.png");
+}
+::-webkit-scrollbar-button:active {
+   background-image: url("../images/arrow-left.png");
+}
+/**/
+
+.form-control::placeholder {
+   color: #A0A0A0;
+}
+
 /**This is to disable the page's right padding. Bootstrap requires container-fluid to exist.*/
 body > div.container-fluid {
    padding-right: 0;
@@ -110,19 +168,17 @@ body > div.container-fluid > div.row {
 }
 
 main {
-   background: url("bg-top.gif") top repeat-x;
-   padding-top: 50px;
    padding-bottom: 50px;
 }
 
 h1 {
-   background-color: darkblue;
+   background-color: #000040;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
-   color: white;
+   color: #A0A0A0;
    padding: 10px;
    font-size: 32px;
-   clear: both;  /*This can be removed (along with some id=) when h1 is only a page header*/
+   clear: both; /*This can be removed (along with some id=) when h1 is only a page header*/
 }
 
 /**This is only applied to h1 at the top of page and only for index.html.
@@ -131,11 +187,11 @@ h1 that is not at the top of page is considered a leaf (blue)
 site-map.html is considered the folder of the website (red)
 */
 .page-header-folder {
-   background-color: darkred;
+   background-color: #450000;
 }
 
 h2 {
-   color: darkred;
+   color: #FF2020;
    font-size: 28px;
    text-decoration: underline;
 }
@@ -147,30 +203,30 @@ h3 {
 
 /**Used for h2 Extras, Free Modifiers, and Flaws on power pages*/
 .power-modifier-header {
-   border-bottom: solid thin darkred;
-   border-top: solid thin darkred;
+   border-bottom: solid thin #FF2020;
+   border-top: solid thin #FF2020;
    text-decoration: none;
 }
 
 /**All of them are h3*/
 .table-name {
-   color: darkblue;
+   color: #79AAFF;
 }
 
 /*Need to also have :visited so that the browser won't blue shift the color*/
 a:link, a:visited {
-   color: darkred;
+   color: #FF2020;
    /*No decoration etc so that the links look like normal text making it easier to read a paragraph of links.*/
    text-decoration: none;
 }
 
-a:hover,a:active {
+a:hover, a:active {
    text-decoration: underline;
 }
 
 hr {
    border: 0;
-   border-bottom: 1px dotted darkred;
+   border-bottom: 1px dotted #FF2020;
    height: 3px;
 }
 
@@ -181,6 +237,11 @@ ul {
 
 ul.radio-ul {
    /*The radio buttons are the inside bullets therefore have half padding in order to make them line up with other ul.*/
+   padding-left: 20px;
+}
+
+.external-links {
+   /*Half padding so that the bullet is close to the edge.*/
    padding-left: 20px;
 }
 
@@ -200,12 +261,12 @@ ol.legal-document > li > ol > li {
    list-style-type: lower-alpha;
 }
 
-.sites-sidebar-nav li, .external-links li {
+.sites-sidebar-nav li {
    list-style: none;
 }
 
 .sites-sidebar-nav .expander {
-   background: url("../images/arrow-down.gif") no-repeat;
+   background: url("../images/arrow-down.png") no-repeat;
    background-size: 15px 15px;
    float: left;
    height: 15px;
@@ -228,7 +289,7 @@ U+25BF (White down-pointing small triangle ▿)
 */
 
 .sites-sidebar-nav .expander.collapsed {
-   background: url("../images/arrow-left.gif") no-repeat;
+   background: url("../images/arrow-left.png") no-repeat;
    background-size: 15px 15px;
 }
 
@@ -237,7 +298,7 @@ U+25BF (White down-pointing small triangle ▿)
    padding-bottom: 0;
 }
 
-.sites-sidebar-nav ul, .external-links {
+.sites-sidebar-nav ul {
    padding: 0;
 }
 
@@ -246,13 +307,13 @@ U+25BF (White down-pointing small triangle ▿)
 }
 
 .sites-sidebar-nav .current-bg {
-   background-color: darkred;
-   color: white;
+   background-color: #450000;
+   color: #A0A0A0;
    font-weight: bold;
 }
 
 .sites-sidebar-nav .topLevel {
-   border-top: 1px grey dotted;
+   border-top: 1px #575757 dotted;
 }
 
 .sites-sidebar-nav .nav-first {
@@ -265,9 +326,14 @@ ol.goog-toc {
    padding-left: 0;
 }
 
+div.goog-toc, .sites-layout-sidebar-left, th {
+   /*from: http://stripesgenerator.com/ angle: 315, maintainRatio: yes, size: 4 */
+   background-image: linear-gradient(135deg, black 25%, #101010 25%, #101010 50%, black 50%, black 75%, #101010 75%, #101010 100%);
+   background-size: 11.31px 11.31px;
+}
+
 div.goog-toc {
-   background: url("bg-pattern.gif") repeat;
-   border: 1px solid grey;
+   border: 1px solid #202020;
 }
 
 div.goog-toc p {
@@ -283,16 +349,16 @@ div.goog-toc p {
 }
 
 .sites-layout-sidebar-left {
-   background: url("bg-pattern.gif") repeat;
-   padding: 0;
+   padding-right: 0;
+   padding-top: 10px;
+   /*TODO: bar code is ignoring bottom pad
+   Also make sure that small window doesn't have this padding*/
+   /*padding-bottom: 10px;*/
 }
 
 .sites-embed-content-sidebar-textbox {
    padding: 5px;
-}
-
-.sites-layout-sidebar-left h2 {
-   border-bottom: 1px dotted darkred;
+   margin-bottom: 16px;
 }
 
 .sites-sidebar-nav {
@@ -301,6 +367,10 @@ div.goog-toc p {
 
 /** Extra small and Small devices*/
 @media (max-width: 767px) {
+   .search-form {
+      padding-bottom: 10px;
+   }
+
    #top-nav:not(.collapse) {
       display: none
    }
@@ -308,6 +378,10 @@ div.goog-toc p {
 
 /** Medium+ devices*/
 @media (min-width: 768px) {
+   .search-form {
+      padding-bottom: 6px;
+   }
+
    /**this is used to show the element despite not having .show*/
    #top-nav.collapse {
       display: block
@@ -346,7 +420,7 @@ img {
 
 .graph-row > div {
    display: inline-block;
-   vertical-align: top;  /*This is here for what seems to be a bug: without it the height of graph-row is larger than it should be.*/
+   vertical-align: top; /*This is here for what seems to be a bug: without it the height of graph-row is larger than it should be.*/
 }
 
 .table-alt-rows td {
@@ -368,7 +442,6 @@ td {
 
 /**All th are under .table-alt-rows*/
 th {
-   background: url("bg-pattern.gif") repeat;
    padding: 3px 5px 5px;
    text-align: center;
    vertical-align: top;
@@ -376,121 +449,135 @@ th {
 
 /**This exists because the default color is transparent which looks bad when a floating table has some color behind it.*/
 .table-alt-rows tr:nth-child(odd) {
-   background-color: white;
+   background-color: black;
 }
 
 .table-alt-rows tr:nth-child(even) {
-   background-color: lightskyblue;
+   background-color: #000040;
 }
 
-.table-alt-rows,.table-alt-rows th,.table-alt-rows td {
+.table-alt-rows, .table-alt-rows th, .table-alt-rows td {
    border-collapse: collapse;
-   border: 1px inset grey;
-}
-
-.table-alt-rows .blue-top-th {
-   border-top: 8px solid darkblue;
+   border: 1px inset #202020;
 }
 
 .stamp-top, .stamp-middle, .stamp-bottom {
-   border: solid black 5px;
+   border: solid #202020 5px;
    font-weight: bold;
    text-align: center;
    width: 150px;
 }
+
 .stamp-top {
-   background-color: darkred;
+   background-color: #450000;
    border-bottom-width: 0;
-   color: white;
+   color: #A0A0A0;
 }
+
 .stamp-middle {
    font-size: 32px;
 }
+
 .stamp-bottom {
    border-top-width: 0;
 }
+
 .bar-code-border {
-   border: 5px solid;
+   border: 5px solid #202020;
 }
 
 .character-sheet input, .character-sheet select {
    font-size: 16px;
 }
-.character-sheet input[type="file"] {
-   background-color: white;
-}
+
 .fill-remaining {
    display: flex;
 }
+
 .fill-remaining > input {
    flex-grow: 1;
 }
+
 textarea {
    resize: both;
    width: 100%;
    max-width: 100%;
    height: 246px;
 }
+
 #testResults {
    width: 950px;
    height: 500px;
 }
+
 .character-sheet-defense-white > div, .character-sheet-defense-green > div {
    padding: 10px;
    text-align: center;
 }
+
 .character-sheet-defense-green > div {
-   background-color: palegreen;
+   background-color: #113A11;
 }
+
 .character-sheet-defense-green > div:nth-child(odd), .character-sheet-defense-white > div:nth-child(odd) {
    font-weight: bold;
 }
+
 .character-sheet-offense-row {
    padding: 5px;
    text-align: center;
 }
+
 .character-sheet-initiative {
-   background-color: palegreen;
+   background-color: #113A11;
    font-size: 24px;
    font-weight: bold;
    padding: 5px 0;
    text-align: center;
 }
+
 .character-sheet-light-green {
-   background-color: palegreen;
+   background-color: #113A11;
    padding: 5px;
 }
+
 .character-sheet-section-label, .character-sheet-point-totals {
-   background-color: darkgreen;
-   color: white;
+   background-color: #002500;
+   color: #A0A0A0;
    font-weight: bold;
    padding: 10px;
 }
+
 .character-sheet-hero-name {
    background-color: inherit;
    border: 0;
    padding: 0;
    font-size: 32px;
 }
+
 .character-sheet-power-level {
    font-size: 28px;
    text-align: center;
 }
+
 .character-sheet-section-label {
    font-size: 28px;
 }
+
 .character-sheet-point-totals {
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
    font-size: 28px;
    text-align: center;
-   display: block;  /*This is needed for point-counter since it contains spans.*/
+   display: block; /*This is needed for point-counter since it contains spans.*/
 }
+
 .character-sheet-ability-section > .row > .green-panel > div {
    font-size: 28px;
    font-weight: bold;
    text-align: center;
 }
+
 .character-sheet-ability-section {
    display: inline-block;
 }
@@ -502,9 +589,10 @@ textarea {
    max-width: 50%;
 }
 
-.red-panel,.green-panel {
-   border: solid thin grey;
+.red-panel, .green-panel {
+   border: solid thin #202020;
 }
+
 .character-sheet-ability-section > .row > .green-panel {
    border: none;
 }
@@ -514,8 +602,8 @@ textarea {
    margin-bottom: 0;
 }
 
-.red-panel > h3,.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
-   color: white;
+.red-panel > h3, .green-panel > h3, .character-sheet-top > div:nth-child(odd) {
+   color: #A0A0A0;
    font-weight: bold;
    padding: 5px;
    text-align: center;
@@ -523,24 +611,28 @@ textarea {
    margin-bottom: 0;
 }
 
-.red-panel > div,.green-panel > div,.character-sheet-top > div:nth-child(even) {
+.character-sheet-top > div:nth-child(odd) {
+   padding-top: 10px;
+}
+
+.red-panel > div, .green-panel > div, .character-sheet-top > div:nth-child(even) {
    padding: 10px;
 }
 
 .red-panel > h3 {
-   background-color: darkred;
+   background-color: #450000;
 }
 
 .red-panel > div {
-   background-color: pink;
+   background-color: #700000;
 }
 
-.green-panel > h3,.character-sheet-top > div:nth-child(odd) {
-   background-color: darkgreen;
+.green-panel > h3, .character-sheet-top > div:nth-child(odd) {
+   background-color: #002500;
 }
 
-.green-panel > div,.character-sheet-top > div:nth-child(even) {
-   background-color: palegreen;
+.green-panel > div, .character-sheet-top > div:nth-child(even) {
+   background-color: #113A11;
 }
 
 .example {
@@ -549,20 +641,20 @@ textarea {
 }
 
 .info-banner {
-   background-color: navajowhite;
+   background-color: #1A0029;
    display: block;
    padding: 5px;
 }
 
 .condition-card-bootstrap > .row > .col-xl-4 > div {
-   border: solid thin grey;
+   border: solid thin #202020;
 }
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > h3 {
-   color: white;
+   color: #A0A0A0;
    font-weight: bold;
    padding: 5px;
-   background-color: darkgreen;
+   background-color: #002500;
    margin-bottom: 0;
    text-align: center;
    text-decoration: none;
@@ -570,7 +662,7 @@ textarea {
 
 .condition-card-bootstrap > .row > .col-xl-4 > div > div {
    padding: 10px;
-   background-color: palegreen;
+   background-color: #113A11;
    flex-grow: 1;
 }
 
@@ -583,13 +675,14 @@ textarea {
    width: 33%;
 }
 
-.condition-card-bootstrap > .row > .col-xl-4 > div > div > table,.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table,
+.condition-card-bootstrap > .row > .col-xl-4 > div > div > table td {
    border-collapse: collapse;
-   border: 1px inset grey;
+   border: 1px inset #202020;
 }
 
 .red-img-border {
-   border: solid medium darkred;
+   border: solid medium #700000;
    padding: 5px;
 }
 
@@ -607,7 +700,7 @@ textarea {
 /**used for: what to roll ("Toughness check vs"), dice formula ("Power Check = 3dF + "), DC formula, cost formula ("Ability Cost"),
 "+/-1 for bonus/penalty", "Time Rank = "*/
 .generated-class-2 {
-   color: darkred;
+   color: #FF2020;
    display: block;
    font-size: 24px;
    font-weight: bold;

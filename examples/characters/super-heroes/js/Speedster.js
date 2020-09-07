@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 var knowledge = '(Choose One)';
 if(undefined !== queryParameters['names'][0]) knowledge = queryParameters['names'][0];
+=======
+var expertise = '(Choose One)';
+if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
+>>>>>>> gh-pages
 
 var json = {
    "Hero": {
@@ -20,7 +25,11 @@ var json = {
    "Powers": [
       {
          "effect": "Damage",
+<<<<<<< HEAD
          "text": "Fast Attack. Total of Damage 9 by default",
+=======
+         "text": "Fast Attack. Total of Damage 10 by default",
+>>>>>>> gh-pages
          "action": "Standard",
          "range": "Close",
          "duration": "Instant",
@@ -38,7 +47,11 @@ var json = {
                "name": "Selective"
             }
          ],
+<<<<<<< HEAD
          "rank": 7
+=======
+         "rank": 8
+>>>>>>> gh-pages
       },
       {
          "effect": "Damage",
@@ -64,7 +77,20 @@ var json = {
                "text": "Always points straight up"
             }
          ],
+<<<<<<< HEAD
          "rank": 6
+=======
+         "rank": 10
+      },
+      {
+         "effect": "Protection",
+         "text": "Anti-kinetic barrier",
+         "action": "None",
+         "range": "Personal",
+         "duration": "Permanent",
+         "Modifiers": [],
+         "rank": 5
+>>>>>>> gh-pages
       },
       {
          "effect": "Quickness",
@@ -78,12 +104,16 @@ var json = {
       {
          "effect": "Movement",
          "cost": 1,
+<<<<<<< HEAD
          "text": "Ground Speed 15: 95,000 MPH",
+=======
+         "text": "Ground Speed 10: 3,000 MPH",
+>>>>>>> gh-pages
          "action": "Move",
          "range": "Personal",
          "duration": "Sustained",
          "Modifiers": [],
-         "rank": 15
+         "rank": 10
       },
       {
          "effect": "Movement",
@@ -170,12 +200,20 @@ var json = {
       }
    ],
    "Defenses": {
+<<<<<<< HEAD
       "Dodge": 11,
+=======
+      "Dodge": 6,
+>>>>>>> gh-pages
       "Parry": 6,
       "Will": 8,
       "Fortitude": 8
    },
+<<<<<<< HEAD
    "ruleset": "4.0",
+=======
+   "ruleset": "3.16",
+>>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

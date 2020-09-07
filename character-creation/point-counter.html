@@ -12,8 +12,13 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-12 col-md-3 col-xl-2 sites-layout-sidebar-left">
-<script type="text/javascript" src="../themes/sideBar.js"></script>
+<p>Please enable JavaScript in order to see the generated sidebar.
+Without it you'll have to use the <a href="../site-map.html">sitemap</a> in order easily navigate.</p>
+
+<p>sideBar.js is harmless: it simply generates hyperlinks to major pages. It exists in a single place so that
+I don't have to update 100+ html pages with relative links whenever I want to change it.</p>
 </div>
+<script type="text/javascript" src="../themes/sideBar.js"></script>
 <main class="col-12 col-md-9 col-xl-10">
 <div class="d-lg-none">
 <div class="red-panel">
@@ -77,10 +82,10 @@
 </div>
 </div>
 <div class="col-12 col-lg-6 col-xl-4">
-<img src="../images/Sirocco.jpg" id="character-image" />
+<img src="../images/Sirocco.png" id="character-image" />
 <br />
 <form action="javascript:void(0);">
-<label>Image Path: <input type="text" value="../images/Sirocco.jpg" id="img-file-path" /></label>
+<label>Image Path: <input type="text" value="../images/Sirocco.png" id="img-file-path" /></label>
 <input type="submit" value="Load Image From Path" onClick="Main.loadImageFromPath();" />
 </form><br />
 <input type="file" accept="image/*" id="img-file-chooser" /><input type="button" value="Load Image From File" onClick="Main.loadImageFromFile();" />
@@ -206,8 +211,73 @@ There are some bugs I am aware of. Hopefully they won't be an issue.<br />
 <br />
 <textarea id="code-box"></textarea>
 <br /><br />
-<!----
+<script type="text/javascript" src="../minorVersion.js"></script>
+<script type="text/javascript">var Main;</script>
+<script type="text/javascript" src="javascript/main.js"></script>
+<script type="text/javascript" src="javascript/polyfill.js"></script>
+<script type="text/javascript" src="javascript/MapDefault.js"></script>
+<script type="text/javascript" src="javascript/Version.js"></script>
+<script type="text/javascript" src="javascript/data.js"></script>
+<!--
+the above few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
+everything else below is alphabetical
+-->
+<script type="text/javascript" src="javascript/abilities.js"></script>
+<script type="text/javascript" src="javascript/advantageList.js"></script>
+<script type="text/javascript" src="javascript/advantageRow.js"></script>
+<script type="text/javascript" src="javascript/CommonsLibrary.js"></script>
+<script type="text/javascript" src="javascript/conversions.js"></script>
+<script type="text/javascript" src="javascript/defenses.js"></script>
+<script type="text/javascript" src="javascript/htmlGenerator.js"></script>
+<script type="text/javascript" src="javascript/modifierList.js"></script>
+<script type="text/javascript" src="javascript/modifierRow.js"></script>
+<script type="text/javascript" src="javascript/powerList.js"></script>
+<script type="text/javascript" src="javascript/powerRow.js"></script>
+<script type="text/javascript" src="javascript/prototypes.js"></script>
+<script type="text/javascript" src="javascript/SelectUtil.js"></script>
+<script type="text/javascript" src="javascript/skillList.js"></script>
+<script type="text/javascript" src="javascript/skillRow.js"></script>
+<script type="text/javascript">
+//Main must be created after all functions have been defined
+Main = new MainObject();
+Object.freeze(Main);
+Main.clear();  //in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
+document.getElementById('ruleset').value = Main.getLatestRuleset().toString();
+document.getElementById('latest-ruleset').innerHTML = Main.getLatestRuleset().toString();
+</script>
+<script type="text/javascript" src="../examples/characters/characterFormParsing.js"></script>
+<script type="text/javascript" src="javascript/autoLoading.js"></script>
+<!--
+==============================================
+don't include these scripts in production to save memory (like half the files)
+Miscellaneous repo only works locally
+==============================================
+-->
+<script type="text/javascript" src="../examples/characters/characterForm.js"></script>
 <h2>Admin Powers</h2>
+<script type="text/javascript" src="../../Miscellaneous/src/main/javascript/testRunner.js"></script>
+<script type="text/javascript" src="javascript/test/root.js"></script>
+<script type="text/javascript" src="javascript/test/data.js"></script>
+<script type="text/javascript" src="javascript/test/abilities.js"></script>
+<script type="text/javascript" src="javascript/test/advantageList.js"></script>
+<script type="text/javascript" src="javascript/test/advantageRow.js"></script>
+<script type="text/javascript" src="javascript/test/characterForm.js"></script>
+<script type="text/javascript" src="javascript/test/characterFormParsing.js"></script>
+<script type="text/javascript" src="javascript/test/CommonsLibrary.js"></script>
+<script type="text/javascript" src="javascript/test/conversions.js"></script>
+<script type="text/javascript" src="javascript/test/defenses.js"></script>
+<script type="text/javascript" src="javascript/test/htmlGenerator.js"></script>
+<script type="text/javascript" src="javascript/test/main.js"></script>
+<script type="text/javascript" src="javascript/test/modifierList.js"></script>
+<script type="text/javascript" src="javascript/test/modifierRow.js"></script>
+<script type="text/javascript" src="javascript/test/powerList.js"></script>
+<script type="text/javascript" src="javascript/test/powerRow.js"></script>
+<script type="text/javascript" src="javascript/test/SelectUtil.js"></script>
+<script type="text/javascript" src="javascript/test/skillList.js"></script>
+<script type="text/javascript" src="javascript/test/skillRow.js"></script>
+<script type="text/javascript" src="javascript/test/Version.js"></script>
+<script type="text/javascript" src="javascript/test/testTools.js"></script>
+<script type="text/javascript" src="../../Miscellaneous/src/main/javascript/unstableSort.js"></script>
 <br />
 <form action="javascript:void(0);">
 <input type="text" value="upgradeCurrentCharacter();" id="command-text" />
@@ -280,18 +350,6 @@ testResults:<br />
 </main>
 </div>
 </div>
-<script type="text/javascript" src="../minorVersion.js"></script>
-<script type="text/javascript">var Main;</script>
-<script type="text/javascript" src="javascript/main.js"></script>
-<script type="text/javascript">
-//Main must be created after all functions have been defined
-Main = new MainObject();
-Object.freeze(Main);
-Main.clear();  //in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
-document.getElementById('ruleset').value = Main.getLatestRuleset().toString();
-document.getElementById('latest-ruleset').innerHTML = Main.getLatestRuleset().toString();
-</script>
-<script type="text/javascript" src="javascript/autoLoading.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>

@@ -1,41 +1,14 @@
 'use strict';
-(function(){
-//include everything else because I'm cool like that
-var jsFileNamesUsed = ['polyfill', 'MapDefault', 'Version', 'data', 'abilities', 'advantageList', 'advantageRow', 'CommonsLibrary',
-    'conversions', 'defenses', 'modifierList', 'modifierRow', 'powerList', 'powerRow', 'prototypes', 'SelectUtil',
-    'skillList', 'skillRow'];
-//the first few are first because everything depends on data which depends on MapDefault and Version (polyfill is first for safety)
-//everything else is alphabetical
-if (null !== document.getElementById('testResults'))  //false in production to save memory (like half the files)
-{
-   var miscRepo = '../../../Miscellaneous/src/main/javascript/';  //only works locally
-   var runnerPath = miscRepo + 'testRunner';
-   var unstableSortPath = miscRepo + 'unstableSort';
-   jsFileNamesUsed = jsFileNamesUsed.concat([runnerPath, 'test/root', 'test/data', 'test/abilities', 'test/advantageList',
-      'test/advantageRow', 'test/CommonsLibrary', 'test/conversions', 'test/defenses',
-      'test/main', 'test/modifierList', 'test/modifierRow', 'test/powerList', 'test/powerRow',
-      'test/SelectUtil', 'test/skillList', 'test/skillRow', 'test/Version',
-      'test/testTools', unstableSortPath]);
-}
-for(var i=0; i < jsFileNamesUsed.length; i++){includeJsFile(jsFileNamesUsed[i]);}
-function includeJsFile(jsName)
-{
-    document.write('<script type="text/javascript" src="javascript/'+jsName+'.js"></script>');
-    //document write is not a problem since this is ran only once
-    //insertAdjacentHTML etc won't work for script. RequireJS (http://requirejs.org/docs/api.html) might work if I used modules.
-}
-})();
-
 //TODO: move to minorVersion
 /*
-var latestMajorRuleset = 3;
+var latestMajorRuleset = 4;
 Not defined because it is intentionally difficult to increment (every page should be examined for implications)
 after that see fb92aba0816064835aba374519045b5e5bd1ab35 for what needs to update.
 The variable isn't very useful anyway.
 Also this file name isn't wrong because major version isn't defined in here.
 */
 var latestMinorRuleset = 0;
-var largestPossibleMinorRulesets = [undefined, 0, 7, 14, latestMinorRuleset];
+var largestPossibleMinorRulesets = [undefined, 0, 7, 16, latestMinorRuleset];
 
 /**Call List onChange
 Hero Name: Nothing (only need to look at it when saving or loading)
@@ -44,20 +17,23 @@ bio box: nothing: same as hero name
 */
 function MainObject()
 {
-   //private variable section:
+   //region private variable
    const latestRuleset = new VersionObject(4, latestMinorRuleset), latestSchemaVersion = 2;  //see bottom of this file for a schema change list
-   var characterPointsSpent = 0, transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
-   var powerLevel = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
+   var transcendence = 0, minimumTranscendence = 0, previousGodhood = false;
+   var powerLevelMaxAttack = 0, powerLevelMaxEffect = 0, powerLevelAttackEffect = 0, powerLevelPerceptionEffect = 0;
    var activeRuleset = latestRuleset.clone();
    var mockMessenger;  //used for testing
    var amLoading = false;  //used by the default messenger
    var derivedValues = {};  //will be used by html, exists for testing
+   //endregion private variable
 
-   //Single line function section
+   //region Single line function
    this.canUseGodhood=function(){return (transcendence > 0);};
-   this.getActiveRuleset=function(){return activeRuleset.clone();};  //defensive copy so that yoda conditions function
+   //does a defensive copy so that yoda conditions function
+   this.getActiveRuleset=function(){return activeRuleset.clone();};
    this.getLatestRuleset=function(){return latestRuleset.clone();};  //used for testing
    this.getTranscendence=function(){return transcendence;};
+   //clone is needed for tests
    this.getDerivedValues=function(){return JSON.clone(derivedValues);};
    /**This sets the code-box with the saved text.*/
    this.saveToTextArea=function(){document.getElementById('code-box').value = this.saveAsString();};
@@ -67,8 +43,9 @@ function MainObject()
    this.setMockMessenger=function(mockedFun){mockMessenger = mockedFun;};
    /**Restores the default function for messaging the user*/
    this.clearMockMessenger=function(){mockMessenger = undefined;};
+   //endregion Single line function
 
-   //Onchange section
+   //region Onchange
    /**Onchange function for changing the ruleset. Sets the document values as needed*/
    this.changeRuleset=function()
    {
@@ -108,12 +85,13 @@ function MainObject()
        minimumTranscendence = transcendence;
        this.updateTranscendence();
    };
+   //endregion Onchange
 
-   //public functions section
+   //region public functions
    /**Resets all values that can be saved (except ruleset), then updates. Each section is cleared. The file selectors are not touched.*/
    this.clear=function()
    {
-      derivedValues = {};
+      this._resetDerivedValues();
       document.getElementById('hero-name').value = 'Hero Name';
       document.getElementById('transcendence').value = transcendence = minimumTranscendence = 0;
       this.abilitySection.clear();
@@ -134,7 +112,51 @@ function MainObject()
    this.exportToMarkdown=function()
    {
       //TODO: store all UI values after calc so that they can be exported or at least defense, skills, offense
-      document.getElementById('code-box').value = jsonToMarkdown(this.save(), powerLevel, characterPointsSpent);
+      document.getElementById('code-box').value = jsonToMarkdown(this.save(), derivedValues);
+   };
+   /**This function loads the json document.*/
+   this.load=function(jsonDoc)
+   {
+      amLoading = true;
+      document.getElementById('code-box').value = '';
+      location.hash = '';  //clear out so that it may change later
+
+      this._determineCompatibilityIssues(jsonDoc);
+      if(jsonDoc.version < latestSchemaVersion) this._convertDocument(jsonDoc);
+      //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
+
+      this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
+      document.getElementById('ruleset').value = activeRuleset.toString();
+      //clear does not change activeRuleset
+      this.clear();  //must clear out all other data first so not to have any remain
+      document.getElementById('hero-name').value = jsonDoc.Hero.name;
+      if (activeRuleset.major > 1)
+      {
+         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
+         document.getElementById('transcendence').value = transcendence;
+      }
+      document.getElementById('img-file-path').value = jsonDoc.Hero.image;
+      this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
+      document.getElementById('bio-box').value = jsonDoc.Information;
+      this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
+
+      this.powerSection.load(jsonDoc.Powers);
+      this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
+
+      this.advantageSection.load(jsonDoc.Advantages);
+      this.skillSection.load(jsonDoc.Skills);
+      this.defenseSection.load(jsonDoc.Defenses);
+      if (undefined === mockMessenger)
+      {
+         if ('' !== document.getElementById('code-box').value)
+         {
+            location.hash = '#code-box';  //scroll to the code-box if there's an error
+            //wouldn't trigger in test anyway because messageUser won't write to box
+            alert('An error has occurred, see text box for details.');
+         }
+         else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
+      }
+      amLoading = false;
    };
    /**Loads the file's data*/
    this.loadFile=function()
@@ -144,6 +166,36 @@ function MainObject()
        var oFReader=new FileReader();  //reference: https://developer.mozilla.org/en-US/docs/DOM/FileReader
        oFReader.readAsText(filePath);
        oFReader.onload=function(oFREvent){Main.loadFromString(oFREvent.target.result);};  //Main has been defined in order to use Main.loadFile() button
+   };
+   /**This function loads the document according to the text string given.*/
+   this.loadFromString=function(fileString)
+   {
+      fileString = fileString.trim();
+      if('' === fileString) return;  //ignore
+
+      var jsonDoc, docType;
+      try {
+         if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
+         else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
+      }
+      catch(e)
+      {
+         amLoading = true;
+         document.getElementById('code-box').value = '';
+         Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
+         //yeah I know the error message is completely unhelpful but there's nothing more I can do
+
+         if (undefined === mockMessenger)
+         {
+            location.hash = '';  //clear out then set it in order to force scroll
+            location.hash = '#code-box';  //scroll to the code-box
+            alert('Invalid document, see text box for details.');
+         }
+         amLoading = false;
+         throw e;  //stop the process and cause a console.error
+      }
+
+      this.load(jsonDoc);
    };
    /**Loads the image file*/
    this.loadImageFromFile=function()
@@ -158,16 +210,22 @@ function MainObject()
    this.loadImageFromPath=function()
    {
        if(document.getElementById('img-file-path').value === '')  //the reason for this is because the user doesn't know this default image path
-          document.getElementById('img-file-path').value = '../images/Sirocco.jpg';
+          document.getElementById('img-file-path').value = '../images/Sirocco.png';
        document.getElementById('character-image').src = document.getElementById('img-file-path').value;
    };
    /**Gets the total protection value of the sections power and equipment.*/
    this.getProtectionTotal=function()
    {
-       if(1 === activeRuleset.major) return (this.powerSection.getProtectionRankTotal() + this.equipmentSection.getProtectionRankTotal());
+       var powerProtectionRanks = this.powerSection.getProtectionRankTotal();
+       var equipmentProtectionRanks = this.equipmentSection.getProtectionRankTotal();
+       //this correctly returns null if both are null
+       if (null === powerProtectionRanks) return equipmentProtectionRanks;
+       if (null === equipmentProtectionRanks) return powerProtectionRanks;
+
        //protection stacks only in v1.0
-       if(this.powerSection.getProtectionRankTotal() > this.equipmentSection.getProtectionRankTotal()) return this.powerSection.getProtectionRankTotal();
-       return this.equipmentSection.getProtectionRankTotal();
+       if(1 === activeRuleset.major) return (powerProtectionRanks + equipmentProtectionRanks);
+       if(powerProtectionRanks > equipmentProtectionRanks) return powerProtectionRanks;
+       return equipmentProtectionRanks;
    };
    /**This method passes a message to the user in some way (currently uses code-box).
    It is abstracted for mocking and so it can easily be changed later.
@@ -177,6 +235,33 @@ function MainObject()
        if(undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
        else if(amLoading) document.getElementById('code-box').value += messageSent + '\n';
        else alert(messageSent);
+   };
+   /**This returns the document's data as a json object*/
+   this.save=function()
+   {
+      var jsonDoc = {Hero: {}, Abilities: {}, Powers: [], Equipment: [], Advantages: [], Skills: [], Defenses: {}};
+      //skeleton so I don't need to create these later
+      jsonDoc.ruleset = activeRuleset.toString();
+      jsonDoc.version = latestSchemaVersion;
+      jsonDoc.Hero.name = document.getElementById('hero-name').value;
+      if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
+      jsonDoc.Hero.image = document.getElementById('img-file-path').value;
+      //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
+      jsonDoc.Information = document.getElementById('bio-box').value;
+      jsonDoc.Abilities = this.abilitySection.save();
+      jsonDoc.Powers = this.powerSection.save();
+      jsonDoc.Equipment = this.equipmentSection.save();
+      jsonDoc.Advantages = this.advantageSection.save();
+      jsonDoc.Skills = this.skillSection.save();
+      jsonDoc.Defenses = this.defenseSection.save();
+      return jsonDoc;
+   };
+   /**This returns the document's data as a string*/
+   this.saveAsString=function()
+   {
+      var jsonDoc = this.save();
+      var fileString = JSON.stringify(jsonDoc);
+      return fileString;
    };
    /**Onclick event for the save-to-file-link anchor link only.
    It changes the a tag so that the link downloads the document as a saved file.*/
@@ -204,22 +289,29 @@ function MainObject()
    /**This counts character points and power level and sets the document. It needs to be called by every section's update.*/
    this.update=function()
    {
-       this._calculateTotal();
+      this._calculateTotal();
 
-       //start by looking at character points which can't be negative
-       powerLevel = Math.ceil(characterPointsSpent/15);  //if characterPointsSpent is 0 then powerLevel is 0
+      //start by looking at character points
+      //CP -5 => PL -0 which should be fine
+      //CP 0 => PL 0 rounds up after that.
+      derivedValues.powerLevel = Math.ceil(derivedValues.characterPointsSpent / 15);
+      //min PL is now 1. M&M has min 0 (kinda). old H&H can also use 0
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16) && derivedValues.powerLevel < 1) derivedValues.powerLevel = 1;
+      //CP -30 => needs to be PL 0 or 1
+      else if(derivedValues.powerLevel < 0) derivedValues.powerLevel = 0;
 
       //if you are no longer limited by power level limitations that changes the minimum possible power level:
-      if(this.advantageSection.isUsingPettyRules())
-          this._calculatePowerLevelLimitations();
+      if (this.advantageSection.isUsingPettyRules())
+         this._calculatePowerLevelLimitations();
 
-       document.getElementById('power-level').innerHTML = powerLevel;
-       document.getElementById('grand-total-max').innerHTML = (powerLevel*15);
+      document.getElementById('power-level').innerHTML = derivedValues.powerLevel.toString();
+      document.getElementById('grand-total-max').innerHTML = (derivedValues.powerLevel * 15).toString();
       if (activeRuleset.major > 1)
       {
-          transcendence = Math.floor(powerLevel/20);  //gain a transcendence every 20 PL
-          if(transcendence < minimumTranscendence) transcendence = minimumTranscendence;  //don't auto-set below the user requested value
-          this.updateTranscendence();  //to regenerate as needed
+         transcendence = Math.floor(derivedValues.powerLevel / 20);  //gain a transcendence every 20 PL
+         //don't auto-set below the user requested value
+         if (transcendence < minimumTranscendence) transcendence = minimumTranscendence;
+         this.updateTranscendence();  //to regenerate as needed
       }
    };
    /**Calculates initiative and sets the document.*/
@@ -241,8 +333,7 @@ function MainObject()
    /**Calculates and creates the offense section of the document.*/
    this.updateOffense=function()
    {
-      powerLevelAttackEffect = 0;
-      powerLevelPerceptionEffect = 0;
+      powerLevelMaxAttack = powerLevelMaxEffect = powerLevelAttackEffect = powerLevelPerceptionEffect = -Infinity;
       var attackBonus;
       var allOffensiveRows = '';
       derivedValues.Offense = [];
@@ -266,6 +357,8 @@ function MainObject()
             //attackBonus can't be -- so don't need to check powerLevelPerceptionEffect
             if(powerLevelAttackEffect < (attackBonus + strengthValue))
                powerLevelAttackEffect = (attackBonus + strengthValue);
+            if(powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+            if(powerLevelMaxEffect < strengthValue) powerLevelMaxEffect = strengthValue;
 
             derivedValues.Offense.push({skillName: 'Unarmed', attackBonus: attackBonus, range: 'Close',
                effect: 'Damage', rank: strengthValue});
@@ -318,9 +411,14 @@ function MainObject()
             //keep track of the highest values for PL
             //TODO: test for PL?
             effectRank = rowPointer.getRank();
-            if(attackBonus === '--' && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
-            else if(attackBonus !== '--' && powerLevelAttackEffect < (attackBonus + effectRank))
-               powerLevelAttackEffect = (attackBonus + effectRank);
+            if ('--' === attackBonus && powerLevelPerceptionEffect < effectRank) powerLevelPerceptionEffect = effectRank;
+            if ('--' !== attackBonus)
+            {
+               if (powerLevelMaxAttack < attackBonus) powerLevelMaxAttack = attackBonus;
+               if (powerLevelAttackEffect < (attackBonus + effectRank))
+                  powerLevelAttackEffect = (attackBonus + effectRank);
+            }
+            if (powerLevelMaxEffect < effectRank) powerLevelMaxEffect = effectRank;
 
             derivedValues.Offense.push({skillName: rowPointer.getName(), attackBonus: attackBonus, range: range,
                effect: rowPointer.getEffect(), rank: effectRank});
@@ -343,66 +441,94 @@ function MainObject()
        this.advantageSection.update();
        //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
    };
+   //endregion public functions
 
-   //'private' functions section. Although all public none of these should be called from outside of this object
+   //region 'private' functions. Although all public none of these should be called from outside of this object
    /**This returns the minimum possible power level based on the powerLevel given and the power level limitations.*/
    this._calculatePowerLevelLimitations=function()
    {
-       var compareTo;
-       //Skills and Abilities
-       //TODO: ruleset 1.0 has advantages I need to include: Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
-      for (var i=0; i < Data.Ability.names.length; i++)
+      var compareTo;
+      //Skills and Abilities. Skills (which can't be negative) includes abilities even if there are no skills
+      //therefore this covers Abilities just fine (for every ruleset)
+      //TODO: ruleset 1.0 has advantages I need to include:
+      //Close Attack etc (Improvised Weapon, Ranged Attack, Throwing Mastery), Eidetic Memory, Great Endurance
+      for (var i = 0; i < Data.Ability.names.length; i++)
       {
-          compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
-          compareTo-=10;
-          if(compareTo > powerLevel) powerLevel = compareTo;  //won't replace if compareTo is negative
+         compareTo = this.skillSection.getMaxSkillRanks().get(Data.Ability.names[i]);
+         compareTo -= 10;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;  //won't replace if compareTo is negative
       }
 
-       //Attack and Effect
-       compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);  //round up
+      if (activeRuleset.isGreaterThanOrEqualTo(3, 16))
+      {
+         //Attack and Effect
+         if(powerLevelMaxAttack > derivedValues.powerLevel) derivedValues.powerLevel = powerLevelMaxAttack;
+         if(powerLevelMaxEffect > derivedValues.powerLevel) derivedValues.powerLevel = powerLevelMaxEffect;
 
-       //Effect without Attack (ie Perception range)
-       compareTo = powerLevelPerceptionEffect;
-       if(compareTo > powerLevel) powerLevel = compareTo;
+         //Defenses
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
-       //Dodge and Toughness
-       compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
-       //Parry and Toughness
-       compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
-       compareTo+= this.defenseSection.getMaxToughness();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
 
-       //Fortitude and Will
-       compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
-       compareTo+= this.defenseSection.getByName('Will').getTotalBonus();
-       compareTo/=2;
-       if(compareTo > powerLevel) powerLevel = Math.ceil(compareTo);
+         compareTo = this.defenseSection.getByName('Will').getTotalBonus();
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
+
+         compareTo = this.defenseSection.getMaxToughness();
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
+      }
+      else
+      {
+         //Attack and Effect
+         compareTo = powerLevelAttackEffect;  //only the highest 2 were stored for power level
+         compareTo /= 2;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);  //round up
+
+         //Effect without Attack (ie Perception range)
+         compareTo = powerLevelPerceptionEffect;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = compareTo;
+
+         //Dodge and Toughness
+         compareTo = this.defenseSection.getByName('Dodge').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
+
+         //Parry and Toughness
+         compareTo = this.defenseSection.getByName('Parry').getTotalBonus();
+         compareTo += this.defenseSection.getMaxToughness();
+         compareTo /= 2;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
+
+         //Fortitude and Will
+         compareTo = this.defenseSection.getByName('Fortitude').getTotalBonus();
+         compareTo += this.defenseSection.getByName('Will').getTotalBonus();
+         compareTo /= 2;
+         if (compareTo > derivedValues.powerLevel) derivedValues.powerLevel = Math.ceil(compareTo);
+      }
    };
    /**This calculates the grand total based on each section's total and sets the document.*/
    this._calculateTotal=function()
    {
-       characterPointsSpent = 0;
-       document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
-       characterPointsSpent += this.abilitySection.getTotal();
-       document.getElementById('power-total').innerHTML = this.powerSection.getTotal();
-       characterPointsSpent += this.powerSection.getTotal();
-       document.getElementById('equipment-points-used').innerHTML = this.equipmentSection.getTotal();
-       document.getElementById('equipment-points-max').innerHTML = this.advantageSection.getEquipmentMaxTotal();
-       //the character points spent for equipment points is accounted for in the advantage section
-       document.getElementById('advantage-total').innerHTML = this.advantageSection.getTotal();
-       characterPointsSpent += this.advantageSection.getTotal();
-       document.getElementById('skill-total').innerHTML = this.skillSection.getTotal();
-       characterPointsSpent += this.skillSection.getTotal();
-       document.getElementById('defense-total').innerHTML = this.defenseSection.getTotal();
-       characterPointsSpent += this.defenseSection.getTotal();
-       document.getElementById('grand-total-used').innerHTML = characterPointsSpent;
+      derivedValues.characterPointsSpent = 0;
+      document.getElementById('ability-total').innerHTML = this.abilitySection.getTotal();
+      derivedValues.characterPointsSpent += this.abilitySection.getTotal();
+      document.getElementById('power-total').innerHTML = this.powerSection.getTotal();
+      derivedValues.characterPointsSpent += this.powerSection.getTotal();
+      document.getElementById('equipment-points-used').innerHTML = this.equipmentSection.getTotal();
+      document.getElementById('equipment-points-max').innerHTML = this.advantageSection.getEquipmentMaxTotal();
+      //the character points spent for equipment points is accounted for in the advantage section
+      document.getElementById('advantage-total').innerHTML = this.advantageSection.getTotal();
+      derivedValues.characterPointsSpent += this.advantageSection.getTotal();
+      document.getElementById('skill-total').innerHTML = this.skillSection.getTotal();
+      derivedValues.characterPointsSpent += this.skillSection.getTotal();
+      document.getElementById('defense-total').innerHTML = this.defenseSection.getTotal();
+      derivedValues.characterPointsSpent += this.defenseSection.getTotal();
+      document.getElementById('grand-total-used').innerHTML = derivedValues.characterPointsSpent;
    };
    /**Given an older json document, this function converts it to the newest document format.*/
    this._convertDocument=function(jsonDoc)
@@ -467,76 +593,6 @@ function MainObject()
        jsonDoc.ruleset = ruleset;
        jsonDoc.version = version;
    };
-   /**This function loads the json document.*/
-   this.load=function(jsonDoc)
-   {
-      amLoading = true;
-      document.getElementById('code-box').value = '';
-      location.hash = '';  //clear out so that it may change later
-
-      this._determineCompatibilityIssues(jsonDoc);
-      if(jsonDoc.version < latestSchemaVersion) this._convertDocument(jsonDoc);
-      //TODO: if(!this.isValidDocument(jsonDoc)) return;  //checks for the things I assume exist below (Hero etc)
-
-      this.setRuleset(jsonDoc.ruleset.major, jsonDoc.ruleset.minor);
-      document.getElementById('ruleset').value = activeRuleset.toString();
-      //clear does not change activeRuleset
-      this.clear();  //must clear out all other data first so not to have any remain
-      document.getElementById('hero-name').value = jsonDoc.Hero.name;
-      if (activeRuleset.major > 1)
-      {
-         transcendence = minimumTranscendence = sanitizeNumber(jsonDoc.Hero.transcendence, -1, 0);
-         document.getElementById('transcendence').value = transcendence;
-      }
-      document.getElementById('img-file-path').value = jsonDoc.Hero.image;
-      this.loadImageFromPath();  //can't set the file chooser for obvious security reasons
-      document.getElementById('bio-box').value = jsonDoc.Information;
-      this.abilitySection.load(jsonDoc.Abilities);  //at the end of each load it updates and generates
-
-      this.powerSection.load(jsonDoc.Powers);
-      this.equipmentSection.load(jsonDoc.Equipment);  //equipment can't have godhood
-
-      this.advantageSection.load(jsonDoc.Advantages);
-      this.skillSection.load(jsonDoc.Skills);
-      this.defenseSection.load(jsonDoc.Defenses);
-      if ('' !== document.getElementById('code-box').value)
-      {
-         location.hash = '#code-box';  //scroll to the code-box if there's an error
-         alert('An error has occurred, see text box for details.');  //won't trigger in test because messageUser won't write to box
-      }
-      else location.hash = '#top';  //(built in anchor) jump to top (but don't scroll horizontally)
-      amLoading = false;
-   };
-   /**This function loads the document according to the text string given.*/
-   this.loadFromString=function(fileString)
-   {
-      fileString = fileString.trim();
-      if('' === fileString) return;  //ignore
-
-      var jsonDoc, docType;
-      try {
-         if(fileString[0] === '<'){docType = 'XML'; jsonDoc = xmlToJson(fileString);}  //if the first character is less than then assume XML
-         else{docType = 'JSON'; jsonDoc = JSON.parse(fileString);}  //else assume JSON
-      }
-      catch(e)
-      {
-         amLoading = true;
-         document.getElementById('code-box').value = '';
-         Main.messageUser('MainObject.loadFromString.parsing.'+docType, 'A parsing error has occurred. The document you provided is not legal '+docType+'.\n\n'+e);
-         //yeah I know the error message is completely unhelpful but there's nothing more I can do
-
-         if (undefined === mockMessenger)
-         {
-            location.hash = '';  //clear out then set it in order to force scroll
-            location.hash = '#code-box';  //scroll to the code-box
-            alert('Invalid document, see text box for details.');
-         }
-         amLoading = false;
-         throw e;  //stop the process and cause a console.error
-      }
-
-      this.load(jsonDoc);
-   };
    /**This is a simple generator called by updateOffense to create a row of offense information.*/
    this._makeOffenseRow=function(skillName, attackBonus, range, effect, rank)
    {
@@ -553,32 +609,13 @@ function MainObject()
       thisOffensiveRow+='</div></div>\n';
       return thisOffensiveRow;
    };
-   /**This returns the document's data as a json object*/
-   this.save=function()
+   this._resetDerivedValues=function()
    {
-       var jsonDoc = {Hero: {}, Abilities: {}, Powers: [], Equipment: [], Advantages: [], Skills: [], Defenses: {}};
-          //skeleton so I don't need to create these later
-       jsonDoc.ruleset = activeRuleset.toString();
-       jsonDoc.version = latestSchemaVersion;
-       jsonDoc.Hero.name = document.getElementById('hero-name').value;
-       if(activeRuleset.major > 1) jsonDoc.Hero.transcendence = transcendence;
-       jsonDoc.Hero.image = document.getElementById('img-file-path').value;
-       //TODO: use jsonDoc.Hero.image = document.getElementById('character-image').src;
-       jsonDoc.Information = document.getElementById('bio-box').value;
-       jsonDoc.Abilities = this.abilitySection.save();
-       jsonDoc.Powers = this.powerSection.save();
-       jsonDoc.Equipment = this.equipmentSection.save();
-       jsonDoc.Advantages = this.advantageSection.save();
-       jsonDoc.Skills = this.skillSection.save();
-       jsonDoc.Defenses = this.defenseSection.save();
-       return jsonDoc;
-   };
-   /**This returns the document's data as a string*/
-   this.saveAsString=function()
-   {
-      var jsonDoc = this.save();
-      var fileString = JSON.stringify(jsonDoc);
-      return fileString;
+      derivedValues = {
+         characterPointsSpent: -Infinity,
+         powerLevel: -Infinity,
+         Offense: []
+      };
    };
    this._constructor=function()
    {
@@ -595,6 +632,8 @@ function MainObject()
        this.defenseSection = new DefenseList();
        this.updateOffense();  //for the default damage
    };
+   //endregion 'private' functions
+
    //constructor:
    this._constructor();
 }
