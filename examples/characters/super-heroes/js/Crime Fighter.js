@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-=======
-var expertise = '(Choose One)';
-if (undefined !== queryParameters.strings[1]) expertise = queryParameters.strings[1];
-
 var equipmentAdvantage = {
    "name": "Equipment",
    "rank": 13
 };
 
->>>>>>> gh-pages
 var json = {
    "Hero": {
       "name": "Crime Fighter",
@@ -18,21 +12,12 @@ var json = {
    "Abilities": {
       "Strength": 8,
       "Agility": 6,
-<<<<<<< HEAD
-      "Fighting": 12,
+      "Fighting": 10,
       "Dexterity": 9,
-      "Stamina": 3,
+      "Stamina": 2,
       "Intellect": 5,
       "Awareness": 6,
-      "Presence": 6
-=======
-      "Fighting": 10,
-      "Dexterity": 6,
-      "Stamina": 1,
-      "Intellect": 3,
-      "Awareness": 4,
       "Presence": 3
->>>>>>> gh-pages
    },
    "Powers": [],
    "Equipment": [
@@ -134,16 +119,9 @@ var json = {
          "rank": "Trained"
       },
       {
-<<<<<<< HEAD
          "name": "Knowledge",
          "subtype": "Criminal",
          "rank": "Trained"
-=======
-         "name": "Investigation",
-         "subtype": "",
-         "rank": 6,
-         "ability": "Intellect"
->>>>>>> gh-pages
       },
       {
          "name": "Perception",
@@ -159,14 +137,6 @@ var json = {
          "rank": "Trained"
       },
       {
-<<<<<<< HEAD
-         "name": "Ranged Combat",
-         "subtype": "Grenades",
-         "rank": "Trained"
-      },
-      {
-=======
->>>>>>> gh-pages
          "name": "Sleight of Hand",
          "rank": "Trained"
       },
@@ -179,18 +149,15 @@ var json = {
       "Dodge": 4,
       "Parry": 0,
       "Will": 6,
-      "Fortitude": 7
+      "Fortitude": 8
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
 
-//2 removes these. requirement: this must run when there's no query params
+/*#2 removes these, 1,3,4 has them. requirement: this must run when there's no query params (#1)
+not an else block to 2 because 3,4 are connected instead*/
 if ('2' !== queryParameters.options[0])
 {
    json.Equipment.push({
@@ -222,14 +189,13 @@ if ('2' !== queryParameters.options[0])
    json.Skills.push({
       "name": "Ranged Combat",
       "subtype": "Grenades",
-      "rank": 4,
-      "ability": "Dexterity"
+      "rank": "Trained"
    });
 }
 
 if ('2' === queryParameters.options[0])
 {
-   equipmentAdvantage.rank -= 10;
+   equipmentAdvantage.rank -= 10;  //no Flash-Bangs
    json.Powers.push({
       "effect": "Healing",
       "text": "(Device of your choice)",
