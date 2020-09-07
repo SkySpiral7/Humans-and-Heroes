@@ -187,7 +187,7 @@ function PowerRowHtml(props)
       </div>);
 
       let costPerRankDisplay;
-      if (derivedValues.costPerRank > 0) costPerRankDisplay = '' + derivedValues.costPerRank;
+      if (derivedValues.costPerRank >= 1) costPerRankDisplay = '' + derivedValues.costPerRank;
       else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')';  //0 is 1/2 and -1 is 1/3
 
       rowList.push(<div className="row" key="cost">
@@ -201,9 +201,6 @@ function PowerRowHtml(props)
          <div className="col">{'Grand total for ' + props.sectionName.toTitleCase() + ': '}
             {state.total}</div>
       </div>);
-
-      //TODO: what was this for?
-      //htmlString += '</div>';
    }
 
    topElementList.push(<div className="container-fluid" key="rows">

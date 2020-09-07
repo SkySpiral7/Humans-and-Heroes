@@ -414,8 +414,8 @@ class ModifierList extends React.Component
 }
 
 /*next:
-convert power row
-convert power list
+convert power row (can't test alone?)
+convert power list (can't test alone?)
 hook up power html
    onChange
 convert mod list
