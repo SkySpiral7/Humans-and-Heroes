@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-var expertise = '(Choose One)';
-if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
-
->>>>>>> gh-pages
 var json = {
    "Hero": {
       "name": "Powerhouse",
@@ -11,19 +5,11 @@ var json = {
       "image": "../images/Powerhouse.jpg"
    },
    "Abilities": {
-<<<<<<< HEAD
-      "Strength": 12,
-      "Agility": 0,
-      "Fighting": 7,
-      "Dexterity": 7,
-      "Stamina": 13,
-=======
       "Strength": 10,
       "Agility": 1,
-      "Fighting": 6,
-      "Dexterity": 1,
+      "Fighting": 7,
+      "Dexterity": 7,
       "Stamina": 10,
->>>>>>> gh-pages
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 1
@@ -99,12 +85,12 @@ var json = {
       {
          "effect": "Feature",
          "cost": 2,
-         "text": "Impervious Toughness 5",
+         "text": "Impervious Toughness 4",
          "action": "None",
          "range": "Personal",
          "duration": "Permanent",
          "Modifiers": [],
-         "rank": 5
+         "rank": 4
       },
       {
          "effect": "Enhanced Trait",
@@ -138,21 +124,8 @@ var json = {
    ],
    "Skills": [
       {
-<<<<<<< HEAD
          "name": "Athletics",
          "rank": "Mastered"
-=======
-         "name": "Close Combat",
-         "subtype": "Unarmed",
-         "rank": 4,
-         "ability": "Fighting"
-      },
-      {
-         "name": "Expertise",
-         "subtype": expertise,
-         "rank": 6,
-         "ability": "Intellect"
->>>>>>> gh-pages
       },
       {
          "name": "Close Combat",
@@ -167,15 +140,11 @@ var json = {
    ],
    "Defenses": {
       "Dodge": 9,
-      "Parry": 4,
+      "Parry": 3,
       "Will": 8,
       "Fortitude": 0
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 var knowledge = '(Choose One)';
-if(undefined !== queryParameters['names'][0]) knowledge = queryParameters['names'][0];
-=======
-var expertise = '(Choose One)';
-if (undefined !== queryParameters.strings[0]) expertise = queryParameters.strings[0];
->>>>>>> gh-pages
+if (undefined !== queryParameters.strings[0]) knowledge = queryParameters.strings[0];
 
 var json = {
    "Hero": {
@@ -15,15 +10,9 @@ var json = {
    "Abilities": {
       "Strength": 10,
       "Agility": 3,
-<<<<<<< HEAD
-      "Fighting": 8,
-      "Dexterity": 7,
-      "Stamina": 12,
-=======
       "Fighting": 10,
-      "Dexterity": 3,
+      "Dexterity": 7,
       "Stamina": 10,
->>>>>>> gh-pages
       "Intellect": 0,
       "Awareness": 1,
       "Presence": 5
@@ -118,28 +107,16 @@ var json = {
       {
          "name": "Ranged Combat",
          "subtype": "Throwing",
-<<<<<<< HEAD
          "rank": "Trained"
-=======
-         "rank": 7,
-         "ability": "Dexterity"
->>>>>>> gh-pages
       }
    ],
    "Defenses": {
       "Dodge": 7,
       "Parry": 0,
-<<<<<<< HEAD
-      "Will": 3,
+      "Will": 5,
       "Fortitude": 0
    },
    "ruleset": "4.0",
-=======
-      "Will": 8,
-      "Fortitude": 0
-   },
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
