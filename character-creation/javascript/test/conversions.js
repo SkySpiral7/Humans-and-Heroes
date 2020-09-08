@@ -278,8 +278,8 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
-   assertions.push({Expected: expected, Actual: actual, Description: 'transcendence, no extra skill: value'});
+   assertions.push({Expected: [], Actual: Messages.list, Description: 'just transcendence, +something (skill): load errors'});
+   assertions.push({Expected: expected, Actual: actual, Description: 'just transcendence, +something (skill): value'});
 
    return TestRunner.displayResults('TestSuite.conversions.jsonToMarkdown', assertions, testState);
 };

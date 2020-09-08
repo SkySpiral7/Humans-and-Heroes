@@ -264,6 +264,7 @@ HtmlGenerator.powerRow = function (props, state, derivedValues)
    var costPerRankDisplay = derivedValues.costPerRank;
    if (derivedValues.costPerRank > 0) costPerRankDisplay = '' + derivedValues.costPerRank;
    else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')';  //0 is 1/2 and -1 is 1/3
+   //TODO: don't show junk that can't be set
    htmlString += '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: ' + costPerRankDisplay + '</div>';
    htmlString += '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: ' + derivedValues.flatValue + '</div>';
    htmlString += '</div>';  //end row of costs

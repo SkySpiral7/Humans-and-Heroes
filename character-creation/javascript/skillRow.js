@@ -49,7 +49,7 @@ function SkillObject(initialRowIndex)
        state.rank = 1;
        state.abilityName = Data.Skill[state.name].ability;
        derivedValues.hasText = Data.Skill[state.name].hasText;
-       if(state.name === 'Other') state.text = 'Skill Name and Subtype';  //doesn't exist in v1
+       if('Other' === state.name) state.text = 'Skill Name and Subtype';  //only exists in 2.x, 3.x
        else if(derivedValues.hasText) state.text = 'Skill Subtype';
        else state.text = undefined;
    };

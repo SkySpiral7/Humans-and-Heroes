@@ -7,7 +7,7 @@ TestConfig.beforeFirst=function()
 TestConfig.betweenEach=function()
 {
    Main.clear();
-   Messages.list = [];
+   Messages.list = [];  //no need to call Loader.resetData
    Main.setRuleset(3, latestMinorRuleset);
 };
 TestConfig.afterLast=function()

@@ -356,6 +356,8 @@ function MainObject()
       }
 
       //TODO: bug: this allows the same attack name for power and equipment
+      //TODO: bug: should also list skills without powers
+      //TODO: bug: 2 attacks of same skill should list twice
       var sectionArray = [this.powerSection, this.equipmentSection];
       for (var sectionIndex=0; sectionIndex < sectionArray.length; sectionIndex++)
       {
