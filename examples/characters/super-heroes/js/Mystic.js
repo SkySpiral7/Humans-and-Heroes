@@ -54,7 +54,7 @@ var json = {
          "Modifiers": [
             {
                "name": "Impervious",
-               "applications": 3
+               "applications": 2
             }
          ],
          "rank": 9
@@ -126,20 +126,16 @@ var json = {
       },
       {
          "name": "Sleight of Hand",
-         "rank": "Trained"
+         "rank": "Mastered"
       }
    ],
    "Defenses": {
-      "Dodge": 7,
-      "Parry": 2,
+      "Dodge": 8,
+      "Parry": 4,
       "Will": 6,
-      "Fortitude": 6
+      "Fortitude": 7
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
