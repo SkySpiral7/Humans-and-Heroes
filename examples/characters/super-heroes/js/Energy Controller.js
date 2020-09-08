@@ -111,12 +111,9 @@ var json = {
    ],
    "Equipment": [],
    "Advantages": [
-      {
-         "name": "All-out Attack"
-      },
-      {
-         "name": "Power Attack"
-      }
+      {"name": "Accurate Attack"},
+      {"name": "All-out Attack"},
+      {"name": "Power Attack"}
    ],
    "Skills": [
       {
@@ -125,18 +122,12 @@ var json = {
       },
       {
          "name": "Ranged Combat",
-<<<<<<< HEAD
-         "subtype": "Energy Control",
+         "subtype": energyType + " Control",
          "rank": "Mastered"
       },
       {
          "name": "Sleight of Hand",
          "rank": "Trained"
-=======
-         "subtype": energyType + " Control",
-         "rank": 7,
-         "ability": "Dexterity"
->>>>>>> gh-pages
       }
    ],
    "Defenses": {
@@ -145,11 +136,7 @@ var json = {
       "Will": 6,
       "Fortitude": 5
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
