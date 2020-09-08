@@ -21,7 +21,7 @@ var json = {
          "action": "Standard",
          "range": "Ranged",
          "duration": "Instant",
-         "name": "Blaster Hurt",
+         "name": "Blaster: Kill",
          "skill": "Blaster",
          "Modifiers": [
             {
@@ -42,7 +42,7 @@ var json = {
          "action": "Standard",
          "range": "Ranged",
          "duration": "Instant",
-         "name": "Blaster Stun",
+         "name": "Blaster: Stun",
          "skill": "Blaster",
          "Modifiers": [
             {
@@ -99,11 +99,7 @@ var json = {
       },
       {
          "effect": "Quickness",
-<<<<<<< HEAD
          "text": "Quick-Thinking. 6 and a half minutes of thought in 6 seconds",
-=======
-         "text": "Quick-Thinking: 24 seconds of thought in 6 seconds",
->>>>>>> gh-pages
          "action": "Free",
          "range": "Personal",
          "duration": "Sustained",
@@ -174,11 +170,7 @@ var json = {
       "Will": 7,
       "Fortitude": 6
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
