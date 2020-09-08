@@ -88,16 +88,12 @@ var json = {
       }
    ],
    "Defenses": {
-      "Dodge": 6,
-      "Parry": 2,
+      "Dodge": 7,
+      "Parry": 1,
       "Will": 6,
       "Fortitude": 6
    },
-<<<<<<< HEAD
    "ruleset": "4.0",
-=======
-   "ruleset": "3.16",
->>>>>>> gh-pages
    "version": 2,
    "Information": "Complications, background and other information"
 };
