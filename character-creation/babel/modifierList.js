@@ -413,8 +413,14 @@ class ModifierList extends React.Component
    //endregion 'private' functions section. Although all public none of these should be called from outside of this object
 }
 
-/*next:
-convert power row (can't test alone?)
+/*TODO: next:
+figure out architecture:
+   * in the end main has all state
+   * power row (really main) needs the state of mod in order to re-render power total
+   * power row (react) uses power html: pass down everything as props, use callback prop to save a reference to mod list
+   * mod list delegate to power row (really main) for state mutation
+   * mod list make an immutable mod row list from props
+make mod list immutable (pull state up)
 convert power list (can't test alone?)
 hook up power html
    onChange
@@ -422,4 +428,5 @@ convert mod list
    replace sanitizeRows with duplicate check
    sort on add?
 test all
+there's lots of tasks
 */

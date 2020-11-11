@@ -232,7 +232,7 @@ function PowerRowHtml(props) {
       sectionName: props.sectionName
     })));
     var costPerRankDisplay;
-    if (derivedValues.costPerRank > 0) costPerRankDisplay = '' + derivedValues.costPerRank;else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')'; //0 is 1/2 and -1 is 1/3
+    if (derivedValues.costPerRank >= 1) costPerRankDisplay = '' + derivedValues.costPerRank;else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')'; //0 is 1/2 and -1 is 1/3
 
     rowList.push( /*#__PURE__*/React.createElement("div", {
       className: "row",
@@ -255,8 +255,7 @@ function PowerRowHtml(props) {
       key: "grandTotal"
     }, /*#__PURE__*/React.createElement("div", {
       className: "col"
-    }, 'Grand total for ' + props.sectionName.toTitleCase() + ': ', state.total))); //TODO: what was this for?
-    //htmlString += '</div>';
+    }, 'Grand total for ' + props.sectionName.toTitleCase() + ': ', state.total)));
   }
 
   topElementList.push( /*#__PURE__*/React.createElement("div", {
@@ -272,39 +271,4 @@ function PowerRowHtml(props) {
 
 
   return topElementList;
-}
-
-function testPowerRowHtml() {
-  var key = MainObject.generateKey();
-
-  var modCallback = function modCallback() {};
-
-  var dataToLoad = Loader.resetData();
-  dataToLoad.Powers.push({
-    "effect": "Feature",
-    "cost": 1,
-    "text": "my text",
-    "action": "None",
-    "range": "Personal",
-    "duration": "Permanent",
-    "Modifiers": [],
-    "rank": 1
-  });
-  Loader.sendData(dataToLoad);
-  var powerRow = Main.powerSection.getRow(0);
-  var state = powerRow.getState();
-  var derivedValues = powerRow.getDerivedValues(); //cheating!
-
-  derivedValues.possibleActions = powerRow._validateAndGetPossibleActions();
-  derivedValues.possibleRanges = powerRow._getPossibleRanges();
-  derivedValues.possibleDurations = powerRow._validateAndGetPossibleDurations();
-  ReactDOM.render( /*#__PURE__*/React.createElement(PowerRowHtml, {
-    sectionName: "power",
-    powerRow: powerRow,
-    state: state,
-    derivedValues: derivedValues,
-    key: key,
-    keyCopy: key,
-    modCallback: modCallback
-  }), document.getElementById('power-section'));
 }
