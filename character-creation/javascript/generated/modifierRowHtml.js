@@ -3,7 +3,9 @@
 function ModifierRowHtml(props) {
   var sectionName = props.powerRow.getSectionName();
   var powerKey = props.powerRow.getKey();
-  var key = props.keyCopy;
+  var key = props.keyCopy; //TODO: refactor to pass in modifierList and use getter for power
+
+  var modifierList = props.powerRow.getModifierList();
 
   function idFor(elementLabel) {
     return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
@@ -40,7 +42,7 @@ function ModifierRowHtml(props) {
 
     onChange = function onChange(event) {
       var nameGiven = event.target.value;
-      props.powerRow.getModifierList().updateNameByRow(nameGiven, props.modifierRow);
+      modifierList.updateNameByRow(nameGiven, props.modifierRow);
     }; //unshift = addFirst
 
 
@@ -106,7 +108,7 @@ function ModifierRowHtml(props) {
             } else {
               onChange = function onChange(event) {
                 var rankGiven = event.target.value;
-                props.modifierRow.updateRankByKey(rankGiven, key);
+                modifierList.updateRankByKey(rankGiven, key);
               }; //TODO: confirm spaces and non-breaking
 
 
@@ -126,7 +128,7 @@ function ModifierRowHtml(props) {
           if (derivedValues.hasText) {
             onChange = function onChange(event) {
               var textGiven = event.target.value;
-              props.modifierRow.updateTextByKey(textGiven, key);
+              modifierList.updateTextByKey(textGiven, key);
             };
 
             elementList.push( /*#__PURE__*/React.createElement("label", {

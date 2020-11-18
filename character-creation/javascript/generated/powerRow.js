@@ -644,7 +644,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
 function testPowerRow() {
   var key = MainObject.generateKey();
-  ReactDOM.render( /*#__PURE__*/React.createElement(PowerRow, {
+  ReactDOM.render( /*#__PURE__*/React.createElement(PowerObjectAgnostic, {
     sectionName: "power",
     powerListParent: Main.powerSection,
     key: key,
@@ -662,5 +662,6 @@ getRange = () => {return this.state.range;};
 getRank = () => {return this.state.rank;};
 getSkillUsed = () => {return this.state.skillUsed;};
 getText = () => {return this.state.text;};
+yes total is state for now
 getTotal = () => {return this.state.total;};
 */

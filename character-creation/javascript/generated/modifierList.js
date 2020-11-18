@@ -26,12 +26,12 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ModifierList);
 
   /**props: callback, powerRowParent, sectionName*/
-  function ModifierList(props) {
+  function ModifierList(_props) {
     var _this;
 
     _classCallCheck(this, ModifierList);
 
-    _this = _super.call(this, props); //state isn't allowed to be an array therefore everything is under the prop it
+    _this = _super.call(this, _props); //state isn't allowed to be an array therefore everything is under the prop it
 
     _defineProperty(_assertThisInitialized(_this), "getFlatTotal", function () {
       return _this._derivedValues.flatTotal;
@@ -89,10 +89,26 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "calculateGrandTotal", function (powerRowRawTotal) {
-      if (_this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect') !== undefined) //TODO: is AutoRank state?
-        powerRowRawTotal = _this._rowArray[_this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect')].setAutoRank(powerRowRawTotal);else if (_this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect') !== undefined) powerRowRawTotal = _this._rowArray[_this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect')].setAutoRank(powerRowRawTotal); //removable is applied secondly after alt effect
+      //Alternate Effect in ruleset 1.0 forced the power to be worth a total of 1 (or 2 for Dynamic). the flaw cost is all but 1
+      //technically 1.0 Alternate Effect was an extra to spent 1 point on a whole other sub-power
+      if (_this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect') !== undefined) {
+        //only exists in ruleset 1.0
+        powerRowRawTotal = 2; //cost ignores current total
+      } else if (_this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect') !== undefined) {
+        if (1 === Main.getActiveRuleset().major) {
+          powerRowRawTotal = 1; //cost ignores current total
+        } else {
+          powerRowRawTotal += -Math.floor(powerRowRawTotal / 2);
+        }
+      } //removable is applied secondly after alt effect (it stacks)
 
-      if (_this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable') !== undefined) powerRowRawTotal = _this._rowArray[_this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable')].setAutoRank(powerRowRawTotal);else if (_this._derivedValues.autoModifierNameToRowIndex.get('Removable') !== undefined) powerRowRawTotal = _this._rowArray[_this._derivedValues.autoModifierNameToRowIndex.get('Removable')].setAutoRank(powerRowRawTotal);
+
+      if (_this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable') !== undefined) {
+        powerRowRawTotal += -Math.floor(powerRowRawTotal * 2 / 5);
+      } else if (_this._derivedValues.autoModifierNameToRowIndex.get('Removable') !== undefined) {
+        powerRowRawTotal += -Math.floor(powerRowRawTotal / 5);
+      }
+
       return powerRowRawTotal;
     });
 
@@ -215,6 +231,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {
+      //TODO: no reason for this to be by row and others by key
       if (undefined === modifierRow) {
         _this.addRow(newName);
 
@@ -226,7 +243,15 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       if (!Data.Modifier.names.contains(newName) || _this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
-        modifierRow.setModifier(newName);
+        var rowState = modifierRow.getState();
+        rowState.name = newName;
+        _this._rowArray[updatedIndex] = new ModifierObject({
+          key: _this._blankKey,
+          powerRowParent: _this.props.powerRowParent,
+          modifierListParent: _assertThisInitialized(_this),
+          sectionName: _this.props.sectionName,
+          state: rowState
+        });
 
         _this._prerender();
 
@@ -244,7 +269,16 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      _this._rowArray[updatedIndex].setRank(newRank);
+      var rowState = _this._rowArray[updatedIndex].getState();
+
+      rowState.rank = newRank;
+      _this._rowArray[updatedIndex] = new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: _this.props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: _this.props.sectionName,
+        state: rowState
+      });
 
       _this._prerender();
 
@@ -261,7 +295,16 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      _this._rowArray[updatedIndex].setText(newText);
+      var rowState = _this._rowArray[updatedIndex].getState();
+
+      rowState.text = newText;
+      _this._rowArray[updatedIndex] = new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: _this.props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: _this.props.sectionName,
+        state: rowState
+      });
 
       if (_this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
@@ -289,14 +332,37 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_addRowNoPush", function (newName) {
-      //the row that was blank no longer is so use the blank key
+      //TODO: move this up. was in mod row
+      if (false) {
+        var wasAttack = 'Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name; //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
+
+        if (wasAttack && 'Feature' !== props.powerRowParent.getEffect()) props.powerRowParent.setRange('Personal');
+
+        if (!Data.Modifier.names.contains(nameGiven)) //if row is removed, ie: 'Select Modifier'
+          {
+            _this._resetValues();
+
+            if (wasAttack) props.powerRowParent.generateNameAndSkill(); //technically only necessary if 'Attack' === state.name
+
+            return;
+          }
+
+        if (('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name) && 'Personal' === props.powerRowParent.getRange()) props.powerRowParent.setRange('Close'); //when loading this value is redundantly set then later overridden by load's setRange
+
+        if (wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill(); //create or destroy as needed
+      } //the row that was blank no longer is so use the blank key
+
+
       var modifierObject = new ModifierObject({
         key: _this._blankKey,
         powerRowParent: _this.props.powerRowParent,
         modifierListParent: _assertThisInitialized(_this),
-        sectionName: _this.props.sectionName
-      });
-      modifierObject.setModifier(newName); //need a new key for the new blank row
+        sectionName: _this.props.sectionName,
+        state: {
+          name: newName
+        } //rest are defaulted
+
+      }); //need a new key for the new blank row
 
       _this._blankKey = MainObject.generateKey();
       return modifierObject;
@@ -411,7 +477,8 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndexToRemove) {
-      _this._rowArray.remove(rowIndexToRemove);
+      _this._rowArray.remove(rowIndexToRemove); //TODO: shouldn't prerender be before every setState?
+
 
       _this.setState(function (state) {
         state.it.remove(rowIndexToRemove);
@@ -431,7 +498,9 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       flatTotal: 0
     };
     _this._blankKey = MainObject.generateKey();
-    props.callback(_assertThisInitialized(_this));
+
+    _props.callback(_assertThisInitialized(_this));
+
     return _this;
   } //region basic getter
 

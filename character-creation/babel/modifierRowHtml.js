@@ -6,6 +6,8 @@ function ModifierRowHtml(props)
    const sectionName = props.powerRow.getSectionName();
    const powerKey = props.powerRow.getKey();
    const key = props.keyCopy;
+   //TODO: refactor to pass in modifierList and use getter for power
+   const modifierList = props.powerRow.getModifierList();
 
    function idFor(elementLabel)
    {
@@ -44,8 +46,7 @@ function ModifierRowHtml(props)
       onChange = (event) =>
       {
          const nameGiven = event.target.value;
-         props.powerRow.getModifierList()
-         .updateNameByRow(nameGiven, props.modifierRow);
+         modifierList.updateNameByRow(nameGiven, props.modifierRow);
       };
       //unshift = addFirst
       options.unshift(<option key="Select Modifier">Select Modifier</option>);
@@ -101,7 +102,7 @@ function ModifierRowHtml(props)
                onChange = (event) =>
                {
                   const rankGiven = event.target.value;
-                  props.modifierRow.updateRankByKey(rankGiven, key);
+                  modifierList.updateRankByKey(rankGiven, key);
                };
                //TODO: confirm spaces and non-breaking
                elementList.push(
@@ -116,7 +117,7 @@ function ModifierRowHtml(props)
             onChange = (event) =>
             {
                const textGiven = event.target.value;
-               props.modifierRow.updateTextByKey(textGiven, key);
+               modifierList.updateTextByKey(textGiven, key);
             };
             elementList.push(
                <label className="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining" key="text">

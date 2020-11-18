@@ -650,7 +650,7 @@ function testPowerRow()
 {
    const key = MainObject.generateKey();
    ReactDOM.render(
-      <PowerRow sectionName={"power"} powerListParent={Main.powerSection}
+      <PowerObjectAgnostic sectionName={"power"} powerListParent={Main.powerSection}
                 key={key} keyCopy={key} />,
       document.getElementById('power-section')
    );
@@ -666,5 +666,6 @@ getRange = () => {return this.state.range;};
 getRank = () => {return this.state.rank;};
 getSkillUsed = () => {return this.state.skillUsed;};
 getText = () => {return this.state.text;};
+yes total is state for now
 getTotal = () => {return this.state.total;};
 */

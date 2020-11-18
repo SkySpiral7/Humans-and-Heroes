@@ -68,20 +68,34 @@ class ModifierList extends React.Component
    /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
    calculateGrandTotal = (powerRowRawTotal) =>
    {
+      //Alternate Effect in ruleset 1.0 forced the power to be worth a total of 1 (or 2 for Dynamic). the flaw cost is all but 1
+      //technically 1.0 Alternate Effect was an extra to spent 1 point on a whole other sub-power
       if (this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect') !== undefined)
-      //TODO: is AutoRank state?
-         powerRowRawTotal = this._rowArray[this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect')].setAutoRank(
-            powerRowRawTotal);
+      {
+         //only exists in ruleset 1.0
+         powerRowRawTotal = 2;  //cost ignores current total
+      }
       else if (this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect') !== undefined)
-         powerRowRawTotal = this._rowArray[this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect')].setAutoRank(
-            powerRowRawTotal);
+      {
+         if (1 === Main.getActiveRuleset().major)
+         {
+            powerRowRawTotal = 1;  //cost ignores current total
+         }
+         else
+         {
+            powerRowRawTotal += -Math.floor(powerRowRawTotal / 2);
+         }
+      }
 
-      //removable is applied secondly after alt effect
+      //removable is applied secondly after alt effect (it stacks)
       if (this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable') !== undefined)
-         powerRowRawTotal = this._rowArray[this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable')].setAutoRank(
-            powerRowRawTotal);
+      {
+         powerRowRawTotal += -Math.floor(powerRowRawTotal * 2 / 5);
+      }
       else if (this._derivedValues.autoModifierNameToRowIndex.get('Removable') !== undefined)
-         powerRowRawTotal = this._rowArray[this._derivedValues.autoModifierNameToRowIndex.get('Removable')].setAutoRank(powerRowRawTotal);
+      {
+         powerRowRawTotal += -Math.floor(powerRowRawTotal / 5);
+      }
 
       return powerRowRawTotal;
    };
@@ -207,6 +221,7 @@ class ModifierList extends React.Component
    };
    updateNameByRow = (newName, modifierRow) =>
    {
+      //TODO: no reason for this to be by row and others by key
       if (undefined === modifierRow)
       {
          this.addRow(newName);
@@ -221,7 +236,15 @@ class ModifierList extends React.Component
       }
       else
       {
-         modifierRow.setModifier(newName);
+         const rowState = modifierRow.getState();
+         rowState.name = newName;
+         this._rowArray[updatedIndex] = new ModifierObject({
+            key: this._blankKey,
+            powerRowParent: this.props.powerRowParent,
+            modifierListParent: this,
+            sectionName: this.props.sectionName,
+            state: rowState
+         });
          this._prerender();
          this.setState(state =>
          {
@@ -238,7 +261,15 @@ class ModifierList extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      this._rowArray[updatedIndex].setRank(newRank);
+      const rowState = this._rowArray[updatedIndex].getState();
+      rowState.rank = newRank;
+      this._rowArray[updatedIndex] = new ModifierObject({
+         key: this._blankKey,
+         powerRowParent: this.props.powerRowParent,
+         modifierListParent: this,
+         sectionName: this.props.sectionName,
+         state: rowState
+      });
       this._prerender();
       this.setState(state =>
       {
@@ -254,7 +285,15 @@ class ModifierList extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      this._rowArray[updatedIndex].setText(newText);
+      const rowState = this._rowArray[updatedIndex].getState();
+      rowState.text = newText;
+      this._rowArray[updatedIndex] = new ModifierObject({
+         key: this._blankKey,
+         powerRowParent: this.props.powerRowParent,
+         modifierListParent: this,
+         sectionName: this.props.sectionName,
+         state: rowState
+      });
 
       if (this._hasDuplicate())
       {
@@ -287,14 +326,36 @@ class ModifierList extends React.Component
    };
    _addRowNoPush = (newName) =>
    {
+      //TODO: move this up. was in mod row
+      if(false)
+      {
+         var wasAttack = ('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name);
+         //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
+         if (wasAttack && 'Feature' !== props.powerRowParent.getEffect()) props.powerRowParent.setRange('Personal');
+
+         if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, ie: 'Select Modifier'
+         {
+            this._resetValues();
+            if (wasAttack) props.powerRowParent.generateNameAndSkill();  //technically only necessary if 'Attack' === state.name
+            return;
+         }
+
+
+
+         if(('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name)
+            && 'Personal' === props.powerRowParent.getRange())
+            props.powerRowParent.setRange('Close');  //when loading this value is redundantly set then later overridden by load's setRange
+         if(wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill();  //create or destroy as needed
+      }
+
       //the row that was blank no longer is so use the blank key
       const modifierObject = new ModifierObject({
          key: this._blankKey,
          powerRowParent: this.props.powerRowParent,
          modifierListParent: this,
-         sectionName: this.props.sectionName
+         sectionName: this.props.sectionName,
+         state: {name: newName}  //rest are defaulted
       });
-      modifierObject.setModifier(newName);
       //need a new key for the new blank row
       this._blankKey = MainObject.generateKey();
       return modifierObject;
@@ -404,6 +465,7 @@ class ModifierList extends React.Component
    _removeRow = (rowIndexToRemove) =>
    {
       this._rowArray.remove(rowIndexToRemove);
+      //TODO: shouldn't prerender be before every setState?
       this.setState(state =>
       {
          state.it.remove(rowIndexToRemove);
