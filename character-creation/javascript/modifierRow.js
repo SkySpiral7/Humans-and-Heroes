@@ -4,6 +4,7 @@ Select Modifier: select();
 Rank: changeRank();
 Text: changeText();
 */
+//Immutable (state/derivedValues don't change)
 function ModifierObject(props)
 {
    //private variable section:

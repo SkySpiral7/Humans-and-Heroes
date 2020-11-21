@@ -183,7 +183,8 @@ function PowerRowHtml(props)
       }
 
       rowList.push(<div id={props.sectionName + 'ModifierSection' + state.rowIndex} key="ModifierSection">
-         <ModifierList callback={props.modCallback} powerRowParent={props.powerRow} sectionName={props.sectionName} />
+         <ModifierList callback={props.modCallback} powerRowParent={props.powerRow}
+                       sectionName={props.sectionName} state={props.modState} />
       </div>);
 
       let costPerRankDisplay;
