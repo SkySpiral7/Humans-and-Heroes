@@ -391,8 +391,7 @@ class AdvantageList extends React.Component
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>
    {
-      //don't update any state in render
-      //can't update total because circle: CP -> PL -> T -> render
+      //don't update any state
       this._calculateValues();
       this._notifyDependent();
    };

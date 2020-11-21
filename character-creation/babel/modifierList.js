@@ -7,13 +7,13 @@ class ModifierList extends React.Component
    {
       super(props);
       //state as custom objects
-      this._rowArray = this.props.state.map(state =>
+      this._rowArray = props.state.map(state =>
       {
          new ModifierObject({
             key: this._blankKey,
-            powerRowParent: this.props.powerRowParent,
+            powerRowParent: props.powerRowParent,
             modifierListParent: this,
-            sectionName: this.props.sectionName,
+            sectionName: props.sectionName,
             state: state
          })
       });
@@ -164,7 +164,6 @@ class ModifierList extends React.Component
          return (<ModifierRowHtml key={modifierObject.getKey()} keyCopy={modifierObject.getKey()} powerRow={this.props.powerRowParent}
                                   modifierRow={modifierObject} />);
       });
-      //derivedValues is undefined and unused for blank
       elementArray.push(<ModifierRowHtml key={this._blankKey} keyCopy={this._blankKey} powerRow={this.props.powerRowParent}
                                          modifierRow={undefined} />);
       return elementArray;
@@ -175,11 +174,12 @@ class ModifierList extends React.Component
 /*TODO: next:
 figure out architecture:
    * in the end main has all state
-   * power row (really main) needs the state of mod in order to re-render power total
+   * power list (really main) needs the state of mod in order to re-render power total
    * power row (react) uses power html: pass down everything as props, use callback prop to save a reference to mod list
-   * mod list delegate to power row (really main) for state mutation
+   * mod list delegate to power list (really main) for state mutation
    * mod list make an immutable mod row list from props
-convert power list (can't test alone?)
+pull power row state up to list
+nail down power row
 hook up power html
    onChange
 hook up more for mod/power

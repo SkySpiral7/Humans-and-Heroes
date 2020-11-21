@@ -19,14 +19,14 @@ class PowerObjectAgnostic extends React.Component
       super(props);
       this.state = {};
       //modifierSection is lazy because it is re-created each render
-      this.derivedValues = {shouldValidateActivationInfo: true, total: 0};
+      this._derivedValues = {shouldValidateActivationInfo: true, total: 0};
    };
 
    //Basic getter section (all single line)
    getAction = () => {return this.state.action;};
    getBaseCost = () => {return this.state.baseCost;};
    getDuration = () => {return this.state.duration;};
-   getDerivedValues = () => {return JSON.clone(this.derivedValues);};
+   getDerivedValues = () => {return JSON.clone(this._derivedValues);};
    /**Get the effect name of the power*/
    getEffect = () => {return this.state.effect;};
    getKey = () => {return this.props.keyCopy;};
@@ -41,12 +41,12 @@ class PowerObjectAgnostic extends React.Component
    /**The total with respect to auto changes and raw total*/
    getTotal = () => {return this.state.total;};
    //for modifierSection see this.getModifierList in the onChange section
-   isBaseCostSettable = () => {return this.derivedValues.canSetBaseCost;};
+   isBaseCostSettable = () => {return this._derivedValues.canSetBaseCost;};
    getSection = () => {return this.props.powerListParent;};
 
    //Single line function section (ignoring isBlank check)
    /**After this is called setAction, setRange, and setDuration will only check if the value exists.*/
-   disableValidationForActivationInfo = () => {this.derivedValues.shouldValidateActivationInfo = false;};
+   disableValidationForActivationInfo = () => {this._derivedValues.shouldValidateActivationInfo = false;};
    /**Returns the default action for this power or nothing if this row is blank.*/
    getDefaultAction = () =>
    {
@@ -160,7 +160,7 @@ class PowerObjectAgnostic extends React.Component
       //this is only reachable if you select the default value in the drop down
 
       this.state.effect = effectNameGiven;
-      this.derivedValues.canSetBaseCost = Data.Power[this.state.effect].hasInputBaseCost;
+      this._derivedValues.canSetBaseCost = Data.Power[this.state.effect].hasInputBaseCost;
       this.state.baseCost = Data.Power[this.state.effect].baseCost;
       if (undefined === this.state.text) this.state.text = 'Descriptors and other text';  //let the text stay if changing between powers
       this.state.action = Data.Power[this.state.effect].defaultAction;
@@ -173,7 +173,7 @@ class PowerObjectAgnostic extends React.Component
    /**Used to set data independent of the document and without calling update*/
    setBaseCost = (baseGiven) =>
    {
-      if (!this.derivedValues.canSetBaseCost || this.isBlank()) return;  //only possible when loading bad data
+      if (!this._derivedValues.canSetBaseCost || this.isBlank()) return;  //only possible when loading bad data
       this.state.baseCost = sanitizeNumber(baseGiven, 1, Data.Power[this.state.effect].baseCost);  //unique defaults
    };
    /**Used to set data independent of the document and without calling update*/
@@ -197,7 +197,7 @@ class PowerObjectAgnostic extends React.Component
 
       this.state.action = newActionName;
 
-      if (!this.derivedValues.shouldValidateActivationInfo) return;  //done
+      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
       this._updateActionModifiers();
       if ('Reaction' === this.state.action && 'Feature' !== this.state.effect && 'Luck Control' !== this.state.effect &&
          Main.getActiveRuleset()
@@ -220,7 +220,7 @@ class PowerObjectAgnostic extends React.Component
       const oldRange = this.state.range;
       this.state.range = newRangeName;
 
-      if (!this.derivedValues.shouldValidateActivationInfo) return;  //done
+      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
 
       //TODO: loading should make sure that skillUsed can't be set when Perception range
       this.generateNameAndSkill();
@@ -253,7 +253,7 @@ class PowerObjectAgnostic extends React.Component
       const oldDuration = this.state.duration;
       this.state.duration = newDurationName;
 
-      if (!this.derivedValues.shouldValidateActivationInfo) return;  //done
+      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
 
       const defaultDurationName = Data.Power[this.state.effect].defaultDuration;
 
@@ -299,7 +299,7 @@ class PowerObjectAgnostic extends React.Component
       if (Main.getActiveRuleset()
          .isGreaterThanOrEqualTo(3, 5) && 'Variable' === this.state.effect && costPerRank < 5) costPerRank = 5;
       else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
-      this.derivedValues.costPerRank = costPerRank;  //save the non-decimal version
+      this._derivedValues.costPerRank = costPerRank;  //save the non-decimal version
       if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
 
       this.state.total = Math.ceil(costPerRank * this.state.rank);  //round up
@@ -312,7 +312,7 @@ class PowerObjectAgnostic extends React.Component
                                                              // will still be +1
          this.state.total = Math.ceil(costPerRank * this.state.rank);  //round up
       }
-      this.derivedValues.flatValue = flatValue;
+      this._derivedValues.flatValue = flatValue;
       this.state.total += flatValue;  //flatValue might be negative
       if ('A God I Am' === this.state.effect) this.state.total += 145;  //for first ranks
       else if ('Reality Warp' === this.state.effect) this.state.total += 75;
@@ -322,13 +322,13 @@ class PowerObjectAgnostic extends React.Component
    {
       const callback = function (newThing) {this.modifierSection = newThing;};
 
-      this.derivedValues.possibleActions = this._validateAndGetPossibleActions();
-      this.derivedValues.possibleRanges = this._getPossibleRanges();
-      this.derivedValues.possibleDurations = this._validateAndGetPossibleDurations();
+      this._derivedValues.possibleActions = this._validateAndGetPossibleActions();
+      this._derivedValues.possibleRanges = this._getPossibleRanges();
+      this._derivedValues.possibleDurations = this._validateAndGetPossibleDurations();
 
       //TODO: pretty sure need different key in which case generate in new()
       return (<PowerRowHtml sectionName={this.props.sectionName} powerRow={this} state={this.state}
-                            derivedValues={this.derivedValues} key={this.props.keyCopy} keyCopy={this.props.keyCopy}
+                            derivedValues={this._derivedValues} key={this.props.keyCopy} keyCopy={this.props.keyCopy}
                             modCallback={callback} modState={this.state.Modifiers} />);
    };
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
@@ -355,7 +355,7 @@ class PowerObjectAgnostic extends React.Component
       //don't just clone this.state: skill, cost is different
       const json = {};
       json.effect = this.state.effect;
-      if (this.derivedValues.canSetBaseCost) json.cost = this.state.baseCost;
+      if (this._derivedValues.canSetBaseCost) json.cost = this.state.baseCost;
       json.text = this.state.text;
       json.action = this.state.action;
       json.range = this.state.range;
@@ -371,7 +371,7 @@ class PowerObjectAgnostic extends React.Component
    /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
    updateActivationModifiers = () =>
    {
-      this.derivedValues.shouldValidateActivationInfo = true;
+      this._derivedValues.shouldValidateActivationInfo = true;
       this._updateActionModifiers();
       this._updateRangeModifiers();
       this._updateDurationModifiers();
@@ -666,9 +666,6 @@ class PowerObjectAgnostic extends React.Component
    //endregion converted from mod list
 
 
-
-
-
    //region copied from mod list
    /**Sets data from a json object given then updates. The row array is not cleared by this function*/
    load = (jsonSection) =>
@@ -816,7 +813,7 @@ class PowerObjectAgnostic extends React.Component
    _addRowNoPush = (newName) =>
    {
       //TODO: move this up. was in mod row
-      if(false)
+      if (false)
       {
          var wasAttack = ('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name);
          //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
@@ -830,11 +827,10 @@ class PowerObjectAgnostic extends React.Component
          }
 
 
-
-         if(('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name)
+         if (('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name)
             && 'Personal' === props.powerRowParent.getRange())
             props.powerRowParent.setRange('Close');  //when loading this value is redundantly set then later overridden by load's setRange
-         if(wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill();  //create or destroy as needed
+         if (wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill();  //create or destroy as needed
       }
 
       //the row that was blank no longer is so use the blank key
@@ -862,10 +858,8 @@ class PowerObjectAgnostic extends React.Component
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>
    {
-      //don't update any state in render
+      //don't update any state
       this.calculateValues();
-      this.props.powerRowParent.getSection()
-      .update();
    };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    _sanitizeRows = () =>
@@ -946,10 +940,11 @@ function testPowerRow()
    const key = MainObject.generateKey();
    ReactDOM.render(
       <PowerObjectAgnostic sectionName={"power"} powerListParent={Main.powerSection}
-                key={key} keyCopy={key} />,
+                           key={key} keyCopy={key} />,
       document.getElementById('power-section')
    );
 }
+
 /*
 all state:
 getAction = () => {return this.state.action;};

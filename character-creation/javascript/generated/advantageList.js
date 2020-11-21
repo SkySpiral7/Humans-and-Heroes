@@ -418,8 +418,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
-      //don't update any state in render
-      //can't update total because circle: CP -> PL -> T -> render
+      //don't update any state
       _this._calculateValues();
 
       _this._notifyDependent();

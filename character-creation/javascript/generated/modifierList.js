@@ -25,13 +25,13 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ModifierList);
 
-  /**props: callback, powerRowParent, sectionName*/
-  function ModifierList(_props) {
+  /**props: callback, powerRowParent, sectionName, state*/
+  function ModifierList(props) {
     var _this;
 
     _classCallCheck(this, ModifierList);
 
-    _this = _super.call(this, _props); //state isn't allowed to be an array therefore everything is under the prop it
+    _this = _super.call(this, props); //state as custom objects
 
     _defineProperty(_assertThisInitialized(_this), "getFlatTotal", function () {
       return _this._derivedValues.flatTotal;
@@ -46,18 +46,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "getState", function () {
-      return JSON.clone(_this.state);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "clear", function () {
-      _this._rowArray = [];
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it = [];
-        return state;
-      });
+      return JSON.clone(_this.props.state);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
@@ -91,10 +80,10 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "calculateGrandTotal", function (powerRowRawTotal) {
       //Alternate Effect in ruleset 1.0 forced the power to be worth a total of 1 (or 2 for Dynamic). the flaw cost is all but 1
       //technically 1.0 Alternate Effect was an extra to spent 1 point on a whole other sub-power
-      if (_this._derivedValues.autoModifierNameToRowIndex.get('Dynamic Alternate Effect') !== undefined) {
+      if (_this._derivedValues.autoModifierNameSet.contains('Dynamic Alternate Effect')) {
         //only exists in ruleset 1.0
         powerRowRawTotal = 2; //cost ignores current total
-      } else if (_this._derivedValues.autoModifierNameToRowIndex.get('Alternate Effect') !== undefined) {
+      } else if (_this._derivedValues.autoModifierNameSet.contains('Alternate Effect')) {
         if (1 === Main.getActiveRuleset().major) {
           powerRowRawTotal = 1; //cost ignores current total
         } else {
@@ -103,9 +92,9 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       } //removable is applied secondly after alt effect (it stacks)
 
 
-      if (_this._derivedValues.autoModifierNameToRowIndex.get('Easily Removable') !== undefined) {
+      if (_this._derivedValues.autoModifierNameSet.contains('Easily Removable')) {
         powerRowRawTotal += -Math.floor(powerRowRawTotal * 2 / 5);
-      } else if (_this._derivedValues.autoModifierNameToRowIndex.get('Removable') !== undefined) {
+      } else if (_this._derivedValues.autoModifierNameSet.contains('Removable')) {
         powerRowRawTotal += -Math.floor(powerRowRawTotal / 5);
       }
 
@@ -117,32 +106,14 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       //TODO: fix sort/indexing
       //this._rowArray.sort(this._sortOrder);
       //this._reindex();
-      _this._derivedValues.autoModifierNameToRowIndex.clear();
-
+      _this._derivedValues.autoModifierNameSet = [];
       _this._derivedValues.rankTotal = 0;
       _this._derivedValues.flatTotal = 0;
 
       for (var i = 0; i < _this._rowArray.length; i++) {
-        if (Data.Modifier[_this._rowArray[i].getName()].hasAutoTotal) _this._derivedValues.autoModifierNameToRowIndex.add(_this._rowArray[i].getName(), i);
+        if (Data.Modifier[_this._rowArray[i].getName()].hasAutoTotal) _this._derivedValues.autoModifierNameSet.push(_this._rowArray[i].getName());
         if (_this._rowArray[i].isRank()) _this._derivedValues.rankTotal += _this._rowArray[i].getRawTotal();else _this._derivedValues.flatTotal += _this._rowArray[i].getRawTotal(); //could be flat or free. if free the total will be 0
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "createByNameRank", function (rowName, rowRank) {
-      var rowIndex = _this.findRowByName(rowName);
-
-      if (rowIndex === undefined) {
-        rowIndex = _this._rowArray.length; //becomes the last row if doesn't exist yet
-
-        _this.addRow(rowName);
-      }
-
-      _this._rowArray[rowIndex].setRank(rowRank);
-
-      _this.setState(function (state) {
-        state.it[rowIndex].rank = rowRank;
-        return state;
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "findRowByName", function (rowName) {
@@ -183,207 +154,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       return false;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
-      if (_this.props.powerRowParent.isBlank()) return; //the row array isn't cleared in case some have been auto set
-      //Main.clear() is called at the start of Main.load()
-
-      var newState = [];
-      var duplicateCheck = [];
-
-      for (var i = 0; i < jsonSection.length; i++) {
-        var nameToLoad = jsonSection[i].name; //TODO: call a fun to get current power index
-
-        var loadLocation = _this.props.sectionName.toTitleCase() + ' #' + (_this.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1);
-
-        if (!Data.Modifier.names.contains(nameToLoad)) {
-          Main.messageUser('ModifierList.load.notExist', loadLocation + ': ' + nameToLoad + ' is not a modifier name. Did you mean "Other" with text?');
-          continue;
-        }
-
-        var modifierObject = _this._addRowNoPush(nameToLoad);
-
-        if (undefined !== jsonSection[i].applications) modifierObject.setRank(jsonSection[i].applications);
-        if (undefined !== jsonSection[i].text) modifierObject.setText(jsonSection[i].text); //duplicateCheck after setting all values for the sake of getUniqueName
-
-        if (duplicateCheck.contains(modifierObject.getUniqueName())) {
-          Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + nameToLoad + ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
-          continue;
-        }
-
-        _this._rowArray.push(modifierObject);
-
-        duplicateCheck.push(modifierObject.getUniqueName());
-        newState.push(modifierObject.getState());
-      }
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it = newState;
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "removeByName", function (rowName) {
-      var rowIndex = _this.findRowByName(rowName);
-
-      if (rowIndex !== undefined) _this._removeRow(rowIndex);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {
-      //TODO: no reason for this to be by row and others by key
-      if (undefined === modifierRow) {
-        _this.addRow(newName);
-
-        return;
-      }
-
-      var updatedIndex = _this.getIndexByKey(modifierRow.getKey());
-
-      if (!Data.Modifier.names.contains(newName) || _this._hasDuplicate()) {
-        _this._removeRow(updatedIndex);
-      } else {
-        var rowState = modifierRow.getState();
-        rowState.name = newName;
-        _this._rowArray[updatedIndex] = new ModifierObject({
-          key: _this._blankKey,
-          powerRowParent: _this.props.powerRowParent,
-          modifierListParent: _assertThisInitialized(_this),
-          sectionName: _this.props.sectionName,
-          state: rowState
-        });
-
-        _this._prerender();
-
-        _this.setState(function (state) {
-          state.it[updatedIndex].name = newName;
-          return state;
-        });
-      }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
-      if (updatedKey === _this._blankKey) {
-        throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      var updatedIndex = _this.getIndexByKey(updatedKey);
-
-      var rowState = _this._rowArray[updatedIndex].getState();
-
-      rowState.rank = newRank;
-      _this._rowArray[updatedIndex] = new ModifierObject({
-        key: _this._blankKey,
-        powerRowParent: _this.props.powerRowParent,
-        modifierListParent: _assertThisInitialized(_this),
-        sectionName: _this.props.sectionName,
-        state: rowState
-      });
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it[updatedIndex].rank = newRank;
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (newText, updatedKey) {
-      if (updatedKey === _this._blankKey) {
-        throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      var updatedIndex = _this.getIndexByKey(updatedKey);
-
-      var rowState = _this._rowArray[updatedIndex].getState();
-
-      rowState.text = newText;
-      _this._rowArray[updatedIndex] = new ModifierObject({
-        key: _this._blankKey,
-        powerRowParent: _this.props.powerRowParent,
-        modifierListParent: _assertThisInitialized(_this),
-        sectionName: _this.props.sectionName,
-        state: rowState
-      });
-
-      if (_this._hasDuplicate()) {
-        _this._removeRow(updatedIndex);
-      } else {
-        _this._prerender();
-
-        _this.setState(function (state) {
-          state.it[updatedIndex].text = newText;
-          return state;
-        });
-      }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
-      var modifierObject = _this._addRowNoPush(newName);
-
-      _this._rowArray.push(modifierObject);
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it.push(modifierObject.getState());
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_addRowNoPush", function (newName) {
-      //TODO: move this up. was in mod row
-      if (false) {
-        var wasAttack = 'Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name; //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
-
-        if (wasAttack && 'Feature' !== props.powerRowParent.getEffect()) props.powerRowParent.setRange('Personal');
-
-        if (!Data.Modifier.names.contains(nameGiven)) //if row is removed, ie: 'Select Modifier'
-          {
-            _this._resetValues();
-
-            if (wasAttack) props.powerRowParent.generateNameAndSkill(); //technically only necessary if 'Attack' === state.name
-
-            return;
-          }
-
-        if (('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name) && 'Personal' === props.powerRowParent.getRange()) props.powerRowParent.setRange('Close'); //when loading this value is redundantly set then later overridden by load's setRange
-
-        if (wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill(); //create or destroy as needed
-      } //the row that was blank no longer is so use the blank key
-
-
-      var modifierObject = new ModifierObject({
-        key: _this._blankKey,
-        powerRowParent: _this.props.powerRowParent,
-        modifierListParent: _assertThisInitialized(_this),
-        sectionName: _this.props.sectionName,
-        state: {
-          name: newName
-        } //rest are defaulted
-
-      }); //need a new key for the new blank row
-
-      _this._blankKey = MainObject.generateKey();
-      return modifierObject;
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
-      //can't change this to take an arg because update name/text will already be in state
-      return _this._rowArray.map(function (item) {
-        return item.getUniqueName();
-      }).some(function (val, id, array) {
-        return array.indexOf(val) !== id;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
-      //don't update any state in render
-      _this.calculateValues();
-
-      _this.props.powerRowParent.getSection().update();
-    });
-
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       var elementArray = _this._rowArray.map(function (modifierObject) {
         return /*#__PURE__*/React.createElement(ModifierRowHtml, {
@@ -392,8 +162,7 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
           powerRow: _this.props.powerRowParent,
           modifierRow: modifierObject
         });
-      }); //derivedValues is undefined and unused for blank
-
+      });
 
       elementArray.push( /*#__PURE__*/React.createElement(ModifierRowHtml, {
         key: _this._blankKey,
@@ -404,102 +173,24 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       return elementArray;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_sanitizeRows", function () {
-      var namesSoFar = [];
-      var canHaveAttack = true;
-      if (_this.props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false; //feature has a default range of Personal
-
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        if (_this._rowArray[i].isBlank() && i < _this._rowArray.length) {
-          _this._removeRow(i);
-
-          i--;
-          continue;
-        } //remove blank row that isn't last
-        else if (_this._rowArray[i].isBlank()) continue; //do nothing if last row is blank
-
-
-        if (_this.props.powerRowParent.getSection() === Main.equipmentSection && (_this._rowArray[i].getName() === 'Removable' || _this._rowArray[i].getName() === 'Easily Removable')) {
-          _this._removeRow(i);
-
-          i--;
-          continue;
-        } //equipment has removable built in and can't have the modifiers
-
-
-        var modifierName = _this._rowArray[i].getUniqueName(false);
-
-        if (namesSoFar.contains(modifierName)) {
-          _this._removeRow(i);
-
-          i--;
-          continue;
-        } //redundant modifier
-
-
-        if (modifierName === 'Attack' || modifierName === 'Affects Others') //Affects Others Also and Affects Others Only return same name
-          {
-            if (!canHaveAttack) {
-              _this._removeRow(i);
-
-              i--;
-              continue;
-            } //redundant or invalid modifier
-
-
-            canHaveAttack = false;
-          }
-
-        namesSoFar.push(modifierName);
-      }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_sortOrder", function (a, b) {
-      var aFirst = -1;
-      var bFirst = 1;
-      if ('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
-      if ('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst; //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
-
-      if ('Aura' === a.getName() || 'Selective' === a.getName() && 'Triggered' === _this.props.powerRowParent.getAction()) return aFirst;
-      if ('Aura' === b.getName() || 'Selective' === b.getName() && 'Triggered' === _this.props.powerRowParent.getAction()) return bFirst;
-      if ('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
-      if ('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;
-      if ('Increased Duration' === a.getName() || 'Decreased Duration' === a.getName()) return aFirst;
-      if ('Increased Duration' === b.getName() || 'Decreased Duration' === b.getName()) return bFirst; //else maintain the current order
-      //using rowIndex to force sort to be stable (since it might not be)
-
-      if (a.getModifierRowIndex() < b.getModifierRowIndex()) return aFirst;
-      return bFirst;
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_testSortStability", function () {
-      unstableSort(_this._rowArray, _this._sortOrder);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndexToRemove) {
-      _this._rowArray.remove(rowIndexToRemove); //TODO: shouldn't prerender be before every setState?
-
-
-      _this.setState(function (state) {
-        state.it.remove(rowIndexToRemove);
-        return state;
+    _this._rowArray = props.state.map(function (state) {
+      new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: props.sectionName,
+        state: state
       });
     });
-
-    _this.state = {
-      it: []
-    };
-    _this._rowArray = []; //state.it as custom objects
-
     _this._derivedValues = {
-      //this could be just {} but I don't want this to be the only non-JSON place using objects as a map
-      autoModifierNameToRowIndex: new MapDefault({}, undefined),
+      autoModifierNameSet: [],
       rankTotal: 0,
       flatTotal: 0
     };
     _this._blankKey = MainObject.generateKey();
+    props.callback(_assertThisInitialized(_this));
 
-    _props.callback(_assertThisInitialized(_this));
+    _this.calculateValues();
 
     return _this;
   } //region basic getter
@@ -513,17 +204,17 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 /*TODO: next:
 figure out architecture:
    * in the end main has all state
-   * power row (really main) needs the state of mod in order to re-render power total
+   * power list (really main) needs the state of mod in order to re-render power total
    * power row (react) uses power html: pass down everything as props, use callback prop to save a reference to mod list
-   * mod list delegate to power row (really main) for state mutation
+   * mod list delegate to power list (really main) for state mutation
    * mod list make an immutable mod row list from props
-make mod list immutable (pull state up)
-convert power list (can't test alone?)
+pull power row state up to list
 hook up power html
    onChange
-convert mod list
+hook up more for mod/power
+   setState
    replace sanitizeRows with duplicate check
-   sort on add?
+   sort mods on add
 test all
 there's lots of tasks
 */

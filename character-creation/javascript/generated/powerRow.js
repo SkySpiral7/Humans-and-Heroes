@@ -37,12 +37,12 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(PowerObjectAgnostic);
 
-  function PowerObjectAgnostic(props) {
+  function PowerObjectAgnostic(_props) {
     var _this;
 
     _classCallCheck(this, PowerObjectAgnostic);
 
-    _this = _super.call(this, props);
+    _this = _super.call(this, _props);
 
     _defineProperty(_assertThisInitialized(_this), "getAction", function () {
       return _this.state.action;
@@ -57,7 +57,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "getDerivedValues", function () {
-      return JSON.clone(_this.derivedValues);
+      return JSON.clone(_this._derivedValues);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getEffect", function () {
@@ -101,7 +101,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "isBaseCostSettable", function () {
-      return _this.derivedValues.canSetBaseCost;
+      return _this._derivedValues.canSetBaseCost;
     });
 
     _defineProperty(_assertThisInitialized(_this), "getSection", function () {
@@ -109,7 +109,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "disableValidationForActivationInfo", function () {
-      _this.derivedValues.shouldValidateActivationInfo = false;
+      _this._derivedValues.shouldValidateActivationInfo = false;
     });
 
     _defineProperty(_assertThisInitialized(_this), "getDefaultAction", function () {
@@ -190,7 +190,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setPower", function (effectNameGiven) {
-      if (undefined !== _this.modifierSection) _this.modifierSection.clear(); //always clear them out on select
+      _this.state.Modifiers = []; //always clear them out on select
 
       if (!Data.Power.names.contains(effectNameGiven)) {
         //TODO: delete this row instead
@@ -201,7 +201,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
 
       _this.state.effect = effectNameGiven;
-      _this.derivedValues.canSetBaseCost = Data.Power[_this.state.effect].hasInputBaseCost;
+      _this._derivedValues.canSetBaseCost = Data.Power[_this.state.effect].hasInputBaseCost;
       _this.state.baseCost = Data.Power[_this.state.effect].baseCost;
       if (undefined === _this.state.text) _this.state.text = 'Descriptors and other text'; //let the text stay if changing between powers
 
@@ -214,7 +214,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setBaseCost", function (baseGiven) {
-      if (!_this.derivedValues.canSetBaseCost || _this.isBlank()) return; //only possible when loading bad data
+      if (!_this._derivedValues.canSetBaseCost || _this.isBlank()) return; //only possible when loading bad data
 
       _this.state.baseCost = sanitizeNumber(baseGiven, 1, Data.Power[_this.state.effect].baseCost); //unique defaults
     });
@@ -235,7 +235,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
       }
 
       _this.state.action = newActionName;
-      if (!_this.derivedValues.shouldValidateActivationInfo) return; //done
+      if (!_this._derivedValues.shouldValidateActivationInfo) return; //done
 
       _this._updateActionModifiers();
 
@@ -256,7 +256,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
       var oldRange = _this.state.range;
       _this.state.range = newRangeName;
-      if (!_this.derivedValues.shouldValidateActivationInfo) return; //done
+      if (!_this._derivedValues.shouldValidateActivationInfo) return; //done
       //TODO: loading should make sure that skillUsed can't be set when Perception range
 
       _this.generateNameAndSkill();
@@ -283,7 +283,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
       var oldDuration = _this.state.duration;
       _this.state.duration = newDurationName;
-      if (!_this.derivedValues.shouldValidateActivationInfo) return; //done
+      if (!_this._derivedValues.shouldValidateActivationInfo) return; //done
 
       var defaultDurationName = Data.Power[_this.state.effect].defaultDuration;
       if ('Permanent' === newDurationName) _this.setAction('None'); //if changing to Permanent
@@ -322,7 +322,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
 
       if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 5) && 'Variable' === _this.state.effect && costPerRank < 5) costPerRank = 5;else if (costPerRank < -3) costPerRank = -3; //can't be less than 1/5
 
-      _this.derivedValues.costPerRank = costPerRank; //save the non-decimal version
+      _this._derivedValues.costPerRank = costPerRank; //save the non-decimal version
 
       if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
       _this.state.total = Math.ceil(costPerRank * _this.state.rank); //round up
@@ -339,7 +339,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
           _this.state.total = Math.ceil(costPerRank * _this.state.rank); //round up
         }
 
-      _this.derivedValues.flatValue = flatValue;
+      _this._derivedValues.flatValue = flatValue;
       _this.state.total += flatValue; //flatValue might be negative
 
       if ('A God I Am' === _this.state.effect) _this.state.total += 145; //for first ranks
@@ -352,18 +352,19 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
         this.modifierSection = newThing;
       };
 
-      _this.derivedValues.possibleActions = _this._validateAndGetPossibleActions();
-      _this.derivedValues.possibleRanges = _this._getPossibleRanges();
-      _this.derivedValues.possibleDurations = _this._validateAndGetPossibleDurations(); //TODO: pretty sure need different key in which case generate in new()
+      _this._derivedValues.possibleActions = _this._validateAndGetPossibleActions();
+      _this._derivedValues.possibleRanges = _this._getPossibleRanges();
+      _this._derivedValues.possibleDurations = _this._validateAndGetPossibleDurations(); //TODO: pretty sure need different key in which case generate in new()
 
       return /*#__PURE__*/React.createElement(PowerRowHtml, {
         sectionName: _this.props.sectionName,
         powerRow: _assertThisInitialized(_this),
         state: _this.state,
-        derivedValues: _this.derivedValues,
+        derivedValues: _this._derivedValues,
         key: _this.props.keyCopy,
         keyCopy: _this.props.keyCopy,
-        modCallback: callback
+        modCallback: callback,
+        modState: _this.state.Modifiers
       });
     });
 
@@ -386,7 +387,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
       //don't just clone this.state: skill, cost is different
       var json = {};
       json.effect = _this.state.effect;
-      if (_this.derivedValues.canSetBaseCost) json.cost = _this.state.baseCost;
+      if (_this._derivedValues.canSetBaseCost) json.cost = _this.state.baseCost;
       json.text = _this.state.text;
       json.action = _this.state.action;
       json.range = _this.state.range;
@@ -401,7 +402,7 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateActivationModifiers", function () {
-      _this.derivedValues.shouldValidateActivationInfo = true;
+      _this._derivedValues.shouldValidateActivationInfo = true;
 
       _this._updateActionModifiers();
 
@@ -629,14 +630,298 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "createByNameRank", function (rowName, rowRank) {
+      var rowIndex = _this.modifierSection.findRowByName(rowName);
+
+      if (undefined === rowIndex) {
+        _this.state.Modifiers.push({
+          name: rowName,
+          rank: rowRank
+        });
+      } else {
+        _this.state.Modifiers[rowIndex].rank = rowRank;
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "removeByName", function (rowName) {
+      var rowIndex = _this.findRowByName(rowName);
+
+      if (undefined !== rowIndex) _this.state.Modifiers.remove(rowIndex);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
+      //the row array isn't cleared in case some have been auto set
+      //Main.clear() is called at the start of Main.load()
+      var newState = [];
+      var duplicateCheck = [];
+
+      for (var i = 0; i < jsonSection.length; i++) {
+        var nameToLoad = jsonSection[i].name; //TODO: call a fun to get current power index
+
+        var loadLocation = _this.props.sectionName.toTitleCase() + ' #' + (_this.props.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1);
+
+        if (!Data.Modifier.names.contains(nameToLoad)) {
+          Main.messageUser('ModifierList.load.notExist', loadLocation + ': ' + nameToLoad + ' is not a modifier name. Did you mean "Other" with text?');
+          continue;
+        }
+
+        var modifierObject = _this._addRowNoPush(nameToLoad);
+
+        if (undefined !== jsonSection[i].applications) modifierObject.setRank(jsonSection[i].applications);
+        if (undefined !== jsonSection[i].text) modifierObject.setText(jsonSection[i].text); //duplicateCheck after setting all values for the sake of getUniqueName
+
+        if (duplicateCheck.contains(modifierObject.getUniqueName())) {
+          Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + nameToLoad + ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
+          continue;
+        }
+
+        _this._rowArray.push(modifierObject);
+
+        duplicateCheck.push(modifierObject.getUniqueName());
+        newState.push(modifierObject.getState());
+      }
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it = newState;
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {
+      //TODO: no reason for this to be by row and others by key
+      if (undefined === modifierRow) {
+        _this.addRow(newName);
+
+        return;
+      }
+
+      var updatedIndex = _this.getIndexByKey(modifierRow.getKey());
+
+      if (!Data.Modifier.names.contains(newName) || _this._hasDuplicate()) {
+        _this._removeRow(updatedIndex);
+      } else {
+        var rowState = modifierRow.getState();
+        rowState.name = newName;
+        _this._rowArray[updatedIndex] = new ModifierObject({
+          key: _this._blankKey,
+          powerRowParent: _this.props.powerRowParent,
+          modifierListParent: _assertThisInitialized(_this),
+          sectionName: _this.props.sectionName,
+          state: rowState
+        });
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[updatedIndex].name = newName;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
+      if (updatedKey === _this._blankKey) {
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      var updatedIndex = _this.getIndexByKey(updatedKey);
+
+      var rowState = _this._rowArray[updatedIndex].getState();
+
+      rowState.rank = newRank;
+      _this._rowArray[updatedIndex] = new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: _this.props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: _this.props.sectionName,
+        state: rowState
+      });
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[updatedIndex].rank = newRank;
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (newText, updatedKey) {
+      if (updatedKey === _this._blankKey) {
+        throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      var updatedIndex = _this.getIndexByKey(updatedKey);
+
+      var rowState = _this._rowArray[updatedIndex].getState();
+
+      rowState.text = newText;
+      _this._rowArray[updatedIndex] = new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: _this.props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: _this.props.sectionName,
+        state: rowState
+      });
+
+      if (_this._hasDuplicate()) {
+        _this._removeRow(updatedIndex);
+      } else {
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[updatedIndex].text = newText;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
+      var modifierObject = _this._addRowNoPush(newName);
+
+      _this._rowArray.push(modifierObject);
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it.push(modifierObject.getState());
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_addRowNoPush", function (newName) {
+      //TODO: move this up. was in mod row
+      if (false) {
+        var wasAttack = 'Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name; //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
+
+        if (wasAttack && 'Feature' !== props.powerRowParent.getEffect()) props.powerRowParent.setRange('Personal');
+
+        if (!Data.Modifier.names.contains(nameGiven)) //if row is removed, ie: 'Select Modifier'
+          {
+            _this._resetValues();
+
+            if (wasAttack) props.powerRowParent.generateNameAndSkill(); //technically only necessary if 'Attack' === state.name
+
+            return;
+          }
+
+        if (('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name) && 'Personal' === props.powerRowParent.getRange()) props.powerRowParent.setRange('Close'); //when loading this value is redundantly set then later overridden by load's setRange
+
+        if (wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill(); //create or destroy as needed
+      } //the row that was blank no longer is so use the blank key
+
+
+      var modifierObject = new ModifierObject({
+        key: _this._blankKey,
+        powerRowParent: _this.props.powerRowParent,
+        modifierListParent: _assertThisInitialized(_this),
+        sectionName: _this.props.sectionName,
+        state: {
+          name: newName
+        } //rest are defaulted
+
+      }); //need a new key for the new blank row
+
+      _this._blankKey = MainObject.generateKey();
+      return modifierObject;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_hasDuplicate", function () {
+      //can't change this to take an arg because update name/text will already be in state
+      return _this._rowArray.map(function (item) {
+        return item.getUniqueName();
+      }).some(function (val, id, array) {
+        return array.indexOf(val) !== id;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
+      //don't update any state
+      _this.calculateValues();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_sanitizeRows", function () {
+      var namesSoFar = [];
+      var canHaveAttack = true;
+      if (_this.props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false; //feature has a default range of Personal
+
+      for (var i = 0; i < _this._rowArray.length; i++) {
+        if (_this._rowArray[i].isBlank() && i < _this._rowArray.length) {
+          _this._removeRow(i);
+
+          i--;
+          continue;
+        } //remove blank row that isn't last
+        else if (_this._rowArray[i].isBlank()) continue; //do nothing if last row is blank
+
+
+        if (_this.props.powerRowParent.getSection() === Main.equipmentSection && (_this._rowArray[i].getName() === 'Removable' || _this._rowArray[i].getName() === 'Easily Removable')) {
+          _this._removeRow(i);
+
+          i--;
+          continue;
+        } //equipment has removable built in and can't have the modifiers
+
+
+        var modifierName = _this._rowArray[i].getUniqueName(false);
+
+        if (namesSoFar.contains(modifierName)) {
+          _this._removeRow(i);
+
+          i--;
+          continue;
+        } //redundant modifier
+
+
+        if (modifierName === 'Attack' || modifierName === 'Affects Others') //Affects Others Also and Affects Others Only return same name
+          {
+            if (!canHaveAttack) {
+              _this._removeRow(i);
+
+              i--;
+              continue;
+            } //redundant or invalid modifier
+
+
+            canHaveAttack = false;
+          }
+
+        namesSoFar.push(modifierName);
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_sortOrder", function (a, b) {
+      var aFirst = -1;
+      var bFirst = 1;
+      if ('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
+      if ('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst; //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
+
+      if ('Aura' === a.getName() || 'Selective' === a.getName() && 'Triggered' === _this.props.powerRowParent.getAction()) return aFirst;
+      if ('Aura' === b.getName() || 'Selective' === b.getName() && 'Triggered' === _this.props.powerRowParent.getAction()) return bFirst;
+      if ('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
+      if ('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;
+      if ('Increased Duration' === a.getName() || 'Decreased Duration' === a.getName()) return aFirst;
+      if ('Increased Duration' === b.getName() || 'Decreased Duration' === b.getName()) return bFirst; //else maintain the current order
+      //using rowIndex to force sort to be stable (since it might not be)
+
+      if (a.getModifierRowIndex() < b.getModifierRowIndex()) return aFirst;
+      return bFirst;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_testSortStability", function () {
+      unstableSort(_this._rowArray, _this._sortOrder);
+    });
+
     _this.state = {}; //modifierSection is lazy because it is re-created each render
 
-    _this.derivedValues = {
+    _this._derivedValues = {
       shouldValidateActivationInfo: true,
       total: 0
     };
     return _this;
-  }
+  } //throws if unstableSort doesn't exist
+
 
   return PowerObjectAgnostic;
 }(React.Component); //TODO: not sure if setting state should be fixed before pulling state up. probably not

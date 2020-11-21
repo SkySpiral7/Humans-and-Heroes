@@ -229,7 +229,8 @@ function PowerRowHtml(props) {
     }, /*#__PURE__*/React.createElement(ModifierList, {
       callback: props.modCallback,
       powerRowParent: props.powerRow,
-      sectionName: props.sectionName
+      sectionName: props.sectionName,
+      state: props.modState
     })));
     var costPerRankDisplay;
     if (derivedValues.costPerRank >= 1) costPerRankDisplay = '' + derivedValues.costPerRank;else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')'; //0 is 1/2 and -1 is 1/3
