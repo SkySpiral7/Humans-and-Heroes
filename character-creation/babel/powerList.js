@@ -129,21 +129,6 @@ class PowerListAgnostic extends React.Component
       return this._rowArray[powerRowIndex].getModifierList()
       .getRowByIndex(modifierRowIndex);
    };
-   getModifierLoadName = (modRowKey) =>
-   {
-      for (let powerIndex = 0; powerIndex < this.state.it.length; powerIndex++)
-      {
-         for (let modIndex = 0; modIndex < this.state.it[powerIndex].Modifiers.length; modIndex++)
-         {
-            if (this._rowArray[powerIndex].getRowByIndex(modIndex)
-               .getKey() === modRowKey)
-            {
-               return (this.props.sectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1));
-            }
-         }
-      }
-      throw new AssertionError('No row with id ' + modRowKey + ' (rowArray.length=' + this._rowArray.length + ')');
-   };
    /**Sets data from a json object given then updates*/
    load = (jsonSection) =>
    {

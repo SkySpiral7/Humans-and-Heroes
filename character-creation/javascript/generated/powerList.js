@@ -169,18 +169,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       return _this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getModifierLoadName", function (modRowKey) {
-      for (var powerIndex = 0; powerIndex < _this.state.it.length; powerIndex++) {
-        for (var modIndex = 0; modIndex < _this.state.it[powerIndex].Modifiers.length; modIndex++) {
-          if (_this._rowArray[powerIndex].getRowByIndex(modIndex).getKey() === modRowKey) {
-            return _this.props.sectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1);
-          }
-        }
-      }
-
-      throw new AssertionError('No row with id ' + modRowKey + ' (rowArray.length=' + _this._rowArray.length + ')');
-    });
-
     _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
       //the row array isn't cleared in case some have been auto set
       //Main.clear() is called at the start of Main.load()

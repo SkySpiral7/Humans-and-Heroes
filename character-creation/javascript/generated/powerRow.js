@@ -124,12 +124,6 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
       return Data.Power[_this.props.state.effect].defaultRange;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getUniqueName", function () {
-      var modListName = '';
-      if (undefined !== _this.modifierSection) modListName = _this.modifierSection.getUniqueName();
-      return _this.props.state.effect + ': ' + _this.props.state.text + '; ' + modListName; //text might be empty
-    });
-
     _defineProperty(_assertThisInitialized(_this), "hasAutoTotal", function () {
       return _this.modifierSection.hasAutoTotal();
     });
@@ -617,46 +611,6 @@ var PowerObjectAgnostic = /*#__PURE__*/function (_React$Component) {
       var rowIndex = _this.findRowByName(rowName);
 
       if (undefined !== rowIndex) _this.state.Modifiers.remove(rowIndex);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
-      //the row array isn't cleared in case some have been auto set
-      //Main.clear() is called at the start of Main.load()
-      var newState = [];
-      var duplicateCheck = [];
-
-      for (var i = 0; i < jsonSection.length; i++) {
-        var nameToLoad = jsonSection[i].name; //TODO: call a fun to get current power index
-
-        var loadLocation = _this.props.sectionName.toTitleCase() + ' #' + (_this.props.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1);
-
-        if (!Data.Modifier.names.contains(nameToLoad)) {
-          Main.messageUser('ModifierList.load.notExist', loadLocation + ': ' + nameToLoad + ' is not a modifier name. Did you mean "Other" with text?');
-          continue;
-        }
-
-        var modifierObject = _this._addRowNoPush(nameToLoad);
-
-        if (undefined !== jsonSection[i].applications) modifierObject.setRank(jsonSection[i].applications);
-        if (undefined !== jsonSection[i].text) modifierObject.setText(jsonSection[i].text); //duplicateCheck after setting all values for the sake of getUniqueName
-
-        if (duplicateCheck.contains(modifierObject.getUniqueName())) {
-          Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + nameToLoad + ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
-          continue;
-        }
-
-        _this._rowArray.push(modifierObject);
-
-        duplicateCheck.push(modifierObject.getUniqueName());
-        newState.push(modifierObject.getState());
-      }
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it = newState;
-        return state;
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateNameByRow", function (newName, modifierRow) {

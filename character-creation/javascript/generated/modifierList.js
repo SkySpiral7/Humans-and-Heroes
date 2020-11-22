@@ -124,20 +124,6 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getUniqueName", function () {
-      var nameArray = [];
-
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        nameArray.push(_this._rowArray[i].getUniqueName(true));
-      }
-
-      nameArray.sort(); //must be sorted because order doesn't matter when considering uniqueness
-      //note that the rows are not sorted only this name array
-      //the sort order is by ascii but that doesn't matter as long as the same sort is used each time
-
-      return nameArray;
-    });
-
     _defineProperty(_assertThisInitialized(_this), "hasAutoTotal", function () {
       for (var i = 0; i < _this._rowArray.length; i++) {
         if (_this._rowArray[i].doesHaveAutoTotal()) return true;
@@ -208,6 +194,8 @@ figure out architecture:
    * power row (react) uses power html: pass down everything as props, use callback prop to save a reference to mod list
    * mod list delegate to power list (really main) for state mutation
    * mod list make an immutable mod row list from props
+   * when loading main sends doc to section to validate/message and return valid state
+sanitizeState. requires static unique name
 pull power row state up to list
 nail down power row
 hook up power html
@@ -219,3 +207,33 @@ hook up more for mod/power
 test all
 there's lots of tasks
 */
+
+
+_defineProperty(ModifierList, "sanitizeState", function (inputState, powerSectionName, powerIndex) {
+  //the row array isn't cleared in case some have been auto set
+  //Main.clear() is called at the start of Main.load()
+  var validListState = [];
+  var duplicateCheck = [];
+
+  for (var modIndex = 0; modIndex < inputState.length; modIndex++) {
+    var loadLocation = powerSectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1);
+    var validRowState = ModifierObject.sanitizeState({
+      name: inputState[modIndex].name,
+      rank: inputState[modIndex].rank,
+      text: inputState[modIndex].text
+    }, loadLocation);
+    if (undefined === validRowState) continue; //already sent message
+
+    var uniqueName = ModifierObject.getUniqueName(validRowState, false);
+
+    if (duplicateCheck.contains(uniqueName)) {
+      Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + validRowState.name + ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
+      continue;
+    }
+
+    duplicateCheck.push(uniqueName);
+    validListState.push(validRowState);
+  }
+
+  return validListState;
+});

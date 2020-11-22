@@ -43,25 +43,6 @@ function ModifierObject(props)
    this.isRank=function(){return (derivedValues.modifierType === 'Rank');};
 
    //Other public functions section
-   /**Get the name of the modifier appended with text to determine redundancy*/
-   this.getUniqueName=function(includeText)
-   {
-       var nameToUse;
-       //all these are exclusive:
-       if(state.name === 'Affects Others Also' || state.name === 'Affects Others Only') nameToUse='Affects Others';
-       else if(state.name === 'Affects Objects Also' || state.name === 'Affects Objects Only') nameToUse='Affects Objects';
-       else if(state.name === 'Alternate Resistance (Free)' || state.name === 'Alternate Resistance (Cost)') nameToUse='Alternate Resistance';
-       else if(state.name === 'Easily Removable') nameToUse='Removable';
-       else if(state.name === 'Dynamic Alternate Effect') nameToUse='Alternate Effect';
-       else if(state.name === 'Inaccurate') nameToUse='Accurate';
-       else if(state.name === 'Extended Range' || state.name === 'Diminished Range') nameToUse='Extended/Diminished Range';
-       //TODO: is uncontrollable entirely a unique modifier?
-       else nameToUse=state.name;
-       //TODO: so I noticed that text should not be used most of the time for uniqueness (check required is only maybe)
-
-       if(includeText && derivedValues.hasText) return (nameToUse+' ('+state.text+')');
-       return nameToUse;
-   };
    /**Returns a json object of this row's data*/
    this.save=function()
    {
@@ -108,11 +89,10 @@ function ModifierObject(props)
    //constructor:
    this._constructor();
 }
-ModifierObject.sanitizeState=function(inputState, powerSection)
+ModifierObject.sanitizeState=function(inputState, loadLocation)
 {
    if (!Data.Modifier.names.contains(inputState.name))
    {
-      var loadLocation = powerSection.getModifierLoadName(props.key);
       Main.messageUser(
          'ModifierList.load.notExist', loadLocation + ': ' +
          inputState.name + ' is not a modifier name. Did you mean "Other" with text?');
@@ -137,4 +117,23 @@ ModifierObject.sanitizeState=function(inputState, powerSection)
    else validState.text = undefined;
 
    return validState;
+};
+/**Get the name of the modifier appended with text to determine redundancy*/
+ModifierObject.getUniqueName=function(state, includeText)
+{
+   var nameToUse;
+   //all these are exclusive:
+   if(state.name === 'Affects Others Also' || state.name === 'Affects Others Only') nameToUse='Affects Others';
+   else if(state.name === 'Affects Objects Also' || state.name === 'Affects Objects Only') nameToUse='Affects Objects';
+   else if(state.name === 'Alternate Resistance (Free)' || state.name === 'Alternate Resistance (Cost)') nameToUse='Alternate Resistance';
+   else if(state.name === 'Easily Removable') nameToUse='Removable';
+   else if(state.name === 'Dynamic Alternate Effect') nameToUse='Alternate Effect';
+   else if(state.name === 'Inaccurate') nameToUse='Accurate';
+   else if(state.name === 'Extended Range' || state.name === 'Diminished Range') nameToUse='Extended/Diminished Range';
+   //TODO: is uncontrollable entirely a unique modifier?
+   else nameToUse=state.name;
+   //TODO: so I noticed that text should not be used most of the time for uniqueness (check required is only maybe)
+
+   if(includeText && undefined !== state.text) return (nameToUse+' ('+state.text+')');
+   return nameToUse;
 };

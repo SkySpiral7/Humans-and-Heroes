@@ -88,13 +88,6 @@ class PowerObjectAgnostic extends React.Component
    {
       return Data.Power[this.props.state.effect].defaultRange;
    };
-   /**Get the name of the power appended with text and modifiers to determine redundancy*/
-   getUniqueName = () =>
-   {
-      let modListName = '';
-      if (undefined !== this.modifierSection) modListName = this.modifierSection.getUniqueName();
-      return this.props.state.effect + ': ' + this.props.state.text + '; ' + modListName;  //text might be empty
-   };
    /**If true then getAutoTotal must be called*/
       //TODO: these are useless?
    hasAutoTotal = () => {return this.modifierSection.hasAutoTotal();};
@@ -672,47 +665,6 @@ class PowerObjectAgnostic extends React.Component
 
 
    //region copied from mod list
-   /**Sets data from a json object given then updates. The row array is not cleared by this function*/
-   load = (jsonSection) =>
-   {
-      //the row array isn't cleared in case some have been auto set
-      //Main.clear() is called at the start of Main.load()
-      const newState = [];
-      const duplicateCheck = [];
-      for (let i = 0; i < jsonSection.length; i++)
-      {
-         const nameToLoad = jsonSection[i].name;
-         //TODO: call a fun to get current power index
-         const loadLocation = (this.props.sectionName.toTitleCase() + ' #' + (this.props.state.sectionRowIndex + 1) + ' Modifier #' + (i + 1));
-         if (!Data.Modifier.names.contains(nameToLoad))
-         {
-            Main.messageUser(
-               'ModifierList.load.notExist', loadLocation + ': ' +
-               nameToLoad + ' is not a modifier name. Did you mean "Other" with text?');
-            continue;
-         }
-         const modifierObject = this._addRowNoPush(nameToLoad);
-         if (undefined !== jsonSection[i].applications) modifierObject.setRank(jsonSection[i].applications);
-         if (undefined !== jsonSection[i].text) modifierObject.setText(jsonSection[i].text);
-
-         //duplicateCheck after setting all values for the sake of getUniqueName
-         if (duplicateCheck.contains(modifierObject.getUniqueName()))
-         {
-            Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + nameToLoad +
-               ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
-            continue;
-         }
-         this._rowArray.push(modifierObject);
-         duplicateCheck.push(modifierObject.getUniqueName());
-         newState.push(modifierObject.getState());
-      }
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it = newState;
-         return state;
-      });
-   };
    updateNameByRow = (newName, modifierRow) =>
    {
       //TODO: no reason for this to be by row and others by key
