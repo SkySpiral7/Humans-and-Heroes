@@ -175,10 +175,10 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
 
     _this._rowArray = props.state.map(function (state) {
       new ModifierObject({
-        key: _this._blankKey,
+        //don't need keyCopy because mod row isn't react
+        key: MainObject.generateKey(),
         powerRowParent: props.powerRowParent,
         modifierListParent: _assertThisInitialized(_this),
-        sectionName: props.sectionName,
         state: state
       });
     });
@@ -188,10 +188,10 @@ var ModifierList = /*#__PURE__*/function (_React$Component) {
       flatTotal: 0
     };
     _this._blankKey = MainObject.generateKey();
-    props.callback(_assertThisInitialized(_this));
 
     _this.calculateValues();
 
+    props.callback(_assertThisInitialized(_this));
     return _this;
   } //region basic getter
 
@@ -209,6 +209,7 @@ figure out architecture:
    * mod list delegate to power list (really main) for state mutation
    * mod list make an immutable mod row list from props
 pull power row state up to list
+nail down power row
 hook up power html
    onChange
 hook up more for mod/power

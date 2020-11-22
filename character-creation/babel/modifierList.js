@@ -10,10 +10,10 @@ class ModifierList extends React.Component
       this._rowArray = props.state.map(state =>
       {
          new ModifierObject({
-            key: this._blankKey,
+            //don't need keyCopy because mod row isn't react
+            key: MainObject.generateKey(),
             powerRowParent: props.powerRowParent,
             modifierListParent: this,
-            sectionName: props.sectionName,
             state: state
          })
       });
@@ -23,9 +23,9 @@ class ModifierList extends React.Component
          flatTotal: 0
       };
       this._blankKey = MainObject.generateKey();
-      props.callback(this);
 
       this.calculateValues();
+      props.callback(this);
    }
 
    //region basic getter

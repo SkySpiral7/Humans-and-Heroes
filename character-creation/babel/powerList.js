@@ -25,6 +25,7 @@ class PowerListAgnostic extends React.Component
          protectionRankTotal: null,
          attackEffectRanks: new MapDefault({}, 0)
       };
+      this._blankKey = MainObject.generateKey();
    };
 
    //region Single line function section
@@ -61,17 +62,19 @@ class PowerListAgnostic extends React.Component
    /**This creates the page's html (for the section)*/
    render = () =>
    {
-      const elementArray = this._rowArray.map(powerObject =>
+      this._rowArray = [];
+      const elementArray = this.state.it.map(powerState =>
       {
-         return (<PowerObjectAgnostic key={powerObject.getKey()} keyCopy={powerObject.getKey()}
+         const callback = (newThing) => {this._rowArray.push(newThing);};
+         const rowKey = MainObject.generateKey();
+         return (<PowerObjectAgnostic key={rowKey} keyCopy={rowKey}
                                       sectionName={this.props.sectionName}
                                       powerListParent={this}
-                                      state={powerObject.getState()} />);
+                                      state={powerState}
+                                      callback={callback} />);
       });
-      elementArray.push(<PowerObjectAgnostic key={this._blankKey} keyCopy={this._blankKey}
-                                             sectionName={this.props.sectionName}
-                                             powerListParent={this}
-                                             state={undefined} />);
+      elementArray.push(<PowerRowHtml sectionName={this.props.sectionName} state={{}}
+                                      key={this._blankKey} keyCopy={this._blankKey} />);
       return elementArray;
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
@@ -125,6 +128,21 @@ class PowerListAgnostic extends React.Component
       if (powerRowIndex >= powerRowIndex.length) return;  //range checking of modifierRowIndex will be handled in getRowByIndex
       return this._rowArray[powerRowIndex].getModifierList()
       .getRowByIndex(modifierRowIndex);
+   };
+   getModifierLoadName = (modRowKey) =>
+   {
+      for (let powerIndex = 0; powerIndex < this.state.it.length; powerIndex++)
+      {
+         for (let modIndex = 0; modIndex < this.state.it[powerIndex].Modifiers.length; modIndex++)
+         {
+            if (this._rowArray[powerIndex].getRowByIndex(modIndex)
+               .getKey() === modRowKey)
+            {
+               return (this.props.sectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1));
+            }
+         }
+      }
+      throw new AssertionError('No row with id ' + modRowKey + ' (rowArray.length=' + this._rowArray.length + ')');
    };
    /**Sets data from a json object given then updates*/
    load = (jsonSection) =>

@@ -77,7 +77,7 @@ function ModifierObject(props)
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**A place that address all quirks in total cost. Will set the total to the correct number for raw total calculation.*/
-   this._calculateTotal=function()
+   this._calculateRawTotal=function()
    {
       if(derivedValues.hasAutoTotal){derivedValues.rawTotal=0; return;}  //so that it will not affect the rawTotal
       derivedValues.rawTotal=derivedValues.costPerRank*state.rank;
@@ -88,44 +88,53 @@ function ModifierObject(props)
    };
    this._constructor=function()
    {
-      state = {};
-      derivedValues = {hasAutoTotal: false, rawTotal: 0};
-      this._setModifier(props.state.name);
-      this._setRank(props.state.rank);
-      this._setText(props.state.text);
-   };
-   /**Populates data of the modifier by using the name (which is validated).
-    This must be called before any other data of this row is set.
-    The data set is independent of the document and doesn't call update.*/
-   this._setModifier=function(nameGiven)
-   {
-      state.name = nameGiven;
+      state = ModifierObject.sanitizeState({
+         name: props.state.name,
+         rank: props.state.rank,
+         text: props.state.text
+      }, props.powerRowParent.getSection());
+      derivedValues = {};
       derivedValues.modifierType = Data.Modifier[state.name].type;
       derivedValues.costPerRank = Data.Modifier[state.name].cost;
       derivedValues.maxRank = Data.Modifier[state.name].maxRank;
       derivedValues.hasRank = (1 !== derivedValues.maxRank);
       derivedValues.hasText = Data.Modifier[state.name].hasText;
       derivedValues.hasAutoTotal = Data.Modifier[state.name].hasAutoTotal;
-   };
-   /**Used to set data independent of the document and without calling update*/
-   this._setRank=function(rankGiven)
-   {
       //TODO: test that this allows setting auto
       //if (Data.Modifier[state.name].hasAutoRank)  //ModifierList.allAutoModifierCanCreate are span so that this isn't called (can't change them anyway)
       //return;  //can't change the rank since it is auto
-      if(!derivedValues.hasRank) return;  //can only happen when loading bad data
-      if(state.name === 'Fragile') state.rank = sanitizeNumber(rankGiven, 0, 0);  //the only modifier than can have 0 ranks
-      else state.rank = sanitizeNumber(rankGiven, 1, 1);  //all others must have at least 1 rank
-      if(state.rank > derivedValues.maxRank) state.rank = derivedValues.maxRank;
-      this._calculateTotal();
-   };
-   /**Used to set data independent of the document and without calling update*/
-   this._setText=function(textGiven)
-   {
-      if (derivedValues.hasText && undefined === textGiven) state.text = Data.Modifier[state.name].defaultText;
-      else if (derivedValues.hasText) state.text = textGiven;
-      else state.text = undefined;  //can only happen when loading bad data
+      this._calculateRawTotal();
    };
    //constructor:
    this._constructor();
 }
+ModifierObject.sanitizeState=function(inputState, powerSection)
+{
+   if (!Data.Modifier.names.contains(inputState.name))
+   {
+      var loadLocation = powerSection.getModifierLoadName(props.key);
+      Main.messageUser(
+         'ModifierList.load.notExist', loadLocation + ': ' +
+         inputState.name + ' is not a modifier name. Did you mean "Other" with text?');
+      return;  //undefined
+   }
+   var validState = {name: inputState.name};
+
+   var maxRank = Data.Modifier[validState.name].maxRank;
+   var hasRank = (1 !== maxRank);
+   var hasText = Data.Modifier[validState.name].hasText;
+
+   if (hasRank)
+   {
+      if ('Fragile' === validState.name) validState.rank = sanitizeNumber(inputState.rank, 0, 0);  //the only modifier than can have 0 ranks
+      else validState.rank = sanitizeNumber(inputState.rank, 1, 1);  //all others must have at least 1 rank
+      if (validState.rank > maxRank) validState.rank = maxRank;
+   }
+   else validState.rank = 1;
+
+   if (hasText && undefined === inputState.text) validState.text = Data.Modifier[validState.name].defaultText;
+   else if (hasText) validState.text = inputState.text;
+   else validState.text = undefined;
+
+   return validState;
+};

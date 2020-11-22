@@ -87,22 +87,29 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var elementArray = _this._rowArray.map(function (powerObject) {
+      _this._rowArray = [];
+
+      var elementArray = _this.state.it.map(function (powerState) {
+        var callback = function callback(newThing) {
+          _this._rowArray.push(newThing);
+        };
+
+        var rowKey = MainObject.generateKey();
         return /*#__PURE__*/React.createElement(PowerObjectAgnostic, {
-          key: powerObject.getKey(),
-          keyCopy: powerObject.getKey(),
+          key: rowKey,
+          keyCopy: rowKey,
           sectionName: _this.props.sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: powerObject.getState()
+          state: powerState,
+          callback: callback
         });
       });
 
-      elementArray.push( /*#__PURE__*/React.createElement(PowerObjectAgnostic, {
-        key: _this._blankKey,
-        keyCopy: _this._blankKey,
+      elementArray.push( /*#__PURE__*/React.createElement(PowerRowHtml, {
         sectionName: _this.props.sectionName,
-        powerListParent: _assertThisInitialized(_this),
-        state: undefined
+        state: {},
+        key: _this._blankKey,
+        keyCopy: _this._blankKey
       }));
       return elementArray;
     });
@@ -160,6 +167,18 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (powerRowIndex >= powerRowIndex.length) return; //range checking of modifierRowIndex will be handled in getRowByIndex
 
       return _this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getModifierLoadName", function (modRowKey) {
+      for (var powerIndex = 0; powerIndex < _this.state.it.length; powerIndex++) {
+        for (var modIndex = 0; modIndex < _this.state.it[powerIndex].Modifiers.length; modIndex++) {
+          if (_this._rowArray[powerIndex].getRowByIndex(modIndex).getKey() === modRowKey) {
+            return _this.props.sectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1);
+          }
+        }
+      }
+
+      throw new AssertionError('No row with id ' + modRowKey + ' (rowArray.length=' + _this._rowArray.length + ')');
     });
 
     _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
@@ -235,12 +254,13 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         godhood: false
       }
     };
-    _this.this._rowArray = [];
+    _this._rowArray = [];
     _this._derivedValues = {
       total: 0,
       protectionRankTotal: null,
       attackEffectRanks: new MapDefault({}, 0)
     };
+    _this._blankKey = MainObject.generateKey();
     return _this;
   }
 
