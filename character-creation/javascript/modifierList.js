@@ -1,5 +1,7 @@
 'use strict';
 
+/** @param props: powerRowParent, state
+ Immutable (state/derivedValues don't change) */
 function ModifierList(props)
 {
    var state, derivedValues, rowArray;
@@ -207,9 +209,6 @@ figure out architecture:
    * power list (react) uses power html: pass down everything as props, immutable non-react below here
    * mod list delegate to power list (really main) for state mutation
    * when loading main sends doc to section to validate/message and return valid state
-timing is wrong: power row needs to mod list to exist in order to calc power total
-   create them in power list render
-   power row total is derived in constructor
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?

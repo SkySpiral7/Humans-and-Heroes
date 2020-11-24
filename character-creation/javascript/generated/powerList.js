@@ -89,27 +89,43 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       _this._rowArray = [];
 
-      var elementArray = _this.state.it.map(function (powerState) {
-        var callback = function callback(newThing) {
-          _this._rowArray.push(newThing);
-        };
-
+      var elementArray = _this.state.it.map(function (state, powerIndex) {
         var rowKey = MainObject.generateKey();
-        return /*#__PURE__*/React.createElement(PowerObjectAgnostic, {
+
+        _this._rowArray.push(new PowerObjectAgnostic({
           key: rowKey,
-          keyCopy: rowKey,
           sectionName: _this.props.sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: powerState,
-          callback: callback
+          state: state
+        }));
+
+        var rowDerivedValues = _this._rowArray.getDerivedValues();
+
+        var loadLocation = {
+          toString: function toString() {
+            throw new AssertionError('Should already be valid.');
+          }
+        };
+        rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+        rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
+        rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
+        return /*#__PURE__*/React.createElement(PowerRowHtml, {
+          key: rowKey,
+          keyCopy: rowKey,
+          state: state,
+          derivedValues: rowDerivedValues,
+          sectionName: _this.props.sectionName,
+          powerRow: _this._rowArray[powerIndex]
         });
       });
 
       elementArray.push( /*#__PURE__*/React.createElement(PowerRowHtml, {
-        sectionName: _this.props.sectionName,
-        state: {},
         key: _this._blankKey,
-        keyCopy: _this._blankKey
+        keyCopy: _this._blankKey,
+        state: {},
+        derivedValues: undefined,
+        sectionName: _this.props.sectionName,
+        powerRow: undefined
       }));
       return elementArray;
     });
@@ -172,49 +188,21 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
       //the row array isn't cleared in case some have been auto set
       //Main.clear() is called at the start of Main.load()
-      for (var i = 0; i < jsonSection.length; i++) {
-        var nameToLoad = jsonSection[i].effect;
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      var newState = [];
 
-        if (!Data.Power.names.contains(nameToLoad)) {
-          Main.messageUser('PowerListAgnostic.load.notExist', _this.props.sectionName.toTitleCase() + ' #' + (i + 1) + ': ' + nameToLoad + ' is not a power name.');
-          continue;
-        }
-
-        if (Data.Power[nameToLoad].isGodhood && !Main.canUseGodhood()) {
-          Main.messageUser('PowerListAgnostic.load.godhood', _this.props.sectionName.toTitleCase() + ' #' + (i + 1) + ': ' + nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
-          continue;
-        }
-
-        var rowPointer = _this._rowArray.last();
-
-        rowPointer.setPower(nameToLoad); //must be done first
-
-        if (undefined !== jsonSection[i].cost) rowPointer.setBaseCost(jsonSection[i].cost);
-        rowPointer.setText(jsonSection[i].text); //they all have text because descriptors
-
-        rowPointer.disableValidationForActivationInfo(); //TODO: turn on loading mod list
-        //rowPointer.getModifierList().load(jsonSection[i].Modifiers);
-        //modifiers are loaded first so that I can use isNonPersonalModifierPresent and reset the activation modifiers
-        //blindly set activation info then validate
-
-        rowPointer.setAction(jsonSection[i].action);
-        rowPointer.setRange(jsonSection[i].range);
-        rowPointer.setDuration(jsonSection[i].duration); //TODO: turn on these
-        //rowPointer.validateActivationInfo();
-        //rowPointer.updateActivationModifiers();
-
-        if (undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
-        if (undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill); //skill requires name however perception range
-        // has name without skill
-
-        rowPointer.generateNameAndSkill(); //TODO: should give warning about removing name and skill
-
-        rowPointer.setRank(jsonSection[i].rank);
-
-        _this.addRow();
+      for (var powerIndex = 0; powerIndex < jsonSection.length; powerIndex++) {
+        var validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
+        if (undefined !== validRowState) newState.push(validRowState); //already sent message
       }
 
-      _this.update();
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it = newState;
+        return state;
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "addRow", function () {
@@ -254,3 +242,10 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
   return PowerListAgnostic;
 }(React.Component);
+
+function createPowerList(callback, sectionName) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(PowerListAgnostic, {
+    callback: callback,
+    sectionName: sectionName
+  }), document.getElementById('power-section'));
+}

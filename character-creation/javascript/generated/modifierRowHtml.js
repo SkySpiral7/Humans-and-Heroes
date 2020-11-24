@@ -1,4 +1,6 @@
-'use strict'; //TODO: doc
+'use strict'; //TODO: more doc (state, derivedValues)
+
+/** @param props: powerRow, modifierRow, keyCopy */
 
 function ModifierRowHtml(props) {
   var sectionName = props.powerRow.getSectionName();

@@ -1,5 +1,6 @@
 'use strict';
 
+/** @param props: sectionName, powerKey, onChange, currentValue */
 function PowerNameHtml(props)
 {
    return (<label className="fill-remaining">
@@ -7,6 +8,7 @@ function PowerNameHtml(props)
                        onChange={props.onChange} value={props.currentValue} /></label>);
 }
 
+/** @param props: sectionName, powerKey, onChange, currentValue */
 function PowerSkillHtml(props)
 {
    return (<label className="fill-remaining">

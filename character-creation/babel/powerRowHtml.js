@@ -1,6 +1,7 @@
 'use strict';
 
-//TODO: doc
+//TODO: more doc (state, derivedValues)
+/** @param props: state, derivedValues, keyCopy, sectionName, powerRow */
 function PowerRowHtml(props)
 {
    const state = props.state;
@@ -192,7 +193,7 @@ function PowerRowHtml(props)
       modifierRows.push(<ModifierRowHtml key={blankModifierKey} keyCopy={blankModifierKey} powerRow={props.powerRow}
                                          modifierRow={undefined} />);
 
-      rowList.push(<div id={props.sectionName + 'ModifierSection' + state.rowIndex} key="ModifierSection">
+      rowList.push(<div id={props.sectionName + 'ModifierSection' + props.powerRow.getKey()} key="ModifierSection">
          {modifierRows}
       </div>);
 

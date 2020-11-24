@@ -11,6 +11,10 @@
  Skill Used: changeSkill();
  (see modifier file)
  Rank: changeRank();
+
+ Immutable (state/derivedValues don't change)
+
+ @param props: key, sectionName, powerListParent, state
  */
 function PowerObjectAgnostic(props)
 {
@@ -23,12 +27,12 @@ function PowerObjectAgnostic(props)
    this.getDerivedValues = function () {return JSON.clone(derivedValues);};
    /**Get the effect name of the power*/
    this.getEffect = function () {return state.effect;};
-   this.getKey = function () {return this.props.keyCopy;};
+   this.getKey = function () {return props.key;};
    /**Get the user's name for the power*/
    this.getName = function () {return state.name;};
    this.getRange = function () {return state.range;};
    this.getRank = function () {return state.rank;};
-   this.getSectionName = function () {return this.props.sectionName;};
+   this.getSectionName = function () {return props.sectionName;};
    this.getSkillUsed = function () {return state.skillUsed;};
    this.getState = function () {return JSON.clone(state);};
    this.getText = function () {return state.text;};
@@ -36,7 +40,7 @@ function PowerObjectAgnostic(props)
    this.getTotal = function () {return derivedValues.total;};
    //for modifierSection see this.getModifierList in the onChange section
    this.isBaseCostSettable = function () {return derivedValues.canSetBaseCost;};
-   this.getSection = function () {return this.props.powerListParent;};
+   this.getSection = function () {return props.powerListParent;};
 
    //Single line function section
    /**Returns the default action for this power or nothing if this row is blank.*/
@@ -56,76 +60,74 @@ function PowerObjectAgnostic(props)
    };
    /**If true then getAutoTotal must be called*/
    //TODO: these are useless?
-   this.hasAutoTotal = function () {return this.modifierSection.hasAutoTotal();};
+   this.hasAutoTotal = function () {return modifierSection.hasAutoTotal();};
 
    //Onchange section
    /**Onchange function for selecting a power*/
    this.select = function ()
    {
       CommonsLibrary.select.call(this, this.setPower,
-         (this.props.sectionName + 'Choices' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'Choices' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the base cost (if possible)*/
    this.changeBaseCost = function ()
    {
       //won't be called if you can't set base cost
       CommonsLibrary.change.call(this, this.setBaseCost,
-         (this.props.sectionName + 'BaseCost' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'BaseCost' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the text*/
    this.changeText = function ()
    {
       CommonsLibrary.change.call(this, this.setText,
-         (this.props.sectionName + 'Text' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'Text' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the action*/
    this.selectAction = function ()
    {
       //won't be called if SelectAction doesn't exist
       CommonsLibrary.select.call(this, this.setAction,
-         (this.props.sectionName + 'SelectAction' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'SelectAction' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the range*/
    this.selectRange = function ()
    {
       CommonsLibrary.select.call(this, this.setRange,
-         (this.props.sectionName + 'SelectRange' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'SelectRange' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the duration*/
    this.selectDuration = function ()
    {
       CommonsLibrary.select.call(this, this.setDuration,
-         (this.props.sectionName + 'SelectDuration' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'SelectDuration' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the user's name for the power*/
    this.changeName = function ()
    {
       CommonsLibrary.change.call(this, this.setName,
-         (this.props.sectionName + 'Name' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'Name' + state.rowIndex), props.powerListParent);
    };
    /**Onchange function for changing the skill name used for the power's attack*/
    this.changeSkill = function ()
    {
       CommonsLibrary.change.call(this, this.setSkill,
-         (this.props.sectionName + 'Skill' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'Skill' + state.rowIndex), props.powerListParent);
    };
    /**Getter is used for onChange events and for other information gathering*/
    //listed here instead of getter section to match its document location
-   this.getModifierList = function () {return this.modifierSection;};
+   this.getModifierList = function () {return modifierSection;};
    /**Onchange function for changing the rank*/
    this.changeRank = function ()
    {
       CommonsLibrary.change.call(this, this.setRank,
-         (this.props.sectionName + 'Rank' + state.rowIndex), this.props.powerListParent);
+         (props.sectionName + 'Rank' + state.rowIndex), props.powerListParent);
    };
 
    //public function section
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    this.calculateValues = function ()
    {
-      if (undefined === this.modifierSection) return;  //nothing to calculate for before rendering
-      this.modifierSection.calculateValues();
-      var costPerRank = (state.baseCost + this.modifierSection.getRankTotal());
+      var costPerRank = (state.baseCost + modifierSection.getRankTotal());
       if (Main.getActiveRuleset()
          .isGreaterThanOrEqualTo(3, 5) && 'Variable' === state.effect && costPerRank < 5) costPerRank = 5;
       else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
@@ -133,7 +135,7 @@ function PowerObjectAgnostic(props)
       if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
 
       derivedValues.total = Math.ceil(costPerRank * state.rank);  //round up
-      var flatValue = this.modifierSection.getFlatTotal();
+      var flatValue = modifierSection.getFlatTotal();
       //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
       if (flatValue < 0 && (derivedValues.total + flatValue) < 1)
       {
@@ -147,7 +149,7 @@ function PowerObjectAgnostic(props)
       if ('A God I Am' === state.effect) derivedValues.total += 145;  //for first ranks
       else if ('Reality Warp' === state.effect) derivedValues.total += 75;
       //used to calculate all auto modifiers
-      derivedValues.total = this.modifierSection.calculateGrandTotal(derivedValues.total);
+      derivedValues.total = modifierSection.calculateGrandTotal(derivedValues.total);
    };
    /**Returns a json object of this row's data*/
    this.save = function ()
@@ -164,7 +166,7 @@ function PowerObjectAgnostic(props)
       if (undefined !== state.name) json.name = state.name;
       //skill requires name however perception range has name without skill
       if (undefined !== state.skillUsed) json.skill = state.skillUsed;
-      json.Modifiers = this.modifierSection.save();
+      json.Modifiers = modifierSection.save();
       json.rank = state.rank;
       return json;
    };
@@ -191,9 +193,9 @@ function PowerObjectAgnostic(props)
          rowState.name = newName;
          rowArray[updatedIndex] = new ModifierObject({
             key: this._blankKey,
-            powerRowParent: this.props.powerRowParent,
+            powerRowParent: props.powerRowParent,
             modifierListParent: this,
-            sectionName: this.props.sectionName,
+            sectionName: props.sectionName,
             state: rowState
          });
          this._prerender();
@@ -216,9 +218,9 @@ function PowerObjectAgnostic(props)
       rowState.rank = newRank;
       rowArray[updatedIndex] = new ModifierObject({
          key: this._blankKey,
-         powerRowParent: this.props.powerRowParent,
+         powerRowParent: props.powerRowParent,
          modifierListParent: this,
-         sectionName: this.props.sectionName,
+         sectionName: props.sectionName,
          state: rowState
       });
       this._prerender();
@@ -240,9 +242,9 @@ function PowerObjectAgnostic(props)
       rowState.text = newText;
       rowArray[updatedIndex] = new ModifierObject({
          key: this._blankKey,
-         powerRowParent: this.props.powerRowParent,
+         powerRowParent: props.powerRowParent,
          modifierListParent: this,
-         sectionName: this.props.sectionName,
+         sectionName: props.sectionName,
          state: rowState
       });
 
@@ -298,9 +300,9 @@ function PowerObjectAgnostic(props)
       //the row that was blank no longer is so use the blank key
       var modifierObject = new ModifierObject({
          key: this._blankKey,
-         powerRowParent: this.props.powerRowParent,
+         powerRowParent: props.powerRowParent,
          modifierListParent: this,
-         sectionName: this.props.sectionName,
+         sectionName: props.sectionName,
          state: {name: newName}  //rest are defaulted
       });
       //need a new key for the new blank row
@@ -317,18 +319,12 @@ function PowerObjectAgnostic(props)
          return array.indexOf(val) !== id;
       });
    };
-   /**Call this after updating rowArray but before setState*/
-   this._prerender = function ()
-   {
-      //don't update any state
-      this.calculateValues();
-   };
    /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
    this._sanitizeRows = function ()
    {
       var namesSoFar = [];
       var canHaveAttack = true;
-      if (this.props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false;  //feature has a default range of Personal
+      if (props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false;  //feature has a default range of Personal
       for (var i = 0; i < rowArray.length; i++)
       {
          if (rowArray[i].isBlank() && i < rowArray.length)
@@ -339,7 +335,7 @@ function PowerObjectAgnostic(props)
          }  //remove blank row that isn't last
          else if (rowArray[i].isBlank()) continue;  //do nothing if last row is blank
 
-         if (this.props.powerRowParent.getSection() === Main.equipmentSection &&
+         if (props.powerRowParent.getSection() === Main.equipmentSection &&
             (rowArray[i].getName() === 'Removable' || rowArray[i].getName() === 'Easily Removable'))
          {
             this._removeRow(i);
@@ -377,8 +373,8 @@ function PowerObjectAgnostic(props)
       if ('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
       if ('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst;
       //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
-      if ('Aura' === a.getName() || ('Selective' === a.getName() && 'Triggered' === this.props.powerRowParent.getAction())) return aFirst;
-      if ('Aura' === b.getName() || ('Selective' === b.getName() && 'Triggered' === this.props.powerRowParent.getAction())) return bFirst;
+      if ('Aura' === a.getName() || ('Selective' === a.getName() && 'Triggered' === props.powerRowParent.getAction())) return aFirst;
+      if ('Aura' === b.getName() || ('Selective' === b.getName() && 'Triggered' === props.powerRowParent.getAction())) return bFirst;
 
       if ('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
       if ('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;
@@ -396,6 +392,7 @@ function PowerObjectAgnostic(props)
 
    this.constructor = function ()
    {
+      state = props.state;
       derivedValues = {total: 0};
 
       derivedValues.canSetBaseCost = Data.Power[props.state.effect].hasInputBaseCost;
@@ -428,7 +425,6 @@ function PowerObjectAgnostic(props)
       */
       modifierSection = new ModifierList({powerRowParent: this, state: props.state.Modifiers});
 
-      this._prerender();
       this.calculateValues();
    };
    this.constructor();

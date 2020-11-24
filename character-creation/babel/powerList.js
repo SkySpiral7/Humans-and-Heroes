@@ -65,34 +65,32 @@ class PowerListAgnostic extends React.Component
       this._rowArray = [];
       const elementArray = this.state.it.map((state, powerIndex) =>
       {
-         const callback = (newThing) => {this._rowArray.push(newThing);};
          const rowKey = MainObject.generateKey();
-         return (<PowerObjectAgnostic key={rowKey} keyCopy={rowKey}
-                                      sectionName={this.props.sectionName}
-                                      powerListParent={this}
-                                      state={state}
-                                      powerIndex={powerIndex}
-                                      callback={callback} />);
+         this._rowArray.push(new PowerObjectAgnostic({
+            key: rowKey,
+            sectionName: this.props.sectionName,
+            powerListParent: this,
+            state: state
+         }));
+         const rowDerivedValues = this._rowArray.getDerivedValues();
+         const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
+         rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+         rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
+         rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
+         return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
+                               state={state}
+                               derivedValues={rowDerivedValues}
+                               sectionName={this.props.sectionName}
+                               powerRow={this._rowArray[powerIndex]} />);
       });
-      elementArray.push(<PowerRowHtml sectionName={this.props.sectionName} state={{}}
-                                      key={this._blankKey} keyCopy={this._blankKey} />);
+      elementArray.push(<PowerRowHtml key={this._blankKey} keyCopy={this._blankKey}
+                                      state={{}}
+                                      derivedValues={undefined}
+                                      sectionName={this.props.sectionName}
+                                      powerRow={undefined} />);
+
       return elementArray;
    };
-   this.rowRender = function ()
-{
-   const callback = (newThing) => {this.modifierSection = newThing;};
-
-   const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
-   const state = state;
-   derivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
-   derivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
-   derivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
-
-   //TODO: pretty sure need different key in which case generate in new()
-   return (<PowerRowHtml sectionName={this.props.sectionName} powerRow={this} state={state}
-                         derivedValues={derivedValues} key={this.props.keyCopy} keyCopy={this.props.keyCopy}
-                         modCallback={callback} modState={state.Modifiers} />);
-};
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndex) =>
    {

@@ -1,4 +1,5 @@
 'use strict';
+/** @param props: sectionName, powerKey, onChange, currentValue */
 
 function PowerNameHtml(props) {
   return /*#__PURE__*/React.createElement("label", {
@@ -10,6 +11,8 @@ function PowerNameHtml(props) {
     value: props.currentValue
   }));
 }
+/** @param props: sectionName, powerKey, onChange, currentValue */
+
 
 function PowerSkillHtml(props) {
   return /*#__PURE__*/React.createElement("label", {

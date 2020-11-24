@@ -1,16 +1,17 @@
 'use strict';
 
+/**
+ props:
+ state: {name, rank, text};
+ derivedValues: {hasRank, costPerRank, total};
+ keyCopy
+ generateGodHood
+ */
 function AdvantageRowHtml(props)
 {
    //TODO: combine all 3 by just passing in ad row object
    const state = props.state, derivedValues = props.derivedValues, key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
-   /*
-   values used:
-   state: {name, rank, text};
-   derivedValues: {hasRank, costPerRank, total};
-   key
-   */
    let nameElement = null;
    let costElement = null;
    let textElement = null;

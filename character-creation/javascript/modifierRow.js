@@ -1,10 +1,14 @@
 'use strict';
+
 /**Call List onChange
-Select Modifier: select();
-Rank: changeRank();
-Text: changeText();
-*/
-//Immutable (state/derivedValues don't change)
+ Select Modifier: select();
+ Rank: changeRank();
+ Text: changeText();
+
+ Immutable (state/derivedValues don't change)
+
+ @param props: key, powerRowParent, modifierListParent, state
+ */
 function ModifierObject(props)
 {
    //private variable section:
