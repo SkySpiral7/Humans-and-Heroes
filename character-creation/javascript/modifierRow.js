@@ -69,11 +69,7 @@ function ModifierObject(props)
    };
    this._constructor=function()
    {
-      state = ModifierObject.sanitizeState({
-         name: props.state.name,
-         rank: props.state.rank,
-         text: props.state.text
-      }, props.loadLocation);
+      state = props.state;
       derivedValues = {};
       derivedValues.modifierType = Data.Modifier[state.name].type;
       derivedValues.costPerRank = Data.Modifier[state.name].cost;
@@ -82,13 +78,12 @@ function ModifierObject(props)
       derivedValues.hasText = Data.Modifier[state.name].hasText;
       derivedValues.hasAutoTotal = Data.Modifier[state.name].hasAutoTotal;
       //TODO: test that this allows setting auto
-      //if (Data.Modifier[state.name].hasAutoRank)  //ModifierList.allAutoModifierCanCreate are span so that this isn't called (can't change them anyway)
-      //return;  //can't change the rank since it is auto
       this._calculateRawTotal();
    };
    //constructor:
    this._constructor();
 }
+
 ModifierObject.sanitizeState=function(inputState, loadLocation)
 {
    if (!Data.Modifier.names.contains(inputState.name))

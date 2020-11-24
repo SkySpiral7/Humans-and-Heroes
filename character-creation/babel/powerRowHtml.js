@@ -182,11 +182,18 @@ function PowerRowHtml(props)
          rowElementList = [];
       }
 
+      const modifierRows = state.Modifiers.map(modifierState =>
+      {
+         const key = MainObject.generateKey();
+         return (<ModifierRowHtml key={key} keyCopy={key} powerRow={props.powerRow}
+                                  modifierRow={modifierState} />);
+      });
+      const blankModifierKey = MainObject.generateKey();
+      modifierRows.push(<ModifierRowHtml key={blankModifierKey} keyCopy={blankModifierKey} powerRow={props.powerRow}
+                                         modifierRow={undefined} />);
+
       rowList.push(<div id={props.sectionName + 'ModifierSection' + state.rowIndex} key="ModifierSection">
-         <ModifierList callback={props.modCallback} powerRowParent={props.powerRow}
-                       sectionName={props.sectionName}
-                       powerIndex={props.powerIndex}
-                       state={props.modState} />
+         {modifierRows}
       </div>);
 
       let costPerRankDisplay;
