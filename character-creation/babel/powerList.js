@@ -63,14 +63,15 @@ class PowerListAgnostic extends React.Component
    render = () =>
    {
       this._rowArray = [];
-      const elementArray = this.state.it.map(powerState =>
+      const elementArray = this.state.it.map((state, powerIndex) =>
       {
          const callback = (newThing) => {this._rowArray.push(newThing);};
          const rowKey = MainObject.generateKey();
          return (<PowerObjectAgnostic key={rowKey} keyCopy={rowKey}
                                       sectionName={this.props.sectionName}
                                       powerListParent={this}
-                                      state={powerState}
+                                      state={state}
+                                      powerIndex={powerIndex}
                                       callback={callback} />);
       });
       elementArray.push(<PowerRowHtml sectionName={this.props.sectionName} state={{}}
@@ -134,48 +135,22 @@ class PowerListAgnostic extends React.Component
    {
       //the row array isn't cleared in case some have been auto set
       //Main.clear() is called at the start of Main.load()
-      for (let i = 0; i < jsonSection.length; i++)
+      const transcendence = Main.getTranscendence();
+      const sectionName = this.props.sectionName;
+      const newState = [];
+      for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
       {
-         const nameToLoad = jsonSection[i].effect;
-         if (!Data.Power.names.contains(nameToLoad))
-         {
-            Main.messageUser('PowerListAgnostic.load.notExist', this.props.sectionName.toTitleCase() + ' #' + (i + 1) + ': ' +
-               nameToLoad + ' is not a power name.');
-            continue;
-         }
-         if (Data.Power[nameToLoad].isGodhood && !Main.canUseGodhood())
-         {
-            Main.messageUser('PowerListAgnostic.load.godhood', this.props.sectionName.toTitleCase() + ' #' + (i + 1) + ': ' +
-               nameToLoad + ' is not allowed because transcendence is ' + Main.getTranscendence() + '.');
-            continue;
-         }
-         const rowPointer = this._rowArray.last();
-         rowPointer.setPower(nameToLoad);  //must be done first
-         if (undefined !== jsonSection[i].cost) rowPointer.setBaseCost(jsonSection[i].cost);
-         rowPointer.setText(jsonSection[i].text);  //they all have text because descriptors
-
-         rowPointer.disableValidationForActivationInfo();
-         //TODO: turn on loading mod list
-         //rowPointer.getModifierList().load(jsonSection[i].Modifiers);
-         //modifiers are loaded first so that I can use isNonPersonalModifierPresent and reset the activation modifiers
-
-         //blindly set activation info then validate
-         rowPointer.setAction(jsonSection[i].action);
-         rowPointer.setRange(jsonSection[i].range);
-         rowPointer.setDuration(jsonSection[i].duration);
-         //TODO: turn on these
-         //rowPointer.validateActivationInfo();
-         //rowPointer.updateActivationModifiers();
-
-         if (undefined !== jsonSection[i].name) rowPointer.setName(jsonSection[i].name);
-         if (undefined !== jsonSection[i].skill) rowPointer.setSkill(jsonSection[i].skill);  //skill requires name however perception range
-                                                                                             // has name without skill
-         rowPointer.generateNameAndSkill();  //TODO: should give warning about removing name and skill
-         rowPointer.setRank(jsonSection[i].rank);
-
-         this.addRow();
+         const validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
+         if (undefined === validRowState) continue;  //already sent message
+         newState.push(validRowState);
       }
-      this.update();
+
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it = newState;
+         return state;
+      });
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object

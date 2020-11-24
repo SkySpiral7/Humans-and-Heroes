@@ -73,7 +73,7 @@ function ModifierObject(props)
          name: props.state.name,
          rank: props.state.rank,
          text: props.state.text
-      }, props.powerRowParent.getSection());
+      }, props.loadLocation);
       derivedValues = {};
       derivedValues.modifierType = Data.Modifier[state.name].type;
       derivedValues.costPerRank = Data.Modifier[state.name].cost;

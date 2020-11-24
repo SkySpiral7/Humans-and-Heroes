@@ -21,28 +21,7 @@ class PowerObjectAgnostic extends React.Component
       //modifierSection is lazy because it is re-created each render
       this._derivedValues = {shouldValidateActivationInfo: true, total: 0};
 
-      this.setPower(props.state.effect);
-      this.setBaseCost(props.state.cost);
-      this.setText(props.state.text);  //they all have text because descriptors
-
-      this.disableValidationForActivationInfo();
-      //TODO: turn on loading mod list
-      //this.getModifierList().load(props.state.Modifiers);
-      //modifiers are loaded first so that I can use isNonPersonalModifierPresent and reset the activation modifiers
-
-      //blindly set activation info then validate
-      this.setAction(props.state.action);
-      this.setRange(props.state.range);
-      this.setDuration(props.state.duration);
-      //TODO: turn on these
-      //this.validateActivationInfo();
-      //this.updateActivationModifiers();
-
-      this.setName(props.state.name);
-      this.setSkill(props.state.skill);
-
-      this.generateNameAndSkill();
-      this.setRank(props.state.rank);
+      PowerObjectAgnostic.sanitizeState(props.state, props.sectionName, props.powerIndex, Main.getTranscendence());
 
       this._prerender();
       props.callback(this);
@@ -154,9 +133,53 @@ class PowerObjectAgnostic extends React.Component
    };
 
    //Value setting section
-   static sanitizeState = (inputState) =>
+   static sanitizeState = (inputState, powerSectionName, powerIndex, transcendence) =>
    {
-      ;
+      const loadLocation = powerSectionName.toTitleCase() + ' #' + (powerIndex + 1);
+      const nameToLoad = inputState.effect;
+      if (!Data.Power.names.contains(nameToLoad))
+      {
+         Main.messageUser('PowerListAgnostic.load.notExist', loadLocation + ': ' +
+            nameToLoad + ' is not a power name.');
+         return;  //undefined
+      }
+      if (Data.Power[nameToLoad].isGodhood && transcendence <= 0)
+      {
+         Main.messageUser('PowerListAgnostic.load.godhood', loadLocation + ': ' +
+            nameToLoad + ' is not allowed because transcendence is ' + transcendence + '.');
+         return;  //undefined
+      }
+      const validState = {effect: inputState.effect};
+
+      //unique defaults
+      const defaultBaseCost = Data.Power[validState.effect].baseCost;
+      if (Data.Power[validState.effect].hasInputBaseCost) validState.baseCost = sanitizeNumber(inputState.baseCost, 1, defaultBaseCost);
+      else validState.baseCost = defaultBaseCost;
+
+      if (undefined === inputState.text) validState.text = 'Descriptors and other text';
+      else validState.text = inputState.text;
+
+      //each value is valid but maybe not the combination
+      const existingActivationInfo = PowerObjectAgnostic._validateActivationInfoExists(inputState, loadLocation);
+      const validActivationInfoObj = PowerObjectAgnostic._validateActivationInfo(validState, existingActivationInfo, loadLocation);
+      validState.action = validActivationInfoObj.action.current;
+      validState.range = validActivationInfoObj.range.current;
+      validState.duration = validActivationInfoObj.duration.current;
+
+      //first pass to make sure they exist and no duplicates
+      let pendingModifiers = ModifierList.sanitizeState(inputState.Modifiers, powerSectionName, powerIndex);
+
+      pendingModifiers = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiers);
+      pendingModifiers = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiers);
+      pendingModifiers = PowerObjectAgnostic._updateDurationModifiers(validState, pendingModifiers);
+      validState.Modifiers = pendingModifiers;
+
+      const validAttackInfo = PowerObjectAgnostic._validateNameAndSkill(validState, inputState, powerSectionName, powerIndex);
+      validState.name = validAttackInfo.name;
+      validState.skillUsed = validAttackInfo.skillUsed;
+
+      validState.rank = sanitizeNumber(inputState.rank, 1, 1);
+      return validState;
    };
    /**Populates data of the power by using the name (which is validated).
     This must be called before any other data of this row is set.
@@ -185,6 +208,34 @@ class PowerObjectAgnostic extends React.Component
    {
       if (undefined === this.state.text) this.state.text = 'Descriptors and other text';  //let the text stay if changing between powers
       this.state.text = textGiven;
+   };
+   static _validateActivationInfoExists = (inputState, loadLocation) =>
+   {
+      if (!Data.Power.actions.contains(inputState.action))
+      {
+         Main.messageUser(
+            'PowerObjectAgnostic.setAction.notExist', loadLocation + ': ' + inputState.action + ' is not the name of an action.');
+         return;  //undefined
+      }
+      //well each value is valid even if together they aren't
+      const validState = {action: inputState.action};
+
+      if (!Data.Power.ranges.contains(inputState.range))
+      {
+         Main.messageUser('PowerObjectAgnostic.setRange.notExist', loadLocation + ': ' + inputState.range + ' is not the name of a range.');
+         return;  //undefined
+      }
+      validState.range = inputState.range;
+
+      if (!Data.Power.durations.contains(inputState.duration))
+      {
+         Main.messageUser(
+            'PowerObjectAgnostic.setDuration.notExist', loadLocation + ': ' + inputState.duration + ' is not the name of a duration.');
+         return;  //undefined
+      }
+      validState.duration = inputState.duration;
+
+      return validState;
    };
    /**Used to set data independent of the document and without calling update*/
    setAction = (newActionName) =>
@@ -302,19 +353,20 @@ class PowerObjectAgnostic extends React.Component
 
       this._derivedValues.total = Math.ceil(costPerRank * this.props.state.rank);  //round up
       const flatValue = this.modifierSection.getFlatTotal();
-      if (flatValue < 0 && (this._derivedValues.total + flatValue) < 1)  //flat flaw more than (or equal to) the total cost is not allowed. so adjust the
-      // power rank
+      //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
+      if (flatValue < 0 && (this._derivedValues.total + flatValue) < 1)
       {
          this.props.state.rank = (Math.abs(flatValue) / costPerRank);
-         this.props.state.rank = Math.floor(this.props.state.rank) + 1;  //must be higher than for this to work. don't use ceil so that if whole number
-                                                             // will still be +1
+         //must be higher than for this to work. don't use ceil so that if whole number will still be +1
+         this.props.state.rank = Math.floor(this.props.state.rank) + 1;
          this._derivedValues.total = Math.ceil(costPerRank * this.props.state.rank);  //round up
       }
       this._derivedValues.flatValue = flatValue;
       this._derivedValues.total += flatValue;  //flatValue might be negative
       if ('A God I Am' === this.props.state.effect) this._derivedValues.total += 145;  //for first ranks
       else if ('Reality Warp' === this.props.state.effect) this._derivedValues.total += 75;
-      this._derivedValues.total = this.modifierSection.calculateGrandTotal(this._derivedValues.total);  //used to calculate all auto modifiers
+      //used to calculate all auto modifiers
+      this._derivedValues.total = this.modifierSection.calculateGrandTotal(this._derivedValues.total);
    };
    render = () =>
    {
@@ -330,22 +382,24 @@ class PowerObjectAgnostic extends React.Component
                             modCallback={callback} modState={this.props.state.Modifiers} />);
    };
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
-   generateNameAndSkill = () =>
+   static _validateNameAndSkill = (validState, inputState, sectionName, rowIndex) =>
    {
-      return;  //TODO: disabled generateNameAndSkill
-      if (!Data.Power[this.props.state.effect].isAttack && undefined === this.modifierSection.findRowByName('Attack'))
+      //TODO: should give warning about removing name and skill?
+      if (!Data.Power[validState.effect].isAttack && !validState.Modifiers.some(it => 'Attack' === it.name))
       {
-         this.props.state.name = this.props.state.skillUsed = undefined;
-         return;
+         return;  //undefined
       }
-      if (undefined === this.props.state.name) this.props.state.name = (this.props.sectionName.toTitleCase() + ' ' + (this.props.state.rowIndex + 1) +
-         ' ' + this.props.state.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+      const validAttackInfo = {};
 
-      const isAura = (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === this.props.state.action &&
-         'Luck Control' !== this.props.state.effect && 'Feature' !== this.props.state.effect);
-      if ('Perception' === this.props.state.range || isAura) this.props.state.skillUsed = undefined;
-      else if (undefined === this.props.state.skillUsed) this.props.state.skillUsed = 'Skill used for attack';
+      if (undefined === inputState.name) validAttackInfo.name = (sectionName.toTitleCase() + ' ' + (rowIndex + 1) +
+         ' ' + validState.effect);  //for example: "Equipment 1 Damage" the "Equipment 1" is used for uniqueness
+      else validAttackInfo.name = inputState.name;
+
+      if ('Perception' === validState.range || validState.Modifiers.some(it => 'Aura' === it.name)) validAttackInfo.skillUsed = undefined;
+      else if (undefined === inputState.skillUsed) validAttackInfo.skillUsed = 'Skill used for attack';
+      else validAttackInfo.skillUsed = inputState.skillUsed;
+
+      return validAttackInfo;
    };
    /**Returns a json object of this row's data*/
    save = () =>
@@ -378,289 +432,298 @@ class PowerObjectAgnostic extends React.Component
     making sure the values are possible and consistent with priority given to range then duration.
     It will changes values to be valid. This function requires modifiers to be loaded (but doesn't affect them).
     The precedence is personal range, duration, action, reaction range, (then modifiers which aren't affected here).*/
-   validateActivationInfo = () =>
+   static _validateActivationInfo = (validState, inputState, loadLocation) =>
    {
-      this._validatePersonalRange();
-      this._validateAndGetPossibleDurations();
-      this._validateAndGetPossibleActions();
+      let pendingRange = PowerObjectAgnostic._validatePersonalRange(validState, inputState, loadLocation);
+      const durationObj = PowerObjectAgnostic._validateAndGetPossibleDurations(validState, inputState, pendingRange, loadLocation);
+      const actionObj = PowerObjectAgnostic._validateAndGetPossibleActions(validState, inputState, durationObj.current, loadLocation);
       /*the order is Range, Duration, Action, Range again
       first 3 are required order based on dependencies,
-      visit range again so that Reaction can have a more reasonable fallback action*/
-      if (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== this.props.state.effect && 'Feature' !== this.props.state.effect &&
-         'Reaction' === this.props.state.action && 'Close' !== this.props.state.range)
+      then range again so that Reaction can have a more reasonable fallback action*/
+
+      //can't trust modifiers yet since this is an unvalidated auto mod
+      const isAura = (Main.getActiveRuleset()
+         .isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== validState.effect && 'Feature' !== validState.effect &&
+         'Reaction' === actionObj.current);
+      if (isAura && 'Close' !== pendingRange)
       {
-         Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose', this.props.sectionName.toTitleCase() +
-            ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' has an action of Reaction and therefore must have a range of Close.');
-         this.props.state.range = 'Close';
+         Main.messageUser('PowerObjectAgnostic._validateActivationInfo.reactionRequiresClose',
+            loadLocation + ': ' + validState.effect + ' has an action of Reaction and therefore must have a range of Close.');
+         pendingRange = 'Close';
          //TODO: confusing limitation: in 3 cases Variable is allowed to have Reaction with Personal range
       }
+      const possibleRanges = PowerObjectAgnostic._getPossibleRanges(validState, actionObj.current, pendingRange);
+      return {
+         action: actionObj,
+         range: {current: pendingRange, choices: possibleRanges},
+         duration: durationObj
+      };
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
    /**@returns {Array} of all ranges that are possible for this power based on current state.*/
-   _getPossibleRanges = () =>
+   static _getPossibleRanges = (validState, validAction, validRange) =>
    {
       const possibleRanges = [];
-      if ('Feature' === this.props.state.effect) possibleRanges.push('Personal');
+      if ('Feature' === validState.effect) possibleRanges.push('Personal');
       else
       {
          if (Main.getActiveRuleset()
-            .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === this.props.state.action && 'Luck Control' !== this.props.state.effect) return ['Close'];
-         if ('Personal' === this.props.state.range) return ['Personal'];
+            .isGreaterThanOrEqualTo(3,
+               4) && 'Reaction' === validAction && 'Luck Control' !== validState.effect) return ['Close'];
+         if ('Personal' === validRange) return ['Personal'];
       }
       return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
    };
    /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
-   _updateActionModifiers = () =>
+   static _updateActionModifiers = (validState, inputPendingModifiers) =>
    {
-      if ('Triggered' === this.props.state.action) this.modifierSection.createByNameRank('Selective', 1);  //Triggered must also be selective so
-                                                                                                     // it auto adds but doesn't remove
+      const outputPendingModifiers = JSON.clone(inputPendingModifiers);
+      //Triggered must also be selective so it auto adds but doesn't remove
+      if ('Triggered' === validState.action) ModifierList.createByNameRank(outputPendingModifiers, 'Selective', 1);
 
-      if ('Feature' === this.props.state.effect) return;  //Feature doesn't change any other modifiers
+      if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change any other modifiers
 
       //remove all if possible
-      this.modifierSection.removeByName('Faster Action');
-      this.modifierSection.removeByName('Slower Action');
-      this.modifierSection.removeByName('Aura');
+      ModifierList.removeByName(outputPendingModifiers, 'Faster Action');
+      ModifierList.removeByName(outputPendingModifiers, 'Slower Action');
+      ModifierList.removeByName(outputPendingModifiers, 'Aura');
 
-      if ('None' === this.props.state.action) return;  //don't add any modifiers
+      if ('None' === validState.action) return outputPendingModifiers;  //don't add any modifiers
 
-      let defaultActionName = Data.Power[this.props.state.effect].defaultAction;
+      let defaultActionName = Data.Power[validState.effect].defaultAction;
       if ('None' === defaultActionName) defaultActionName = 'Free';  //calculate distance from free
       const defaultActionIndex = Data.Power.actions.indexOf(defaultActionName);
-      let newActionIndex = Data.Power.actions.indexOf(this.props.state.action);
+      let newActionIndex = Data.Power.actions.indexOf(validState.action);
       if (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === this.props.state.action && 'Luck Control' !== this.props.state.effect)
+         .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === validState.action && 'Luck Control' !== validState.effect)
       {
          newActionIndex = Data.Power.actions.indexOf('Standard');  //calculate distance from Standard
-         this.modifierSection.createByNameRank('Aura', 1);
+         ModifierList.createByNameRank(outputPendingModifiers, 'Aura', 1);
       }
 
       let actionDifference = (newActionIndex - defaultActionIndex);
-      if (actionDifference > 0) this.modifierSection.createByNameRank('Faster Action', actionDifference);
-      else if (actionDifference < 0) this.modifierSection.createByNameRank('Slower Action', -actionDifference);
+      if (actionDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Faster Action', actionDifference);
+      else if (actionDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Slower Action', -actionDifference);
+
+      return outputPendingModifiers;
    };
    /**This function recreates Increased/Decreased Duration as needed.*/
-   _updateDurationModifiers = () =>
+   static _updateDurationModifiers = (validState, inputPendingModifiers) =>
    {
-      if ('Feature' === this.props.state.effect) return;  //Feature doesn't change modifiers
+      const outputPendingModifiers = JSON.clone(inputPendingModifiers);
+      if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
 
-      const defaultDurationName = Data.Power[this.props.state.effect].defaultDuration;
+      const defaultDurationName = Data.Power[validState.effect].defaultDuration;
       let defaultDurationIndex = Data.Power.durations.indexOf(defaultDurationName);
-      const newDurationIndex = Data.Power.durations.indexOf(this.props.state.duration);
-      if ('Permanent' === defaultDurationName && 'Personal' !== this.props.state.range) defaultDurationIndex = Data.Power.durations.indexOf(
-         'Sustained');  //calculate distance from Sustained
+      const newDurationIndex = Data.Power.durations.indexOf(validState.duration);
+      if ('Permanent' === defaultDurationName && 'Personal' !== validState.range)
+         defaultDurationIndex = Data.Power.durations.indexOf('Sustained');  //calculate distance from Sustained
 
       //remove both if possible
-      this.modifierSection.removeByName('Increased Duration');
-      this.modifierSection.removeByName('Decreased Duration');
+      ModifierList.removeByName(outputPendingModifiers, 'Increased Duration');
+      ModifierList.removeByName(outputPendingModifiers, 'Decreased Duration');
 
       let durationDifference = (newDurationIndex - defaultDurationIndex);
-      if (durationDifference > 0) this.modifierSection.createByNameRank('Increased Duration', durationDifference);
-      else if (durationDifference < 0) this.modifierSection.createByNameRank('Decreased Duration', -durationDifference);
+      if (durationDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Increased Duration', durationDifference);
+      else if (durationDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Decreased Duration',
+         -durationDifference);
+
+      return outputPendingModifiers;
    };
    /**This function recreates Increased/Reduced Range as needed.*/
-   _updateRangeModifiers = () =>
+   static _updateRangeModifiers = (validState, inputPendingModifiers) =>
    {
+      const outputPendingModifiers = JSON.clone(inputPendingModifiers);
       //when changing to personal nothing else needs to change
-      if ('Personal' === this.props.state.range) return;  //only possible (for feature or) when removing a modifier
+      if ('Personal' === validState.range) return outputPendingModifiers;  //only possible (for feature or) when removing a modifier
 
-      if ('Feature' === this.props.state.effect) return;  //Feature doesn't change modifiers
+      if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
       //TODO: refactor so that Feature has a base activation row and a current activation row
       //so that Feature will have the modifiers auto set. This should be less confusing to the user
       //this will also allow and require more edge case testing
 
-      const defaultRangeName = Data.Power[this.props.state.effect].defaultRange;
+      const defaultRangeName = Data.Power[validState.effect].defaultRange;
       let defaultRangeIndex = Data.Power.ranges.indexOf(defaultRangeName);
-      const newRangeIndex = Data.Power.ranges.indexOf(this.props.state.range);
+      const newRangeIndex = Data.Power.ranges.indexOf(validState.range);
       if ('Personal' === defaultRangeName) defaultRangeIndex = Data.Power.ranges.indexOf('Close');  //calculate distance from close
 
       //remove both if possible
-      this.modifierSection.removeByName('Increased Range');
-      this.modifierSection.removeByName('Reduced Range');
+      ModifierList.removeByName(outputPendingModifiers, 'Increased Range');
+      ModifierList.removeByName(outputPendingModifiers, 'Reduced Range');
 
       let rangeDifference = (newRangeIndex - defaultRangeIndex);
-      if (rangeDifference > 0) this.modifierSection.createByNameRank('Increased Range', rangeDifference);
-      else if (rangeDifference < 0) this.modifierSection.createByNameRank('Reduced Range', -rangeDifference);
+      if (rangeDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Increased Range', rangeDifference);
+      else if (rangeDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Reduced Range', -rangeDifference);
+
+      return outputPendingModifiers;
    };
-   /**@returns {Array} of all actions that are possible for this power based on current state.*/
-   _validateAndGetPossibleActions = () =>
+   /**@returns {Object} of all actions that are possible for this power based on current state.*/
+   static _validateAndGetPossibleActions = (validState, inputState, validDuration, loadLocation) =>
    {
       //feature has the same action as the others (because allowReaction is true)
-      if ('Permanent' === this.props.state.duration)
+      let pendingAction = inputState.action;
+      if ('Permanent' === validDuration)
       {
-         if ('None' !== this.props.state.action)
+         if ('None' !== inputState.action)
          {
             Main.messageUser(
-               'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               this.props.state.effect + ' can\'t have an action of ' + this.props.state.action + '. It can only be None because the duration is Permanent.');
-            this.props.state.action = 'None';
+               'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone', loadLocation + ': ' +
+               validState.effect + ' can\'t have an action of ' + inputState.action + '. It can only be None because the duration is Permanent.');
          }
-         return ['None'];
+         return {current: 'None', choices: ['None']};
       }
-      else if ('None' === this.props.state.action)  //only Permanent duration can have action None
+      else if ('None' === inputState.action)  //only Permanent duration can have action None
       {
-         this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-         if ('None' === this.props.state.action) this.props.state.action = 'Free';
+         pendingAction = Data.Power[validState.effect].defaultAction;
+         if ('None' === inputState.action) pendingAction = 'Free';
          //use default action if possible. otherwise use Free
          //either way it will cost 0
          Main.messageUser(
-            'PowerObjectAgnostic.validateAndGetPossibleActions.notNone', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + this.props.state.duration + '). Using action of ' + this.props.state.action + ' instead.');
+            'PowerObjectAgnostic.validateAndGetPossibleActions.notNone', loadLocation + ': ' +
+            validState.effect + ' can\'t have an action of None because it isn\'t Permanent duration (duration is ' + validDuration + '). ' +
+            'Using action of ' + pendingAction + ' instead.');
       }
       const possibleActions = Data.Power.actions.copy();
       possibleActions.removeByValue('None');  //it would have returned above if none is allowed
 
       let allowMoveAction = (Main.getActiveRuleset()
-      .isLessThan(3, 4) || !Data.Power[this.props.state.effect].isAttack || 'Move Object' === this.props.state.effect);
+      .isLessThan(3, 4) || !Data.Power[validState.effect].isAttack || 'Move Object' === validState.effect);
       if (!allowMoveAction) possibleActions.removeByValue('Move');
-      if ('Move' === this.props.state.action && !allowMoveAction)
+      if ('Move' === inputState.action && !allowMoveAction)
       {
-         this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-         if ('None' === this.props.state.action) this.props.state.action = 'Free';  //dead code: attacks can't have a default duration of Permanent
+         pendingAction = Data.Power[validState.effect].defaultAction;
+         //dead code: attacks can't have a default duration of Permanent
+         if ('None' === inputState.action) pendingAction = 'Free';
          Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed',
-            this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' + this.props.state.effect + ' can\'t have an action ' +
-            'of Move because it is an attack type. Using action of ' + this.props.state.action + ' instead.');
+            loadLocation + ': ' + validState.effect + ' can\'t have an action ' +
+            'of Move because it is an attack type. Using action of ' + pendingAction + ' instead.');
       }
 
       let allowFreeAction = (Main.getActiveRuleset()
          .isLessThan(3, 4) ||
-         (allowMoveAction && !Data.Power[this.props.state.effect].isMovement && 'Healing' !== this.props.state.effect));
+         (allowMoveAction && !Data.Power[validState.effect].isMovement && 'Healing' !== validState.effect));
       if (!allowFreeAction) possibleActions.removeByValue('Free');
-      if ('Free' === this.props.state.action && !allowFreeAction)
+      if ('Free' === inputState.action && !allowFreeAction)
       {
          if (!allowMoveAction)
          {
-            this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-            if ('None' === this.props.state.action) this.props.state.action = 'Free';  //dead code: attacks/movement can't have a default duration of
-                                                                           // Permanent
+            pendingAction = Data.Power[validState.effect].defaultAction;
+            //dead code: attacks/movement can't have a default duration of Permanent
+            if ('None' === inputState.action) pendingAction = 'Free';
             Main.messageUser(
-               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               this.props.state.effect + ' can\'t have an action of Free because it is an attack type. Using action of ' + this.props.state.action + ' instead.');
+               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks', loadLocation + ': ' +
+               validState.effect + ' can\'t have an action of Free because it is an attack type. Using action of ' + pendingAction + ' instead.');
          }
          //attacks can't be movements so there's no overlap
-         else if (Data.Power[this.props.state.effect].isMovement)
+         else if (Data.Power[validState.effect].isMovement)
          {
-            this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-            if ('None' === this.props.state.action) this.props.state.action = 'Free';  //dead code: movements can't have a default duration of Permanent
+            pendingAction = Data.Power[validState.effect].defaultAction;
+            //dead code: movements can't have a default duration of Permanent
+            if ('None' === inputState.action) pendingAction = 'Free';
             Main.messageUser(
-               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               this.props.state.effect + ' can\'t have an action of Free because it is a movement type. Using action of ' + this.props.state.action + ' instead.');
+               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement', loadLocation + ': ' +
+               validState.effect + ' can\'t have an action of Free because it is a movement type. Using action of ' + pendingAction + ' instead.');
          }
          //healing is not an attack or movement so there's no overlap
-         else //if ('Healing' === this.props.state.effect)
+         else //if ('Healing' === validState.effect)
          {
-            this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-            if ('None' === this.props.state.action) this.props.state.action = 'Free';  //dead code: Healing doesn't have a default duration of Permanent
+            pendingAction = Data.Power[validState.effect].defaultAction;
+            //dead code: Healing doesn't have a default duration of Permanent
+            if ('None' === inputState.action) pendingAction = 'Free';
             Main.messageUser(
-               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               'Healing can\'t have an action of Free. Using action of ' + this.props.state.action + ' instead.');
+               'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing', loadLocation + ': ' +
+               'Healing can\'t have an action of Free. Using action of ' + pendingAction + ' instead.');
          }
       }
 
       let allowReaction = (Main.getActiveRuleset()
-      .isLessThan(3, 4) || Data.Power[this.props.state.effect].allowReaction);
+      .isLessThan(3, 4) || Data.Power[validState.effect].allowReaction);
       if (!allowReaction) possibleActions.removeByValue('Reaction');
-      if ('Reaction' === this.props.state.action && !allowReaction)
+      if ('Reaction' === inputState.action && !allowReaction)
       {
-         this.props.state.action = Data.Power[this.props.state.effect].defaultAction;
-         if ('None' === this.props.state.action) this.props.state.action = 'Free';  //duration is not Permanent here because that was checked above
+         pendingAction = Data.Power[validState.effect].defaultAction;
+         //duration is not Permanent here because that was checked above
+         if ('None' === inputState.action) pendingAction = 'Free';
          Main.messageUser(
-            'PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' can\'t have an action of Reaction because it isn\'t an attack type. Using action of ' + this.props.state.action + ' instead.');
+            'PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed', loadLocation + ': ' +
+            validState.effect + ' can\'t have an action of Reaction because it isn\'t an attack type. ' +
+            'Using action of ' + pendingAction + ' instead.');
          //TODO: confusing limitation: Variable is allowed to have Reaction in 3 cases
       }
 
-      return possibleActions;
+      return {current: pendingAction, choices: possibleActions};
    };
-   /**@returns {Array} of all durations that are possible for this power based on current state.*/
-   _validateAndGetPossibleDurations = () =>
+   /**@returns {Object} of all durations that are possible for this power based on current state.*/
+   static _validateAndGetPossibleDurations = (validState, inputState, pendingRange, loadLocation) =>
    {
-      const defaultDuration = Data.Power[this.props.state.effect].defaultDuration;
+      const defaultDuration = Data.Power[validState.effect].defaultDuration;
       if ('Instant' === defaultDuration)
       {
-         if ('Instant' !== this.props.state.duration)
+         if ('Instant' !== inputState.duration)
          {
             Main.messageUser(
-               'PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               this.props.state.effect + ' can\'t have ' + this.props.state.duration + ' duration. It can only be Instant.');
-            this.props.state.duration = 'Instant';  //can't be changed (Feature's defaultDuration is Permanent)
+               'PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant', loadLocation + ': ' +
+               validState.effect + ' can\'t have ' + inputState.duration + ' duration. It can only be Instant.');
+            //can't be changed (Feature's defaultDuration is Permanent)
          }
-         return ['Instant'];
+         return {current: 'Instant', choices: ['Instant']};
       }
 
+      let pendingDuration = inputState.duration;
       const possibleDurations = ['Concentration', 'Sustained', 'Continuous'];
-      if ('Personal' === this.props.state.range) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration
+      if ('Personal' === pendingRange) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration
       //when loading, range may later change to Close but not Personal so this check is safe
-      else if ('Permanent' === this.props.state.duration)  //only personal range can have Permanent duration
+      else if ('Permanent' === inputState.duration)  //only personal range can have Permanent duration
       {
-         if ('Permanent' === defaultDuration) this.props.state.duration = 'Sustained';
-         else this.props.state.duration = defaultDuration;
-         //use default duration if possible. otherwise use Sustained
+         if ('Permanent' === defaultDuration) pendingDuration = 'Sustained';
+         else pendingDuration = defaultDuration;
+         //(backwards) use default duration if possible. otherwise use Sustained
          //either way it will cost 0
          Main.messageUser(
-            'PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + this.props.state.range + '). Using duration of ' + this.props.state.duration + ' instead.');
+            'PowerObjectAgnostic.validateAndGetPossibleDurations.notPermanent', loadLocation + ': ' +
+            validState.effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + pendingRange + '). ' +
+            'Using duration of ' + pendingDuration + ' instead.');
       }
-      if ('Feature' === this.props.state.effect) possibleDurations.push('Instant');
-      else if ('Instant' === this.props.state.duration)
+      if ('Feature' === validState.effect) possibleDurations.push('Instant');
+      else if ('Instant' === inputState.duration)
       {
          //only Feature can change to Instant duration. defaultDuration of instant was checked above
          Main.messageUser(
-            'PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
-         this.props.state.duration = defaultDuration;
+            'PowerObjectAgnostic.validateAndGetPossibleDurations.notInstant', loadLocation + ': ' +
+            validState.effect + ' can\'t have Instant duration. Using the default duration of ' + defaultDuration + ' instead.');
+         pendingDuration = defaultDuration;
       }
-      return possibleDurations;
+      return {current: pendingDuration, choices: possibleDurations};
    };
-   /**This function validates range. It changes range and creates user messages as needed.*/
-   _validatePersonalRange = () =>
+   /**@returns {String} This function validates range. It changes range and creates user messages as needed.*/
+   static _validatePersonalRange = (validState, inputState, loadLocation) =>
    {
-      if ('Feature' === this.props.state.effect) return;  //allow everything
-      const defaultRange = Data.Power[this.props.state.effect].defaultRange;
-      if ('Personal' === this.props.state.range && 'Personal' !== defaultRange)
+      if ('Feature' === validState.effect) return inputState.range;  //allow everything
+      const defaultRange = Data.Power[validState.effect].defaultRange;
+      if ('Personal' === inputState.range && 'Personal' !== defaultRange)
       {
          Main.messageUser(
-            'PowerObjectAgnostic.validatePersonalRange.notPersonal', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-            this.props.state.effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
-         this.props.state.range = defaultRange;  //can't change something to personal unless it started out as that (Feature's defaultRange is
-                                           // Personal)
+            'PowerObjectAgnostic.validatePersonalRange.notPersonal', loadLocation + ': ' +
+            validState.effect + ' can\'t have Personal range. Using the default range of ' + defaultRange + ' instead.');
+         //can't change something to personal unless it started out as that (Feature's defaultRange is Personal)
+         return defaultRange;
       }
-      else if ('Personal' !== this.props.state.range && 'Personal' === defaultRange)
+      else if ('Personal' !== inputState.range && 'Personal' === defaultRange)
       {
-         let hasNonPersonalMod = this.modifierSection.isNonPersonalModifierPresent();
-         if (!hasNonPersonalMod)
+         if (!ModifierList.isNonPersonalModifierPresent(inputState.Modifiers))
          {
             Main.messageUser(
-               'PowerObjectAgnostic.validatePersonalRange.nonPersonalNotAllowed', this.props.sectionName.toTitleCase() + ' #' + (this.props.state.rowIndex + 1) + ': ' +
-               this.props.state.effect + ' with ' + this.props.state.range + ' range requires one of the following modifiers: "Affects Others Also", "Affects Others Only", or "Attack". ' +
+               'PowerObjectAgnostic.validatePersonalRange.nonPersonalNotAllowed', loadLocation + ': ' +
+               validState.effect + ' with ' + inputState.range + ' range requires one of the following modifiers: ' +
+               '"Affects Others Also", "Affects Others Only", or "Attack". ' +
                'Using the default range of Personal instead.');
-            this.props.state.range = defaultRange;  //can't create a mod for you since there are 3 possible
+            return defaultRange;  //can't create a mod for you since there are 3 possible
          }
       }
+      return inputState.range;
    };
    //region converted from mod list
-   /**This will set a row (by name) to the rank given. If the row doesn't exist it will be created*/
-   createByNameRank = (rowName, rowRank) =>
-   {
-      let rowIndex = this.modifierSection.findRowByName(rowName);
-      if (undefined === rowIndex)
-      {
-         this.state.Modifiers.push({name: rowName, rank: rowRank});
-      }
-      else
-      {
-         this.state.Modifiers[rowIndex].rank = rowRank;
-      }
-   };
-   /**This will remove a row of the given name. Note that this should only be called with modifiers that don't have text.*/
-   removeByName = (rowName) =>
-   {
-      const rowIndex = this.findRowByName(rowName);
-      if (undefined !== rowIndex) this.state.Modifiers.remove(rowIndex);
-   };
    //endregion converted from mod list
 
 

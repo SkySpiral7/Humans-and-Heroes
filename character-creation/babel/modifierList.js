@@ -7,13 +7,16 @@ class ModifierList extends React.Component
    {
       super(props);
       //state as custom objects
-      this._rowArray = props.state.map(state =>
+      this._rowArray = props.state.map((state, modIndex) =>
       {
+         const loadLocation = (props.powerRowParent.getSectionName()
+         .toTitleCase() + ' #' + (props.powerIndex + 1) + ' Modifier #' + (modIndex + 1));
          new ModifierObject({
             //don't need keyCopy because mod row isn't react
             key: MainObject.generateKey(),
             powerRowParent: props.powerRowParent,
             modifierListParent: this,
+            loadLocation: loadLocation,
             state: state
          })
       });
@@ -131,13 +134,13 @@ class ModifierList extends React.Component
       return false;
    };
    /**@returns {boolean} true if there exists a modifier that changes range from being Personal*/
-   isNonPersonalModifierPresent = () =>
+   static isNonPersonalModifierPresent = (inputState) =>
    {
-      for (let i = 0; i < this._rowArray.length; ++i)
+      for (let i = 0; i < inputState.length; ++i)
       {
-         if ('Attack' === this._rowArray[i].getName() ||
-            'Affects Others Also' === this._rowArray[i].getName() ||
-            'Affects Others Only' === this._rowArray[i].getName())
+         if ('Attack' === inputState[i].name ||
+            'Affects Others Also' === inputState[i].name ||
+            'Affects Others Only' === inputState[i].name)
             return true;
       }
       return false;
@@ -171,6 +174,25 @@ class ModifierList extends React.Component
       }
       return validListState;
    };
+   /**This will set a row (by name) to the rank given. If the row doesn't exist it will be created*/
+   static createByNameRank = (state, rowName, rowRank) =>
+   {
+      let rowIndex = state.some(it => rowName === it.name);
+      if (undefined === rowIndex)
+      {
+         state.push({name: rowName, rank: rowRank});
+      }
+      else
+      {
+         state[rowIndex].rank = rowRank;
+      }
+   };
+   /**This will remove a row of the given name. Note that this should only be called with modifiers that don't have text.*/
+   static removeByName = (state, rowName) =>
+   {
+      const rowIndex = state.some(it => rowName === it.name);
+      if (undefined !== rowIndex) state.remove(rowIndex);
+   };
    //endregion public functions
 
    //region 'private' functions section. Although all public none of these should be called from outside of this object
@@ -198,6 +220,7 @@ figure out architecture:
    * mod list make an immutable mod row list from props
    * when loading main sends doc to section to validate/message and return valid state
 sanitizeState. requires static unique name
+add save to state conversion
 pull power row state up to list
 nail down power row
 hook up power html
