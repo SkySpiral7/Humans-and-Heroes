@@ -9,7 +9,7 @@ function ModifierList(props)
    this.getFlatTotal = function () {return derivedValues.flatTotal;};  //TODO: make sure these are not called before they are defined
    /**This total will be the sum of all rank modifiers*/
    this.getRankTotal = function () {return derivedValues.rankTotal;};
-   this.getPower = function () {return this.props.powerRowParent;};
+   this.getPower = function () {return props.powerRowParent;};
    this.getState = function () {return JSON.clone(state);};  //defensive copy is important to prevent tamper
    //endregion basic getter
 
@@ -109,6 +109,7 @@ function ModifierList(props)
       for (var modIndex = 0; modIndex < rowArray.length; modIndex++)
       {
          rowArray.push(new ModifierObject({
+            //TODO: need to pass the actual keys down (link html to mod row)
             //don't need keyCopy because mod row isn't react
             key: MainObject.generateKey(),
             powerRowParent: props.powerRowParent,
@@ -207,8 +208,6 @@ figure out architecture:
    * mod list delegate to power list (really main) for state mutation
    * when loading main sends doc to section to validate/message and return valid state
 timing is wrong: power row needs to mod list to exist in order to calc power total
-   make mod list non-react (still immutable)
-   make power row non-react (still immutable)
    create them in power list render
    power row total is derived in constructor
 long run: everything is either react or immutable

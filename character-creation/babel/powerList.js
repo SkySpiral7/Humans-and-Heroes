@@ -78,6 +78,21 @@ class PowerListAgnostic extends React.Component
                                       key={this._blankKey} keyCopy={this._blankKey} />);
       return elementArray;
    };
+   this.rowRender = function ()
+{
+   const callback = (newThing) => {this.modifierSection = newThing;};
+
+   const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
+   const state = state;
+   derivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+   derivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
+   derivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
+
+   //TODO: pretty sure need different key in which case generate in new()
+   return (<PowerRowHtml sectionName={this.props.sectionName} powerRow={this} state={state}
+                         derivedValues={derivedValues} key={this.props.keyCopy} keyCopy={this.props.keyCopy}
+                         modCallback={callback} modState={state.Modifiers} />);
+};
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndex) =>
    {
@@ -174,4 +189,12 @@ class PowerListAgnostic extends React.Component
       Main.updateOffense();
       Main.defenseSection.calculateValues();
    };
+}
+
+function createPowerList(callback, sectionName)
+{
+   ReactDOM.render(
+      <PowerListAgnostic callback={callback} sectionName={sectionName} />,
+      document.getElementById('power-section')
+   );
 }
