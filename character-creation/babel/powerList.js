@@ -141,8 +141,7 @@ class PowerListAgnostic extends React.Component
       for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
       {
          const validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
-         if (undefined === validRowState) continue;  //already sent message
-         newState.push(validRowState);
+         if (undefined !== validRowState) newState.push(validRowState);  //already sent message
       }
 
       this._prerender();

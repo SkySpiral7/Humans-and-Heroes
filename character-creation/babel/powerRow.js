@@ -17,13 +17,39 @@ class PowerObjectAgnostic extends React.Component
    constructor(props)
    {
       super(props);
-      this.state = {};
-      //modifierSection is lazy because it is re-created each render
-      this._derivedValues = {shouldValidateActivationInfo: true, total: 0};
+      this._derivedValues = {total: 0};
 
-      PowerObjectAgnostic.sanitizeState(props.state, props.sectionName, props.powerIndex, Main.getTranscendence());
+      this._derivedValues.canSetBaseCost = Data.Power[props.state.effect].hasInputBaseCost;
+      //TODO: power activation onchange
+      /*
+      //change to reaction action changes range to close without user message
+      if ('Reaction' === this.state.action && 'Feature' !== this.state.effect && 'Luck Control' !== this.state.effect &&
+         Main.getActiveRuleset()
+         .isGreaterThanOrEqualTo(3, 4)) this.setRange('Close');
+
+      //changing from personal must change duration to not be permanent
+      if ('Personal' === oldRange && 'Permanent' === this.state.duration)
+      {
+         const defaultDuration = Data.Power[this.state.effect].defaultDuration;
+         if ('Permanent' === defaultDuration) this.setDuration('Sustained');
+         else this.setDuration(defaultDuration);
+         //use default duration if possible. otherwise use Sustained
+         //either way it will cost 0
+      }
+
+      if ('Permanent' === newDurationName) this.setAction('None');  //if changing to Permanent
+      else if ('Permanent' === oldDuration)  //if changing from Permanent
+      {
+         //then reset action
+         if ('Permanent' === defaultDurationName) this.setAction('Free');  //default action is None so use Free instead
+         else this.setAction(Data.Power[this.state.effect].defaultAction);
+         //use default action if possible otherwise use Free
+         //either way it will cost 0
+      }
+      */
 
       this._prerender();
+      this.calculateValues();
       props.callback(this);
    };
 
@@ -50,8 +76,6 @@ class PowerObjectAgnostic extends React.Component
    getSection = () => {return this.props.powerListParent;};
 
    //Single line function section
-   /**After this is called setAction, setRange, and setDuration will only check if the value exists.*/
-   disableValidationForActivationInfo = () => {this._derivedValues.shouldValidateActivationInfo = false;};
    /**Returns the default action for this power or nothing if this row is blank.*/
    getDefaultAction = () =>
    {
@@ -156,6 +180,7 @@ class PowerObjectAgnostic extends React.Component
       if (Data.Power[validState.effect].hasInputBaseCost) validState.baseCost = sanitizeNumber(inputState.baseCost, 1, defaultBaseCost);
       else validState.baseCost = defaultBaseCost;
 
+      //TODO: onchange: let the text stay if changing between powers
       if (undefined === inputState.text) validState.text = 'Descriptors and other text';
       else validState.text = inputState.text;
 
@@ -180,34 +205,6 @@ class PowerObjectAgnostic extends React.Component
 
       validState.rank = sanitizeNumber(inputState.rank, 1, 1);
       return validState;
-   };
-   /**Populates data of the power by using the name (which is validated).
-    This must be called before any other data of this row is set.
-    The data set is independent of the document and doesn't call update.*/
-   setPower = (effectNameGiven) =>
-   {
-      //TODO: only set _derivedValues in each. move defaults to specific
-      this.state.action = Data.Power[this.state.effect].defaultAction;
-      this.state.range = Data.Power[this.state.effect].defaultRange;
-      this.state.duration = Data.Power[this.state.effect].defaultDuration;
-      this.state.rank = 1;
-      //name = skillUsed = undefined;  //don't clear so that if changing between 2 different attacks these carry over
-      this.generateNameAndSkill();
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setBaseCost = (baseGiven) =>
-   {
-      this._derivedValues.canSetBaseCost = Data.Power[this.state.effect].hasInputBaseCost;
-      this.state.baseCost = Data.Power[this.state.effect].baseCost;
-
-      if (!this._derivedValues.canSetBaseCost) return;  //only possible when loading bad data
-      this.state.baseCost = sanitizeNumber(baseGiven, 1, Data.Power[this.state.effect].baseCost);  //unique defaults
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setText = (textGiven) =>
-   {
-      if (undefined === this.state.text) this.state.text = 'Descriptors and other text';  //let the text stay if changing between powers
-      this.state.text = textGiven;
    };
    static _validateActivationInfoExists = (inputState, loadLocation) =>
    {
@@ -236,106 +233,6 @@ class PowerObjectAgnostic extends React.Component
       validState.duration = inputState.duration;
 
       return validState;
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setAction = (newActionName) =>
-   {
-      if (this.state.action === newActionName) return;  //nothing has changed (only possible when loading)
-      if (!Data.Power.actions.contains(newActionName))
-      {
-         //if not found (only possible when loading bad data)
-         Main.messageUser('PowerObjectAgnostic.setAction.notExist', this.props.sectionName.toTitleCase() + ' #' +
-            (this.state.rowIndex + 1) + ': ' + newActionName + ' is not the name of an action.');
-         return;
-      }
-
-      this.state.action = newActionName;
-
-      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
-      this._updateActionModifiers();
-      if ('Reaction' === this.state.action && 'Feature' !== this.state.effect && 'Luck Control' !== this.state.effect &&
-         Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4)) this.setRange('Close');
-      this.generateNameAndSkill();
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setRange = (newRangeName) =>
-   {
-      if (this.state.range === newRangeName) return;  //nothing has changed (only possible when loading)
-      if (!Data.Power.ranges.contains(newRangeName))
-      {
-         //if not found (only possible when loading bad data)
-         Main.messageUser('PowerObjectAgnostic.setRange.notExist', this.props.sectionName.toTitleCase() + ' #' +
-            (this.state.rowIndex + 1) + ': ' + newRangeName + ' is not the name of a range.');
-         return;
-      }
-
-      const oldRange = this.state.range;
-      this.state.range = newRangeName;
-
-      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
-
-      //TODO: loading should make sure that skillUsed can't be set when Perception range
-      this.generateNameAndSkill();
-
-      if ('Personal' === oldRange && 'Permanent' === this.state.duration)
-      {
-         //changing from personal must change duration to not be permanent
-         const defaultDuration = Data.Power[this.state.effect].defaultDuration;
-         if ('Permanent' === defaultDuration) this.setDuration('Sustained');
-         else this.setDuration(defaultDuration);
-         //use default duration if possible. otherwise use Sustained
-         //either way it will cost 0
-      }
-
-      this._updateRangeModifiers();
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setDuration = (newDurationName) =>
-   {
-      if (this.state.duration === newDurationName) return;  //nothing has changed (only possible when loading)
-      if (!Data.Power.durations.contains(newDurationName))
-      {
-         //if not found (only possible when loading bad data)
-         Main.messageUser(
-            'PowerObjectAgnostic.setDuration.notExist', this.props.sectionName.toTitleCase() + ' #' + (this.state.rowIndex + 1) + ': ' + newDurationName + ' is not the name of a duration.');
-         return;
-      }
-
-      const oldDuration = this.state.duration;
-      this.state.duration = newDurationName;
-
-      if (!this._derivedValues.shouldValidateActivationInfo) return;  //done
-
-      const defaultDurationName = Data.Power[this.state.effect].defaultDuration;
-
-      if ('Permanent' === newDurationName) this.setAction('None');  //if changing to Permanent
-      else if ('Permanent' === oldDuration)  //if changing from Permanent
-      {
-         //then reset action
-         if ('Permanent' === defaultDurationName) this.setAction('Free');  //default action is None so use Free instead
-         else this.setAction(Data.Power[this.state.effect].defaultAction);
-         //use default action if possible otherwise use Free
-         //either way it will cost 0
-      }
-
-      this._updateDurationModifiers();
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setName = (nameGiven) =>
-   {
-      this.state.name = nameGiven;
-   };
-   /**Used to set data independent of the document and without calling update*/
-   setSkill = (skillGiven) =>
-   {
-      this.state.skillUsed = skillGiven;
-   };
-   //for modifierSection see this.getModifierList in the onChange section
-   /**Used to set data independent of the document and without calling update*/
-   setRank = (rankGiven) =>
-   {
-      this.state.rank = sanitizeNumber(rankGiven, 1, 1);
    };
 
    //public function section
@@ -372,14 +269,16 @@ class PowerObjectAgnostic extends React.Component
    {
       const callback = (newThing) => {this.modifierSection = newThing;};
 
-      this._derivedValues.possibleActions = this._validateAndGetPossibleActions();
-      this._derivedValues.possibleRanges = this._getPossibleRanges();
-      this._derivedValues.possibleDurations = this._validateAndGetPossibleDurations();
+      const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
+      const state = this.props.state;
+      this._derivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+      this._derivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
+      this._derivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
 
       //TODO: pretty sure need different key in which case generate in new()
-      return (<PowerRowHtml sectionName={this.props.sectionName} powerRow={this} state={this.props.state}
+      return (<PowerRowHtml sectionName={this.props.sectionName} powerRow={this} state={state}
                             derivedValues={this._derivedValues} key={this.props.keyCopy} keyCopy={this.props.keyCopy}
-                            modCallback={callback} modState={this.props.state.Modifiers} />);
+                            modCallback={callback} modState={state.Modifiers} />);
    };
    /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
    static _validateNameAndSkill = (validState, inputState, sectionName, rowIndex) =>
@@ -419,14 +318,6 @@ class PowerObjectAgnostic extends React.Component
       json.Modifiers = this.modifierSection.save();
       json.rank = this.props.state.rank;
       return json;
-   };
-   /**Only used for loading. This function resets all of the modifiers for action, range, duration.*/
-   updateActivationModifiers = () =>
-   {
-      this._derivedValues.shouldValidateActivationInfo = true;
-      this._updateActionModifiers();
-      this._updateRangeModifiers();
-      this._updateDurationModifiers();
    };
    /**Called when loading after action, range, and duration have been set. This function validates the values
     making sure the values are possible and consistent with priority given to range then duration.

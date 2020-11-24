@@ -202,7 +202,7 @@ function PowerRowHtml(props)
 
       rowList.push(<div className="row" key="grandTotal">
          <div className="col">{'Grand total for ' + props.sectionName.toTitleCase() + ': '}
-            {state.total}</div>
+            {derivedValues.total}</div>
       </div>);
    }
 

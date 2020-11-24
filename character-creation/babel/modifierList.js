@@ -219,7 +219,7 @@ figure out architecture:
    * mod list delegate to power list (really main) for state mutation
    * mod list make an immutable mod row list from props
    * when loading main sends doc to section to validate/message and return valid state
-sanitizeState. requires static unique name
+timing is wrong: power row needs to mod list to exist in order to calc power total
 add save to state conversion
 pull power row state up to list
 nail down power row
