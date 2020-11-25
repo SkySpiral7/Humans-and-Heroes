@@ -97,7 +97,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           sectionName: _this.props.sectionName,
           powerListParent: _assertThisInitialized(_this),
           state: state
-        }));
+        })); //getDerivedValues makes a clone
+
 
         var rowDerivedValues = _this._rowArray.getDerivedValues(); //TODO: it's stupid that main use has several useless args
 

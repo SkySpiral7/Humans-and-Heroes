@@ -23,8 +23,7 @@ function PowerRowHtml(props) {
 
   var topElementList = [];
   var onChange = null;
-  var i,
-      rowList = [],
+  var rowList = [],
       rowElementList = []; //TODO: Main.canUseGodhood should be in state somewhere
 
   var displayGodhood = 'equipment' !== props.sectionName && undefined !== Main && Main.canUseGodhood();

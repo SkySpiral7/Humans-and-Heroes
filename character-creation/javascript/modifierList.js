@@ -205,6 +205,7 @@ figure out architecture:
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?
+redo ad list based to use as basis for power/mod
 hook up power html
    onChange
 add save to state conversion
@@ -215,7 +216,4 @@ hook up more for mod/power
    sort mods on add
 test all
 there's lots of tasks
-
-Browserslist: caniuse-lite is outdated. Please run:
-npx browserslist@latest --update-db
 */

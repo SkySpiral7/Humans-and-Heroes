@@ -72,6 +72,7 @@ class PowerListAgnostic extends React.Component
             powerListParent: this,
             state: state
          }));
+         //getDerivedValues makes a clone
          const rowDerivedValues = this._rowArray.getDerivedValues();
          //TODO: it's stupid that main use has several useless args
          const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
