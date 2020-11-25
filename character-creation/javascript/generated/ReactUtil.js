@@ -22,43 +22,53 @@ Cool but Event API is also not supported by IE 11.
 Plus 'input' doesn't work for select elements*/
 globalThis.ReactUtil = ReactUtil;
 
-},{"@testing-library/react":63}],2:[function(require,module,exports){
+},{"@testing-library/react":72}],2:[function(require,module,exports){
+module.exports = require("core-js-pure/stable/array/from");
+},{"core-js-pure/stable/array/from":379}],3:[function(require,module,exports){
+module.exports = require("core-js-pure/stable/array/is-array");
+},{"core-js-pure/stable/array/is-array":380}],4:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/concat");
-},{"core-js-pure/stable/instance/concat":357}],3:[function(require,module,exports){
+},{"core-js-pure/stable/instance/concat":384}],5:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/entries");
-},{"core-js-pure/stable/instance/entries":358}],4:[function(require,module,exports){
+},{"core-js-pure/stable/instance/entries":385}],6:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/find");
-},{"core-js-pure/stable/instance/find":359}],5:[function(require,module,exports){
+},{"core-js-pure/stable/instance/find":386}],7:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/for-each");
-},{"core-js-pure/stable/instance/for-each":360}],6:[function(require,module,exports){
+},{"core-js-pure/stable/instance/for-each":387}],8:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/instance/keys");
-},{"core-js-pure/stable/instance/keys":361}],7:[function(require,module,exports){
+},{"core-js-pure/stable/instance/keys":388}],9:[function(require,module,exports){
+module.exports = require("core-js-pure/stable/instance/slice");
+},{"core-js-pure/stable/instance/slice":389}],10:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/json/stringify");
-},{"core-js-pure/stable/json/stringify":362}],8:[function(require,module,exports){
+},{"core-js-pure/stable/json/stringify":390}],11:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/map");
-},{"core-js-pure/stable/map":363}],9:[function(require,module,exports){
+},{"core-js-pure/stable/map":391}],12:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/assign");
-},{"core-js-pure/stable/object/assign":364}],10:[function(require,module,exports){
+},{"core-js-pure/stable/object/assign":392}],13:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/define-property");
-},{"core-js-pure/stable/object/define-property":365}],11:[function(require,module,exports){
+},{"core-js-pure/stable/object/define-property":393}],14:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/object/keys");
-},{"core-js-pure/stable/object/keys":366}],12:[function(require,module,exports){
+},{"core-js-pure/stable/object/keys":394}],15:[function(require,module,exports){
 module.exports = require("core-js-pure/stable/set");
-},{"core-js-pure/stable/set":367}],13:[function(require,module,exports){
+},{"core-js-pure/stable/set":395}],16:[function(require,module,exports){
+module.exports = require("core-js-pure/stable/symbol");
+},{"core-js-pure/stable/symbol":396}],17:[function(require,module,exports){
 module.exports = require("core-js-pure/features/array/from");
-},{"core-js-pure/features/array/from":213}],14:[function(require,module,exports){
+},{"core-js-pure/features/array/from":235}],18:[function(require,module,exports){
 module.exports = require("core-js-pure/features/array/is-array");
-},{"core-js-pure/features/array/is-array":214}],15:[function(require,module,exports){
+},{"core-js-pure/features/array/is-array":236}],19:[function(require,module,exports){
+module.exports = require("core-js-pure/features/get-iterator-method");
+},{"core-js-pure/features/get-iterator-method":237}],20:[function(require,module,exports){
 module.exports = require("core-js-pure/features/get-iterator");
-},{"core-js-pure/features/get-iterator":215}],16:[function(require,module,exports){
+},{"core-js-pure/features/get-iterator":238}],21:[function(require,module,exports){
 module.exports = require("core-js-pure/features/instance/slice");
-},{"core-js-pure/features/instance/slice":216}],17:[function(require,module,exports){
+},{"core-js-pure/features/instance/slice":239}],22:[function(require,module,exports){
 module.exports = require("core-js-pure/features/is-iterable");
-},{"core-js-pure/features/is-iterable":217}],18:[function(require,module,exports){
+},{"core-js-pure/features/is-iterable":240}],23:[function(require,module,exports){
 module.exports = require("core-js-pure/features/object/define-property");
-},{"core-js-pure/features/object/define-property":218}],19:[function(require,module,exports){
+},{"core-js-pure/features/object/define-property":241}],24:[function(require,module,exports){
 module.exports = require("core-js-pure/features/symbol");
-},{"core-js-pure/features/symbol":219}],20:[function(require,module,exports){
+},{"core-js-pure/features/symbol":242}],25:[function(require,module,exports){
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
@@ -70,16 +80,16 @@ function _arrayLikeToArray(arr, len) {
 }
 
 module.exports = _arrayLikeToArray;
-},{}],21:[function(require,module,exports){
-var _Array$isArray = require("../core-js/array/is-array");
+},{}],26:[function(require,module,exports){
+var _Array$isArray = require("@babel/runtime-corejs3/core-js/array/is-array");
 
 function _arrayWithHoles(arr) {
   if (_Array$isArray(arr)) return arr;
 }
 
 module.exports = _arrayWithHoles;
-},{"../core-js/array/is-array":14}],22:[function(require,module,exports){
-var _Array$isArray = require("../core-js/array/is-array");
+},{"@babel/runtime-corejs3/core-js/array/is-array":18}],27:[function(require,module,exports){
+var _Array$isArray = require("@babel/runtime-corejs3/core-js/array/is-array");
 
 var arrayLikeToArray = require("./arrayLikeToArray");
 
@@ -88,8 +98,8 @@ function _arrayWithoutHoles(arr) {
 }
 
 module.exports = _arrayWithoutHoles;
-},{"../core-js/array/is-array":14,"./arrayLikeToArray":20}],23:[function(require,module,exports){
-var _Object$defineProperty = require("../core-js/object/define-property");
+},{"./arrayLikeToArray":25,"@babel/runtime-corejs3/core-js/array/is-array":18}],28:[function(require,module,exports){
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js/object/define-property");
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -107,7 +117,7 @@ function _defineProperty(obj, key, value) {
 }
 
 module.exports = _defineProperty;
-},{"../core-js/object/define-property":18}],24:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js/object/define-property":23}],29:[function(require,module,exports){
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
@@ -115,24 +125,24 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],25:[function(require,module,exports){
-var _Array$from = require("../core-js/array/from");
+},{}],30:[function(require,module,exports){
+var _Array$from = require("@babel/runtime-corejs3/core-js/array/from");
 
-var _isIterable = require("../core-js/is-iterable");
+var _isIterable = require("@babel/runtime-corejs3/core-js/is-iterable");
 
-var _Symbol = require("../core-js/symbol");
+var _Symbol = require("@babel/runtime-corejs3/core-js/symbol");
 
 function _iterableToArray(iter) {
   if (typeof _Symbol !== "undefined" && _isIterable(Object(iter))) return _Array$from(iter);
 }
 
 module.exports = _iterableToArray;
-},{"../core-js/array/from":13,"../core-js/is-iterable":17,"../core-js/symbol":19}],26:[function(require,module,exports){
-var _getIterator = require("../core-js/get-iterator");
+},{"@babel/runtime-corejs3/core-js/array/from":17,"@babel/runtime-corejs3/core-js/is-iterable":22,"@babel/runtime-corejs3/core-js/symbol":24}],31:[function(require,module,exports){
+var _getIterator = require("@babel/runtime-corejs3/core-js/get-iterator");
 
-var _isIterable = require("../core-js/is-iterable");
+var _isIterable = require("@babel/runtime-corejs3/core-js/is-iterable");
 
-var _Symbol = require("../core-js/symbol");
+var _Symbol = require("@babel/runtime-corejs3/core-js/symbol");
 
 function _iterableToArrayLimit(arr, i) {
   if (typeof _Symbol === "undefined" || !_isIterable(Object(arr))) return;
@@ -162,19 +172,19 @@ function _iterableToArrayLimit(arr, i) {
 }
 
 module.exports = _iterableToArrayLimit;
-},{"../core-js/get-iterator":15,"../core-js/is-iterable":17,"../core-js/symbol":19}],27:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js/get-iterator":20,"@babel/runtime-corejs3/core-js/is-iterable":22,"@babel/runtime-corejs3/core-js/symbol":24}],32:[function(require,module,exports){
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 module.exports = _nonIterableRest;
-},{}],28:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 module.exports = _nonIterableSpread;
-},{}],29:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var arrayWithHoles = require("./arrayWithHoles");
 
 var iterableToArrayLimit = require("./iterableToArrayLimit");
@@ -188,7 +198,7 @@ function _slicedToArray(arr, i) {
 }
 
 module.exports = _slicedToArray;
-},{"./arrayWithHoles":21,"./iterableToArrayLimit":26,"./nonIterableRest":27,"./unsupportedIterableToArray":31}],30:[function(require,module,exports){
+},{"./arrayWithHoles":26,"./iterableToArrayLimit":31,"./nonIterableRest":32,"./unsupportedIterableToArray":36}],35:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -202,10 +212,10 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":22,"./iterableToArray":25,"./nonIterableSpread":28,"./unsupportedIterableToArray":31}],31:[function(require,module,exports){
-var _Array$from = require("../core-js/array/from");
+},{"./arrayWithoutHoles":27,"./iterableToArray":30,"./nonIterableSpread":33,"./unsupportedIterableToArray":36}],36:[function(require,module,exports){
+var _Array$from = require("@babel/runtime-corejs3/core-js/array/from");
 
-var _sliceInstanceProperty = require("../core-js/instance/slice");
+var _sliceInstanceProperty = require("@babel/runtime-corejs3/core-js/instance/slice");
 
 var arrayLikeToArray = require("./arrayLikeToArray");
 
@@ -223,10 +233,10 @@ function _unsupportedIterableToArray(o, minLen) {
 }
 
 module.exports = _unsupportedIterableToArray;
-},{"../core-js/array/from":13,"../core-js/instance/slice":16,"./arrayLikeToArray":20}],32:[function(require,module,exports){
-arguments[4][24][0].apply(exports,arguments)
-},{"dup":24}],33:[function(require,module,exports){
-var _typeof = require("../helpers/typeof");
+},{"./arrayLikeToArray":25,"@babel/runtime-corejs3/core-js/array/from":17,"@babel/runtime-corejs3/core-js/instance/slice":21}],37:[function(require,module,exports){
+arguments[4][29][0].apply(exports,arguments)
+},{"dup":29}],38:[function(require,module,exports){
+var _typeof = require("@babel/runtime/helpers/typeof");
 
 function _getRequireWildcardCache() {
   if (typeof WeakMap !== "function") return null;
@@ -281,7 +291,7 @@ function _interopRequireWildcard(obj) {
 }
 
 module.exports = _interopRequireWildcard;
-},{"../helpers/typeof":34}],34:[function(require,module,exports){
+},{"@babel/runtime/helpers/typeof":39}],39:[function(require,module,exports){
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -299,14 +309,16 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-},{}],35:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.runWithExpensiveErrorDiagnosticsDisabled = runWithExpensiveErrorDiagnosticsDisabled;
 exports.configure = configure;
 exports.getConfig = getConfig;
+exports.DEFAULT_IGNORE_TAGS = void 0;
 
 var _prettyDom = require("./pretty-dom");
 
@@ -324,19 +336,35 @@ let config = {
   // react-testing-library to use. For that reason, this feature will remain
   // undocumented.
   asyncWrapper: cb => cb(),
+  eventWrapper: cb => cb(),
   // default value for the `hidden` option in `ByRole` queries
   defaultHidden: false,
-  //showOriginalStackTrace flag to show the full error stack traces for async errors
+  // showOriginalStackTrace flag to show the full error stack traces for async errors
   showOriginalStackTrace: false,
+  // throw errors w/ suggestions for better queries. Opt in so off by default.
+  throwSuggestions: false,
 
   // called when getBy* queries fail. (message, container) => Error
   getElementError(message, container) {
     const error = new Error([message, (0, _prettyDom.prettyDOM)(container)].filter(Boolean).join('\n\n'));
     error.name = 'TestingLibraryElementError';
     return error;
-  }
+  },
 
+  _disableExpensiveErrorDiagnostics: false,
+  computedStyleSupportsPseudoElements: false
 };
+const DEFAULT_IGNORE_TAGS = 'script, style';
+exports.DEFAULT_IGNORE_TAGS = DEFAULT_IGNORE_TAGS;
+
+function runWithExpensiveErrorDiagnosticsDisabled(callback) {
+  try {
+    config._disableExpensiveErrorDiagnostics = true;
+    return callback();
+  } finally {
+    config._disableExpensiveErrorDiagnostics = false;
+  }
+}
 
 function configure(newConfig) {
   if (typeof newConfig === 'function') {
@@ -354,7 +382,7 @@ function configure(newConfig) {
 function getConfig() {
   return config;
 }
-},{"./pretty-dom":43}],36:[function(require,module,exports){
+},{"./pretty-dom":50}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -980,7 +1008,7 @@ const eventMap = {
   gotPointerCapture: {
     EventType: 'PointerEvent',
     defaultInit: {
-      bubbles: false,
+      bubbles: true,
       cancelable: false,
       composed: true
     }
@@ -988,7 +1016,7 @@ const eventMap = {
   lostPointerCapture: {
     EventType: 'PointerEvent',
     defaultInit: {
-      bubbles: false,
+      bubbles: true,
       cancelable: false,
       composed: true
     }
@@ -1007,33 +1035,118 @@ const eventAliasMap = {
   doubleClick: 'dblClick'
 };
 exports.eventAliasMap = eventAliasMap;
-},{}],37:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fireEvent = fireEvent;
-exports.createEvent = void 0;
+exports.createEvent = createEvent;
+
+var _config = require("./config");
 
 var _helpers = require("./helpers");
 
 var _eventMap = require("./event-map");
 
 function fireEvent(element, event) {
-  if (!event) {
-    throw new Error(`Unable to fire an event - please provide an event object.`);
-  }
+  return (0, _config.getConfig)().eventWrapper(() => {
+    if (!event) {
+      throw new Error(`Unable to fire an event - please provide an event object.`);
+    }
 
-  if (!element) {
-    throw new Error(`Unable to fire a "${event.type}" event - please provide a DOM element.`);
-  }
+    if (!element) {
+      throw new Error(`Unable to fire a "${event.type}" event - please provide a DOM element.`);
+    }
 
-  return element.dispatchEvent(event);
+    return element.dispatchEvent(event);
+  });
 }
 
-const createEvent = {};
-exports.createEvent = createEvent;
+function createEvent(eventName, node, init, {
+  EventType = 'Event',
+  defaultInit = {}
+} = {}) {
+  if (!node) {
+    throw new Error(`Unable to fire a "${eventName}" event - please provide a DOM element.`);
+  }
+
+  const eventInit = { ...defaultInit,
+    ...init
+  };
+  const {
+    target: {
+      value,
+      files,
+      ...targetProperties
+    } = {}
+  } = eventInit;
+
+  if (value !== undefined) {
+    setNativeValue(node, value);
+  }
+
+  if (files !== undefined) {
+    // input.files is a read-only property so this is not allowed:
+    // input.files = [file]
+    // so we have to use this workaround to set the property
+    Object.defineProperty(node, 'files', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: files
+    });
+  }
+
+  Object.assign(node, targetProperties);
+  const window = (0, _helpers.getWindowFromNode)(node);
+  const EventConstructor = window[EventType] || window.Event;
+  let event;
+  /* istanbul ignore else  */
+
+  if (typeof EventConstructor === 'function') {
+    event = new EventConstructor(eventName, eventInit);
+  } else {
+    // IE11 polyfill from https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill
+    event = window.document.createEvent(EventType);
+    const {
+      bubbles,
+      cancelable,
+      detail,
+      ...otherInit
+    } = eventInit;
+    event.initEvent(eventName, bubbles, cancelable, detail);
+    Object.keys(otherInit).forEach(eventKey => {
+      event[eventKey] = otherInit[eventKey];
+    });
+  } // DataTransfer is not supported in jsdom: https://github.com/jsdom/jsdom/issues/1568
+
+
+  ['dataTransfer', 'clipboardData'].forEach(dataTransferKey => {
+    const dataTransferValue = eventInit[dataTransferKey];
+
+    if (typeof dataTransferValue === 'object') {
+      /* istanbul ignore if  */
+      if (typeof window.DataTransfer === 'function') {
+        Object.defineProperty(event, dataTransferKey, {
+          value: Object.getOwnPropertyNames(dataTransferValue).reduce((acc, propName) => {
+            Object.defineProperty(acc, propName, {
+              value: dataTransferValue[propName]
+            });
+            return acc;
+          }, new window.DataTransfer())
+        });
+      } else {
+        Object.defineProperty(event, dataTransferKey, {
+          value: dataTransferValue
+        });
+      }
+    }
+  });
+  return event;
+}
+
 Object.keys(_eventMap.eventMap).forEach(key => {
   const {
     EventType,
@@ -1041,82 +1154,10 @@ Object.keys(_eventMap.eventMap).forEach(key => {
   } = _eventMap.eventMap[key];
   const eventName = key.toLowerCase();
 
-  createEvent[key] = (node, init) => {
-    if (!node) {
-      throw new Error(`Unable to fire a "${key}" event - please provide a DOM element.`);
-    }
-
-    const eventInit = { ...defaultInit,
-      ...init
-    };
-    const {
-      target: {
-        value,
-        files,
-        ...targetProperties
-      } = {}
-    } = eventInit;
-
-    if (value !== undefined) {
-      setNativeValue(node, value);
-    }
-
-    if (files !== undefined) {
-      // input.files is a read-only property so this is not allowed:
-      // input.files = [file]
-      // so we have to use this workaround to set the property
-      Object.defineProperty(node, 'files', {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: files
-      });
-    }
-
-    Object.assign(node, targetProperties);
-    const window = (0, _helpers.getWindowFromNode)(node);
-    const EventConstructor = window[EventType] || window.Event;
-    let event;
-    /* istanbul ignore else  */
-
-    if (typeof EventConstructor === 'function') {
-      event = new EventConstructor(eventName, eventInit);
-    } else {
-      // IE11 polyfill from https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill
-      event = window.document.createEvent(EventType);
-      const {
-        bubbles,
-        cancelable,
-        detail,
-        ...otherInit
-      } = eventInit;
-      event.initEvent(eventName, bubbles, cancelable, detail);
-      Object.keys(otherInit).forEach(eventKey => {
-        event[eventKey] = otherInit[eventKey];
-      });
-    }
-
-    const {
-      dataTransfer
-    } = eventInit;
-
-    if (typeof dataTransfer === 'object') {
-      // DataTransfer is not supported in jsdom: https://github.com/jsdom/jsdom/issues/1568
-
-      /* istanbul ignore if  */
-      if (typeof window.DataTransfer === 'function') {
-        Object.defineProperty(event, 'dataTransfer', {
-          value: Object.assign(new window.DataTransfer(), dataTransfer)
-        });
-      } else {
-        Object.defineProperty(event, 'dataTransfer', {
-          value: dataTransfer
-        });
-      }
-    }
-
-    return event;
-  };
+  createEvent[key] = (node, init) => createEvent(eventName, node, init, {
+    EventType,
+    defaultInit
+  });
 
   fireEvent[key] = (node, init) => fireEvent(node, createEvent[key](node, init));
 }); // function written after some investigation here:
@@ -1148,25 +1189,24 @@ Object.keys(_eventMap.eventAliasMap).forEach(aliasKey => {
   fireEvent[aliasKey] = (...args) => fireEvent[key](...args);
 });
 /* eslint complexity:["error", 9] */
-},{"./event-map":36,"./helpers":40}],38:[function(require,module,exports){
+},{"./config":40,"./event-map":41,"./helpers":46}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getNodeText = getNodeText;
-// Constant node.nodeType for text nodes, see:
-// https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType#Node_type_constants
-const TEXT_NODE = 3;
+
+var _helpers = require("./helpers");
 
 function getNodeText(node) {
   if (node.matches('input[type=submit], input[type=button]')) {
     return node.value;
   }
 
-  return Array.from(node.childNodes).filter(child => child.nodeType === TEXT_NODE && Boolean(child.textContent)).map(c => c.textContent).join('');
+  return Array.from(node.childNodes).filter(child => child.nodeType === _helpers.TEXT_NODE && Boolean(child.textContent)).map(c => c.textContent).join('');
 }
-},{}],39:[function(require,module,exports){
+},{"./helpers":46}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -1195,8 +1235,69 @@ function getQueriesForElement(element, queries = defaultQueries, initialValue = 
     return helpers;
   }, initialValue);
 }
-},{"./queries":47,"@babel/runtime/helpers/interopRequireWildcard":33}],40:[function(require,module,exports){
-(function (global){
+},{"./queries":54,"@babel/runtime/helpers/interopRequireWildcard":38}],45:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getUserCodeFrame = getUserCodeFrame;
+// We try to load node dependencies
+let chalk = null;
+let readFileSync = null;
+let codeFrameColumns = null;
+
+try {
+  const nodeRequire = module && module.require;
+  readFileSync = nodeRequire.call(module, 'fs').readFileSync;
+  codeFrameColumns = nodeRequire.call(module, '@babel/code-frame').codeFrameColumns;
+  chalk = nodeRequire.call(module, 'chalk');
+} catch {// We're in a browser environment
+} // frame has the form "at myMethod (location/to/my/file.js:10:2)"
+
+
+function getCodeFrame(frame) {
+  const locationStart = frame.indexOf('(') + 1;
+  const locationEnd = frame.indexOf(')');
+  const frameLocation = frame.slice(locationStart, locationEnd);
+  const frameLocationElements = frameLocation.split(':');
+  const [filename, line, column] = [frameLocationElements[0], parseInt(frameLocationElements[1], 10), parseInt(frameLocationElements[2], 10)];
+  let rawFileContents = '';
+
+  try {
+    rawFileContents = readFileSync(filename, 'utf-8');
+  } catch {
+    return '';
+  }
+
+  const codeFrame = codeFrameColumns(rawFileContents, {
+    start: {
+      line,
+      column
+    }
+  }, {
+    highlightCode: true,
+    linesBelow: 0
+  });
+  return `${chalk.dim(frameLocation)}\n${codeFrame}\n`;
+}
+
+function getUserCodeFrame() {
+  // If we couldn't load dependencies, we can't generate the user trace
+
+  /* istanbul ignore next */
+  if (!readFileSync || !codeFrameColumns) {
+    return '';
+  }
+
+  const err = new Error();
+  const firstClientCodeFrame = err.stack.split('\n').slice(1) // Remove first line which has the form "Error: TypeError"
+  .find(frame => !frame.includes('node_modules/')); // Ignore frames from 3rd party libraries
+
+  return getCodeFrame(firstClientCodeFrame);
+}
+},{}],46:[function(require,module,exports){
+(function (global){(function (){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1205,26 +1306,58 @@ Object.defineProperty(exports, "__esModule", {
 exports.getWindowFromNode = getWindowFromNode;
 exports.getDocument = getDocument;
 exports.runWithRealTimers = runWithRealTimers;
-exports.setTimeout = exports.setImmediate = exports.clearTimeout = void 0;
-const globalObj = typeof window === 'undefined' ? global : window; // Currently this fn only supports jest timers, but it could support other test runners in the future.
+exports.checkContainerType = checkContainerType;
+exports.TEXT_NODE = exports.jestFakeTimersAreEnabled = exports.setTimeout = exports.setImmediate = exports.clearTimeout = void 0;
+const globalObj = typeof window === 'undefined' ? global : window; // Constant node.nodeType for text nodes, see:
+// https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType#Node_type_constants
+
+const TEXT_NODE = 3; // Currently this fn only supports jest timers, but it could support other test runners in the future.
+
+exports.TEXT_NODE = TEXT_NODE;
 
 function runWithRealTimers(callback) {
-  const usingJestFakeTimers = globalObj.setTimeout && globalObj.setTimeout._isMockFunction && typeof jest !== 'undefined';
+  const fakeTimersType = getJestFakeTimersType();
 
-  if (usingJestFakeTimers) {
+  if (fakeTimersType) {
     jest.useRealTimers();
   }
 
   const callbackReturnValue = callback();
 
-  if (usingJestFakeTimers) {
-    jest.useFakeTimers();
+  if (fakeTimersType) {
+    jest.useFakeTimers(fakeTimersType);
   }
 
   return callbackReturnValue;
-} // we only run our tests in node, and setImmediate is supported in node.
+}
+
+function getJestFakeTimersType() {
+  // istanbul ignore if
+  if (typeof jest === 'undefined' || typeof globalObj.setTimeout === 'undefined') {
+    return null;
+  }
+
+  if (typeof globalObj.setTimeout._isMockFunction !== 'undefined' && globalObj.setTimeout._isMockFunction) {
+    return 'legacy';
+  }
+
+  if (typeof globalObj.setTimeout.clock !== 'undefined' && typeof jest.getRealSystemTime !== 'undefined') {
+    try {
+      // jest.getRealSystemTime is only supported for Jest's `modern` fake timers and otherwise throws
+      jest.getRealSystemTime();
+      return 'modern';
+    } catch {// not using Jest's modern fake timers
+    }
+  }
+
+  return null;
+}
+
+const jestFakeTimersAreEnabled = () => Boolean(getJestFakeTimersType()); // we only run our tests in node, and setImmediate is supported in node.
 // istanbul ignore next
 
+
+exports.jestFakeTimersAreEnabled = jestFakeTimersAreEnabled;
 
 function setImmediatePolyfill(fn) {
   return globalObj.setTimeout(fn, 0);
@@ -1258,7 +1391,6 @@ function getDocument() {
 }
 
 function getWindowFromNode(node) {
-  // istanbul ignore next I'm not sure what could cause the final else so we'll leave it uncovered.
   if (node.defaultView) {
     // node is document
     return node.defaultView;
@@ -1268,13 +1400,29 @@ function getWindowFromNode(node) {
   } else if (node.window) {
     // node is window
     return node.window;
+  } else if (node.then instanceof Function) {
+    throw new Error(`It looks like you passed a Promise object instead of a DOM node. Did you do something like \`fireEvent.click(screen.findBy...\` when you meant to use a \`getBy\` query \`fireEvent.click(screen.getBy...\`, or await the findBy query \`fireEvent.click(await screen.findBy...\`?`);
   } else {
-    // no idea...
+    // The user passed something unusual to a calling function
     throw new Error(`Unable to find the "window" object for the given node. Please file an issue with the code that's causing you to see this error: https://github.com/testing-library/dom-testing-library/issues/new`);
   }
 }
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],41:[function(require,module,exports){
+
+function checkContainerType(container) {
+  if (!container || !(typeof container.querySelector === 'function') || !(typeof container.querySelectorAll === 'function')) {
+    throw new TypeError(`Expected container to be an Element, a Document or a DocumentFragment but got ${getTypeName(container)}.`);
+  }
+
+  function getTypeName(object) {
+    if (typeof object === 'object') {
+      return object === null ? 'null' : object.constructor.name;
+    }
+
+    return typeof object;
+  }
+}
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],47:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -1290,7 +1438,8 @@ var _exportNames = {
   getRoles: true,
   logRoles: true,
   isInaccessible: true,
-  configure: true
+  configure: true,
+  getConfig: true
 };
 Object.defineProperty(exports, "within", {
   enumerable: true,
@@ -1328,6 +1477,12 @@ Object.defineProperty(exports, "configure", {
     return _config.configure;
   }
 });
+Object.defineProperty(exports, "getConfig", {
+  enumerable: true,
+  get: function () {
+    return _config.getConfig;
+  }
+});
 exports.queryHelpers = exports.queries = void 0;
 
 var _getQueriesForElement = require("./get-queries-for-element");
@@ -1335,6 +1490,7 @@ var _getQueriesForElement = require("./get-queries-for-element");
 Object.keys(_getQueriesForElement).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _getQueriesForElement[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1349,6 +1505,7 @@ exports.queries = queries;
 Object.keys(queries).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === queries[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1363,6 +1520,7 @@ exports.queryHelpers = queryHelpers;
 Object.keys(queryHelpers).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === queryHelpers[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1376,6 +1534,7 @@ var _waitFor = require("./wait-for");
 Object.keys(_waitFor).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _waitFor[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1389,6 +1548,7 @@ var _waitForElement = require("./wait-for-element");
 Object.keys(_waitForElement).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _waitForElement[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1402,6 +1562,7 @@ var _waitForElementToBeRemoved = require("./wait-for-element-to-be-removed");
 Object.keys(_waitForElementToBeRemoved).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _waitForElementToBeRemoved[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1415,6 +1576,7 @@ var _waitForDomChange = require("./wait-for-dom-change");
 Object.keys(_waitForDomChange).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _waitForDomChange[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1430,6 +1592,7 @@ var _getNodeText = require("./get-node-text");
 Object.keys(_getNodeText).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _getNodeText[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1443,6 +1606,7 @@ var _events = require("./events");
 Object.keys(_events).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _events[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1456,6 +1620,7 @@ var _screen = require("./screen");
 Object.keys(_screen).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _screen[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1471,6 +1636,7 @@ var _prettyDom = require("./pretty-dom");
 Object.keys(_prettyDom).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _prettyDom[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1480,7 +1646,92 @@ Object.keys(_prettyDom).forEach(function (key) {
 });
 
 var _config = require("./config");
-},{"./config":35,"./events":37,"./get-node-text":38,"./get-queries-for-element":39,"./matches":42,"./pretty-dom":43,"./queries":47,"./query-helpers":54,"./role-helpers":55,"./screen":56,"./wait-for":60,"./wait-for-dom-change":57,"./wait-for-element":59,"./wait-for-element-to-be-removed":58,"@babel/runtime/helpers/interopRequireWildcard":33}],42:[function(require,module,exports){
+
+var _suggestions = require("./suggestions");
+
+Object.keys(_suggestions).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _suggestions[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _suggestions[key];
+    }
+  });
+});
+},{"./config":40,"./events":42,"./get-node-text":43,"./get-queries-for-element":44,"./matches":49,"./pretty-dom":50,"./queries":54,"./query-helpers":61,"./role-helpers":62,"./screen":63,"./suggestions":64,"./wait-for":68,"./wait-for-dom-change":65,"./wait-for-element":67,"./wait-for-element-to-be-removed":66,"@babel/runtime/helpers/interopRequireWildcard":38}],48:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getLabels = getLabels;
+exports.getRealLabels = getRealLabels;
+exports.getLabelContent = getLabelContent;
+
+var _helpers = require("./helpers");
+
+const labelledNodeNames = ['button', 'meter', 'output', 'progress', 'select', 'textarea', 'input'];
+
+function getTextContent(node) {
+  if (labelledNodeNames.includes(node.nodeName.toLowerCase())) {
+    return '';
+  }
+
+  if (node.nodeType === _helpers.TEXT_NODE) return node.textContent;
+  return Array.from(node.childNodes).map(childNode => getTextContent(childNode)).join('');
+}
+
+function getLabelContent(node) {
+  let textContent;
+
+  if (node.tagName.toLowerCase() === 'label') {
+    textContent = getTextContent(node);
+  } else {
+    textContent = node.value || node.textContent;
+  }
+
+  return textContent;
+} // Based on https://github.com/eps1lon/dom-accessibility-api/pull/352
+
+
+function getRealLabels(element) {
+  var _element$labels;
+
+  if (element.labels !== undefined) return (_element$labels = element.labels) != null ? _element$labels : [];
+  if (!isLabelable(element)) return [];
+  const labels = element.ownerDocument.querySelectorAll('label');
+  return Array.from(labels).filter(label => label.control === element);
+}
+
+function isLabelable(element) {
+  return element.tagName.match(/BUTTON|METER|OUTPUT|PROGRESS|SELECT|TEXTAREA/) || element.tagName === 'INPUT' && element.getAttribute('type') !== 'hidden';
+}
+
+function getLabels(container, element, {
+  selector = '*'
+} = {}) {
+  const labelsId = element.getAttribute('aria-labelledby') ? element.getAttribute('aria-labelledby').split(' ') : [];
+  return labelsId.length ? labelsId.map(labelId => {
+    const labellingElement = container.querySelector(`[id="${labelId}"]`);
+    return labellingElement ? {
+      content: getLabelContent(labellingElement),
+      formControl: null
+    } : {
+      content: '',
+      formControl: null
+    };
+  }) : Array.from(getRealLabels(element)).map(label => {
+    const textToMatch = getLabelContent(label);
+    const labelledFormControl = Array.from(label.querySelectorAll('button, input, meter, output, progress, select, textarea')).filter(formControlElement => formControlElement.matches(selector))[0];
+    return {
+      content: textToMatch,
+      formControl: labelledFormControl
+    };
+  });
+}
+},{"./helpers":46}],49:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1491,11 +1742,18 @@ exports.matches = matches;
 exports.getDefaultNormalizer = getDefaultNormalizer;
 exports.makeNormalizer = makeNormalizer;
 
+function assertNotNullOrUndefined(matcher) {
+  if (matcher == null) {
+    throw new Error(`It looks like ${matcher} was passed instead of a matcher. Did you do something like getByText(${matcher})?`);
+  }
+}
+
 function fuzzyMatches(textToMatch, node, matcher, normalizer) {
   if (typeof textToMatch !== 'string') {
     return false;
   }
 
+  assertNotNullOrUndefined(matcher);
   const normalizedText = normalizer(textToMatch);
 
   if (typeof matcher === 'string') {
@@ -1512,14 +1770,15 @@ function matches(textToMatch, node, matcher, normalizer) {
     return false;
   }
 
+  assertNotNullOrUndefined(matcher);
   const normalizedText = normalizer(textToMatch);
 
-  if (typeof matcher === 'string') {
-    return normalizedText === matcher;
-  } else if (typeof matcher === 'function') {
+  if (matcher instanceof Function) {
     return matcher(normalizedText, node);
-  } else {
+  } else if (matcher instanceof RegExp) {
     return matcher.test(normalizedText);
+  } else {
+    return normalizedText === String(matcher);
   }
 }
 
@@ -1566,8 +1825,8 @@ function makeNormalizer({
     });
   }
 }
-},{}],43:[function(require,module,exports){
-(function (process,global){
+},{}],50:[function(require,module,exports){
+(function (process,global){(function (){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -1576,9 +1835,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.prettyDOM = prettyDOM;
+Object.defineProperty(exports, "prettyFormat", {
+  enumerable: true,
+  get: function () {
+    return _prettyFormat.default;
+  }
+});
 exports.logDOM = void 0;
 
 var _prettyFormat = _interopRequireDefault(require("pretty-format"));
+
+var _getUserCodeFrame = require("./get-user-code-frame");
 
 var _helpers = require("./helpers");
 
@@ -1635,11 +1902,19 @@ function prettyDOM(dom, maxLength, options) {
   return maxLength !== undefined && dom.outerHTML.length > maxLength ? `${debugContent.slice(0, maxLength)}...` : debugContent;
 }
 
-const logDOM = (...args) => console.log(prettyDOM(...args));
+const logDOM = (...args) => {
+  const userCodeFrame = (0, _getUserCodeFrame.getUserCodeFrame)();
+
+  if (userCodeFrame) {
+    console.log(`${prettyDOM(...args)}\n\n${userCodeFrame}`);
+  } else {
+    console.log(prettyDOM(...args));
+  }
+};
 
 exports.logDOM = logDOM;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./helpers":40,"@babel/runtime/helpers/interopRequireDefault":32,"_process":391,"pretty-format":376}],44:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./get-user-code-frame":45,"./helpers":46,"@babel/runtime/helpers/interopRequireDefault":37,"_process":423,"pretty-format":408}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1650,6 +1925,7 @@ var _matches = require("../matches");
 
 Object.keys(_matches).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _matches[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1662,6 +1938,7 @@ var _getNodeText = require("../get-node-text");
 
 Object.keys(_getNodeText).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _getNodeText[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1674,6 +1951,7 @@ var _queryHelpers = require("../query-helpers");
 
 Object.keys(_queryHelpers).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _queryHelpers[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1686,6 +1964,7 @@ var _config = require("../config");
 
 Object.keys(_config).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _config[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1693,14 +1972,17 @@ Object.keys(_config).forEach(function (key) {
     }
   });
 });
-},{"../config":35,"../get-node-text":38,"../matches":42,"../query-helpers":54}],45:[function(require,module,exports){
+},{"../config":40,"../get-node-text":43,"../matches":49,"../query-helpers":61}],52:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByAltText = queryAllByAltText;
-exports.findByAltText = exports.findAllByAltText = exports.getAllByAltText = exports.getByAltText = exports.queryByAltText = void 0;
+exports.findByAltText = exports.findAllByAltText = exports.getAllByAltText = exports.getByAltText = exports.queryAllByAltText = exports.queryByAltText = void 0;
+
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
 
 var _allUtils = require("./all-utils");
 
@@ -1710,6 +1992,7 @@ function queryAllByAltText(container, alt, {
   trim,
   normalizer
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
   const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
@@ -1723,20 +2006,25 @@ const getMultipleError = (c, alt) => `Found multiple elements with the alt text:
 
 const getMissingError = (c, alt) => `Unable to find an element with the alt text: ${alt}`;
 
+const queryAllByAltTextWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByAltText, queryAllByAltText.name, 'queryAll');
+exports.queryAllByAltText = queryAllByAltTextWithSuggestions;
 const [queryByAltText, getAllByAltText, getByAltText, findAllByAltText, findByAltText] = (0, _allUtils.buildQueries)(queryAllByAltText, getMultipleError, getMissingError);
 exports.findByAltText = findByAltText;
 exports.findAllByAltText = findAllByAltText;
 exports.getByAltText = getByAltText;
 exports.getAllByAltText = getAllByAltText;
 exports.queryByAltText = queryByAltText;
-},{"./all-utils":44}],46:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"./all-utils":51}],53:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByDisplayValue = queryAllByDisplayValue;
-exports.findByDisplayValue = exports.findAllByDisplayValue = exports.getAllByDisplayValue = exports.getByDisplayValue = exports.queryByDisplayValue = void 0;
+exports.findByDisplayValue = exports.findAllByDisplayValue = exports.getAllByDisplayValue = exports.getByDisplayValue = exports.queryAllByDisplayValue = exports.queryByDisplayValue = void 0;
+
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
 
 var _allUtils = require("./all-utils");
 
@@ -1746,6 +2034,7 @@ function queryAllByDisplayValue(container, value, {
   trim,
   normalizer
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
   const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
@@ -1766,13 +2055,15 @@ const getMultipleError = (c, value) => `Found multiple elements with the display
 
 const getMissingError = (c, value) => `Unable to find an element with the display value: ${value}.`;
 
+const queryAllByDisplayValueWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByDisplayValue, queryAllByDisplayValue.name, 'queryAll');
+exports.queryAllByDisplayValue = queryAllByDisplayValueWithSuggestions;
 const [queryByDisplayValue, getAllByDisplayValue, getByDisplayValue, findAllByDisplayValue, findByDisplayValue] = (0, _allUtils.buildQueries)(queryAllByDisplayValue, getMultipleError, getMissingError);
 exports.findByDisplayValue = findByDisplayValue;
 exports.findAllByDisplayValue = findAllByDisplayValue;
 exports.getByDisplayValue = getByDisplayValue;
 exports.getAllByDisplayValue = getAllByDisplayValue;
 exports.queryByDisplayValue = queryByDisplayValue;
-},{"./all-utils":44}],47:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"./all-utils":51}],54:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1783,6 +2074,7 @@ var _labelText = require("./label-text");
 
 Object.keys(_labelText).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _labelText[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1795,6 +2087,7 @@ var _placeholderText = require("./placeholder-text");
 
 Object.keys(_placeholderText).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _placeholderText[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1807,6 +2100,7 @@ var _text = require("./text");
 
 Object.keys(_text).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _text[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1819,6 +2113,7 @@ var _displayValue = require("./display-value");
 
 Object.keys(_displayValue).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _displayValue[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1831,6 +2126,7 @@ var _altText = require("./alt-text");
 
 Object.keys(_altText).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _altText[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1843,6 +2139,7 @@ var _title = require("./title");
 
 Object.keys(_title).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _title[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1855,6 +2152,7 @@ var _role = require("./role");
 
 Object.keys(_role).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _role[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1867,6 +2165,7 @@ var _testId = require("./test-id");
 
 Object.keys(_testId).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _testId[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -1874,21 +2173,32 @@ Object.keys(_testId).forEach(function (key) {
     }
   });
 });
-},{"./alt-text":45,"./display-value":46,"./label-text":48,"./placeholder-text":49,"./role":50,"./test-id":51,"./text":52,"./title":53}],48:[function(require,module,exports){
+},{"./alt-text":52,"./display-value":53,"./label-text":55,"./placeholder-text":56,"./role":57,"./test-id":58,"./text":59,"./title":60}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByLabelText = queryAllByLabelText;
-exports.getAllByLabelText = getAllByLabelText;
-exports.findByLabelText = exports.findAllByLabelText = exports.getByLabelText = exports.queryByLabelText = void 0;
+exports.findByLabelText = exports.findAllByLabelText = exports.getByLabelText = exports.getAllByLabelText = exports.queryByLabelText = exports.queryAllByLabelText = void 0;
 
 var _config = require("../config");
 
+var _helpers = require("../helpers");
+
+var _labelHelpers = require("../label-helpers");
+
 var _allUtils = require("./all-utils");
 
-var _text = require("./text");
+function queryAllLabels(container) {
+  return Array.from(container.querySelectorAll('label,input')).map(node => {
+    return {
+      node,
+      textToMatch: (0, _labelHelpers.getLabelContent)(node)
+    };
+  }).filter(({
+    textToMatch
+  }) => textToMatch !== null);
+}
 
 function queryAllLabelsByText(container, text, {
   exact = true,
@@ -1902,20 +2212,13 @@ function queryAllLabelsByText(container, text, {
     trim,
     normalizer
   });
-  return Array.from(container.querySelectorAll('label')).filter(label => {
-    let textToMatch = label.textContent; // The children of a textarea are part of `textContent` as well. We
-    // need to remove them from the string so we can match it afterwards.
-
-    Array.from(label.querySelectorAll('textarea')).forEach(textarea => {
-      textToMatch = textToMatch.replace(textarea.value, '');
-    }); // The children of a select are also part of `textContent`, so we
-    // need also to remove their text.
-
-    Array.from(label.querySelectorAll('select')).forEach(select => {
-      textToMatch = textToMatch.replace(select.textContent, '');
-    });
-    return matcher(textToMatch, label, text, matchNormalizer);
-  });
+  const textToMatchByLabels = queryAllLabels(container);
+  return textToMatchByLabels.filter(({
+    node,
+    textToMatch
+  }) => matcher(textToMatch, node, text, matchNormalizer)).map(({
+    node
+  }) => node);
 }
 
 function queryAllByLabelText(container, text, {
@@ -1925,59 +2228,42 @@ function queryAllByLabelText(container, text, {
   trim,
   normalizer
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
+  const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
     trim,
     normalizer
   });
-  const labels = queryAllLabelsByText(container, text, {
-    exact,
-    normalizer: matchNormalizer
-  });
-  const labelledElements = labels.reduce((matchedElements, label) => {
-    const elementsForLabel = [];
+  const matchingLabelledElements = Array.from(container.querySelectorAll('*')).filter(element => {
+    return (0, _labelHelpers.getRealLabels)(element).length || element.hasAttribute('aria-labelledby');
+  }).reduce((labelledElements, labelledElement) => {
+    const labelList = (0, _labelHelpers.getLabels)(container, labelledElement, {
+      selector
+    });
+    labelList.filter(label => Boolean(label.formControl)).forEach(label => {
+      if (matcher(label.content, label.formControl, text, matchNormalizer)) labelledElements.push(label.formControl);
+    });
+    const labelsValue = labelList.filter(label => Boolean(label.content)).map(label => label.content);
+    if (matcher(labelsValue.join(' '), labelledElement, text, matchNormalizer)) labelledElements.push(labelledElement);
 
-    if (label.control) {
-      elementsForLabel.push(label.control);
-    }
-    /* istanbul ignore if */
+    if (labelsValue.length > 1) {
+      labelsValue.forEach((labelValue, index) => {
+        if (matcher(labelValue, labelledElement, text, matchNormalizer)) labelledElements.push(labelledElement);
+        const labelsFiltered = [...labelsValue];
+        labelsFiltered.splice(index, 1);
 
-
-    if (label.getAttribute('for')) {
-      // we're using this notation because with the # selector we would have to escape special characters e.g. user.name
-      // see https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector#Escaping_special_characters
-      // <label for="someId">text</label><input id="someId" />
-      // .control support has landed in jsdom (https://github.com/jsdom/jsdom/issues/2175)
-      elementsForLabel.push(container.querySelector(`[id="${label.getAttribute('for')}"]`));
-    }
-
-    if (label.getAttribute('id')) {
-      // <label id="someId">text</label><input aria-labelledby="someId" />
-      Array.from(container.querySelectorAll(`[aria-labelledby~="${label.getAttribute('id')}"]`)).forEach(element => elementsForLabel.push(element));
+        if (labelsFiltered.length > 1) {
+          if (matcher(labelsFiltered.join(' '), labelledElement, text, matchNormalizer)) labelledElements.push(labelledElement);
+        }
+      });
     }
 
-    if (label.childNodes.length) {
-      // <label>text: <input /></label>
-      const labelledFormControl = Array.from(label.querySelectorAll('button, input, meter, output, progress, select, textarea')).filter(element => element.matches(selector))[0];
-      if (labelledFormControl) elementsForLabel.push(labelledFormControl);
-    }
-
-    return matchedElements.concat(elementsForLabel);
-  }, []).filter(element => element !== null).concat((0, _allUtils.queryAllByAttribute)('aria-label', container, text, {
+    return labelledElements;
+  }, []).concat((0, _allUtils.queryAllByAttribute)('aria-label', container, text, {
     exact
   }));
-  const possibleAriaLabelElements = (0, _text.queryAllByText)(container, text, {
-    exact,
-    normalizer: matchNormalizer
-  });
-  const ariaLabelledElements = possibleAriaLabelElements.reduce((allLabelledElements, nextLabelElement) => {
-    const labelId = nextLabelElement.getAttribute('id');
-    if (!labelId) return allLabelledElements; // ARIA labels can label multiple elements
-
-    const labelledNodes = Array.from(container.querySelectorAll(`[aria-labelledby~="${labelId}"]`));
-    return allLabelledElements.concat(labelledNodes);
-  }, []);
-  return Array.from(new Set([...labelledElements, ...ariaLabelledElements])).filter(element => element.matches(selector));
+  return Array.from(new Set(matchingLabelledElements)).filter(element => element.matches(selector));
 } // the getAll* query would normally look like this:
 // const getAllByLabelText = makeGetAllQuery(
 //   queryAllByLabelText,
@@ -1987,34 +2273,56 @@ function queryAllByLabelText(container, text, {
 // so we're writing this one out by hand.
 
 
-function getAllByLabelText(container, text, ...rest) {
+const getAllByLabelText = (container, text, ...rest) => {
   const els = queryAllByLabelText(container, text, ...rest);
 
   if (!els.length) {
     const labels = queryAllLabelsByText(container, text, ...rest);
 
     if (labels.length) {
-      throw (0, _config.getConfig)().getElementError(`Found a label with the text of: ${text}, however no form control was found associated to that label. Make sure you're using the "for" attribute or "aria-labelledby" attribute correctly.`, container);
+      const tagNames = labels.map(label => getTagNameOfElementAssociatedWithLabelViaFor(container, label)).filter(tagName => !!tagName);
+
+      if (tagNames.length) {
+        throw (0, _config.getConfig)().getElementError(tagNames.map(tagName => `Found a label with the text of: ${text}, however the element associated with this label (<${tagName} />) is non-labellable [https://html.spec.whatwg.org/multipage/forms.html#category-label]. If you really need to label a <${tagName} />, you can use aria-label or aria-labelledby instead.`).join('\n\n'), container);
+      } else {
+        throw (0, _config.getConfig)().getElementError(`Found a label with the text of: ${text}, however no form control was found associated to that label. Make sure you're using the "for" attribute or "aria-labelledby" attribute correctly.`, container);
+      }
     } else {
       throw (0, _config.getConfig)().getElementError(`Unable to find a label with the text of: ${text}`, container);
     }
   }
 
   return els;
+};
+
+function getTagNameOfElementAssociatedWithLabelViaFor(container, label) {
+  const htmlFor = label.getAttribute('for');
+
+  if (!htmlFor) {
+    return null;
+  }
+
+  const element = container.querySelector(`[id="${htmlFor}"]`);
+  return element ? element.tagName.toLowerCase() : null;
 } // the reason mentioned above is the same reason we're not using buildQueries
 
 
 const getMultipleError = (c, text) => `Found multiple elements with the text of: ${text}`;
 
-const queryByLabelText = (0, _allUtils.makeSingleQuery)(queryAllByLabelText, getMultipleError);
+const queryByLabelText = (0, _allUtils.wrapSingleQueryWithSuggestion)((0, _allUtils.makeSingleQuery)(queryAllByLabelText, getMultipleError), queryAllByLabelText.name, 'query');
 exports.queryByLabelText = queryByLabelText;
 const getByLabelText = (0, _allUtils.makeSingleQuery)(getAllByLabelText, getMultipleError);
-exports.getByLabelText = getByLabelText;
-const findAllByLabelText = (0, _allUtils.makeFindQuery)(getAllByLabelText);
+const findAllByLabelText = (0, _allUtils.makeFindQuery)((0, _allUtils.wrapAllByQueryWithSuggestion)(getAllByLabelText, getAllByLabelText.name, 'findAll'));
 exports.findAllByLabelText = findAllByLabelText;
-const findByLabelText = (0, _allUtils.makeFindQuery)(getByLabelText);
+const findByLabelText = (0, _allUtils.makeFindQuery)((0, _allUtils.wrapSingleQueryWithSuggestion)(getByLabelText, getAllByLabelText.name, 'find'));
 exports.findByLabelText = findByLabelText;
-},{"../config":35,"./all-utils":44,"./text":52}],49:[function(require,module,exports){
+const getAllByLabelTextWithSuggestions = (0, _allUtils.wrapAllByQueryWithSuggestion)(getAllByLabelText, getAllByLabelText.name, 'getAll');
+exports.getAllByLabelText = getAllByLabelTextWithSuggestions;
+const getByLabelTextWithSuggestions = (0, _allUtils.wrapSingleQueryWithSuggestion)(getByLabelText, getAllByLabelText.name, 'get');
+exports.getByLabelText = getByLabelTextWithSuggestions;
+const queryAllByLabelTextWithSuggestions = (0, _allUtils.wrapAllByQueryWithSuggestion)(queryAllByLabelText, queryAllByLabelText.name, 'queryAll');
+exports.queryAllByLabelText = queryAllByLabelTextWithSuggestions;
+},{"../config":40,"../helpers":46,"../label-helpers":48,"./all-utils":51}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2022,36 +2330,46 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.findByPlaceholderText = exports.findAllByPlaceholderText = exports.getAllByPlaceholderText = exports.getByPlaceholderText = exports.queryAllByPlaceholderText = exports.queryByPlaceholderText = void 0;
 
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
+
 var _allUtils = require("./all-utils");
 
-const queryAllByPlaceholderText = _allUtils.queryAllByAttribute.bind(null, 'placeholder');
-
-exports.queryAllByPlaceholderText = queryAllByPlaceholderText;
+function queryAllByPlaceholderText(...args) {
+  (0, _helpers.checkContainerType)(...args);
+  return (0, _allUtils.queryAllByAttribute)('placeholder', ...args);
+}
 
 const getMultipleError = (c, text) => `Found multiple elements with the placeholder text of: ${text}`;
 
 const getMissingError = (c, text) => `Unable to find an element with the placeholder text of: ${text}`;
 
+const queryAllByPlaceholderTextWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByPlaceholderText, queryAllByPlaceholderText.name, 'queryAll');
+exports.queryAllByPlaceholderText = queryAllByPlaceholderTextWithSuggestions;
 const [queryByPlaceholderText, getAllByPlaceholderText, getByPlaceholderText, findAllByPlaceholderText, findByPlaceholderText] = (0, _allUtils.buildQueries)(queryAllByPlaceholderText, getMultipleError, getMissingError);
 exports.findByPlaceholderText = findByPlaceholderText;
 exports.findAllByPlaceholderText = findAllByPlaceholderText;
 exports.getByPlaceholderText = getByPlaceholderText;
 exports.getAllByPlaceholderText = getAllByPlaceholderText;
 exports.queryByPlaceholderText = queryByPlaceholderText;
-},{"./all-utils":44}],50:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"./all-utils":51}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByRole = queryAllByRole;
-exports.findByRole = exports.findAllByRole = exports.getByRole = exports.getAllByRole = exports.queryByRole = void 0;
+exports.findByRole = exports.findAllByRole = exports.getByRole = exports.getAllByRole = exports.queryAllByRole = exports.queryByRole = void 0;
 
 var _domAccessibilityApi = require("dom-accessibility-api");
 
 var _ariaQuery = require("aria-query");
 
 var _roleHelpers = require("../role-helpers");
+
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
 
 var _allUtils = require("./all-utils");
 
@@ -2063,8 +2381,12 @@ function queryAllByRole(container, role, {
   trim,
   normalizer,
   queryFallbacks = false,
-  selected
+  selected,
+  checked,
+  pressed,
+  level
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
   const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
@@ -2078,6 +2400,31 @@ function queryAllByRole(container, role, {
     // guard against unknown roles
     if (((_allRoles$get = _ariaQuery.roles.get(role)) == null ? void 0 : _allRoles$get.props['aria-selected']) === undefined) {
       throw new Error(`"aria-selected" is not supported on role "${role}".`);
+    }
+  }
+
+  if (checked !== undefined) {
+    var _allRoles$get2;
+
+    // guard against unknown roles
+    if (((_allRoles$get2 = _ariaQuery.roles.get(role)) == null ? void 0 : _allRoles$get2.props['aria-checked']) === undefined) {
+      throw new Error(`"aria-checked" is not supported on role "${role}".`);
+    }
+  }
+
+  if (pressed !== undefined) {
+    var _allRoles$get3;
+
+    // guard against unknown roles
+    if (((_allRoles$get3 = _ariaQuery.roles.get(role)) == null ? void 0 : _allRoles$get3.props['aria-pressed']) === undefined) {
+      throw new Error(`"aria-pressed" is not supported on role "${role}".`);
+    }
+  }
+
+  if (level !== undefined) {
+    // guard against using `level` option with any role other than `heading`
+    if (role !== 'heading') {
+      throw new Error(`Role "${role}" cannot have "level" property.`);
     }
   }
 
@@ -2116,6 +2463,18 @@ function queryAllByRole(container, role, {
   }).filter(element => {
     if (selected !== undefined) {
       return selected === (0, _roleHelpers.computeAriaSelected)(element);
+    }
+
+    if (checked !== undefined) {
+      return checked === (0, _roleHelpers.computeAriaChecked)(element);
+    }
+
+    if (pressed !== undefined) {
+      return pressed === (0, _roleHelpers.computeAriaPressed)(element);
+    }
+
+    if (level !== undefined) {
+      return level === (0, _roleHelpers.computeHeadingLevel)(element);
     } // don't care if aria attributes are unspecified
 
 
@@ -2130,16 +2489,36 @@ function queryAllByRole(container, role, {
       return true;
     }
 
-    return (0, _allUtils.matches)((0, _domAccessibilityApi.computeAccessibleName)(element), element, name, text => text);
+    return (0, _allUtils.matches)((0, _domAccessibilityApi.computeAccessibleName)(element, {
+      computedStyleSupportsPseudoElements: (0, _allUtils.getConfig)().computedStyleSupportsPseudoElements
+    }), element, name, text => text);
   });
 }
 
-const getMultipleError = (c, role) => `Found multiple elements with the role "${role}"`;
+const getMultipleError = (c, role, {
+  name
+} = {}) => {
+  let nameHint = '';
+
+  if (name === undefined) {
+    nameHint = '';
+  } else if (typeof name === 'string') {
+    nameHint = ` and name "${name}"`;
+  } else {
+    nameHint = ` and name \`${name}\``;
+  }
+
+  return `Found multiple elements with the role "${role}"${nameHint}`;
+};
 
 const getMissingError = (container, role, {
   hidden = (0, _allUtils.getConfig)().defaultHidden,
   name
 } = {}) => {
+  if ((0, _allUtils.getConfig)()._disableExpensiveErrorDiagnostics) {
+    return `Unable to find role="${role}"`;
+  }
+
   let roles = '';
   Array.from(container.children).forEach(childElement => {
     roles += (0, _roleHelpers.prettyRoles)(childElement, {
@@ -2179,13 +2558,15 @@ Unable to find an ${hidden === false ? 'accessible ' : ''}element with the role 
 ${roleMessage}`.trim();
 };
 
+const queryAllByRoleWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByRole, queryAllByRole.name, 'queryAll');
+exports.queryAllByRole = queryAllByRoleWithSuggestions;
 const [queryByRole, getAllByRole, getByRole, findAllByRole, findByRole] = (0, _allUtils.buildQueries)(queryAllByRole, getMultipleError, getMissingError);
 exports.findByRole = findByRole;
 exports.findAllByRole = findAllByRole;
 exports.getByRole = getByRole;
 exports.getAllByRole = getAllByRole;
 exports.queryByRole = queryByRole;
-},{"../role-helpers":55,"./all-utils":44,"aria-query":192,"dom-accessibility-api":370}],51:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"../role-helpers":62,"./all-utils":51,"aria-query":214,"dom-accessibility-api":401}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2193,32 +2574,44 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.findByTestId = exports.findAllByTestId = exports.getAllByTestId = exports.getByTestId = exports.queryAllByTestId = exports.queryByTestId = void 0;
 
+var _helpers = require("../helpers");
+
+var _queryHelpers = require("../query-helpers");
+
 var _allUtils = require("./all-utils");
 
 const getTestIdAttribute = () => (0, _allUtils.getConfig)().testIdAttribute;
 
-const queryAllByTestId = (...args) => (0, _allUtils.queryAllByAttribute)(getTestIdAttribute(), ...args);
-
-exports.queryAllByTestId = queryAllByTestId;
+function queryAllByTestId(...args) {
+  (0, _helpers.checkContainerType)(...args);
+  return (0, _allUtils.queryAllByAttribute)(getTestIdAttribute(), ...args);
+}
 
 const getMultipleError = (c, id) => `Found multiple elements by: [${getTestIdAttribute()}="${id}"]`;
 
 const getMissingError = (c, id) => `Unable to find an element by: [${getTestIdAttribute()}="${id}"]`;
 
+const queryAllByTestIdWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByTestId, queryAllByTestId.name, 'queryAll');
+exports.queryAllByTestId = queryAllByTestIdWithSuggestions;
 const [queryByTestId, getAllByTestId, getByTestId, findAllByTestId, findByTestId] = (0, _allUtils.buildQueries)(queryAllByTestId, getMultipleError, getMissingError);
 exports.findByTestId = findByTestId;
 exports.findAllByTestId = findAllByTestId;
 exports.getByTestId = getByTestId;
 exports.getAllByTestId = getAllByTestId;
 exports.queryByTestId = queryByTestId;
-},{"./all-utils":44}],52:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"./all-utils":51}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByText = queryAllByText;
-exports.findByText = exports.findAllByText = exports.getAllByText = exports.getByText = exports.queryByText = void 0;
+exports.findByText = exports.findAllByText = exports.getAllByText = exports.getByText = exports.queryAllByText = exports.queryByText = void 0;
+
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
+
+var _config = require("../config");
 
 var _allUtils = require("./all-utils");
 
@@ -2227,9 +2620,10 @@ function queryAllByText(container, text, {
   exact = true,
   collapseWhitespace,
   trim,
-  ignore = 'script, style',
+  ignore = _config.DEFAULT_IGNORE_TAGS,
   normalizer
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
   const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
@@ -2249,22 +2643,33 @@ const getMultipleError = (c, text) => `Found multiple elements with the text: ${
 
 const getMissingError = (c, text) => `Unable to find an element with the text: ${text}. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.`;
 
+const queryAllByTextWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByText, queryAllByText.name, 'queryAll');
+exports.queryAllByText = queryAllByTextWithSuggestions;
 const [queryByText, getAllByText, getByText, findAllByText, findByText] = (0, _allUtils.buildQueries)(queryAllByText, getMultipleError, getMissingError);
 exports.findByText = findByText;
 exports.findAllByText = findAllByText;
 exports.getByText = getByText;
 exports.getAllByText = getAllByText;
 exports.queryByText = queryByText;
-},{"./all-utils":44}],53:[function(require,module,exports){
+},{"../config":40,"../helpers":46,"../query-helpers":61,"./all-utils":51}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.queryAllByTitle = queryAllByTitle;
-exports.findByTitle = exports.findAllByTitle = exports.getAllByTitle = exports.getByTitle = exports.queryByTitle = void 0;
+exports.findByTitle = exports.findAllByTitle = exports.getAllByTitle = exports.getByTitle = exports.queryAllByTitle = exports.queryByTitle = void 0;
+
+var _queryHelpers = require("../query-helpers");
+
+var _helpers = require("../helpers");
 
 var _allUtils = require("./all-utils");
+
+const isSvgTitle = node => {
+  var _node$parentElement;
+
+  return node.tagName.toLowerCase() === 'title' && ((_node$parentElement = node.parentElement) == null ? void 0 : _node$parentElement.tagName.toLowerCase()) === 'svg';
+};
 
 function queryAllByTitle(container, text, {
   exact = true,
@@ -2272,26 +2677,29 @@ function queryAllByTitle(container, text, {
   trim,
   normalizer
 } = {}) {
+  (0, _helpers.checkContainerType)(container);
   const matcher = exact ? _allUtils.matches : _allUtils.fuzzyMatches;
   const matchNormalizer = (0, _allUtils.makeNormalizer)({
     collapseWhitespace,
     trim,
     normalizer
   });
-  return Array.from(container.querySelectorAll('[title], svg > title')).filter(node => matcher(node.getAttribute('title'), node, text, matchNormalizer) || matcher((0, _allUtils.getNodeText)(node), node, text, matchNormalizer));
+  return Array.from(container.querySelectorAll('[title], svg > title')).filter(node => matcher(node.getAttribute('title'), node, text, matchNormalizer) || isSvgTitle(node) && matcher((0, _allUtils.getNodeText)(node), node, text, matchNormalizer));
 }
 
 const getMultipleError = (c, title) => `Found multiple elements with the title: ${title}.`;
 
 const getMissingError = (c, title) => `Unable to find an element with the title: ${title}.`;
 
+const queryAllByTitleWithSuggestions = (0, _queryHelpers.wrapAllByQueryWithSuggestion)(queryAllByTitle, queryAllByTitle.name, 'queryAll');
+exports.queryAllByTitle = queryAllByTitleWithSuggestions;
 const [queryByTitle, getAllByTitle, getByTitle, findAllByTitle, findByTitle] = (0, _allUtils.buildQueries)(queryAllByTitle, getMultipleError, getMissingError);
 exports.findByTitle = findByTitle;
 exports.findAllByTitle = findAllByTitle;
 exports.getByTitle = getByTitle;
 exports.getAllByTitle = getAllByTitle;
 exports.queryByTitle = queryByTitle;
-},{"./all-utils":44}],54:[function(require,module,exports){
+},{"../helpers":46,"../query-helpers":61,"./all-utils":51}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2305,6 +2713,9 @@ exports.makeSingleQuery = makeSingleQuery;
 exports.makeGetAllQuery = makeGetAllQuery;
 exports.makeFindQuery = makeFindQuery;
 exports.buildQueries = buildQueries;
+exports.wrapSingleQueryWithSuggestion = exports.wrapAllByQueryWithSuggestion = void 0;
+
+var _suggestions = require("./suggestions");
 
 var _matches = require("./matches");
 
@@ -2353,11 +2764,22 @@ function makeSingleQuery(allQuery, getMultipleError) {
     const els = allQuery(container, ...args);
 
     if (els.length > 1) {
-      throw getMultipleElementsFoundError(getMultipleError(container, ...args), container);
+      const elementStrings = els.map(element => getElementError(null, element).message).join('\n\n');
+      throw getMultipleElementsFoundError(`${getMultipleError(container, ...args)}
+
+Here are the matching elements:
+
+${elementStrings}`, container);
     }
 
     return els[0] || null;
   };
+}
+
+function getSuggestionError(suggestion, container) {
+  return (0, _config.getConfig)().getElementError(`A better query is available, try this:
+${suggestion.toString()}
+`, container);
 } // this accepts a query function and returns a function which throws an error
 // if an empty list of elements is returned
 
@@ -2377,18 +2799,67 @@ function makeGetAllQuery(allQuery, getMissingError) {
 
 
 function makeFindQuery(getter) {
-  return (container, text, options, waitForOptions) => (0, _waitFor.waitFor)(() => getter(container, text, options), waitForOptions);
+  return (container, text, options, waitForOptions) => (0, _waitFor.waitFor)(() => {
+    return getter(container, text, options);
+  }, waitForOptions);
 }
 
+const wrapSingleQueryWithSuggestion = (query, queryAllByName, variant) => (container, ...args) => {
+  const element = query(container, ...args);
+  const [{
+    suggest = (0, _config.getConfig)().throwSuggestions
+  } = {}] = args.slice(-1);
+
+  if (element && suggest) {
+    const suggestion = (0, _suggestions.getSuggestedQuery)(element, variant);
+
+    if (suggestion && !queryAllByName.endsWith(suggestion.queryName)) {
+      throw getSuggestionError(suggestion.toString(), container);
+    }
+  }
+
+  return element;
+};
+
+exports.wrapSingleQueryWithSuggestion = wrapSingleQueryWithSuggestion;
+
+const wrapAllByQueryWithSuggestion = (query, queryAllByName, variant) => (container, ...args) => {
+  const els = query(container, ...args);
+  const [{
+    suggest = (0, _config.getConfig)().throwSuggestions
+  } = {}] = args.slice(-1);
+
+  if (els.length && suggest) {
+    // get a unique list of all suggestion messages.  We are only going to make a suggestion if
+    // all the suggestions are the same
+    const uniqueSuggestionMessages = [...new Set(els.map(element => {
+      var _getSuggestedQuery;
+
+      return (_getSuggestedQuery = (0, _suggestions.getSuggestedQuery)(element, variant)) == null ? void 0 : _getSuggestedQuery.toString();
+    }))];
+
+    if ( // only want to suggest if all the els have the same suggestion.
+    uniqueSuggestionMessages.length === 1 && !queryAllByName.endsWith((0, _suggestions.getSuggestedQuery)(els[0], variant).queryName)) {
+      throw getSuggestionError(uniqueSuggestionMessages[0], container);
+    }
+  }
+
+  return els;
+};
+
+exports.wrapAllByQueryWithSuggestion = wrapAllByQueryWithSuggestion;
+
 function buildQueries(queryAllBy, getMultipleError, getMissingError) {
-  const queryBy = makeSingleQuery(queryAllBy, getMultipleError);
+  const queryBy = wrapSingleQueryWithSuggestion(makeSingleQuery(queryAllBy, getMultipleError), queryAllBy.name, 'query');
   const getAllBy = makeGetAllQuery(queryAllBy, getMissingError);
   const getBy = makeSingleQuery(getAllBy, getMultipleError);
-  const findAllBy = makeFindQuery(getAllBy);
-  const findBy = makeFindQuery(getBy);
-  return [queryBy, getAllBy, getBy, findAllBy, findBy];
+  const getByWithSuggestions = wrapSingleQueryWithSuggestion(getBy, queryAllBy.name, 'get');
+  const getAllWithSuggestions = wrapAllByQueryWithSuggestion(getAllBy, queryAllBy.name.replace('query', 'get'), 'getAll');
+  const findAllBy = makeFindQuery(wrapAllByQueryWithSuggestion(getAllBy, queryAllBy.name, 'findAll'));
+  const findBy = makeFindQuery(wrapSingleQueryWithSuggestion(getBy, queryAllBy.name, 'find'));
+  return [queryBy, getAllWithSuggestions, getByWithSuggestions, findAllBy, findBy];
 }
-},{"./config":35,"./matches":42,"./wait-for":60}],55:[function(require,module,exports){
+},{"./config":40,"./matches":49,"./suggestions":64,"./wait-for":68}],62:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2400,6 +2871,9 @@ exports.isSubtreeInaccessible = isSubtreeInaccessible;
 exports.prettyRoles = prettyRoles;
 exports.isInaccessible = isInaccessible;
 exports.computeAriaSelected = computeAriaSelected;
+exports.computeAriaChecked = computeAriaChecked;
+exports.computeAriaPressed = computeAriaPressed;
+exports.computeHeadingLevel = computeHeadingLevel;
 exports.logRoles = void 0;
 
 var _ariaQuery = require("aria-query");
@@ -2407,6 +2881,8 @@ var _ariaQuery = require("aria-query");
 var _domAccessibilityApi = require("dom-accessibility-api");
 
 var _prettyDom = require("./pretty-dom");
+
+var _config = require("./config");
 
 const elementRoleList = buildElementRoleList(_ariaQuery.elementRoles);
 /**
@@ -2474,10 +2950,10 @@ function getImplicitAriaRoles(currentNode) {
   // eslint bug here:
   // eslint-disable-next-line no-unused-vars
   for (const {
-    selector,
+    match,
     roles
   } of elementRoleList) {
-    if (currentNode.matches(selector)) {
+    if (match(currentNode)) {
       return [...roles];
     }
   }
@@ -2488,7 +2964,7 @@ function getImplicitAriaRoles(currentNode) {
 function buildElementRoleList(elementRolesMap) {
   function makeElementSelector({
     name,
-    attributes = []
+    attributes
   }) {
     return `${name}${attributes.map(({
       name: attributeName,
@@ -2513,12 +2989,35 @@ function buildElementRoleList(elementRolesMap) {
     return attributes.length;
   }
 
+  function match(element) {
+    return node => {
+      let {
+        attributes = []
+      } = element; // https://github.com/testing-library/dom-testing-library/issues/814
+
+      const typeTextIndex = attributes.findIndex(attribute => attribute.value && attribute.name === 'type' && attribute.value === 'text');
+
+      if (typeTextIndex >= 0) {
+        // not using splice to not mutate the attributes array
+        attributes = [...attributes.slice(0, typeTextIndex), ...attributes.slice(typeTextIndex + 1)];
+
+        if (node.type !== 'text') {
+          return false;
+        }
+      }
+
+      return node.matches(makeElementSelector({ ...element,
+        attributes
+      }));
+    };
+  }
+
   let result = []; // eslint bug here:
   // eslint-disable-next-line no-unused-vars
 
   for (const [element, roles] of elementRolesMap.entries()) {
     result = [...result, {
-      selector: makeElementSelector(element),
+      match: match(element),
       roles: Array.from(roles),
       specificity: getSelectorSpecificity(element)
     }];
@@ -2543,7 +3042,14 @@ function getRoles(container, {
   return flattenDOM(container).filter(element => {
     return hidden === false ? isInaccessible(element) === false : true;
   }).reduce((acc, node) => {
-    const roles = getImplicitAriaRoles(node);
+    let roles = []; // TODO: This violates html-aria which does not allow any role on every element
+
+    if (node.hasAttribute('role')) {
+      roles = node.getAttribute('role').split(' ').slice(0, 1);
+    } else {
+      roles = getImplicitAriaRoles(node);
+    }
+
     return roles.reduce((rolesAcc, role) => Array.isArray(rolesAcc[role]) ? { ...rolesAcc,
       [role]: [...rolesAcc[role], node]
     } : { ...rolesAcc,
@@ -2557,11 +3063,14 @@ function prettyRoles(dom, {
 }) {
   const roles = getRoles(dom, {
     hidden
-  });
-  return Object.entries(roles).map(([role, elements]) => {
+  }); // We prefer to skip generic role, we don't recommend it
+
+  return Object.entries(roles).filter(([role]) => role !== 'generic').map(([role, elements]) => {
     const delimiterBar = '-'.repeat(50);
     const elementsString = elements.map(el => {
-      const nameString = `Name "${(0, _domAccessibilityApi.computeAccessibleName)(el)}":\n`;
+      const nameString = `Name "${(0, _domAccessibilityApi.computeAccessibleName)(el, {
+        computedStyleSupportsPseudoElements: (0, _config.getConfig)().computedStyleSupportsPseudoElements
+      })}":\n`;
       const domString = (0, _prettyDom.prettyDOM)(el.cloneNode(false));
       return `${nameString}${domString}`;
     }).join('\n\n');
@@ -2590,7 +3099,42 @@ function computeAriaSelected(element) {
   } // explicit value
 
 
-  const attributeValue = element.getAttribute('aria-selected');
+  return checkBooleanAttribute(element, 'aria-selected');
+}
+/**
+ * @param {Element} element -
+ * @returns {boolean | undefined} - false/true if (not)checked, undefined if not checked-able
+ */
+
+
+function computeAriaChecked(element) {
+  // implicit value from html-aam mappings: https://www.w3.org/TR/html-aam-1.0/#html-attribute-state-and-property-mappings
+  // https://www.w3.org/TR/html-aam-1.0/#details-id-56
+  // https://www.w3.org/TR/html-aam-1.0/#details-id-67
+  if ('indeterminate' in element && element.indeterminate) {
+    return undefined;
+  }
+
+  if ('checked' in element) {
+    return element.checked;
+  } // explicit value
+
+
+  return checkBooleanAttribute(element, 'aria-checked');
+}
+/**
+ * @param {Element} element -
+ * @returns {boolean | undefined} - false/true if (not)pressed, undefined if not press-able
+ */
+
+
+function computeAriaPressed(element) {
+  // https://www.w3.org/TR/wai-aria-1.1/#aria-pressed
+  return checkBooleanAttribute(element, 'aria-pressed');
+}
+
+function checkBooleanAttribute(element, attribute) {
+  const attributeValue = element.getAttribute(attribute);
 
   if (attributeValue === 'true') {
     return true;
@@ -2602,7 +3146,28 @@ function computeAriaSelected(element) {
 
   return undefined;
 }
-},{"./pretty-dom":43,"aria-query":192,"dom-accessibility-api":370}],56:[function(require,module,exports){
+/**
+ * @param {Element} element -
+ * @returns {number | undefined} - number if implicit heading or aria-level present, otherwise undefined
+ */
+
+
+function computeHeadingLevel(element) {
+  // https://w3c.github.io/html-aam/#el-h1-h6
+  // https://w3c.github.io/html-aam/#el-h1-h6
+  // explicit aria-level value
+  // https://www.w3.org/TR/wai-aria-1.2/#aria-level
+  const ariaLevelAttribute = element.getAttribute('aria-level') && Number(element.getAttribute('aria-level'));
+  return ariaLevelAttribute || {
+    H1: 1,
+    H2: 2,
+    H3: 3,
+    H4: 4,
+    H5: 5,
+    H6: 6
+  }[element.tagName];
+}
+},{"./config":40,"./pretty-dom":50,"aria-query":214,"dom-accessibility-api":401}],63:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -2612,27 +3177,214 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.screen = void 0;
 
+var _lzString = require("lz-string");
+
 var queries = _interopRequireWildcard(require("./queries"));
 
 var _getQueriesForElement = require("./get-queries-for-element");
 
 var _prettyDom = require("./pretty-dom");
 
+var _helpers = require("./helpers");
+
+function unindent(string) {
+  // remove white spaces first, to save a few bytes.
+  // testing-playground will reformat on load any ways.
+  return string.replace(/[ \t]*[\n][ \t]*/g, '\n');
+}
+
+function encode(value) {
+  return (0, _lzString.compressToEncodedURIComponent)(unindent(value));
+}
+
+function getPlaygroundUrl(markup) {
+  return `https://testing-playground.com/#markup=${encode(markup)}`;
+}
+
 const debug = (element, maxLength, options) => Array.isArray(element) ? element.forEach(el => (0, _prettyDom.logDOM)(el, maxLength, options)) : (0, _prettyDom.logDOM)(element, maxLength, options);
 
-const screen = typeof document !== 'undefined' && document.body ? (0, _getQueriesForElement.getQueriesForElement)(document.body, queries, {
-  debug
-}) : Object.keys(queries).reduce((helpers, key) => {
+const logTestingPlaygroundURL = (element = (0, _helpers.getDocument)().body) => {
+  if (!element || !('innerHTML' in element)) {
+    console.log(`The element you're providing isn't a valid DOM element.`);
+    return;
+  }
+
+  if (!element.innerHTML) {
+    console.log(`The provided element doesn't have any children.`);
+    return;
+  }
+
+  console.log(`Open this URL in your browser\n\n${getPlaygroundUrl(element.innerHTML)}`);
+};
+
+const initialValue = {
+  debug,
+  logTestingPlaygroundURL
+};
+const screen = typeof document !== 'undefined' && document.body ? (0, _getQueriesForElement.getQueriesForElement)(document.body, queries, initialValue) : Object.keys(queries).reduce((helpers, key) => {
   helpers[key] = () => {
     throw new TypeError('For queries bound to document.body a global document has to be available... Learn more: https://testing-library.com/s/screen-global-error');
   };
 
   return helpers;
-}, {
-  debug
-});
+}, initialValue);
 exports.screen = screen;
-},{"./get-queries-for-element":39,"./pretty-dom":43,"./queries":47,"@babel/runtime/helpers/interopRequireWildcard":33}],57:[function(require,module,exports){
+},{"./get-queries-for-element":44,"./helpers":46,"./pretty-dom":50,"./queries":54,"@babel/runtime/helpers/interopRequireWildcard":38,"lz-string":405}],64:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getSuggestedQuery = getSuggestedQuery;
+
+var _domAccessibilityApi = require("dom-accessibility-api");
+
+var _matches = require("./matches");
+
+var _getNodeText = require("./get-node-text");
+
+var _config = require("./config");
+
+var _roleHelpers = require("./role-helpers");
+
+var _labelHelpers = require("./label-helpers");
+
+const normalize = (0, _matches.getDefaultNormalizer)();
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+function getRegExpMatcher(string) {
+  return new RegExp(escapeRegExp(string.toLowerCase()), 'i');
+}
+
+function makeSuggestion(queryName, element, content, {
+  variant,
+  name
+}) {
+  let warning = '';
+  const queryOptions = {};
+  const queryArgs = [['Role', 'TestId'].includes(queryName) ? content : getRegExpMatcher(content)];
+
+  if (name) {
+    queryOptions.name = getRegExpMatcher(name);
+  }
+
+  if (queryName === 'Role' && (0, _roleHelpers.isInaccessible)(element)) {
+    queryOptions.hidden = true;
+    warning = `Element is inaccessible. This means that the element and all its children are invisible to screen readers.
+    If you are using the aria-hidden prop, make sure this is the right choice for your case.
+    `;
+  }
+
+  if (Object.keys(queryOptions).length > 0) {
+    queryArgs.push(queryOptions);
+  }
+
+  const queryMethod = `${variant}By${queryName}`;
+  return {
+    queryName,
+    queryMethod,
+    queryArgs,
+    variant,
+    warning,
+
+    toString() {
+      if (warning) {
+        console.warn(warning);
+      }
+
+      let [text, options] = queryArgs;
+      text = typeof text === 'string' ? `'${text}'` : text;
+      options = options ? `, { ${Object.entries(options).map(([k, v]) => `${k}: ${v}`).join(', ')} }` : '';
+      return `${queryMethod}(${text}${options})`;
+    }
+
+  };
+}
+
+function canSuggest(currentMethod, requestedMethod, data) {
+  return data && (!requestedMethod || requestedMethod.toLowerCase() === currentMethod.toLowerCase());
+}
+
+function getSuggestedQuery(element, variant = 'get', method) {
+  var _element$getAttribute, _getImplicitAriaRoles;
+
+  // don't create suggestions for script and style elements
+  if (element.matches(_config.DEFAULT_IGNORE_TAGS)) {
+    return undefined;
+  } //We prefer to suggest something else if the role is generic
+
+
+  const role = (_element$getAttribute = element.getAttribute('role')) != null ? _element$getAttribute : (_getImplicitAriaRoles = (0, _roleHelpers.getImplicitAriaRoles)(element)) == null ? void 0 : _getImplicitAriaRoles[0];
+
+  if (role !== 'generic' && canSuggest('Role', method, role)) {
+    return makeSuggestion('Role', element, role, {
+      variant,
+      name: (0, _domAccessibilityApi.computeAccessibleName)(element, {
+        computedStyleSupportsPseudoElements: (0, _config.getConfig)().computedStyleSupportsPseudoElements
+      })
+    });
+  }
+
+  const labelText = (0, _labelHelpers.getLabels)(document, element).map(label => label.content).join(' ');
+
+  if (canSuggest('LabelText', method, labelText)) {
+    return makeSuggestion('LabelText', element, labelText, {
+      variant
+    });
+  }
+
+  const placeholderText = element.getAttribute('placeholder');
+
+  if (canSuggest('PlaceholderText', method, placeholderText)) {
+    return makeSuggestion('PlaceholderText', element, placeholderText, {
+      variant
+    });
+  }
+
+  const textContent = normalize((0, _getNodeText.getNodeText)(element));
+
+  if (canSuggest('Text', method, textContent)) {
+    return makeSuggestion('Text', element, textContent, {
+      variant
+    });
+  }
+
+  if (canSuggest('DisplayValue', method, element.value)) {
+    return makeSuggestion('DisplayValue', element, normalize(element.value), {
+      variant
+    });
+  }
+
+  const alt = element.getAttribute('alt');
+
+  if (canSuggest('AltText', method, alt)) {
+    return makeSuggestion('AltText', element, alt, {
+      variant
+    });
+  }
+
+  const title = element.getAttribute('title');
+
+  if (canSuggest('Title', method, title)) {
+    return makeSuggestion('Title', element, title, {
+      variant
+    });
+  }
+
+  const testId = element.getAttribute((0, _config.getConfig)().testIdAttribute);
+
+  if (canSuggest('TestId', method, testId)) {
+    return makeSuggestion('TestId', element, testId, {
+      variant
+    });
+  }
+
+  return undefined;
+}
+},{"./config":40,"./get-node-text":43,"./label-helpers":48,"./matches":49,"./role-helpers":62,"dom-accessibility-api":401}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2691,7 +3443,7 @@ function waitForDomChange({
 function waitForDomChangeWrapper(...args) {
   return (0, _config.getConfig)().asyncWrapper(() => waitForDomChange(...args));
 }
-},{"./config":35,"./helpers":40}],58:[function(require,module,exports){
+},{"./config":40,"./helpers":46}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2737,7 +3489,7 @@ async function waitForElementToBeRemoved(callback, options) {
       result = callback();
     } catch (error) {
       if (error.name === 'TestingLibraryElementError') {
-        return true;
+        return undefined;
       }
 
       throw error;
@@ -2747,14 +3499,14 @@ async function waitForElementToBeRemoved(callback, options) {
       throw timeoutError;
     }
 
-    return true;
+    return undefined;
   }, options);
 }
 /*
 eslint
   require-await: "off"
 */
-},{"./wait-for":60}],59:[function(require,module,exports){
+},{"./wait-for":68}],67:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2771,7 +3523,7 @@ let hasWarned = false; // deprecated... TODO: remove this method. People should 
 async function waitForElement(callback, options) {
   if (!hasWarned) {
     hasWarned = true;
-    console.warn(`\`waitForElement\` has been deprecated. Use a \`find*\` query (preferred: https://testing-library.com/docs/dom-testing-library/api-queries#findby) or use \`waitFor\` instead (it's the same API, so you can find/replace): https://testing-library.com/docs/dom-testing-library/api-async#waitfor`);
+    console.warn(`\`waitForElement\` has been deprecated. Use a \`find*\` query (preferred: https://testing-library.com/docs/dom-testing-library/api-queries#findby) or use \`waitFor\` instead: https://testing-library.com/docs/dom-testing-library/api-async#waitfor`);
   }
 
   if (!callback) {
@@ -2792,7 +3544,7 @@ async function waitForElement(callback, options) {
 eslint
   require-await: "off"
 */
-},{"./wait-for":60}],60:[function(require,module,exports){
+},{"./wait-for":68}],68:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2817,6 +3569,10 @@ function waitFor(callback, {
   showOriginalStackTrace = (0, _config.getConfig)().showOriginalStackTrace,
   stackTraceError,
   interval = 50,
+  onTimeout = error => {
+    error.message = (0, _config.getConfig)().getElementError(error.message, container).message;
+    return error;
+  },
   mutationObserverOptions = {
     subtree: true,
     childList: true,
@@ -2828,22 +3584,64 @@ function waitFor(callback, {
     throw new TypeError('Received `callback` arg must be a function');
   }
 
-  if (interval < 1) interval = 1;
-  return new Promise((resolve, reject) => {
-    let lastError;
-    const overallTimeoutTimer = (0, _helpers.setTimeout)(onTimeout, timeout);
-    const intervalId = setInterval(checkCallback, interval);
-    const {
-      MutationObserver
-    } = (0, _helpers.getWindowFromNode)(container);
-    const observer = new MutationObserver(checkCallback);
-    (0, _helpers.runWithRealTimers)(() => observer.observe(container, mutationObserverOptions));
-    checkCallback();
+  return new Promise(async (resolve, reject) => {
+    let lastError, intervalId, observer;
+    let finished = false;
+    let promiseStatus = 'idle';
+    const overallTimeoutTimer = (0, _helpers.setTimeout)(handleTimeout, timeout);
+    const usingFakeTimers = (0, _helpers.jestFakeTimersAreEnabled)();
+
+    if (usingFakeTimers) {
+      checkCallback(); // this is a dangerous rule to disable because it could lead to an
+      // infinite loop. However, eslint isn't smart enough to know that we're
+      // setting finished inside `onDone` which will be called when we're done
+      // waiting or when we've timed out.
+      // eslint-disable-next-line no-unmodified-loop-condition
+
+      while (!finished) {
+        if (!(0, _helpers.jestFakeTimersAreEnabled)()) {
+          const error = new Error(`Changed from using fake timers to real timers while using waitFor. This is not allowed and will result in very strange behavior. Please ensure you're awaiting all async things your test is doing before changing to real timers. For more info, please go to https://github.com/testing-library/dom-testing-library/issues/830`);
+          if (!showOriginalStackTrace) copyStackTrace(error, stackTraceError);
+          reject(error);
+          return;
+        } // we *could* (maybe should?) use `advanceTimersToNextTimer` but it's
+        // possible that could make this loop go on forever if someone is using
+        // third party code that's setting up recursive timers so rapidly that
+        // the user's timer's don't get a chance to resolve. So we'll advance
+        // by an interval instead. (We have a test for this case).
+
+
+        jest.advanceTimersByTime(interval); // It's really important that checkCallback is run *before* we flush
+        // in-flight promises. To be honest, I'm not sure why, and I can't quite
+        // think of a way to reproduce the problem in a test, but I spent
+        // an entire day banging my head against a wall on this.
+
+        checkCallback(); // In this rare case, we *need* to wait for in-flight promises
+        // to resolve before continuing. We don't need to take advantage
+        // of parallelization so we're fine.
+        // https://stackoverflow.com/a/59243586/971592
+        // eslint-disable-next-line no-await-in-loop
+
+        await new Promise(r => (0, _helpers.setImmediate)(r));
+      }
+    } else {
+      intervalId = setInterval(checkRealTimersCallback, interval);
+      const {
+        MutationObserver
+      } = (0, _helpers.getWindowFromNode)(container);
+      observer = new MutationObserver(checkRealTimersCallback);
+      observer.observe(container, mutationObserverOptions);
+      checkCallback();
+    }
 
     function onDone(error, result) {
+      finished = true;
       (0, _helpers.clearTimeout)(overallTimeoutTimer);
-      clearInterval(intervalId);
-      (0, _helpers.setImmediate)(() => observer.disconnect());
+
+      if (!usingFakeTimers) {
+        clearInterval(intervalId);
+        observer.disconnect();
+      }
 
       if (error) {
         reject(error);
@@ -2852,16 +3650,42 @@ function waitFor(callback, {
       }
     }
 
+    function checkRealTimersCallback() {
+      if ((0, _helpers.jestFakeTimersAreEnabled)()) {
+        const error = new Error(`Changed from using real timers to fake timers while using waitFor. This is not allowed and will result in very strange behavior. Please ensure you're awaiting all async things your test is doing before changing to fake timers. For more info, please go to https://github.com/testing-library/dom-testing-library/issues/830`);
+        if (!showOriginalStackTrace) copyStackTrace(error, stackTraceError);
+        return reject(error);
+      } else {
+        return checkCallback();
+      }
+    }
+
     function checkCallback() {
+      if (promiseStatus === 'pending') return;
+
       try {
-        onDone(null, callback()); // If `callback` throws, wait for the next mutation or timeout.
+        const result = (0, _config.runWithExpensiveErrorDiagnosticsDisabled)(callback);
+
+        if (typeof (result == null ? void 0 : result.then) === 'function') {
+          promiseStatus = 'pending';
+          result.then(resolvedValue => {
+            promiseStatus = 'resolved';
+            onDone(null, resolvedValue);
+          }, rejectedValue => {
+            promiseStatus = 'rejected';
+            lastError = rejectedValue;
+          });
+        } else {
+          onDone(null, result);
+        } // If `callback` throws, wait for the next mutation, interval, or timeout.
+
       } catch (error) {
-        // Save the callback error to reject the promise with it.
+        // Save the most recent callback error to reject the promise with it in the event of a timeout
         lastError = error;
       }
     }
 
-    function onTimeout() {
+    function handleTimeout() {
       let error;
 
       if (lastError) {
@@ -2878,7 +3702,7 @@ function waitFor(callback, {
         }
       }
 
-      onDone(error, null);
+      onDone(onTimeout(error), null);
     }
   });
 }
@@ -2907,7 +3731,11 @@ function wait(...args) {
 
   return waitForWrapper(first, ...rest);
 }
-},{"./config":35,"./helpers":40}],61:[function(require,module,exports){
+/*
+eslint
+  max-lines-per-function: ["error", {"max": 200}],
+*/
+},{"./config":40,"./helpers":46}],69:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -3045,7 +3873,75 @@ var _default = act;
 /* eslint no-console:0 */
 
 exports.default = _default;
-},{"@babel/runtime/helpers/interopRequireDefault":32,"@babel/runtime/helpers/interopRequireWildcard":33,"react":405,"react-dom":398,"react-dom/test-utils":399}],62:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":37,"@babel/runtime/helpers/interopRequireWildcard":38,"react":437,"react-dom":430,"react-dom/test-utils":431}],70:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fireEvent = void 0;
+
+var _dom = require("@testing-library/dom");
+
+// react-testing-library's version of fireEvent will call
+// dom-testing-library's version of fireEvent. The reason
+// we make this distinction however is because we have
+// a few extra events that work a bit differently
+const fireEvent = (...args) => (0, _dom.fireEvent)(...args);
+
+exports.fireEvent = fireEvent;
+Object.keys(_dom.fireEvent).forEach(key => {
+  fireEvent[key] = (...args) => _dom.fireEvent[key](...args);
+}); // React event system tracks native mouseOver/mouseOut events for
+// running onMouseEnter/onMouseLeave handlers
+// @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/EnterLeaveEventPlugin.js#L24-L31
+
+const mouseEnter = fireEvent.mouseEnter;
+const mouseLeave = fireEvent.mouseLeave;
+
+fireEvent.mouseEnter = (...args) => {
+  mouseEnter(...args);
+  return fireEvent.mouseOver(...args);
+};
+
+fireEvent.mouseLeave = (...args) => {
+  mouseLeave(...args);
+  return fireEvent.mouseOut(...args);
+};
+
+const select = fireEvent.select;
+
+fireEvent.select = (node, init) => {
+  select(node, init); // React tracks this event only on focused inputs
+
+  node.focus(); // React creates this event when one of the following native events happens
+  // - contextMenu
+  // - mouseUp
+  // - dragEnd
+  // - keyUp
+  // - keyDown
+  // so we can use any here
+  // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
+
+  fireEvent.keyUp(node, init);
+}; // React event system tracks native focusout/focusin events for
+// running blur/focus handlers
+// @link https://github.com/facebook/react/pull/19186
+
+
+const blur = fireEvent.blur;
+const focus = fireEvent.focus;
+
+fireEvent.blur = (...args) => {
+  fireEvent.focusOut(...args);
+  return blur(...args);
+};
+
+fireEvent.focus = (...args) => {
+  fireEvent.focusIn(...args);
+  return focus(...args);
+};
+},{"@testing-library/dom":47}],71:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3059,8 +3955,12 @@ exports.default = flushMicroTasks;
 // anyway. So we're just going to ignore coverage for this file
 
 /**
- * copied from React's enqueueTask.js
+ * copied and modified from React's enqueueTask.js
  */
+function getIsUsingFakeTimers() {
+  return typeof jest !== 'undefined' && typeof setTimeout !== 'undefined' && (setTimeout.hasOwnProperty('_isMockFunction') || setTimeout.hasOwnProperty('clock'));
+}
+
 let didWarnAboutMessageChannel = false;
 let enqueueTask;
 
@@ -3094,13 +3994,21 @@ try {
 function flushMicroTasks() {
   return {
     then(resolve) {
-      enqueueTask(resolve);
+      if (getIsUsingFakeTimers()) {
+        // without this, a test using fake timers would never get microtasks
+        // actually flushed. I spent several days on this... Really hard to
+        // reproduce the problem, so there's no test for it. But it works!
+        jest.advanceTimersByTime(0);
+        resolve();
+      } else {
+        enqueueTask(resolve);
+      }
     }
 
   };
 }
-},{}],63:[function(require,module,exports){
-(function (process){
+},{}],72:[function(require,module,exports){
+(function (process){(function (){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3120,17 +4028,29 @@ Object.keys(_pure).forEach(function (key) {
 });
 
 // if we're running in a test runner that supports afterEach
-// then we'll automatically run cleanup afterEach test
+// or teardown then we'll automatically run cleanup afterEach test
 // this ensures that tests run in isolation from each other
 // if you don't like this then either import the `pure` module
 // or set the RTL_SKIP_AUTO_CLEANUP env variable to 'true'.
-if (typeof afterEach === 'function' && !process.env.RTL_SKIP_AUTO_CLEANUP) {
-  afterEach(async () => {
-    await (0, _pure.cleanup)();
-  });
+if (!process.env.RTL_SKIP_AUTO_CLEANUP) {
+  // ignore teardown() in code coverage because Jest does not support it
+
+  /* istanbul ignore else */
+  if (typeof afterEach === 'function') {
+    afterEach(async () => {
+      await (0, _pure.cleanup)();
+    });
+  } else if (typeof teardown === 'function') {
+    // Block is guarded by `typeof` check.
+    // eslint does not support `typeof` guards.
+    // eslint-disable-next-line no-undef
+    teardown(async () => {
+      await (0, _pure.cleanup)();
+    });
+  }
 }
-}).call(this,require('_process'))
-},{"./pure":64,"_process":391}],64:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'))
+},{"./pure":73,"_process":423}],73:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -3143,16 +4063,21 @@ Object.defineProperty(exports, "__esModule", {
 var _exportNames = {
   render: true,
   cleanup: true,
-  fireEvent: true,
-  act: true
+  act: true,
+  fireEvent: true
 };
 exports.render = render;
 exports.cleanup = cleanup;
-exports.fireEvent = fireEvent;
 Object.defineProperty(exports, "act", {
   enumerable: true,
   get: function () {
     return _actCompat.default;
+  }
+});
+Object.defineProperty(exports, "fireEvent", {
+  enumerable: true,
+  get: function () {
+    return _fireEvent.fireEvent;
   }
 });
 
@@ -3175,6 +4100,8 @@ Object.keys(_dom).forEach(function (key) {
 
 var _actCompat = _interopRequireWildcard(require("./act-compat"));
 
+var _fireEvent = require("./fire-event");
+
 var _flushMicrotasks = _interopRequireDefault(require("./flush-microtasks"));
 
 (0, _dom.configure)({
@@ -3182,6 +4109,13 @@ var _flushMicrotasks = _interopRequireDefault(require("./flush-microtasks"));
     let result;
     await (0, _actCompat.asyncAct)(async () => {
       result = await cb();
+    });
+    return result;
+  },
+  eventWrapper: cb => {
+    let result;
+    (0, _actCompat.default)(() => {
+      result = cb();
     });
     return result;
   }
@@ -3210,7 +4144,7 @@ function render(ui, {
 
   mountedContainers.add(container);
 
-  const wrapUiIfNeeded = innerElement => WrapperComponent ? _react.default.createElement(WrapperComponent, null, innerElement) : innerElement;
+  const wrapUiIfNeeded = innerElement => WrapperComponent ? /*#__PURE__*/_react.default.createElement(WrapperComponent, null, innerElement) : innerElement;
 
   (0, _actCompat.default)(() => {
     if (hydrate) {
@@ -3225,7 +4159,11 @@ function render(ui, {
     debug: (el = baseElement, maxLength, options) => Array.isArray(el) ? // eslint-disable-next-line no-console
     el.forEach(e => console.log((0, _dom.prettyDOM)(e, maxLength, options))) : // eslint-disable-next-line no-console,
     console.log((0, _dom.prettyDOM)(el, maxLength, options)),
-    unmount: () => _reactDom.default.unmountComponentAtNode(container),
+    unmount: () => {
+      (0, _actCompat.default)(() => {
+        _reactDom.default.unmountComponentAtNode(container);
+      });
+    },
     rerender: rerenderUi => {
       render(wrapUiIfNeeded(rerenderUi), {
         container,
@@ -3234,22 +4172,24 @@ function render(ui, {
       // folks can use all the same utilities we return in the first place that are bound to the container
     },
     asFragment: () => {
-      /* istanbul ignore if (jsdom limitation) */
+      /* istanbul ignore else (old jsdom limitation) */
       if (typeof document.createRange === 'function') {
         return document.createRange().createContextualFragment(container.innerHTML);
+      } else {
+        const template = document.createElement('template');
+        template.innerHTML = container.innerHTML;
+        return template.content;
       }
-
-      const template = document.createElement('template');
-      template.innerHTML = container.innerHTML;
-      return template.content;
     },
     ...(0, _dom.getQueriesForElement)(baseElement, queries)
   };
 }
 
 async function cleanup() {
+  mountedContainers.forEach(cleanupAtContainer); // flush microtask queue after unmounting in case
+  // unmount sequence generates new microtasks
+
   await (0, _flushMicrotasks.default)();
-  mountedContainers.forEach(cleanupAtContainer);
 } // maybe one day we'll expose this (perhaps even as a utility returned by render).
 // but let's wait until someone asks for it.
 
@@ -3262,68 +4202,13 @@ function cleanupAtContainer(container) {
   }
 
   mountedContainers.delete(container);
-} // react-testing-library's version of fireEvent will call
-// dom-testing-library's version of fireEvent wrapped inside
-// an "act" call so that after all event callbacks have been
-// called, the resulting useEffect callbacks will also be
-// called.
-
-
-function fireEvent(...args) {
-  let returnValue;
-  (0, _actCompat.default)(() => {
-    returnValue = (0, _dom.fireEvent)(...args);
-  });
-  return returnValue;
-}
-
-Object.keys(_dom.fireEvent).forEach(key => {
-  fireEvent[key] = (...args) => {
-    let returnValue;
-    (0, _actCompat.default)(() => {
-      returnValue = _dom.fireEvent[key](...args);
-    });
-    return returnValue;
-  };
-}); // React event system tracks native mouseOver/mouseOut events for
-// running onMouseEnter/onMouseLeave handlers
-// @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/EnterLeaveEventPlugin.js#L24-L31
-
-const mouseEnter = fireEvent.mouseEnter;
-const mouseLeave = fireEvent.mouseLeave;
-
-fireEvent.mouseEnter = (...args) => {
-  mouseEnter(...args);
-  return fireEvent.mouseOver(...args);
-};
-
-fireEvent.mouseLeave = (...args) => {
-  mouseLeave(...args);
-  return fireEvent.mouseOut(...args);
-};
-
-const select = fireEvent.select;
-
-fireEvent.select = (node, init) => {
-  select(node, init); // React tracks this event only on focused inputs
-
-  node.focus(); // React creates this event when one of the following native events happens
-  // - contextMenu
-  // - mouseUp
-  // - dragEnd
-  // - keyUp
-  // - keyDown
-  // so we can use any here
-  // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
-
-  fireEvent.keyUp(node, init);
-}; // just re-export everything from dom-testing-library
+} // just re-export everything from dom-testing-library
 // NOTE: we're not going to export asyncAct because that's our own compatibility
 // thing for people using react-dom@16.8.0. Anyone else doesn't need it and
 // people should just upgrade anyway.
 
 /* eslint func-name-matching:0 */
-},{"./act-compat":61,"./flush-microtasks":62,"@babel/runtime/helpers/interopRequireDefault":32,"@babel/runtime/helpers/interopRequireWildcard":33,"@testing-library/dom":41,"react":405,"react-dom":398}],65:[function(require,module,exports){
+},{"./act-compat":69,"./fire-event":70,"./flush-microtasks":71,"@babel/runtime/helpers/interopRequireDefault":37,"@babel/runtime/helpers/interopRequireWildcard":38,"@testing-library/dom":47,"react":437,"react-dom":430}],74:[function(require,module,exports){
 'use strict';
 
 module.exports = ({onlyFirst = false} = {}) => {
@@ -3335,7 +4220,7 @@ module.exports = ({onlyFirst = false} = {}) => {
 	return new RegExp(pattern, onlyFirst ? undefined : 'g');
 };
 
-},{}],66:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3462,7 +4347,7 @@ var ariaPropsMap = new _map.default([['aria-activedescendant', {
 }]]);
 var _default = ariaPropsMap;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],67:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],76:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3738,7 +4623,7 @@ var domMap = new _map.default([['a', {
 }]]);
 var _default = domMap;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],68:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],77:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -3811,7 +4696,7 @@ var elementRoleMap = new _map.default([]);
 });
 var _default = elementRoleMap;
 exports.default = _default;
-},{"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/entries":3,"@babel/runtime-corejs3/core-js-stable/instance/find":4,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/json/stringify":7,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/slicedToArray":29,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],69:[function(require,module,exports){
+},{"./rolesMap":216,"@babel/runtime-corejs3/core-js-stable/instance/concat":4,"@babel/runtime-corejs3/core-js-stable/instance/entries":5,"@babel/runtime-corejs3/core-js-stable/instance/find":6,"@babel/runtime-corejs3/core-js-stable/instance/for-each":7,"@babel/runtime-corejs3/core-js-stable/instance/keys":8,"@babel/runtime-corejs3/core-js-stable/json/stringify":10,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/core-js-stable/set":15,"@babel/runtime-corejs3/helpers/interopRequireDefault":29,"@babel/runtime-corejs3/helpers/slicedToArray":34,"@babel/runtime-corejs3/helpers/toConsumableArray":35}],78:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3827,12 +4712,13 @@ var commandRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'menuitem'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -3842,7 +4728,7 @@ var commandRole = {
 };
 var _default = commandRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],70:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],79:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3858,8 +4744,10 @@ var compositeRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-activedescendant': null
+    'aria-activedescendant': null,
+    'aria-disabled': null
   },
   relatedConcepts: [],
   requireContextRole: [],
@@ -3870,7 +4758,7 @@ var compositeRole = {
 };
 var _default = compositeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],71:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],80:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3886,12 +4774,15 @@ var inputRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null
+  },
   relatedConcepts: [{
-    module: 'XForms',
     concept: {
       name: 'input'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -3901,7 +4792,7 @@ var inputRole = {
 };
 var _default = inputRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],72:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],81:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3917,6 +4808,7 @@ var landmarkRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -3927,7 +4819,7 @@ var landmarkRole = {
 };
 var _default = landmarkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],73:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],82:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3943,6 +4835,7 @@ var rangeRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-valuemax': null,
     'aria-valuemin': null,
@@ -3954,11 +4847,11 @@ var rangeRole = {
   requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {},
-  superClass: [['roletype', 'widget']]
+  superClass: [['roletype', 'structure']]
 };
 var _default = rangeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],74:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],83:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -3973,7 +4866,8 @@ var roletypeRole = {
   accessibleNameRequired: false,
   baseConcepts: [],
   childrenPresentational: false,
-  nameFrom: ['author'],
+  nameFrom: [],
+  prohibitedProps: [],
   props: {
     'aria-atomic': null,
     'aria-busy': null,
@@ -3981,14 +4875,10 @@ var roletypeRole = {
     'aria-current': null,
     'aria-describedby': null,
     'aria-details': null,
-    'aria-disabled': null,
     'aria-dropeffect': null,
-    'aria-errormessage': null,
     'aria-flowto': null,
     'aria-grabbed': null,
-    'aria-haspopup': null,
     'aria-hidden': null,
-    'aria-invalid': null,
     'aria-keyshortcuts': null,
     'aria-label': null,
     'aria-labelledby': null,
@@ -3998,20 +4888,20 @@ var roletypeRole = {
     'aria-roledescription': null
   },
   relatedConcepts: [{
-    module: 'XHTML',
-    concept: {
-      name: 'role'
-    }
-  }, {
-    module: 'HTML',
     concept: {
       name: 'rel'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'Dublin Core',
+    concept: {
+      name: 'role'
+    },
+    module: 'XHTML'
+  }, {
     concept: {
       name: 'type'
-    }
+    },
+    module: 'Dublin Core'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4021,7 +4911,7 @@ var roletypeRole = {
 };
 var _default = roletypeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],75:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],84:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4037,24 +4927,23 @@ var sectionRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: [],
-  props: {
-    'aria-expanded': null
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
-    module: 'DTB',
     concept: {
       name: 'frontmatter'
-    }
+    },
+    module: 'DTB'
   }, {
-    module: 'DTB',
     concept: {
       name: 'level'
-    }
+    },
+    module: 'DTB'
   }, {
-    module: 'SMIL',
     concept: {
       name: 'level'
-    }
+    },
+    module: 'SMIL'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4064,7 +4953,7 @@ var sectionRole = {
 };
 var _default = sectionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],76:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],85:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4080,9 +4969,8 @@ var sectionheadRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {
-    'aria-expanded': null
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4092,7 +4980,7 @@ var sectionheadRole = {
 };
 var _default = sectionheadRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],77:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],86:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4108,6 +4996,7 @@ var selectRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-orientation': null
   },
@@ -4120,7 +5009,7 @@ var selectRole = {
 };
 var _default = selectRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],78:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],87:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4136,6 +5025,7 @@ var structureRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: [],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -4146,7 +5036,7 @@ var structureRole = {
 };
 var _default = structureRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],79:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],88:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4162,6 +5052,7 @@ var widgetRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: [],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -4172,7 +5063,7 @@ var widgetRole = {
 };
 var _default = widgetRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],80:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],89:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4188,8 +5079,8 @@ var windowRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-expanded': null,
     'aria-modal': null
   },
   relatedConcepts: [],
@@ -4201,7 +5092,7 @@ var windowRole = {
 };
 var _default = windowRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],81:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],90:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4243,7 +5134,7 @@ var _windowRole = _interopRequireDefault(require("./abstract/windowRole"));
 var ariaAbstractRoles = new _map.default([['command', _commandRole.default], ['composite', _compositeRole.default], ['input', _inputRole.default], ['landmark', _landmarkRole.default], ['range', _rangeRole.default], ['roletype', _roletypeRole.default], ['section', _sectionRole.default], ['sectionhead', _sectionheadRole.default], ['select', _selectRole.default], ['structure', _structureRole.default], ['widget', _widgetRole.default], ['window', _windowRole.default]]);
 var _default = ariaAbstractRoles;
 exports.default = _default;
-},{"./abstract/commandRole":69,"./abstract/compositeRole":70,"./abstract/inputRole":71,"./abstract/landmarkRole":72,"./abstract/rangeRole":73,"./abstract/roletypeRole":74,"./abstract/sectionRole":75,"./abstract/sectionheadRole":76,"./abstract/selectRole":77,"./abstract/structureRole":78,"./abstract/widgetRole":79,"./abstract/windowRole":80,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],82:[function(require,module,exports){
+},{"./abstract/commandRole":78,"./abstract/compositeRole":79,"./abstract/inputRole":80,"./abstract/landmarkRole":81,"./abstract/rangeRole":82,"./abstract/roletypeRole":83,"./abstract/sectionRole":84,"./abstract/sectionheadRole":85,"./abstract/selectRole":86,"./abstract/structureRole":87,"./abstract/widgetRole":88,"./abstract/windowRole":89,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],91:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4339,7 +5230,7 @@ var _docTocRole = _interopRequireDefault(require("./dpub/docTocRole"));
 var ariaDpubRoles = new _map.default([['doc-abstract', _docAbstractRole.default], ['doc-acknowledgments', _docAcknowledgmentsRole.default], ['doc-afterword', _docAfterwordRole.default], ['doc-appendix', _docAppendixRole.default], ['doc-backlink', _docBacklinkRole.default], ['doc-biblioentry', _docBiblioentryRole.default], ['doc-bibliography', _docBibliographyRole.default], ['doc-biblioref', _docBibliorefRole.default], ['doc-chapter', _docChapterRole.default], ['doc-colophon', _docColophonRole.default], ['doc-conclusion', _docConclusionRole.default], ['doc-cover', _docCoverRole.default], ['doc-credit', _docCreditRole.default], ['doc-credits', _docCreditsRole.default], ['doc-dedication', _docDedicationRole.default], ['doc-endnote', _docEndnoteRole.default], ['doc-endnotes', _docEndnotesRole.default], ['doc-epigraph', _docEpigraphRole.default], ['doc-epilogue', _docEpilogueRole.default], ['doc-errata', _docErrataRole.default], ['doc-example', _docExampleRole.default], ['doc-footnote', _docFootnoteRole.default], ['doc-foreword', _docForewordRole.default], ['doc-glossary', _docGlossaryRole.default], ['doc-glossref', _docGlossrefRole.default], ['doc-index', _docIndexRole.default], ['doc-introduction', _docIntroductionRole.default], ['doc-noteref', _docNoterefRole.default], ['doc-notice', _docNoticeRole.default], ['doc-pagebreak', _docPagebreakRole.default], ['doc-pagelist', _docPagelistRole.default], ['doc-part', _docPartRole.default], ['doc-preface', _docPrefaceRole.default], ['doc-prologue', _docPrologueRole.default], ['doc-pullquote', _docPullquoteRole.default], ['doc-qna', _docQnaRole.default], ['doc-subtitle', _docSubtitleRole.default], ['doc-tip', _docTipRole.default], ['doc-toc', _docTocRole.default]]);
 var _default = ariaDpubRoles;
 exports.default = _default;
-},{"./dpub/docAbstractRole":84,"./dpub/docAcknowledgmentsRole":85,"./dpub/docAfterwordRole":86,"./dpub/docAppendixRole":87,"./dpub/docBacklinkRole":88,"./dpub/docBiblioentryRole":89,"./dpub/docBibliographyRole":90,"./dpub/docBibliorefRole":91,"./dpub/docChapterRole":92,"./dpub/docColophonRole":93,"./dpub/docConclusionRole":94,"./dpub/docCoverRole":95,"./dpub/docCreditRole":96,"./dpub/docCreditsRole":97,"./dpub/docDedicationRole":98,"./dpub/docEndnoteRole":99,"./dpub/docEndnotesRole":100,"./dpub/docEpigraphRole":101,"./dpub/docEpilogueRole":102,"./dpub/docErrataRole":103,"./dpub/docExampleRole":104,"./dpub/docFootnoteRole":105,"./dpub/docForewordRole":106,"./dpub/docGlossaryRole":107,"./dpub/docGlossrefRole":108,"./dpub/docIndexRole":109,"./dpub/docIntroductionRole":110,"./dpub/docNoterefRole":111,"./dpub/docNoticeRole":112,"./dpub/docPagebreakRole":113,"./dpub/docPagelistRole":114,"./dpub/docPartRole":115,"./dpub/docPrefaceRole":116,"./dpub/docPrologueRole":117,"./dpub/docPullquoteRole":118,"./dpub/docQnaRole":119,"./dpub/docSubtitleRole":120,"./dpub/docTipRole":121,"./dpub/docTocRole":122,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],83:[function(require,module,exports){
+},{"./dpub/docAbstractRole":93,"./dpub/docAcknowledgmentsRole":94,"./dpub/docAfterwordRole":95,"./dpub/docAppendixRole":96,"./dpub/docBacklinkRole":97,"./dpub/docBiblioentryRole":98,"./dpub/docBibliographyRole":99,"./dpub/docBibliorefRole":100,"./dpub/docChapterRole":101,"./dpub/docColophonRole":102,"./dpub/docConclusionRole":103,"./dpub/docCoverRole":104,"./dpub/docCreditRole":105,"./dpub/docCreditsRole":106,"./dpub/docDedicationRole":107,"./dpub/docEndnoteRole":108,"./dpub/docEndnotesRole":109,"./dpub/docEpigraphRole":110,"./dpub/docEpilogueRole":111,"./dpub/docErrataRole":112,"./dpub/docExampleRole":113,"./dpub/docFootnoteRole":114,"./dpub/docForewordRole":115,"./dpub/docGlossaryRole":116,"./dpub/docGlossrefRole":117,"./dpub/docIndexRole":118,"./dpub/docIntroductionRole":119,"./dpub/docNoterefRole":120,"./dpub/docNoticeRole":121,"./dpub/docPagebreakRole":122,"./dpub/docPagelistRole":123,"./dpub/docPartRole":124,"./dpub/docPrefaceRole":125,"./dpub/docPrologueRole":126,"./dpub/docPullquoteRole":127,"./dpub/docQnaRole":128,"./dpub/docSubtitleRole":129,"./dpub/docTipRole":130,"./dpub/docTocRole":131,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],92:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -4364,11 +5255,17 @@ var _articleRole = _interopRequireDefault(require("./literal/articleRole"));
 
 var _bannerRole = _interopRequireDefault(require("./literal/bannerRole"));
 
+var _blockquoteRole = _interopRequireDefault(require("./literal/blockquoteRole"));
+
 var _buttonRole = _interopRequireDefault(require("./literal/buttonRole"));
+
+var _captionRole = _interopRequireDefault(require("./literal/captionRole"));
 
 var _cellRole = _interopRequireDefault(require("./literal/cellRole"));
 
 var _checkboxRole = _interopRequireDefault(require("./literal/checkboxRole"));
+
+var _codeRole = _interopRequireDefault(require("./literal/codeRole"));
 
 var _columnheaderRole = _interopRequireDefault(require("./literal/columnheaderRole"));
 
@@ -4380,17 +5277,23 @@ var _contentinfoRole = _interopRequireDefault(require("./literal/contentinfoRole
 
 var _definitionRole = _interopRequireDefault(require("./literal/definitionRole"));
 
+var _deletionRole = _interopRequireDefault(require("./literal/deletionRole"));
+
 var _dialogRole = _interopRequireDefault(require("./literal/dialogRole"));
 
 var _directoryRole = _interopRequireDefault(require("./literal/directoryRole"));
 
 var _documentRole = _interopRequireDefault(require("./literal/documentRole"));
 
+var _emphasisRole = _interopRequireDefault(require("./literal/emphasisRole"));
+
 var _feedRole = _interopRequireDefault(require("./literal/feedRole"));
 
 var _figureRole = _interopRequireDefault(require("./literal/figureRole"));
 
 var _formRole = _interopRequireDefault(require("./literal/formRole"));
+
+var _genericRole = _interopRequireDefault(require("./literal/genericRole"));
 
 var _gridRole = _interopRequireDefault(require("./literal/gridRole"));
 
@@ -4401,6 +5304,8 @@ var _groupRole = _interopRequireDefault(require("./literal/groupRole"));
 var _headingRole = _interopRequireDefault(require("./literal/headingRole"));
 
 var _imgRole = _interopRequireDefault(require("./literal/imgRole"));
+
+var _insertionRole = _interopRequireDefault(require("./literal/insertionRole"));
 
 var _linkRole = _interopRequireDefault(require("./literal/linkRole"));
 
@@ -4428,6 +5333,8 @@ var _menuitemcheckboxRole = _interopRequireDefault(require("./literal/menuitemch
 
 var _menuitemradioRole = _interopRequireDefault(require("./literal/menuitemradioRole"));
 
+var _meterRole = _interopRequireDefault(require("./literal/meterRole"));
+
 var _navigationRole = _interopRequireDefault(require("./literal/navigationRole"));
 
 var _noneRole = _interopRequireDefault(require("./literal/noneRole"));
@@ -4435,6 +5342,8 @@ var _noneRole = _interopRequireDefault(require("./literal/noneRole"));
 var _noteRole = _interopRequireDefault(require("./literal/noteRole"));
 
 var _optionRole = _interopRequireDefault(require("./literal/optionRole"));
+
+var _paragraphRole = _interopRequireDefault(require("./literal/paragraphRole"));
 
 var _presentationRole = _interopRequireDefault(require("./literal/presentationRole"));
 
@@ -4466,6 +5375,12 @@ var _spinbuttonRole = _interopRequireDefault(require("./literal/spinbuttonRole")
 
 var _statusRole = _interopRequireDefault(require("./literal/statusRole"));
 
+var _strongRole = _interopRequireDefault(require("./literal/strongRole"));
+
+var _subscriptRole = _interopRequireDefault(require("./literal/subscriptRole"));
+
+var _superscriptRole = _interopRequireDefault(require("./literal/superscriptRole"));
+
 var _switchRole = _interopRequireDefault(require("./literal/switchRole"));
 
 var _tabRole = _interopRequireDefault(require("./literal/tabRole"));
@@ -4480,6 +5395,8 @@ var _termRole = _interopRequireDefault(require("./literal/termRole"));
 
 var _textboxRole = _interopRequireDefault(require("./literal/textboxRole"));
 
+var _timeRole = _interopRequireDefault(require("./literal/timeRole"));
+
 var _timerRole = _interopRequireDefault(require("./literal/timerRole"));
 
 var _toolbarRole = _interopRequireDefault(require("./literal/toolbarRole"));
@@ -4492,10 +5409,10 @@ var _treegridRole = _interopRequireDefault(require("./literal/treegridRole"));
 
 var _treeitemRole = _interopRequireDefault(require("./literal/treeitemRole"));
 
-var ariaLiteralRoles = new _map.default([['alert', _alertRole.default], ['alertdialog', _alertdialogRole.default], ['application', _applicationRole.default], ['article', _articleRole.default], ['banner', _bannerRole.default], ['button', _buttonRole.default], ['cell', _cellRole.default], ['checkbox', _checkboxRole.default], ['columnheader', _columnheaderRole.default], ['combobox', _comboboxRole.default], ['complementary', _complementaryRole.default], ['contentinfo', _contentinfoRole.default], ['definition', _definitionRole.default], ['dialog', _dialogRole.default], ['directory', _directoryRole.default], ['document', _documentRole.default], ['feed', _feedRole.default], ['figure', _figureRole.default], ['form', _formRole.default], ['grid', _gridRole.default], ['gridcell', _gridcellRole.default], ['group', _groupRole.default], ['heading', _headingRole.default], ['img', _imgRole.default], ['link', _linkRole.default], ['list', _listRole.default], ['listbox', _listboxRole.default], ['listitem', _listitemRole.default], ['log', _logRole.default], ['main', _mainRole.default], ['marquee', _marqueeRole.default], ['math', _mathRole.default], ['menu', _menuRole.default], ['menubar', _menubarRole.default], ['menuitem', _menuitemRole.default], ['menuitemcheckbox', _menuitemcheckboxRole.default], ['menuitemradio', _menuitemradioRole.default], ['navigation', _navigationRole.default], ['none', _noneRole.default], ['note', _noteRole.default], ['option', _optionRole.default], ['presentation', _presentationRole.default], ['progressbar', _progressbarRole.default], ['radio', _radioRole.default], ['radiogroup', _radiogroupRole.default], ['region', _regionRole.default], ['row', _rowRole.default], ['rowgroup', _rowgroupRole.default], ['rowheader', _rowheaderRole.default], ['scrollbar', _scrollbarRole.default], ['search', _searchRole.default], ['searchbox', _searchboxRole.default], ['separator', _separatorRole.default], ['slider', _sliderRole.default], ['spinbutton', _spinbuttonRole.default], ['status', _statusRole.default], ['switch', _switchRole.default], ['tab', _tabRole.default], ['table', _tableRole.default], ['tablist', _tablistRole.default], ['tabpanel', _tabpanelRole.default], ['term', _termRole.default], ['textbox', _textboxRole.default], ['timer', _timerRole.default], ['toolbar', _toolbarRole.default], ['tooltip', _tooltipRole.default], ['tree', _treeRole.default], ['treegrid', _treegridRole.default], ['treeitem', _treeitemRole.default]]);
+var ariaLiteralRoles = new _map.default([['alert', _alertRole.default], ['alertdialog', _alertdialogRole.default], ['application', _applicationRole.default], ['article', _articleRole.default], ['banner', _bannerRole.default], ['blockquote', _blockquoteRole.default], ['button', _buttonRole.default], ['caption', _captionRole.default], ['cell', _cellRole.default], ['checkbox', _checkboxRole.default], ['code', _codeRole.default], ['columnheader', _columnheaderRole.default], ['combobox', _comboboxRole.default], ['complementary', _complementaryRole.default], ['contentinfo', _contentinfoRole.default], ['definition', _definitionRole.default], ['deletion', _deletionRole.default], ['dialog', _dialogRole.default], ['directory', _directoryRole.default], ['document', _documentRole.default], ['emphasis', _emphasisRole.default], ['feed', _feedRole.default], ['figure', _figureRole.default], ['form', _formRole.default], ['generic', _genericRole.default], ['grid', _gridRole.default], ['gridcell', _gridcellRole.default], ['group', _groupRole.default], ['heading', _headingRole.default], ['img', _imgRole.default], ['insertion', _insertionRole.default], ['link', _linkRole.default], ['list', _listRole.default], ['listbox', _listboxRole.default], ['listitem', _listitemRole.default], ['log', _logRole.default], ['main', _mainRole.default], ['marquee', _marqueeRole.default], ['math', _mathRole.default], ['menu', _menuRole.default], ['menubar', _menubarRole.default], ['menuitem', _menuitemRole.default], ['menuitemcheckbox', _menuitemcheckboxRole.default], ['menuitemradio', _menuitemradioRole.default], ['meter', _meterRole.default], ['navigation', _navigationRole.default], ['none', _noneRole.default], ['note', _noteRole.default], ['option', _optionRole.default], ['paragraph', _paragraphRole.default], ['presentation', _presentationRole.default], ['progressbar', _progressbarRole.default], ['radio', _radioRole.default], ['radiogroup', _radiogroupRole.default], ['region', _regionRole.default], ['row', _rowRole.default], ['rowgroup', _rowgroupRole.default], ['rowheader', _rowheaderRole.default], ['scrollbar', _scrollbarRole.default], ['search', _searchRole.default], ['searchbox', _searchboxRole.default], ['separator', _separatorRole.default], ['slider', _sliderRole.default], ['spinbutton', _spinbuttonRole.default], ['status', _statusRole.default], ['strong', _strongRole.default], ['subscript', _subscriptRole.default], ['superscript', _superscriptRole.default], ['switch', _switchRole.default], ['tab', _tabRole.default], ['table', _tableRole.default], ['tablist', _tablistRole.default], ['tabpanel', _tabpanelRole.default], ['term', _termRole.default], ['textbox', _textboxRole.default], ['time', _timeRole.default], ['timer', _timerRole.default], ['toolbar', _toolbarRole.default], ['tooltip', _tooltipRole.default], ['tree', _treeRole.default], ['treegrid', _treegridRole.default], ['treeitem', _treeitemRole.default]]);
 var _default = ariaLiteralRoles;
 exports.default = _default;
-},{"./literal/alertRole":123,"./literal/alertdialogRole":124,"./literal/applicationRole":125,"./literal/articleRole":126,"./literal/bannerRole":127,"./literal/buttonRole":128,"./literal/cellRole":129,"./literal/checkboxRole":130,"./literal/columnheaderRole":131,"./literal/comboboxRole":132,"./literal/complementaryRole":133,"./literal/contentinfoRole":134,"./literal/definitionRole":135,"./literal/dialogRole":136,"./literal/directoryRole":137,"./literal/documentRole":138,"./literal/feedRole":139,"./literal/figureRole":140,"./literal/formRole":141,"./literal/gridRole":142,"./literal/gridcellRole":143,"./literal/groupRole":144,"./literal/headingRole":145,"./literal/imgRole":146,"./literal/linkRole":147,"./literal/listRole":148,"./literal/listboxRole":149,"./literal/listitemRole":150,"./literal/logRole":151,"./literal/mainRole":152,"./literal/marqueeRole":153,"./literal/mathRole":154,"./literal/menuRole":155,"./literal/menubarRole":156,"./literal/menuitemRole":157,"./literal/menuitemcheckboxRole":158,"./literal/menuitemradioRole":159,"./literal/navigationRole":160,"./literal/noneRole":161,"./literal/noteRole":162,"./literal/optionRole":163,"./literal/presentationRole":164,"./literal/progressbarRole":165,"./literal/radioRole":166,"./literal/radiogroupRole":167,"./literal/regionRole":168,"./literal/rowRole":169,"./literal/rowgroupRole":170,"./literal/rowheaderRole":171,"./literal/scrollbarRole":172,"./literal/searchRole":173,"./literal/searchboxRole":174,"./literal/separatorRole":175,"./literal/sliderRole":176,"./literal/spinbuttonRole":177,"./literal/statusRole":178,"./literal/switchRole":179,"./literal/tabRole":180,"./literal/tableRole":181,"./literal/tablistRole":182,"./literal/tabpanelRole":183,"./literal/termRole":184,"./literal/textboxRole":185,"./literal/timerRole":186,"./literal/toolbarRole":187,"./literal/tooltipRole":188,"./literal/treeRole":189,"./literal/treegridRole":190,"./literal/treeitemRole":191,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],84:[function(require,module,exports){
+},{"./literal/alertRole":132,"./literal/alertdialogRole":133,"./literal/applicationRole":134,"./literal/articleRole":135,"./literal/bannerRole":136,"./literal/blockquoteRole":137,"./literal/buttonRole":138,"./literal/captionRole":139,"./literal/cellRole":140,"./literal/checkboxRole":141,"./literal/codeRole":142,"./literal/columnheaderRole":143,"./literal/comboboxRole":144,"./literal/complementaryRole":145,"./literal/contentinfoRole":146,"./literal/definitionRole":147,"./literal/deletionRole":148,"./literal/dialogRole":149,"./literal/directoryRole":150,"./literal/documentRole":151,"./literal/emphasisRole":152,"./literal/feedRole":153,"./literal/figureRole":154,"./literal/formRole":155,"./literal/genericRole":156,"./literal/gridRole":157,"./literal/gridcellRole":158,"./literal/groupRole":159,"./literal/headingRole":160,"./literal/imgRole":161,"./literal/insertionRole":162,"./literal/linkRole":163,"./literal/listRole":164,"./literal/listboxRole":165,"./literal/listitemRole":166,"./literal/logRole":167,"./literal/mainRole":168,"./literal/marqueeRole":169,"./literal/mathRole":170,"./literal/menuRole":171,"./literal/menubarRole":172,"./literal/menuitemRole":173,"./literal/menuitemcheckboxRole":174,"./literal/menuitemradioRole":175,"./literal/meterRole":176,"./literal/navigationRole":177,"./literal/noneRole":178,"./literal/noteRole":179,"./literal/optionRole":180,"./literal/paragraphRole":181,"./literal/presentationRole":182,"./literal/progressbarRole":183,"./literal/radioRole":184,"./literal/radiogroupRole":185,"./literal/regionRole":186,"./literal/rowRole":187,"./literal/rowgroupRole":188,"./literal/rowheaderRole":189,"./literal/scrollbarRole":190,"./literal/searchRole":191,"./literal/searchboxRole":192,"./literal/separatorRole":193,"./literal/sliderRole":194,"./literal/spinbuttonRole":195,"./literal/statusRole":196,"./literal/strongRole":197,"./literal/subscriptRole":198,"./literal/superscriptRole":199,"./literal/switchRole":200,"./literal/tabRole":201,"./literal/tableRole":202,"./literal/tablistRole":203,"./literal/tabpanelRole":204,"./literal/termRole":205,"./literal/textboxRole":206,"./literal/timeRole":207,"./literal/timerRole":208,"./literal/toolbarRole":209,"./literal/tooltipRole":210,"./literal/treeRole":211,"./literal/treegridRole":212,"./literal/treeitemRole":213,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],93:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4511,12 +5428,19 @@ var docAbstractRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'abstract [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4526,7 +5450,7 @@ var docAbstractRole = {
 };
 var _default = docAbstractRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],85:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],94:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4542,12 +5466,19 @@ var docAcknowledgmentsRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'acknowledgments [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4557,7 +5488,7 @@ var docAcknowledgmentsRole = {
 };
 var _default = docAcknowledgmentsRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],86:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],95:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4573,12 +5504,19 @@ var docAfterwordRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'afterword [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4588,7 +5526,7 @@ var docAfterwordRole = {
 };
 var _default = docAfterwordRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],87:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],96:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4604,12 +5542,19 @@ var docAppendixRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'appendix [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4619,7 +5564,7 @@ var docAppendixRole = {
 };
 var _default = docAppendixRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],88:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],97:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4635,12 +5580,17 @@ var docBacklinkRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'content'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'referrer [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4650,7 +5600,7 @@ var docBacklinkRole = {
 };
 var _default = docBacklinkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],89:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],98:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4666,12 +5616,19 @@ var docBiblioentryRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'EPUB biblioentry [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: ['doc-bibliography'],
   requiredContextRole: ['doc-bibliography'],
@@ -4681,7 +5638,7 @@ var docBiblioentryRole = {
 };
 var _default = docBiblioentryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],90:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],99:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4697,12 +5654,19 @@ var docBibliographyRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'bibliography [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4712,7 +5676,7 @@ var docBibliographyRole = {
 };
 var _default = docBibliographyRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],91:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],100:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4728,12 +5692,17 @@ var docBibliorefRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'biblioref [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4743,7 +5712,7 @@ var docBibliorefRole = {
 };
 var _default = docBibliorefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],92:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],101:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4759,12 +5728,19 @@ var docChapterRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'chapter [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4774,7 +5750,7 @@ var docChapterRole = {
 };
 var _default = docChapterRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],93:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],102:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4790,12 +5766,19 @@ var docColophonRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'colophon [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4805,7 +5788,7 @@ var docColophonRole = {
 };
 var _default = docColophonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],94:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],103:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4821,12 +5804,19 @@ var docConclusionRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'conclusion [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4836,7 +5826,7 @@ var docConclusionRole = {
 };
 var _default = docConclusionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],95:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],104:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4852,12 +5842,19 @@ var docCoverRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'cover [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4867,7 +5864,7 @@ var docCoverRole = {
 };
 var _default = docCoverRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],96:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],105:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4883,12 +5880,19 @@ var docCreditRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'credit [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4898,7 +5902,7 @@ var docCreditRole = {
 };
 var _default = docCreditRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],97:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],106:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4914,12 +5918,19 @@ var docCreditsRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'credits [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4929,7 +5940,7 @@ var docCreditsRole = {
 };
 var _default = docCreditsRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],98:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],107:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4945,12 +5956,19 @@ var docDedicationRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'dedication [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -4960,7 +5978,7 @@ var docDedicationRole = {
 };
 var _default = docDedicationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],99:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],108:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -4976,12 +5994,19 @@ var docEndnoteRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'rearnote [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: ['doc-endnotes'],
   requiredContextRole: ['doc-endnotes'],
@@ -4991,7 +6016,7 @@ var docEndnoteRole = {
 };
 var _default = docEndnoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],100:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],109:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5007,12 +6032,19 @@ var docEndnotesRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'rearnotes [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5022,7 +6054,7 @@ var docEndnotesRole = {
 };
 var _default = docEndnotesRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],101:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],110:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5038,12 +6070,19 @@ var docEpigraphRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'epigraph [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5053,7 +6092,7 @@ var docEpigraphRole = {
 };
 var _default = docEpigraphRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],102:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],111:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5069,12 +6108,19 @@ var docEpilogueRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'epilogue [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5084,7 +6130,7 @@ var docEpilogueRole = {
 };
 var _default = docEpilogueRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],103:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],112:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5100,12 +6146,19 @@ var docErrataRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'errata [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5115,7 +6168,7 @@ var docErrataRole = {
 };
 var _default = docErrataRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],104:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],113:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5131,7 +6184,14 @@ var docExampleRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5141,7 +6201,7 @@ var docExampleRole = {
 };
 var _default = docExampleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],105:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],114:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5157,12 +6217,19 @@ var docFootnoteRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'footnote [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5172,7 +6239,7 @@ var docFootnoteRole = {
 };
 var _default = docFootnoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],106:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],115:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5188,12 +6255,19 @@ var docForewordRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'foreword [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5203,7 +6277,7 @@ var docForewordRole = {
 };
 var _default = docForewordRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],107:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],116:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5219,22 +6293,29 @@ var docGlossaryRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'glossary [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['term'], ['definition']],
+  requiredOwnedElements: [['definition'], ['term']],
   requiredProps: {},
   superClass: [['roletype', 'structure', 'section', 'landmark']]
 };
 var _default = docGlossaryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],108:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],117:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5250,12 +6331,17 @@ var docGlossrefRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'glossref [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5265,7 +6351,7 @@ var docGlossrefRole = {
 };
 var _default = docGlossrefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],109:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],118:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5281,12 +6367,19 @@ var docIndexRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'index [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5296,7 +6389,7 @@ var docIndexRole = {
 };
 var _default = docIndexRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],110:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],119:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5312,12 +6405,19 @@ var docIntroductionRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'introduction [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5327,7 +6427,7 @@ var docIntroductionRole = {
 };
 var _default = docIntroductionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],111:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],120:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5343,12 +6443,17 @@ var docNoterefRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'noteref [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5358,7 +6463,7 @@ var docNoterefRole = {
 };
 var _default = docNoterefRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],112:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],121:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5374,12 +6479,19 @@ var docNoticeRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'notice [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5389,7 +6501,7 @@ var docNoticeRole = {
 };
 var _default = docNoticeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],113:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],122:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5405,12 +6517,18 @@ var docPagebreakRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'pagebreak [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5420,7 +6538,7 @@ var docPagebreakRole = {
 };
 var _default = docPagebreakRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],114:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],123:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5436,12 +6554,19 @@ var docPagelistRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'page-list [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5451,7 +6576,7 @@ var docPagelistRole = {
 };
 var _default = docPagelistRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],115:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],124:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5467,12 +6592,19 @@ var docPartRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'part [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5482,7 +6614,7 @@ var docPartRole = {
 };
 var _default = docPartRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],116:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],125:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5498,12 +6630,19 @@ var docPrefaceRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'preface [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5513,7 +6652,7 @@ var docPrefaceRole = {
 };
 var _default = docPrefaceRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],117:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],126:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5529,12 +6668,19 @@ var docPrologueRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'prologue [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5544,7 +6690,7 @@ var docPrologueRole = {
 };
 var _default = docPrologueRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],118:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],127:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5560,12 +6706,13 @@ var docPullquoteRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'pullquote [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5575,7 +6722,7 @@ var docPullquoteRole = {
 };
 var _default = docPullquoteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],119:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],128:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5591,12 +6738,19 @@ var docQnaRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'qna [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5606,7 +6760,7 @@ var docQnaRole = {
 };
 var _default = docQnaRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],120:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],129:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5622,12 +6776,19 @@ var docSubtitleRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'subtitle [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5637,7 +6798,7 @@ var docSubtitleRole = {
 };
 var _default = docSubtitleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],121:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],130:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5653,12 +6814,19 @@ var docTipRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'help [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5668,7 +6836,7 @@ var docTipRole = {
 };
 var _default = docTipRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],122:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],131:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5684,12 +6852,19 @@ var docTocRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
+  },
   relatedConcepts: [{
-    module: 'EPUB',
     concept: {
       name: 'toc [EPUB-SSV]'
-    }
+    },
+    module: 'EPUB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5699,7 +6874,7 @@ var docTocRole = {
 };
 var _default = docTocRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],123:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],132:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5715,15 +6890,16 @@ var alertRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-atomic': 'true',
     'aria-live': 'assertive'
   },
   relatedConcepts: [{
-    module: 'XForms',
     concept: {
       name: 'alert'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5733,7 +6909,7 @@ var alertRole = {
 };
 var _default = alertRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],124:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],133:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5749,12 +6925,13 @@ var alertdialogRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'XForms',
     concept: {
       name: 'alert'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5764,7 +6941,7 @@ var alertdialogRole = {
 };
 var _default = alertdialogRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],125:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],134:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5780,8 +6957,14 @@ var applicationRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-activedescendant': null
+    'aria-activedescendant': null,
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null
   },
   relatedConcepts: [{
     concept: {
@@ -5796,7 +6979,7 @@ var applicationRole = {
 };
 var _default = applicationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],126:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],135:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5812,15 +6995,16 @@ var articleRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-posinset': null,
     'aria-setsize': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'article'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5830,7 +7014,7 @@ var articleRole = {
 };
 var _default = articleRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],127:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],136:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5846,13 +7030,14 @@ var bannerRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'banner',
-      constraints: ['direct descendant of document']
-    }
+      constraints: ['direct descendant of document'],
+      name: 'header'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5862,7 +7047,34 @@ var bannerRole = {
 };
 var _default = bannerRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],128:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],137:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var blockquoteRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['author'],
+  prohibitedProps: [],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = blockquoteRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],138:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5878,87 +7090,90 @@ var buttonRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
+    'aria-disabled': null,
     'aria-expanded': null,
+    'aria-haspopup': null,
     'aria-pressed': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'button'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
       attributes: [{
-        name: 'type',
-        value: 'button'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'image'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'reset'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'submit'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
+        constraints: ['set'],
+        name: 'aria-pressed'
+      }, {
         name: 'type',
         value: 'checkbox'
-      }, {
-        name: 'aria-pressed',
-        constraints: ['set']
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'summary',
-      constraints: ['direct descendant of details element with the open attribute defined'],
-      attributes: [{
-        name: 'aria-expanded',
-        value: 'true'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'summary',
       attributes: [{
         name: 'aria-expanded',
         value: 'false'
-      }]
-    }
+      }],
+      name: 'summary'
+    },
+    module: 'HTML'
   }, {
-    module: 'XForms',
+    concept: {
+      attributes: [{
+        name: 'aria-expanded',
+        value: 'true'
+      }],
+      constraints: ['direct descendant of details element with the open attribute defined'],
+      name: 'summary'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        name: 'type',
+        value: 'button'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        name: 'type',
+        value: 'image'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        name: 'type',
+        value: 'reset'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        name: 'type',
+        value: 'submit'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'button'
+    },
+    module: 'HTML'
+  }, {
     concept: {
       name: 'trigger'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -5968,7 +7183,34 @@ var buttonRole = {
 };
 var _default = buttonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],129:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],139:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var captionRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: ['figure', 'grid', 'table'],
+  requiredContextRole: ['figure', 'grid', 'table'],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = captionRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],140:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -5984,6 +7226,7 @@ var cellRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
     'aria-colindex': null,
     'aria-colspan': null,
@@ -5991,11 +7234,11 @@ var cellRole = {
     'aria-rowspan': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'td',
-      constraints: ['descendant of table']
-    }
+      constraints: ['descendant of table'],
+      name: 'td'
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['row'],
   requiredContextRole: ['row'],
@@ -6005,7 +7248,7 @@ var cellRole = {
 };
 var _default = cellRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],130:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],141:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6021,24 +7264,29 @@ var checkboxRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
-    'aria-checked': 'false',
-    'aria-readonly': null
+    'aria-checked': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-invalid': null,
+    'aria-readonly': null,
+    'aria-required': null
   },
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
-      name: 'option'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
       attributes: [{
         name: 'type',
         value: 'checkbox'
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'option'
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6050,7 +7298,34 @@ var checkboxRole = {
 };
 var _default = checkboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],131:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],142:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var codeRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = codeRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],143:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6066,14 +7341,19 @@ var columnheaderRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
     'aria-sort': null
   },
   relatedConcepts: [{
-    module: 'HTML',
+    attributes: [{
+      name: 'scope',
+      value: 'col'
+    }],
     concept: {
       name: 'th'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['row'],
   requiredContextRole: ['row'],
@@ -6083,7 +7363,7 @@ var columnheaderRole = {
 };
 var _default = columnheaderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],132:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],144:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6099,127 +7379,131 @@ var comboboxRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-expanded': 'false',
+    'aria-activedescendant': null,
     'aria-autocomplete': null,
+    'aria-errormessage': null,
+    'aria-invalid': null,
+    'aria-readonly': null,
     'aria-required': null,
-    'aria-haspopup': 'listbox',
-    'aria-readonly': null
+    'aria-expanded': 'false',
+    'aria-haspopup': 'listbox'
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'select',
       attributes: [{
-        name: 'multiple',
-        constraints: ['undefined']
+        constraints: ['set'],
+        name: 'list'
       }, {
-        name: 'size',
-        constraints: ['undefined']
-      }]
-    }
+        name: 'type',
+        value: 'email'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'select',
       attributes: [{
-        name: 'multiple',
-        constraints: ['undefined']
+        constraints: ['set'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'search'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['set'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'tel'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['set'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'text'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['set'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'url'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['set'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'url'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['undefined'],
+        name: 'multiple'
+      }, {
+        constraints: ['undefined'],
+        name: 'size'
+      }],
+      name: 'select'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['undefined'],
+        name: 'multiple'
       }, {
         name: 'size',
         value: 1
-      }]
-    }
+      }],
+      name: 'select'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'text'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'search'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'url'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'tel'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'url'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
-      attributes: [{
-        name: 'type',
-        value: 'email'
-      }, {
-        name: 'list',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'XForms',
     concept: {
       name: 'select'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['textbox'], ['listbox'], ['tree'], ['grid'], ['dialog']],
+  requiredOwnedElements: [],
   requiredProps: {
     'aria-controls': null,
     'aria-expanded': 'false'
   },
-  superClass: [['roletype', 'widget', 'composite', 'select'], ['roletype', 'structure', 'section', 'group', 'select']]
+  superClass: [['roletype', 'widget', 'input']]
 };
 var _default = comboboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],133:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],145:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6235,12 +7519,13 @@ var complementaryRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'aside'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6250,7 +7535,7 @@ var complementaryRole = {
 };
 var _default = complementaryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],134:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],146:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6266,13 +7551,14 @@ var contentinfoRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'footer',
-      constraints: ['direct descendant of document']
-    }
+      constraints: ['direct descendant of document'],
+      name: 'footer'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6282,7 +7568,7 @@ var contentinfoRole = {
 };
 var _default = contentinfoRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],135:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],147:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6298,12 +7584,13 @@ var definitionRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'dd'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6313,7 +7600,34 @@ var definitionRole = {
 };
 var _default = definitionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],136:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],148:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var deletionRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = deletionRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],149:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6329,12 +7643,13 @@ var dialogRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'dialog'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6344,7 +7659,7 @@ var dialogRole = {
 };
 var _default = dialogRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],137:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],150:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6360,6 +7675,7 @@ var directoryRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
     module: 'DAISY Guide'
@@ -6372,7 +7688,7 @@ var directoryRole = {
 };
 var _default = directoryRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],138:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],151:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6388,18 +7704,17 @@ var documentRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
-  props: {
-    'aria-expanded': null
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
     concept: {
       name: 'Device Independence Delivery Unit'
     }
   }, {
-    module: 'HTML',
     concept: {
       name: 'body'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6409,7 +7724,34 @@ var documentRole = {
 };
 var _default = documentRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],139:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],152:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var emphasisRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = emphasisRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],153:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6425,6 +7767,7 @@ var feedRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -6435,7 +7778,7 @@ var feedRole = {
 };
 var _default = feedRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],140:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],154:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6451,12 +7794,13 @@ var figureRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'figure'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6466,7 +7810,7 @@ var figureRole = {
 };
 var _default = figureRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],141:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],155:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6482,34 +7826,35 @@ var formRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'form',
       attributes: [{
-        name: 'name',
-        constraints: ['set']
-      }]
-    }
+        constraints: ['set'],
+        name: 'aria-label'
+      }],
+      name: 'form'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'form',
       attributes: [{
-        name: 'aria-label',
-        constraints: ['set']
-      }]
-    }
+        constraints: ['set'],
+        name: 'aria-labelledby'
+      }],
+      name: 'form'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'form',
       attributes: [{
-        name: 'aria-labelledby',
-        constraints: ['set']
-      }]
-    }
+        constraints: ['set'],
+        name: 'name'
+      }],
+      name: 'form'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6519,7 +7864,44 @@ var formRole = {
 };
 var _default = formRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],142:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],156:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var genericRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [{
+    concept: {
+      name: 'span'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'div'
+    },
+    module: 'HTML'
+  }],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure']]
+};
+var _default = genericRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],157:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6535,30 +7917,30 @@ var gridRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-level': null,
     'aria-multiselectable': null,
     'aria-readonly': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'table',
       attributes: [{
         name: 'role',
         value: 'grid'
-      }]
-    }
+      }],
+      name: 'table'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['rowgroup', 'row'], ['row']],
+  requiredOwnedElements: [['row'], ['row', 'rowgroup']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite'], ['roletype', 'structure', 'section', 'table']]
 };
 var _default = gridRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],143:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],158:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6570,24 +7952,30 @@ _Object$defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var gridcellRole = {
   abstract: false,
-  accessibleNameRequired: true,
+  accessibleNameRequired: false,
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
+    'aria-disabled': null,
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
+    'aria-invalid': null,
     'aria-readonly': null,
     'aria-required': null,
     'aria-selected': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'td',
       attributes: [{
         name: 'role',
         value: 'gridcell'
-      }]
-    }
+      }],
+      name: 'td'
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['row'],
   requiredContextRole: ['row'],
@@ -6597,7 +7985,7 @@ var gridcellRole = {
 };
 var _default = gridcellRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],144:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],159:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6613,24 +8001,26 @@ var groupRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-activedescendant': null
+    'aria-activedescendant': null,
+    'aria-disabled': null
   },
   relatedConcepts: [{
-    module: 'HTML',
-    concept: {
-      name: 'fieldset'
-    }
-  }, {
-    module: 'HTML',
     concept: {
       name: 'details'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
+    concept: {
+      name: 'fieldset'
+    },
+    module: 'HTML'
+  }, {
     concept: {
       name: 'optgroup'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6640,7 +8030,7 @@ var groupRole = {
 };
 var _default = groupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],145:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],160:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6656,49 +8046,52 @@ var headingRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
-    'aria-level': '2'
+    'aria-level': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'h1'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'h2'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'h3'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'h4'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'h5'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'h6'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
-  requiredProps: {},
+  requiredProps: {
+    'aria-level': 2
+  },
   superClass: [['roletype', 'structure', 'sectionhead']]
 };
 var _default = headingRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],146:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],161:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6714,30 +8107,31 @@ var imgRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'img',
       attributes: [{
-        name: 'alt',
-        constraints: ['set']
-      }]
-    }
+        constraints: ['set'],
+        name: 'alt'
+      }],
+      name: 'img'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'img',
       attributes: [{
-        name: 'alt',
-        constraints: ['undefined']
-      }]
-    }
+        constraints: ['undefined'],
+        name: 'alt'
+      }],
+      name: 'img'
+    },
+    module: 'HTML'
   }, {
-    module: 'DTB',
     concept: {
       name: 'imggroup'
-    }
+    },
+    module: 'DTB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6747,7 +8141,34 @@ var imgRole = {
 };
 var _default = imgRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],147:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],162:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var insertionRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = insertionRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],163:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6763,33 +8184,35 @@ var linkRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
+    'aria-disabled': null,
     'aria-expanded': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'a',
       attributes: [{
         name: 'href'
-      }]
-    }
+      }],
+      name: 'a'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'area',
       attributes: [{
         name: 'href'
-      }]
-    }
+      }],
+      name: 'area'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'link',
       attributes: [{
         name: 'href'
-      }]
-    }
+      }],
+      name: 'link'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -6799,7 +8222,7 @@ var linkRole = {
 };
 var _default = linkRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],148:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],164:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6815,32 +8238,33 @@ var listRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
-    concept: {
-      name: 'ol'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'ul'
-    }
-  }, {
-    module: 'HTML',
     concept: {
       name: 'menu'
-    }
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'ol'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'ul'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['group', 'listitem'], ['listitem']],
+  requiredOwnedElements: [['listitem']],
   requiredProps: {},
   superClass: [['roletype', 'structure', 'section']]
 };
 var _default = listRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],149:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],165:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6856,65 +8280,69 @@ var listboxRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
+    'aria-errormessage': null,
+    'aria-expanded': null,
+    'aria-invalid': null,
     'aria-multiselectable': null,
     'aria-readonly': null,
     'aria-required': null,
     'aria-orientation': 'vertical'
   },
   relatedConcepts: [{
-    module: 'HTML',
+    concept: {
+      attributes: [{
+        constraints: ['>1'],
+        name: 'size'
+      }, {
+        name: 'multiple'
+      }],
+      name: 'select'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['>1'],
+        name: 'size'
+      }],
+      name: 'select'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        name: 'multiple'
+      }],
+      name: 'select'
+    },
+    module: 'HTML'
+  }, {
     concept: {
       name: 'datalist'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
-    concept: {
-      name: 'select',
-      attributes: [{
-        name: 'multiple'
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'select',
-      attributes: [{
-        name: 'multiple'
-      }, {
-        name: 'size',
-        constraints: ['>1']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'select',
-      attributes: [{
-        name: 'size',
-        constraints: ['>1']
-      }]
-    }
-  }, {
-    module: 'ARIA',
     concept: {
       name: 'list'
-    }
+    },
+    module: 'ARIA'
   }, {
-    module: 'XForms',
     concept: {
       name: 'select'
-    }
+    },
+    module: 'XForms'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['option']],
+  requiredOwnedElements: [['option', 'group'], ['option']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite', 'select'], ['roletype', 'structure', 'section', 'group', 'select']]
 };
 var _default = listboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],150:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],166:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6930,32 +8358,33 @@ var listitemRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-level': null,
     'aria-posinset': null,
     'aria-setsize': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'li',
-      constraints: ['direct descendant of ol, ul or menu']
-    }
+      constraints: ['direct descendant of ol, ul or menu'],
+      name: 'li'
+    },
+    module: 'HTML'
   }, {
-    module: 'XForms',
     concept: {
       name: 'item'
-    }
+    },
+    module: 'XForms'
   }],
-  requireContextRole: ['group', 'list'],
-  requiredContextRole: ['group', 'list'],
+  requireContextRole: ['directory', 'list'],
+  requiredContextRole: ['directory', 'list'],
   requiredOwnedElements: [],
   requiredProps: {},
   superClass: [['roletype', 'structure', 'section']]
 };
 var _default = listitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],151:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],167:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6967,10 +8396,11 @@ _Object$defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var logRole = {
   abstract: false,
-  accessibleNameRequired: true,
+  accessibleNameRequired: false,
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-live': 'polite'
   },
@@ -6983,7 +8413,7 @@ var logRole = {
 };
 var _default = logRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],152:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],168:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -6999,12 +8429,13 @@ var mainRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'main'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7014,7 +8445,7 @@ var mainRole = {
 };
 var _default = mainRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],153:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],169:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7030,6 +8461,7 @@ var marqueeRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -7040,7 +8472,7 @@ var marqueeRole = {
 };
 var _default = marqueeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],154:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],170:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7054,14 +8486,15 @@ var mathRole = {
   abstract: false,
   accessibleNameRequired: false,
   baseConcepts: [],
-  childrenPresentational: true,
+  childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'math'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7071,7 +8504,7 @@ var mathRole = {
 };
 var _default = mathRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],155:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],171:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7087,39 +8520,40 @@ var menuRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-orientation': 'vertical'
   },
   relatedConcepts: [{
-    module: 'ARIA',
-    concept: {
-      name: 'list'
-    }
-  }, {
-    module: 'DTB',
-    concept: {
-      name: 'sidebar'
-    }
-  }, {
-    module: 'XForms',
-    concept: {
-      name: 'select'
-    }
-  }, {
-    module: 'JAPI',
     concept: {
       name: 'MENU'
-    }
+    },
+    module: 'JAPI'
+  }, {
+    concept: {
+      name: 'list'
+    },
+    module: 'ARIA'
+  }, {
+    concept: {
+      name: 'select'
+    },
+    module: 'XForms'
+  }, {
+    concept: {
+      name: 'sidebar'
+    },
+    module: 'DTB'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['group', 'menuitemradio'], ['menuitem'], ['menuitemcheckbox'], ['menuitemradio']],
+  requiredOwnedElements: [['menuitem', 'group'], ['menuitemradio', 'group'], ['menuitemcheckbox', 'group'], ['menuitem'], ['menuitemcheckbox'], ['menuitemradio']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite', 'select'], ['roletype', 'structure', 'section', 'group', 'select']]
 };
 var _default = menuRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],156:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],172:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7135,24 +8569,25 @@ var menubarRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-orientation': 'vertical'
+    'aria-orientation': 'horizontal'
   },
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'toolbar'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['group', 'menuitemradio'], ['menuitem'], ['menuitemcheckbox'], ['menuitemradio']],
+  requiredOwnedElements: [['menuitem', 'group'], ['menuitemradio', 'group'], ['menuitemcheckbox', 'group'], ['menuitem'], ['menuitemcheckbox'], ['menuitemradio']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite', 'select', 'menu'], ['roletype', 'structure', 'section', 'group', 'select', 'menu']]
 };
 var _default = menubarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],157:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],173:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7168,30 +8603,34 @@ var menuitemRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
+    'aria-disabled': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
     'aria-posinset': null,
     'aria-setsize': null
   },
   relatedConcepts: [{
-    module: 'ARIA',
-    concept: {
-      name: 'option'
-    }
-  }, {
-    module: 'ARIA',
-    concept: {
-      name: 'listitem'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'menuitem'
-    }
-  }, {
-    module: 'JAPI',
     concept: {
       name: 'MENU_ITEM'
-    }
+    },
+    module: 'JAPI'
+  }, {
+    concept: {
+      name: 'listitem'
+    },
+    module: 'ARIA'
+  }, {
+    concept: {
+      name: 'menuitem'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'option'
+    },
+    module: 'ARIA'
   }],
   requireContextRole: ['group', 'menu', 'menubar'],
   requiredContextRole: ['group', 'menu', 'menubar'],
@@ -7201,7 +8640,7 @@ var menuitemRole = {
 };
 var _default = menuitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],158:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],174:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7217,26 +8656,25 @@ var menuitemcheckboxRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
-  props: {
-    'aria-checked': 'false'
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'menuitem'
-    }
+    },
+    module: 'ARIA'
   }],
-  requireContextRole: ['menu', 'menubar'],
-  requiredContextRole: ['menu', 'menubar'],
+  requireContextRole: ['group', 'menu', 'menubar'],
+  requiredContextRole: ['group', 'menu', 'menubar'],
   requiredOwnedElements: [],
   requiredProps: {
     'aria-checked': null
   },
-  superClass: [['roletype', 'widget', 'command', 'menuitem'], ['roletype', 'widget', 'input', 'checkbox']]
+  superClass: [['roletype', 'widget', 'input', 'checkbox'], ['roletype', 'widget', 'command', 'menuitem']]
 };
 var _default = menuitemcheckboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],159:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],175:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7252,14 +8690,13 @@ var menuitemradioRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
-  props: {
-    'aria-checked': 'false'
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'menuitem'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: ['group', 'menu', 'menubar'],
   requiredContextRole: ['group', 'menu', 'menubar'],
@@ -7267,11 +8704,42 @@ var menuitemradioRole = {
   requiredProps: {
     'aria-checked': null
   },
-  superClass: [['roletype', 'widget', 'command', 'menuitem', 'menuitemcheckbox'], ['roletype', 'widget', 'input', 'checkbox', 'menuitemcheckbox'], ['roletype', 'widget', 'input', 'radio']]
+  superClass: [['roletype', 'widget', 'input', 'checkbox', 'menuitemcheckbox'], ['roletype', 'widget', 'command', 'menuitem', 'menuitemcheckbox'], ['roletype', 'widget', 'input', 'radio']]
 };
 var _default = menuitemradioRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],160:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],176:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var meterRole = {
+  abstract: false,
+  accessibleNameRequired: true,
+  baseConcepts: [],
+  childrenPresentational: true,
+  nameFrom: ['author'],
+  prohibitedProps: [],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {
+    'aria-valuemax': null,
+    'aria-valuemin': null,
+    'aria-valuenow': null
+  },
+  superClass: [['roletype', 'structure', 'range']]
+};
+var _default = meterRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],177:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7287,12 +8755,13 @@ var navigationRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'nav'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7302,7 +8771,7 @@ var navigationRole = {
 };
 var _default = navigationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],161:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],178:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7318,6 +8787,7 @@ var noneRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: [],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -7328,7 +8798,7 @@ var noneRole = {
 };
 var _default = noneRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],162:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],179:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7344,6 +8814,7 @@ var noteRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -7354,7 +8825,7 @@ var noteRole = {
 };
 var _default = noteRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],163:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],180:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7370,30 +8841,31 @@ var optionRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
     'aria-checked': null,
     'aria-posinset': null,
-    'aria-selected': 'false',
-    'aria-setsize': null
+    'aria-setsize': null,
+    'aria-selected': 'false'
   },
   relatedConcepts: [{
-    module: 'HTML',
-    concept: {
-      name: 'option'
-    }
-  }, {
-    module: 'ARIA',
-    concept: {
-      name: 'listitem'
-    }
-  }, {
-    module: 'XForms',
     concept: {
       name: 'item'
-    }
+    },
+    module: 'XForms'
+  }, {
+    concept: {
+      name: 'listitem'
+    },
+    module: 'ARIA'
+  }, {
+    concept: {
+      name: 'option'
+    },
+    module: 'HTML'
   }],
-  requireContextRole: ['listbox'],
-  requiredContextRole: ['listbox'],
+  requireContextRole: [],
+  requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {
     'aria-selected': 'false'
@@ -7402,7 +8874,34 @@ var optionRole = {
 };
 var _default = optionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],164:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],181:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var paragraphRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = paragraphRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],182:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7417,7 +8916,8 @@ var presentationRole = {
   accessibleNameRequired: false,
   baseConcepts: [],
   childrenPresentational: false,
-  nameFrom: ['author'],
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -7428,7 +8928,7 @@ var presentationRole = {
 };
 var _default = presentationRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],165:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],183:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7444,27 +8944,28 @@ var progressbarRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'progress'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'ARIA',
     concept: {
       name: 'status'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {},
-  superClass: [['roletype', 'widget', 'range']]
+  superClass: [['roletype', 'structure', 'range'], ['roletype', 'widget']]
 };
 var _default = progressbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],166:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],184:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7480,33 +8981,33 @@ var radioRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
-    'aria-checked': 'false',
+    'aria-checked': null,
     'aria-posinset': null,
-    'aria-selected': null,
     'aria-setsize': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
         name: 'type',
         value: 'radio'
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {
-    'aria-checked': 'false'
+    'aria-checked': null
   },
   superClass: [['roletype', 'widget', 'input']]
 };
 var _default = radioRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],167:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],185:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7522,15 +9023,18 @@ var radiogroupRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
+    'aria-errormessage': null,
+    'aria-invalid': null,
     'aria-readonly': null,
     'aria-required': null
   },
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'list'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7540,7 +9044,7 @@ var radiogroupRole = {
 };
 var _default = radiogroupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],168:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],186:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7556,34 +9060,35 @@ var regionRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'frame'
-    }
+      attributes: [{
+        constraints: ['set'],
+        name: 'aria-label'
+      }],
+      name: 'section'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['set'],
+        name: 'aria-labelledby'
+      }],
+      name: 'section'
+    },
+    module: 'HTML'
   }, {
     concept: {
       name: 'Device Independence Glossart perceivable unit'
     }
   }, {
-    module: 'HTML',
     concept: {
-      name: 'section',
-      attributes: [{
-        name: 'aria-label',
-        constraints: ['set']
-      }]
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'section',
-      attributes: [{
-        name: 'aria-labelledby',
-        constraints: ['set']
-      }]
-    }
+      name: 'frame'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7593,7 +9098,7 @@ var regionRole = {
 };
 var _default = regionRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],169:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],187:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7609,17 +9114,21 @@ var rowRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
     'aria-colindex': null,
+    'aria-expanded': null,
     'aria-level': null,
+    'aria-posinset': null,
     'aria-rowindex': null,
-    'aria-selected': null
+    'aria-selected': null,
+    'aria-setsize': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'tr'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['grid', 'rowgroup', 'table', 'treegrid'],
   requiredContextRole: ['grid', 'rowgroup', 'table', 'treegrid'],
@@ -7629,7 +9138,7 @@ var rowRole = {
 };
 var _default = rowRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],170:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],188:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7645,25 +9154,23 @@ var rowgroupRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {
-    'aria-activedescendant': null,
-    'aria-expanded': null
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'tbody'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'tfoot'
-    }
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
       name: 'thead'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['grid', 'table', 'treegrid'],
   requiredContextRole: ['grid', 'table', 'treegrid'],
@@ -7673,7 +9180,7 @@ var rowgroupRole = {
 };
 var _default = rowgroupRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],171:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],189:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7689,18 +9196,19 @@ var rowheaderRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
     'aria-sort': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'th',
       attributes: [{
         name: 'scope',
         value: 'row'
-      }]
-    }
+      }],
+      name: 'th'
+    },
+    module: 'HTML'
   }],
   requireContextRole: ['row'],
   requiredContextRole: ['row'],
@@ -7710,7 +9218,7 @@ var rowheaderRole = {
 };
 var _default = rowheaderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],172:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],190:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7726,28 +9234,12 @@ var scrollbarRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-controls': null,
-    'aria-orientation': null,
-    'aria-valuemax': null,
-    'aria-valuemin': null,
-    'aria-valuenow': null,
-    'aria-atomic': null,
-    'aria-busy': null,
-    'aria-describedby': null,
     'aria-disabled': null,
-    'aria-dropeffect': null,
-    'aria-flowto': null,
-    'aria-grabbed': null,
-    'aria-haspopup': null,
-    'aria-hidden': null,
-    'aria-invalid': null,
-    'aria-label': null,
-    'aria-labelledby': null,
-    'aria-live': null,
-    'aria-owns': null,
-    'aria-relevant': null,
-    'aria-valuetext': null
+    'aria-orientation': 'vertical',
+    'aria-valuemax': '100',
+    'aria-valuemin': '0'
   },
   relatedConcepts: [],
   requireContextRole: [],
@@ -7755,16 +9247,13 @@ var scrollbarRole = {
   requiredOwnedElements: [],
   requiredProps: {
     'aria-controls': null,
-    'aria-orientation': null,
-    'aria-valuemax': null,
-    'aria-valuemin': null,
     'aria-valuenow': null
   },
-  superClass: []
+  superClass: [['roletype', 'structure', 'range'], ['roletype', 'widget']]
 };
 var _default = scrollbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],173:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],191:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7780,6 +9269,7 @@ var searchRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -7790,7 +9280,7 @@ var searchRole = {
 };
 var _default = searchRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],174:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],192:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7806,19 +9296,20 @@ var searchboxRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
+        constraints: ['undefined'],
+        name: 'list'
+      }, {
         name: 'type',
         value: 'search'
-      }, {
-        name: 'list',
-        constraints: ['undefined']
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7828,7 +9319,7 @@ var searchboxRole = {
 };
 var _default = searchboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],175:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],193:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7844,15 +9335,19 @@ var separatorRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-expanded': null,
-    'aria-orientation': 'horizontal'
+    'aria-disabled': null,
+    'aria-valuetext': null,
+    'aria-orientation': 'horizontal',
+    'aria-valuemax': '100',
+    'aria-valuemin': '0'
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'hr'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7862,7 +9357,7 @@ var separatorRole = {
 };
 var _default = separatorRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],176:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],194:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7878,36 +9373,37 @@ var sliderRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-orientation': 'horizontal',
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null,
     'aria-readonly': null,
+    'aria-orientation': 'horizontal',
     'aria-valuemax': '100',
-    'aria-valuemin': '0',
-    'aria-valuenow': '50'
+    'aria-valuemin': '0'
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
         name: 'type',
         value: 'range'
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {
-    'aria-valuemax': '100',
-    'aria-valuemin': '0',
-    'aria-valuenow': '50'
+    'aria-valuenow': null
   },
-  superClass: [['roletype', 'widget', 'input'], ['roletype', 'widget', 'range']]
+  superClass: [['roletype', 'widget', 'input'], ['roletype', 'structure', 'range']]
 };
 var _default = sliderRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],177:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],195:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7923,34 +9419,33 @@ var spinbuttonRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
-    'aria-valuenow': '0',
+    'aria-errormessage': null,
+    'aria-invalid': null,
+    'aria-readonly': null,
     'aria-required': null,
-    'aria-readonly': null
+    'aria-valuenow': '0'
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
         name: 'type',
         value: 'number'
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
-  requiredProps: {
-    'aria-valuemax': null,
-    'aria-valuemin': null,
-    'aria-valuenow': '0'
-  },
-  superClass: [['roletype', 'widget', 'composite'], ['roletype', 'widget', 'input'], ['roletype', 'widget', 'range']]
+  requiredProps: {},
+  superClass: [['roletype', 'widget', 'composite'], ['roletype', 'widget', 'input'], ['roletype', 'structure', 'range']]
 };
 var _default = spinbuttonRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],178:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],196:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -7966,15 +9461,16 @@ var statusRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-atomic': 'true',
     'aria-live': 'polite'
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'output'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -7984,7 +9480,88 @@ var statusRole = {
 };
 var _default = statusRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],179:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],197:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var strongRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = strongRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],198:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var subscriptRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = subscriptRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],199:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var superscriptRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['prohibited'],
+  prohibitedProps: ['aria-label', 'aria-labelledby'],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = superscriptRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],200:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8000,26 +9577,25 @@ var switchRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
-  props: {
-    'aria-checked': 'false'
-  },
+  prohibitedProps: [],
+  props: {},
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'button'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
   requiredOwnedElements: [],
   requiredProps: {
-    'aria-checked': 'false'
+    'aria-checked': null
   },
   superClass: [['roletype', 'widget', 'input', 'checkbox']]
 };
 var _default = switchRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],180:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],201:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8035,10 +9611,14 @@ var tabRole = {
   baseConcepts: [],
   childrenPresentational: true,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {
+    'aria-disabled': null,
+    'aria-expanded': null,
+    'aria-haspopup': null,
     'aria-posinset': null,
-    'aria-selected': 'false',
-    'aria-setsize': null
+    'aria-setsize': null,
+    'aria-selected': 'false'
   },
   relatedConcepts: [],
   requireContextRole: ['tablist'],
@@ -8049,7 +9629,7 @@ var tabRole = {
 };
 var _default = tabRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],181:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],202:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8065,25 +9645,26 @@ var tableRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-colcount': null,
     'aria-rowcount': null
   },
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
       name: 'table'
-    }
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['row'], ['rowgroup', 'row']],
+  requiredOwnedElements: [['row'], ['row', 'rowgroup']],
   requiredProps: {},
   superClass: [['roletype', 'structure', 'section']]
 };
 var _default = tableRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],182:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],203:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8099,11 +9680,11 @@ var tablistRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-level': null,
     'aria-multiselectable': null,
-    'aria-orientation': 'horizontal',
-    'aria-expanded': null
+    'aria-orientation': 'horizontal'
   },
   relatedConcepts: [{
     module: 'DAISY',
@@ -8119,7 +9700,7 @@ var tablistRole = {
 };
 var _default = tablistRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],183:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],204:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8135,6 +9716,7 @@ var tabpanelRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -8145,7 +9727,7 @@ var tabpanelRole = {
 };
 var _default = tabpanelRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],184:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],205:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8161,12 +9743,13 @@ var termRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [{
-    module: 'HTML',
     concept: {
-      name: 'dt'
-    }
+      name: 'dfn'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -8176,7 +9759,7 @@ var termRole = {
 };
 var _default = termRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],185:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],206:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8192,72 +9775,88 @@ var textboxRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-activedescendant': null,
     'aria-autocomplete': null,
+    'aria-errormessage': null,
+    'aria-haspopup': null,
+    'aria-invalid': null,
     'aria-multiline': null,
     'aria-placeholder': null,
     'aria-readonly': null,
     'aria-required': null
   },
   relatedConcepts: [{
-    module: 'XForms',
     concept: {
-      name: 'input'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'textarea'
-    }
-  }, {
-    module: 'HTML',
-    concept: {
-      name: 'input',
       attributes: [{
-        name: 'type',
-        value: 'text'
+        constraints: ['undefined'],
+        name: 'type'
       }, {
-        name: 'list',
-        constraints: ['undefined']
-      }]
-    }
+        constraints: ['undefined'],
+        name: 'list'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
+        constraints: ['undefined'],
+        name: 'list'
+      }, {
         name: 'type',
         value: 'email'
-      }, {
-        name: 'list',
-        constraints: ['undefined']
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
+        constraints: ['undefined'],
+        name: 'list'
+      }, {
         name: 'type',
         value: 'tel'
-      }, {
-        name: 'list',
-        constraints: ['undefined']
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
   }, {
-    module: 'HTML',
     concept: {
-      name: 'input',
       attributes: [{
+        constraints: ['undefined'],
+        name: 'list'
+      }, {
+        name: 'type',
+        value: 'text'
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      attributes: [{
+        constraints: ['undefined'],
+        name: 'list'
+      }, {
         name: 'type',
         value: 'url'
-      }, {
-        name: 'list',
-        constraints: ['undefined']
-      }]
-    }
+      }],
+      name: 'input'
+    },
+    module: 'HTML'
+  }, {
+    concept: {
+      name: 'input'
+    },
+    module: 'XForms'
+  }, {
+    concept: {
+      name: 'textarea'
+    },
+    module: 'HTML'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -8267,7 +9866,34 @@ var textboxRole = {
 };
 var _default = textboxRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],186:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],207:[function(require,module,exports){
+"use strict";
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+var timeRole = {
+  abstract: false,
+  accessibleNameRequired: false,
+  baseConcepts: [],
+  childrenPresentational: false,
+  nameFrom: ['author'],
+  prohibitedProps: [],
+  props: {},
+  relatedConcepts: [],
+  requireContextRole: [],
+  requiredContextRole: [],
+  requiredOwnedElements: [],
+  requiredProps: {},
+  superClass: [['roletype', 'structure', 'section']]
+};
+var _default = timeRole;
+exports.default = _default;
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],208:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8279,10 +9905,11 @@ _Object$defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var timerRole = {
   abstract: false,
-  accessibleNameRequired: true,
+  accessibleNameRequired: false,
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -8293,7 +9920,7 @@ var timerRole = {
 };
 var _default = timerRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],187:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],209:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8309,14 +9936,15 @@ var toolbarRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
     'aria-orientation': 'horizontal'
   },
   relatedConcepts: [{
-    module: 'ARIA',
     concept: {
       name: 'menubar'
-    }
+    },
+    module: 'ARIA'
   }],
   requireContextRole: [],
   requiredContextRole: [],
@@ -8326,7 +9954,7 @@ var toolbarRole = {
 };
 var _default = toolbarRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],188:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],210:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8342,6 +9970,7 @@ var tooltipRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
@@ -8352,7 +9981,7 @@ var tooltipRole = {
 };
 var _default = tooltipRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],189:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],211:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8368,7 +9997,10 @@ var treeRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {
+    'aria-errormessage': null,
+    'aria-invalid': null,
     'aria-multiselectable': null,
     'aria-required': null,
     'aria-orientation': 'vertical'
@@ -8376,13 +10008,13 @@ var treeRole = {
   relatedConcepts: [],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['group', 'treeitem'], ['treeitem']],
+  requiredOwnedElements: [['treeitem', 'group'], ['treeitem']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite', 'select'], ['roletype', 'structure', 'section', 'group', 'select']]
 };
 var _default = treeRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],190:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],212:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8394,21 +10026,22 @@ _Object$defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var treegridRole = {
   abstract: false,
-  accessibleNameRequired: false,
+  accessibleNameRequired: true,
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author'],
+  prohibitedProps: [],
   props: {},
   relatedConcepts: [],
   requireContextRole: [],
   requiredContextRole: [],
-  requiredOwnedElements: [['rowgroup', 'row'], ['row']],
+  requiredOwnedElements: [['row'], ['row', 'rowgroup']],
   requiredProps: {},
   superClass: [['roletype', 'widget', 'composite', 'grid'], ['roletype', 'structure', 'section', 'table', 'grid'], ['roletype', 'widget', 'composite', 'select', 'tree'], ['roletype', 'structure', 'section', 'group', 'select', 'tree']]
 };
 var _default = treegridRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],191:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],213:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
@@ -8424,7 +10057,11 @@ var treeitemRole = {
   baseConcepts: [],
   childrenPresentational: false,
   nameFrom: ['author', 'contents'],
-  props: {},
+  prohibitedProps: [],
+  props: {
+    'aria-expanded': null,
+    'aria-haspopup': null
+  },
   relatedConcepts: [],
   requireContextRole: ['group', 'tree'],
   requiredContextRole: ['group', 'tree'],
@@ -8434,7 +10071,7 @@ var treeitemRole = {
 };
 var _default = treeitemRole;
 exports.default = _default;
-},{"@babel/runtime-corejs3/core-js-stable/object/define-property":10}],192:[function(require,module,exports){
+},{"@babel/runtime-corejs3/core-js-stable/object/define-property":13}],214:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8467,7 +10104,7 @@ var elementRoles = _elementRoleMap.default;
 exports.elementRoles = elementRoles;
 var roleElements = _roleElementMap.default;
 exports.roleElements = roleElements;
-},{"./ariaPropsMap":66,"./domMap":67,"./elementRoleMap":68,"./roleElementMap":193,"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],193:[function(require,module,exports){
+},{"./ariaPropsMap":75,"./domMap":76,"./elementRoleMap":77,"./roleElementMap":215,"./rolesMap":216,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],215:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8518,7 +10155,7 @@ var roleElementMap = new _map.default([]);
 });
 var _default = roleElementMap;
 exports.default = _default;
-},{"./rolesMap":194,"@babel/runtime-corejs3/core-js-stable/instance/concat":2,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/instance/keys":6,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/set":12,"@babel/runtime-corejs3/helpers/interopRequireDefault":24,"@babel/runtime-corejs3/helpers/toConsumableArray":30}],194:[function(require,module,exports){
+},{"./rolesMap":216,"@babel/runtime-corejs3/core-js-stable/instance/concat":4,"@babel/runtime-corejs3/core-js-stable/instance/for-each":7,"@babel/runtime-corejs3/core-js-stable/instance/keys":8,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/core-js-stable/set":15,"@babel/runtime-corejs3/helpers/interopRequireDefault":29,"@babel/runtime-corejs3/helpers/toConsumableArray":35}],216:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
@@ -8531,13 +10168,23 @@ _Object$defineProperty(exports, "__esModule", {
 
 exports.default = void 0;
 
+var _getIterator2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js/get-iterator"));
+
+var _isArray = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/array/is-array"));
+
+var _getIteratorMethod2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js/get-iterator-method"));
+
+var _symbol = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/symbol"));
+
+var _from = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/array/from"));
+
+var _slice = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/slice"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime-corejs3/helpers/defineProperty"));
 
 var _assign = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/assign"));
 
 var _keys = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/keys"));
-
-var _getIterator2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js/get-iterator"));
 
 var _forEach = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/for-each"));
 
@@ -8551,6 +10198,12 @@ var _ariaDpubRoles = _interopRequireDefault(require("./etc/roles/ariaDpubRoles")
 
 var _context;
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof _symbol.default === "undefined" || (0, _getIteratorMethod2.default)(o) == null) { if ((0, _isArray.default)(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = (0, _getIterator2.default)(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { var _context2; if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = (0, _slice.default)(_context2 = Object.prototype.toString.call(o)).call(_context2, 8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return (0, _from.default)(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var rolesMap = new _map.default([]);
 (0, _forEach.default)(_context = [_ariaAbstractRoles.default, _ariaLiteralRoles.default, _ariaDpubRoles.default]).call(_context, function (roleSet) {
   (0, _forEach.default)(roleSet).call(roleSet, function (roleDefinition, name) {
@@ -8559,19 +10212,18 @@ var rolesMap = new _map.default([]);
 });
 (0, _forEach.default)(rolesMap).call(rolesMap, function (roleDefinition, name) {
   // Conglomerate the properties
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  var _iterator = _createForOfIteratorHelper(roleDefinition.superClass),
+      _step;
 
   try {
-    for (var _iterator = (0, _getIterator2.default)(roleDefinition.superClass), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var superClassIter = _step.value;
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+
+      var _iterator2 = _createForOfIteratorHelper(superClassIter),
+          _step2;
 
       try {
-        for (var _iterator2 = (0, _getIterator2.default)(superClassIter), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var superClassName = _step2.value;
           var superClassDefinition = rolesMap.get(superClassName);
 
@@ -8586,87 +10238,69 @@ var rolesMap = new _map.default([]);
           }
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _iterator2.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+        _iterator2.f();
       }
     }
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 });
 var _default = rolesMap;
 exports.default = _default;
-},{"./etc/roles/ariaAbstractRoles":81,"./etc/roles/ariaDpubRoles":82,"./etc/roles/ariaLiteralRoles":83,"@babel/runtime-corejs3/core-js-stable/instance/for-each":5,"@babel/runtime-corejs3/core-js-stable/map":8,"@babel/runtime-corejs3/core-js-stable/object/assign":9,"@babel/runtime-corejs3/core-js-stable/object/define-property":10,"@babel/runtime-corejs3/core-js-stable/object/keys":11,"@babel/runtime-corejs3/core-js/get-iterator":15,"@babel/runtime-corejs3/helpers/defineProperty":23,"@babel/runtime-corejs3/helpers/interopRequireDefault":24}],195:[function(require,module,exports){
+},{"./etc/roles/ariaAbstractRoles":90,"./etc/roles/ariaDpubRoles":91,"./etc/roles/ariaLiteralRoles":92,"@babel/runtime-corejs3/core-js-stable/array/from":2,"@babel/runtime-corejs3/core-js-stable/array/is-array":3,"@babel/runtime-corejs3/core-js-stable/instance/for-each":7,"@babel/runtime-corejs3/core-js-stable/instance/slice":9,"@babel/runtime-corejs3/core-js-stable/map":11,"@babel/runtime-corejs3/core-js-stable/object/assign":12,"@babel/runtime-corejs3/core-js-stable/object/define-property":13,"@babel/runtime-corejs3/core-js-stable/object/keys":14,"@babel/runtime-corejs3/core-js-stable/symbol":16,"@babel/runtime-corejs3/core-js/get-iterator":20,"@babel/runtime-corejs3/core-js/get-iterator-method":19,"@babel/runtime-corejs3/helpers/defineProperty":28,"@babel/runtime-corejs3/helpers/interopRequireDefault":29}],217:[function(require,module,exports){
 require('../../modules/es.string.iterator');
 require('../../modules/es.array.from');
 var path = require('../../internals/path');
 
 module.exports = path.Array.from;
 
-},{"../../internals/path":294,"../../modules/es.array.from":319,"../../modules/es.string.iterator":332}],196:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.array.from":343,"../../modules/es.string.iterator":357}],218:[function(require,module,exports){
 require('../../modules/es.array.is-array');
 var path = require('../../internals/path');
 
 module.exports = path.Array.isArray;
 
-},{"../../internals/path":294,"../../modules/es.array.is-array":320}],197:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.array.is-array":344}],219:[function(require,module,exports){
 require('../../../modules/es.array.concat');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').concat;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.concat":316}],198:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.concat":340}],220:[function(require,module,exports){
 require('../../../modules/es.array.iterator');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').entries;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.iterator":321}],199:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.iterator":345}],221:[function(require,module,exports){
 require('../../../modules/es.array.find');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').find;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.find":317}],200:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.find":341}],222:[function(require,module,exports){
 require('../../../modules/es.array.for-each');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').forEach;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.for-each":318}],201:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.for-each":342}],223:[function(require,module,exports){
 require('../../../modules/es.array.iterator');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').keys;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.iterator":321}],202:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.iterator":345}],224:[function(require,module,exports){
 require('../../../modules/es.array.slice');
 var entryVirtual = require('../../../internals/entry-virtual');
 
 module.exports = entryVirtual('Array').slice;
 
-},{"../../../internals/entry-virtual":251,"../../../modules/es.array.slice":322}],203:[function(require,module,exports){
+},{"../../../internals/entry-virtual":274,"../../../modules/es.array.slice":346}],225:[function(require,module,exports){
 var concat = require('../array/virtual/concat');
 
 var ArrayPrototype = Array.prototype;
@@ -8676,7 +10310,7 @@ module.exports = function (it) {
   return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.concat) ? concat : own;
 };
 
-},{"../array/virtual/concat":197}],204:[function(require,module,exports){
+},{"../array/virtual/concat":219}],226:[function(require,module,exports){
 var find = require('../array/virtual/find');
 
 var ArrayPrototype = Array.prototype;
@@ -8686,7 +10320,7 @@ module.exports = function (it) {
   return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
 };
 
-},{"../array/virtual/find":199}],205:[function(require,module,exports){
+},{"../array/virtual/find":221}],227:[function(require,module,exports){
 var slice = require('../array/virtual/slice');
 
 var ArrayPrototype = Array.prototype;
@@ -8696,7 +10330,7 @@ module.exports = function (it) {
   return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.slice) ? slice : own;
 };
 
-},{"../array/virtual/slice":202}],206:[function(require,module,exports){
+},{"../array/virtual/slice":224}],228:[function(require,module,exports){
 require('../../modules/es.json.stringify');
 var core = require('../../internals/path');
 
@@ -8707,7 +10341,7 @@ module.exports = function stringify(it, replacer, space) {
   return core.JSON.stringify.apply(null, arguments);
 };
 
-},{"../../internals/path":294,"../../modules/es.json.stringify":323}],207:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.json.stringify":347}],229:[function(require,module,exports){
 require('../../modules/es.map');
 require('../../modules/es.object.to-string');
 require('../../modules/es.string.iterator');
@@ -8716,13 +10350,13 @@ var path = require('../../internals/path');
 
 module.exports = path.Map;
 
-},{"../../internals/path":294,"../../modules/es.map":325,"../../modules/es.object.to-string":330,"../../modules/es.string.iterator":332,"../../modules/web.dom-collections.iterator":353}],208:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.map":349,"../../modules/es.object.to-string":354,"../../modules/es.string.iterator":357,"../../modules/web.dom-collections.iterator":378}],230:[function(require,module,exports){
 require('../../modules/es.object.assign');
 var path = require('../../internals/path');
 
 module.exports = path.Object.assign;
 
-},{"../../internals/path":294,"../../modules/es.object.assign":327}],209:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.object.assign":351}],231:[function(require,module,exports){
 require('../../modules/es.object.define-property');
 var path = require('../../internals/path');
 
@@ -8734,13 +10368,13 @@ var defineProperty = module.exports = function defineProperty(it, key, desc) {
 
 if (Object.defineProperty.sham) defineProperty.sham = true;
 
-},{"../../internals/path":294,"../../modules/es.object.define-property":328}],210:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.object.define-property":352}],232:[function(require,module,exports){
 require('../../modules/es.object.keys');
 var path = require('../../internals/path');
 
 module.exports = path.Object.keys;
 
-},{"../../internals/path":294,"../../modules/es.object.keys":329}],211:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.object.keys":353}],233:[function(require,module,exports){
 require('../../modules/es.set');
 require('../../modules/es.object.to-string');
 require('../../modules/es.string.iterator');
@@ -8749,7 +10383,7 @@ var path = require('../../internals/path');
 
 module.exports = path.Set;
 
-},{"../../internals/path":294,"../../modules/es.object.to-string":330,"../../modules/es.set":331,"../../modules/es.string.iterator":332,"../../modules/web.dom-collections.iterator":353}],212:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.object.to-string":354,"../../modules/es.set":356,"../../modules/es.string.iterator":357,"../../modules/web.dom-collections.iterator":378}],234:[function(require,module,exports){
 require('../../modules/es.array.concat');
 require('../../modules/es.object.to-string');
 require('../../modules/es.symbol');
@@ -8767,47 +10401,55 @@ require('../../modules/es.symbol.split');
 require('../../modules/es.symbol.to-primitive');
 require('../../modules/es.symbol.to-string-tag');
 require('../../modules/es.symbol.unscopables');
-require('../../modules/es.math.to-string-tag');
 require('../../modules/es.json.to-string-tag');
+require('../../modules/es.math.to-string-tag');
+require('../../modules/es.reflect.to-string-tag');
 var path = require('../../internals/path');
 
 module.exports = path.Symbol;
 
-},{"../../internals/path":294,"../../modules/es.array.concat":316,"../../modules/es.json.to-string-tag":324,"../../modules/es.math.to-string-tag":326,"../../modules/es.object.to-string":330,"../../modules/es.symbol":338,"../../modules/es.symbol.async-iterator":333,"../../modules/es.symbol.description":334,"../../modules/es.symbol.has-instance":335,"../../modules/es.symbol.is-concat-spreadable":336,"../../modules/es.symbol.iterator":337,"../../modules/es.symbol.match":340,"../../modules/es.symbol.match-all":339,"../../modules/es.symbol.replace":341,"../../modules/es.symbol.search":342,"../../modules/es.symbol.species":343,"../../modules/es.symbol.split":344,"../../modules/es.symbol.to-primitive":345,"../../modules/es.symbol.to-string-tag":346,"../../modules/es.symbol.unscopables":347}],213:[function(require,module,exports){
+},{"../../internals/path":318,"../../modules/es.array.concat":340,"../../modules/es.json.to-string-tag":348,"../../modules/es.math.to-string-tag":350,"../../modules/es.object.to-string":354,"../../modules/es.reflect.to-string-tag":355,"../../modules/es.symbol":363,"../../modules/es.symbol.async-iterator":358,"../../modules/es.symbol.description":359,"../../modules/es.symbol.has-instance":360,"../../modules/es.symbol.is-concat-spreadable":361,"../../modules/es.symbol.iterator":362,"../../modules/es.symbol.match":365,"../../modules/es.symbol.match-all":364,"../../modules/es.symbol.replace":366,"../../modules/es.symbol.search":367,"../../modules/es.symbol.species":368,"../../modules/es.symbol.split":369,"../../modules/es.symbol.to-primitive":370,"../../modules/es.symbol.to-string-tag":371,"../../modules/es.symbol.unscopables":372}],235:[function(require,module,exports){
 var parent = require('../../es/array/from');
 
 module.exports = parent;
 
-},{"../../es/array/from":195}],214:[function(require,module,exports){
+},{"../../es/array/from":217}],236:[function(require,module,exports){
 var parent = require('../../es/array/is-array');
 
 module.exports = parent;
 
-},{"../../es/array/is-array":196}],215:[function(require,module,exports){
+},{"../../es/array/is-array":218}],237:[function(require,module,exports){
+require('../modules/web.dom-collections.iterator');
+require('../modules/es.string.iterator');
+var getIteratorMethod = require('../internals/get-iterator-method');
+
+module.exports = getIteratorMethod;
+
+},{"../internals/get-iterator-method":281,"../modules/es.string.iterator":357,"../modules/web.dom-collections.iterator":378}],238:[function(require,module,exports){
 require('../modules/web.dom-collections.iterator');
 require('../modules/es.string.iterator');
 var getIterator = require('../internals/get-iterator');
 
 module.exports = getIterator;
 
-},{"../internals/get-iterator":259,"../modules/es.string.iterator":332,"../modules/web.dom-collections.iterator":353}],216:[function(require,module,exports){
+},{"../internals/get-iterator":282,"../modules/es.string.iterator":357,"../modules/web.dom-collections.iterator":378}],239:[function(require,module,exports){
 var parent = require('../../es/instance/slice');
 
 module.exports = parent;
 
-},{"../../es/instance/slice":205}],217:[function(require,module,exports){
+},{"../../es/instance/slice":227}],240:[function(require,module,exports){
 require('../modules/web.dom-collections.iterator');
 require('../modules/es.string.iterator');
 var isIterable = require('../internals/is-iterable');
 
 module.exports = isIterable;
 
-},{"../internals/is-iterable":272,"../modules/es.string.iterator":332,"../modules/web.dom-collections.iterator":353}],218:[function(require,module,exports){
+},{"../internals/is-iterable":295,"../modules/es.string.iterator":357,"../modules/web.dom-collections.iterator":378}],241:[function(require,module,exports){
 var parent = require('../../es/object/define-property');
 
 module.exports = parent;
 
-},{"../../es/object/define-property":209}],219:[function(require,module,exports){
+},{"../../es/object/define-property":231}],242:[function(require,module,exports){
 var parent = require('../../es/symbol');
 require('../../modules/esnext.symbol.async-dispose');
 require('../../modules/esnext.symbol.dispose');
@@ -8818,14 +10460,14 @@ require('../../modules/esnext.symbol.replace-all');
 
 module.exports = parent;
 
-},{"../../es/symbol":212,"../../modules/esnext.symbol.async-dispose":348,"../../modules/esnext.symbol.dispose":349,"../../modules/esnext.symbol.observable":350,"../../modules/esnext.symbol.pattern-match":351,"../../modules/esnext.symbol.replace-all":352}],220:[function(require,module,exports){
+},{"../../es/symbol":234,"../../modules/esnext.symbol.async-dispose":373,"../../modules/esnext.symbol.dispose":374,"../../modules/esnext.symbol.observable":375,"../../modules/esnext.symbol.pattern-match":376,"../../modules/esnext.symbol.replace-all":377}],243:[function(require,module,exports){
 module.exports = function (it) {
   if (typeof it != 'function') {
     throw TypeError(String(it) + ' is not a function');
   } return it;
 };
 
-},{}],221:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 var isObject = require('../internals/is-object');
 
 module.exports = function (it) {
@@ -8834,17 +10476,17 @@ module.exports = function (it) {
   } return it;
 };
 
-},{"../internals/is-object":273}],222:[function(require,module,exports){
+},{"../internals/is-object":296}],245:[function(require,module,exports){
 module.exports = function () { /* empty */ };
 
-},{}],223:[function(require,module,exports){
+},{}],246:[function(require,module,exports){
 module.exports = function (it, Constructor, name) {
   if (!(it instanceof Constructor)) {
     throw TypeError('Incorrect ' + (name ? name + ' ' : '') + 'invocation');
   } return it;
 };
 
-},{}],224:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 var isObject = require('../internals/is-object');
 
 module.exports = function (it) {
@@ -8853,7 +10495,7 @@ module.exports = function (it) {
   } return it;
 };
 
-},{"../internals/is-object":273}],225:[function(require,module,exports){
+},{"../internals/is-object":296}],248:[function(require,module,exports){
 'use strict';
 var $forEach = require('../internals/array-iteration').forEach;
 var arrayMethodIsStrict = require('../internals/array-method-is-strict');
@@ -8868,7 +10510,7 @@ module.exports = (!STRICT_METHOD || !USES_TO_LENGTH) ? function forEach(callback
   return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
 } : [].forEach;
 
-},{"../internals/array-iteration":228,"../internals/array-method-is-strict":230,"../internals/array-method-uses-to-length":231}],226:[function(require,module,exports){
+},{"../internals/array-iteration":251,"../internals/array-method-is-strict":253,"../internals/array-method-uses-to-length":254}],249:[function(require,module,exports){
 'use strict';
 var bind = require('../internals/function-bind-context');
 var toObject = require('../internals/to-object');
@@ -8911,7 +10553,7 @@ module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undef
   return result;
 };
 
-},{"../internals/call-with-safe-iteration-closing":233,"../internals/create-property":243,"../internals/function-bind-context":256,"../internals/get-iterator-method":258,"../internals/is-array-iterator-method":269,"../internals/to-length":308,"../internals/to-object":309}],227:[function(require,module,exports){
+},{"../internals/call-with-safe-iteration-closing":256,"../internals/create-property":266,"../internals/function-bind-context":279,"../internals/get-iterator-method":281,"../internals/is-array-iterator-method":292,"../internals/to-length":332,"../internals/to-object":333}],250:[function(require,module,exports){
 var toIndexedObject = require('../internals/to-indexed-object');
 var toLength = require('../internals/to-length');
 var toAbsoluteIndex = require('../internals/to-absolute-index');
@@ -8945,7 +10587,7 @@ module.exports = {
   indexOf: createMethod(false)
 };
 
-},{"../internals/to-absolute-index":305,"../internals/to-indexed-object":306,"../internals/to-length":308}],228:[function(require,module,exports){
+},{"../internals/to-absolute-index":329,"../internals/to-indexed-object":330,"../internals/to-length":332}],251:[function(require,module,exports){
 var bind = require('../internals/function-bind-context');
 var IndexedObject = require('../internals/indexed-object');
 var toObject = require('../internals/to-object');
@@ -9012,7 +10654,7 @@ module.exports = {
   findIndex: createMethod(6)
 };
 
-},{"../internals/array-species-create":232,"../internals/function-bind-context":256,"../internals/indexed-object":265,"../internals/to-length":308,"../internals/to-object":309}],229:[function(require,module,exports){
+},{"../internals/array-species-create":255,"../internals/function-bind-context":279,"../internals/indexed-object":288,"../internals/to-length":332,"../internals/to-object":333}],252:[function(require,module,exports){
 var fails = require('../internals/fails');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var V8_VERSION = require('../internals/engine-v8-version');
@@ -9033,7 +10675,7 @@ module.exports = function (METHOD_NAME) {
   });
 };
 
-},{"../internals/engine-v8-version":250,"../internals/fails":254,"../internals/well-known-symbol":315}],230:[function(require,module,exports){
+},{"../internals/engine-v8-version":273,"../internals/fails":277,"../internals/well-known-symbol":339}],253:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 
@@ -9045,7 +10687,7 @@ module.exports = function (METHOD_NAME, argument) {
   });
 };
 
-},{"../internals/fails":254}],231:[function(require,module,exports){
+},{"../internals/fails":277}],254:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
 var has = require('../internals/has');
@@ -9074,7 +10716,7 @@ module.exports = function (METHOD_NAME, options) {
   });
 };
 
-},{"../internals/descriptors":246,"../internals/fails":254,"../internals/has":261}],232:[function(require,module,exports){
+},{"../internals/descriptors":269,"../internals/fails":277,"../internals/has":284}],255:[function(require,module,exports){
 var isObject = require('../internals/is-object');
 var isArray = require('../internals/is-array');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -9096,8 +10738,9 @@ module.exports = function (originalArray, length) {
   } return new (C === undefined ? Array : C)(length === 0 ? 0 : length);
 };
 
-},{"../internals/is-array":270,"../internals/is-object":273,"../internals/well-known-symbol":315}],233:[function(require,module,exports){
+},{"../internals/is-array":293,"../internals/is-object":296,"../internals/well-known-symbol":339}],256:[function(require,module,exports){
 var anObject = require('../internals/an-object');
+var iteratorClose = require('../internals/iterator-close');
 
 // call something on iterator step with safe closing on error
 module.exports = function (iterator, fn, value, ENTRIES) {
@@ -9105,13 +10748,12 @@ module.exports = function (iterator, fn, value, ENTRIES) {
     return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value);
   // 7.4.6 IteratorClose(iterator, completion)
   } catch (error) {
-    var returnMethod = iterator['return'];
-    if (returnMethod !== undefined) anObject(returnMethod.call(iterator));
+    iteratorClose(iterator);
     throw error;
   }
 };
 
-},{"../internals/an-object":224}],234:[function(require,module,exports){
+},{"../internals/an-object":247,"../internals/iterator-close":299}],257:[function(require,module,exports){
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var ITERATOR = wellKnownSymbol('iterator');
@@ -9151,14 +10793,14 @@ module.exports = function (exec, SKIP_CLOSING) {
   return ITERATION_SUPPORT;
 };
 
-},{"../internals/well-known-symbol":315}],235:[function(require,module,exports){
+},{"../internals/well-known-symbol":339}],258:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
-},{}],236:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var classofRaw = require('../internals/classof-raw');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -9186,7 +10828,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
     : (result = classofRaw(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : result;
 };
 
-},{"../internals/classof-raw":235,"../internals/to-string-tag-support":311,"../internals/well-known-symbol":315}],237:[function(require,module,exports){
+},{"../internals/classof-raw":258,"../internals/to-string-tag-support":335,"../internals/well-known-symbol":339}],260:[function(require,module,exports){
 'use strict';
 var defineProperty = require('../internals/object-define-property').f;
 var create = require('../internals/object-create');
@@ -9215,7 +10857,7 @@ module.exports = {
         size: 0
       });
       if (!DESCRIPTORS) that.size = 0;
-      if (iterable != undefined) iterate(iterable, that[ADDER], that, IS_MAP);
+      if (iterable != undefined) iterate(iterable, that[ADDER], { that: that, AS_ENTRIES: IS_MAP });
     });
 
     var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
@@ -9374,7 +11016,7 @@ module.exports = {
   }
 };
 
-},{"../internals/an-instance":223,"../internals/define-iterator":244,"../internals/descriptors":246,"../internals/function-bind-context":256,"../internals/internal-metadata":267,"../internals/internal-state":268,"../internals/iterate":275,"../internals/object-create":281,"../internals/object-define-property":283,"../internals/redefine-all":295,"../internals/set-species":299}],238:[function(require,module,exports){
+},{"../internals/an-instance":246,"../internals/define-iterator":267,"../internals/descriptors":269,"../internals/function-bind-context":279,"../internals/internal-metadata":290,"../internals/internal-state":291,"../internals/iterate":298,"../internals/object-create":305,"../internals/object-define-property":307,"../internals/redefine-all":319,"../internals/set-species":323}],261:[function(require,module,exports){
 'use strict';
 var $ = require('./export');
 var global = require('../internals/global');
@@ -9414,7 +11056,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
         type: CONSTRUCTOR_NAME,
         collection: new NativeConstructor()
       });
-      if (iterable != undefined) iterate(iterable, target[ADDER], target, IS_MAP);
+      if (iterable != undefined) iterate(iterable, target[ADDER], { that: target, AS_ENTRIES: IS_MAP });
     });
 
     var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
@@ -9449,7 +11091,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
   return Constructor;
 };
 
-},{"../internals/an-instance":223,"../internals/array-iteration":228,"../internals/create-non-enumerable-property":241,"../internals/descriptors":246,"../internals/fails":254,"../internals/global":260,"../internals/internal-metadata":267,"../internals/internal-state":268,"../internals/is-object":273,"../internals/iterate":275,"../internals/object-define-property":283,"../internals/set-to-string-tag":300,"./export":253}],239:[function(require,module,exports){
+},{"../internals/an-instance":246,"../internals/array-iteration":251,"../internals/create-non-enumerable-property":264,"../internals/descriptors":269,"../internals/fails":277,"../internals/global":283,"../internals/internal-metadata":290,"../internals/internal-state":291,"../internals/is-object":296,"../internals/iterate":298,"../internals/object-define-property":307,"../internals/set-to-string-tag":324,"./export":276}],262:[function(require,module,exports){
 var fails = require('../internals/fails');
 
 module.exports = !fails(function () {
@@ -9458,7 +11100,7 @@ module.exports = !fails(function () {
   return Object.getPrototypeOf(new F()) !== F.prototype;
 });
 
-},{"../internals/fails":254}],240:[function(require,module,exports){
+},{"../internals/fails":277}],263:[function(require,module,exports){
 'use strict';
 var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
 var create = require('../internals/object-create');
@@ -9476,7 +11118,7 @@ module.exports = function (IteratorConstructor, NAME, next) {
   return IteratorConstructor;
 };
 
-},{"../internals/create-property-descriptor":242,"../internals/iterators":277,"../internals/iterators-core":276,"../internals/object-create":281,"../internals/set-to-string-tag":300}],241:[function(require,module,exports){
+},{"../internals/create-property-descriptor":265,"../internals/iterators":301,"../internals/iterators-core":300,"../internals/object-create":305,"../internals/set-to-string-tag":324}],264:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var definePropertyModule = require('../internals/object-define-property');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
@@ -9488,7 +11130,7 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
   return object;
 };
 
-},{"../internals/create-property-descriptor":242,"../internals/descriptors":246,"../internals/object-define-property":283}],242:[function(require,module,exports){
+},{"../internals/create-property-descriptor":265,"../internals/descriptors":269,"../internals/object-define-property":307}],265:[function(require,module,exports){
 module.exports = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
@@ -9498,7 +11140,7 @@ module.exports = function (bitmap, value) {
   };
 };
 
-},{}],243:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 'use strict';
 var toPrimitive = require('../internals/to-primitive');
 var definePropertyModule = require('../internals/object-define-property');
@@ -9510,7 +11152,7 @@ module.exports = function (object, key, value) {
   else object[propertyKey] = value;
 };
 
-},{"../internals/create-property-descriptor":242,"../internals/object-define-property":283,"../internals/to-primitive":310}],244:[function(require,module,exports){
+},{"../internals/create-property-descriptor":265,"../internals/object-define-property":307,"../internals/to-primitive":334}],267:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var createIteratorConstructor = require('../internals/create-iterator-constructor');
@@ -9602,7 +11244,7 @@ module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, I
   return methods;
 };
 
-},{"../internals/create-iterator-constructor":240,"../internals/create-non-enumerable-property":241,"../internals/export":253,"../internals/is-pure":274,"../internals/iterators":277,"../internals/iterators-core":276,"../internals/object-get-prototype-of":288,"../internals/object-set-prototype-of":292,"../internals/redefine":296,"../internals/set-to-string-tag":300,"../internals/well-known-symbol":315}],245:[function(require,module,exports){
+},{"../internals/create-iterator-constructor":263,"../internals/create-non-enumerable-property":264,"../internals/export":276,"../internals/is-pure":297,"../internals/iterators":301,"../internals/iterators-core":300,"../internals/object-get-prototype-of":312,"../internals/object-set-prototype-of":316,"../internals/redefine":320,"../internals/set-to-string-tag":324,"../internals/well-known-symbol":339}],268:[function(require,module,exports){
 var path = require('../internals/path');
 var has = require('../internals/has');
 var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
@@ -9615,7 +11257,7 @@ module.exports = function (NAME) {
   });
 };
 
-},{"../internals/has":261,"../internals/object-define-property":283,"../internals/path":294,"../internals/well-known-symbol-wrapped":314}],246:[function(require,module,exports){
+},{"../internals/has":284,"../internals/object-define-property":307,"../internals/path":318,"../internals/well-known-symbol-wrapped":338}],269:[function(require,module,exports){
 var fails = require('../internals/fails');
 
 // Thank's IE8 for his funny defineProperty
@@ -9623,7 +11265,7 @@ module.exports = !fails(function () {
   return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
 });
 
-},{"../internals/fails":254}],247:[function(require,module,exports){
+},{"../internals/fails":277}],270:[function(require,module,exports){
 var global = require('../internals/global');
 var isObject = require('../internals/is-object');
 
@@ -9635,7 +11277,7 @@ module.exports = function (it) {
   return EXISTS ? document.createElement(it) : {};
 };
 
-},{"../internals/global":260,"../internals/is-object":273}],248:[function(require,module,exports){
+},{"../internals/global":283,"../internals/is-object":296}],271:[function(require,module,exports){
 // iterable DOM collections
 // flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
 module.exports = {
@@ -9672,12 +11314,12 @@ module.exports = {
   TouchList: 0
 };
 
-},{}],249:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 var getBuiltIn = require('../internals/get-built-in');
 
 module.exports = getBuiltIn('navigator', 'userAgent') || '';
 
-},{"../internals/get-built-in":257}],250:[function(require,module,exports){
+},{"../internals/get-built-in":280}],273:[function(require,module,exports){
 var global = require('../internals/global');
 var userAgent = require('../internals/engine-user-agent');
 
@@ -9699,14 +11341,14 @@ if (v8) {
 
 module.exports = version && +version;
 
-},{"../internals/engine-user-agent":249,"../internals/global":260}],251:[function(require,module,exports){
+},{"../internals/engine-user-agent":272,"../internals/global":283}],274:[function(require,module,exports){
 var path = require('../internals/path');
 
 module.exports = function (CONSTRUCTOR) {
   return path[CONSTRUCTOR + 'Prototype'];
 };
 
-},{"../internals/path":294}],252:[function(require,module,exports){
+},{"../internals/path":318}],275:[function(require,module,exports){
 // IE8- don't enum bug keys
 module.exports = [
   'constructor',
@@ -9718,7 +11360,7 @@ module.exports = [
   'valueOf'
 ];
 
-},{}],253:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 'use strict';
 var global = require('../internals/global');
 var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
@@ -9818,7 +11460,7 @@ module.exports = function (options, source) {
   }
 };
 
-},{"../internals/create-non-enumerable-property":241,"../internals/function-bind-context":256,"../internals/global":260,"../internals/has":261,"../internals/is-forced":271,"../internals/object-get-own-property-descriptor":284,"../internals/path":294}],254:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264,"../internals/function-bind-context":279,"../internals/global":283,"../internals/has":284,"../internals/is-forced":294,"../internals/object-get-own-property-descriptor":308,"../internals/path":318}],277:[function(require,module,exports){
 module.exports = function (exec) {
   try {
     return !!exec();
@@ -9827,14 +11469,14 @@ module.exports = function (exec) {
   }
 };
 
-},{}],255:[function(require,module,exports){
+},{}],278:[function(require,module,exports){
 var fails = require('../internals/fails');
 
 module.exports = !fails(function () {
   return Object.isExtensible(Object.preventExtensions({}));
 });
 
-},{"../internals/fails":254}],256:[function(require,module,exports){
+},{"../internals/fails":277}],279:[function(require,module,exports){
 var aFunction = require('../internals/a-function');
 
 // optional / simple context binding
@@ -9860,7 +11502,7 @@ module.exports = function (fn, that, length) {
   };
 };
 
-},{"../internals/a-function":220}],257:[function(require,module,exports){
+},{"../internals/a-function":243}],280:[function(require,module,exports){
 var path = require('../internals/path');
 var global = require('../internals/global');
 
@@ -9873,7 +11515,7 @@ module.exports = function (namespace, method) {
     : path[namespace] && path[namespace][method] || global[namespace] && global[namespace][method];
 };
 
-},{"../internals/global":260,"../internals/path":294}],258:[function(require,module,exports){
+},{"../internals/global":283,"../internals/path":318}],281:[function(require,module,exports){
 var classof = require('../internals/classof');
 var Iterators = require('../internals/iterators');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -9886,7 +11528,7 @@ module.exports = function (it) {
     || Iterators[classof(it)];
 };
 
-},{"../internals/classof":236,"../internals/iterators":277,"../internals/well-known-symbol":315}],259:[function(require,module,exports){
+},{"../internals/classof":259,"../internals/iterators":301,"../internals/well-known-symbol":339}],282:[function(require,module,exports){
 var anObject = require('../internals/an-object');
 var getIteratorMethod = require('../internals/get-iterator-method');
 
@@ -9897,8 +11539,8 @@ module.exports = function (it) {
   } return anObject(iteratorMethod.call(it));
 };
 
-},{"../internals/an-object":224,"../internals/get-iterator-method":258}],260:[function(require,module,exports){
-(function (global){
+},{"../internals/an-object":247,"../internals/get-iterator-method":281}],283:[function(require,module,exports){
+(function (global){(function (){
 var check = function (it) {
   return it && it.Math == Math && it;
 };
@@ -9911,25 +11553,25 @@ module.exports =
   check(typeof self == 'object' && self) ||
   check(typeof global == 'object' && global) ||
   // eslint-disable-next-line no-new-func
-  Function('return this')();
+  (function () { return this; })() || Function('return this')();
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],261:[function(require,module,exports){
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],284:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 
 module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
 
-},{}],262:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 module.exports = {};
 
-},{}],263:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 var getBuiltIn = require('../internals/get-built-in');
 
 module.exports = getBuiltIn('document', 'documentElement');
 
-},{"../internals/get-built-in":257}],264:[function(require,module,exports){
+},{"../internals/get-built-in":280}],287:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
 var createElement = require('../internals/document-create-element');
@@ -9941,7 +11583,7 @@ module.exports = !DESCRIPTORS && !fails(function () {
   }).a != 7;
 });
 
-},{"../internals/descriptors":246,"../internals/document-create-element":247,"../internals/fails":254}],265:[function(require,module,exports){
+},{"../internals/descriptors":269,"../internals/document-create-element":270,"../internals/fails":277}],288:[function(require,module,exports){
 var fails = require('../internals/fails');
 var classof = require('../internals/classof-raw');
 
@@ -9956,7 +11598,7 @@ module.exports = fails(function () {
   return classof(it) == 'String' ? split.call(it, '') : Object(it);
 } : Object;
 
-},{"../internals/classof-raw":235,"../internals/fails":254}],266:[function(require,module,exports){
+},{"../internals/classof-raw":258,"../internals/fails":277}],289:[function(require,module,exports){
 var store = require('../internals/shared-store');
 
 var functionToString = Function.toString;
@@ -9970,7 +11612,7 @@ if (typeof store.inspectSource != 'function') {
 
 module.exports = store.inspectSource;
 
-},{"../internals/shared-store":302}],267:[function(require,module,exports){
+},{"../internals/shared-store":326}],290:[function(require,module,exports){
 var hiddenKeys = require('../internals/hidden-keys');
 var isObject = require('../internals/is-object');
 var has = require('../internals/has');
@@ -10033,12 +11675,13 @@ var meta = module.exports = {
 
 hiddenKeys[METADATA] = true;
 
-},{"../internals/freezing":255,"../internals/has":261,"../internals/hidden-keys":262,"../internals/is-object":273,"../internals/object-define-property":283,"../internals/uid":312}],268:[function(require,module,exports){
+},{"../internals/freezing":278,"../internals/has":284,"../internals/hidden-keys":285,"../internals/is-object":296,"../internals/object-define-property":307,"../internals/uid":336}],291:[function(require,module,exports){
 var NATIVE_WEAK_MAP = require('../internals/native-weak-map');
 var global = require('../internals/global');
 var isObject = require('../internals/is-object');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 var objectHas = require('../internals/has');
+var shared = require('../internals/shared-store');
 var sharedKey = require('../internals/shared-key');
 var hiddenKeys = require('../internals/hidden-keys');
 
@@ -10059,11 +11702,12 @@ var getterFor = function (TYPE) {
 };
 
 if (NATIVE_WEAK_MAP) {
-  var store = new WeakMap();
+  var store = shared.state || (shared.state = new WeakMap());
   var wmget = store.get;
   var wmhas = store.has;
   var wmset = store.set;
   set = function (it, metadata) {
+    metadata.facade = it;
     wmset.call(store, it, metadata);
     return metadata;
   };
@@ -10077,6 +11721,7 @@ if (NATIVE_WEAK_MAP) {
   var STATE = sharedKey('state');
   hiddenKeys[STATE] = true;
   set = function (it, metadata) {
+    metadata.facade = it;
     createNonEnumerableProperty(it, STATE, metadata);
     return metadata;
   };
@@ -10096,7 +11741,7 @@ module.exports = {
   getterFor: getterFor
 };
 
-},{"../internals/create-non-enumerable-property":241,"../internals/global":260,"../internals/has":261,"../internals/hidden-keys":262,"../internals/is-object":273,"../internals/native-weak-map":279,"../internals/shared-key":301}],269:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264,"../internals/global":283,"../internals/has":284,"../internals/hidden-keys":285,"../internals/is-object":296,"../internals/native-weak-map":303,"../internals/shared-key":325,"../internals/shared-store":326}],292:[function(require,module,exports){
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var Iterators = require('../internals/iterators');
 
@@ -10108,7 +11753,7 @@ module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
 };
 
-},{"../internals/iterators":277,"../internals/well-known-symbol":315}],270:[function(require,module,exports){
+},{"../internals/iterators":301,"../internals/well-known-symbol":339}],293:[function(require,module,exports){
 var classof = require('../internals/classof-raw');
 
 // `IsArray` abstract operation
@@ -10117,7 +11762,7 @@ module.exports = Array.isArray || function isArray(arg) {
   return classof(arg) == 'Array';
 };
 
-},{"../internals/classof-raw":235}],271:[function(require,module,exports){
+},{"../internals/classof-raw":258}],294:[function(require,module,exports){
 var fails = require('../internals/fails');
 
 var replacement = /#|\.prototype\./;
@@ -10140,7 +11785,7 @@ var POLYFILL = isForced.POLYFILL = 'P';
 
 module.exports = isForced;
 
-},{"../internals/fails":254}],272:[function(require,module,exports){
+},{"../internals/fails":277}],295:[function(require,module,exports){
 var classof = require('../internals/classof');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var Iterators = require('../internals/iterators');
@@ -10155,30 +11800,46 @@ module.exports = function (it) {
     || Iterators.hasOwnProperty(classof(O));
 };
 
-},{"../internals/classof":236,"../internals/iterators":277,"../internals/well-known-symbol":315}],273:[function(require,module,exports){
+},{"../internals/classof":259,"../internals/iterators":301,"../internals/well-known-symbol":339}],296:[function(require,module,exports){
 module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
 
-},{}],274:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 module.exports = true;
 
-},{}],275:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 var anObject = require('../internals/an-object');
 var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
 var toLength = require('../internals/to-length');
 var bind = require('../internals/function-bind-context');
 var getIteratorMethod = require('../internals/get-iterator-method');
-var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
+var iteratorClose = require('../internals/iterator-close');
 
 var Result = function (stopped, result) {
   this.stopped = stopped;
   this.result = result;
 };
 
-var iterate = module.exports = function (iterable, fn, that, AS_ENTRIES, IS_ITERATOR) {
-  var boundFunction = bind(fn, that, AS_ENTRIES ? 2 : 1);
+module.exports = function (iterable, unboundFunction, options) {
+  var that = options && options.that;
+  var AS_ENTRIES = !!(options && options.AS_ENTRIES);
+  var IS_ITERATOR = !!(options && options.IS_ITERATOR);
+  var INTERRUPTED = !!(options && options.INTERRUPTED);
+  var fn = bind(unboundFunction, that, 1 + AS_ENTRIES + INTERRUPTED);
   var iterator, iterFn, index, length, result, next, step;
+
+  var stop = function (condition) {
+    if (iterator) iteratorClose(iterator);
+    return new Result(true, condition);
+  };
+
+  var callFn = function (value) {
+    if (AS_ENTRIES) {
+      anObject(value);
+      return INTERRUPTED ? fn(value[0], value[1], stop) : fn(value[0], value[1]);
+    } return INTERRUPTED ? fn(value, stop) : fn(value);
+  };
 
   if (IS_ITERATOR) {
     iterator = iterable;
@@ -10188,9 +11849,7 @@ var iterate = module.exports = function (iterable, fn, that, AS_ENTRIES, IS_ITER
     // optimisation for array iterators
     if (isArrayIteratorMethod(iterFn)) {
       for (index = 0, length = toLength(iterable.length); length > index; index++) {
-        result = AS_ENTRIES
-          ? boundFunction(anObject(step = iterable[index])[0], step[1])
-          : boundFunction(iterable[index]);
+        result = callFn(iterable[index]);
         if (result && result instanceof Result) return result;
       } return new Result(false);
     }
@@ -10199,16 +11858,27 @@ var iterate = module.exports = function (iterable, fn, that, AS_ENTRIES, IS_ITER
 
   next = iterator.next;
   while (!(step = next.call(iterator)).done) {
-    result = callWithSafeIterationClosing(iterator, boundFunction, step.value, AS_ENTRIES);
+    try {
+      result = callFn(step.value);
+    } catch (error) {
+      iteratorClose(iterator);
+      throw error;
+    }
     if (typeof result == 'object' && result && result instanceof Result) return result;
   } return new Result(false);
 };
 
-iterate.stop = function (result) {
-  return new Result(true, result);
+},{"../internals/an-object":247,"../internals/function-bind-context":279,"../internals/get-iterator-method":281,"../internals/is-array-iterator-method":292,"../internals/iterator-close":299,"../internals/to-length":332}],299:[function(require,module,exports){
+var anObject = require('../internals/an-object');
+
+module.exports = function (iterator) {
+  var returnMethod = iterator['return'];
+  if (returnMethod !== undefined) {
+    return anObject(returnMethod.call(iterator)).value;
+  }
 };
 
-},{"../internals/an-object":224,"../internals/call-with-safe-iteration-closing":233,"../internals/function-bind-context":256,"../internals/get-iterator-method":258,"../internals/is-array-iterator-method":269,"../internals/to-length":308}],276:[function(require,module,exports){
+},{"../internals/an-object":247}],300:[function(require,module,exports){
 'use strict';
 var getPrototypeOf = require('../internals/object-get-prototype-of');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
@@ -10247,9 +11917,9 @@ module.exports = {
   BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
 };
 
-},{"../internals/create-non-enumerable-property":241,"../internals/has":261,"../internals/is-pure":274,"../internals/object-get-prototype-of":288,"../internals/well-known-symbol":315}],277:[function(require,module,exports){
-arguments[4][262][0].apply(exports,arguments)
-},{"dup":262}],278:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264,"../internals/has":284,"../internals/is-pure":297,"../internals/object-get-prototype-of":312,"../internals/well-known-symbol":339}],301:[function(require,module,exports){
+arguments[4][285][0].apply(exports,arguments)
+},{"dup":285}],302:[function(require,module,exports){
 var fails = require('../internals/fails');
 
 module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
@@ -10258,7 +11928,7 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
   return !String(Symbol());
 });
 
-},{"../internals/fails":254}],279:[function(require,module,exports){
+},{"../internals/fails":277}],303:[function(require,module,exports){
 var global = require('../internals/global');
 var inspectSource = require('../internals/inspect-source');
 
@@ -10266,7 +11936,7 @@ var WeakMap = global.WeakMap;
 
 module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
 
-},{"../internals/global":260,"../internals/inspect-source":266}],280:[function(require,module,exports){
+},{"../internals/global":283,"../internals/inspect-source":289}],304:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
@@ -10320,7 +11990,7 @@ module.exports = !nativeAssign || fails(function () {
   } return T;
 } : nativeAssign;
 
-},{"../internals/descriptors":246,"../internals/fails":254,"../internals/indexed-object":265,"../internals/object-get-own-property-symbols":287,"../internals/object-keys":290,"../internals/object-property-is-enumerable":291,"../internals/to-object":309}],281:[function(require,module,exports){
+},{"../internals/descriptors":269,"../internals/fails":277,"../internals/indexed-object":288,"../internals/object-get-own-property-symbols":311,"../internals/object-keys":314,"../internals/object-property-is-enumerable":315,"../internals/to-object":333}],305:[function(require,module,exports){
 var anObject = require('../internals/an-object');
 var defineProperties = require('../internals/object-define-properties');
 var enumBugKeys = require('../internals/enum-bug-keys');
@@ -10400,7 +12070,7 @@ module.exports = Object.create || function create(O, Properties) {
   return Properties === undefined ? result : defineProperties(result, Properties);
 };
 
-},{"../internals/an-object":224,"../internals/document-create-element":247,"../internals/enum-bug-keys":252,"../internals/hidden-keys":262,"../internals/html":263,"../internals/object-define-properties":282,"../internals/shared-key":301}],282:[function(require,module,exports){
+},{"../internals/an-object":247,"../internals/document-create-element":270,"../internals/enum-bug-keys":275,"../internals/hidden-keys":285,"../internals/html":286,"../internals/object-define-properties":306,"../internals/shared-key":325}],306:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var definePropertyModule = require('../internals/object-define-property');
 var anObject = require('../internals/an-object');
@@ -10418,7 +12088,7 @@ module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperti
   return O;
 };
 
-},{"../internals/an-object":224,"../internals/descriptors":246,"../internals/object-define-property":283,"../internals/object-keys":290}],283:[function(require,module,exports){
+},{"../internals/an-object":247,"../internals/descriptors":269,"../internals/object-define-property":307,"../internals/object-keys":314}],307:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
 var anObject = require('../internals/an-object');
@@ -10440,7 +12110,7 @@ exports.f = DESCRIPTORS ? nativeDefineProperty : function defineProperty(O, P, A
   return O;
 };
 
-},{"../internals/an-object":224,"../internals/descriptors":246,"../internals/ie8-dom-define":264,"../internals/to-primitive":310}],284:[function(require,module,exports){
+},{"../internals/an-object":247,"../internals/descriptors":269,"../internals/ie8-dom-define":287,"../internals/to-primitive":334}],308:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
@@ -10462,7 +12132,7 @@ exports.f = DESCRIPTORS ? nativeGetOwnPropertyDescriptor : function getOwnProper
   if (has(O, P)) return createPropertyDescriptor(!propertyIsEnumerableModule.f.call(O, P), O[P]);
 };
 
-},{"../internals/create-property-descriptor":242,"../internals/descriptors":246,"../internals/has":261,"../internals/ie8-dom-define":264,"../internals/object-property-is-enumerable":291,"../internals/to-indexed-object":306,"../internals/to-primitive":310}],285:[function(require,module,exports){
+},{"../internals/create-property-descriptor":265,"../internals/descriptors":269,"../internals/has":284,"../internals/ie8-dom-define":287,"../internals/object-property-is-enumerable":315,"../internals/to-indexed-object":330,"../internals/to-primitive":334}],309:[function(require,module,exports){
 var toIndexedObject = require('../internals/to-indexed-object');
 var nativeGetOwnPropertyNames = require('../internals/object-get-own-property-names').f;
 
@@ -10486,7 +12156,7 @@ module.exports.f = function getOwnPropertyNames(it) {
     : nativeGetOwnPropertyNames(toIndexedObject(it));
 };
 
-},{"../internals/object-get-own-property-names":286,"../internals/to-indexed-object":306}],286:[function(require,module,exports){
+},{"../internals/object-get-own-property-names":310,"../internals/to-indexed-object":330}],310:[function(require,module,exports){
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
 
@@ -10498,10 +12168,10 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
 
-},{"../internals/enum-bug-keys":252,"../internals/object-keys-internal":289}],287:[function(require,module,exports){
+},{"../internals/enum-bug-keys":275,"../internals/object-keys-internal":313}],311:[function(require,module,exports){
 exports.f = Object.getOwnPropertySymbols;
 
-},{}],288:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 var has = require('../internals/has');
 var toObject = require('../internals/to-object');
 var sharedKey = require('../internals/shared-key');
@@ -10520,7 +12190,7 @@ module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O)
   } return O instanceof Object ? ObjectPrototype : null;
 };
 
-},{"../internals/correct-prototype-getter":239,"../internals/has":261,"../internals/shared-key":301,"../internals/to-object":309}],289:[function(require,module,exports){
+},{"../internals/correct-prototype-getter":262,"../internals/has":284,"../internals/shared-key":325,"../internals/to-object":333}],313:[function(require,module,exports){
 var has = require('../internals/has');
 var toIndexedObject = require('../internals/to-indexed-object');
 var indexOf = require('../internals/array-includes').indexOf;
@@ -10539,7 +12209,7 @@ module.exports = function (object, names) {
   return result;
 };
 
-},{"../internals/array-includes":227,"../internals/has":261,"../internals/hidden-keys":262,"../internals/to-indexed-object":306}],290:[function(require,module,exports){
+},{"../internals/array-includes":250,"../internals/has":284,"../internals/hidden-keys":285,"../internals/to-indexed-object":330}],314:[function(require,module,exports){
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
 
@@ -10549,7 +12219,7 @@ module.exports = Object.keys || function keys(O) {
   return internalObjectKeys(O, enumBugKeys);
 };
 
-},{"../internals/enum-bug-keys":252,"../internals/object-keys-internal":289}],291:[function(require,module,exports){
+},{"../internals/enum-bug-keys":275,"../internals/object-keys-internal":313}],315:[function(require,module,exports){
 'use strict';
 var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
 var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
@@ -10564,7 +12234,7 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
   return !!descriptor && descriptor.enumerable;
 } : nativePropertyIsEnumerable;
 
-},{}],292:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 var anObject = require('../internals/an-object');
 var aPossiblePrototype = require('../internals/a-possible-prototype');
 
@@ -10590,7 +12260,7 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
   };
 }() : undefined);
 
-},{"../internals/a-possible-prototype":221,"../internals/an-object":224}],293:[function(require,module,exports){
+},{"../internals/a-possible-prototype":244,"../internals/an-object":247}],317:[function(require,module,exports){
 'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var classof = require('../internals/classof');
@@ -10601,9 +12271,9 @@ module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
   return '[object ' + classof(this) + ']';
 };
 
-},{"../internals/classof":236,"../internals/to-string-tag-support":311}],294:[function(require,module,exports){
-arguments[4][262][0].apply(exports,arguments)
-},{"dup":262}],295:[function(require,module,exports){
+},{"../internals/classof":259,"../internals/to-string-tag-support":335}],318:[function(require,module,exports){
+arguments[4][285][0].apply(exports,arguments)
+},{"dup":285}],319:[function(require,module,exports){
 var redefine = require('../internals/redefine');
 
 module.exports = function (target, src, options) {
@@ -10613,7 +12283,7 @@ module.exports = function (target, src, options) {
   } return target;
 };
 
-},{"../internals/redefine":296}],296:[function(require,module,exports){
+},{"../internals/redefine":320}],320:[function(require,module,exports){
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 
 module.exports = function (target, key, value, options) {
@@ -10621,7 +12291,7 @@ module.exports = function (target, key, value, options) {
   else createNonEnumerableProperty(target, key, value);
 };
 
-},{"../internals/create-non-enumerable-property":241}],297:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264}],321:[function(require,module,exports){
 // `RequireObjectCoercible` abstract operation
 // https://tc39.github.io/ecma262/#sec-requireobjectcoercible
 module.exports = function (it) {
@@ -10629,7 +12299,7 @@ module.exports = function (it) {
   return it;
 };
 
-},{}],298:[function(require,module,exports){
+},{}],322:[function(require,module,exports){
 var global = require('../internals/global');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 
@@ -10641,7 +12311,7 @@ module.exports = function (key, value) {
   } return value;
 };
 
-},{"../internals/create-non-enumerable-property":241,"../internals/global":260}],299:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264,"../internals/global":283}],323:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var definePropertyModule = require('../internals/object-define-property');
@@ -10662,7 +12332,7 @@ module.exports = function (CONSTRUCTOR_NAME) {
   }
 };
 
-},{"../internals/descriptors":246,"../internals/get-built-in":257,"../internals/object-define-property":283,"../internals/well-known-symbol":315}],300:[function(require,module,exports){
+},{"../internals/descriptors":269,"../internals/get-built-in":280,"../internals/object-define-property":307,"../internals/well-known-symbol":339}],324:[function(require,module,exports){
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var defineProperty = require('../internals/object-define-property').f;
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
@@ -10684,7 +12354,7 @@ module.exports = function (it, TAG, STATIC, SET_METHOD) {
   }
 };
 
-},{"../internals/create-non-enumerable-property":241,"../internals/has":261,"../internals/object-define-property":283,"../internals/object-to-string":293,"../internals/to-string-tag-support":311,"../internals/well-known-symbol":315}],301:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":264,"../internals/has":284,"../internals/object-define-property":307,"../internals/object-to-string":317,"../internals/to-string-tag-support":335,"../internals/well-known-symbol":339}],325:[function(require,module,exports){
 var shared = require('../internals/shared');
 var uid = require('../internals/uid');
 
@@ -10694,7 +12364,7 @@ module.exports = function (key) {
   return keys[key] || (keys[key] = uid(key));
 };
 
-},{"../internals/shared":303,"../internals/uid":312}],302:[function(require,module,exports){
+},{"../internals/shared":327,"../internals/uid":336}],326:[function(require,module,exports){
 var global = require('../internals/global');
 var setGlobal = require('../internals/set-global');
 
@@ -10703,19 +12373,19 @@ var store = global[SHARED] || setGlobal(SHARED, {});
 
 module.exports = store;
 
-},{"../internals/global":260,"../internals/set-global":298}],303:[function(require,module,exports){
+},{"../internals/global":283,"../internals/set-global":322}],327:[function(require,module,exports){
 var IS_PURE = require('../internals/is-pure');
 var store = require('../internals/shared-store');
 
 (module.exports = function (key, value) {
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
-  version: '3.6.4',
+  version: '3.7.0',
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
 });
 
-},{"../internals/is-pure":274,"../internals/shared-store":302}],304:[function(require,module,exports){
+},{"../internals/is-pure":297,"../internals/shared-store":326}],328:[function(require,module,exports){
 var toInteger = require('../internals/to-integer');
 var requireObjectCoercible = require('../internals/require-object-coercible');
 
@@ -10744,7 +12414,7 @@ module.exports = {
   charAt: createMethod(true)
 };
 
-},{"../internals/require-object-coercible":297,"../internals/to-integer":307}],305:[function(require,module,exports){
+},{"../internals/require-object-coercible":321,"../internals/to-integer":331}],329:[function(require,module,exports){
 var toInteger = require('../internals/to-integer');
 
 var max = Math.max;
@@ -10758,7 +12428,7 @@ module.exports = function (index, length) {
   return integer < 0 ? max(integer + length, 0) : min(integer, length);
 };
 
-},{"../internals/to-integer":307}],306:[function(require,module,exports){
+},{"../internals/to-integer":331}],330:[function(require,module,exports){
 // toObject with fallback for non-array-like ES3 strings
 var IndexedObject = require('../internals/indexed-object');
 var requireObjectCoercible = require('../internals/require-object-coercible');
@@ -10767,7 +12437,7 @@ module.exports = function (it) {
   return IndexedObject(requireObjectCoercible(it));
 };
 
-},{"../internals/indexed-object":265,"../internals/require-object-coercible":297}],307:[function(require,module,exports){
+},{"../internals/indexed-object":288,"../internals/require-object-coercible":321}],331:[function(require,module,exports){
 var ceil = Math.ceil;
 var floor = Math.floor;
 
@@ -10777,7 +12447,7 @@ module.exports = function (argument) {
   return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
 };
 
-},{}],308:[function(require,module,exports){
+},{}],332:[function(require,module,exports){
 var toInteger = require('../internals/to-integer');
 
 var min = Math.min;
@@ -10788,7 +12458,7 @@ module.exports = function (argument) {
   return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
 
-},{"../internals/to-integer":307}],309:[function(require,module,exports){
+},{"../internals/to-integer":331}],333:[function(require,module,exports){
 var requireObjectCoercible = require('../internals/require-object-coercible');
 
 // `ToObject` abstract operation
@@ -10797,7 +12467,7 @@ module.exports = function (argument) {
   return Object(requireObjectCoercible(argument));
 };
 
-},{"../internals/require-object-coercible":297}],310:[function(require,module,exports){
+},{"../internals/require-object-coercible":321}],334:[function(require,module,exports){
 var isObject = require('../internals/is-object');
 
 // `ToPrimitive` abstract operation
@@ -10813,7 +12483,7 @@ module.exports = function (input, PREFERRED_STRING) {
   throw TypeError("Can't convert object to primitive value");
 };
 
-},{"../internals/is-object":273}],311:[function(require,module,exports){
+},{"../internals/is-object":296}],335:[function(require,module,exports){
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
@@ -10823,7 +12493,7 @@ test[TO_STRING_TAG] = 'z';
 
 module.exports = String(test) === '[object z]';
 
-},{"../internals/well-known-symbol":315}],312:[function(require,module,exports){
+},{"../internals/well-known-symbol":339}],336:[function(require,module,exports){
 var id = 0;
 var postfix = Math.random();
 
@@ -10831,7 +12501,7 @@ module.exports = function (key) {
   return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
 };
 
-},{}],313:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 var NATIVE_SYMBOL = require('../internals/native-symbol');
 
 module.exports = NATIVE_SYMBOL
@@ -10840,12 +12510,12 @@ module.exports = NATIVE_SYMBOL
   // eslint-disable-next-line no-undef
   && typeof Symbol.iterator == 'symbol';
 
-},{"../internals/native-symbol":278}],314:[function(require,module,exports){
+},{"../internals/native-symbol":302}],338:[function(require,module,exports){
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 exports.f = wellKnownSymbol;
 
-},{"../internals/well-known-symbol":315}],315:[function(require,module,exports){
+},{"../internals/well-known-symbol":339}],339:[function(require,module,exports){
 var global = require('../internals/global');
 var shared = require('../internals/shared');
 var has = require('../internals/has');
@@ -10864,7 +12534,7 @@ module.exports = function (name) {
   } return WellKnownSymbolsStore[name];
 };
 
-},{"../internals/global":260,"../internals/has":261,"../internals/native-symbol":278,"../internals/shared":303,"../internals/uid":312,"../internals/use-symbol-as-uid":313}],316:[function(require,module,exports){
+},{"../internals/global":283,"../internals/has":284,"../internals/native-symbol":302,"../internals/shared":327,"../internals/uid":336,"../internals/use-symbol-as-uid":337}],340:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var fails = require('../internals/fails');
@@ -10926,7 +12596,7 @@ $({ target: 'Array', proto: true, forced: FORCED }, {
   }
 });
 
-},{"../internals/array-method-has-species-support":229,"../internals/array-species-create":232,"../internals/create-property":243,"../internals/engine-v8-version":250,"../internals/export":253,"../internals/fails":254,"../internals/is-array":270,"../internals/is-object":273,"../internals/to-length":308,"../internals/to-object":309,"../internals/well-known-symbol":315}],317:[function(require,module,exports){
+},{"../internals/array-method-has-species-support":252,"../internals/array-species-create":255,"../internals/create-property":266,"../internals/engine-v8-version":273,"../internals/export":276,"../internals/fails":277,"../internals/is-array":293,"../internals/is-object":296,"../internals/to-length":332,"../internals/to-object":333,"../internals/well-known-symbol":339}],341:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var $find = require('../internals/array-iteration').find;
@@ -10952,7 +12622,7 @@ $({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
 // https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables(FIND);
 
-},{"../internals/add-to-unscopables":222,"../internals/array-iteration":228,"../internals/array-method-uses-to-length":231,"../internals/export":253}],318:[function(require,module,exports){
+},{"../internals/add-to-unscopables":245,"../internals/array-iteration":251,"../internals/array-method-uses-to-length":254,"../internals/export":276}],342:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var forEach = require('../internals/array-for-each');
@@ -10963,7 +12633,7 @@ $({ target: 'Array', proto: true, forced: [].forEach != forEach }, {
   forEach: forEach
 });
 
-},{"../internals/array-for-each":225,"../internals/export":253}],319:[function(require,module,exports){
+},{"../internals/array-for-each":248,"../internals/export":276}],343:[function(require,module,exports){
 var $ = require('../internals/export');
 var from = require('../internals/array-from');
 var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
@@ -10978,7 +12648,7 @@ $({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
   from: from
 });
 
-},{"../internals/array-from":226,"../internals/check-correctness-of-iteration":234,"../internals/export":253}],320:[function(require,module,exports){
+},{"../internals/array-from":249,"../internals/check-correctness-of-iteration":257,"../internals/export":276}],344:[function(require,module,exports){
 var $ = require('../internals/export');
 var isArray = require('../internals/is-array');
 
@@ -10988,7 +12658,7 @@ $({ target: 'Array', stat: true }, {
   isArray: isArray
 });
 
-},{"../internals/export":253,"../internals/is-array":270}],321:[function(require,module,exports){
+},{"../internals/export":276,"../internals/is-array":293}],345:[function(require,module,exports){
 'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var addToUnscopables = require('../internals/add-to-unscopables');
@@ -11043,7 +12713,7 @@ addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
 
-},{"../internals/add-to-unscopables":222,"../internals/define-iterator":244,"../internals/internal-state":268,"../internals/iterators":277,"../internals/to-indexed-object":306}],322:[function(require,module,exports){
+},{"../internals/add-to-unscopables":245,"../internals/define-iterator":267,"../internals/internal-state":291,"../internals/iterators":301,"../internals/to-indexed-object":330}],346:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var isObject = require('../internals/is-object');
@@ -11094,7 +12764,7 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGT
   }
 });
 
-},{"../internals/array-method-has-species-support":229,"../internals/array-method-uses-to-length":231,"../internals/create-property":243,"../internals/export":253,"../internals/is-array":270,"../internals/is-object":273,"../internals/to-absolute-index":305,"../internals/to-indexed-object":306,"../internals/to-length":308,"../internals/well-known-symbol":315}],323:[function(require,module,exports){
+},{"../internals/array-method-has-species-support":252,"../internals/array-method-uses-to-length":254,"../internals/create-property":266,"../internals/export":276,"../internals/is-array":293,"../internals/is-object":296,"../internals/to-absolute-index":329,"../internals/to-indexed-object":330,"../internals/to-length":332,"../internals/well-known-symbol":339}],347:[function(require,module,exports){
 var $ = require('../internals/export');
 var getBuiltIn = require('../internals/get-built-in');
 var fails = require('../internals/fails');
@@ -11128,7 +12798,7 @@ if ($stringify) {
   });
 }
 
-},{"../internals/export":253,"../internals/fails":254,"../internals/get-built-in":257}],324:[function(require,module,exports){
+},{"../internals/export":276,"../internals/fails":277,"../internals/get-built-in":280}],348:[function(require,module,exports){
 var global = require('../internals/global');
 var setToStringTag = require('../internals/set-to-string-tag');
 
@@ -11136,7 +12806,7 @@ var setToStringTag = require('../internals/set-to-string-tag');
 // https://tc39.github.io/ecma262/#sec-json-@@tostringtag
 setToStringTag(global.JSON, 'JSON', true);
 
-},{"../internals/global":260,"../internals/set-to-string-tag":300}],325:[function(require,module,exports){
+},{"../internals/global":283,"../internals/set-to-string-tag":324}],349:[function(require,module,exports){
 'use strict';
 var collection = require('../internals/collection');
 var collectionStrong = require('../internals/collection-strong');
@@ -11147,14 +12817,10 @@ module.exports = collection('Map', function (init) {
   return function Map() { return init(this, arguments.length ? arguments[0] : undefined); };
 }, collectionStrong);
 
-},{"../internals/collection":238,"../internals/collection-strong":237}],326:[function(require,module,exports){
-var setToStringTag = require('../internals/set-to-string-tag');
+},{"../internals/collection":261,"../internals/collection-strong":260}],350:[function(require,module,exports){
+// empty
 
-// Math[@@toStringTag] property
-// https://tc39.github.io/ecma262/#sec-math-@@tostringtag
-setToStringTag(Math, 'Math', true);
-
-},{"../internals/set-to-string-tag":300}],327:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
 var $ = require('../internals/export');
 var assign = require('../internals/object-assign');
 
@@ -11164,7 +12830,7 @@ $({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
   assign: assign
 });
 
-},{"../internals/export":253,"../internals/object-assign":280}],328:[function(require,module,exports){
+},{"../internals/export":276,"../internals/object-assign":304}],352:[function(require,module,exports){
 var $ = require('../internals/export');
 var DESCRIPTORS = require('../internals/descriptors');
 var objectDefinePropertyModile = require('../internals/object-define-property');
@@ -11175,7 +12841,7 @@ $({ target: 'Object', stat: true, forced: !DESCRIPTORS, sham: !DESCRIPTORS }, {
   defineProperty: objectDefinePropertyModile.f
 });
 
-},{"../internals/descriptors":246,"../internals/export":253,"../internals/object-define-property":283}],329:[function(require,module,exports){
+},{"../internals/descriptors":269,"../internals/export":276,"../internals/object-define-property":307}],353:[function(require,module,exports){
 var $ = require('../internals/export');
 var toObject = require('../internals/to-object');
 var nativeKeys = require('../internals/object-keys');
@@ -11191,10 +12857,11 @@ $({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
   }
 });
 
-},{"../internals/export":253,"../internals/fails":254,"../internals/object-keys":290,"../internals/to-object":309}],330:[function(require,module,exports){
-// empty
-
-},{}],331:[function(require,module,exports){
+},{"../internals/export":276,"../internals/fails":277,"../internals/object-keys":314,"../internals/to-object":333}],354:[function(require,module,exports){
+arguments[4][350][0].apply(exports,arguments)
+},{"dup":350}],355:[function(require,module,exports){
+arguments[4][350][0].apply(exports,arguments)
+},{"dup":350}],356:[function(require,module,exports){
 'use strict';
 var collection = require('../internals/collection');
 var collectionStrong = require('../internals/collection-strong');
@@ -11205,7 +12872,7 @@ module.exports = collection('Set', function (init) {
   return function Set() { return init(this, arguments.length ? arguments[0] : undefined); };
 }, collectionStrong);
 
-},{"../internals/collection":238,"../internals/collection-strong":237}],332:[function(require,module,exports){
+},{"../internals/collection":261,"../internals/collection-strong":260}],357:[function(require,module,exports){
 'use strict';
 var charAt = require('../internals/string-multibyte').charAt;
 var InternalStateModule = require('../internals/internal-state');
@@ -11236,37 +12903,37 @@ defineIterator(String, 'String', function (iterated) {
   return { value: point, done: false };
 });
 
-},{"../internals/define-iterator":244,"../internals/internal-state":268,"../internals/string-multibyte":304}],333:[function(require,module,exports){
+},{"../internals/define-iterator":267,"../internals/internal-state":291,"../internals/string-multibyte":328}],358:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.asyncIterator` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.asynciterator
 defineWellKnownSymbol('asyncIterator');
 
-},{"../internals/define-well-known-symbol":245}],334:[function(require,module,exports){
-arguments[4][330][0].apply(exports,arguments)
-},{"dup":330}],335:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],359:[function(require,module,exports){
+arguments[4][350][0].apply(exports,arguments)
+},{"dup":350}],360:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.hasInstance` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.hasinstance
 defineWellKnownSymbol('hasInstance');
 
-},{"../internals/define-well-known-symbol":245}],336:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],361:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.isConcatSpreadable` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.isconcatspreadable
 defineWellKnownSymbol('isConcatSpreadable');
 
-},{"../internals/define-well-known-symbol":245}],337:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],362:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.iterator` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.iterator
 defineWellKnownSymbol('iterator');
 
-},{"../internals/define-well-known-symbol":245}],338:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],363:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var global = require('../internals/global');
@@ -11579,103 +13246,103 @@ setToStringTag($Symbol, SYMBOL);
 
 hiddenKeys[HIDDEN] = true;
 
-},{"../internals/an-object":224,"../internals/array-iteration":228,"../internals/create-non-enumerable-property":241,"../internals/create-property-descriptor":242,"../internals/define-well-known-symbol":245,"../internals/descriptors":246,"../internals/export":253,"../internals/fails":254,"../internals/get-built-in":257,"../internals/global":260,"../internals/has":261,"../internals/hidden-keys":262,"../internals/internal-state":268,"../internals/is-array":270,"../internals/is-object":273,"../internals/is-pure":274,"../internals/native-symbol":278,"../internals/object-create":281,"../internals/object-define-property":283,"../internals/object-get-own-property-descriptor":284,"../internals/object-get-own-property-names":286,"../internals/object-get-own-property-names-external":285,"../internals/object-get-own-property-symbols":287,"../internals/object-keys":290,"../internals/object-property-is-enumerable":291,"../internals/redefine":296,"../internals/set-to-string-tag":300,"../internals/shared":303,"../internals/shared-key":301,"../internals/to-indexed-object":306,"../internals/to-object":309,"../internals/to-primitive":310,"../internals/uid":312,"../internals/use-symbol-as-uid":313,"../internals/well-known-symbol":315,"../internals/well-known-symbol-wrapped":314}],339:[function(require,module,exports){
+},{"../internals/an-object":247,"../internals/array-iteration":251,"../internals/create-non-enumerable-property":264,"../internals/create-property-descriptor":265,"../internals/define-well-known-symbol":268,"../internals/descriptors":269,"../internals/export":276,"../internals/fails":277,"../internals/get-built-in":280,"../internals/global":283,"../internals/has":284,"../internals/hidden-keys":285,"../internals/internal-state":291,"../internals/is-array":293,"../internals/is-object":296,"../internals/is-pure":297,"../internals/native-symbol":302,"../internals/object-create":305,"../internals/object-define-property":307,"../internals/object-get-own-property-descriptor":308,"../internals/object-get-own-property-names":310,"../internals/object-get-own-property-names-external":309,"../internals/object-get-own-property-symbols":311,"../internals/object-keys":314,"../internals/object-property-is-enumerable":315,"../internals/redefine":320,"../internals/set-to-string-tag":324,"../internals/shared":327,"../internals/shared-key":325,"../internals/to-indexed-object":330,"../internals/to-object":333,"../internals/to-primitive":334,"../internals/uid":336,"../internals/use-symbol-as-uid":337,"../internals/well-known-symbol":339,"../internals/well-known-symbol-wrapped":338}],364:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.matchAll` well-known symbol
 defineWellKnownSymbol('matchAll');
 
-},{"../internals/define-well-known-symbol":245}],340:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],365:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.match` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.match
 defineWellKnownSymbol('match');
 
-},{"../internals/define-well-known-symbol":245}],341:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],366:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.replace` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.replace
 defineWellKnownSymbol('replace');
 
-},{"../internals/define-well-known-symbol":245}],342:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],367:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.search` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.search
 defineWellKnownSymbol('search');
 
-},{"../internals/define-well-known-symbol":245}],343:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],368:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.species` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.species
 defineWellKnownSymbol('species');
 
-},{"../internals/define-well-known-symbol":245}],344:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],369:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.split` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.split
 defineWellKnownSymbol('split');
 
-},{"../internals/define-well-known-symbol":245}],345:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],370:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.toPrimitive` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.toprimitive
 defineWellKnownSymbol('toPrimitive');
 
-},{"../internals/define-well-known-symbol":245}],346:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],371:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.toStringTag` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.tostringtag
 defineWellKnownSymbol('toStringTag');
 
-},{"../internals/define-well-known-symbol":245}],347:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],372:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.unscopables` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.unscopables
 defineWellKnownSymbol('unscopables');
 
-},{"../internals/define-well-known-symbol":245}],348:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],373:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.asyncDispose` well-known symbol
 // https://github.com/tc39/proposal-using-statement
 defineWellKnownSymbol('asyncDispose');
 
-},{"../internals/define-well-known-symbol":245}],349:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],374:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.dispose` well-known symbol
 // https://github.com/tc39/proposal-using-statement
 defineWellKnownSymbol('dispose');
 
-},{"../internals/define-well-known-symbol":245}],350:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],375:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.observable` well-known symbol
 // https://github.com/tc39/proposal-observable
 defineWellKnownSymbol('observable');
 
-},{"../internals/define-well-known-symbol":245}],351:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],376:[function(require,module,exports){
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 // `Symbol.patternMatch` well-known symbol
 // https://github.com/tc39/proposal-pattern-matching
 defineWellKnownSymbol('patternMatch');
 
-},{"../internals/define-well-known-symbol":245}],352:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],377:[function(require,module,exports){
 // TODO: remove from `core-js@4`
 var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
 
 defineWellKnownSymbol('replaceAll');
 
-},{"../internals/define-well-known-symbol":245}],353:[function(require,module,exports){
+},{"../internals/define-well-known-symbol":268}],378:[function(require,module,exports){
 require('./es.array.iterator');
 var DOMIterables = require('../internals/dom-iterables');
 var global = require('../internals/global');
@@ -11695,27 +13362,31 @@ for (var COLLECTION_NAME in DOMIterables) {
   Iterators[COLLECTION_NAME] = Iterators.Array;
 }
 
-},{"../internals/classof":236,"../internals/create-non-enumerable-property":241,"../internals/dom-iterables":248,"../internals/global":260,"../internals/iterators":277,"../internals/well-known-symbol":315,"./es.array.iterator":321}],354:[function(require,module,exports){
+},{"../internals/classof":259,"../internals/create-non-enumerable-property":264,"../internals/dom-iterables":271,"../internals/global":283,"../internals/iterators":301,"../internals/well-known-symbol":339,"./es.array.iterator":345}],379:[function(require,module,exports){
+arguments[4][235][0].apply(exports,arguments)
+},{"../../es/array/from":217,"dup":235}],380:[function(require,module,exports){
+arguments[4][236][0].apply(exports,arguments)
+},{"../../es/array/is-array":218,"dup":236}],381:[function(require,module,exports){
 var parent = require('../../../es/array/virtual/entries');
 
 module.exports = parent;
 
-},{"../../../es/array/virtual/entries":198}],355:[function(require,module,exports){
+},{"../../../es/array/virtual/entries":220}],382:[function(require,module,exports){
 var parent = require('../../../es/array/virtual/for-each');
 
 module.exports = parent;
 
-},{"../../../es/array/virtual/for-each":200}],356:[function(require,module,exports){
+},{"../../../es/array/virtual/for-each":222}],383:[function(require,module,exports){
 var parent = require('../../../es/array/virtual/keys');
 
 module.exports = parent;
 
-},{"../../../es/array/virtual/keys":201}],357:[function(require,module,exports){
+},{"../../../es/array/virtual/keys":223}],384:[function(require,module,exports){
 var parent = require('../../es/instance/concat');
 
 module.exports = parent;
 
-},{"../../es/instance/concat":203}],358:[function(require,module,exports){
+},{"../../es/instance/concat":225}],385:[function(require,module,exports){
 require('../../modules/web.dom-collections.iterator');
 var entries = require('../array/virtual/entries');
 var classof = require('../../internals/classof');
@@ -11733,12 +13404,12 @@ module.exports = function (it) {
     || DOMIterables.hasOwnProperty(classof(it)) ? entries : own;
 };
 
-},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/entries":354}],359:[function(require,module,exports){
+},{"../../internals/classof":259,"../../modules/web.dom-collections.iterator":378,"../array/virtual/entries":381}],386:[function(require,module,exports){
 var parent = require('../../es/instance/find');
 
 module.exports = parent;
 
-},{"../../es/instance/find":204}],360:[function(require,module,exports){
+},{"../../es/instance/find":226}],387:[function(require,module,exports){
 require('../../modules/web.dom-collections.iterator');
 var forEach = require('../array/virtual/for-each');
 var classof = require('../../internals/classof');
@@ -11756,7 +13427,7 @@ module.exports = function (it) {
     || DOMIterables.hasOwnProperty(classof(it)) ? forEach : own;
 };
 
-},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/for-each":355}],361:[function(require,module,exports){
+},{"../../internals/classof":259,"../../modules/web.dom-collections.iterator":378,"../array/virtual/for-each":382}],388:[function(require,module,exports){
 require('../../modules/web.dom-collections.iterator');
 var keys = require('../array/virtual/keys');
 var classof = require('../../internals/classof');
@@ -11774,92 +13445,107 @@ module.exports = function (it) {
     || DOMIterables.hasOwnProperty(classof(it)) ? keys : own;
 };
 
-},{"../../internals/classof":236,"../../modules/web.dom-collections.iterator":353,"../array/virtual/keys":356}],362:[function(require,module,exports){
+},{"../../internals/classof":259,"../../modules/web.dom-collections.iterator":378,"../array/virtual/keys":383}],389:[function(require,module,exports){
+arguments[4][239][0].apply(exports,arguments)
+},{"../../es/instance/slice":227,"dup":239}],390:[function(require,module,exports){
 var parent = require('../../es/json/stringify');
 
 module.exports = parent;
 
-},{"../../es/json/stringify":206}],363:[function(require,module,exports){
+},{"../../es/json/stringify":228}],391:[function(require,module,exports){
 var parent = require('../../es/map');
 
 module.exports = parent;
 
-},{"../../es/map":207}],364:[function(require,module,exports){
+},{"../../es/map":229}],392:[function(require,module,exports){
 var parent = require('../../es/object/assign');
 
 module.exports = parent;
 
-},{"../../es/object/assign":208}],365:[function(require,module,exports){
-arguments[4][218][0].apply(exports,arguments)
-},{"../../es/object/define-property":209,"dup":218}],366:[function(require,module,exports){
+},{"../../es/object/assign":230}],393:[function(require,module,exports){
+arguments[4][241][0].apply(exports,arguments)
+},{"../../es/object/define-property":231,"dup":241}],394:[function(require,module,exports){
 var parent = require('../../es/object/keys');
 
 module.exports = parent;
 
-},{"../../es/object/keys":210}],367:[function(require,module,exports){
+},{"../../es/object/keys":232}],395:[function(require,module,exports){
 var parent = require('../../es/set');
 
 module.exports = parent;
 
-},{"../../es/set":211}],368:[function(require,module,exports){
+},{"../../es/set":233}],396:[function(require,module,exports){
+var parent = require('../../es/symbol');
+
+module.exports = parent;
+
+},{"../../es/symbol":234}],397:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
-exports.computeAccessibleName = computeAccessibleName;
+exports.computeAccessibleDescription = computeAccessibleDescription;
+
+var _accessibleNameAndDescription = require("./accessible-name-and-description");
+
+var _util = require("./util");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * implements https://w3c.github.io/accname/#mapping_additional_nd_description
+ * @param root
+ * @param [options]
+ * @parma [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
+ */
+function computeAccessibleDescription(root) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var description = (0, _util.queryIdRefs)(root, "aria-describedby").map(function (element) {
+    return (0, _accessibleNameAndDescription.computeTextAlternative)(element, _objectSpread(_objectSpread({}, options), {}, {
+      compute: "description"
+    }));
+  }).join(" "); // TODO: Technically we need to make sure that node wasn't used for the accessible name
+  //       This causes `description_1.0_combobox-focusable-manual` to fail
+  //
+  // https://www.w3.org/TR/html-aam-1.0/#accessible-name-and-description-computation
+  // says for so many elements to use the `title` that we assume all elements are considered
+
+  if (description === "") {
+    var title = root.getAttribute("title");
+    description = title === null ? "" : title;
+  }
+
+  return description;
+}
+
+},{"./accessible-name-and-description":398,"./util":404}],398:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.computeTextAlternative = computeTextAlternative;
 
 var _array = _interopRequireDefault(require("./polyfills/array.from"));
 
 var _SetLike = _interopRequireDefault(require("./polyfills/SetLike"));
 
-var _getRole = _interopRequireDefault(require("./getRole"));
-
 var _util = require("./util");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 /**
- * Small utility that handles all the JS quirks with `this` which is important
- * if no mock is provided.
- * @param element
- * @param options - These are not optional to prevent accidentally calling it without options in `computeAccessibleName`
+ * implements https://w3c.github.io/accname/
  */
-function createGetComputedStyle(element, options) {
-  var window = (0, _util.safeWindow)(element);
-  var _options$getComputedS = options.getComputedStyle,
-      getComputedStyle = _options$getComputedS === void 0 ? window.getComputedStyle.bind(window) : _options$getComputedS;
-  return getComputedStyle;
-}
+
 /**
  *
  * @param {string} string -
  * @returns {FlatString} -
  */
-
-
 function asFlatString(s) {
   return s.trim().replace(/\s\s+/g, " ");
-}
-/**
- * https://w3c.github.io/aria/#namefromprohibited
- */
-
-
-function prohibitsNaming(node) {
-  return hasAnyConcreteRoles(node, ["caption", "code", "deletion", "emphasis", "generic", "insertion", "paragraph", "presentation", "strong", "subscript", "superscript"]);
 }
 /**
  *
@@ -11869,7 +13555,7 @@ function prohibitsNaming(node) {
  */
 
 
-function isHidden(node, options) {
+function isHidden(node, getComputedStyleImplementation) {
   if (!(0, _util.isElement)(node)) {
     return false;
   }
@@ -11878,43 +13564,8 @@ function isHidden(node, options) {
     return true;
   }
 
-  var style = createGetComputedStyle(node, options)(node);
+  var style = getComputedStyleImplementation(node);
   return style.getPropertyValue("display") === "none" || style.getPropertyValue("visibility") === "hidden";
-}
-/**
- *
- * @param {Node} node -
- * @param {string} attributeName -
- * @returns {Element[]} -
- */
-
-
-function idRefs(node, attributeName) {
-  if ((0, _util.isElement)(node) && node.hasAttribute(attributeName)) {
-    // safe due to hasAttribute check
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    var ids = node.getAttribute(attributeName).split(" ");
-    return ids // safe since it can't be null for an Element
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    .map(function (id) {
-      return node.ownerDocument.getElementById(id);
-    }).filter(function (element) {
-      return element !== null;
-    } // TODO: why does this not narrow?
-    );
-  }
-
-  return [];
-}
-/**
- * All defined children. This include childNodes as well as owned (portaled) trees
- * via aria-owns
- * @param node
- */
-
-
-function queryChildNodes(node) {
-  return (0, _array.default)(node.childNodes).concat(idRefs(node, "aria-owns"));
 }
 /**
  * @param {Node} node -
@@ -11923,7 +13574,7 @@ function queryChildNodes(node) {
 
 
 function isControl(node) {
-  return hasAnyConcreteRoles(node, ["button", "combobox", "listbox", "textbox"]) || hasAbstractRole(node, "range");
+  return (0, _util.hasAnyConcreteRoles)(node, ["button", "combobox", "listbox", "textbox"]) || hasAbstractRole(node, "range");
 }
 
 function hasAbstractRole(node, role) {
@@ -11933,19 +13584,11 @@ function hasAbstractRole(node, role) {
 
   switch (role) {
     case "range":
-      return hasAnyConcreteRoles(node, ["meter", "progressbar", "scrollbar", "slider", "spinbutton"]);
+      return (0, _util.hasAnyConcreteRoles)(node, ["meter", "progressbar", "scrollbar", "slider", "spinbutton"]);
 
     default:
       throw new TypeError("No knowledge about abstract role '".concat(role, "'. This is likely a bug :("));
   }
-}
-
-function hasAnyConcreteRoles(node, roles) {
-  if ((0, _util.isElement)(node)) {
-    return roles.indexOf((0, _getRole.default)(node)) !== -1;
-  }
-
-  return false;
 }
 /**
  * element.querySelectorAll but also considers owned tree
@@ -11955,13 +13598,11 @@ function hasAnyConcreteRoles(node, roles) {
 
 
 function querySelectorAllSubtree(element, selectors) {
-  var elements = [];
-
-  for (var _i = 0, _arr = [element].concat(_toConsumableArray(idRefs(element, "aria-owns"))); _i < _arr.length; _i++) {
-    var root = _arr[_i];
-    elements.push.apply(elements, _toConsumableArray((0, _array.default)(root.querySelectorAll(selectors))));
-  }
-
+  var elements = (0, _array.default)(element.querySelectorAll(selectors));
+  (0, _util.queryIdRefs)(element, "aria-owns").forEach(function (root) {
+    // babel transpiles this assuming an iterator
+    elements.push.apply(elements, (0, _array.default)(root.querySelectorAll(selectors)));
+  });
   return elements;
 }
 
@@ -11975,15 +13616,22 @@ function querySelectedOptions(listbox) {
 }
 
 function isMarkedPresentational(node) {
-  return hasAnyConcreteRoles(node, ["none", "presentation"]);
+  return (0, _util.hasAnyConcreteRoles)(node, ["none", "presentation"]);
 }
 /**
- * TODO https://github.com/eps1lon/dom-accessibility-api/issues/99
+ * Elements specifically listed in html-aam
+ *
+ * We don't need this for `label` or `legend` elements.
+ * Their implicit roles already allow "naming from content".
+ *
+ * sources:
+ *
+ * - https://w3c.github.io/html-aam/#table-element
  */
 
 
 function isNativeHostLanguageTextAlternativeElement(node) {
-  return false;
+  return (0, _util.isHTMLTableCaptionElement)(node);
 }
 /**
  * https://w3c.github.io/aria/#namefromcontent
@@ -11991,19 +13639,21 @@ function isNativeHostLanguageTextAlternativeElement(node) {
 
 
 function allowsNameFromContent(node) {
-  return hasAnyConcreteRoles(node, ["button", "cell", "checkbox", "columnheader", "gridcell", "heading", "label", "legend", "link", "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio", "row", "rowheader", "switch", "tab", "tooltip", "treeitem"]);
+  return (0, _util.hasAnyConcreteRoles)(node, ["button", "cell", "checkbox", "columnheader", "gridcell", "heading", "label", "legend", "link", "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio", "row", "rowheader", "switch", "tab", "tooltip", "treeitem"]);
 }
 /**
  * TODO https://github.com/eps1lon/dom-accessibility-api/issues/100
  */
 
 
-function isDescendantOfNativeHostLanguageTextAlternativeElement(node) {
+function isDescendantOfNativeHostLanguageTextAlternativeElement( // eslint-disable-next-line @typescript-eslint/no-unused-vars -- not implemented yet
+node) {
   return false;
 }
 /**
  * TODO https://github.com/eps1lon/dom-accessibility-api/issues/101
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- not implemented yet
 
 
 function computeTooltipAttributeValue(node) {
@@ -12029,55 +13679,153 @@ function getTextualContent(declaration) {
   return "";
 }
 /**
- * implements https://w3c.github.io/accname/#mapping_additional_nd_te
- * @param root
- * @param [options]
- * @parma [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
+ * https://html.spec.whatwg.org/multipage/forms.html#category-label
+ * TODO: form-associated custom elements
+ * @param element
  */
 
 
-function computeAccessibleName(root) {
+function isLabelableElement(element) {
+  var localName = (0, _util.getLocalName)(element);
+  return localName === "button" || localName === "input" && element.getAttribute("type") !== "hidden" || localName === "meter" || localName === "output" || localName === "progress" || localName === "select" || localName === "textarea";
+}
+/**
+ * > [...], then the first such descendant in tree order is the label element's labeled control.
+ * -- https://html.spec.whatwg.org/multipage/forms.html#labeled-control
+ * @param element
+ */
+
+
+function findLabelableElement(element) {
+  if (isLabelableElement(element)) {
+    return element;
+  }
+
+  var labelableElement = null;
+  element.childNodes.forEach(function (childNode) {
+    if (labelableElement === null && (0, _util.isElement)(childNode)) {
+      var descendantLabelableElement = findLabelableElement(childNode);
+
+      if (descendantLabelableElement !== null) {
+        labelableElement = descendantLabelableElement;
+      }
+    }
+  });
+  return labelableElement;
+}
+/**
+ * Polyfill of HTMLLabelElement.control
+ * https://html.spec.whatwg.org/multipage/forms.html#labeled-control
+ * @param label
+ */
+
+
+function getControlOfLabel(label) {
+  if (label.control !== undefined) {
+    return label.control;
+  }
+
+  var htmlFor = label.getAttribute("for");
+
+  if (htmlFor !== null) {
+    return label.ownerDocument.getElementById(htmlFor);
+  }
+
+  return findLabelableElement(label);
+}
+/**
+ * Polyfill of HTMLInputElement.labels
+ * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/labels
+ * @param element
+ */
+
+
+function getLabels(element) {
+  var labelsProperty = element.labels;
+
+  if (labelsProperty === null) {
+    return labelsProperty;
+  }
+
+  if (labelsProperty !== undefined) {
+    return (0, _array.default)(labelsProperty);
+  }
+
+  if (!isLabelableElement(element)) {
+    return null;
+  }
+
+  var document = element.ownerDocument;
+  return (0, _array.default)(document.querySelectorAll("label")).filter(function (label) {
+    return getControlOfLabel(label) === element;
+  });
+}
+/**
+ * Gets the contents of a slot used for computing the accname
+ * @param slot
+ */
+
+
+function getSlotContents(slot) {
+  // Computing the accessible name for elements containing slots is not
+  // currently defined in the spec. This implementation reflects the
+  // behavior of NVDA 2020.2/Firefox 81 and iOS VoiceOver/Safari 13.6.
+  var assignedNodes = slot.assignedNodes();
+
+  if (assignedNodes.length === 0) {
+    // if no nodes are assigned to the slot, it displays the default content
+    return (0, _array.default)(slot.childNodes);
+  }
+
+  return assignedNodes;
+}
+/**
+ * implements https://w3c.github.io/accname/#mapping_additional_nd_te
+ * @param root
+ * @param [options]
+ * @param [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
+ */
+
+
+function computeTextAlternative(root) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var consultedNodes = new _SetLike.default();
-
-  if (prohibitsNaming(root)) {
-    return "";
-  } // 2F.i
-
+  var window = (0, _util.safeWindow)(root);
+  var _options$compute = options.compute,
+      compute = _options$compute === void 0 ? "name" : _options$compute,
+      _options$computedStyl = options.computedStyleSupportsPseudoElements,
+      computedStyleSupportsPseudoElements = _options$computedStyl === void 0 ? options.getComputedStyle !== undefined : _options$computedStyl,
+      _options$getComputedS = options.getComputedStyle,
+      getComputedStyle = _options$getComputedS === void 0 ? window.getComputedStyle.bind(window) : _options$getComputedS; // 2F.i
 
   function computeMiscTextAlternative(node, context) {
     var accumulatedText = "";
 
-    if ((0, _util.isElement)(node)) {
-      var pseudoBefore = createGetComputedStyle(node, options)(node, "::before");
+    if ((0, _util.isElement)(node) && computedStyleSupportsPseudoElements) {
+      var pseudoBefore = getComputedStyle(node, "::before");
       var beforeContent = getTextualContent(pseudoBefore);
       accumulatedText = "".concat(beforeContent, " ").concat(accumulatedText);
-    }
+    } // FIXME: Including aria-owns is not defined in the spec
+    // But it is required in the web-platform-test
 
-    var _iterator = _createForOfIteratorHelper(queryChildNodes(node)),
-        _step;
 
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var child = _step.value;
-        var result = computeTextAlternative(child, {
-          isEmbeddedInLabel: context.isEmbeddedInLabel,
-          isReferenced: false,
-          recursion: true
-        }); // TODO: Unclear why display affects delimiter
+    var childNodes = (0, _util.isHTMLSlotElement)(node) ? getSlotContents(node) : (0, _array.default)(node.childNodes).concat((0, _util.queryIdRefs)(node, "aria-owns"));
+    childNodes.forEach(function (child) {
+      var result = computeTextAlternative(child, {
+        isEmbeddedInLabel: context.isEmbeddedInLabel,
+        isReferenced: false,
+        recursion: true
+      }); // TODO: Unclear why display affects delimiter
+      // see https://github.com/w3c/accname/issues/3
 
-        var display = (0, _util.isElement)(node) && createGetComputedStyle(node, options)(node).getPropertyValue("display");
-        var separator = display !== "inline" ? " " : "";
-        accumulatedText += "".concat(separator).concat(result);
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
+      var display = (0, _util.isElement)(child) ? getComputedStyle(child).getPropertyValue("display") : "inline";
+      var separator = display !== "inline" ? " " : ""; // trailing separator for wpt tests
 
-    if ((0, _util.isElement)(node)) {
-      var pseudoAfter = createGetComputedStyle(node, options)(node, ":after");
+      accumulatedText += "".concat(separator).concat(result).concat(separator);
+    });
+
+    if ((0, _util.isElement)(node) && computedStyleSupportsPseudoElements) {
+      var pseudoAfter = getComputedStyle(node, "::after");
       var afterContent = getTextualContent(pseudoAfter);
       accumulatedText = "".concat(accumulatedText, " ").concat(afterContent);
     }
@@ -12085,64 +13833,145 @@ function computeAccessibleName(root) {
     return accumulatedText;
   }
 
-  function computeAttributeTextAlternative(node) {
+  function computeElementTextAlternative(node) {
     if (!(0, _util.isElement)(node)) {
       return null;
     }
+    /**
+     *
+     * @param element
+     * @param attributeName
+     * @returns A string non-empty string or `null`
+     */
 
-    var titleAttribute = node.getAttributeNode("title");
 
-    if (titleAttribute !== null && !consultedNodes.has(titleAttribute)) {
-      consultedNodes.add(titleAttribute);
-      return titleAttribute.value;
-    }
+    function useAttribute(element, attributeName) {
+      var attribute = element.getAttributeNode(attributeName);
 
-    var altAttribute = node.getAttributeNode("alt");
+      if (attribute !== null && !consultedNodes.has(attribute) && attribute.value.trim() !== "") {
+        consultedNodes.add(attribute);
+        return attribute.value;
+      }
 
-    if (altAttribute !== null && !consultedNodes.has(altAttribute)) {
-      consultedNodes.add(altAttribute);
-      return altAttribute.value;
-    }
+      return null;
+    } // https://w3c.github.io/html-aam/#fieldset-and-legend-elements
 
-    if ((0, _util.isHTMLInputElement)(node) && node.type === "button") {
+
+    if ((0, _util.isHTMLFieldSetElement)(node)) {
       consultedNodes.add(node);
-      return node.getAttribute("value") || "";
-    }
+      var children = (0, _array.default)(node.childNodes);
 
-    return null;
-  }
+      for (var i = 0; i < children.length; i += 1) {
+        var child = children[i];
 
-  function computeElementTextAlternative(node) {
-    if (!((0, _util.isHTMLInputElement)(node) || (0, _util.isHTMLSelectElement)(node) || (0, _util.isHTMLTextAreaElement)(node))) {
+        if ((0, _util.isHTMLLegendElement)(child)) {
+          return computeTextAlternative(child, {
+            isEmbeddedInLabel: false,
+            isReferenced: false,
+            recursion: false
+          });
+        }
+      }
+    } else if ((0, _util.isHTMLTableElement)(node)) {
+      // https://w3c.github.io/html-aam/#table-element
+      consultedNodes.add(node);
+
+      var _children = (0, _array.default)(node.childNodes);
+
+      for (var _i = 0; _i < _children.length; _i += 1) {
+        var _child = _children[_i];
+
+        if ((0, _util.isHTMLTableCaptionElement)(_child)) {
+          return computeTextAlternative(_child, {
+            isEmbeddedInLabel: false,
+            isReferenced: false,
+            recursion: false
+          });
+        }
+      }
+    } else if ((0, _util.isSVGSVGElement)(node)) {
+      // https://www.w3.org/TR/svg-aam-1.0/
+      consultedNodes.add(node);
+
+      var _children2 = (0, _array.default)(node.childNodes);
+
+      for (var _i2 = 0; _i2 < _children2.length; _i2 += 1) {
+        var _child2 = _children2[_i2];
+
+        if ((0, _util.isSVGTitleElement)(_child2)) {
+          return _child2.textContent;
+        }
+      }
+
       return null;
+    } else if ((0, _util.getLocalName)(node) === "img" || (0, _util.getLocalName)(node) === "area") {
+      // https://w3c.github.io/html-aam/#area-element
+      // https://w3c.github.io/html-aam/#img-element
+      var nameFromAlt = useAttribute(node, "alt");
+
+      if (nameFromAlt !== null) {
+        return nameFromAlt;
+      }
     }
 
-    var input = node; // https://w3c.github.io/html-aam/#input-type-text-input-type-password-input-type-search-input-type-tel-input-type-email-input-type-url-and-textarea-element-accessible-description-computation
+    if ((0, _util.isHTMLInputElement)(node) && (node.type === "button" || node.type === "submit" || node.type === "reset")) {
+      // https://w3c.github.io/html-aam/#input-type-text-input-type-password-input-type-search-input-type-tel-input-type-email-input-type-url-and-textarea-element-accessible-description-computation
+      var nameFromValue = useAttribute(node, "value");
 
-    if (input.type === "submit") {
-      return "Submit";
+      if (nameFromValue !== null) {
+        return nameFromValue;
+      } // TODO: l10n
+
+
+      if (node.type === "submit") {
+        return "Submit";
+      } // TODO: l10n
+
+
+      if (node.type === "reset") {
+        return "Reset";
+      }
     }
 
-    if (input.type === "reset") {
-      return "Reset";
+    if ((0, _util.isHTMLInputElement)(node) || (0, _util.isHTMLSelectElement)(node) || (0, _util.isHTMLTextAreaElement)(node)) {
+      var input = node;
+      var labels = getLabels(input);
+
+      if (labels !== null && labels.length !== 0) {
+        consultedNodes.add(input);
+        return (0, _array.default)(labels).map(function (element) {
+          return computeTextAlternative(element, {
+            isEmbeddedInLabel: true,
+            isReferenced: false,
+            recursion: true
+          });
+        }).filter(function (label) {
+          return label.length > 0;
+        }).join(" ");
+      }
+    } // https://w3c.github.io/html-aam/#input-type-image-accessible-name-computation
+    // TODO: wpt test consider label elements but html-aam does not mention them
+    // We follow existing implementations over spec
+
+
+    if ((0, _util.isHTMLInputElement)(node) && node.type === "image") {
+      var _nameFromAlt = useAttribute(node, "alt");
+
+      if (_nameFromAlt !== null) {
+        return _nameFromAlt;
+      }
+
+      var nameFromTitle = useAttribute(node, "title");
+
+      if (nameFromTitle !== null) {
+        return nameFromTitle;
+      } // TODO: l10n
+
+
+      return "Submit Query";
     }
 
-    var labels = input.labels; // IE11 does not implement labels, TODO: verify with caniuse instead of mdn
-
-    if (labels === null || labels === undefined || labels.length === 0) {
-      return null;
-    }
-
-    consultedNodes.add(input);
-    return (0, _array.default)(labels).map(function (element) {
-      return computeTextAlternative(element, {
-        isEmbeddedInLabel: true,
-        isReferenced: false,
-        recursion: true
-      });
-    }).filter(function (label) {
-      return label.length > 0;
-    }).join(" ");
+    return useAttribute(node, "title");
   }
 
   function computeTextAlternative(current, context) {
@@ -12152,21 +13981,21 @@ function computeAccessibleName(root) {
     // https://github.com/w3c/accname/issues/67
 
 
-    if (hasAnyConcreteRoles(current, ["menu"])) {
+    if ((0, _util.hasAnyConcreteRoles)(current, ["menu"])) {
       consultedNodes.add(current);
       return "";
     } // 2A
 
 
-    if (isHidden(current, options) && !context.isReferenced) {
+    if (isHidden(current, getComputedStyle) && !context.isReferenced) {
       consultedNodes.add(current);
       return "";
     } // 2B
 
 
-    var labelElements = idRefs(current, "aria-labelledby");
+    var labelElements = (0, _util.queryIdRefs)(current, "aria-labelledby");
 
-    if (!context.isReferenced && labelElements.length > 0) {
+    if (compute === "name" && !context.isReferenced && labelElements.length > 0) {
       return labelElements.map(function (element) {
         return computeTextAlternative(element, {
           isEmbeddedInLabel: context.isEmbeddedInLabel,
@@ -12182,12 +14011,12 @@ function computeAccessibleName(root) {
     // spec says we should only consider skipping if we have a non-empty label
 
 
-    var skipToStep2E = context.recursion && isControl(current);
+    var skipToStep2E = context.recursion && isControl(current) && compute === "name";
 
     if (!skipToStep2E) {
       var ariaLabel = ((0, _util.isElement)(current) && current.getAttribute("aria-label") || "").trim();
 
-      if (ariaLabel !== "") {
+      if (ariaLabel !== "" && compute === "name") {
         consultedNodes.add(current);
         return ariaLabel;
       } // 2D
@@ -12200,19 +14029,12 @@ function computeAccessibleName(root) {
           consultedNodes.add(current);
           return elementTextAlternative;
         }
-
-        var attributeTextAlternative = computeAttributeTextAlternative(current);
-
-        if (attributeTextAlternative !== null) {
-          consultedNodes.add(current);
-          return attributeTextAlternative;
-        }
       }
     } // 2E
 
 
     if (skipToStep2E || context.isEmbeddedInLabel || context.isReferenced) {
-      if (hasAnyConcreteRoles(current, ["combobox", "listbox"])) {
+      if ((0, _util.hasAnyConcreteRoles)(current, ["combobox", "listbox"])) {
         consultedNodes.add(current);
         var selectedOptions = querySelectedOptions(current);
 
@@ -12234,14 +14056,12 @@ function computeAccessibleName(root) {
         consultedNodes.add(current);
 
         if (current.hasAttribute("aria-valuetext")) {
-          // safe due to hasAttribute guard
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- safe due to hasAttribute guard
           return current.getAttribute("aria-valuetext");
         }
 
         if (current.hasAttribute("aria-valuenow")) {
-          // safe due to hasAttribute guard
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- safe due to hasAttribute guard
           return current.getAttribute("aria-valuenow");
         } // Otherwise, use the value as specified by a host language attribute.
 
@@ -12249,7 +14069,7 @@ function computeAccessibleName(root) {
         return current.getAttribute("value") || "";
       }
 
-      if (hasAnyConcreteRoles(current, ["textbox"])) {
+      if ((0, _util.hasAnyConcreteRoles)(current, ["textbox"])) {
         consultedNodes.add(current);
         return getValueOfTextbox(current);
       }
@@ -12291,22 +14111,59 @@ function computeAccessibleName(root) {
 
   return asFlatString(computeTextAlternative(root, {
     isEmbeddedInLabel: false,
-    isReferenced: false,
+    // by spec computeAccessibleDescription starts with the referenced elements as roots
+    isReferenced: compute === "description",
     recursion: false
   }));
 }
 
-},{"./getRole":369,"./polyfills/SetLike":371,"./polyfills/array.from":372,"./util":373}],369:[function(require,module,exports){
+},{"./polyfills/SetLike":402,"./polyfills/array.from":403,"./util":404}],399:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+exports.computeAccessibleName = computeAccessibleName;
+
+var _accessibleNameAndDescription = require("./accessible-name-and-description");
+
+var _util = require("./util");
+
+/**
+ * https://w3c.github.io/aria/#namefromprohibited
+ */
+function prohibitsNaming(node) {
+  return (0, _util.hasAnyConcreteRoles)(node, ["caption", "code", "deletion", "emphasis", "generic", "insertion", "paragraph", "presentation", "strong", "subscript", "superscript"]);
+}
+/**
+ * implements https://w3c.github.io/accname/#mapping_additional_nd_name
+ * @param root
+ * @param [options]
+ * @parma [options.getComputedStyle] - mock window.getComputedStyle. Needs `content`, `display` and `visibility`
+ */
+
+
+function computeAccessibleName(root) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (prohibitsNaming(root)) {
+    return "";
+  }
+
+  return (0, _accessibleNameAndDescription.computeTextAlternative)(root, options);
+}
+
+},{"./accessible-name-and-description":398,"./util":404}],400:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
 exports.default = getRole;
 
+var _util = require("./util");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -12314,92 +14171,132 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// https://w3c.github.io/html-aria/#document-conformance-requirements-for-use-of-aria-attributes-in-html
+var localNameToRoleMappings = {
+  article: "article",
+  aside: "complementary",
+  body: "document",
+  button: "button",
+  datalist: "listbox",
+  dd: "definition",
+  details: "group",
+  dialog: "dialog",
+  dt: "term",
+  fieldset: "group",
+  figure: "figure",
+  // WARNING: Only with an accessible name
+  form: "form",
+  footer: "contentinfo",
+  h1: "heading",
+  h2: "heading",
+  h3: "heading",
+  h4: "heading",
+  h5: "heading",
+  h6: "heading",
+  header: "banner",
+  hr: "separator",
+  legend: "legend",
+  li: "listitem",
+  math: "math",
+  main: "main",
+  menu: "list",
+  nav: "navigation",
+  ol: "list",
+  optgroup: "group",
+  // WARNING: Only in certain context
+  option: "option",
+  output: "status",
+  progress: "progressbar",
+  // WARNING: Only with an accessible name
+  section: "region",
+  summary: "button",
+  table: "table",
+  tbody: "rowgroup",
+  textarea: "textbox",
+  tfoot: "rowgroup",
+  // WARNING: Only in certain context
+  td: "cell",
+  th: "columnheader",
+  thead: "rowgroup",
+  tr: "row",
+  ul: "list"
+};
+var prohibitedAttributes = {
+  caption: new Set(["aria-label", "aria-labelledby"]),
+  code: new Set(["aria-label", "aria-labelledby"]),
+  deletion: new Set(["aria-label", "aria-labelledby"]),
+  emphasis: new Set(["aria-label", "aria-labelledby"]),
+  generic: new Set(["aria-label", "aria-labelledby", "aria-roledescription"]),
+  insertion: new Set(["aria-label", "aria-labelledby"]),
+  paragraph: new Set(["aria-label", "aria-labelledby"]),
+  presentation: new Set(["aria-label", "aria-labelledby"]),
+  strong: new Set(["aria-label", "aria-labelledby"]),
+  subscript: new Set(["aria-label", "aria-labelledby"]),
+  superscript: new Set(["aria-label", "aria-labelledby"])
+};
+/**
+ *
+ * @param element
+ * @param role The role used for this element. This is specified to control whether you want to use the implicit or explicit role.
+ */
+
+function hasGlobalAriaAttributes(element, role) {
+  // https://rawgit.com/w3c/aria/stable/#global_states
+  // commented attributes are deprecated
+  return ["aria-atomic", "aria-busy", "aria-controls", "aria-current", "aria-describedby", "aria-details", // "disabled",
+  "aria-dropeffect", // "errormessage",
+  "aria-flowto", "aria-grabbed", // "haspopup",
+  "aria-hidden", // "invalid",
+  "aria-keyshortcuts", "aria-label", "aria-labelledby", "aria-live", "aria-owns", "aria-relevant", "aria-roledescription"].some(function (attributeName) {
+    var _prohibitedAttributes;
+
+    return element.hasAttribute(attributeName) && !((_prohibitedAttributes = prohibitedAttributes[role]) === null || _prohibitedAttributes === void 0 ? void 0 : _prohibitedAttributes.has(attributeName));
+  });
+}
+
+function ignorePresentationalRole(element, implicitRole) {
+  // https://rawgit.com/w3c/aria/stable/#conflict_resolution_presentation_none
+  return hasGlobalAriaAttributes(element, implicitRole);
+}
+
 function getRole(element) {
   var explicitRole = getExplicitRole(element);
 
-  if (explicitRole !== null) {
-    return explicitRole;
+  if (explicitRole === null || explicitRole === "presentation") {
+    var implicitRole = getImplicitRole(element);
+
+    if (explicitRole !== "presentation" || ignorePresentationalRole(element, implicitRole || "")) {
+      return implicitRole;
+    }
   }
 
-  return getImplicitRole(element);
+  return explicitRole;
 }
 
-var tagToRoleMappings = {
-  ARTICLE: "article",
-  ASIDE: "complementary",
-  BODY: "document",
-  BUTTON: "button",
-  DATALIST: "listbox",
-  DD: "definition",
-  DETAILS: "group",
-  DIALOG: "dialog",
-  DT: "term",
-  FIELDSET: "group",
-  FIGURE: "figure",
-  // WARNING: Only with an accessible name
-  FORM: "form",
-  FOOTER: "contentinfo",
-  H1: "heading",
-  H2: "heading",
-  H3: "heading",
-  H4: "heading",
-  H5: "heading",
-  H6: "heading",
-  HEADER: "banner",
-  HR: "separator",
-  LEGEND: "legend",
-  LI: "listitem",
-  MATH: "math",
-  MAIN: "main",
-  MENU: "list",
-  NAV: "navigation",
-  OL: "list",
-  OPTGROUP: "group",
-  // WARNING: Only in certain context
-  OPTION: "option",
-  OUTPUT: "status",
-  PROGRESS: "progressbar",
-  // WARNING: Only with an accessible name
-  SECTION: "region",
-  SUMMARY: "button",
-  TABLE: "table",
-  TBODY: "rowgroup",
-  TEXTAREA: "textbox",
-  TFOOT: "rowgroup",
-  // WARNING: Only in certain context
-  TD: "cell",
-  TH: "columnheader",
-  THEAD: "rowgroup",
-  TR: "row",
-  UL: "list"
-};
-
 function getImplicitRole(element) {
-  var mappedByTag = tagToRoleMappings[element.tagName];
+  var mappedByTag = localNameToRoleMappings[(0, _util.getLocalName)(element)];
 
   if (mappedByTag !== undefined) {
     return mappedByTag;
   }
 
-  switch (element.tagName) {
-    case "A":
-    case "AREA":
-    case "LINK":
+  switch ((0, _util.getLocalName)(element)) {
+    case "a":
+    case "area":
+    case "link":
       if (element.hasAttribute("href")) {
         return "link";
       }
 
       break;
 
-    case "IMG":
-      if ((element.getAttribute("alt") || "").length > 0) {
-        return "img";
+    case "img":
+      if (element.getAttribute("alt") === "" && !ignorePresentationalRole(element, "img")) {
+        return "presentation";
       }
 
-      break;
+      return "img";
 
-    case "INPUT":
+    case "input":
       {
         var _ref = element,
             type = _ref.type;
@@ -12440,7 +14337,7 @@ function getImplicitRole(element) {
         }
       }
 
-    case "SELECT":
+    case "select":
       if (element.hasAttribute("multiple") || element.size > 1) {
         return "listbox";
       }
@@ -12453,8 +14350,7 @@ function getImplicitRole(element) {
 
 function getExplicitRole(element) {
   if (element.hasAttribute("role")) {
-    // safe due to hasAttribute check
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- safe due to hasAttribute check
     var _trim$split = element.getAttribute("role").trim().split(" "),
         _trim$split2 = _slicedToArray(_trim$split, 1),
         explicitRole = _trim$split2[0];
@@ -12467,11 +14363,15 @@ function getExplicitRole(element) {
   return null;
 }
 
-},{}],370:[function(require,module,exports){
+},{"./util":404}],401:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
-exports.getRole = exports.computeAccessibleName = void 0;
+exports.getRole = exports.computeAccessibleName = exports.computeAccessibleDescription = void 0;
+
+var _accessibleDescription = require("./accessible-description");
+
+exports.computeAccessibleDescription = _accessibleDescription.computeAccessibleDescription;
 
 var _accessibleName = require("./accessible-name");
 
@@ -12483,13 +14383,11 @@ exports.getRole = _getRole.default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./accessible-name":368,"./getRole":369}],371:[function(require,module,exports){
+},{"./accessible-description":397,"./accessible-name":399,"./getRole":400}],402:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
 exports.default = void 0;
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12497,48 +14395,18 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
-
-function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // for environments without Set we fallback to arrays with unique members
-var SetLike = /*#__PURE__*/function (_Set) {
-  _inherits(SetLike, _Set);
-
-  var _super = _createSuper(SetLike);
-
+var SetLike = /*#__PURE__*/function () {
   function SetLike() {
-    var _this;
+    var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
     _classCallCheck(this, SetLike);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _defineProperty(this, "items", void 0);
 
-    _this = _super.call.apply(_super, [this].concat(args));
-
-    _defineProperty(_assertThisInitialized(_this), "items", []);
-
-    return _this;
+    this.items = items;
   }
 
   _createClass(SetLike, [{
@@ -12567,10 +14435,10 @@ var SetLike = /*#__PURE__*/function (_Set) {
   }, {
     key: "forEach",
     value: function forEach(callbackfn) {
-      var _this2 = this;
+      var _this = this;
 
       this.items.forEach(function (item) {
-        callbackfn(item, item, _this2);
+        callbackfn(item, item, _this);
       });
     }
   }, {
@@ -12586,13 +14454,13 @@ var SetLike = /*#__PURE__*/function (_Set) {
   }]);
 
   return SetLike;
-}( /*#__PURE__*/_wrapNativeSuper(Set));
+}();
 
 var _default = typeof Set === "undefined" ? Set : SetLike;
 
 exports.default = _default;
 
-},{}],372:[function(require,module,exports){
+},{}],403:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -12692,35 +14560,66 @@ function arrayFrom(arrayLike, mapFn) {
   return A;
 }
 
-},{}],373:[function(require,module,exports){
+},{}],404:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
+exports.getLocalName = getLocalName;
 exports.isElement = isElement;
+exports.isHTMLTableCaptionElement = isHTMLTableCaptionElement;
 exports.isHTMLInputElement = isHTMLInputElement;
 exports.isHTMLSelectElement = isHTMLSelectElement;
+exports.isHTMLTableElement = isHTMLTableElement;
 exports.isHTMLTextAreaElement = isHTMLTextAreaElement;
 exports.safeWindow = safeWindow;
+exports.isHTMLFieldSetElement = isHTMLFieldSetElement;
+exports.isHTMLLegendElement = isHTMLLegendElement;
+exports.isHTMLSlotElement = isHTMLSlotElement;
+exports.isSVGElement = isSVGElement;
+exports.isSVGSVGElement = isSVGSVGElement;
+exports.isSVGTitleElement = isSVGTitleElement;
+exports.queryIdRefs = queryIdRefs;
+exports.hasAnyConcreteRoles = hasAnyConcreteRoles;
 
-function isElement(node) {
-  return (// @ts-ignore
-    node !== null && node instanceof node.ownerDocument.defaultView.Element
+var _getRole = _interopRequireDefault(require("./getRole"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Safe Element.localName for all supported environments
+ * @param element
+ */
+function getLocalName(element) {
+  var _element$localName;
+
+  return (// eslint-disable-next-line no-restricted-properties -- actual guard for environments without localName
+    (_element$localName = element.localName) !== null && _element$localName !== void 0 ? _element$localName : // eslint-disable-next-line no-restricted-properties -- required for the fallback
+    element.tagName.toLowerCase()
   );
 }
 
+function isElement(node) {
+  return node !== null && node.nodeType === node.ELEMENT_NODE;
+}
+
+function isHTMLTableCaptionElement(node) {
+  return isElement(node) && getLocalName(node) === "caption";
+}
+
 function isHTMLInputElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLInputElement;
+  return isElement(node) && getLocalName(node) === "input";
 }
 
 function isHTMLSelectElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLSelectElement;
+  return isElement(node) && getLocalName(node) === "select";
+}
+
+function isHTMLTableElement(node) {
+  return isElement(node) && getLocalName(node) === "table";
 }
 
 function isHTMLTextAreaElement(node) {
-  return isElement(node) && // @ts-ignore
-  node instanceof node.ownerDocument.defaultView.HTMLTextAreaElement;
+  return isElement(node) && getLocalName(node) === "textarea";
 }
 
 function safeWindow(node) {
@@ -12734,7 +14633,564 @@ function safeWindow(node) {
   return defaultView;
 }
 
-},{}],374:[function(require,module,exports){
+function isHTMLFieldSetElement(node) {
+  return isElement(node) && getLocalName(node) === "fieldset";
+}
+
+function isHTMLLegendElement(node) {
+  return isElement(node) && getLocalName(node) === "legend";
+}
+
+function isHTMLSlotElement(node) {
+  return isElement(node) && getLocalName(node) === "slot";
+}
+
+function isSVGElement(node) {
+  return isElement(node) && node.ownerSVGElement !== undefined;
+}
+
+function isSVGSVGElement(node) {
+  return isElement(node) && getLocalName(node) === "svg";
+}
+
+function isSVGTitleElement(node) {
+  return isSVGElement(node) && getLocalName(node) === "title";
+}
+/**
+ *
+ * @param {Node} node -
+ * @param {string} attributeName -
+ * @returns {Element[]} -
+ */
+
+
+function queryIdRefs(node, attributeName) {
+  if (isElement(node) && node.hasAttribute(attributeName)) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- safe due to hasAttribute check
+    var ids = node.getAttribute(attributeName).split(" ");
+    return ids.map(function (id) {
+      return node.ownerDocument.getElementById(id);
+    }).filter(function (element) {
+      return element !== null;
+    } // TODO: why does this not narrow?
+    );
+  }
+
+  return [];
+}
+
+function hasAnyConcreteRoles(node, roles) {
+  if (isElement(node)) {
+    return roles.indexOf((0, _getRole.default)(node)) !== -1;
+  }
+
+  return false;
+}
+
+},{"./getRole":400}],405:[function(require,module,exports){
+// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
+// This work is free. You can redistribute it and/or modify it
+// under the terms of the WTFPL, Version 2
+// For more information see LICENSE.txt or http://www.wtfpl.net/
+//
+// For more information, the home page:
+// http://pieroxy.net/blog/pages/lz-string/testing.html
+//
+// LZ-based compression algorithm, version 1.4.4
+var LZString = (function() {
+
+// private property
+var f = String.fromCharCode;
+var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+var baseReverseDic = {};
+
+function getBaseValue(alphabet, character) {
+  if (!baseReverseDic[alphabet]) {
+    baseReverseDic[alphabet] = {};
+    for (var i=0 ; i<alphabet.length ; i++) {
+      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+    }
+  }
+  return baseReverseDic[alphabet][character];
+}
+
+var LZString = {
+  compressToBase64 : function (input) {
+    if (input == null) return "";
+    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
+    switch (res.length % 4) { // To produce valid Base64
+    default: // When could this happen ?
+    case 0 : return res;
+    case 1 : return res+"===";
+    case 2 : return res+"==";
+    case 3 : return res+"=";
+    }
+  },
+
+  decompressFromBase64 : function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
+  },
+
+  compressToUTF16 : function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
+  },
+
+  decompressFromUTF16: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
+  },
+
+  //compress into uint8array (UCS-2 big endian format)
+  compressToUint8Array: function (uncompressed) {
+    var compressed = LZString.compress(uncompressed);
+    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
+
+    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
+      var current_value = compressed.charCodeAt(i);
+      buf[i*2] = current_value >>> 8;
+      buf[i*2+1] = current_value % 256;
+    }
+    return buf;
+  },
+
+  //decompress from uint8array (UCS-2 big endian format)
+  decompressFromUint8Array:function (compressed) {
+    if (compressed===null || compressed===undefined){
+        return LZString.decompress(compressed);
+    } else {
+        var buf=new Array(compressed.length/2); // 2 bytes per character
+        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
+          buf[i]=compressed[i*2]*256+compressed[i*2+1];
+        }
+
+        var result = [];
+        buf.forEach(function (c) {
+          result.push(f(c));
+        });
+        return LZString.decompress(result.join(''));
+
+    }
+
+  },
+
+
+  //compress into a string that is already URI encoded
+  compressToEncodedURIComponent: function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
+  },
+
+  //decompress from an output of compressToEncodedURIComponent
+  decompressFromEncodedURIComponent:function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    input = input.replace(/ /g, "+");
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
+  },
+
+  compress: function (uncompressed) {
+    return LZString._compress(uncompressed, 16, function(a){return f(a);});
+  },
+  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
+    if (uncompressed == null) return "";
+    var i, value,
+        context_dictionary= {},
+        context_dictionaryToCreate= {},
+        context_c="",
+        context_wc="",
+        context_w="",
+        context_enlargeIn= 2, // Compensate for the first entry which should not count
+        context_dictSize= 3,
+        context_numBits= 2,
+        context_data=[],
+        context_data_val=0,
+        context_data_position=0,
+        ii;
+
+    for (ii = 0; ii < uncompressed.length; ii += 1) {
+      context_c = uncompressed.charAt(ii);
+      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
+        context_dictionary[context_c] = context_dictSize++;
+        context_dictionaryToCreate[context_c] = true;
+      }
+
+      context_wc = context_w + context_c;
+      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
+        context_w = context_wc;
+      } else {
+        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+          if (context_w.charCodeAt(0)<256) {
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<8 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          } else {
+            value = 1;
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1) | value;
+              if (context_data_position ==bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = 0;
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<16 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          }
+          context_enlargeIn--;
+          if (context_enlargeIn == 0) {
+            context_enlargeIn = Math.pow(2, context_numBits);
+            context_numBits++;
+          }
+          delete context_dictionaryToCreate[context_w];
+        } else {
+          value = context_dictionary[context_w];
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+
+
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        // Add wc to the dictionary.
+        context_dictionary[context_wc] = context_dictSize++;
+        context_w = String(context_c);
+      }
+    }
+
+    // Output the code for w.
+    if (context_w !== "") {
+      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+        if (context_w.charCodeAt(0)<256) {
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<8 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        } else {
+          value = 1;
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | value;
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = 0;
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<16 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        delete context_dictionaryToCreate[context_w];
+      } else {
+        value = context_dictionary[context_w];
+        for (i=0 ; i<context_numBits ; i++) {
+          context_data_val = (context_data_val << 1) | (value&1);
+          if (context_data_position == bitsPerChar-1) {
+            context_data_position = 0;
+            context_data.push(getCharFromInt(context_data_val));
+            context_data_val = 0;
+          } else {
+            context_data_position++;
+          }
+          value = value >> 1;
+        }
+
+
+      }
+      context_enlargeIn--;
+      if (context_enlargeIn == 0) {
+        context_enlargeIn = Math.pow(2, context_numBits);
+        context_numBits++;
+      }
+    }
+
+    // Mark the end of the stream
+    value = 2;
+    for (i=0 ; i<context_numBits ; i++) {
+      context_data_val = (context_data_val << 1) | (value&1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data_position = 0;
+        context_data.push(getCharFromInt(context_data_val));
+        context_data_val = 0;
+      } else {
+        context_data_position++;
+      }
+      value = value >> 1;
+    }
+
+    // Flush the last char
+    while (true) {
+      context_data_val = (context_data_val << 1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data.push(getCharFromInt(context_data_val));
+        break;
+      }
+      else context_data_position++;
+    }
+    return context_data.join('');
+  },
+
+  decompress: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
+  },
+
+  _decompress: function (length, resetValue, getNextValue) {
+    var dictionary = [],
+        next,
+        enlargeIn = 4,
+        dictSize = 4,
+        numBits = 3,
+        entry = "",
+        result = [],
+        i,
+        w,
+        bits, resb, maxpower, power,
+        c,
+        data = {val:getNextValue(0), position:resetValue, index:1};
+
+    for (i = 0; i < 3; i += 1) {
+      dictionary[i] = i;
+    }
+
+    bits = 0;
+    maxpower = Math.pow(2,2);
+    power=1;
+    while (power!=maxpower) {
+      resb = data.val & data.position;
+      data.position >>= 1;
+      if (data.position == 0) {
+        data.position = resetValue;
+        data.val = getNextValue(data.index++);
+      }
+      bits |= (resb>0 ? 1 : 0) * power;
+      power <<= 1;
+    }
+
+    switch (next = bits) {
+      case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 2:
+        return "";
+    }
+    dictionary[3] = c;
+    w = c;
+    result.push(c);
+    while (true) {
+      if (data.index > length) {
+        return "";
+      }
+
+      bits = 0;
+      maxpower = Math.pow(2,numBits);
+      power=1;
+      while (power!=maxpower) {
+        resb = data.val & data.position;
+        data.position >>= 1;
+        if (data.position == 0) {
+          data.position = resetValue;
+          data.val = getNextValue(data.index++);
+        }
+        bits |= (resb>0 ? 1 : 0) * power;
+        power <<= 1;
+      }
+
+      switch (c = bits) {
+        case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 2:
+          return result.join('');
+      }
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+      if (dictionary[c]) {
+        entry = dictionary[c];
+      } else {
+        if (c === dictSize) {
+          entry = w + w.charAt(0);
+        } else {
+          return null;
+        }
+      }
+      result.push(entry);
+
+      // Add w+entry[0] to the dictionary.
+      dictionary[dictSize++] = w + entry.charAt(0);
+      enlargeIn--;
+
+      w = entry;
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+    }
+  }
+};
+  return LZString;
+})();
+
+if (typeof define === 'function' && define.amd) {
+  define(function () { return LZString; });
+} else if( typeof module !== 'undefined' && module != null ) {
+  module.exports = LZString
+}
+
+},{}],406:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -12826,7 +15282,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],375:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13013,7 +15469,7 @@ function printObjectProperties(val, config, indentation, depth, refs, printer) {
   return result;
 }
 
-},{}],376:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 'use strict';
 
 var _ansiStyles = _interopRequireDefault(require('ansi-styles'));
@@ -13048,6 +15504,8 @@ function _interopRequireDefault(obj) {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable local/ban-types-eventually */
 const toString = Object.prototype.toString;
 const toISOString = Date.prototype.toISOString;
 const errorToString = Error.prototype.toString;
@@ -13570,12 +16028,11 @@ prettyFormat.plugins = {
   Immutable: _Immutable.default,
   ReactElement: _ReactElement.default,
   ReactTestComponent: _ReactTestComponent.default
-}; // eslint-disable-next-line no-redeclare
-
+};
 module.exports = prettyFormat;
 
-},{"./collections":375,"./plugins/AsymmetricMatcher":377,"./plugins/ConvertAnsi":378,"./plugins/DOMCollection":379,"./plugins/DOMElement":380,"./plugins/Immutable":381,"./plugins/ReactElement":382,"./plugins/ReactTestComponent":383,"ansi-styles":386}],377:[function(require,module,exports){
-(function (global){
+},{"./collections":407,"./plugins/AsymmetricMatcher":409,"./plugins/ConvertAnsi":410,"./plugins/DOMCollection":411,"./plugins/DOMElement":412,"./plugins/Immutable":413,"./plugins/ReactElement":414,"./plugins/ReactTestComponent":415,"ansi-styles":418}],409:[function(require,module,exports){
+(function (global){(function (){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13680,8 +16137,8 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../collections":375}],378:[function(require,module,exports){
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../collections":407}],410:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13779,7 +16236,7 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-},{"ansi-regex":65,"ansi-styles":386}],379:[function(require,module,exports){
+},{"ansi-regex":74,"ansi-styles":418}],411:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13795,6 +16252,8 @@ var _collections = require('../collections');
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable local/ban-types-eventually */
 const SPACE = ' ';
 const OBJECT_NAMES = ['DOMStringMap', 'NamedNodeMap'];
 const ARRAY_REGEXP = /^(HTML\w*Collection|NodeList)$/;
@@ -13859,7 +16318,7 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-},{"../collections":375}],380:[function(require,module,exports){
+},{"../collections":407}],412:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13881,17 +16340,38 @@ const COMMENT_NODE = 8;
 const FRAGMENT_NODE = 11;
 const ELEMENT_REGEXP = /^((HTML|SVG)\w*)?Element$/;
 
-const testNode = (nodeType, name) =>
-  (nodeType === ELEMENT_NODE && ELEMENT_REGEXP.test(name)) ||
-  (nodeType === TEXT_NODE && name === 'Text') ||
-  (nodeType === COMMENT_NODE && name === 'Comment') ||
-  (nodeType === FRAGMENT_NODE && name === 'DocumentFragment');
+const testNode = val => {
+  var _val$hasAttribute;
 
-const test = val =>
-  val &&
-  val.constructor &&
-  val.constructor.name &&
-  testNode(val.nodeType, val.constructor.name);
+  const constructorName = val.constructor.name;
+  const {nodeType, tagName} = val;
+  const isCustomElement =
+    (typeof tagName === 'string' && tagName.includes('-')) ||
+    ((_val$hasAttribute = val.hasAttribute) === null ||
+    _val$hasAttribute === void 0
+      ? void 0
+      : _val$hasAttribute.call(val, 'is'));
+  return (
+    (nodeType === ELEMENT_NODE &&
+      (ELEMENT_REGEXP.test(constructorName) || isCustomElement)) ||
+    (nodeType === TEXT_NODE && constructorName === 'Text') ||
+    (nodeType === COMMENT_NODE && constructorName === 'Comment') ||
+    (nodeType === FRAGMENT_NODE && constructorName === 'DocumentFragment')
+  );
+};
+
+const test = val => {
+  var _val$constructor;
+
+  return (
+    (val === null || val === void 0
+      ? void 0
+      : (_val$constructor = val.constructor) === null ||
+        _val$constructor === void 0
+      ? void 0
+      : _val$constructor.name) && testNode(val)
+  );
+};
 
 exports.test = test;
 
@@ -13965,7 +16445,7 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-},{"./lib/markup":385}],381:[function(require,module,exports){
+},{"./lib/markup":417}],413:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -14214,7 +16694,7 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-},{"../collections":375}],382:[function(require,module,exports){
+},{"../collections":407}],414:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -14382,8 +16862,8 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-},{"./lib/markup":385,"react-is":402}],383:[function(require,module,exports){
-(function (global){
+},{"./lib/markup":417,"react-is":434}],415:[function(require,module,exports){
+(function (global){(function (){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -14450,8 +16930,8 @@ const plugin = {
 var _default = plugin;
 exports.default = _default;
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/markup":385}],384:[function(require,module,exports){
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./lib/markup":417}],416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -14469,7 +16949,7 @@ function escapeHTML(str) {
   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-},{}],385:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -14618,7 +17098,7 @@ const printElementAsLeaf = (type, config) => {
 
 exports.printElementAsLeaf = printElementAsLeaf;
 
-},{"./escapeHTML":384}],386:[function(require,module,exports){
+},{"./escapeHTML":416}],418:[function(require,module,exports){
 'use strict';
 
 const wrapAnsi16 = (fn, offset) => (...args) => {
@@ -14783,7 +17263,7 @@ Object.defineProperty(module, 'exports', {
 	get: assembleStyles
 });
 
-},{"color-convert":388}],387:[function(require,module,exports){
+},{"color-convert":420}],419:[function(require,module,exports){
 /* MIT license */
 /* eslint-disable no-mixed-operators */
 const cssKeywords = require('color-name');
@@ -15624,7 +18104,7 @@ convert.rgb.gray = function (rgb) {
 	return [val / 255 * 100];
 };
 
-},{"color-name":390}],388:[function(require,module,exports){
+},{"color-name":422}],420:[function(require,module,exports){
 const conversions = require('./conversions');
 const route = require('./route');
 
@@ -15707,7 +18187,7 @@ models.forEach(fromModel => {
 
 module.exports = convert;
 
-},{"./conversions":387,"./route":389}],389:[function(require,module,exports){
+},{"./conversions":419,"./route":421}],421:[function(require,module,exports){
 const conversions = require('./conversions');
 
 /*
@@ -15806,7 +18286,7 @@ module.exports = function (fromModel) {
 };
 
 
-},{"./conversions":387}],390:[function(require,module,exports){
+},{"./conversions":419}],422:[function(require,module,exports){
 'use strict'
 
 module.exports = {
@@ -15960,7 +18440,7 @@ module.exports = {
 	"yellowgreen": [154, 205, 50]
 };
 
-},{}],391:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16146,8 +18626,8 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],392:[function(require,module,exports){
-(function (process){
+},{}],424:[function(require,module,exports){
+(function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -16251,8 +18731,8 @@ checkPropTypes.resetWarningCache = function() {
 
 module.exports = checkPropTypes;
 
-}).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":393,"_process":391}],393:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'))
+},{"./lib/ReactPropTypesSecret":425,"_process":423}],425:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -16266,9 +18746,9 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],394:[function(require,module,exports){
-(function (process){
-/** @license React v16.13.1
+},{}],426:[function(require,module,exports){
+(function (process){(function (){
+/** @license React v16.14.0
  * react-dom-test-utils.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -17749,9 +20229,9 @@ module.exports = testUtils;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391,"object-assign":374,"react":405,"react-dom":398,"scheduler":410}],395:[function(require,module,exports){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"_process":423,"object-assign":406,"react":437,"react-dom":430,"scheduler":442}],427:[function(require,module,exports){
+/** @license React v16.14.0
  * react-dom-test-utils.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -17787,9 +20267,9 @@ function oa(a,b){return function(c,e){var d=new W(a);g(d,e);Y.isDOMComponent(c)?
 ["mouseout","mouseOut"],["mouseover","mouseOver"],["mouseup","mouseUp"],["paste","paste"],["pause","pause"],["play","play"],["playing","playing"],["progress","progress"],["ratechange","rateChange"],["scroll","scroll"],["seeked","seeked"],["seeking","seeking"],["selectionchange","selectionChange"],["stalled","stalled"],["suspend","suspend"],["textInput","textInput"],["timeupdate","timeUpdate"],["toggle","toggle"],["touchcancel","touchCancel"],["touchend","touchEnd"],["touchmove","touchMove"],["touchstart",
 "touchStart"],[aa,"transitionEnd"],["volumechange","volumeChange"],["waiting","waiting"],["wheel","wheel"]].forEach(function(a){var b=a[1];Y.SimulateNative[b]=oa(b,a[0])});module.exports=Y.default||Y;
 
-},{"object-assign":374,"react":405,"react-dom":398,"scheduler":410}],396:[function(require,module,exports){
-(function (process){
-/** @license React v16.13.1
+},{"object-assign":406,"react":437,"react-dom":430,"scheduler":442}],428:[function(require,module,exports){
+(function (process){(function (){
+/** @license React v16.14.0
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -42359,7 +44839,7 @@ function injectIntoDevTools(devToolsConfig) {
     // Enables DevTools to append owner stacks to error messages in DEV mode.
     getCurrentFiber:  function () {
       return current;
-    } 
+    }
   }));
 }
 var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;
@@ -42711,7 +45191,7 @@ implementation) {
   };
 }
 
-var ReactVersion = '16.13.1';
+var ReactVersion = '16.14.0';
 
 setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
 setAttemptContinuousHydration(attemptContinuousHydration$1);
@@ -42802,9 +45282,9 @@ exports.version = ReactVersion;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391,"object-assign":374,"prop-types/checkPropTypes":392,"react":405,"scheduler":410,"scheduler/tracing":411}],397:[function(require,module,exports){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"_process":423,"object-assign":406,"prop-types/checkPropTypes":424,"react":437,"scheduler":442,"scheduler/tracing":443}],429:[function(require,module,exports){
+/** @license React v16.14.0
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -43091,14 +45571,14 @@ function ik(a,b,c,d,e){var f=c._reactRootContainer;if(f){var g=f._internalRoot;i
 wc=function(a){if(13===a.tag){var b=hg(Gg(),150,100);Ig(a,b);ek(a,b)}};xc=function(a){13===a.tag&&(Ig(a,3),ek(a,3))};yc=function(a){if(13===a.tag){var b=Gg();b=Hg(b,a,null);Ig(a,b);ek(a,b)}};
 za=function(a,b,c){switch(b){case "input":Cb(a,c);b=c.name;if("radio"===c.type&&null!=b){for(c=a;c.parentNode;)c=c.parentNode;c=c.querySelectorAll("input[name="+JSON.stringify(""+b)+'][type="radio"]');for(b=0;b<c.length;b++){var d=c[b];if(d!==a&&d.form===a.form){var e=Qd(d);if(!e)throw Error(u(90));yb(d);Cb(d,e)}}}break;case "textarea":Kb(a,c);break;case "select":b=c.value,null!=b&&Hb(a,!!c.multiple,b,!1)}};Fa=Mj;
 Ga=function(a,b,c,d,e){var f=W;W|=4;try{return cg(98,a.bind(null,b,c,d,e))}finally{W=f,W===V&&gg()}};Ha=function(){(W&(1|fj|gj))===V&&(Lj(),Dj())};Ia=function(a,b){var c=W;W|=2;try{return a(b)}finally{W=c,W===V&&gg()}};function kk(a,b){var c=2<arguments.length&&void 0!==arguments[2]?arguments[2]:null;if(!gk(b))throw Error(u(200));return jk(a,b,null,c)}var lk={Events:[Nc,Pd,Qd,xa,ta,Xd,function(a){jc(a,Wd)},Da,Ea,id,mc,Dj,{current:!1}]};
-(function(a){var b=a.findFiberByHostInstance;return Yj(n({},a,{overrideHookState:null,overrideProps:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:Wa.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hc(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null},findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null}))})({findFiberByHostInstance:tc,bundleType:0,version:"16.13.1",
+(function(a){var b=a.findFiberByHostInstance;return Yj(n({},a,{overrideHookState:null,overrideProps:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:Wa.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hc(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null},findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null}))})({findFiberByHostInstance:tc,bundleType:0,version:"16.14.0",
 rendererPackageName:"react-dom"});exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=lk;exports.createPortal=kk;exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return a;var b=a._reactInternalFiber;if(void 0===b){if("function"===typeof a.render)throw Error(u(188));throw Error(u(268,Object.keys(a)));}a=hc(b);a=null===a?null:a.stateNode;return a};
 exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W|=1;try{return cg(99,a.bind(null,b))}finally{W=c,gg()}};exports.hydrate=function(a,b,c){if(!gk(b))throw Error(u(200));return ik(null,a,b,!0,c)};exports.render=function(a,b,c){if(!gk(b))throw Error(u(200));return ik(null,a,b,!1,c)};
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
-exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.13.1";
+exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.14.0";
 
-},{"object-assign":374,"react":405,"scheduler":410}],398:[function(require,module,exports){
-(function (process){
+},{"object-assign":406,"react":437,"scheduler":442}],430:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 function checkDCE() {
@@ -43138,9 +45618,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/react-dom.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":396,"./cjs/react-dom.production.min.js":397,"_process":391}],399:[function(require,module,exports){
-(function (process){
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/react-dom.development.js":428,"./cjs/react-dom.production.min.js":429,"_process":423}],431:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -43149,10 +45629,10 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/react-dom-test-utils.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/react-dom-test-utils.development.js":394,"./cjs/react-dom-test-utils.production.min.js":395,"_process":391}],400:[function(require,module,exports){
-(function (process){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/react-dom-test-utils.development.js":426,"./cjs/react-dom-test-utils.production.min.js":427,"_process":423}],432:[function(require,module,exports){
+(function (process){(function (){
+/** @license React v17.0.1
  * react-is.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -43163,39 +45643,81 @@ if (process.env.NODE_ENV === 'production') {
 
 'use strict';
 
-
-
 if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
+// ATTENTION
+// When adding new symbols to this file,
+// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
-var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-// (unstable) APIs that have been removed. Can we remove the symbols?
+var REACT_ELEMENT_TYPE = 0xeac7;
+var REACT_PORTAL_TYPE = 0xeaca;
+var REACT_FRAGMENT_TYPE = 0xeacb;
+var REACT_STRICT_MODE_TYPE = 0xeacc;
+var REACT_PROFILER_TYPE = 0xead2;
+var REACT_PROVIDER_TYPE = 0xeacd;
+var REACT_CONTEXT_TYPE = 0xeace;
+var REACT_FORWARD_REF_TYPE = 0xead0;
+var REACT_SUSPENSE_TYPE = 0xead1;
+var REACT_SUSPENSE_LIST_TYPE = 0xead8;
+var REACT_MEMO_TYPE = 0xead3;
+var REACT_LAZY_TYPE = 0xead4;
+var REACT_BLOCK_TYPE = 0xead9;
+var REACT_SERVER_BLOCK_TYPE = 0xeada;
+var REACT_FUNDAMENTAL_TYPE = 0xead5;
+var REACT_SCOPE_TYPE = 0xead7;
+var REACT_OPAQUE_ID_TYPE = 0xeae0;
+var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
+var REACT_OFFSCREEN_TYPE = 0xeae2;
+var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
 
-var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+if (typeof Symbol === 'function' && Symbol.for) {
+  var symbolFor = Symbol.for;
+  REACT_ELEMENT_TYPE = symbolFor('react.element');
+  REACT_PORTAL_TYPE = symbolFor('react.portal');
+  REACT_FRAGMENT_TYPE = symbolFor('react.fragment');
+  REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
+  REACT_PROFILER_TYPE = symbolFor('react.profiler');
+  REACT_PROVIDER_TYPE = symbolFor('react.provider');
+  REACT_CONTEXT_TYPE = symbolFor('react.context');
+  REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
+  REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
+  REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
+  REACT_MEMO_TYPE = symbolFor('react.memo');
+  REACT_LAZY_TYPE = symbolFor('react.lazy');
+  REACT_BLOCK_TYPE = symbolFor('react.block');
+  REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
+  REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
+  REACT_SCOPE_TYPE = symbolFor('react.scope');
+  REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
+  REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
+  REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
+  REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
+}
+
+// Filter certain DOM attributes (e.g. src, href) if their values are empty strings.
+
+var enableScopeAPI = false; // Experimental Create Event Handle API.
 
 function isValidElementType(type) {
-  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+  if (typeof type === 'string' || typeof type === 'function') {
+    return true;
+  } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
+
+
+  if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI ) {
+    return true;
+  }
+
+  if (typeof type === 'object' && type !== null) {
+    if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function typeOf(object) {
@@ -43207,12 +45729,11 @@ function typeOf(object) {
         var type = object.type;
 
         switch (type) {
-          case REACT_ASYNC_MODE_TYPE:
-          case REACT_CONCURRENT_MODE_TYPE:
           case REACT_FRAGMENT_TYPE:
           case REACT_PROFILER_TYPE:
           case REACT_STRICT_MODE_TYPE:
           case REACT_SUSPENSE_TYPE:
+          case REACT_SUSPENSE_LIST_TYPE:
             return type;
 
           default:
@@ -43238,10 +45759,7 @@ function typeOf(object) {
   }
 
   return undefined;
-} // AsyncMode is deprecated along with isAsyncMode
-
-var AsyncMode = REACT_ASYNC_MODE_TYPE;
-var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+}
 var ContextConsumer = REACT_CONTEXT_TYPE;
 var ContextProvider = REACT_PROVIDER_TYPE;
 var Element = REACT_ELEMENT_TYPE;
@@ -43253,21 +45771,30 @@ var Portal = REACT_PORTAL_TYPE;
 var Profiler = REACT_PROFILER_TYPE;
 var StrictMode = REACT_STRICT_MODE_TYPE;
 var Suspense = REACT_SUSPENSE_TYPE;
-var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+var hasWarnedAboutDeprecatedIsAsyncMode = false;
+var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
 
 function isAsyncMode(object) {
   {
     if (!hasWarnedAboutDeprecatedIsAsyncMode) {
       hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
 
-      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
     }
   }
 
-  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+  return false;
 }
 function isConcurrentMode(object) {
-  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+  {
+    if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
+      hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
+    }
+  }
+
+  return false;
 }
 function isContextConsumer(object) {
   return typeOf(object) === REACT_CONTEXT_TYPE;
@@ -43303,8 +45830,6 @@ function isSuspense(object) {
   return typeOf(object) === REACT_SUSPENSE_TYPE;
 }
 
-exports.AsyncMode = AsyncMode;
-exports.ConcurrentMode = ConcurrentMode;
 exports.ContextConsumer = ContextConsumer;
 exports.ContextProvider = ContextProvider;
 exports.Element = Element;
@@ -43334,9 +45859,9 @@ exports.typeOf = typeOf;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391}],401:[function(require,module,exports){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"_process":423}],433:[function(require,module,exports){
+/** @license React v17.0.1
  * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -43344,16 +45869,15 @@ exports.typeOf = typeOf;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+'use strict';var b=60103,c=60106,d=60107,e=60108,f=60114,g=60109,h=60110,k=60112,l=60113,m=60120,n=60115,p=60116,q=60121,r=60122,u=60117,v=60129,w=60131;
+if("function"===typeof Symbol&&Symbol.for){var x=Symbol.for;b=x("react.element");c=x("react.portal");d=x("react.fragment");e=x("react.strict_mode");f=x("react.profiler");g=x("react.provider");h=x("react.context");k=x("react.forward_ref");l=x("react.suspense");m=x("react.suspense_list");n=x("react.memo");p=x("react.lazy");q=x("react.block");r=x("react.server.block");u=x("react.fundamental");v=x("react.debug_trace_mode");w=x("react.legacy_hidden")}
+function y(a){if("object"===typeof a&&null!==a){var t=a.$$typeof;switch(t){case b:switch(a=a.type,a){case d:case f:case e:case l:case m:return a;default:switch(a=a&&a.$$typeof,a){case h:case k:case p:case n:case g:return a;default:return t}}case c:return t}}}var z=g,A=b,B=k,C=d,D=p,E=n,F=c,G=f,H=e,I=l;exports.ContextConsumer=h;exports.ContextProvider=z;exports.Element=A;exports.ForwardRef=B;exports.Fragment=C;exports.Lazy=D;exports.Memo=E;exports.Portal=F;exports.Profiler=G;exports.StrictMode=H;
+exports.Suspense=I;exports.isAsyncMode=function(){return!1};exports.isConcurrentMode=function(){return!1};exports.isContextConsumer=function(a){return y(a)===h};exports.isContextProvider=function(a){return y(a)===g};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===b};exports.isForwardRef=function(a){return y(a)===k};exports.isFragment=function(a){return y(a)===d};exports.isLazy=function(a){return y(a)===p};exports.isMemo=function(a){return y(a)===n};
+exports.isPortal=function(a){return y(a)===c};exports.isProfiler=function(a){return y(a)===f};exports.isStrictMode=function(a){return y(a)===e};exports.isSuspense=function(a){return y(a)===l};exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===d||a===f||a===v||a===e||a===l||a===m||a===w||"object"===typeof a&&null!==a&&(a.$$typeof===p||a.$$typeof===n||a.$$typeof===g||a.$$typeof===h||a.$$typeof===k||a.$$typeof===u||a.$$typeof===q||a[0]===r)?!0:!1};
+exports.typeOf=y;
 
-'use strict';var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
-Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
-function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;exports.Fragment=e;exports.Lazy=t;exports.Memo=r;exports.Portal=d;
-exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;exports.isAsyncMode=function(a){return A(a)||z(a)===l};exports.isConcurrentMode=A;exports.isContextConsumer=function(a){return z(a)===k};exports.isContextProvider=function(a){return z(a)===h};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return z(a)===n};exports.isFragment=function(a){return z(a)===e};exports.isLazy=function(a){return z(a)===t};
-exports.isMemo=function(a){return z(a)===r};exports.isPortal=function(a){return z(a)===d};exports.isProfiler=function(a){return z(a)===g};exports.isStrictMode=function(a){return z(a)===f};exports.isSuspense=function(a){return z(a)===p};
-exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};exports.typeOf=z;
-
-},{}],402:[function(require,module,exports){
-(function (process){
+},{}],434:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -43362,10 +45886,10 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/react-is.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/react-is.development.js":400,"./cjs/react-is.production.min.js":401,"_process":391}],403:[function(require,module,exports){
-(function (process){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/react-is.development.js":432,"./cjs/react-is.production.min.js":433,"_process":423}],435:[function(require,module,exports){
+(function (process){(function (){
+/** @license React v16.14.0
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -43385,7 +45909,7 @@ if (process.env.NODE_ENV !== "production") {
 var _assign = require('object-assign');
 var checkPropTypes = require('prop-types/checkPropTypes');
 
-var ReactVersion = '16.13.1';
+var ReactVersion = '16.14.0';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
@@ -45278,9 +47802,9 @@ exports.version = ReactVersion;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391,"object-assign":374,"prop-types/checkPropTypes":392}],404:[function(require,module,exports){
-/** @license React v16.13.1
+}).call(this)}).call(this,require('_process'))
+},{"_process":423,"object-assign":406,"prop-types/checkPropTypes":424}],436:[function(require,module,exports){
+/** @license React v16.14.0
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -45304,10 +47828,10 @@ exports.Component=F;exports.Fragment=r;exports.Profiler=u;exports.PureComponent=
 exports.cloneElement=function(a,b,c){if(null===a||void 0===a)throw Error(C(267,a));var e=l({},a.props),d=a.key,g=a.ref,k=a._owner;if(null!=b){void 0!==b.ref&&(g=b.ref,k=J.current);void 0!==b.key&&(d=""+b.key);if(a.type&&a.type.defaultProps)var f=a.type.defaultProps;for(h in b)K.call(b,h)&&!L.hasOwnProperty(h)&&(e[h]=void 0===b[h]&&void 0!==f?f[h]:b[h])}var h=arguments.length-2;if(1===h)e.children=c;else if(1<h){f=Array(h);for(var m=0;m<h;m++)f[m]=arguments[m+2];e.children=f}return{$$typeof:p,type:a.type,
 key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(b=null);a={$$typeof:w,_calculateChangedBits:b,_currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null};a.Provider={$$typeof:v,_context:a};return a.Consumer=a};exports.createElement=M;exports.createFactory=function(a){var b=M.bind(null,a);b.type=a;return b};exports.createRef=function(){return{current:null}};exports.forwardRef=function(a){return{$$typeof:x,render:a}};exports.isValidElement=O;
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
-exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.13.1";
+exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.14.0";
 
-},{"object-assign":374}],405:[function(require,module,exports){
-(function (process){
+},{"object-assign":406}],437:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -45316,9 +47840,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/react.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/react.development.js":403,"./cjs/react.production.min.js":404,"_process":391}],406:[function(require,module,exports){
-(function (process){
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/react.development.js":435,"./cjs/react.production.min.js":436,"_process":423}],438:[function(require,module,exports){
+(function (process){(function (){
 /** @license React v0.19.1
  * scheduler-tracing.development.js
  *
@@ -45669,8 +48193,8 @@ exports.unstable_wrap = unstable_wrap;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391}],407:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'))
+},{"_process":423}],439:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler-tracing.production.min.js
  *
@@ -45682,8 +48206,8 @@ exports.unstable_wrap = unstable_wrap;
 
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],408:[function(require,module,exports){
-(function (process){
+},{}],440:[function(require,module,exports){
+(function (process){(function (){
 /** @license React v0.19.1
  * scheduler.development.js
  *
@@ -46543,8 +49067,8 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
   })();
 }
 
-}).call(this,require('_process'))
-},{"_process":391}],409:[function(require,module,exports){
+}).call(this)}).call(this,require('_process'))
+},{"_process":423}],441:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -46567,8 +49091,8 @@ exports.unstable_getCurrentPriorityLevel=function(){return R};exports.unstable_g
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a)}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c}}};
 
-},{}],410:[function(require,module,exports){
-(function (process){
+},{}],442:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -46577,9 +49101,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/scheduler.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":408,"./cjs/scheduler.production.min.js":409,"_process":391}],411:[function(require,module,exports){
-(function (process){
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/scheduler.development.js":440,"./cjs/scheduler.production.min.js":441,"_process":423}],443:[function(require,module,exports){
+(function (process){(function (){
 'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -46588,5 +49112,5 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = require('./cjs/scheduler-tracing.development.js');
 }
 
-}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":406,"./cjs/scheduler-tracing.production.min.js":407,"_process":391}]},{},[1]);
+}).call(this)}).call(this,require('_process'))
+},{"./cjs/scheduler-tracing.development.js":438,"./cjs/scheduler-tracing.production.min.js":439,"_process":423}]},{},[1]);
