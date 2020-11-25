@@ -94,13 +94,6 @@ function ModifierList(props)
          else derivedValues.flatTotal += rowArray[i].getRawTotal();  //could be flat or free. if free the total will be 0
       }
    };
-   /**@returns {boolean} true if any modifier in the list doesHaveAutoTotal*/
-   this.hasAutoTotal = function ()
-   {
-      for (var i = 0; i < rowArray.length; i++)
-      {if (rowArray[i].doesHaveAutoTotal()) return true;}
-      return false;
-   };
    //endregion public functions
 
    //region 'private' functions section. Although all public none of these should be called from outside of this object
@@ -212,15 +205,17 @@ figure out architecture:
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?
-add save to state conversion
-pull power row state up to list
-nail down power row
 hook up power html
    onChange
+add save to state conversion
+nail down power row
 hook up more for mod/power
    setState
    replace sanitizeRows with duplicate check
    sort mods on add
 test all
 there's lots of tasks
+
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
 */

@@ -250,7 +250,7 @@ everything else below is alphabetical
 //Main must be created after all functions have been defined
 Main = new MainObject();
 Object.freeze(Main);
-Main.clear();  //in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
+//clear moved to constructor
 document.getElementById('ruleset').value = Main.getLatestRuleset().toString();
 document.getElementById('latest-ruleset').innerHTML = Main.getLatestRuleset().toString();
 </script>

@@ -99,7 +99,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           state: state
         }));
 
-        var rowDerivedValues = _this._rowArray.getDerivedValues();
+        var rowDerivedValues = _this._rowArray.getDerivedValues(); //TODO: it's stupid that main use has several useless args
+
 
         var loadLocation = {
           toString: function toString() {
@@ -247,5 +248,5 @@ function createPowerList(callback, sectionName) {
   ReactDOM.render( /*#__PURE__*/React.createElement(PowerListAgnostic, {
     callback: callback,
     sectionName: sectionName
-  }), document.getElementById('power-section'));
+  }), document.getElementById(sectionName + '-section'));
 }

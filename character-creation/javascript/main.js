@@ -663,22 +663,52 @@ function MainObject()
          Offense: []
       };
    };
+   this._postCreation=function()
+   {
+      //only possible after all react stuff exist
+      if (undefined !== this.powerSection
+         && undefined !== this.equipmentSection
+         && undefined !== this.advantageSection)
+      {
+         /*in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
+         this also generates offense*/
+         this.clear();
+      }
+   };
    this._constructor=function()
    {
-       var self = this;  //required to pass the this pointer down
-       Data.change(activeRuleset);  //needed to initialize some data
-       this.abilitySection = new AbilityList();
-       //give it the section name and the rest is the same
-       createPowerList(function(newThing){self.powerSection = newThing;}, 'power');
-       createPowerList(function(newThing){self.equipmentSection = newThing;}, 'equipment');
-       //Object.freeze(this.powerSection);  //TODO: what should and shouldn't be frozen? Main and data only (and commons etc?). freeze isn't deep. maybe screw it because tests
-       //TODO: define the naming conventions for html elements.
-       //I'm thinking: user input: TitleCase, output: snake_case, else: two words
-       //but why not make them all TitleCase? Power row.generate uses 'Main.'+sectionName+'Section' for onchange
-       createAdvantageList(function(newThing){self.advantageSection = newThing;});
-       this.skillSection = new SkillList();
-       this.defenseSection = new DefenseList();
-       this.updateOffense();  //for the default damage
+      var self = this;  //required to pass the this pointer down
+      Data.change(activeRuleset);  //needed to initialize some data
+      this.abilitySection = new AbilityList();
+
+      //give it the section name and the rest is the same
+      var callBack = function (newThing)
+      {
+         self.powerSection = newThing;
+         self._postCreation();
+      };
+      createPowerList(callBack, 'power');
+      callBack = function (newThing)
+      {
+         self.equipmentSection = newThing;
+         self._postCreation();
+      };
+      createPowerList(callBack, 'equipment');
+
+      //Object.freeze(this.powerSection);  //TODO: what should and shouldn't be frozen?
+      // Main and data only (and commons etc?). freeze isn't deep. maybe screw it because tests
+      // TODO: define the naming conventions for html elements.
+      // I'm thinking: user input: TitleCase, output: snake_case, else: two words but why not make them all TitleCase?
+      // Power row.generate uses 'Main.'+sectionName+'Section' for onchange
+
+      createAdvantageList(function (newThing)
+      {
+         self.advantageSection = newThing;
+         self._postCreation();
+      });
+      this.skillSection = new SkillList();
+      this.defenseSection = new DefenseList();
+      //don't need to update since clear is called next
    };
    //endregion 'private' functions
 

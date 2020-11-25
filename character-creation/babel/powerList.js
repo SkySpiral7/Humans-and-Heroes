@@ -73,6 +73,7 @@ class PowerListAgnostic extends React.Component
             state: state
          }));
          const rowDerivedValues = this._rowArray.getDerivedValues();
+         //TODO: it's stupid that main use has several useless args
          const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
          rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
          rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
@@ -193,6 +194,6 @@ function createPowerList(callback, sectionName)
 {
    ReactDOM.render(
       <PowerListAgnostic callback={callback} sectionName={sectionName} />,
-      document.getElementById('power-section')
+      document.getElementById(sectionName + '-section')
    );
 }

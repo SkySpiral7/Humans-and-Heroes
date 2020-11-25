@@ -8,7 +8,7 @@
  */
 
 function AdvantageRowHtml(props) {
-  //TODO: combine all 3 by just passing in ad row object
+  //TODO: combine all 3 by just passing in ad row object. would need blank check
   var state = props.state,
       derivedValues = props.derivedValues,
       key = props.keyCopy;

@@ -9,7 +9,7 @@
  */
 function AdvantageRowHtml(props)
 {
-   //TODO: combine all 3 by just passing in ad row object
+   //TODO: combine all 3 by just passing in ad row object. would need blank check
    const state = props.state, derivedValues = props.derivedValues, key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
    let nameElement = null;
