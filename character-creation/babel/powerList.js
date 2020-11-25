@@ -26,6 +26,8 @@ class PowerListAgnostic extends React.Component
          attackEffectRanks: new MapDefault({}, 0)
       };
       this._blankKey = MainObject.generateKey();
+      //this._prerender();
+      props.callback(this);
    };
 
    //region Single line function section

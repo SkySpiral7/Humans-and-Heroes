@@ -76,9 +76,6 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
-      //if coming from blank row's onChange then grab the added name from UI
-      if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + _this._blankKey);
-
       var advantageObject = _this._addRowNoPush(newName);
 
       _this._rowArray.push(advantageObject);
@@ -444,18 +441,16 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/React.createElement(AdvantageRowHtml, {
           key: advantageObject.getKey(),
           keyCopy: advantageObject.getKey(),
-          state: advantageObject.getState(),
-          derivedValues: advantageObject.getDerivedValues(),
-          generateGodHood: generateGodHood
+          generateGodHood: generateGodHood,
+          advantageRow: advantageObject
         });
-      }); //derivedValues is undefined and unused for blank
-
+      });
 
       elementArray.push( /*#__PURE__*/React.createElement(AdvantageRowHtml, {
         key: _this._blankKey,
         keyCopy: _this._blankKey,
-        state: {},
-        generateGodHood: generateGodHood
+        generateGodHood: generateGodHood,
+        advantageRow: undefined
       }));
       return elementArray;
     });

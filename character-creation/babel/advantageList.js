@@ -45,8 +45,6 @@ class AdvantageList extends React.Component
    /**Creates a new row at the end of the array*/
    addRow = (newName) =>
    {
-      //if coming from blank row's onChange then grab the added name from UI
-      if (undefined === newName) newName = SelectUtil.getTextById('advantageChoices' + this._blankKey);
       const advantageObject = this._addRowNoPush(newName);
 
       this._rowArray.push(advantageObject);
@@ -416,11 +414,12 @@ class AdvantageList extends React.Component
       const elementArray = this._rowArray.map(advantageObject =>
       {
          return (<AdvantageRowHtml key={advantageObject.getKey()} keyCopy={advantageObject.getKey()}
-                                   state={advantageObject.getState()} derivedValues={advantageObject.getDerivedValues()}
-                                   generateGodHood={generateGodHood} />);
+                                   generateGodHood={generateGodHood}
+                                   advantageRow={advantageObject} />);
       });
-      //derivedValues is undefined and unused for blank
-      elementArray.push(<AdvantageRowHtml key={this._blankKey} keyCopy={this._blankKey} state={{}} generateGodHood={generateGodHood} />);
+      elementArray.push(<AdvantageRowHtml key={this._blankKey} keyCopy={this._blankKey}
+                                          generateGodHood={generateGodHood}
+                                          advantageRow={undefined} />);
       return elementArray;
    };
    //endregion private functions

@@ -238,7 +238,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       protectionRankTotal: null,
       attackEffectRanks: new MapDefault({}, 0)
     };
-    _this._blankKey = MainObject.generateKey();
+    _this._blankKey = MainObject.generateKey(); //this._prerender();
+
+    props.callback(_assertThisInitialized(_this));
     return _this;
   }
 

@@ -663,12 +663,13 @@ function MainObject()
          Offense: []
       };
    };
-   this._postCreation=function()
+   this.postCreation=function()
    {
       //only possible after all react stuff exist
       if (undefined !== this.powerSection
          && undefined !== this.equipmentSection
-         && undefined !== this.advantageSection)
+         && undefined !== this.advantageSection
+         && undefined !== Main)
       {
          /*in case the browser has cached some fields (wrong totals and onChange won't work) all other fields can stay as is
          this also generates offense*/
@@ -685,13 +686,13 @@ function MainObject()
       var callBack = function (newThing)
       {
          self.powerSection = newThing;
-         self._postCreation();
+         self.postCreation();
       };
       createPowerList(callBack, 'power');
       callBack = function (newThing)
       {
          self.equipmentSection = newThing;
-         self._postCreation();
+         self.postCreation();
       };
       createPowerList(callBack, 'equipment');
 
@@ -704,7 +705,7 @@ function MainObject()
       createAdvantageList(function (newThing)
       {
          self.advantageSection = newThing;
-         self._postCreation();
+         self.postCreation();
       });
       this.skillSection = new SkillList();
       this.defenseSection = new DefenseList();

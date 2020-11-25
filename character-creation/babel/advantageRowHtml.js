@@ -9,15 +9,19 @@
  */
 function AdvantageRowHtml(props)
 {
-   //TODO: combine all 3 by just passing in ad row object. would need blank check
-   const state = props.state, derivedValues = props.derivedValues, key = props.keyCopy;
+   const key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
+
+   const state = (undefined !== props.advantageRow)
+      ? props.advantageRow.getState()
+      : {name: undefined};
+
    let nameElement = null;
    let costElement = null;
    let textElement = null;
    let costPerRankElement = null;
 
-   if (state.name === 'Equipment') nameElement = <div className="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>;
+   if ('Equipment' === state.name) nameElement = <div className="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>;
    else
    {
       const options = Data.Advantage.names
@@ -32,14 +36,18 @@ function AdvantageRowHtml(props)
       let onChange = null;
       if (undefined === state.name)  //if blank
       {
-         onChange = () => {Main.advantageSection.addRow();};
+         onChange = (event) =>
+         {
+            const nameGiven = event.target.value;
+            Main.advantageSection.addRow(nameGiven);
+         };
       }
       else
       {
-         onChange = () =>
+         onChange = (event) =>
          {
-            Main.advantageSection.getRowByKey(key)
-            .select();
+            const nameGiven = event.target.value;
+            props.advantageRow.select(nameGiven);
          };
       }
       nameElement = (<div className="col-12 col-sm-6 col-lg-4 col-xl-auto">
@@ -49,27 +57,30 @@ function AdvantageRowHtml(props)
             </select></div>
       );
    }
+
    if (undefined !== state.name)  //done for blank
    {
+      const derivedValues = props.advantageRow.getDerivedValues();
+
       if ('Equipment' === state.name) costElement =
          <div className="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost {state.rank}</div>;
       //state.rank is always defined but only show this if max rank is > 1
       else if (derivedValues.hasRank) costElement = <label className="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank{' '}
          <input type="text" size="1" id={'advantageRank' + key}
-                onChange={() =>
+                onChange={(event) =>
                 {
-                   Main.advantageSection.getRowByKey(key)
-                   .changeRank();
+                   const rankGiven = event.target.value;
+                   props.advantageRow.changeRank(rankGiven);
                 }} value={state.rank} /></label>;
 
       if (undefined !== state.text)
       {
          textElement = (<div className="col-12 col-sm-6">
             <input type="text" id={'advantageText' + key}
-                   onChange={() =>
+                   onChange={(event) =>
                    {
-                      Main.advantageSection.getRowByKey(key)
-                      .changeText();
+                      const textGiven = event.target.value;
+                      props.advantageRow.changeText(textGiven);
                    }} value={state.text} style={{width: '100%'}} /></div>);
       }
       if (derivedValues.costPerRank > 1) costPerRankElement = <div className="col-auto">=&nbsp;{derivedValues.total}</div>;

@@ -8,16 +8,16 @@
  */
 
 function AdvantageRowHtml(props) {
-  //TODO: combine all 3 by just passing in ad row object. would need blank check
-  var state = props.state,
-      derivedValues = props.derivedValues,
-      key = props.keyCopy;
+  var key = props.keyCopy;
   var displayGodhood = props.generateGodHood;
+  var state = undefined !== props.advantageRow ? props.advantageRow.getState() : {
+    name: undefined
+  };
   var nameElement = null;
   var costElement = null;
   var textElement = null;
   var costPerRankElement = null;
-  if (state.name === 'Equipment') nameElement = /*#__PURE__*/React.createElement("div", {
+  if ('Equipment' === state.name) nameElement = /*#__PURE__*/React.createElement("div", {
     className: "col-6 col-lg-4 col-xl-auto"
   }, /*#__PURE__*/React.createElement("b", null, "Equipment"));else {
     var options = Data.Advantage.names.filter(function (name) {
@@ -36,12 +36,14 @@ function AdvantageRowHtml(props) {
 
     if (undefined === state.name) //if blank
       {
-        onChange = function onChange() {
-          Main.advantageSection.addRow();
+        onChange = function onChange(event) {
+          var nameGiven = event.target.value;
+          Main.advantageSection.addRow(nameGiven);
         };
       } else {
-      onChange = function onChange() {
-        Main.advantageSection.getRowByKey(key).select();
+      onChange = function onChange(event) {
+        var nameGiven = event.target.value;
+        props.advantageRow.select(nameGiven);
       };
     }
 
@@ -56,6 +58,7 @@ function AdvantageRowHtml(props) {
 
   if (undefined !== state.name) //done for blank
     {
+      var derivedValues = props.advantageRow.getDerivedValues();
       if ('Equipment' === state.name) costElement = /*#__PURE__*/React.createElement("div", {
         className: "col-6 col-sm-3 col-lg-2 col-xl-auto"
       }, "Cost ", state.rank); //state.rank is always defined but only show this if max rank is > 1
@@ -65,8 +68,9 @@ function AdvantageRowHtml(props) {
           type: "text",
           size: "1",
           id: 'advantageRank' + key,
-          onChange: function onChange() {
-            Main.advantageSection.getRowByKey(key).changeRank();
+          onChange: function onChange(event) {
+            var rankGiven = event.target.value;
+            props.advantageRow.changeRank(rankGiven);
           },
           value: state.rank
         }));
@@ -77,8 +81,9 @@ function AdvantageRowHtml(props) {
         }, /*#__PURE__*/React.createElement("input", {
           type: "text",
           id: 'advantageText' + key,
-          onChange: function onChange() {
-            Main.advantageSection.getRowByKey(key).changeText();
+          onChange: function onChange(event) {
+            var textGiven = event.target.value;
+            props.advantageRow.changeText(textGiven);
           },
           value: state.text,
           style: {

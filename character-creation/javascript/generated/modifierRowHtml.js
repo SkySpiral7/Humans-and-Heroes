@@ -5,9 +5,7 @@
 function ModifierRowHtml(props) {
   var sectionName = props.powerRow.getSectionName();
   var powerKey = props.powerRow.getKey();
-  var key = props.keyCopy; //TODO: refactor to pass in modifierList and use getter for power
-
-  var modifierList = props.powerRow.getModifierList();
+  var key = props.keyCopy;
 
   function idFor(elementLabel) {
     return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
