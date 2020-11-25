@@ -42,39 +42,6 @@ class AdvantageList extends React.Component
    //endregion Single line function
 
    //region public functions
-   /**Creates a new row at the end of the array*/
-   addRow = (newName) =>
-   {
-      const advantageObject = this._addRowNoPush(newName);
-
-      this._rowArray.push(advantageObject);
-      if (this._hasDuplicate())  //requires duplicate to be in this.rowArray
-      {
-         this._rowArray.pop();
-         this.forceUpdate();  //to undo the DOM value
-      }
-      else
-      {
-         this._prerender();
-         this.setState(state =>
-         {
-            state.it.push(advantageObject.getState());
-            return state;
-         });
-      }
-
-      if (false && this._hasDuplicate())
-      {
-         //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
-         this._rowArray.pop();
-         this._prerender();
-         this.setState(state =>
-         {
-            state.it.pop();
-            return state;
-         });
-      }
-   };
    /**This calculates the required rank of the equipment advantage and adds or removes the advantage row accordingly*/
    calculateEquipmentRank = (equipTotal) =>
    {
@@ -265,22 +232,23 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-   updateNameByKey = (updatedKey) =>
+   /**Onchange function for selecting an advantage*/
+   updateNameByKey = (newName, updatedKey) =>
    {
       if (updatedKey === this._blankKey)
       {
-         throw new AssertionError('Can\'t update name of blank row ' + updatedKey);
+         this._addRow(newName);
+         return;
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      const newName = this._rowArray[updatedIndex].getName();
-
-      if (undefined === newName || this._hasDuplicate())
+      if (!Data.Advantage.names.contains(newName) || this._hasDuplicate())
       {
          this._removeRow(updatedIndex);
       }
       else
       {
+         this._rowArray[updatedIndex].setAdvantage(newName);
          this._prerender();
          this.setState(state =>
          {
@@ -289,7 +257,8 @@ class AdvantageList extends React.Component
          });
       }
    };
-   updateRankByKey = (updatedKey) =>
+   /**Onchange function for changing the rank*/
+   updateRankByKey = (newRank, updatedKey) =>
    {
       if (updatedKey === this._blankKey)
       {
@@ -297,7 +266,10 @@ class AdvantageList extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      const newRank = this._rowArray[updatedIndex].getRank();
+      this._rowArray[updatedIndex].setRank(newRank);
+      //setRank will sanitize value
+      newRank = this._rowArray[updatedIndex].getRank();
+
       this._prerender();
       this.setState(state =>
       {
@@ -305,7 +277,8 @@ class AdvantageList extends React.Component
          return state;
       });
    };
-   updateTextByKey = (updatedKey) =>
+   /**Onchange function for changing the text*/
+   updateTextByKey = (newText, updatedKey) =>
    {
       if (updatedKey === this._blankKey)
       {
@@ -313,7 +286,10 @@ class AdvantageList extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      const newText = this._rowArray[updatedIndex].getText();
+      this._rowArray[updatedIndex].setText(newText);
+      //setText will sanitize value
+      newText = this._rowArray[updatedIndex].getText();
+
       if (this._hasDuplicate())
       {
          this._removeRow(updatedIndex);
@@ -331,6 +307,39 @@ class AdvantageList extends React.Component
    //endregion public functions
 
    //region private functions
+   /**Creates a new row at the end of the array*/
+   _addRow = (newName) =>
+   {
+      const advantageObject = this._addRowNoPush(newName);
+
+      this._rowArray.push(advantageObject);
+      if (this._hasDuplicate())  //requires duplicate to be in this.rowArray
+      {
+         this._rowArray.pop();
+         this.forceUpdate();  //to undo the DOM value
+      }
+      else
+      {
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it.push(advantageObject.getState());
+            return state;
+         });
+      }
+
+      if (false && this._hasDuplicate())
+      {
+         //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
+         this._rowArray.pop();
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it.pop();
+            return state;
+         });
+      }
+   };
    /**Converts blank row into AdvantageObject but doesn't update rowArray or state*/
    _addRowNoPush = (newName) =>
    {

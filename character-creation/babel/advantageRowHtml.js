@@ -33,23 +33,11 @@ function AdvantageRowHtml(props)
       //TODO: technically should key be undefined?
       options.unshift(<option key="Select Advantage">Select Advantage</option>);
 
-      let onChange = null;
-      if (undefined === state.name)  //if blank
+      let onChange = (event) =>
       {
-         onChange = (event) =>
-         {
-            const nameGiven = event.target.value;
-            Main.advantageSection.addRow(nameGiven);
-         };
-      }
-      else
-      {
-         onChange = (event) =>
-         {
-            const nameGiven = event.target.value;
-            props.advantageRow.select(nameGiven);
-         };
-      }
+         const nameGiven = event.target.value;
+         Main.advantageSection.updateNameByKey(nameGiven, key);
+      };
       nameElement = (<div className="col-12 col-sm-6 col-lg-4 col-xl-auto">
             <select id={'advantageChoices' + key} onChange={onChange}
                     value={state.name}>
@@ -70,7 +58,7 @@ function AdvantageRowHtml(props)
                 onChange={(event) =>
                 {
                    const rankGiven = event.target.value;
-                   props.advantageRow.changeRank(rankGiven);
+                   Main.advantageSection.updateRankByKey(rankGiven, key);
                 }} value={state.rank} /></label>;
 
       if (undefined !== state.text)
@@ -80,7 +68,7 @@ function AdvantageRowHtml(props)
                    onChange={(event) =>
                    {
                       const textGiven = event.target.value;
-                      props.advantageRow.changeText(textGiven);
+                      Main.advantageSection.updateTextByKey(textGiven, key);
                    }} value={state.text} style={{width: '100%'}} /></div>);
       }
       if (derivedValues.costPerRank > 1) costPerRankElement = <div className="col-auto">=&nbsp;{derivedValues.total}</div>;

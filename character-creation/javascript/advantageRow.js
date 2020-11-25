@@ -24,28 +24,6 @@ function AdvantageObject(key)
    this.getKey = function () {return key;};
    //endregion Basic getter
 
-   //region Onchange
-   /**Onchange function for selecting an advantage*/
-   this.select = function (nameGiven)
-   {
-      if (Data.Advantage.names.contains(nameGiven)) this.setAdvantage(nameGiven);
-      else state.name = undefined;  //mark for delete (since I can't delete myself)
-      Main.advantageSection.updateNameByKey(key);
-   };
-   /**Onchange function for changing the rank*/
-   this.changeRank = function (rankGiven)
-   {
-      this.setRank(rankGiven);
-      Main.advantageSection.updateRankByKey(key);
-   };
-   /**Onchange function for changing the text*/
-   this.changeText = function (textGiven)
-   {
-      this.setText(textGiven);
-      Main.advantageSection.updateTextByKey(key);
-   };
-   //endregion Onchange
-
    //region Value setting
    /**Populates data of the advantage by using the name (which is validated).
     This must be called before any other data of this row is set.

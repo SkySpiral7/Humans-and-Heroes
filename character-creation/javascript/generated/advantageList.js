@@ -75,39 +75,6 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       return JSON.clone(_this.state);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "addRow", function (newName) {
-      var advantageObject = _this._addRowNoPush(newName);
-
-      _this._rowArray.push(advantageObject);
-
-      if (_this._hasDuplicate()) //requires duplicate to be in this.rowArray
-        {
-          _this._rowArray.pop();
-
-          _this.forceUpdate(); //to undo the DOM value
-
-        } else {
-        _this._prerender();
-
-        _this.setState(function (state) {
-          state.it.push(advantageObject.getState());
-          return state;
-        });
-      }
-
-      if (false && _this._hasDuplicate()) {
-        //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
-        _this._rowArray.pop();
-
-        _this._prerender();
-
-        _this.setState(function (state) {
-          state.it.pop();
-          return state;
-        });
-      }
-    });
-
     _defineProperty(_assertThisInitialized(_this), "calculateEquipmentRank", function (equipTotal) {
       var equipmentIndex = 0; //due to sorting it is always first
 
@@ -298,18 +265,20 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "updateNameByKey", function (updatedKey) {
+    _defineProperty(_assertThisInitialized(_this), "updateNameByKey", function (newName, updatedKey) {
       if (updatedKey === _this._blankKey) {
-        throw new AssertionError('Can\'t update name of blank row ' + updatedKey);
+        _this._addRow(newName);
+
+        return;
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      var newName = _this._rowArray[updatedIndex].getName();
-
-      if (undefined === newName || _this._hasDuplicate()) {
+      if (!Data.Advantage.names.contains(newName) || _this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
+        _this._rowArray[updatedIndex].setAdvantage(newName);
+
         _this._prerender();
 
         _this.setState(function (state) {
@@ -319,14 +288,17 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (updatedKey) {
+    _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
       if (updatedKey === _this._blankKey) {
         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      var newRank = _this._rowArray[updatedIndex].getRank();
+      _this._rowArray[updatedIndex].setRank(newRank); //setRank will sanitize value
+
+
+      newRank = _this._rowArray[updatedIndex].getRank();
 
       _this._prerender();
 
@@ -336,14 +308,17 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (updatedKey) {
+    _defineProperty(_assertThisInitialized(_this), "updateTextByKey", function (newText, updatedKey) {
       if (updatedKey === _this._blankKey) {
         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      var newText = _this._rowArray[updatedIndex].getText();
+      _this._rowArray[updatedIndex].setText(newText); //setText will sanitize value
+
+
+      newText = _this._rowArray[updatedIndex].getText();
 
       if (_this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
@@ -352,6 +327,39 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
 
         _this.setState(function (state) {
           state.it[updatedIndex].text = newText;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_addRow", function (newName) {
+      var advantageObject = _this._addRowNoPush(newName);
+
+      _this._rowArray.push(advantageObject);
+
+      if (_this._hasDuplicate()) //requires duplicate to be in this.rowArray
+        {
+          _this._rowArray.pop();
+
+          _this.forceUpdate(); //to undo the DOM value
+
+        } else {
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it.push(advantageObject.getState());
+          return state;
+        });
+      }
+
+      if (false && _this._hasDuplicate()) {
+        //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
+        _this._rowArray.pop();
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it.pop();
           return state;
         });
       }

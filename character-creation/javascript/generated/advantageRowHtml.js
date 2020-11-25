@@ -32,20 +32,11 @@ function AdvantageRowHtml(props) {
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Advantage"
     }, "Select Advantage"));
-    var onChange = null;
 
-    if (undefined === state.name) //if blank
-      {
-        onChange = function onChange(event) {
-          var nameGiven = event.target.value;
-          Main.advantageSection.addRow(nameGiven);
-        };
-      } else {
-      onChange = function onChange(event) {
-        var nameGiven = event.target.value;
-        props.advantageRow.select(nameGiven);
-      };
-    }
+    var onChange = function onChange(event) {
+      var nameGiven = event.target.value;
+      Main.advantageSection.updateNameByKey(nameGiven, key);
+    };
 
     nameElement = /*#__PURE__*/React.createElement("div", {
       className: "col-12 col-sm-6 col-lg-4 col-xl-auto"
@@ -70,7 +61,7 @@ function AdvantageRowHtml(props) {
           id: 'advantageRank' + key,
           onChange: function onChange(event) {
             var rankGiven = event.target.value;
-            props.advantageRow.changeRank(rankGiven);
+            Main.advantageSection.updateRankByKey(rankGiven, key);
           },
           value: state.rank
         }));
@@ -83,7 +74,7 @@ function AdvantageRowHtml(props) {
           id: 'advantageText' + key,
           onChange: function onChange(event) {
             var textGiven = event.target.value;
-            props.advantageRow.changeText(textGiven);
+            Main.advantageSection.updateTextByKey(textGiven, key);
           },
           value: state.text,
           style: {
