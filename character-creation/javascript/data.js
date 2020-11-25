@@ -3,7 +3,6 @@ const Data = {};
 Data.Ability = {names: ['Strength', 'Agility', 'Fighting', 'Dexterity', 'Stamina', 'Intellect', 'Awareness', 'Presence']};
 //freeze the only ones that are never changed so that I don't accidentally change them
 Object.freeze(Data.Ability);
-Object.freeze(Data.SharedHtml);
 
 /**This method changes all of the data to the version passed in.
 The constructor of Main also calls this to initialize the rule dependant data.*/

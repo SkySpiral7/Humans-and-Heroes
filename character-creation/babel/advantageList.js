@@ -135,8 +135,6 @@ class AdvantageList extends React.Component
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
-   /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-   getRowByKey = (key) => {return this._rowArray[this.getIndexByKey(key)];};
    /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    indexToKey = (rowIndex) =>
    {

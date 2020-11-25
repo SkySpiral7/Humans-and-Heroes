@@ -65,7 +65,7 @@ TestSuite.powerRowHtml = function (testState={})
    Main.clear();
 
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '</div></div>';
    document.getElementById('powerChoices0').innerHTML = '';
@@ -79,18 +79,18 @@ TestSuite.powerRowHtml = function (testState={})
    SelectUtil.changeText('powerChoices0', 'Attain Knowledge');
    DomUtil.changeValue('powerText0', 'my text');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<label class="col">Base Cost per Rank: ' +
-      '<input type="text" size="1" id="powerBaseCost0" onchange="Main.powerSection.getRow(0).changeBaseCost();" value="2">' +
+      '<input type="text" size="1" id="powerBaseCost0" onchange="Main.powerSection.getRowByIndex(0).changeBaseCost();" value="2">' +
       '</label>' +
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value="my text"></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -103,7 +103,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 2</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
@@ -142,35 +142,35 @@ TestSuite.powerRowHtml = function (testState={})
    SelectUtil.changeText('powerChoices0', 'Create');
    DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">2</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Range' +
-      '<select id="powerSelectRange0" onchange="Main.powerSection.getRow(0).selectRange();">' +
+      '<select id="powerSelectRange0" onchange="Main.powerSection.getRowByIndex(0).selectRange();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Duration' +
-      '<select id="powerSelectDuration0" onchange="Main.powerSection.getRow(0).selectDuration();">' +
+      '<select id="powerSelectDuration0" onchange="Main.powerSection.getRowByIndex(0).selectDuration();">' +
       '</select></label>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 2</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
@@ -220,13 +220,13 @@ TestSuite.powerRowHtml = function (testState={})
    SelectUtil.changeText('powerChoices0', 'Immortality');
    DomUtil.changeValue('powerText0', '');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">5</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -237,14 +237,14 @@ TestSuite.powerRowHtml = function (testState={})
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Duration' +
-      '<select id="powerSelectDuration0" onchange="Main.powerSection.getRow(0).selectDuration();">' +
+      '<select id="powerSelectDuration0" onchange="Main.powerSection.getRowByIndex(0).selectDuration();">' +
       '</select></label>' +
       '</div>' +
       '</div>' +  //end action, range, duration row
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 5</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
@@ -273,23 +273,23 @@ TestSuite.powerRowHtml = function (testState={})
    DomUtil.changeValue('powerName0', 'my name 2');
    DomUtil.changeValue('powerSkill0', 'my skill 2');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Range' +
-      '<select id="powerSelectRange0" onchange="Main.powerSection.getRow(0).selectRange();">' +
+      '<select id="powerSelectRange0" onchange="Main.powerSection.getRowByIndex(0).selectRange();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -307,7 +307,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="1"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 1</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
@@ -330,23 +330,23 @@ TestSuite.powerRowHtml = function (testState={})
    SelectUtil.changeText('powerSelectRange0', 'Perception');
    DomUtil.changeValue('powerName0', 'my name 3');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Range' +
-      '<select id="powerSelectRange0" onchange="Main.powerSection.getRow(0).selectRange();">' +
+      '<select id="powerSelectRange0" onchange="Main.powerSection.getRowByIndex(0).selectRange();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -361,7 +361,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="1"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="1"></label>' +
       //Increased Range to Perception is +3
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: 4</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
@@ -385,18 +385,18 @@ TestSuite.powerRowHtml = function (testState={})
    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
    DomUtil.changeValue('powerRank0', '4');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -409,7 +409,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="4"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="4"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: (1/2)</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs
@@ -432,18 +432,18 @@ TestSuite.powerRowHtml = function (testState={})
    DomUtil.changeValue('powerModifierRank0.0', '3');
    DomUtil.changeValue('powerRank0', '8');
    expected = '<div class="container-fluid"><div class="row">' +
-      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRow(0).select();">' +
+      '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '<div class="col">Base Cost per Rank: ' +
       '<span id="powerBaseCost0" style="display: inline-block; width: 50px; text-align: center;">1</span>' +
       '</div>' +  //end base cost col
       '</div>' +  //end power/cost row
-      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRow(0).changeText();"' +
+      '<div class="row"><input type="text" style="width: 100%" id="powerText0" onchange="Main.powerSection.getRowByIndex(0).changeText();"' +
       ' value=""></div>' +
       '<div class="row justify-content-center">' +  //action, range, duration row
       '<div class="col-12 col-sm-4 col-lg-3">' +
       '<label>Action' +
-      '<select id="powerSelectAction0" onchange="Main.powerSection.getRow(0).selectAction();">' +
+      '<select id="powerSelectAction0" onchange="Main.powerSection.getRowByIndex(0).selectAction();">' +
       '</select></label>' +
       '</div>' +
       '<div class="col-12 col-sm-4 col-lg-3">' +
@@ -456,7 +456,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div id="powerModifierSection0">modifiers</div>' +  //set below
       '<div class="row">' +
       '<label class="col-12 col-sm-6 col-md-4 col-xl-auto">Ranks: ' +
-      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRow(0).changeRank();" value="8"></label>' +
+      '<input type="text" size="1" id="powerRank0" onchange="Main.powerSection.getRowByIndex(0).changeRank();" value="8"></label>' +
       '<div class="col-12 col-sm-6 col-md-4 col-xl-auto">Total Cost Per Rank: (1/4)</div>' +
       '<div class="col-12 col-md-4 col-xl-auto">Total Flat Modifier Cost: 0</div>' +
       '</div>' +  //end row of costs

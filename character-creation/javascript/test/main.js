@@ -196,7 +196,7 @@ TestSuite.main.loadFile=function(testState={})
     document.getElementById('file-chooser').value = '';  //clear the input
     SelectUtil.changeText('powerChoices0', 'Damage');
     Main.loadFile();
-    assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRow(0).getEffect(), Description: 'Loading no file does nothing'});
+    assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Loading no file does nothing'});
     } catch(e){assertions.push({Error: e, Description: 'Loading no file does nothing'});}
 
     //this test is complete since I can't set the file chooser to anything else

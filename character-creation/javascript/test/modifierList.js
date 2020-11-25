@@ -93,7 +93,7 @@ TestSuite.modifierList.sortOrder=function(testState={})
     SelectUtil.changeText('powerModifierChoices0.0', 'Selective');
     SelectUtil.changeText('powerSelectRange0', 'Close');
     SelectUtil.changeText('powerModifierChoices0.2', 'Precise');
-    Main.powerSection.getRow(0).getModifierList()._testSortStability();
+    Main.powerSection.getRowByIndex(0).getModifierList()._testSortStability();
     //this test proves that the sort order forces stability
 
     assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Stability: Modifier 1'});

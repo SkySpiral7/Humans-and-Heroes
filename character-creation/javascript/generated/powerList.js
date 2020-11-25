@@ -72,7 +72,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRow", function (rowIndex) {
+    _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
       return _this._rowArray[rowIndex];
     });
 
@@ -87,37 +87,28 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      _this._rowArray = [];
-
       var elementArray = _this.state.it.map(function (state, powerIndex) {
-        var rowKey = MainObject.generateKey();
+        var powerRow = _this._rowArray[powerIndex];
+        var rowKey = powerRow.getKey(); //getDerivedValues makes a clone
 
-        _this._rowArray.push(new PowerObjectAgnostic({
-          key: rowKey,
-          sectionName: _this.props.sectionName,
-          powerListParent: _assertThisInitialized(_this),
-          state: state
-        })); //getDerivedValues makes a clone
-
-
-        var rowDerivedValues = _this._rowArray.getDerivedValues(); //TODO: it's stupid that main use has several useless args
-
+        var rowDerivedValues = powerRow.getDerivedValues(); //TODO: it's stupid that main use has several useless args
 
         var loadLocation = {
           toString: function toString() {
             throw new AssertionError('Should already be valid.');
           }
         };
-        rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+        rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation).choices;
         rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
-        rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
+        rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation).choices;
         return /*#__PURE__*/React.createElement(PowerRowHtml, {
           key: rowKey,
           keyCopy: rowKey,
           state: state,
           derivedValues: rowDerivedValues,
           sectionName: _this.props.sectionName,
-          powerRow: _this._rowArray[powerIndex]
+          powerRow: powerRow,
+          powerSection: _assertThisInitialized(_this)
         });
       });
 
@@ -127,9 +118,82 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         state: {},
         derivedValues: undefined,
         sectionName: _this.props.sectionName,
-        powerRow: undefined
+        powerRow: undefined,
+        powerSection: _assertThisInitialized(_this)
       }));
       return elementArray;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateNameByKey", function (newName, updatedKey) {
+      if (updatedKey === _this._blankKey) {
+        _this._addRow(newName);
+
+        return;
+      }
+
+      var updatedIndex = _this.getIndexByKey(updatedKey);
+
+      if (!Data.Power.names.contains(newName)) {
+        _this._removeRow(updatedIndex);
+      } else {
+        var state = _this._rowArray[updatedIndex].getState();
+
+        state.name = newName;
+        _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
+          key: _this._rowArray[updatedIndex].getKey(),
+          sectionName: _this.props.sectionName,
+          powerListParent: _assertThisInitialized(_this),
+          state: state
+        });
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[updatedIndex].name = newName;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_addRow", function (newName) {
+      var powerObject = _this._addRowNoPush(newName);
+
+      _this._rowArray.push(powerObject);
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it.push(powerObject.getState());
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_addRowNoPush", function (newName) {
+      //the row that was blank no longer is so use the blank key
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      var state = PowerObjectAgnostic.sanitizeState({
+        effect: newName
+      }, sectionName, _this._rowArray.length, transcendence);
+      var powerObject = new PowerObjectAgnostic({
+        key: _this._blankKey,
+        sectionName: sectionName,
+        powerListParent: _assertThisInitialized(_this),
+        state: state
+      }); //need a new key for the new blank row
+
+      _this._blankKey = MainObject.generateKey();
+      return powerObject;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
+      if (key === _this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+
+      for (var i = 0; i < _this._rowArray.length; i++) {
+        if (_this._rowArray[i].getKey() === key) return i;
+      }
+
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + _this._rowArray.length + ')');
     });
 
     _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndex) {
@@ -158,8 +222,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var usingGodhoodPowers = false;
       _this._derivedValues.total = 0;
 
-      for (var i = 0; i < _this._rowArray.length - 1; i++) //the last row is always blank
-      {
+      for (var i = 0; i < _this._rowArray.length; i++) {
         _this._rowArray[i].calculateValues(); //will calculate rank and total
 
 
@@ -177,7 +240,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       if (0 === _this._derivedValues.protectionRankTotal) _this._derivedValues.protectionRankTotal = null; //equipment is always Godhood false. excluded to avoid messing up power Godhood
 
-      if (_assertThisInitialized(_this) !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
+      if (undefined !== Main && _assertThisInitialized(_this) !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getModifierRowShort", function (powerRowIndex, modifierRowIndex) {
@@ -207,15 +270,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "addRow", function () {
-      //TODO: add rows
-      _this._rowArray.push(new PowerObjectAgnostic({
-        powerListParent: _assertThisInitialized(_this),
-        initialRowIndex: _this._rowArray.length,
-        sectionName: _this.props.sectionName
-      }));
-    });
-
     _defineProperty(_assertThisInitialized(_this), "_notifyDependent", function () {
       if (_assertThisInitialized(_this) === Main.equipmentSection) {
         //always call it even if total is 0 because the row may need to be removed
@@ -238,7 +292,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       protectionRankTotal: null,
       attackEffectRanks: new MapDefault({}, 0)
     };
-    _this._blankKey = MainObject.generateKey(); //this._prerender();
+    _this._blankKey = MainObject.generateKey();
+
+    _this._calculateValues();
 
     props.callback(_assertThisInitialized(_this));
     return _this;

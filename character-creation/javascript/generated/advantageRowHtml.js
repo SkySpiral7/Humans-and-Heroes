@@ -32,17 +32,14 @@ function AdvantageRowHtml(props) {
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Advantage"
     }, "Select Advantage"));
-
-    var onChange = function onChange(event) {
-      var nameGiven = event.target.value;
-      Main.advantageSection.updateNameByKey(nameGiven, key);
-    };
-
     nameElement = /*#__PURE__*/React.createElement("div", {
       className: "col-12 col-sm-6 col-lg-4 col-xl-auto"
     }, /*#__PURE__*/React.createElement("select", {
       id: 'advantageChoices' + key,
-      onChange: onChange,
+      onChange: function onChange(event) {
+        var nameGiven = event.target.value;
+        Main.advantageSection.updateNameByKey(nameGiven, key);
+      },
       value: state.name
     }, options));
   }

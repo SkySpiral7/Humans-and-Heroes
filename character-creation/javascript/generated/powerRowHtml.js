@@ -1,6 +1,6 @@
 'use strict'; //TODO: more doc (state, derivedValues)
 
-/** @param props: state, derivedValues, keyCopy, sectionName, powerRow */
+/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection */
 
 function PowerRowHtml(props) {
   var state = props.state;
@@ -47,7 +47,10 @@ function PowerRowHtml(props) {
     key: "Choices"
   }, /*#__PURE__*/React.createElement("select", {
     id: idFor('Choices'),
-    onChange: onChangeFor('select'),
+    onChange: function onChange(event) {
+      var nameGiven = event.target.value;
+      props.powerSection.updateNameByKey(nameGiven, key);
+    },
     value: state.effect
   }, options)));
 

@@ -33,13 +33,13 @@ function AdvantageRowHtml(props)
       //TODO: technically should key be undefined?
       options.unshift(<option key="Select Advantage">Select Advantage</option>);
 
-      let onChange = (event) =>
-      {
-         const nameGiven = event.target.value;
-         Main.advantageSection.updateNameByKey(nameGiven, key);
-      };
       nameElement = (<div className="col-12 col-sm-6 col-lg-4 col-xl-auto">
-            <select id={'advantageChoices' + key} onChange={onChange}
+            <select id={'advantageChoices' + key}
+                    onChange={(event) =>
+                    {
+                       const nameGiven = event.target.value;
+                       Main.advantageSection.updateNameByKey(nameGiven, key);
+                    }}
                     value={state.name}>
                {options}
             </select></div>

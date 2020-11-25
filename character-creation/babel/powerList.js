@@ -26,7 +26,8 @@ class PowerListAgnostic extends React.Component
          attackEffectRanks: new MapDefault({}, 0)
       };
       this._blankKey = MainObject.generateKey();
-      //this._prerender();
+
+      this._calculateValues();
       props.callback(this);
    };
 
@@ -50,7 +51,7 @@ class PowerListAgnostic extends React.Component
       });
    };
    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-   getRow = (rowIndex) => {return this._rowArray[rowIndex];};
+   getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns an array of json objects for this section's data*/
    save = () =>
    {
@@ -64,36 +65,105 @@ class PowerListAgnostic extends React.Component
    /**This creates the page's html (for the section)*/
    render = () =>
    {
-      this._rowArray = [];
       const elementArray = this.state.it.map((state, powerIndex) =>
       {
-         const rowKey = MainObject.generateKey();
-         this._rowArray.push(new PowerObjectAgnostic({
-            key: rowKey,
-            sectionName: this.props.sectionName,
-            powerListParent: this,
-            state: state
-         }));
+         const powerRow = this._rowArray[powerIndex];
+         const rowKey = powerRow.getKey();
          //getDerivedValues makes a clone
-         const rowDerivedValues = this._rowArray.getDerivedValues();
+         const rowDerivedValues = powerRow.getDerivedValues();
          //TODO: it's stupid that main use has several useless args
          const loadLocation = {toString: function () {throw new AssertionError('Should already be valid.');}};
-         rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation);
+         rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration,
+            loadLocation).choices;
          rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
-         rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation);
+         rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range,
+            loadLocation).choices;
          return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
                                state={state}
                                derivedValues={rowDerivedValues}
                                sectionName={this.props.sectionName}
-                               powerRow={this._rowArray[powerIndex]} />);
+                               powerRow={powerRow}
+                               powerSection={this} />);
       });
       elementArray.push(<PowerRowHtml key={this._blankKey} keyCopy={this._blankKey}
                                       state={{}}
                                       derivedValues={undefined}
                                       sectionName={this.props.sectionName}
-                                      powerRow={undefined} />);
+                                      powerRow={undefined}
+                                      powerSection={this} />);
 
       return elementArray;
+   };
+   /**Onchange function for selecting a power*/
+   updateNameByKey = (newName, updatedKey) =>
+   {
+      if (updatedKey === this._blankKey)
+      {
+         this._addRow(newName);
+         return;
+      }
+
+      const updatedIndex = this.getIndexByKey(updatedKey);
+      if (!Data.Power.names.contains(newName))
+      {
+         this._removeRow(updatedIndex);
+      }
+      else
+      {
+         const state = this._rowArray[updatedIndex].getState();
+         state.name = newName;
+         this._rowArray[updatedIndex] = new PowerObjectAgnostic({
+            key: this._rowArray[updatedIndex].getKey(),
+            sectionName: this.props.sectionName,
+            powerListParent: this,
+            state: state
+         });
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it[updatedIndex].name = newName;
+            return state;
+         });
+      }
+   };
+   /**Creates a new row at the end of the array*/
+   _addRow = (newName) =>
+   {
+      const powerObject = this._addRowNoPush(newName);
+
+      this._rowArray.push(powerObject);
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it.push(powerObject.getState());
+         return state;
+      });
+   };
+   /**Converts blank row into AdvantageObject but doesn't update rowArray or state*/
+   _addRowNoPush = (newName) =>
+   {
+      //the row that was blank no longer is so use the blank key
+      const transcendence = Main.getTranscendence();
+      const sectionName = this.props.sectionName;
+      const state = PowerObjectAgnostic.sanitizeState({effect: newName}, sectionName, this._rowArray.length, transcendence);
+      const powerObject = new PowerObjectAgnostic({
+         key: this._blankKey,
+         sectionName: sectionName,
+         powerListParent: this,
+         state: state
+      });
+      //need a new key for the new blank row
+      this._blankKey = MainObject.generateKey();
+      return powerObject;
+   };
+   getIndexByKey = (key) =>
+   {
+      if (key === this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+      for (let i = 0; i < this._rowArray.length; i++)
+      {
+         if (this._rowArray[i].getKey() === key) return i;
+      }
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + this._rowArray.length + ')');
    };
    /**Removes the row from the array and updates the index of all others in the list.*/
    _removeRow = (rowIndex) =>
@@ -120,7 +190,7 @@ class PowerListAgnostic extends React.Component
       this._derivedValues.protectionRankTotal = 0;  //this makes math easier. will be set to null at bottom as needed
       let usingGodhoodPowers = false;
       this._derivedValues.total = 0;
-      for (let i = 0; i < this._rowArray.length - 1; i++)  //the last row is always blank
+      for (let i = 0; i < this._rowArray.length; i++)
       {
          this._rowArray[i].calculateValues();  //will calculate rank and total
          const powerEffect = this._rowArray[i].getEffect();
@@ -137,9 +207,9 @@ class PowerListAgnostic extends React.Component
       //rank 0 is impossible. if it doesn't exist then use null instead
       if (0 === this._derivedValues.protectionRankTotal) this._derivedValues.protectionRankTotal = null;
       //equipment is always Godhood false. excluded to avoid messing up power Godhood
-      if (this !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
+      if (undefined !== Main && this !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
    };
-   /**Short hand version of Main.powerSection.getRow(0).getModifierList().getRowByIndex(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
+   /**Short hand version of Main.powerSection.getRowByIndex(0).getModifierList().getRowByIndex(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
    getModifierRowShort = (powerRowIndex, modifierRowIndex) =>
    {
       //TODO: is range check needed?
@@ -170,16 +240,6 @@ class PowerListAgnostic extends React.Component
    };
 
    //'private' functions section. Although all public none of these should be called from outside of this object
-   /**Creates a new row at the end of the array*/
-   addRow = () =>
-   {
-      //TODO: add rows
-      this._rowArray.push(new PowerObjectAgnostic({
-         powerListParent: this,
-         initialRowIndex: this._rowArray.length,
-         sectionName: this.props.sectionName
-      }));
-   };
    /**Updates other sections which depend on power section*/
    _notifyDependent = () =>
    {

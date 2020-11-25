@@ -395,7 +395,7 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    else validState.text = inputState.text;
 
    //each value is valid but maybe not the combination
-   var existingActivationInfo = PowerObjectAgnostic._validateActivationInfoExists(inputState, loadLocation);
+   var existingActivationInfo = PowerObjectAgnostic._validateActivationInfoExists(validState, inputState, loadLocation);
    var validActivationInfoObj = PowerObjectAgnostic._validateActivationInfo(validState, existingActivationInfo, loadLocation);
    validState.action = validActivationInfoObj.action.current;
    validState.range = validActivationInfoObj.range.current;
@@ -416,33 +416,33 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    validState.rank = sanitizeNumber(inputState.rank, 1, 1);
    return validState;
 };
-PowerObjectAgnostic._validateActivationInfoExists = function (inputState, loadLocation)
+PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputState, loadLocation)
 {
-   if (!Data.Power.actions.contains(inputState.action))
+   var existingActivationInfo = {};
+   if (undefined === inputState.action) existingActivationInfo.action = Data.Power[validState.effect].defaultAction;
+   else if (!Data.Power.actions.contains(inputState.action))
    {
       Main.messageUser(
          'PowerObjectAgnostic.setAction.notExist', loadLocation + ': ' + inputState.action + ' is not the name of an action.');
-      return;  //undefined
    }
-   //well each value is valid even if together they aren't
-   var validState = {action: inputState.action};
+   else existingActivationInfo.action = inputState.action;
 
-   if (!Data.Power.ranges.contains(inputState.range))
+   if (undefined === inputState.range) existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
+   else if (!Data.Power.ranges.contains(inputState.range))
    {
       Main.messageUser('PowerObjectAgnostic.setRange.notExist', loadLocation + ': ' + inputState.range + ' is not the name of a range.');
-      return;  //undefined
    }
-   validState.range = inputState.range;
+   else existingActivationInfo.range = inputState.range;
 
-   if (!Data.Power.durations.contains(inputState.duration))
+   if (undefined === inputState.duration) existingActivationInfo.duration = Data.Power[validState.effect].defaultDuration;
+   else if (!Data.Power.durations.contains(inputState.duration))
    {
       Main.messageUser(
          'PowerObjectAgnostic.setDuration.notExist', loadLocation + ': ' + inputState.duration + ' is not the name of a duration.');
-      return;  //undefined
    }
-   validState.duration = inputState.duration;
+   else existingActivationInfo.duration = inputState.duration;
 
-   return validState;
+   return existingActivationInfo;
 };
 /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
 PowerObjectAgnostic._validateNameAndSkill = function (validState, inputState, sectionName, rowIndex)

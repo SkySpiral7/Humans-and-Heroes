@@ -1,7 +1,7 @@
 'use strict';
 
 //TODO: more doc (state, derivedValues)
-/** @param props: state, derivedValues, keyCopy, sectionName, powerRow */
+/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection */
 function PowerRowHtml(props)
 {
    const state = props.state;
@@ -47,7 +47,12 @@ function PowerRowHtml(props)
    options.unshift(<option key="Select Power">Select Power</option>);
 
    rowElementList.push(<div className="col-12 col-sm-6 col-xl-auto" key="Choices">
-      <select id={idFor('Choices')} onChange={onChangeFor('select')} value={state.effect}>
+      <select id={idFor('Choices')}
+              onChange={(event) =>
+              {
+                 const nameGiven = event.target.value;
+                 props.powerSection.updateNameByKey(nameGiven, key);
+              }} value={state.effect}>
          {options}
       </select>
    </div>);

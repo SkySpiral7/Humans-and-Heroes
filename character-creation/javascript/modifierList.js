@@ -101,7 +101,8 @@ function ModifierList(props)
    this._constructor = function ()
    {
       state = props.state;
-      for (var modIndex = 0; modIndex < rowArray.length; modIndex++)
+      rowArray = [];
+      for (var modIndex = 0; modIndex < state.length; modIndex++)
       {
          rowArray.push(new ModifierObject({
             //TODO: need to pass the actual keys down (link html to mod row)
@@ -139,9 +140,8 @@ ModifierList.isNonPersonalModifierPresent = function (inputState)
 /**Sets data from a json object given then updates. The row array is not cleared by this function*/
 ModifierList.sanitizeState = function (inputState, powerSectionName, powerIndex)
 {
-   //the row array isn't cleared in case some have been auto set
-   //Main.clear() is called at the start of Main.load()
    var validListState = [];
+   if (undefined === inputState) return validListState;
    var duplicateCheck = [];
    for (var modIndex = 0; modIndex < inputState.length; modIndex++)
    {
@@ -205,7 +205,6 @@ figure out architecture:
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?
-redo ad list based to use as basis for power/mod
 hook up power html
    onChange
 add save to state conversion

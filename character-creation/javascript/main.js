@@ -248,9 +248,9 @@ function MainObject()
    errorCode only exists to be sent to the mockMessenger*/
    this.messageUser=function(errorCode, messageSent)
    {
-       if(undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
-       else if(amLoading) document.getElementById('code-box').value += messageSent + '\n';
-       else alert(messageSent);
+      if (undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
+      else if (amLoading) document.getElementById('code-box').value += messageSent + '\n';
+      else alert(messageSent);
    };
    /**This returns the document's data as a json object*/
    this.save=function()
@@ -409,7 +409,7 @@ function MainObject()
          //TODO: bug: missing ability messes up offense section
          for (var i=0; i < damageKeys.length; i++)
          {
-            var rowPointer = sectionPointer.getRow(sectionPointer.getAttackEffectRanks().get(damageKeys[i]));
+            var rowPointer = sectionPointer.getRowByIndex(sectionPointer.getAttackEffectRanks().get(damageKeys[i]));
             var range = rowPointer.getRange();
             var skillUsed = rowPointer.getSkillUsed();
 
@@ -431,10 +431,10 @@ function MainObject()
                }
 
                var modifierList = rowPointer.getModifierList();
-               var accurateIndex = modifierList.findRowByName('Accurate');
+               var accurateIndex = ModifierList.findRowByName(modifierList.getState(), 'Accurate');
                if (undefined !== accurateIndex)
                {
-                  var accurateApplications = modifierList.getRow(accurateIndex).getRank();
+                  var accurateApplications = modifierList.getRowByIndex(accurateIndex).getRank();
                   //in all versions accurate is +2 attack/rank
                   attackBonus += accurateApplications * 2;
                }
