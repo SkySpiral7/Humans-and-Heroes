@@ -410,8 +410,11 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    validState.Modifiers = pendingModifiers;
 
    var validAttackInfo = PowerObjectAgnostic._validateNameAndSkill(validState, inputState, powerSectionName, powerIndex);
-   validState.name = validAttackInfo.name;
-   validState.skillUsed = validAttackInfo.skillUsed;
+   if (undefined !== validAttackInfo)
+   {
+      validState.name = validAttackInfo.name;
+      validState.skillUsed = validAttackInfo.skillUsed;
+   }
 
    validState.rank = sanitizeNumber(inputState.rank, 1, 1);
    return validState;

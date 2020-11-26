@@ -54,7 +54,6 @@ function AssertionError(message, fileName, lineNumber)
 {
    var instance = new Error(message, fileName, lineNumber);
    Object.setPrototypeOf(instance, Object.getPrototypeOf(this));
-   //TODO: test if allowed and if I need a console.error
    alert('Assertion Error');
    return instance;
 }

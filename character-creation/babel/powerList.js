@@ -95,23 +95,23 @@ class PowerListAgnostic extends React.Component
       return elementArray;
    };
    /**Onchange function for selecting a power*/
-   updateNameByKey = (newName, updatedKey) =>
+   updateEffectByKey = (newEffect, updatedKey) =>
    {
       if (updatedKey === this._blankKey)
       {
-         this._addRow(newName);
+         this._addRow(newEffect);
          return;
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      if (!Data.Power.names.contains(newName))
+      if (!Data.Power.names.contains(newEffect))
       {
          this._removeRow(updatedIndex);
       }
       else
       {
          const state = this._rowArray[updatedIndex].getState();
-         state.name = newName;
+         state.effect = newEffect;
          this._rowArray[updatedIndex] = new PowerObjectAgnostic({
             key: this._rowArray[updatedIndex].getKey(),
             sectionName: this.props.sectionName,
@@ -121,15 +121,39 @@ class PowerListAgnostic extends React.Component
          this._prerender();
          this.setState(state =>
          {
-            state.it[updatedIndex].name = newName;
+            state.it[updatedIndex].effect = newEffect;
             return state;
          });
       }
    };
-   /**Creates a new row at the end of the array*/
-   _addRow = (newName) =>
+   /**Onchange function for base cost*/
+   updatePropertyByKey = (propertyName, newValue, updatedKey) =>
    {
-      const powerObject = this._addRowNoPush(newName);
+      if (updatedKey === this._blankKey)
+      {
+         throw new AssertionError('Can\'t update blank row ' + updatedKey);
+      }
+
+      const updatedIndex = this.getIndexByKey(updatedKey);
+      const state = this._rowArray[updatedIndex].getState();
+      state[propertyName] = newValue;
+      this._rowArray[updatedIndex] = new PowerObjectAgnostic({
+         key: this._rowArray[updatedIndex].getKey(),
+         sectionName: this.props.sectionName,
+         powerListParent: this,
+         state: state
+      });
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it[updatedIndex][propertyName] = newValue;
+         return state;
+      });
+   };
+   /**Creates a new row at the end of the array*/
+   _addRow = (newEffect) =>
+   {
+      const powerObject = this._addRowNoPush(newEffect);
 
       this._rowArray.push(powerObject);
       this._prerender();
@@ -140,12 +164,12 @@ class PowerListAgnostic extends React.Component
       });
    };
    /**Converts blank row into AdvantageObject but doesn't update rowArray or state*/
-   _addRowNoPush = (newName) =>
+   _addRowNoPush = (newEffect) =>
    {
       //the row that was blank no longer is so use the blank key
       const transcendence = Main.getTranscendence();
       const sectionName = this.props.sectionName;
-      const state = PowerObjectAgnostic.sanitizeState({effect: newName}, sectionName, this._rowArray.length, transcendence);
+      const state = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, this._rowArray.length, transcendence);
       const powerObject = new PowerObjectAgnostic({
          key: this._blankKey,
          sectionName: sectionName,

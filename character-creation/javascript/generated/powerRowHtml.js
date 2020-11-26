@@ -16,13 +16,14 @@ function PowerRowHtml(props) {
     return props.sectionName + elementLabel + key;
   }
 
-  function onChangeFor(nextFunctionName) {
-    //TODO: onChange
-    return function () {}; //return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
+  function onChangeFor(propertyName) {
+    return function (event) {
+      var valueGiven = event.target.value;
+      props.powerSection.updatePropertyByKey(propertyName, valueGiven, key);
+    };
   }
 
   var topElementList = [];
-  var onChange = null;
   var rowList = [],
       rowElementList = []; //TODO: Main.canUseGodhood should be in state somewhere
 
@@ -49,7 +50,7 @@ function PowerRowHtml(props) {
     id: idFor('Choices'),
     onChange: function onChange(event) {
       var nameGiven = event.target.value;
-      props.powerSection.updateNameByKey(nameGiven, key);
+      props.powerSection.updateEffectByKey(nameGiven, key);
     },
     value: state.effect
   }, options)));
@@ -63,7 +64,7 @@ function PowerRowHtml(props) {
         type: "text",
         size: "1",
         id: idFor('BaseCost'),
-        onChange: onChangeFor('changeBaseCost'),
+        onChange: onChangeFor('baseCost'),
         value: state.baseCost
       })));
     } else {
@@ -97,7 +98,7 @@ function PowerRowHtml(props) {
         width: '100%'
       },
       id: idFor('Text'),
-      onChange: onChangeFor('changeText'),
+      onChange: onChangeFor('text'),
       value: state.text
     })));
 
@@ -126,7 +127,7 @@ function PowerRowHtml(props) {
         key: "Action"
       }, /*#__PURE__*/React.createElement("label", null, 'Action ', /*#__PURE__*/React.createElement("select", {
         id: idFor('SelectAction'),
-        onChange: onChangeFor('selectAction'),
+        onChange: onChangeFor('action'),
         value: state.action
       }, options))));
     }
@@ -154,7 +155,7 @@ function PowerRowHtml(props) {
         key: "Range"
       }, /*#__PURE__*/React.createElement("label", null, 'Range ', /*#__PURE__*/React.createElement("select", {
         id: idFor('SelectRange'),
-        onChange: onChangeFor('selectRange'),
+        onChange: onChangeFor('range'),
         value: state.range
       }, options))));
     }
@@ -182,7 +183,7 @@ function PowerRowHtml(props) {
         key: "Duration"
       }, /*#__PURE__*/React.createElement("label", null, 'Duration ', /*#__PURE__*/React.createElement("select", {
         id: idFor('SelectDuration'),
-        onChange: onChangeFor('selectDuration'),
+        onChange: onChangeFor('duration'),
         value: state.duration
       }, options))));
     }
@@ -201,9 +202,7 @@ function PowerRowHtml(props) {
         sectionName: props.sectionName,
         powerKey: key,
         currentValue: state.name,
-        onChange: function onChange() {
-          return props.powerRow.changeName();
-        }
+        onChange: onChangeFor('name')
       })));
 
       if (undefined !== state.skillUsed) {
@@ -214,9 +213,7 @@ function PowerRowHtml(props) {
           sectionName: props.sectionName,
           powerKey: key,
           currentValue: state.skillUsed,
-          onChange: function onChange() {
-            return props.powerRow.changeSkill();
-          }
+          onChange: onChangeFor('skillUsed')
         })));
       }
 
@@ -259,7 +256,7 @@ function PowerRowHtml(props) {
       type: "text",
       size: "1",
       id: idFor('Rank'),
-      onChange: onChangeFor('changeRank'),
+      onChange: onChangeFor('rank'),
       value: state.rank
     })), /*#__PURE__*/React.createElement("div", {
       className: "col-12 col-sm-6 col-md-4 col-xl-auto"

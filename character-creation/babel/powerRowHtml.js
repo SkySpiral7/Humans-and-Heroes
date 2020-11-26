@@ -19,15 +19,16 @@ function PowerRowHtml(props)
       return props.sectionName + elementLabel + key;
    }
 
-   function onChangeFor(nextFunctionName)
+   function onChangeFor(propertyName)
    {
-      //TODO: onChange
-      return function () {};
-      //return 'Main.' + props.sectionName + 'Section.getRow(' + state.rowIndex + ').' + nextFunctionName + '();'
+      return (event =>
+      {
+         const valueGiven = event.target.value;
+         props.powerSection.updatePropertyByKey(propertyName, valueGiven, key);
+      });
    }
 
    let topElementList = [];
-   let onChange = null;
    let rowList = [], rowElementList = [];
 
    //TODO: Main.canUseGodhood should be in state somewhere
@@ -51,7 +52,7 @@ function PowerRowHtml(props)
               onChange={(event) =>
               {
                  const nameGiven = event.target.value;
-                 props.powerSection.updateNameByKey(nameGiven, key);
+                 props.powerSection.updateEffectByKey(nameGiven, key);
               }} value={state.effect}>
          {options}
       </select>
@@ -63,7 +64,7 @@ function PowerRowHtml(props)
       {
          rowElementList.push(<label className="col" key="BaseCost">{'Base Cost per Rank: '}
             <input type="text" size="1" id={idFor('BaseCost')}
-                   onChange={onChangeFor('changeBaseCost')} value={state.baseCost} />
+                   onChange={onChangeFor('baseCost')} value={state.baseCost} />
          </label>);
       }
       else
@@ -82,8 +83,8 @@ function PowerRowHtml(props)
    if (undefined !== state.effect)
    {
       rowList.push(<div className="row" key="Text">
-         <input type="text" style={{width: '100%'}} id={idFor('Text')} onChange={onChangeFor('changeText')}
-                value={state.text} />
+         <input type="text" style={{width: '100%'}} id={idFor('Text')}
+                onChange={onChangeFor('text')} value={state.text} />
       </div>);
 
       if (1 === derivedValues.possibleActions.length)
@@ -106,7 +107,7 @@ function PowerRowHtml(props)
 
          rowElementList.push(<div className="col-12 col-sm-4 col-lg-3" key="Action">
             <label>{'Action '}
-               <select id={idFor('SelectAction')} onChange={onChangeFor('selectAction')} value={state.action}>
+               <select id={idFor('SelectAction')} onChange={onChangeFor('action')} value={state.action}>
                   {options}
                </select>
             </label>
@@ -130,7 +131,7 @@ function PowerRowHtml(props)
 
          rowElementList.push(<div className="col-12 col-sm-4 col-lg-3" key="Range">
             <label>{'Range '}
-               <select id={idFor('SelectRange')} onChange={onChangeFor('selectRange')} value={state.range}>
+               <select id={idFor('SelectRange')} onChange={onChangeFor('range')} value={state.range}>
                   {options}
                </select>
             </label>
@@ -154,7 +155,7 @@ function PowerRowHtml(props)
 
          rowElementList.push(<div className="col-12 col-sm-4 col-lg-3" key="Duration">
             <label>{'Duration '}
-               <select id={idFor('SelectDuration')} onChange={onChangeFor('selectDuration')} value={state.duration}>
+               <select id={idFor('SelectDuration')} onChange={onChangeFor('duration')} value={state.duration}>
                   {options}
                </select>
             </label>
@@ -171,14 +172,14 @@ function PowerRowHtml(props)
       {
          rowElementList.push(<div className="col-12 col-sm-6 col-lg-5 col-xl-4" key="powerName">
             <PowerNameHtml sectionName={props.sectionName} powerKey={key} currentValue={state.name}
-                           onChange={() => props.powerRow.changeName()} />
+                           onChange={onChangeFor('name')} />
          </div>);
 
          if (undefined !== state.skillUsed)
          {
             rowElementList.push(<div className="col-12 col-sm-6 col-lg-5 col-xl-4" key="skillUsed">
                <PowerSkillHtml sectionName={props.sectionName} powerKey={key} currentValue={state.skillUsed}
-                               onChange={() => props.powerRow.changeSkill()} />
+                               onChange={onChangeFor('skillUsed')} />
             </div>);
          }
 
@@ -210,7 +211,7 @@ function PowerRowHtml(props)
 
       rowList.push(<div className="row" key="cost">
          <label className="col-12 col-sm-6 col-md-4 col-xl-auto">{'Ranks: '}
-            <input type="text" size="1" id={idFor('Rank')} onChange={onChangeFor('changeRank')} value={state.rank} /></label>
+            <input type="text" size="1" id={idFor('Rank')} onChange={onChangeFor('rank')} value={state.rank} /></label>
          <div className="col-12 col-sm-6 col-md-4 col-xl-auto">{'Total Cost Per Rank: ' + costPerRankDisplay}</div>
          <div className="col-12 col-md-4 col-xl-auto">{'Total Flat Modifier Cost: ' + derivedValues.flatValue}</div>
       </div>);
