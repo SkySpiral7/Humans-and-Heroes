@@ -180,6 +180,65 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "updateModifierNameByRow", function (newName, updatedRow) {
+      //TODO: detect mod blank row
+      if (updatedKey === _this._blankKey) {
+        _this._addModifierRow(null, newName);
+
+        return;
+      }
+
+      var powerIndex = _this.getIndexByKey(updatedRow.getPower().getKey());
+
+      var modifierSection = updatedRow.getModifierList();
+      var modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey()); //TODO: figure out how to handle duplicates
+
+      if (!Data.Modifier.names.contains(newName)) {
+        _this._removeModifierRow(powerIndex, modifierIndex);
+      } else {
+        var state = _this._rowArray[powerIndex].getState();
+
+        state.Modifiers[modifierIndex].name = newName;
+        _this._rowArray[powerIndex] = new PowerObjectAgnostic({
+          key: _this._rowArray[powerIndex].getKey(),
+          sectionName: _this.props.sectionName,
+          powerListParent: _assertThisInitialized(_this),
+          state: state
+        });
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it[powerIndex].Modifiers[modifierIndex].name = newName;
+          return state;
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateModifierPropertyByRow", function (propertyName, newValue, updatedRow) {
+      var powerIndex = _this.getIndexByKey(updatedRow.getPower().getKey());
+
+      var modifierSection = updatedRow.getModifierList();
+      var modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
+
+      var state = _this._rowArray[powerIndex].getState();
+
+      state.Modifiers[modifierIndex][propertyName] = newValue;
+      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
+        key: _this._rowArray[powerIndex].getKey(),
+        sectionName: _this.props.sectionName,
+        powerListParent: _assertThisInitialized(_this),
+        state: state
+      });
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[powerIndex].Modifiers[modifierIndex][propertyName] = newValue;
+        return state;
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "_addRow", function (newEffect) {
       var powerObject = _this._addRowNoPush(newEffect);
 
@@ -211,6 +270,31 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       return powerObject;
     });
 
+    _defineProperty(_assertThisInitialized(_this), "_addModifierRow", function (powerIndex, newName) {
+      var state = _this._rowArray[powerIndex].getState();
+
+      state.Modifiers.push({
+        name: newName
+      });
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      state = PowerObjectAgnostic.sanitizeState(state, sectionName, powerIndex, transcendence);
+      var modState = state.Modifiers.last();
+      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
+        key: _this._rowArray[powerIndex].getKey(),
+        sectionName: _this.props.sectionName,
+        powerListParent: _assertThisInitialized(_this),
+        state: state
+      });
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[powerIndex].Modifiers.push(modState);
+        return state;
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
       if (key === _this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
 
@@ -228,6 +312,25 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       _this.setState(function (state) {
         state.it.remove(rowIndex);
+        return state;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_removeModifierRow", function (powerIndex, modifierIndex) {
+      var state = _this._rowArray[powerIndex].getState();
+
+      state.Modifiers.remove(modifierIndex);
+      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
+        key: _this._rowArray[powerIndex].getKey(),
+        sectionName: _this.props.sectionName,
+        powerListParent: _assertThisInitialized(_this),
+        state: state
+      });
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[powerIndex].Modifiers.remove(modifierIndex);
         return state;
       });
     });

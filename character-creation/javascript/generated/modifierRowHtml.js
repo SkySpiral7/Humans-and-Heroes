@@ -6,6 +6,7 @@ function ModifierRowHtml(props) {
   var sectionName = props.powerRow.getSectionName();
   var powerKey = props.powerRow.getKey();
   var key = props.keyCopy;
+  var powerSection = props.powerRow.getSection();
 
   function idFor(elementLabel) {
     return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
@@ -21,7 +22,6 @@ function ModifierRowHtml(props) {
   */
 
   var elementList = [];
-  var onChange = null;
   var amReadOnly = 'Selective' === state.name && 'Triggered' === props.powerRow.getAction(); //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
   //Triggered's Selective is amReadOnly even for Feature
 
@@ -38,13 +38,7 @@ function ModifierRowHtml(props) {
       return /*#__PURE__*/React.createElement("option", {
         key: name
       }, name);
-    });
-
-    onChange = function onChange(event) {
-      var nameGiven = event.target.value;
-      modifierList.updateNameByRow(nameGiven, props.modifierRow);
-    }; //unshift = addFirst
-
+    }); //unshift = addFirst
 
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Modifier"
@@ -54,7 +48,10 @@ function ModifierRowHtml(props) {
       key: "name"
     }, /*#__PURE__*/React.createElement("select", {
       id: idFor('Choices'),
-      onChange: onChange,
+      onChange: function onChange(event) {
+        var nameGiven = event.target.value;
+        powerSection.updateModifierNameByRow(nameGiven, props.modifierRow);
+      },
       value: state.name
     }, options)));
   } else {
@@ -77,8 +74,9 @@ function ModifierRowHtml(props) {
           sectionName: sectionName,
           powerKey: powerKey,
           currentValue: props.powerRow.getName(),
-          onChange: function onChange() {
-            return props.powerRow.changeName();
+          onChange: function onChange(event) {
+            var nameGiven = event.target.value;
+            powerSection.updatePropertyByKey('name', nameGiven, props.powerKey);
           }
         })));
 
@@ -90,8 +88,9 @@ function ModifierRowHtml(props) {
             sectionName: sectionName,
             powerKey: powerKey,
             currentValue: props.powerRow.getSkillUsed(),
-            onChange: function onChange() {
-              return props.powerRow.changeSkill();
+            onChange: function onChange(event) {
+              var nameGiven = event.target.value;
+              powerSection.updatePropertyByKey('skillUsed', nameGiven, props.powerKey);
             }
           })));
         }
@@ -106,12 +105,7 @@ function ModifierRowHtml(props) {
                 key: "rank"
               }, 'Cost ' + state.rank));
             } else {
-              onChange = function onChange(event) {
-                var rankGiven = event.target.value;
-                modifierList.updateRankByKey(rankGiven, key);
-              }; //TODO: confirm spaces and non-breaking
-
-
+              //TODO: confirm spaces and non-breaking
               elementList.push( /*#__PURE__*/React.createElement("label", {
                 className: "col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto",
                 key: "rank"
@@ -119,25 +113,26 @@ function ModifierRowHtml(props) {
                 type: "text",
                 size: "1",
                 id: idFor('Rank'),
-                onChange: onChange,
+                onChange: function onChange(event) {
+                  var rankGiven = event.target.value;
+                  powerSection.updateModifierPropertyByRow('rank', rankGiven, props.modifierRow);
+                },
                 value: state.rank
               })));
             }
           }
 
           if (derivedValues.hasText) {
-            onChange = function onChange(event) {
-              var textGiven = event.target.value;
-              modifierList.updateTextByKey(textGiven, key);
-            };
-
             elementList.push( /*#__PURE__*/React.createElement("label", {
               className: "col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining",
               key: "text"
             }, "Text\xA0", /*#__PURE__*/React.createElement("input", {
               type: "text",
               id: idFor('Text'),
-              onChange: onChange,
+              onChange: function onChange(event) {
+                var textGiven = event.target.value;
+                powerSection.updateModifierPropertyByRow('text', textGiven, props.modifierRow);
+              },
               value: state.text
             })));
           } //auto total must see total (it doesn't show ranks)

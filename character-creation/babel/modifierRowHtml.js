@@ -7,6 +7,7 @@ function ModifierRowHtml(props)
    const sectionName = props.powerRow.getSectionName();
    const powerKey = props.powerRow.getKey();
    const key = props.keyCopy;
+   const powerSection = props.powerRow.getSection();
 
    function idFor(elementLabel)
    {
@@ -24,7 +25,6 @@ function ModifierRowHtml(props)
    */
 
    let elementList = [];
-   let onChange = null;
 
    let amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRow.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
@@ -42,16 +42,16 @@ function ModifierRowHtml(props)
       .map(name =>
          <option key={name}>{name}</option>
       );
-      onChange = (event) =>
-      {
-         const nameGiven = event.target.value;
-         modifierList.updateNameByRow(nameGiven, props.modifierRow);
-      };
       //unshift = addFirst
       options.unshift(<option key="Select Modifier">Select Modifier</option>);
 
       elementList.push(<div className="col-12 col-sm-5 col-lg-4 col-xl-auto" key="name">
-            <select id={idFor('Choices')} onChange={onChange}
+            <select id={idFor('Choices')}
+                    onChange={(event) =>
+                    {
+                       const nameGiven = event.target.value;
+                       powerSection.updateModifierNameByRow(nameGiven, props.modifierRow);
+                    }}
                     value={state.name}>
                {options}
             </select>
@@ -75,13 +75,21 @@ function ModifierRowHtml(props)
       {
          elementList.push(<div className="col-12 col-sm-6 col-lg-4" key="powerNameDiv">
             <PowerNameHtml sectionName={sectionName} powerKey={powerKey} currentValue={props.powerRow.getName()}
-                           onChange={() => props.powerRow.changeName()} />
+                           onChange={(event) =>
+                           {
+                              const nameGiven = event.target.value;
+                              powerSection.updatePropertyByKey('name', nameGiven, props.powerKey);
+                           }} />
          </div>);
          if (props.powerRow.getRange() !== 'Perception')
          {
             elementList.push(<div className="col-12 col-sm-6 col-lg-4" key="powerSkillDiv">
                <PowerSkillHtml sectionName={sectionName} powerKey={powerKey} currentValue={props.powerRow.getSkillUsed()}
-                               onChange={() => props.powerRow.changeSkill()} />
+                               onChange={(event) =>
+                               {
+                                  const nameGiven = event.target.value;
+                                  powerSection.updatePropertyByKey('skillUsed', nameGiven, props.powerKey);
+                               }} />
             </div>);
          }
       }
@@ -98,30 +106,30 @@ function ModifierRowHtml(props)
             }
             else
             {
-               onChange = (event) =>
-               {
-                  const rankGiven = event.target.value;
-                  modifierList.updateRankByKey(rankGiven, key);
-               };
                //TODO: confirm spaces and non-breaking
                elementList.push(
                   <label className="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto" key="rank">Applications{' '}
                      <input type="text" size="1" id={idFor('Rank')}
-                            onChange={onChange} value={state.rank} />
+                            onChange={(event) =>
+                            {
+                               const rankGiven = event.target.value;
+                               powerSection.updateModifierPropertyByRow('rank', rankGiven, props.modifierRow);
+                            }} value={state.rank} />
                   </label>);
             }
          }
          if (derivedValues.hasText)
          {
-            onChange = (event) =>
-            {
-               const textGiven = event.target.value;
-               modifierList.updateTextByKey(textGiven, key);
-            };
             elementList.push(
                <label className="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining" key="text">
                   Text&nbsp;
-                  <input type="text" id={idFor('Text')} onChange={onChange} value={state.text} /></label>);
+                  <input type="text" id={idFor('Text')}
+                         onChange={(event) =>
+                         {
+                            const textGiven = event.target.value;
+                            powerSection.updateModifierPropertyByRow('text', textGiven, props.modifierRow);
+                         }} value={state.text} />
+               </label>);
          }
          //auto total must see total (it doesn't show ranks)
          if (derivedValues.hasAutoTotal)
