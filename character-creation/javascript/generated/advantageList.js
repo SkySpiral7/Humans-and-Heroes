@@ -235,28 +235,10 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setMainState", function (value) {
-      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render.
       plus calling prerender causes a resolvable circle*/
       _this.setState(function (state) {
         state.main.godhood = value;
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "updateByKey", function (updatedKey) {
-      if (updatedKey === _this._blankKey) {
-        throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      var updatedIndex = _this.getIndexByKey(updatedKey);
-
-      var newStateRow = _this._rowArray[updatedIndex].getState();
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        //TODO: race conditions? merge issues? can this replace the others?
-        state.it[updatedIndex] = newStateRow;
         return state;
       });
     });
@@ -285,7 +267,6 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
-      //TODO: combine rank and text
       if (updatedKey === _this._blankKey) {
         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }

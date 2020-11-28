@@ -83,6 +83,7 @@ function MainObject()
       powerGodhood = advantageGodhood = false;
       if (previousGodhood)
       {
+         this.powerSection.setMainState(false);
          this.advantageSection.setMainState(false);
          previousGodhood = false;
       }
@@ -481,7 +482,7 @@ function MainObject()
       if(previousGodhood === currentGodhood) return;  //same transcendence so don't need to regenerate (also ad would be infinite recur)
       previousGodhood = currentGodhood;
       //transcendence changed so update these
-      this.powerSection.update();
+      this.powerSection.setMainState(currentGodhood);
       //although devices can have godhood powers (if maker is T2+) equipment can't so equipment isn't regenerated
       this.advantageSection.setMainState(currentGodhood);
    };

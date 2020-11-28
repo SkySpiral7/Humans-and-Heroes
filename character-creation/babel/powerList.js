@@ -66,6 +66,11 @@ class PowerListAgnostic extends React.Component
    /**This creates the page's html (for the section)*/
    render = () =>
    {
+      /*equipment can't be god-like so exclude it
+      don't check usingGodhoodPowers because global includes that
+      don't call a main method for this because render should be pure.*/
+      const generateGodHood = 'equipment' !== this.props.sectionName && this.state.main.godhood;
+
       const elementArray = this.state.it.map((state, powerIndex) =>
       {
          const powerRow = this._rowArray[powerIndex];
@@ -84,16 +89,28 @@ class PowerListAgnostic extends React.Component
                                derivedValues={rowDerivedValues}
                                sectionName={this.props.sectionName}
                                powerRow={powerRow}
-                               powerSection={this} />);
+                               powerSection={this}
+                               generateGodHood={generateGodHood} />);
       });
       elementArray.push(<PowerRowHtml key={this._blankPowerKey} keyCopy={this._blankPowerKey}
                                       state={{}}
                                       derivedValues={undefined}
                                       sectionName={this.props.sectionName}
                                       powerRow={undefined}
-                                      powerSection={this} />);
+                                      powerSection={this}
+                                      generateGodHood={generateGodHood} />);
 
       return elementArray;
+   };
+   setMainState = (value) =>
+   {
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render.
+      plus calling prerender causes a resolvable circle*/
+      this.setState(state =>
+      {
+         state.main.godhood = value;
+         return state;
+      });
    };
    /**Onchange function for selecting a power*/
    updateEffectByKey = (newEffect, updatedKey) =>

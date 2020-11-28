@@ -206,7 +206,6 @@ figure out architecture:
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?
-mod html onChange for blank
 add save to state conversion
 nail down power row
 hook up more for mod/power

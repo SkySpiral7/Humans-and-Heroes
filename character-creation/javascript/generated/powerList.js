@@ -87,6 +87,11 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
+      /*equipment can't be god-like so exclude it
+      don't check usingGodhoodPowers because global includes that
+      don't call a main method for this because render should be pure.*/
+      var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
+
       var elementArray = _this.state.it.map(function (state, powerIndex) {
         var powerRow = _this._rowArray[powerIndex];
         var rowKey = powerRow.getKey(); //getDerivedValues makes a clone
@@ -108,7 +113,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           derivedValues: rowDerivedValues,
           sectionName: _this.props.sectionName,
           powerRow: powerRow,
-          powerSection: _assertThisInitialized(_this)
+          powerSection: _assertThisInitialized(_this),
+          generateGodHood: generateGodHood
         });
       });
 
@@ -119,9 +125,19 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         derivedValues: undefined,
         sectionName: _this.props.sectionName,
         powerRow: undefined,
-        powerSection: _assertThisInitialized(_this)
+        powerSection: _assertThisInitialized(_this),
+        generateGodHood: generateGodHood
       }));
       return elementArray;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "setMainState", function (value) {
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render.
+      plus calling prerender causes a resolvable circle*/
+      _this.setState(function (state) {
+        state.main.godhood = value;
+        return state;
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateEffectByKey", function (newEffect, updatedKey) {

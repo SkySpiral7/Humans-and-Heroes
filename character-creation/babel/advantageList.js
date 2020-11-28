@@ -204,29 +204,11 @@ class AdvantageList extends React.Component
    };
    setMainState = (value) =>
    {
-      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render
+      /*don't prerender because ad list state isn't updating so we don't need to calculate anything just render.
       plus calling prerender causes a resolvable circle*/
       this.setState(state =>
       {
          state.main.godhood = value;
-         return state;
-      });
-   };
-   /**Unused until safe or deleted*/
-   updateByKey = (updatedKey) =>
-   {
-      if (updatedKey === this._blankKey)
-      {
-         throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      const updatedIndex = this.getIndexByKey(updatedKey);
-      const newStateRow = this._rowArray[updatedIndex].getState();
-      this._prerender();
-      this.setState(state =>
-      {
-         //TODO: race conditions? merge issues? can this replace the others?
-         state.it[updatedIndex] = newStateRow;
          return state;
       });
    };
@@ -258,7 +240,6 @@ class AdvantageList extends React.Component
    /**Onchange function for changing the rank*/
    updateRankByKey = (newRank, updatedKey) =>
    {
-      //TODO: combine rank and text
       if (updatedKey === this._blankKey)
       {
          throw new AssertionError('Can\'t update blank row ' + updatedKey);

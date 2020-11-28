@@ -1,12 +1,13 @@
 'use strict';
 
 //TODO: more doc (state, derivedValues)
-/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection */
+/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection, generateGodHood */
 function PowerRowHtml(props)
 {
    const state = props.state;
    const derivedValues = props.derivedValues;
    const key = props.keyCopy;
+   const displayGodhood = props.generateGodHood;
 
    /*
    values used:
@@ -30,13 +31,6 @@ function PowerRowHtml(props)
 
    let topElementList = [];
    let rowList = [], rowElementList = [];
-
-   //TODO: Main.canUseGodhood should be in state somewhere
-   let displayGodhood = ('equipment' !== props.sectionName &&
-      undefined !== Main && Main.canUseGodhood());
-   /*displayGodhood is false during main's constructor
-   equipment can't be god-like so exclude it
-   don't check isUsingGodhoodPowers because global includes that (more relevant with react)*/
 
    let options = Data.Power.names
    .filter(name => displayGodhood || !Data.Power[name].isGodhood)
