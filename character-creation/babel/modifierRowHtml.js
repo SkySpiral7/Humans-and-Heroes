@@ -50,7 +50,7 @@ function ModifierRowHtml(props)
                     onChange={(event) =>
                     {
                        const nameGiven = event.target.value;
-                       powerSection.updateModifierNameByRow(nameGiven, props.modifierRow);
+                       powerSection.updateModifierNameByRow(nameGiven, props.powerRow, props.modifierRow);
                     }}
                     value={state.name}>
                {options}

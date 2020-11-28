@@ -224,17 +224,20 @@ function PowerRowHtml(props) {
       rowElementList = [];
     }
 
-    var modifierRows = state.Modifiers.map(function (modifierState) {
-      var key = MainObject.generateKey();
+    var modifierList = props.powerRow.getModifierList();
+    var modifierKeyList = modifierList.getKeyList(); //modifierState is unused since I pass down the whole row object
+
+    var modifierHtmlRows = state.Modifiers.map(function (unused, modifierIndex) {
+      var key = modifierKeyList[modifierIndex];
       return /*#__PURE__*/React.createElement(ModifierRowHtml, {
         key: key,
         keyCopy: key,
         powerRow: props.powerRow,
-        modifierRow: modifierState
+        modifierRow: modifierList.getRowByIndex(modifierIndex)
       });
     });
-    var blankModifierKey = MainObject.generateKey();
-    modifierRows.push( /*#__PURE__*/React.createElement(ModifierRowHtml, {
+    var blankModifierKey = modifierKeyList.last();
+    modifierHtmlRows.push( /*#__PURE__*/React.createElement(ModifierRowHtml, {
       key: blankModifierKey,
       keyCopy: blankModifierKey,
       powerRow: props.powerRow,
@@ -243,7 +246,7 @@ function PowerRowHtml(props) {
     rowList.push( /*#__PURE__*/React.createElement("div", {
       id: props.sectionName + 'ModifierSection' + props.powerRow.getKey(),
       key: "ModifierSection"
-    }, modifierRows));
+    }, modifierHtmlRows));
     var costPerRankDisplay;
     if (derivedValues.costPerRank >= 1) costPerRankDisplay = '' + derivedValues.costPerRank;else costPerRankDisplay = '(1/' + (2 - derivedValues.costPerRank) + ')'; //0 is 1/2 and -1 is 1/3
 

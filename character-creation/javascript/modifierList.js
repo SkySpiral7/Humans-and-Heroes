@@ -4,9 +4,11 @@
  Immutable (state/derivedValues don't change) */
 function ModifierList(props)
 {
-   var state, derivedValues, rowArray;
+   var state, derivedValues, rowArray, blankKey;
 
    //region basic getter
+   this.getKeyList = function () {return JSON.clone(props.keyList);};
+   this.getBlankKey = function () {return blankKey;};
    /**This total will be the sum of all flat modifiers*/
    this.getFlatTotal = function () {return derivedValues.flatTotal;};  //TODO: make sure these are not called before they are defined
    /**This total will be the sum of all rank modifiers*/
@@ -18,8 +20,7 @@ function ModifierList(props)
    //TODO: sort this section
    this.getIndexByKey = function (key)
    {
-      //TODO: move blank check (doesn't work here)
-      if (key === this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+      if (key === blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
       for (var i = 0; i < rowArray.length; i++)
       {
          if (rowArray[i].getKey() === key) return i;
@@ -101,13 +102,13 @@ function ModifierList(props)
    this._constructor = function ()
    {
       state = props.state;
+      blankKey = props.keyList.last();
       rowArray = [];
       for (var modIndex = 0; modIndex < state.length; modIndex++)
       {
          rowArray.push(new ModifierObject({
-            //TODO: need to pass the actual keys down (link html to mod row)
             //don't need keyCopy because mod row isn't react
-            key: MainObject.generateKey(),
+            key: props.keyList[modIndex],
             powerRowParent: props.powerRowParent,
             modifierListParent: this,
             state: state[modIndex]
@@ -205,8 +206,7 @@ figure out architecture:
 long run: everything is either react or immutable
    main (react) has all state
    what about power list state?
-hook up power html
-   onChange
+mod html onChange for blank
 add save to state conversion
 nail down power row
 hook up more for mod/power

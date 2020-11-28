@@ -360,7 +360,7 @@ function PowerObjectAgnostic(props)
          //either way it will cost 0
       }
       */
-      modifierSection = new ModifierList({powerRowParent: this, state: props.state.Modifiers});
+      modifierSection = new ModifierList({powerRowParent: this, state: props.state.Modifiers, keyList: props.modifierKeyList});
 
       this.calculateValues();
    };

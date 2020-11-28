@@ -25,7 +25,8 @@ class PowerListAgnostic extends React.Component
          protectionRankTotal: null,
          attackEffectRanks: new MapDefault({}, 0)
       };
-      this._blankKey = MainObject.generateKey();
+      this._rowArray = [];
+      this._blankPowerKey = MainObject.generateKey();
 
       this._calculateValues();
       props.callback(this);
@@ -85,7 +86,7 @@ class PowerListAgnostic extends React.Component
                                powerRow={powerRow}
                                powerSection={this} />);
       });
-      elementArray.push(<PowerRowHtml key={this._blankKey} keyCopy={this._blankKey}
+      elementArray.push(<PowerRowHtml key={this._blankPowerKey} keyCopy={this._blankPowerKey}
                                       state={{}}
                                       derivedValues={undefined}
                                       sectionName={this.props.sectionName}
@@ -97,7 +98,7 @@ class PowerListAgnostic extends React.Component
    /**Onchange function for selecting a power*/
    updateEffectByKey = (newEffect, updatedKey) =>
    {
-      if (updatedKey === this._blankKey)
+      if (updatedKey === this._blankPowerKey)
       {
          this._addRow(newEffect);
          return;
@@ -116,7 +117,9 @@ class PowerListAgnostic extends React.Component
             key: this._rowArray[updatedIndex].getKey(),
             sectionName: this.props.sectionName,
             powerListParent: this,
-            state: state
+            state: state,
+            modifierKeyList: this._rowArray[updatedIndex].getModifierList()
+            .getKeyList()
          });
          this._prerender();
          this.setState(state =>
@@ -129,7 +132,7 @@ class PowerListAgnostic extends React.Component
    /**Onchange function for everything else in power*/
    updatePropertyByKey = (propertyName, newValue, updatedKey) =>
    {
-      if (updatedKey === this._blankKey)
+      if (updatedKey === this._blankPowerKey)
       {
          throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }
@@ -141,7 +144,9 @@ class PowerListAgnostic extends React.Component
          key: this._rowArray[updatedIndex].getKey(),
          sectionName: this.props.sectionName,
          powerListParent: this,
-         state: state
+         state: state,
+         modifierKeyList: this._rowArray[updatedIndex].getModifierList()
+         .getKeyList()
       });
       this._prerender();
       this.setState(state =>
@@ -151,19 +156,18 @@ class PowerListAgnostic extends React.Component
       });
    };
    /**Onchange function for selecting a modifier*/
-   updateModifierNameByRow = (newName, updatedRow) =>
+   updateModifierNameByRow = (newName, powerRow, updatedModifierRow) =>
    {
-      //TODO: detect mod blank row
-      if (updatedKey === this._blankKey)
+      const powerIndex = this.getIndexByKey(powerRow.getKey());
+
+      if (undefined === updatedModifierRow)
       {
-         this._addModifierRow(null, newName);
+         this._addModifierRow(powerIndex, newName);
          return;
       }
 
-      const powerIndex = this.getIndexByKey(updatedRow.getPower()
-      .getKey());
-      const modifierSection = updatedRow.getModifierList();
-      const modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
+      const modifierSection = powerRow.getModifierList();
+      const modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.getKey());
 
       //TODO: figure out how to handle duplicates
       if (!Data.Modifier.names.contains(newName))
@@ -173,12 +177,15 @@ class PowerListAgnostic extends React.Component
       else
       {
          const state = this._rowArray[powerIndex].getState();
+         //TODO: most of the time a new name should clear other state
          state.Modifiers[modifierIndex].name = newName;
          this._rowArray[powerIndex] = new PowerObjectAgnostic({
             key: this._rowArray[powerIndex].getKey(),
             sectionName: this.props.sectionName,
             powerListParent: this,
-            state: state
+            state: state,
+            modifierKeyList: this._rowArray[powerIndex].getModifierList()
+            .getKeyList()
          });
          this._prerender();
          this.setState(state =>
@@ -193,7 +200,7 @@ class PowerListAgnostic extends React.Component
    {
       const powerIndex = this.getIndexByKey(updatedRow.getPower()
       .getKey());
-      const modifierSection = updatedRow.getModifierList();
+      const modifierSection = updatedRow.getSection();
       const modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
 
       const state = this._rowArray[powerIndex].getState();
@@ -202,7 +209,9 @@ class PowerListAgnostic extends React.Component
          key: this._rowArray[powerIndex].getKey(),
          sectionName: this.props.sectionName,
          powerListParent: this,
-         state: state
+         state: state,
+         modifierKeyList: this._rowArray[powerIndex].getModifierList()
+         .getKeyList()
       });
       this._prerender();
       this.setState(state =>
@@ -232,13 +241,14 @@ class PowerListAgnostic extends React.Component
       const sectionName = this.props.sectionName;
       const state = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, this._rowArray.length, transcendence);
       const powerObject = new PowerObjectAgnostic({
-         key: this._blankKey,
+         key: this._blankPowerKey,
          sectionName: sectionName,
          powerListParent: this,
-         state: state
+         state: state,
+         modifierKeyList: [MainObject.generateKey()]
       });
-      //need a new key for the new blank row
-      this._blankKey = MainObject.generateKey();
+      //need a new key for the new blank power row
+      this._blankPowerKey = MainObject.generateKey();
       return powerObject;
    };
    /**Creates a new modifier row at the end of the power's array*/
@@ -250,24 +260,28 @@ class PowerListAgnostic extends React.Component
       const transcendence = Main.getTranscendence();
       const sectionName = this.props.sectionName;
       state = PowerObjectAgnostic.sanitizeState(state, sectionName, powerIndex, transcendence);
-      const modState = state.Modifiers.last();
+      const newModState = state.Modifiers.last();
+      const modifierKeyList = this._rowArray[powerIndex].getModifierList()
+      .getKeyList();
+      modifierKeyList.push(MainObject.generateKey());
 
       this._rowArray[powerIndex] = new PowerObjectAgnostic({
          key: this._rowArray[powerIndex].getKey(),
          sectionName: this.props.sectionName,
          powerListParent: this,
-         state: state
+         state: state,
+         modifierKeyList: modifierKeyList
       });
       this._prerender();
       this.setState(state =>
       {
-         state.it[powerIndex].Modifiers.push(modState);
+         state.it[powerIndex].Modifiers.push(newModState);
          return state;
       });
    };
    getIndexByKey = (key) =>
    {
-      if (key === this._blankKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+      if (key === this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
       for (let i = 0; i < this._rowArray.length; i++)
       {
          if (this._rowArray[i].getKey() === key) return i;
@@ -290,11 +304,15 @@ class PowerListAgnostic extends React.Component
    {
       const state = this._rowArray[powerIndex].getState();
       state.Modifiers.remove(modifierIndex);
+      const modifierKeyList = this._rowArray[powerIndex].getModifierList()
+      .getKeyList();
+      modifierKeyList.remove(modifierIndex);
       this._rowArray[powerIndex] = new PowerObjectAgnostic({
          key: this._rowArray[powerIndex].getKey(),
          sectionName: this.props.sectionName,
          powerListParent: this,
-         state: state
+         state: state,
+         modifierKeyList: modifierKeyList
       });
       this._prerender();
       this.setState(state =>

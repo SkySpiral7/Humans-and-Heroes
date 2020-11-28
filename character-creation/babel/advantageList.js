@@ -258,6 +258,7 @@ class AdvantageList extends React.Component
    /**Onchange function for changing the rank*/
    updateRankByKey = (newRank, updatedKey) =>
    {
+      //TODO: combine rank and text
       if (updatedKey === this._blankKey)
       {
          throw new AssertionError('Can\'t update blank row ' + updatedKey);

@@ -285,6 +285,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateRankByKey", function (newRank, updatedKey) {
+      //TODO: combine rank and text
       if (updatedKey === _this._blankKey) {
         throw new AssertionError('Can\'t update blank row ' + updatedKey);
       }

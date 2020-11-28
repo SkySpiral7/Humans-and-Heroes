@@ -189,20 +189,23 @@ function PowerRowHtml(props)
          rowElementList = [];
       }
 
-      const modifierRows = state.Modifiers.map(modifierState =>
+      const modifierList = props.powerRow.getModifierList();
+      const modifierKeyList = modifierList.getKeyList();
+      //modifierState is unused since I pass down the whole row object
+      const modifierHtmlRows = state.Modifiers.map((unused, modifierIndex) =>
       {
-         const key = MainObject.generateKey();
+         const key = modifierKeyList[modifierIndex];
          return (<ModifierRowHtml key={key} keyCopy={key}
                                   powerRow={props.powerRow}
-                                  modifierRow={modifierState} />);
+                                  modifierRow={modifierList.getRowByIndex(modifierIndex)} />);
       });
-      const blankModifierKey = MainObject.generateKey();
-      modifierRows.push(<ModifierRowHtml key={blankModifierKey} keyCopy={blankModifierKey}
-                                         powerRow={props.powerRow}
-                                         modifierRow={undefined} />);
+      const blankModifierKey = modifierKeyList.last();
+      modifierHtmlRows.push(<ModifierRowHtml key={blankModifierKey} keyCopy={blankModifierKey}
+                                             powerRow={props.powerRow}
+                                             modifierRow={undefined} />);
 
       rowList.push(<div id={props.sectionName + 'ModifierSection' + props.powerRow.getKey()} key="ModifierSection">
-         {modifierRows}
+         {modifierHtmlRows}
       </div>);
 
       let costPerRankDisplay;
