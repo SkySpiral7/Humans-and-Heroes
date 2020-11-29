@@ -196,22 +196,28 @@ ModifierList.removeByName = function (state, rowName)
    if (undefined !== rowIndex) state.remove(rowIndex);
 };
 
-/*TODO: next:
-figure out architecture:
-   * in the end main has all state
-   * power list (really main) needs the state of mod in order to render power row total
-   * power list (react) uses power html: pass down everything as props, immutable non-react below here
+/*
+architecture:
+   * main (react) has state but each section does too
+   * power list needs the state of mod in order to render power row total
+   * power list uses power html: pass down everything as props, immutable non-react below here
    * mod list delegate to power list (really main) for state mutation
-   * when loading main sends doc to section to validate/message and return valid state
-long run: everything is either react or immutable
-   main (react) has all state
-   what about power list state?
-add save to state conversion
-nail down power row
-hook up more for mod/power
-   setState
-   replace sanitizeRows with duplicate check
-   sort mods on add
+   * loading main is normal
+
+TODO: next:
+power row has activation on change
+sort all functions
+test all possible
+replace sanitizeRows with duplicate check
+   power row has stuff from mod on change
+sort mods on add
 test all
 there's lots of tasks
+
+skill list react
+react abilities
+react defenses
+react main
+   make offense new section
+   render includes totals and every non-section thing
 */

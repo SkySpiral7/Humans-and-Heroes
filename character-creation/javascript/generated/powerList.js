@@ -142,7 +142,20 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updateEffectByKey", function (newEffect, updatedKey) {
       if (updatedKey === _this._blankPowerKey) {
-        _this._addRow(newEffect);
+        var transcendence = Main.getTranscendence();
+        var sectionName = _this.props.sectionName;
+        var validState = PowerObjectAgnostic.sanitizeState({
+          effect: newEffect
+        }, sectionName, _this._rowArray.length, transcendence);
+
+        _this._addRowNoSetState(validState);
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it.push(validState);
+          return state;
+        });
 
         return;
       }
@@ -259,36 +272,19 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_addRow", function (newEffect) {
-      var powerObject = _this._addRowNoPush(newEffect);
-
-      _this._rowArray.push(powerObject);
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it.push(powerObject.getState());
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_addRowNoPush", function (newEffect) {
+    _defineProperty(_assertThisInitialized(_this), "_addRowNoSetState", function (validState) {
       //the row that was blank no longer is so use the blank key
-      var transcendence = Main.getTranscendence();
-      var sectionName = _this.props.sectionName;
-      var state = PowerObjectAgnostic.sanitizeState({
-        effect: newEffect
-      }, sectionName, _this._rowArray.length, transcendence);
       var powerObject = new PowerObjectAgnostic({
         key: _this._blankPowerKey,
-        sectionName: sectionName,
+        sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: state,
+        state: validState,
         modifierKeyList: [MainObject.generateKey()]
       }); //need a new key for the new blank power row
 
       _this._blankPowerKey = MainObject.generateKey();
-      return powerObject;
+
+      _this._rowArray.push(powerObject);
     });
 
     _defineProperty(_assertThisInitialized(_this), "_addModifierRow", function (powerIndex, newName) {
@@ -418,7 +414,13 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       for (var powerIndex = 0; powerIndex < jsonSection.length; powerIndex++) {
         var validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
-        if (undefined !== validRowState) newState.push(validRowState); //already sent message
+
+        if (undefined !== validRowState) {
+          //already sent message if invalid
+          newState.push(validRowState);
+
+          _this._addRowNoSetState(validRowState);
+        }
       }
 
       _this._prerender();
@@ -451,7 +453,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       protectionRankTotal: null,
       attackEffectRanks: new MapDefault({}, 0)
     };
-    _this._rowArray = [];
     _this._blankPowerKey = MainObject.generateKey();
 
     _this._calculateValues();

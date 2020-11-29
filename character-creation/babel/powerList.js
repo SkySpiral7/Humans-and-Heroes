@@ -25,7 +25,6 @@ class PowerListAgnostic extends React.Component
          protectionRankTotal: null,
          attackEffectRanks: new MapDefault({}, 0)
       };
-      this._rowArray = [];
       this._blankPowerKey = MainObject.generateKey();
 
       this._calculateValues();
@@ -117,7 +116,18 @@ class PowerListAgnostic extends React.Component
    {
       if (updatedKey === this._blankPowerKey)
       {
-         this._addRow(newEffect);
+         const transcendence = Main.getTranscendence();
+         const sectionName = this.props.sectionName;
+         const validState = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, this._rowArray.length, transcendence);
+
+         this._addRowNoSetState(validState);
+
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it.push(validState);
+            return state;
+         });
          return;
       }
 
@@ -237,36 +247,24 @@ class PowerListAgnostic extends React.Component
          return state;
       });
    };
-   /**Creates a new row at the end of the array*/
-   _addRow = (newEffect) =>
-   {
-      const powerObject = this._addRowNoPush(newEffect);
-
-      this._rowArray.push(powerObject);
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it.push(powerObject.getState());
-         return state;
-      });
-   };
-   /**Converts blank row into PowerObjectAgnostic but doesn't update rowArray or state*/
-   _addRowNoPush = (newEffect) =>
+   /**
+    * Converts blank row into PowerObjectAgnostic and pushes to rowArray but doesn't update state
+    * @param validState must already be valid
+    * @return void
+    */
+   _addRowNoSetState = (validState) =>
    {
       //the row that was blank no longer is so use the blank key
-      const transcendence = Main.getTranscendence();
-      const sectionName = this.props.sectionName;
-      const state = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, this._rowArray.length, transcendence);
       const powerObject = new PowerObjectAgnostic({
          key: this._blankPowerKey,
-         sectionName: sectionName,
+         sectionName: this.props.sectionName,
          powerListParent: this,
-         state: state,
+         state: validState,
          modifierKeyList: [MainObject.generateKey()]
       });
       //need a new key for the new blank power row
       this._blankPowerKey = MainObject.generateKey();
-      return powerObject;
+      this._rowArray.push(powerObject);
    };
    /**Creates a new modifier row at the end of the power's array*/
    _addModifierRow = (powerIndex, newName) =>
@@ -390,7 +388,12 @@ class PowerListAgnostic extends React.Component
       for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
       {
          const validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
-         if (undefined !== validRowState) newState.push(validRowState);  //already sent message
+         if (undefined !== validRowState)
+         {
+            //already sent message if invalid
+            newState.push(validRowState);
+            this._addRowNoSetState(validRowState);
+         }
       }
 
       this._prerender();

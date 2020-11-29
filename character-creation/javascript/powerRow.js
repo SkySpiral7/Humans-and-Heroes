@@ -109,108 +109,6 @@ function PowerObjectAgnostic(props)
    };
 
    //region copied from mod list
-   this.updateNameByRow = function (newName, modifierRow)
-   {
-      //TODO: no reason for this to be by row and others by key
-      if (undefined === modifierRow)
-      {
-         this.addRow(newName);
-         return;
-      }
-
-      var updatedIndex = this.getIndexByKey(modifierRow.getKey());
-
-      if (!Data.Modifier.names.contains(newName) || this._hasDuplicate())
-      {
-         this._removeRow(updatedIndex);
-      }
-      else
-      {
-         var rowState = modifierRow.getState();
-         rowState.name = newName;
-         rowArray[updatedIndex] = new ModifierObject({
-            key: this._blankKey,
-            powerRowParent: props.powerRowParent,
-            modifierListParent: this,
-            sectionName: props.sectionName,
-            state: rowState
-         });
-         this._prerender();
-         this.setState(state =>
-         {
-            state.it[updatedIndex].name = newName;
-            return state;
-         });
-      }
-   };
-   this.updateRankByKey = function (newRank, updatedKey)
-   {
-      if (updatedKey === this._blankKey)
-      {
-         throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      var updatedIndex = this.getIndexByKey(updatedKey);
-      var rowState = rowArray[updatedIndex].getState();
-      rowState.rank = newRank;
-      rowArray[updatedIndex] = new ModifierObject({
-         key: this._blankKey,
-         powerRowParent: props.powerRowParent,
-         modifierListParent: this,
-         sectionName: props.sectionName,
-         state: rowState
-      });
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it[updatedIndex].rank = newRank;
-         return state;
-      });
-   };
-   this.updateTextByKey = function (newText, updatedKey)
-   {
-      if (updatedKey === this._blankKey)
-      {
-         throw new AssertionError('Can\'t update blank row ' + updatedKey);
-      }
-
-      var updatedIndex = this.getIndexByKey(updatedKey);
-      var rowState = rowArray[updatedIndex].getState();
-      rowState.text = newText;
-      rowArray[updatedIndex] = new ModifierObject({
-         key: this._blankKey,
-         powerRowParent: props.powerRowParent,
-         modifierListParent: this,
-         sectionName: props.sectionName,
-         state: rowState
-      });
-
-      if (this._hasDuplicate())
-      {
-         this._removeRow(updatedIndex);
-      }
-      else
-      {
-         this._prerender();
-         this.setState(state =>
-         {
-            state.it[updatedIndex].text = newText;
-            return state;
-         });
-      }
-   };
-   /**Creates a new row at the end of the array*/
-   this.addRow = function (newName)
-   {
-      var modifierObject = this._addRowNoPush(newName);
-      rowArray.push(modifierObject);
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it.push(modifierObject.getState());
-         return state;
-      });
-   };
    this._addRowNoPush = function (newName)
    {
       //TODO: move this up. was in mod row
@@ -390,7 +288,7 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    if (Data.Power[validState.effect].hasInputBaseCost) validState.baseCost = sanitizeNumber(inputState.baseCost, 1, defaultBaseCost);
    else validState.baseCost = defaultBaseCost;
 
-   //TODO: onchange: var the text stay if changing between powers
+   //TODO: onchange: text stay if changing between powers
    if (undefined === inputState.text) validState.text = 'Descriptors and other text';
    else validState.text = inputState.text;
 
