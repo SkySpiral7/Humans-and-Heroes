@@ -250,13 +250,14 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
         return;
       }
 
-      var updatedIndex = _this.getIndexByKey(updatedKey);
+      var updatedIndex = _this.getIndexByKey(updatedKey); //has to be in row array for Duplicate check but must be valid to set it
+
+
+      if (Data.Advantage.names.contains(newName)) _this._rowArray[updatedIndex].setAdvantage(newName);
 
       if (!Data.Advantage.names.contains(newName) || _this._hasDuplicate()) {
         _this._removeRow(updatedIndex);
       } else {
-        _this._rowArray[updatedIndex].setAdvantage(newName);
-
         _this._prerender();
 
         _this.setState(function (state) {

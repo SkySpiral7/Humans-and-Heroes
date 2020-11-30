@@ -111,7 +111,7 @@ function PowerObjectAgnostic(props)
    //region copied from mod list
    this._addRowNoPush = function (newName)
    {
-      //TODO: move this up. was in mod row
+      //TODO: onchange: move this up. was in mod row
       if (false)
       {
          var wasAttack = ('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name);
@@ -224,6 +224,7 @@ function PowerObjectAgnostic(props)
    };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
    this._testSortStability = function () {unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
+   //endregion copied from mod list
 
    this.constructor = function ()
    {

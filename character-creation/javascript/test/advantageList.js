@@ -52,6 +52,7 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
    or at least polyfill: https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md
    */
    TestRunner.clearResults(testState);
+
    /*TODO: better? test runner API:
    fewer args but has more functionality. now requires DSL instead of []
    TestSuite.advantageList.calculateEquipmentRank = function (testState)
@@ -65,6 +66,11 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 
    return testState.determineResultsFor('TestSuite.abilityList.calculateValues');
    }*/
+
+   function getEquipmentId(index)
+   {
+      return Main.equipmentSection.indexToKey(index);
+   }
 
    const assertions = [];
    assertions.push({
@@ -80,7 +86,7 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 
    try
    {
-      SelectUtil.changeText('equipmentChoices0', 'Damage');  //use Damage because it has a base cost of 1
+      ReactUtil.changeValue('equipmentChoices' + getEquipmentId(0), 'Damage');  //use Damage because it has a base cost of 1
       assertions.push({
          Expected: 'Equipment',
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -94,7 +100,7 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it[0].rank, Description: 'Damage Added: Equipment rank is 1'});
 
-      DomUtil.changeValue('equipmentRank0', 5);
+      ReactUtil.changeValue('equipmentRank' + getEquipmentId(0), 5);
       assertions.push({
          Expected: 5,
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
@@ -106,7 +112,7 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
          Description: 'Damage Rank 5: Equipment rank still 1'
       });
 
-      DomUtil.changeValue('equipmentRank0', 6);
+      ReactUtil.changeValue('equipmentRank' + getEquipmentId(0), 6);
       assertions.push({
          Expected: 10,
          Actual: Main.advantageSection.getEquipmentMaxTotal(),
@@ -142,9 +148,14 @@ TestSuite.advantageList.clear = function (testState = {})
 
    const assertions = [];
 
+   function getEquipmentId(index)
+   {
+      return Main.equipmentSection.indexToKey(index);
+   }
+
    try
    {
-      DomUtil.changeValue('equipmentChoices0', 'Damage');
+      ReactUtil.changeValue('equipmentChoices' + getEquipmentId(0), 'Damage');
       Main.advantageSection.clear();
       assertions.push({
          Expected: 1,
@@ -166,13 +177,18 @@ TestSuite.advantageList.load = function (testState = {})
       return Main.advantageSection.indexToKey(index);
    }
 
+   function getEquipmentId(index)
+   {
+      return Main.equipmentSection.indexToKey(index);
+   }
+
    let dataToLoad;
    const assertions = [];
 
    try
    {
       ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
-      DomUtil.changeValue('equipmentChoices0', 'Damage');
+      ReactUtil.changeValue('equipmentChoices' + getEquipmentId(0), 'Damage');
       dataToLoad = Loader.resetData();
       dataToLoad.Advantages.push({name: 'Seize Initiative'});
       Loader.sendData(dataToLoad);

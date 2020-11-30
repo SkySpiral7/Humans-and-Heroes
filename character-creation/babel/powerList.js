@@ -50,6 +50,12 @@ class PowerListAgnostic extends React.Component
          return state;
       });
    };
+   /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
+   indexToKey = (rowIndex) =>
+   {
+      if (rowIndex === this._rowArray.length) return this._blankPowerKey;
+      return this._rowArray[rowIndex].getKey();
+   };
    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
    getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**Returns an array of json objects for this section's data*/

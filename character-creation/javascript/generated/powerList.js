@@ -72,6 +72,11 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "indexToKey", function (rowIndex) {
+      if (rowIndex === _this._rowArray.length) return _this._blankPowerKey;
+      return _this._rowArray[rowIndex].getKey();
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
       return _this._rowArray[rowIndex];
     });

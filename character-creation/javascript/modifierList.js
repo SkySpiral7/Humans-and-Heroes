@@ -31,6 +31,12 @@ function ModifierList(props)
    this.getRowByIndex = function (rowIndex) {return rowArray[rowIndex];};
    /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
    this.getRowByKey = function (key) {return rowArray[this.getIndexByKey(key)];};
+   /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
+   this.indexToKey = function (rowIndex)
+   {
+      if (rowIndex === rowArray.length) return blankKey;
+      return rowArray[rowIndex].getKey();
+   };
    /**Returns an array of json objects for this section's data*/
    this.save = function ()
    {
@@ -205,11 +211,12 @@ architecture:
    * loading main is normal
 
 TODO: next:
-power row has activation on change
-sort all functions
 test all possible
+sort all functions
+power row constructor has activation on change
+test
 replace sanitizeRows with duplicate check
-   power row has stuff from mod on change
+   power row has stuff (see _addRowNoPush region) from mod on change
 sort mods on add
 test all
 there's lots of tasks

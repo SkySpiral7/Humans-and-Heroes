@@ -222,13 +222,14 @@ class AdvantageList extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
+      //has to be in row array for Duplicate check but must be valid to set it
+      if (Data.Advantage.names.contains(newName)) this._rowArray[updatedIndex].setAdvantage(newName);
       if (!Data.Advantage.names.contains(newName) || this._hasDuplicate())
       {
          this._removeRow(updatedIndex);
       }
       else
       {
-         this._rowArray[updatedIndex].setAdvantage(newName);
          this._prerender();
          this.setState(state =>
          {
