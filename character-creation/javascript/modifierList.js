@@ -211,6 +211,8 @@ architecture:
    * loading main is normal
 
 TODO: next:
+resolve godhood circle:
+   high CP needs to trigger godhood but prerender can't update state
 test all possible
 sort all functions
 power row constructor has activation on change

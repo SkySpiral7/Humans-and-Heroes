@@ -189,13 +189,23 @@ class PowerListAgnostic extends React.Component
       const transcendence = Main.getTranscendence();
       powerState = PowerObjectAgnostic.sanitizeState(powerState, this.props.sectionName, updatedIndex, transcendence);
 
+      //sanitizeState may have auto added/removed modifiers so adjust key list
+      const modifierKeyList = this._rowArray[updatedIndex].getModifierList()
+      .getKeyList();
+      //grow as needed (>= because blank row has key but no state):
+      while (powerState.Modifiers.length >= modifierKeyList.length)
+      {
+         modifierKeyList.push(MainObject.generateKey());
+      }
+      //shrink as needed (+1 for blank row):
+      modifierKeyList.length = (powerState.Modifiers.length + 1);
+
       this._rowArray[updatedIndex] = new PowerObjectAgnostic({
          key: this._rowArray[updatedIndex].getKey(),
          sectionName: this.props.sectionName,
          powerListParent: this,
          state: powerState,
-         modifierKeyList: this._rowArray[updatedIndex].getModifierList()
-         .getKeyList()
+         modifierKeyList: modifierKeyList
       });
       this._prerender();
       this.setState(state =>
@@ -464,7 +474,9 @@ class PowerListAgnostic extends React.Component
       }
       Main.updateOffense();
       Main.defenseSection.calculateValues();
-      Main.update();
+      //TODO: resolve godhood circle:
+      //Main.update();
+      //high CP needs to trigger godhood but prerender can't update state
    };
 }
 

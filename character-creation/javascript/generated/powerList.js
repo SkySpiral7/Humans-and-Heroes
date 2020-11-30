@@ -213,13 +213,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
-      powerState = PowerObjectAgnostic.sanitizeState(powerState, _this.props.sectionName, updatedIndex, transcendence);
+      powerState = PowerObjectAgnostic.sanitizeState(powerState, _this.props.sectionName, updatedIndex, transcendence); //sanitizeState may have auto added/removed modifiers so adjust key list
+
+      var modifierKeyList = _this._rowArray[updatedIndex].getModifierList().getKeyList(); //grow as needed (>= because blank row has key but no state):
+
+
+      while (powerState.Modifiers.length >= modifierKeyList.length) {
+        modifierKeyList.push(MainObject.generateKey());
+      } //shrink as needed (+1 for blank row):
+
+
+      modifierKeyList.length = powerState.Modifiers.length + 1;
       _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[updatedIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
         state: powerState,
-        modifierKeyList: _this._rowArray[updatedIndex].getModifierList().getKeyList()
+        modifierKeyList: modifierKeyList
       });
 
       _this._prerender();
@@ -483,8 +493,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       }
 
       Main.updateOffense();
-      Main.defenseSection.calculateValues();
-      Main.update();
+      Main.defenseSection.calculateValues(); //TODO: resolve godhood circle:
+      //Main.update();
+      //high CP needs to trigger godhood but prerender can't update state
     });
 
     _this.state = {
