@@ -503,18 +503,18 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
    var pendingAction = inputState.action;
    if ('Permanent' === validDuration)
    {
-      if ('None' !== inputState.action)
+      if ('None' !== pendingAction)
       {
          Main.messageUser(
             'PowerObjectAgnostic.validateAndGetPossibleActions.onlyNone', loadLocation + ': ' +
-            validState.effect + ' can\'t have an action of ' + inputState.action + '. It can only be None because the duration is Permanent.');
+            validState.effect + ' can\'t have an action of ' + pendingAction + '. It can only be None because the duration is Permanent.');
       }
       return {current: 'None', choices: ['None']};
    }
-   else if ('None' === inputState.action)  //only Permanent duration can have action None
+   else if ('None' === pendingAction)  //only Permanent duration can have action None
    {
       pendingAction = Data.Power[validState.effect].defaultAction;
-      if ('None' === inputState.action) pendingAction = 'Free';
+      if ('None' === pendingAction) pendingAction = 'Free';
       //use default action if possible. otherwise use Free
       //either way it will cost 0
       Main.messageUser(
@@ -528,11 +528,11 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
    var allowMoveAction = (Main.getActiveRuleset()
    .isLessThan(3, 4) || !Data.Power[validState.effect].isAttack || 'Move Object' === validState.effect);
    if (!allowMoveAction) possibleActions.removeByValue('Move');
-   if ('Move' === inputState.action && !allowMoveAction)
+   if ('Move' === pendingAction && !allowMoveAction)
    {
       pendingAction = Data.Power[validState.effect].defaultAction;
       //dead code: attacks can't have a default duration of Permanent
-      if ('None' === inputState.action) pendingAction = 'Free';
+      if ('None' === pendingAction) pendingAction = 'Free';
       Main.messageUser('PowerObjectAgnostic.validateAndGetPossibleActions.moveNotAllowed',
          loadLocation + ': ' + validState.effect + ' can\'t have an action ' +
          'of Move because it is an attack type. Using action of ' + pendingAction + ' instead.');
@@ -542,13 +542,13 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
       .isLessThan(3, 4) ||
       (allowMoveAction && !Data.Power[validState.effect].isMovement && 'Healing' !== validState.effect));
    if (!allowFreeAction) possibleActions.removeByValue('Free');
-   if ('Free' === inputState.action && !allowFreeAction)
+   if ('Free' === pendingAction && !allowFreeAction)
    {
       if (!allowMoveAction)
       {
          pendingAction = Data.Power[validState.effect].defaultAction;
          //dead code: attacks/movement can't have a default duration of Permanent
-         if ('None' === inputState.action) pendingAction = 'Free';
+         if ('None' === pendingAction) pendingAction = 'Free';
          Main.messageUser(
             'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForAttacks', loadLocation + ': ' +
             validState.effect + ' can\'t have an action of Free because it is an attack type. Using action of ' + pendingAction + ' instead.');
@@ -558,7 +558,7 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
       {
          pendingAction = Data.Power[validState.effect].defaultAction;
          //dead code: movements can't have a default duration of Permanent
-         if ('None' === inputState.action) pendingAction = 'Free';
+         if ('None' === pendingAction) pendingAction = 'Free';
          Main.messageUser(
             'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForMovement', loadLocation + ': ' +
             validState.effect + ' can\'t have an action of Free because it is a movement type. Using action of ' + pendingAction + ' instead.');
@@ -568,7 +568,7 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
       {
          pendingAction = Data.Power[validState.effect].defaultAction;
          //dead code: Healing doesn't have a default duration of Permanent
-         if ('None' === inputState.action) pendingAction = 'Free';
+         if ('None' === pendingAction) pendingAction = 'Free';
          Main.messageUser(
             'PowerObjectAgnostic.validateAndGetPossibleActions.freeNotAllowedForHealing', loadLocation + ': ' +
             'Healing can\'t have an action of Free. Using action of ' + pendingAction + ' instead.');
@@ -578,11 +578,11 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
    var allowReaction = (Main.getActiveRuleset()
    .isLessThan(3, 4) || Data.Power[validState.effect].allowReaction);
    if (!allowReaction) possibleActions.removeByValue('Reaction');
-   if ('Reaction' === inputState.action && !allowReaction)
+   if ('Reaction' === pendingAction && !allowReaction)
    {
       pendingAction = Data.Power[validState.effect].defaultAction;
       //duration is not Permanent here because that was checked above
-      if ('None' === inputState.action) pendingAction = 'Free';
+      if ('None' === pendingAction) pendingAction = 'Free';
       Main.messageUser(
          'PowerObjectAgnostic.validateAndGetPossibleActions.reactionNotAllowed', loadLocation + ': ' +
          validState.effect + ' can\'t have an action of Reaction because it isn\'t an attack type. ' +
@@ -596,23 +596,23 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
 PowerObjectAgnostic._validateAndGetPossibleDurations = function (validState, inputState, pendingRange, loadLocation)
 {
    var defaultDuration = Data.Power[validState.effect].defaultDuration;
+   var pendingDuration = inputState.duration;
    if ('Instant' === defaultDuration)
    {
-      if ('Instant' !== inputState.duration)
+      if ('Instant' !== pendingDuration)
       {
          Main.messageUser(
             'PowerObjectAgnostic.validateAndGetPossibleDurations.onlyInstant', loadLocation + ': ' +
-            validState.effect + ' can\'t have ' + inputState.duration + ' duration. It can only be Instant.');
+            validState.effect + ' can\'t have ' + pendingDuration + ' duration. It can only be Instant.');
          //can't be changed (Feature's defaultDuration is Permanent)
       }
       return {current: 'Instant', choices: ['Instant']};
    }
 
-   var pendingDuration = inputState.duration;
    var possibleDurations = ['Concentration', 'Sustained', 'Continuous'];
    if ('Personal' === pendingRange) possibleDurations.push('Permanent');  //even Feature needs Personal range for Permanent duration
    //when loading, range may later change to Close but not Personal so this check is safe
-   else if ('Permanent' === inputState.duration)  //only personal range can have Permanent duration
+   else if ('Permanent' === pendingDuration)  //only personal range can have Permanent duration
    {
       if ('Permanent' === defaultDuration) pendingDuration = 'Sustained';
       else pendingDuration = defaultDuration;
@@ -624,7 +624,7 @@ PowerObjectAgnostic._validateAndGetPossibleDurations = function (validState, inp
          'Using duration of ' + pendingDuration + ' instead.');
    }
    if ('Feature' === validState.effect) possibleDurations.push('Instant');
-   else if ('Instant' === inputState.duration)
+   else if ('Instant' === pendingDuration)
    {
       //only Feature can change to Instant duration. defaultDuration of instant was checked above
       Main.messageUser(

@@ -181,22 +181,22 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (!Data.Power.names.contains(newEffect)) {
         _this._removeRow(updatedIndex);
       } else {
-        var state = _this._rowArray[updatedIndex].getState();
+        var powerState = _this._rowArray[updatedIndex].getState();
 
-        state.effect = newEffect;
-        state = PowerObjectAgnostic.sanitizeState(state, sectionName, _this._rowArray.length, transcendence);
+        powerState.effect = newEffect;
+        powerState = PowerObjectAgnostic.sanitizeState(powerState, sectionName, _this._rowArray.length, transcendence);
         _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[updatedIndex].getKey(),
           sectionName: _this.props.sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: state,
+          state: powerState,
           modifierKeyList: _this._rowArray[updatedIndex].getModifierList().getKeyList()
         });
 
         _this._prerender();
 
         _this.setState(function (state) {
-          state.it[updatedIndex].effect = newEffect;
+          state.it[updatedIndex] = powerState;
           return state;
         });
       }
@@ -209,23 +209,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      var state = _this._rowArray[updatedIndex].getState();
+      var powerState = _this._rowArray[updatedIndex].getState();
 
-      state[propertyName] = newValue;
+      powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
-      state = PowerObjectAgnostic.sanitizeState(state, _this.props.sectionName, updatedIndex, transcendence);
+      powerState = PowerObjectAgnostic.sanitizeState(powerState, _this.props.sectionName, updatedIndex, transcendence);
       _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[updatedIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: state,
+        state: powerState,
         modifierKeyList: _this._rowArray[updatedIndex].getModifierList().getKeyList()
       });
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[updatedIndex][propertyName] = newValue;
+        state.it[updatedIndex] = powerState;
         return state;
       });
     });
@@ -248,23 +248,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         var transcendence = Main.getTranscendence();
         var sectionName = _this.props.sectionName;
 
-        var state = _this._rowArray[powerIndex].getState(); //TODO: most of the time a new name should clear other state
+        var newModState = _this._rowArray[powerIndex].getState(); //TODO: most of the time a new name should clear other state
 
 
-        state.Modifiers[modifierIndex].name = newName;
-        state = PowerObjectAgnostic.sanitizeState(state, sectionName, _this._rowArray.length, transcendence);
+        newModState.Modifiers[modifierIndex].name = newName;
+        newModState = PowerObjectAgnostic.sanitizeState(newModState, sectionName, _this._rowArray.length, transcendence);
         _this._rowArray[powerIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[powerIndex].getKey(),
           sectionName: sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: state,
+          state: newModState,
           modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
         });
 
         _this._prerender();
 
         _this.setState(function (state) {
-          state.it[powerIndex].Modifiers[modifierIndex].name = newName;
+          state.it[powerIndex].Modifiers[modifierIndex] = newModState;
           return state;
         });
       }
@@ -276,23 +276,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var modifierSection = updatedRow.getSection();
       var modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
 
-      var state = _this._rowArray[powerIndex].getState();
+      var newModState = _this._rowArray[powerIndex].getState();
 
-      state.Modifiers[modifierIndex][propertyName] = newValue;
+      newModState.Modifiers[modifierIndex][propertyName] = newValue;
       var transcendence = Main.getTranscendence();
-      state = PowerObjectAgnostic.sanitizeState(state, _this.props.sectionName, powerIndex, transcendence);
+      newModState = PowerObjectAgnostic.sanitizeState(newModState, _this.props.sectionName, powerIndex, transcendence);
       _this._rowArray[powerIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: state,
+        state: newModState,
         modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
       });
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[powerIndex].Modifiers[modifierIndex][propertyName] = newValue;
+        state.it[powerIndex].Modifiers[modifierIndex] = newModState;
         return state;
       });
     });
@@ -484,6 +484,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       Main.updateOffense();
       Main.defenseSection.calculateValues();
+      Main.update();
     });
 
     _this.state = {
