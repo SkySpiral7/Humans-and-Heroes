@@ -156,9 +156,10 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateEffectByKey", function (newEffect, updatedKey) {
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+
       if (updatedKey === _this._blankPowerKey) {
-        var transcendence = Main.getTranscendence();
-        var sectionName = _this.props.sectionName;
         var validState = PowerObjectAgnostic.sanitizeState({
           effect: newEffect
         }, sectionName, _this._rowArray.length, transcendence);
@@ -183,6 +184,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         var state = _this._rowArray[updatedIndex].getState();
 
         state.effect = newEffect;
+        state = PowerObjectAgnostic.sanitizeState(state, sectionName, _this._rowArray.length, transcendence);
         _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[updatedIndex].getKey(),
           sectionName: _this.props.sectionName,
@@ -210,6 +212,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var state = _this._rowArray[updatedIndex].getState();
 
       state[propertyName] = newValue;
+      var transcendence = Main.getTranscendence();
+      state = PowerObjectAgnostic.sanitizeState(state, _this.props.sectionName, updatedIndex, transcendence);
       _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[updatedIndex].getKey(),
         sectionName: _this.props.sectionName,
@@ -241,13 +245,17 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (!Data.Modifier.names.contains(newName)) {
         _this._removeModifierRow(powerIndex, modifierIndex);
       } else {
+        var transcendence = Main.getTranscendence();
+        var sectionName = _this.props.sectionName;
+
         var state = _this._rowArray[powerIndex].getState(); //TODO: most of the time a new name should clear other state
 
 
         state.Modifiers[modifierIndex].name = newName;
+        state = PowerObjectAgnostic.sanitizeState(state, sectionName, _this._rowArray.length, transcendence);
         _this._rowArray[powerIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[powerIndex].getKey(),
-          sectionName: _this.props.sectionName,
+          sectionName: sectionName,
           powerListParent: _assertThisInitialized(_this),
           state: state,
           modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
@@ -271,6 +279,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var state = _this._rowArray[powerIndex].getState();
 
       state.Modifiers[modifierIndex][propertyName] = newValue;
+      var transcendence = Main.getTranscendence();
+      state = PowerObjectAgnostic.sanitizeState(state, _this.props.sectionName, powerIndex, transcendence);
       _this._rowArray[powerIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,

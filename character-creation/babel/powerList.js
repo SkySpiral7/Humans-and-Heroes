@@ -129,10 +129,10 @@ class PowerListAgnostic extends React.Component
    /**Onchange function for selecting a power*/
    updateEffectByKey = (newEffect, updatedKey) =>
    {
+      const transcendence = Main.getTranscendence();
+      const sectionName = this.props.sectionName;
       if (updatedKey === this._blankPowerKey)
       {
-         const transcendence = Main.getTranscendence();
-         const sectionName = this.props.sectionName;
          const validState = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, this._rowArray.length, transcendence);
 
          this._addRowNoSetState(validState);
@@ -153,8 +153,11 @@ class PowerListAgnostic extends React.Component
       }
       else
       {
-         const state = this._rowArray[updatedIndex].getState();
+         let state = this._rowArray[updatedIndex].getState();
          state.effect = newEffect;
+
+         state = PowerObjectAgnostic.sanitizeState(state, sectionName, this._rowArray.length, transcendence);
+
          this._rowArray[updatedIndex] = new PowerObjectAgnostic({
             key: this._rowArray[updatedIndex].getKey(),
             sectionName: this.props.sectionName,
@@ -180,8 +183,12 @@ class PowerListAgnostic extends React.Component
       }
 
       const updatedIndex = this.getIndexByKey(updatedKey);
-      const state = this._rowArray[updatedIndex].getState();
+      let state = this._rowArray[updatedIndex].getState();
       state[propertyName] = newValue;
+
+      const transcendence = Main.getTranscendence();
+      state = PowerObjectAgnostic.sanitizeState(state, this.props.sectionName, updatedIndex, transcendence);
+
       this._rowArray[updatedIndex] = new PowerObjectAgnostic({
          key: this._rowArray[updatedIndex].getKey(),
          sectionName: this.props.sectionName,
@@ -218,12 +225,17 @@ class PowerListAgnostic extends React.Component
       }
       else
       {
-         const state = this._rowArray[powerIndex].getState();
+         const transcendence = Main.getTranscendence();
+         const sectionName = this.props.sectionName;
+         let state = this._rowArray[powerIndex].getState();
          //TODO: most of the time a new name should clear other state
          state.Modifiers[modifierIndex].name = newName;
+
+         state = PowerObjectAgnostic.sanitizeState(state, sectionName, this._rowArray.length, transcendence);
+
          this._rowArray[powerIndex] = new PowerObjectAgnostic({
             key: this._rowArray[powerIndex].getKey(),
-            sectionName: this.props.sectionName,
+            sectionName: sectionName,
             powerListParent: this,
             state: state,
             modifierKeyList: this._rowArray[powerIndex].getModifierList()
@@ -245,8 +257,12 @@ class PowerListAgnostic extends React.Component
       const modifierSection = updatedRow.getSection();
       const modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
 
-      const state = this._rowArray[powerIndex].getState();
+      let state = this._rowArray[powerIndex].getState();
       state.Modifiers[modifierIndex][propertyName] = newValue;
+
+      const transcendence = Main.getTranscendence();
+      state = PowerObjectAgnostic.sanitizeState(state, this.props.sectionName, powerIndex, transcendence);
+
       this._rowArray[powerIndex] = new PowerObjectAgnostic({
          key: this._rowArray[powerIndex].getKey(),
          sectionName: this.props.sectionName,

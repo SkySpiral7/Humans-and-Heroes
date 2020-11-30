@@ -79,10 +79,6 @@ TestSuite.defenseList._calculateToughness=function(testState={})
    {
       return Main.defenseSection.getDerivedValues().Toughness;
    }
-   function getAdId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
 
    assertions.push({Expected: {totalBonus: 0}, Actual: getActual(), Description: 'Toughness defaults to 0'});
 
@@ -100,7 +96,7 @@ TestSuite.defenseList._calculateToughness=function(testState={})
 
    Main.clear();
    DomUtil.changeValue('Stamina', 1);
-   ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Defensive Roll');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Defensive Roll');
    expected = {totalBonus: 2, withoutDefensiveRoll: 1};
    assertions.push({Expected: expected, Actual: getActual(), Description: 'Defensive Roll stacks sometimes'});
 
