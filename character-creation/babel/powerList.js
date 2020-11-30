@@ -261,12 +261,15 @@ class PowerListAgnostic extends React.Component
    _addRowNoSetState = (validState) =>
    {
       //the row that was blank no longer is so use the blank key
+      //need a new key for each new mod (can be 1+ for load)
+      const modifierKeyList = validState.Modifiers.map(_ => MainObject.generateKey());
+      modifierKeyList.push(MainObject.generateKey());  //for blank
       const powerObject = new PowerObjectAgnostic({
          key: this._blankPowerKey,
          sectionName: this.props.sectionName,
          powerListParent: this,
          state: validState,
-         modifierKeyList: [MainObject.generateKey()]
+         modifierKeyList: modifierKeyList
       });
       //need a new key for the new blank power row
       this._blankPowerKey = MainObject.generateKey();
@@ -393,7 +396,22 @@ class PowerListAgnostic extends React.Component
       const newState = [];
       for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
       {
-         const validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
+         const jsonPowerRow = JSON.clone(jsonSection[powerIndex]);
+         jsonPowerRow.baseCost = jsonPowerRow.cost;
+         delete jsonPowerRow.cost;
+         jsonPowerRow.skillUsed = jsonPowerRow.skill;
+         delete jsonPowerRow.skill;
+         if (undefined !== jsonPowerRow.Modifiers)
+         {
+            jsonPowerRow.Modifiers = jsonPowerRow.Modifiers.map(jsonModRow =>
+            {
+               jsonModRow.rank = jsonModRow.applications;
+               delete jsonModRow.applications;
+               return jsonModRow;
+            });
+         }
+
+         const validRowState = PowerObjectAgnostic.sanitizeState(jsonPowerRow, sectionName, powerIndex, transcendence);
          if (undefined !== validRowState)
          {
             //already sent message if invalid

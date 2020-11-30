@@ -279,12 +279,18 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "_addRowNoSetState", function (validState) {
       //the row that was blank no longer is so use the blank key
+      //need a new key for each new mod (can be 1+ for load)
+      var modifierKeyList = validState.Modifiers.map(function (_) {
+        return MainObject.generateKey();
+      });
+      modifierKeyList.push(MainObject.generateKey()); //for blank
+
       var powerObject = new PowerObjectAgnostic({
         key: _this._blankPowerKey,
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
         state: validState,
-        modifierKeyList: [MainObject.generateKey()]
+        modifierKeyList: modifierKeyList
       }); //need a new key for the new blank power row
 
       _this._blankPowerKey = MainObject.generateKey();
@@ -418,7 +424,21 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var newState = [];
 
       for (var powerIndex = 0; powerIndex < jsonSection.length; powerIndex++) {
-        var validRowState = PowerObjectAgnostic.sanitizeState(jsonSection[powerIndex], sectionName, powerIndex, transcendence);
+        var jsonPowerRow = JSON.clone(jsonSection[powerIndex]);
+        jsonPowerRow.baseCost = jsonPowerRow.cost;
+        delete jsonPowerRow.cost;
+        jsonPowerRow.skillUsed = jsonPowerRow.skill;
+        delete jsonPowerRow.skill;
+
+        if (undefined !== jsonPowerRow.Modifiers) {
+          jsonPowerRow.Modifiers = jsonPowerRow.Modifiers.map(function (jsonModRow) {
+            jsonModRow.rank = jsonModRow.applications;
+            delete jsonModRow.applications;
+            return jsonModRow;
+          });
+        }
+
+        var validRowState = PowerObjectAgnostic.sanitizeState(jsonPowerRow, sectionName, powerIndex, transcendence);
 
         if (undefined !== validRowState) {
           //already sent message if invalid
