@@ -6,19 +6,14 @@ TestSuite.advantageRow.select = function (testState = {})
    const assertions = [];
    let expected;
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
       Description: 'Blank'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
    expected = [{name: 'Lucky', rank: 2}];
    assertions.push({
       Expected: expected,
@@ -26,7 +21,7 @@ TestSuite.advantageRow.select = function (testState = {})
       Description: 'Lucky: state'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Select Advantage');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Select Advantage');
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
@@ -41,12 +36,7 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    const assertions = [];
    let expected;
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
    expected = {name: 'Lucky', rank: 1};
    assertions.push({
       Expected: expected,
@@ -69,7 +59,7 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    expected = {
       name: 'Sidekick',
       rank: 1,
@@ -81,9 +71,9 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
       .getState(),
       Description: 'Sidekick: state'
    });
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
-   ReactUtil.changeValue('advantageText' + getId(0), 'I help');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Minion');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'I help');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
    expected = {
       name: 'Minion',
       rank: 2,
@@ -97,10 +87,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Minion');
-   ReactUtil.changeValue('advantageRank' + getId(0), 3);
-   ReactUtil.changeValue('advantageText' + getId(0), 'I can help');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 3);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'I can help');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    expected = {
       name: 'Sidekick',
       rank: 3,
@@ -114,10 +104,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Minion');
-   ReactUtil.changeValue('advantageRank' + getId(0), 4);
-   ReactUtil.changeValue('advantageText' + getId(0), 'helping');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 4);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'helping');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
    expected = {
       name: 'Benefit',
       rank: 1,
@@ -131,10 +121,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
-   ReactUtil.changeValue('advantageText' + getId(0), 'benny');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Minion');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'benny');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
    expected = {
       name: 'Minion',
       rank: 1,
@@ -148,10 +138,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
-   ReactUtil.changeValue('advantageRank' + getId(0), 4);
-   ReactUtil.changeValue('advantageText' + getId(0), 'helping');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 4);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'helping');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
    expected = {
       name: 'Benefit',
       rank: 1,
@@ -165,10 +155,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
-   ReactUtil.changeValue('advantageText' + getId(0), 'benny');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'benny');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    expected = {
       name: 'Sidekick',
       rank: 1,
@@ -181,7 +171,7 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
       Description: 'Benefit to Sidekick clears rank, text'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Diehard');
    assertions.push({
       Expected: false,
       Actual: Main.advantageSection.getRowByIndex(0)
@@ -190,10 +180,10 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
-   ReactUtil.changeValue('advantageText' + getId(0), 'side');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'side');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Diehard');
    expected = {
       name: 'Diehard',
       rank: 1
@@ -206,8 +196,8 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
    });
 
    Main.advantageSection.clear();
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    expected = {
       name: 'Sidekick',
       rank: 1,
@@ -229,15 +219,10 @@ TestSuite.advantageRow.setRank = function (testState = {})
    const assertions = [];
    let dataToLoad, expected;
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
    try
    {
-      ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-      ReactUtil.changeValue('advantageRank' + getId(0), '123456');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), '123456');
 
       assertions.push({
          Expected: 'Benefit',
@@ -291,7 +276,7 @@ TestSuite.advantageRow.setRank = function (testState = {})
 
    try
    {
-      ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
       assertions.push({
          Expected: 'Lucky',
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -305,7 +290,7 @@ TestSuite.advantageRow.setRank = function (testState = {})
          Description: 'Lucky getMaxRank'
       });
 
-      ReactUtil.changeValue('advantageRank' + getId(0), 5);
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 5);
       assertions.push({
          Expected: 3,
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -313,7 +298,7 @@ TestSuite.advantageRow.setRank = function (testState = {})
          Description: 'Lucky max rank enforced'
       });
 
-      ReactUtil.changeValue('advantageRank' + getId(0), -5);
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), -5);
       assertions.push({
          Expected: 1,
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -321,8 +306,8 @@ TestSuite.advantageRow.setRank = function (testState = {})
          Description: 'Lucky min rank enforced'
       });
 
-      ReactUtil.changeValue('advantageRank' + getId(0), 2);
-      ReactUtil.changeValue('advantageRank' + getId(0), 'invalid');
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 'invalid');
       assertions.push({
          Expected: 1,
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -330,7 +315,7 @@ TestSuite.advantageRow.setRank = function (testState = {})
          Description: 'Lucky rank defaults to 1'  //and not previous value of 2
       });
 
-      ReactUtil.changeValue('advantageRank' + getId(0), 2);
+      ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
       assertions.push({
          Expected: 5,
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -356,15 +341,10 @@ TestSuite.advantageRow.setText = function (testState = {})
    const assertions = [];
    let dataToLoad, expected;
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
    try
    {
-      ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-      ReactUtil.changeValue('advantageText' + getId(0), '\tchanged text: trimmed \n');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+      ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), '\tchanged text: trimmed \n');
       assertions.push({
          Expected: 'changed text: trimmed',
          Actual: Main.advantageSection.getRowByIndex(0)
@@ -395,20 +375,15 @@ TestSuite.advantageRow.getUniqueName = function (testState = {})
 
    const assertions = [];
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Minion');
-   ReactUtil.changeValue('advantageText' + getId(0), 'my name');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'my name');
    assertions.push({
       Expected: 'Helper: my name',
       Actual: Main.advantageSection.getRowByIndex(0)
       .getUniqueName(),
       Description: 'getUniqueName Minion'
    });
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    //text stays
    assertions.push({
       Expected: 'Helper: my name',
@@ -417,8 +392,8 @@ TestSuite.advantageRow.getUniqueName = function (testState = {})
       Description: 'getUniqueName Sidekick'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-   ReactUtil.changeValue('advantageText' + getId(0), 'my stuff');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'my stuff');
    assertions.push({
       Expected: 'Benefit: my stuff',
       Actual: Main.advantageSection.getRowByIndex(0)
@@ -426,7 +401,7 @@ TestSuite.advantageRow.getUniqueName = function (testState = {})
       Description: 'getUniqueName hasText'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
    assertions.push({
       Expected: 'Lucky',
       Actual: Main.advantageSection.getRowByIndex(0)
@@ -442,14 +417,9 @@ TestSuite.advantageRow.save = function (testState = {})
 
    const assertions = [];
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Benefit');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
-   ReactUtil.changeValue('advantageText' + getId(0), 'my text');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'my text');
    assertions.push({
       Expected: {name: 'Benefit', text: 'my text', rank: 2},
       Actual: Main.advantageSection.getRowByIndex(0)
@@ -457,8 +427,8 @@ TestSuite.advantageRow.save = function (testState = {})
       Description: 'text, rank'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Lucky');
-   ReactUtil.changeValue('advantageRank' + getId(0), 2);
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), 2);
    assertions.push({
       Expected: {name: 'Lucky', rank: 2},
       Actual: Main.advantageSection.getRowByIndex(0)
@@ -466,8 +436,8 @@ TestSuite.advantageRow.save = function (testState = {})
       Description: '!text'
    });
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Skill Mastery');
-   ReactUtil.changeValue('advantageText' + getId(0), 'skillz');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Skill Mastery');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'skillz');
    assertions.push({
       Expected: {name: 'Skill Mastery', text: 'skillz'},
       Actual: Main.advantageSection.getRowByIndex(0)

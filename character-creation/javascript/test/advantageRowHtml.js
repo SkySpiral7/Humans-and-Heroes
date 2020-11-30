@@ -17,12 +17,7 @@ TestSuite.advantageRowHtml = function (testState = {})
       return html;
    }
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
-   SelectUtil.changeText('equipmentChoices0', 'Feature');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Feature');
    expected = '<div class="row">' +
       '<div class="col-6 col-lg-4 col-xl-auto"><b>Equipment</b></div>' +
       '<div class="col-6 col-sm-3 col-lg-2 col-xl-auto">Cost 1</div>' +
@@ -32,7 +27,7 @@ TestSuite.advantageRowHtml = function (testState = {})
 
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'blank row'});
@@ -42,59 +37,59 @@ TestSuite.advantageRowHtml = function (testState = {})
 
    assertions.push({
       Expected: 'Select Advantage',
-      Actual: document.getElementById('advantageChoices' + getId(0)).value,
+      Actual: document.getElementById('advantageChoices' + Main.advantageSection.indexToKey(0)).value,
       Description: 'initial: default value'
    });
    assertions.push({
       Expected: false,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Equipment'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Equipment'),
       Description: 'initial: Equipment not in select'
    });
    assertions.push({
       Expected: true,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Ultimate Effort'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Ultimate Effort'),
       Description: 'initial: has (last advantage) Ultimate Effort'
    });
    assertions.push({
       Expected: false,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
       Description: 'initial: no (first Godhood) Beyond Mortal'
    });
 
    DomUtil.changeValue('transcendence', 1);
    assertions.push({
       Expected: true,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
       Description: 'godhood: has (first) Beyond Mortal'
    });
    assertions.push({
       Expected: true,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Your Petty Rules Don\'t Apply to Me'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Your Petty Rules Don\'t Apply to Me'),
       Description: 'godhood: has (last) Your Petty Rules Don\'t Apply to Me'
    });
    DomUtil.changeValue('transcendence', 0);
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Diehard');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Diehard');
    assertions.push({
       Expected: 'Diehard',
-      Actual: document.getElementById('advantageChoices' + getId(0)).value,
+      Actual: document.getElementById('advantageChoices' + Main.advantageSection.indexToKey(0)).value,
       Description: 'select set to value'
    });
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'no rank or text'});
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Defensive Roll');
-   ReactUtil.changeValue('advantageRank' + getId(0), '3');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Defensive Roll');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), '3');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
-      '<input type="text" size="1" id="advantageRank' + getId(0) + '" value="3"></label>' +
+      '<input type="text" size="1" id="advantageRank' + Main.advantageSection.indexToKey(0) + '" value="3"></label>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has rank'});
 
@@ -102,38 +97,38 @@ TestSuite.advantageRowHtml = function (testState = {})
 
    //TODO: everywhere: should really be setting #transcendence instead of Strength for godhood. more clear, less side affect
    DomUtil.changeValue('transcendence', 1);
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Let There Be');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Let There Be');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '<div class="col-auto">=&nbsp;40</div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has total'});
    Main.clear();
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Sidekick');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '<label class="col-5 col-sm-3 col-lg-2 col-xl-auto">Rank ' +
-      '<input type="text" size="1" id="advantageRank' + getId(0) + '" value="1"></label>' +
+      '<input type="text" size="1" id="advantageRank' + Main.advantageSection.indexToKey(0) + '" value="1"></label>' +
       '<div class="col-12 col-sm-6"><input type="text" ' +
-      'id="advantageText' + getId(0) + '" value="Helper Name" style="width: 100%;"></div>' +
+      'id="advantageText' + Main.advantageSection.indexToKey(0) + '" value="Helper Name" style="width: 100%;"></div>' +
       '<div class="col-auto">=&nbsp;2</div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has rank, text, total'});
 
    Main.setRuleset(1, 0);
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Favored Environment');
-   ReactUtil.changeValue('advantageText' + getId(0), 'Ocean');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Favored Environment');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'Ocean');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-6 col-lg-4 col-xl-auto">' +
-      '<select id="advantageChoices' + getId(0) + '">' +
+      '<select id="advantageChoices' + Main.advantageSection.indexToKey(0) + '">' +
       '</select></div>' +
       '<div class="col-12 col-sm-6"><input type="text" ' +
-      'id="advantageText' + getId(0) + '" value="Ocean" style="width: 100%;"></div>' +
+      'id="advantageText' + Main.advantageSection.indexToKey(0) + '" value="Ocean" style="width: 100%;"></div>' +
       '</div>';
    assertions.push({Expected: expected, Actual: getSectionFirstRowHtml(), Description: 'has text'});
 

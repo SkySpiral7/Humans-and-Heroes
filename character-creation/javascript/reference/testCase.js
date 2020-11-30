@@ -4,11 +4,6 @@ TestSuite.test.example = function (testState = {})
    const assertions = [];
    let dataToLoad;
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
    dataToLoad = Loader.resetData();
    dataToLoad.Skills = [{"name": "Perception", "rank": 2, "ability": "Awareness"}];
    Loader.sendData(dataToLoad);
@@ -20,7 +15,8 @@ TestSuite.test.example = function (testState = {})
    });
 
    Main.setRuleset(2, 7);
-   ReactUtil.changeValue('powerChoices' + getId(0), 'Feature');
+   ReactUtil.changeValue('powerChoices' + Main.advantageSection.indexToKey(0), 'Feature');
+   //and indexToPowerAndModifierKey
    SelectUtil.changeText('powerChoices0', 'Feature');
    DomUtil.changeValue('equipmentRank0', 5);
    assertions.push({

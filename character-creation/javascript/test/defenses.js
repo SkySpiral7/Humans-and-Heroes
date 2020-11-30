@@ -92,7 +92,7 @@ TestSuite.defenseList._calculateToughness=function(testState={})
    DomUtil.changeValue('Stamina', -1);
    assertions.push({Expected: {totalBonus: -1}, Actual: getActual(), Description: 'Negative Toughness is possible'});
 
-   SelectUtil.changeText('powerChoices0', 'Protection');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
    assertions.push({Expected: {totalBonus: 1}, Actual: getActual(), Description: 'protection vs stamina: use greater protection'});
 
    DomUtil.changeValue('Stamina', 3);
@@ -110,7 +110,7 @@ TestSuite.defenseList._calculateToughness=function(testState={})
 
    Main.setRuleset(1, 0);
    DomUtil.changeValue('Stamina', 1);
-   SelectUtil.changeText('powerChoices0', 'Protection');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
    assertions.push({Expected: {totalBonus: 2}, Actual: getActual(), Description: 'v1 protection stacks with stamina'});
 
    return TestRunner.displayResults('TestSuite.defenseList._calculateToughness', assertions, testState);

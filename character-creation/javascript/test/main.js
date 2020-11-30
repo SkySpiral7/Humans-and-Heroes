@@ -194,7 +194,7 @@ TestSuite.main.loadFile=function(testState={})
     var assertions=[];
     try{
     document.getElementById('file-chooser').value = '';  //clear the input
-    SelectUtil.changeText('powerChoices0', 'Damage');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
     Main.loadFile();
     assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Loading no file does nothing'});
     } catch(e){assertions.push({Error: e, Description: 'Loading no file does nothing'});}
@@ -232,26 +232,26 @@ TestSuite.main.getProtectionTotal=function(testState={})
 
    assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
 
-   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Protection');
    assertions.push({Expected: 1, Actual: getActual(), Description: 'uses equip when power is null'});
 
    Main.equipmentSection.clear();
-   SelectUtil.changeText('powerChoices0', 'Protection');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
    assertions.push({Expected: 1, Actual: getActual(), Description: 'uses power when equip is null'});
 
-   SelectUtil.changeText('equipmentChoices0', 'Protection');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Protection');
    assertions.push({Expected: 1, Actual: getActual(), Description: 'does not stack'});
 
-   DomUtil.changeValue('equipmentRank0', 2);
+   ReactUtil.changeValue('equipmentRank' + Main.equipmentSection.indexToKey(0), 2);
    assertions.push({Expected: 2, Actual: getActual(), Description: 'use equip if greater'});
 
-   DomUtil.changeValue('powerRank0', 3);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 3);
    assertions.push({Expected: 3, Actual: getActual(), Description: 'use power if greater'});
 
    Main.setRuleset(1, 0);
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   SelectUtil.changeText('equipmentChoices0', 'Protection');
-   DomUtil.changeValue('powerRank0', 2);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
    assertions.push({Expected: 3, Actual: getActual(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.main.getProtectionTotal', assertions, testState);
@@ -315,30 +315,30 @@ TestSuite.main.update=function(testState={})
    assertions.push({Expected: 0, Actual: Main.getEveryVar().powerLevelTranscendence, Description: '-CP but PL T min 0'});
    Main.abilitySection.clear();
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   DomUtil.changeValue('powerRank0', 15);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 15);
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: '15 CP = PL 1'});
 
-   DomUtil.changeValue('powerRank0', 16);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 16);
    assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: '16 CP = PL 2'});
 
-   DomUtil.changeValue('powerRank0', 1000);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1000);
    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Your Petty Rules Don\'t Apply to Me');
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
    //petty costs 50 + 40 damage = 90 CP /15 = 6 PL even though PL limit would require 10
-   DomUtil.changeValue('powerRank0', 10);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 10);
    assertions.push(
       {Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'Petty rules has PL from CP only'});
 
    Main.clear();
    assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'Default transcendence 0'});
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   DomUtil.changeValue('powerRank0', 15 * 19);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 15 * 19);
    assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'PL 19 = transcendence 0'});
 
-   DomUtil.changeValue('powerRank0', 15 * 20);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 15 * 20);
    assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'PL 20 = transcendence 1'});
 
    //v3.15
@@ -354,21 +354,21 @@ TestSuite.main.update=function(testState={})
    assertions.push({Expected: 0, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 -35 CP = PL 0'});
    Main.abilitySection.clear();
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 1 CP = PL 1'});
 
-   DomUtil.changeValue('powerRank0', 15);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 15);
    assertions.push({Expected: 1, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 15 CP = PL 1'});
 
-   DomUtil.changeValue('powerRank0', 16);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 16);
    assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 16 CP = PL 2'});
 
    //v1.0
    Main.setRuleset(1, 0);
    assertions.push({Expected: 0, Actual: Main.getTranscendence(), Description: 'v1.0 Default transcendence 0'});
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   DomUtil.changeValue('powerRank0', 15 * 20);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 15 * 20);
    assertions.push({
       Expected: 0,
       Actual: Main.getTranscendence(),
@@ -470,13 +470,13 @@ TestSuite.main.updateOffense=function(testState={})
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'No Str, Awe Unarmed: no Unarmed'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerName0', 'Sword 1');
-   DomUtil.changeValue('powerSkill0', 'Sword');
-   SelectUtil.changeText('equipmentChoices0', 'Affliction');
-   DomUtil.changeValue('equipmentName0', 'Sword 2');
-   DomUtil.changeValue('equipmentSkill0', 'Sword');
-   DomUtil.changeValue('equipmentRank0', 2);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'Sword 1');
+   ReactUtil.changeValue('powerSkill' + Main.powerSection.indexToKey(0), 'Sword');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Affliction');
+   ReactUtil.changeValue('equipmentName' + Main.equipmentSection.indexToKey(0), 'Sword 2');
+   ReactUtil.changeValue('equipmentSkill' + Main.equipmentSection.indexToKey(0), 'Sword');
+   ReactUtil.changeValue('equipmentRank' + Main.equipmentSection.indexToKey(0), 2);
    DomUtil.changeValue('Fighting', 2);
    expected = [
       {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
@@ -495,17 +495,17 @@ TestSuite.main.updateOffense=function(testState={})
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Power/Equip with skill'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerSelectRange0', 'Perception');
-   DomUtil.changeValue('powerName0', 'Attack 1');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'Attack 1');
    expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Attack 1', attackBonus: '--', range: 'Perception', effect: 'Damage', rank: 1}
    ];
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Perception attack'});
 
-   DomUtil.changeValue('powerSelectRange0', 'Ranged');
-   DomUtil.changeValue('powerSkill0', 'Gun');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+   ReactUtil.changeValue('powerSkill' + Main.powerSection.indexToKey(0), 'Gun');
    DomUtil.changeValue('Dexterity', 5);
    expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
@@ -522,10 +522,10 @@ TestSuite.main.updateOffense=function(testState={})
    assertions.push({Expected: expected, Actual: Main.getDerivedValues().Offense, Description: 'Ranged attack with skill'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerName0', 'Sword 1');
-   DomUtil.changeValue('powerModifierChoices0.0', 'Accurate');
-   DomUtil.changeValue('powerModifierRank0.0', 2);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'Sword 1');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Accurate');
+   ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 2);
    DomUtil.changeValue('Fighting', 1);
    expected = [
       {skillName: 'Unarmed', attackBonus: 1, range: 'Close', effect: 'Damage', rank: 0},
@@ -536,8 +536,8 @@ TestSuite.main.updateOffense=function(testState={})
    Main.setRuleset(1, 0);
    ReactUtil.changeValue('advantageChoices' + getAdId(0), 'Close Attack');
    DomUtil.changeValue('Fighting', 1);
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerName0', 'Sword 1');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'Sword 1');
    expected = [
       {skillName: 'Unarmed', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 0},
       {skillName: 'Sword 1', attackBonus: 2, range: 'Close', effect: 'Damage', rank: 1}
@@ -549,15 +549,15 @@ TestSuite.main.updateOffense=function(testState={})
    ReactUtil.changeValue('advantageRank' + getAdId(0), 2);
    DomUtil.changeValue('Dexterity', 1);
 
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerName0', 'Attack 1');
-   SelectUtil.changeText('powerSelectRange0', 'Ranged');
-   DomUtil.changeValue('powerSkill0', 'Gun 1');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'Attack 1');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+   ReactUtil.changeValue('powerSkill' + Main.powerSection.indexToKey(0), 'Gun 1');
    //TODO: bug: skill shouldn't be required here. don't know why/how it removes the row
 
-   SelectUtil.changeText('powerChoices1', 'Affliction');
-   DomUtil.changeValue('powerName1', 'Attack 2');
-   SelectUtil.changeText('powerSelectRange1', 'Ranged');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(1), 'Affliction');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(1), 'Attack 2');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(1), 'Ranged');
 
    expected = [
       {skillName: 'Unarmed', attackBonus: 0, range: 'Close', effect: 'Damage', rank: 0},
@@ -573,11 +573,6 @@ TestSuite.main.updateTranscendence = function (testState = {})
    TestRunner.clearResults(testState);
    const assertions = [];
 
-   function getId(index)
-   {
-      return Main.advantageSection.indexToKey(index);
-   }
-
    DomUtil.changeValue('transcendence', -1);
    assertions.push({Expected: -1, Actual: Main.getTranscendence(), Description: 'set T -1'});
 
@@ -585,11 +580,11 @@ TestSuite.main.updateTranscendence = function (testState = {})
    assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'PL set T 1'});
    assertions.push({Expected: '1', Actual: document.getElementById('transcendence').value, Description: 'DOM updated'});
 
-   ReactUtil.changeValue('advantageChoices' + getId(0), 'Beyond Mortal');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal');
    DomUtil.changeValue('Strength', 0);
    assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'advantageGodhood used for min T'});
 
-   SelectUtil.changeText('powerChoices0', 'A God I Am');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am');
    Main.advantageSection.clear();
    assertions.push({Expected: 1, Actual: Main.getTranscendence(), Description: 'powerGodhood used for min T'});
    Main.powerSection.clear();
@@ -604,7 +599,7 @@ TestSuite.main.updateTranscendence = function (testState = {})
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power no T'});
    assertions.push({
       Expected: false,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
       Description: 'ad no T'
    });
 
@@ -612,7 +607,7 @@ TestSuite.main.updateTranscendence = function (testState = {})
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T refresh'});
    assertions.push({
       Expected: true,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
       Description: 'ad T refresh'
    });
 
@@ -620,7 +615,7 @@ TestSuite.main.updateTranscendence = function (testState = {})
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T reset'});
    assertions.push({
       Expected: false,
-      Actual: SelectUtil.containsText('advantageChoices' + getId(0), 'Beyond Mortal'),
+      Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
       Description: 'ad T reset'
    });
 
@@ -662,17 +657,17 @@ TestSuite.main._calculatePowerLevelLimitations=function(testState={})
    assertions.push({Expected: 2, Actual: Main.getDerivedValues().powerLevel, Description: 'Unarmed Damage to PL'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    //10 CP /15 = 1 PL
-   DomUtil.changeValue('powerRank0', 10);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 10);
    assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Power Damage to PL'});
 
-   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
    //40 CP /15 = 3 PL
    assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Perception Damage to PL'});
 
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   DomUtil.changeValue('powerRank0', 10);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 10);
    //10 CP /15 = PL 1
    assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'Toughness to PL'});
 
@@ -714,18 +709,18 @@ TestSuite.main._calculatePowerLevelLimitations=function(testState={})
    assertions.push({Expected: 6, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Unarmed Attack+Damage to PL'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    //10 CP /15 = 1 PL
-   DomUtil.changeValue('powerRank0', 10);
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 10);
    assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Power Damage to PL'});
 
-   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
    //40 CP /15 = 3 PL
    assertions.push({Expected: 10, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 Perception Damage to PL'});
 
    Main.clear();
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   DomUtil.changeValue('powerRank0', 10);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 10);
    //10 CP /15 = PL 1
    assertions.push({Expected: 5, Actual: Main.getDerivedValues().powerLevel, Description: 'v3.15 0+Toughness to PL'});
 

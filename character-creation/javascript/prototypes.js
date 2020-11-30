@@ -48,15 +48,21 @@ Array.prototype.stableSort=function(compare)
 
 if(undefined === JSON.clone){JSON.clone = function(obj){return JSON.parse(JSON.stringify(obj));};}
 
-/**From https://stackoverflow.com/a/43595019 pure ES5 version.
+/**Based on https://stackoverflow.com/a/43595019 pure ES5 version.
  * Used for debugging.*/
 function AssertionError(message, fileName, lineNumber)
 {
    var instance = new Error(message, fileName, lineNumber);
    Object.setPrototypeOf(instance, Object.getPrototypeOf(this));
-   alert('Assertion Error');
+   if (AssertionError.alert)
+   {
+      AssertionError.alert = false;
+      alert('Assertion Error');
+      console.error(instance);
+   }
    return instance;
 }
+AssertionError.alert = true;
 
 AssertionError.prototype = Object.create(Error.prototype, {
    constructor: {

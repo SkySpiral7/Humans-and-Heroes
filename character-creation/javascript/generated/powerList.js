@@ -77,6 +77,16 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       return _this._rowArray[rowIndex].getKey();
     });
 
+    _defineProperty(_assertThisInitialized(_this), "indexToPowerAndModifierKey", function (powerIndex, modifierIndex) {
+      if (powerIndex === _this._rowArray.length) throw new AssertionError('Blank power row (' + key + ') has no modifiers');
+
+      var powerKey = _this._rowArray[powerIndex].getKey();
+
+      var modifierKey = _this._rowArray[powerIndex].getModifierList().indexToKey(modifierIndex);
+
+      return powerKey + '.' + modifierKey;
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
       return _this._rowArray[rowIndex];
     });

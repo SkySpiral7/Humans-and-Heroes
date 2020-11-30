@@ -8,7 +8,7 @@ TestSuite.powerRowHtml = function (testState={})
 
    assertions.push({
       Expected: 'Select Power',
-      Actual: document.getElementById('powerChoices0').value,
+      Actual: document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).value,
       Description: 'power: default value'
    });
    assertions.push({
@@ -16,10 +16,10 @@ TestSuite.powerRowHtml = function (testState={})
       Actual: SelectUtil.containsText('powerChoices0', 'Flight'),
       Description: 'power has option Flight'
    });
-   SelectUtil.changeText('powerChoices0', 'Flight');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push({
       Expected: 'Flight',
-      Actual: document.getElementById('powerChoices0').value,
+      Actual: document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).value,
       Description: 'power: selected value'
    });
    assertions.push({
@@ -37,7 +37,7 @@ TestSuite.powerRowHtml = function (testState={})
 
    assertions.push({
       Expected: 'Select Power',
-      Actual: document.getElementById('equipmentChoices0').value,
+      Actual: document.getElementById('equipmentChoices' + Main.equipmentSection.indexToKey(0)).value,
       Description: 'equipment: default value'
    });
    assertions.push({
@@ -45,10 +45,10 @@ TestSuite.powerRowHtml = function (testState={})
       Actual: SelectUtil.containsText('equipmentChoices0', 'Flight'),
       Description: 'equipment has option Flight'
    });
-   SelectUtil.changeText('equipmentChoices0', 'Flight');
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Flight');
    assertions.push({
       Expected: 'Flight',
-      Actual: document.getElementById('equipmentChoices0').value,
+      Actual: document.getElementById('equipmentChoices' + Main.equipmentSection.indexToKey(0)).value,
       Description: 'equipment: selected value'
    });
    assertions.push({
@@ -68,7 +68,7 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
       '</div></div>';
-   document.getElementById('powerChoices0').innerHTML = '';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -76,8 +76,8 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   SelectUtil.changeText('powerChoices0', 'Attain Knowledge');
-   DomUtil.changeValue('powerText0', 'my text');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Attain Knowledge');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), 'my text');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -110,9 +110,9 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -125,22 +125,22 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   SelectUtil.changeText('powerChoices0', 'Flight');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push({
       Expected: 'Move',
-      Actual: document.getElementById('powerSelectAction0').value,
+      Actual: document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).value,
       Description: 'action: selected value'
    });
-   SelectUtil.changeText('powerSelectAction0', 'Full');
+   ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Full');
    assertions.push({
       Expected: 'Full',
-      Actual: document.getElementById('powerSelectAction0').value,
+      Actual: document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).value,
       Description: 'action: has list of values that can be selected'
    });
    Main.powerSection.clear();
 
-   SelectUtil.changeText('powerChoices0', 'Create');
-   DomUtil.changeValue('powerText0', '');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -177,11 +177,11 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerSelectRange0').innerHTML = '';
-   document.getElementById('powerSelectDuration0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectRange' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectDuration' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -189,36 +189,36 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    assertions.push({
       Expected: 'Close',
-      Actual: document.getElementById('powerSelectRange0').value,
+      Actual: document.getElementById('powerSelectRange' + Main.powerSection.indexToKey(0)).value,
       Description: 'range: selected value'
    });
-   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
    assertions.push({
       Expected: 'Ranged',
-      Actual: document.getElementById('powerSelectRange0').value,
+      Actual: document.getElementById('powerSelectRange' + Main.powerSection.indexToKey(0)).value,
       Description: 'range: has list of values that can be selected'
    });
    Main.powerSection.clear();
 
-   SelectUtil.changeText('powerChoices0', 'Protection');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
    assertions.push({
       Expected: 'Permanent',
-      Actual: document.getElementById('powerSelectDuration0').value,
+      Actual: document.getElementById('powerSelectDuration' + Main.powerSection.indexToKey(0)).value,
       Description: 'duration: selected value'
    });
-   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
    assertions.push({
       Expected: 'Sustained',
-      Actual: document.getElementById('powerSelectDuration0').value,
+      Actual: document.getElementById('powerSelectDuration' + Main.powerSection.indexToKey(0)).value,
       Description: 'duration: has list of values that can be selected'
    });
    Main.powerSection.clear();
 
-   SelectUtil.changeText('powerChoices0', 'Immortality');
-   DomUtil.changeValue('powerText0', '');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Immortality');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -251,9 +251,9 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 5</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectDuration0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectDuration' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -268,10 +268,10 @@ TestSuite.powerRowHtml = function (testState={})
       .replace(/ \/>/g, '>');
    }
 
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerText0', '');
-   DomUtil.changeValue('powerName0', 'my name 2');
-   DomUtil.changeValue('powerSkill0', 'my skill 2');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'my name 2');
+   ReactUtil.changeValue('powerSkill' + Main.powerSection.indexToKey(0), 'my skill 2');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -314,10 +314,10 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 1</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerSelectRange0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectRange' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -325,10 +325,10 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate the selects
 
-   SelectUtil.changeText('powerChoices0', 'Damage');
-   DomUtil.changeValue('powerText0', '');
-   SelectUtil.changeText('powerSelectRange0', 'Perception');
-   DomUtil.changeValue('powerName0', 'my name 3');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'my name 3');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -369,10 +369,10 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 4</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerSelectRange0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectRange' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -380,10 +380,10 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   SelectUtil.changeText('powerChoices0', 'Leaping');
-   DomUtil.changeValue('powerText0', '');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-   DomUtil.changeValue('powerRank0', '4');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Leaping');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), '4');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -416,9 +416,9 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,
@@ -426,11 +426,11 @@ TestSuite.powerRowHtml = function (testState={})
    });
    Main.powerSection.clear();  //to regenerate powerChoices0
 
-   SelectUtil.changeText('powerChoices0', 'Leaping');
-   DomUtil.changeValue('powerText0', '');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-   DomUtil.changeValue('powerModifierRank0.0', '3');
-   DomUtil.changeValue('powerRank0', '8');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Leaping');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), '');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+   ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), '3');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), '8');
    expected = '<div class="container-fluid"><div class="row">' +
       '<div class="col-12 col-sm-6 col-xl-auto"><select id="powerChoices0" onchange="Main.powerSection.getRowByIndex(0).select();">' +
       '</select></div>' +
@@ -463,9 +463,9 @@ TestSuite.powerRowHtml = function (testState={})
       '<div class="row"><div class="col">Grand total for Power: 2</div>' +
       '</div>' +
       '</div>';  //<hr> is next child
-   document.getElementById('powerChoices0').innerHTML = '';
-   document.getElementById('powerSelectAction0').innerHTML = '';
-   document.getElementById('powerModifierSection0').innerHTML = 'modifiers';
+   document.getElementById('powerChoices' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerSelectAction' + Main.powerSection.indexToKey(0)).innerHTML = '';
+   document.getElementById('powerModifierSection' + Main.powerSection.indexToKey(0)).innerHTML = 'modifiers';
    assertions.push({
       Expected: expected,
       Actual: document.getElementById('power-section').firstChild.outerHTML,

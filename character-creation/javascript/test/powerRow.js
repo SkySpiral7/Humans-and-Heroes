@@ -399,13 +399,13 @@ TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
    assertions.push({Expected: [], Actual: Messages.list, Description: 'Reaction Feature happy: error'});
 
    Main.powerSection.clear();
-   SelectUtil.changeText('powerChoices0', 'Illusion');  //isAttack but !allowReaction
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Illusion');  //isAttack but !allowReaction
    assertions.push({
       Expected: ['Slow', 'Full', 'Standard'],
       Actual: Main.powerSection.getRowByIndex(0)._validateAndGetPossibleActions(),
       Description: 'Illusion: returns all actions except Move, Free, Reaction'  //and None
    });
-   SelectUtil.changeText('powerChoices0', 'Luck Control');  //!isAttack and allowReaction
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control');  //!isAttack and allowReaction
    assertions.push({
       Expected: ['Slow', 'Full', 'Standard', 'Move', 'Free', 'Reaction'],
       Actual: Main.powerSection.getRowByIndex(0)._validateAndGetPossibleActions(),
@@ -580,9 +580,9 @@ TestSuite.powerRow.setAction=function(testState={})
 
     try{
     Main.setRuleset(3, 3);
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v2.7 Reaction Damage doesn\'t become close range: power'});
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v2.7 Reaction Damage doesn\'t become close range: getAction'});
     assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v2.7 Reaction Damage doesn\'t become close range: getRange'});
@@ -590,9 +590,9 @@ TestSuite.powerRow.setAction=function(testState={})
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.4 Reaction Damage becomes close range: power'});
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Reaction Damage becomes close range: getAction'});
     assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Reaction Damage becomes close range: getRange'});
@@ -600,9 +600,9 @@ TestSuite.powerRow.setAction=function(testState={})
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.4 Reaction Feature doesn\'t become close range: power'});
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Reaction Feature doesn\'t become close range: getAction'});
     assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Reaction Feature doesn\'t become close range: getRange'});
@@ -610,14 +610,14 @@ TestSuite.powerRow.setAction=function(testState={})
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Luck Control');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control starts as ranged: getAction'});
     assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Luck Control starts as ranged: getRange'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Free');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Free');
     assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control changed to Free'});
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control doesn\'t become close range: getAction'});
     assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Luck Control doesn\'t become close range: getRange'});
     } catch(e){assertions.push({Error: e, Description: 'v3.4 Luck Control not close range'});}
@@ -636,38 +636,38 @@ TestSuite.powerRow.setDuration=function(testState={})
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Duration does not exist: getDuration'});
    assertions.push({Expected: ['PowerObjectAgnostic.setDuration.notExist'], Actual: Messages.errorCodes(), Description: 'Duration does not exist: error'});
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   SelectUtil.changeText('powerSelectDuration0', 'Instant');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Instant');
    assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Can change to Instant: power'});
    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Can change to Instant: getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Can change to Instant: getRange'});
    assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Can change to Instant: getDuration'});
 
-   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
    assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Can change from Instant: power'});
    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Can change from Instant: getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Can change from Instant: getRange'});
    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Can change from Instant: getDuration'});
 
-   SelectUtil.changeText('powerChoices0', 'Flight');
-   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Permanent');
    assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change to permanent (non-permanent default): power'});
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to permanent (non-permanent default): getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to permanent (non-permanent default): getRange'});
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to permanent (non-permanent default): getDuration'});
 
-   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from permanent (non-permanent default): getAction'});
    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from permanent (non-permanent default): getDuration'});
 
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
    assertions.push({Expected: 'Protection', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change from permanent (permanent default): power'});
    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from permanent (permanent default): getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from permanent (permanent default): getRange'});
    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from permanent (permanent default): getDuration'});
 
-   SelectUtil.changeText('powerSelectDuration0', 'Permanent');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Permanent');
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to permanent (permanent default): getAction'});
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to permanent (permanent default): getDuration'});
 
@@ -681,34 +681,34 @@ TestSuite.powerRow.updateDurationModifiers=function(testState={})
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature does\'t auto gain Increased Duration: getDuration'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Increased Duration: before is blank'});
-    SelectUtil.changeText('powerSelectDuration0', 'Continuous');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Increased Duration: after is still blank'});
     } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Increased Duration'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Decreased Duration: before is blank'});
-    SelectUtil.changeText('powerSelectDuration0', 'Concentration');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Decreased Duration: after is still blank'});
     } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Decreased Duration'});}
 
     try{
-    SelectUtil.changeText('powerChoices0', 'Flight'); SelectUtil.changeText('powerSelectDuration0', 'Continuous');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
     assertions.push({Expected: 'Continuous', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: duration'});
     assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Increased Duration: was auto created'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Increased Duration: is rank 1'});
 
-    SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: setting the duration back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Increased Duration: was auto removed'});
 
-    SelectUtil.changeText('powerSelectDuration0', 'Continuous'); SelectUtil.changeText('powerSelectDuration0', 'Concentration');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
     assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: setting duration up then down'});
     assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Increased Duration: was auto replaced with Decreased Duration'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Increased Duration: was in fact removed'});
@@ -716,16 +716,16 @@ TestSuite.powerRow.updateDurationModifiers=function(testState={})
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Flight'); SelectUtil.changeText('powerSelectDuration0', 'Concentration');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
     assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: duration'});
     assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Decreased Duration: was auto created'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Decreased Duration: is rank 1'});
 
-    SelectUtil.changeText('powerSelectDuration0', 'Sustained');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: setting the duration back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Decreased Duration: was auto removed'});
 
-    SelectUtil.changeText('powerSelectDuration0', 'Concentration'); SelectUtil.changeText('powerSelectDuration0', 'Continuous');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
     assertions.push({Expected: 'Continuous', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: setting duration up then down'});
     assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Decreased Duration: was auto replaced with Increased Duration'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Decreased Duration: was in fact removed'});
@@ -751,32 +751,32 @@ TestSuite.powerRow.updateActionModifiers=function(testState={})
 
     try{
     Main.setRuleset(3,3);
-    SelectUtil.changeText('powerChoices0', 'Teleport'); SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Teleport'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Faster Action: action'});
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Faster Action: was auto created'});
     assertions.push({Expected: 2, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Faster Action: rank'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Move');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
     assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Faster Action: setting the action back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Faster Action: was auto removed'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Reaction'); SelectUtil.changeText('powerSelectAction0', 'Full');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Full');
     assertions.push({Expected: 'Full', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Faster Action: setting action up then down'});
     assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Faster Action: was auto replaced with Slower Action'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Faster Action: was in fact removed'});
     } catch(e){assertions.push({Error: e, Description: 'Faster Action'});}
 
     try{
-    SelectUtil.changeText('powerSelectAction0', 'Full');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Full');
     assertions.push({Expected: 'Full', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Slower Action: action'});
     assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Slower Action: was auto created'});
     assertions.push({Expected: 2, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Slower Action: is rank 1'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Move');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
     assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Slower Action: setting the action back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Slower Action: was auto removed'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Full'); SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Full'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Slower Action: setting action down then up'});
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Slower Action: was auto replaced with Faster Action'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Slower Action: was in fact removed'});
@@ -784,19 +784,19 @@ TestSuite.powerRow.updateActionModifiers=function(testState={})
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Damage'); SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Aura: action'});
     assertions.push({Expected: 'Aura', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Aura: was auto created'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Aura: calculates distance from Standard'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Standard');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Standard');
     assertions.push({Expected: 'Standard', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Aura: setting the action back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Aura: was auto removed'});
     } catch(e){assertions.push({Error: e, Description: 'Aura'});}
 
     try{
     Main.setRuleset(3,3);
-    SelectUtil.changeText('powerChoices0', 'Teleport'); SelectUtil.changeText('powerSelectAction0', 'Triggered');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Teleport'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
     assertions.push({Expected: 'Triggered', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Add Selective: action'});
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Add Selective: Faster Action was auto created'});
     assertions.push({Expected: 3, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Add Selective: Faster Action rank 3'});
@@ -804,14 +804,14 @@ TestSuite.powerRow.updateActionModifiers=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Add Selective'});}
 
     try{
-    SelectUtil.changeText('powerSelectAction0', 'Move');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
     assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Keep Selective: action'});
     assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Keep Selective: Selective still there'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Keep Selective: no other modifiers'});
     } catch(e){assertions.push({Error: e, Description: 'Keep Selective'});}
 
     try{
-    SelectUtil.changeText('powerSelectAction0', 'Triggered');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Only 1 Selective: Faster Action was auto created'});
     assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 1).getName(), Description: 'Only 1 Selective: Selective still there'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 2).isBlank(), Description: 'Only 1 Selective: no other modifiers'});
@@ -819,40 +819,40 @@ TestSuite.powerRow.updateActionModifiers=function(testState={})
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature doesn\'t auto gain Faster Action: getAction'});
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature doesn\'t auto gain Faster Action: after'});
     } catch(e){assertions.push({Error: e, Description: 'Feature doesn\'t auto gain Faster Action'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
-    SelectUtil.changeText('powerSelectAction0', 'Slow');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Slow');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature doesn\'t auto gain Slower Action: after'});
     } catch(e){assertions.push({Error: e, Description: 'Feature doesn\'t auto gain Slower Action'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
-    SelectUtil.changeText('powerSelectAction0', 'Triggered');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
     assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Feature auto gains Selective: Selective added'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Feature auto gains Selective: no other modifiers'});
     } catch(e){assertions.push({Error: e, Description: 'Feature auto gains Selective'});}
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Luck Control'); SelectUtil.changeText('powerSelectAction0', 'Free');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control'); ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Free');
     assertions.push({Expected: 'Luck Control', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Luck Control doesn\'t have Aura: power'});
     assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Luck Control doesn\'t have Aura: free action'});
     assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Luck Control doesn\'t have Aura: Slower Action from Reaction (name)'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Luck Control doesn\'t have Aura: Slower Action from Reaction (rank)'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Luck Control doesn\'t have Aura: only modifier'});
 
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Luck Control doesn\'t have Aura: Reaction action'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Luck Control doesn\'t have Aura: no modifiers'});
     } catch(e){assertions.push({Error: e, Description: 'Luck Control doesn\'t have Aura'});}
@@ -884,32 +884,32 @@ TestSuite.powerRow.setRange=function(testState={})
    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
    assertions.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Feature Range does not exist: error'});
 
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change to Perception: power'});
    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to Perception: getRange before'});
    assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change to Perception: getName before'});
    assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change to Perception: getSkillUsed before'});
 
-   SelectUtil.changeText('powerSelectRange0', 'Perception');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
    assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to Perception: getRange after'});
    assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change to Perception: getName after'});
    assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change to Perception: getSkillUsed after'});
 
    try{
-   SelectUtil.changeText('powerSelectRange0', 'Close');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from Perception: getRange'});
    assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change from Perception: getName'});
    assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change from Perception: getSkillUsed'});
    } catch(e){assertions.push({Error: e, Description: 'Change from Perception'});}
 
    try{
-   SelectUtil.changeText('powerChoices0', 'Protection');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
    assertions.push({Expected: 'Protection', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change from personal: power'});
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from personal: getAction before'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from personal: getRange before'});
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from personal: getDuration before'});
 
-   SelectUtil.changeText('powerModifierChoices0.0', 'Affects Others Only');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Affects Others Only');
    assertions.push({Expected: 'Affects Others Only', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Change from personal: modifier'});
    assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Change from personal: no other modifiers'});
    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from personal: getAction after'});
@@ -918,22 +918,22 @@ TestSuite.powerRow.setRange=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Change from personal'});}
 
    try{
-   SelectUtil.changeText('powerSelectAction0', 'Move');
-   SelectUtil.changeText('powerSelectDuration0', 'Concentration');
-   SelectUtil.changeText('powerModifierChoices0.2', 'Select Modifier');  //removes Affects Others (first 2 are for action and duration)
+   ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Select Modifier');  //removes Affects Others (first 2 are for action and duration)
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to personal changes nothing: getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to personal changes nothing: getRange'});
    assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to personal changes nothing: getDuration'});
    } catch(e){assertions.push({Error: e, Description: 'Change to personal changes nothing'});}
 
    try{
-   SelectUtil.changeText('powerChoices0', 'Feature');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
    assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature change from personal: power'});
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change from personal: getAction before'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change from personal: getRange before'});
    assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change from personal: getDuration before'});
 
-   SelectUtil.changeText('powerSelectRange0', 'Ranged');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change from personal: getAction after'});
    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change from personal: getRange after'});
    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change from personal: getDuration after'});
@@ -941,11 +941,11 @@ TestSuite.powerRow.setRange=function(testState={})
 
    try{
    Main.powerSection.clear();
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   SelectUtil.changeText('powerSelectRange0', 'Ranged');
-   SelectUtil.changeText('powerSelectAction0', 'Move');
-   SelectUtil.changeText('powerSelectDuration0', 'Concentration');
-   SelectUtil.changeText('powerSelectRange0', 'Personal');  //must be last here
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+   ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
+   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Personal');  //must be last here
    assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change to personal changes nothing: getAction'});
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change to personal changes nothing: getRange'});
    assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change to personal changes nothing: getDuration'});
@@ -961,40 +961,40 @@ TestSuite.powerRow.updateRangeModifiers=function(testState={})
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Feature');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Increased Range: before is blank'});
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Feature does\'t auto gain Increased Range: after is still blank'});
     } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Increased Range'});}
     //can't test 'Feature does\'t auto gain Decreased Range' because Feature's default range is Personal
 
     try{
-    SelectUtil.changeText('powerChoices0', 'Move Object'); SelectUtil.changeText('powerSelectRange0', 'Perception');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Move Object'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
     assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: range'});
     assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Increased Range: was auto created'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Increased Range: is rank 1'});
 
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
     assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: setting the range back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Increased Range: was auto removed'});
 
-    SelectUtil.changeText('powerSelectRange0', 'Perception'); SelectUtil.changeText('powerSelectRange0', 'Close');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: setting range up then down'});
     assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Increased Range: was auto replaced with Reduced Range'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Increased Range: was in fact removed'});
     } catch(e){assertions.push({Error: e, Description: 'Increased Range'});}
 
     try{
-    SelectUtil.changeText('powerSelectRange0', 'Close');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: range'});
     assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Reduced Range: was auto created'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0, 0).getRank(), Description: 'Reduced Range: is rank 1'});
 
-    SelectUtil.changeText('powerSelectRange0', 'Ranged');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
     assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: setting the range back'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 0).isBlank(), Description: 'Reduced Range: was auto removed'});
 
-    SelectUtil.changeText('powerSelectRange0', 'Close'); SelectUtil.changeText('powerSelectRange0', 'Perception');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
     assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: setting range down then up'});
     assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Reduced Range: was auto replaced with Increased Range'});
     assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Reduced Range: was in fact removed'});
@@ -1008,68 +1008,68 @@ TestSuite.powerRow.calculateValues=function(testState={})
 
     var assertions=[];
     try{
-    SelectUtil.changeText('powerChoices0', 'Variable');
-    DomUtil.changeValue('powerRank0', 2);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
     assertions.push({Expected: 16, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank extras increase cost/rank'});
     } catch(e){assertions.push({Error: e, Description: 'Rank extras'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Variable');
-    DomUtil.changeValue('powerRank0', 2);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
     assertions.push({Expected: 12, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws reduce cost/rank'});
 
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    DomUtil.changeValue('powerRank0', 4);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
     assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws can reduce to fraction'});
 
-    DomUtil.changeValue('powerRank0', 3);
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 3);
     assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Total cost rounds up'});
 
-    DomUtil.changeValue('powerRank0', 100);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    DomUtil.changeValue('powerModifierRank0.0', 100);
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 100);
     assertions.push({Expected: 20, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws min of 1/5'});
     } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
 
     try{
     Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Variable');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    DomUtil.changeValue('powerModifierRank0.0', 6);
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
     assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'v3.4 Variable has no min cost'});
 
     Main.setRuleset(3,5);
-    SelectUtil.changeText('powerChoices0', 'Variable');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Other Rank Flaw');
-    DomUtil.changeValue('powerModifierRank0.0', 6);
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
     assertions.push({Expected: 5, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'v3.5 Variable has a min cost of 5/rank'});
     } catch(e){assertions.push({Error: e, Description: 'Variable min cost'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    DomUtil.changeValue('powerRank0', 2);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
-    SelectUtil.changeText('powerModifierChoices0.1', 'Accurate');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Accurate');
     assertions.push({Expected: 5, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat Extras add to cost after ranks'});
     } catch(e){assertions.push({Error: e, Description: 'Flat Extras'});}
 
     try{
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    DomUtil.changeValue('powerRank0', 2);
-    SelectUtil.changeText('powerModifierChoices0.0', 'Area');
-    SelectUtil.changeText('powerModifierChoices0.1', 'Inaccurate');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Inaccurate');
     assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat flaws reduce cost after ranks'});
 
     Main.powerSection.clear();
-    SelectUtil.changeText('powerChoices0', 'Damage');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Inaccurate');
-    DomUtil.changeValue('powerModifierRank0.0', 3);
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Inaccurate');
+    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 3);
     assertions.push({Expected: 4, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Flat flaws may increase ranks'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat flaws retains total of 1'});
     } catch(e){assertions.push({Error: e, Description: 'Flat flaws'});}
@@ -1078,12 +1078,12 @@ TestSuite.powerRow.calculateValues=function(testState={})
     Main.powerSection.clear();
     //Main.setRuleset(3,5);
     DomUtil.changeValue('Strength', 100);
-    SelectUtil.changeText('powerChoices0', 'A God I Am');
-    DomUtil.changeValue('powerRank0', 2);
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
     assertions.push({Expected: 155, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '2 ranks: A God I Am'});
 
-    SelectUtil.changeText('powerChoices0', 'Reality Warp');
-    DomUtil.changeValue('powerRank0', 2);
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Reality Warp');
+    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
     assertions.push({Expected: 85, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '2 ranks: Reality Warp'});
     } catch(e){assertions.push({Error: e, Description: 'Odd first rank values'});}
 
@@ -1097,20 +1097,20 @@ TestSuite.powerRow.generate=function(testState={})
 
    /*2 different values for each to show they aren't hard coded.
    check DOM to show that it's passed to HTML*/
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 1'});
-   SelectUtil.changeText('powerChoices0', 'Flight');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 2'});
 
-   SelectUtil.changeText('powerChoices0', 'Feature');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
    assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 1'});
-   SelectUtil.changeText('powerChoices0', 'Damage');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 2'});
 
-   SelectUtil.changeText('powerChoices0', 'Flight');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push(
       {Expected: true, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 1'});
-   SelectUtil.changeText('powerChoices0', 'Create');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
    assertions.push(
       {Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 2'});
 
@@ -1122,12 +1122,12 @@ TestSuite.powerRow.generateNameAndSkill=function(testState={})
 
    const assertions=[];
    try{
-      SelectUtil.changeText('powerChoices0', 'Damage');
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
       assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Default name 1'});
       assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Default skill 1'});
-      SelectUtil.changeText('powerChoices1', 'Affliction');
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(1), 'Affliction');
       assertions.push({Expected: 'Power 2 Affliction', Actual: Main.powerSection.getRowByIndex(1).getName(), Description: 'Default name 2'});
-      SelectUtil.changeText('equipmentChoices0', 'Nullify');
+      ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Nullify');
       assertions.push({Expected: 'Equipment 1 Nullify', Actual: Main.equipmentSection.getRowByIndex(0).getName(), Description: 'Default name 3'});
       assertions.push({Expected: 'Skill used for attack', Actual: Main.equipmentSection.getRowByIndex(0).getSkillUsed(), Description: 'Default skill 2'});
    } catch(e){assertions.push({Error: e, Description: 'Default name and skill'});}
@@ -1135,16 +1135,16 @@ TestSuite.powerRow.generateNameAndSkill=function(testState={})
    try{
       Main.clear();
       Main.setRuleset(3,4);
-      SelectUtil.changeText('powerChoices0', 'Flight');
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'No name'});
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'No skill'});
 
-      SelectUtil.changeText('powerChoices0', 'Damage');
-      SelectUtil.changeText('powerSelectAction0', 'Reaction');
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
       assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Default name'});
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Aura has no skill'});
-      SelectUtil.changeText('powerSelectAction0', 'Standard');
-      SelectUtil.changeText('powerSelectRange0', 'Perception');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Standard');
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Perception has no skill'});
    } catch(e){assertions.push({Error: e, Description: 'No name or skill'});}
 

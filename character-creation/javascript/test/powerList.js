@@ -12,26 +12,26 @@ TestSuite.powerList.calculateValues=function(testState={})
 
    assertions.push({Expected: null, Actual: getProtectionRank(), Description: 'Protection default: null'});
 
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), 'pro 1');  //for uniqueness
    assertions.push({Expected: 1, Actual: getProtectionRank(), Description: 'picks up protection'});
 
-   SelectUtil.changeText('powerChoices1', 'Protection');
-   DomUtil.changeValue('powerRank1', 2);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(1), 'Protection');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(1), 2);
    assertions.push({Expected: 2, Actual: getProtectionRank(), Description: 'protection doesn\'t stack'});
    Main.clear();
 
    DomUtil.changeValue('transcendence', 1);
-   SelectUtil.changeText('powerChoices0', 'A God I Am');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am');
    assertions.push({Expected: true, Actual: Main.getEveryVar().powerGodhood, Description: 'sets powerGodhood to true'});
-   SelectUtil.changeText('powerChoices0', 'Create');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
    assertions.push({Expected: false, Actual: Main.getEveryVar().powerGodhood, Description: 'sets powerGodhood to false'});
 
    Main.setRuleset(1, 0);
-   SelectUtil.changeText('powerChoices0', 'Protection');
-   DomUtil.changeValue('powerText0', 'pro 1');  //for uniqueness
-   SelectUtil.changeText('powerChoices1', 'Protection');
-   DomUtil.changeValue('powerRank1', 2);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
+   ReactUtil.changeValue('powerText' + Main.powerSection.indexToKey(0), 'pro 1');  //for uniqueness
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(1), 'Protection');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(1), 2);
    assertions.push({Expected: 3, Actual: getProtectionRank(), Description: 'v1: protection stacks'});
 
    return TestRunner.displayResults('TestSuite.powerList.calculateValues', assertions, testState);
@@ -47,12 +47,12 @@ TestSuite.powerList.calculateValues_modCost=function(testState={})
       return Main.powerSection.getRowByIndex(0).getDerivedValues().costPerRank;
    }
 
-   SelectUtil.changeText('powerChoices0', 'Nullify');
-   SelectUtil.changeText('powerModifierChoices0.0', 'Limited');
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
    assertions.push({Expected: 2, Actual: getCostPerRank(), Description: 'Rank flaws reduce cost/rank'});
 
-   SelectUtil.changeText('powerModifierChoices0.1', 'Area');
-   DomUtil.changeValue('powerModifierRank0.1', '5');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Area');
+   ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 1), '5');
    assertions.push({Expected: 7, Actual: getCostPerRank(), Description: 'Rank extras increase cost/rank'});
 
    return TestRunner.displayResults('TestSuite.powerList.calculateValues_modCost', assertions, testState);

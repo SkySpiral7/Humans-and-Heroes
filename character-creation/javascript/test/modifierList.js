@@ -89,10 +89,10 @@ TestSuite.modifierList.sortOrder=function(testState={})
     var assertions=[];
 
     try{
-    SelectUtil.changeText('powerChoices0', 'Create');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Selective');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
-    SelectUtil.changeText('powerModifierChoices0.2', 'Precise');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Selective');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Precise');
     Main.powerSection.getRowByIndex(0).getModifierList()._testSortStability();
     //this test proves that the sort order forces stability
 
@@ -103,11 +103,11 @@ TestSuite.modifierList.sortOrder=function(testState={})
 
     try{
     Main.clear();
-    SelectUtil.changeText('powerChoices0', 'Create');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Selective');
-    SelectUtil.changeText('powerSelectRange0', 'Perception');
-    SelectUtil.changeText('powerSelectDuration0', 'Continuous');
-    SelectUtil.changeText('powerSelectAction0', 'Free');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Selective');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Free');
     //this test proves that these are in the right order: Faster Action, Increased Range, Increased Duration, else
 
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Auto Extras: Modifier 1'});
@@ -118,11 +118,11 @@ TestSuite.modifierList.sortOrder=function(testState={})
 
     try{
     Main.clear();
-    SelectUtil.changeText('powerChoices0', 'Create');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Selective');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
-    SelectUtil.changeText('powerSelectDuration0', 'Concentration');
-    SelectUtil.changeText('powerSelectAction0', 'Slow');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Selective');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Slow');
     //this test proves that these are in the right order: Slower Action, Reduced Range, Decreased Duration, else
 
     assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Auto Flaws: Modifier 1'});
@@ -133,8 +133,8 @@ TestSuite.modifierList.sortOrder=function(testState={})
 
     try{
     Main.clear(); Main.setRuleset(3,4);
-    SelectUtil.changeText('powerChoices0', 'Nullify');
-    SelectUtil.changeText('powerSelectAction0', 'Reaction');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     //this test proves that Aura comes before Reduced Range
 
     assertions.push({Expected: 'Aura', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Aura sort order: Aura first'});
@@ -143,9 +143,9 @@ TestSuite.modifierList.sortOrder=function(testState={})
 
     try{
     Main.clear(); Main.setRuleset(3,3);
-    SelectUtil.changeText('powerChoices0', 'Nullify');
-    SelectUtil.changeText('powerSelectRange0', 'Close');
-    SelectUtil.changeText('powerSelectAction0', 'Triggered');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
+    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
+    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
 
     assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective span sorts before Range: action'});
     assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective span sorts before Range: Selective'});
@@ -154,10 +154,10 @@ TestSuite.modifierList.sortOrder=function(testState={})
 
     try{
     Main.clear(); Main.setRuleset(3,3);
-    SelectUtil.changeText('powerChoices0', 'Flight');
-    SelectUtil.changeText('powerModifierChoices0.0', 'Precise');
-    SelectUtil.changeText('powerModifierChoices0.1', 'Selective');
-    SelectUtil.changeText('powerSelectDuration0', 'Concentration');
+    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Precise');
+    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Selective');
+    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
 
     assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective non-span retains order: Duration'});
     assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective non-span retains order: then rest'});
