@@ -70,7 +70,7 @@ TestSuite.powerList.load=function(testState={})
        "Modifiers":[{"name":"Other Rank Extra"}], "rank":2});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Happy Path: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Happy Path: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Happy Path: 1 row'});
     assertions.push({Expected: [], Actual: Messages.list, Description: 'Happy Path: no errors'});
     assertions.push({Expected: false, Actual: Main.powerSection.getRowByIndex(0).isBaseCostSettable(), Description: 'Happy Path: isBaseCostSettable'});
     assertions.push({Expected: 'Text test', Actual: Main.powerSection.getRowByIndex(0).getText(), Description: 'Happy Path: text'});
@@ -78,7 +78,7 @@ TestSuite.powerList.load=function(testState={})
     assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Happy Path: default range'});
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Happy Path: default duration'});
     assertions.push({Expected: 'Other Rank Extra', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Happy Path: simple modifier'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0, 1).isBlank(), Description: 'Happy Path: no others modifiers'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Happy Path: no others modifiers'});
     assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Happy Path: rank'});
     assertions.push({Expected: 6, Actual: Main.powerSection.getTotal(), Description: 'Happy Path: Make sure update was called'});
     } catch(e){assertions.push({Error: e, Description: 'Happy Path'});}
@@ -92,7 +92,7 @@ TestSuite.powerList.load=function(testState={})
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.equipmentSection.getRowByIndex(0).getEffect(), Description: 'Happy Equipment: Effect'});
     //just confirming that it loaded
-    assertions.push({Expected: true, Actual: Main.equipmentSection.getRowByIndex(1).isBlank(), Description: 'Happy Equipment: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.equipmentSection.getState().it.length, Description: 'Happy Equipment: 1 row'});
     } catch(e){assertions.push({Error: e, Description: 'Happy Equipment'});}
 
     try{
@@ -101,7 +101,7 @@ TestSuite.powerList.load=function(testState={})
     dataToLoad.Powers.push({"effect":"Invalid","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Errors: Flight was loaded'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Errors: Nothing else was loaded'});
     assertions.push({Expected: ['PowerListAgnostic.load.notExist'], Actual: Messages.errorCodes(), Description: 'Errors: not found'});
     } catch(e){assertions.push({Error: e, Description: 'Errors'});}
 
@@ -112,7 +112,7 @@ TestSuite.powerList.load=function(testState={})
     Loader.sendData(dataToLoad);
     assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Errors: Godhood is off'});
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Errors: Flight was loaded'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Errors: Nothing else was loaded'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Errors: Nothing else was loaded'});
     assertions.push({Expected: ['PowerListAgnostic.load.godhood'], Actual: Messages.errorCodes(), Description: 'Errors: A God I Am was not allowed'});
     } catch(e){assertions.push({Error: e, Description: 'Errors'});}
 
@@ -127,7 +127,7 @@ TestSuite.powerList.load=function(testState={})
     assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load Godhood: Godhood is on'});
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Load Godhood: Flight was loaded'});
     assertions.push({Expected: 'A God I Am', Actual: Main.powerSection.getRowByIndex(1).getEffect(), Description: 'Load Godhood: A God I Am was loaded'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(2).isBlank(), Description: 'Load Godhood: Nothing else was loaded'});
+    assertions.push({Expected: 2, Actual: Main.powerSection.getState().it.length, Description: 'Load Godhood: Nothing else was loaded'});
     assertions.push({Expected: [], Actual: Messages.list, Description: 'Load godhood: No errors'});
     } catch(e){assertions.push({Error: e, Description: 'Load godhood'});}
 
@@ -136,7 +136,7 @@ TestSuite.powerList.load=function(testState={})
     dataToLoad.Powers.push({"effect":"Attain Knowledge","cost":3,"text":"","action":"Standard","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Attain Knowledge', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Custom Cost: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Custom Cost: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Custom Cost: 1 row'});
     assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(0).isBaseCostSettable(), Description: 'Custom Cost: isBaseCostSettable'});
     assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getBaseCost(), Description: 'Custom Cost: getBaseCost'});
     } catch(e){assertions.push({Error: e, Description: 'Custom Cost'});}
@@ -147,7 +147,7 @@ TestSuite.powerList.load=function(testState={})
        "Modifiers":[{"name":"Slower Action","applications":1}],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Custom Description: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Custom Description: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Custom Description: 1 row'});
     assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Custom Description: getAction'});
     } catch(e){assertions.push({Error: e, Description: 'Custom Description'});}
 
@@ -157,7 +157,7 @@ TestSuite.powerList.load=function(testState={})
       "Modifiers":[{"name":"Slower Action"}],"rank":1});
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Healing', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Custom Action: Effect'});
-   assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Custom Action: 1 row'});
+   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Custom Action: 1 row'});
    assertions.push({Expected: 'Full', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Custom Action: getAction'});
    } catch(e){assertions.push({Error: e, Description: 'Custom Action'});}
 
@@ -193,7 +193,7 @@ TestSuite.powerList.load=function(testState={})
       "Modifiers":[{"name":"Increased Range","applications":1}],"rank":1});
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'Healing', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Custom Range: Effect'});
-   assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Custom Range: 1 row'});
+   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Custom Range: 1 row'});
    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Custom Range: getRange'});
    } catch(e){assertions.push({Error: e, Description: 'Custom Range'});}
 
@@ -203,7 +203,7 @@ TestSuite.powerList.load=function(testState={})
        "Modifiers":[{"name":"Decreased Duration","applications":1}],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Custom Duration: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Custom Duration: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Custom Duration: 1 row'});
     assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Custom Duration: getDuration'});
     } catch(e){assertions.push({Error: e, Description: 'Custom Duration'});}
 
@@ -213,7 +213,7 @@ TestSuite.powerList.load=function(testState={})
        "name":"Damage name","skill":"Skill used","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Name and skill: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Name and skill: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Name and skill: 1 row'});
     assertions.push({Expected: 'Damage name', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Name and skill: getName'});
     assertions.push({Expected: 'Skill used', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Name and skill: getSkillUsed'});
     } catch(e){assertions.push({Error: e, Description: 'Name and skill'});}
@@ -224,7 +224,7 @@ TestSuite.powerList.load=function(testState={})
        "name":"Mind Reading name","Modifiers":[],"rank":1});
     Loader.sendData(dataToLoad);
     assertions.push({Expected: 'Mind Reading', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Name only: Effect'});
-    assertions.push({Expected: true, Actual: Main.powerSection.getRowByIndex(1).isBlank(), Description: 'Name only: 1 row'});
+    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Name only: 1 row'});
     assertions.push({Expected: 'Mind Reading name', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Name only: getName'});
     assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Name only: getSkillUsed'});
     } catch(e){assertions.push({Error: e, Description: 'Name only'});}

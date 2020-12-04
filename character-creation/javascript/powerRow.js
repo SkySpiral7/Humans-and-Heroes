@@ -324,23 +324,29 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
    if (undefined === inputState.action) existingActivationInfo.action = Data.Power[validState.effect].defaultAction;
    else if (!Data.Power.actions.contains(inputState.action))
    {
+      existingActivationInfo.action = Data.Power[validState.effect].defaultAction;
       Main.messageUser(
-         'PowerObjectAgnostic.setAction.notExist', loadLocation + ': ' + inputState.action + ' is not the name of an action.');
+         'PowerObjectAgnostic.setAction.notExist', loadLocation + ': ' + inputState.action + ' is not the name of an action. ' +
+         'Using default of ' + existingActivationInfo.action + ' instead.');
    }
    else existingActivationInfo.action = inputState.action;
 
    if (undefined === inputState.range) existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
    else if (!Data.Power.ranges.contains(inputState.range))
    {
-      Main.messageUser('PowerObjectAgnostic.setRange.notExist', loadLocation + ': ' + inputState.range + ' is not the name of a range.');
+      existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
+      Main.messageUser('PowerObjectAgnostic.setRange.notExist', loadLocation + ': ' + inputState.range + ' is not the name of a range. ' +
+         'Using default of ' + existingActivationInfo.range + ' instead.');
    }
    else existingActivationInfo.range = inputState.range;
 
    if (undefined === inputState.duration) existingActivationInfo.duration = Data.Power[validState.effect].defaultDuration;
    else if (!Data.Power.durations.contains(inputState.duration))
    {
+      existingActivationInfo.duration = Data.Power[validState.effect].defaultDuration;
       Main.messageUser(
-         'PowerObjectAgnostic.setDuration.notExist', loadLocation + ': ' + inputState.duration + ' is not the name of a duration.');
+         'PowerObjectAgnostic.setDuration.notExist', loadLocation + ': ' + inputState.duration + ' is not the name of a duration. ' +
+         'Using default of ' + existingActivationInfo.duration + ' instead.');
    }
    else existingActivationInfo.duration = inputState.duration;
 

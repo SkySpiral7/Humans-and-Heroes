@@ -56,6 +56,10 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       return _this.props.sectionName;
     });
 
+    _defineProperty(_assertThisInitialized(_this), "getState", function () {
+      return JSON.clone(_this.state);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getTotal", function () {
       return _this._derivedValues.total;
     });

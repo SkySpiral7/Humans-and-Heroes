@@ -135,6 +135,7 @@ function ModifierList(props)
 /**@returns {boolean} true if there exists a modifier that changes range from being Personal*/
 ModifierList.isNonPersonalModifierPresent = function (inputState)
 {
+   if (undefined === inputState) return false;
    for (var i = 0; i < inputState.length; ++i)
    {
       if ('Attack' === inputState[i].name ||
@@ -204,19 +205,22 @@ ModifierList.removeByName = function (state, rowName)
 
 /*
 architecture:
-   * main (react) has state but each section does too
+   * main (react) has all state or maybe each section does too
    * power list needs the state of mod in order to render power row total
    * power list uses power html: pass down everything as props, immutable non-react below here
    * mod list delegate to power list (really main) for state mutation
    * loading main is normal
 
 TODO: next:
+fix all possible tests
+sort all functions
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state
-test all possible
-sort all functions
+   static method to determine godhood
+   all setState set both at once
+   but then there's CP from others
+   all need static calc values (main eventually has all state?)
 power row constructor has activation on change
-test
 replace sanitizeRows with duplicate check
    power row has stuff (see _addRowNoPush region) from mod on change
 sort mods on add

@@ -35,6 +35,7 @@ class PowerListAgnostic extends React.Component
    getAttackEffectRanks = () => {return this._derivedValues.attackEffectRanks;};
    getProtectionRankTotal = () => {return this._derivedValues.protectionRankTotal;};
    getSectionName = () => {return this.props.sectionName;};
+   getState = () => {return JSON.clone(this.state);};
    getTotal = () => {return this._derivedValues.total;};
    //endregion Single line function section
 
