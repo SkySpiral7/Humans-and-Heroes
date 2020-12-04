@@ -31,7 +31,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Slow');
-   assertions.push({Expected: true, Actual: Main.powerSection.getModifierRowShort(0,0).isBlank(), Description: 'Slow Feature doesn\'t auto get Slower Action'});
+   assertions.push({Expected: 0, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Slow Feature doesn\'t auto get Slower Action'});
    Main.powerSection.clear();
 
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');

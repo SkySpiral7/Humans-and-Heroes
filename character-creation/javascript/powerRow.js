@@ -391,7 +391,7 @@ PowerObjectAgnostic._validateActivationInfo = function (validState, inputState, 
       'Reaction' === actionObj.current);
    if (isAura && 'Close' !== pendingRange)
    {
-      Main.messageUser('PowerObjectAgnostic._validateActivationInfo.reactionRequiresClose',
+      Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose',
          loadLocation + ': ' + validState.effect + ' has an action of Reaction and therefore must have a range of Close.');
       pendingRange = 'Close';
       //TODO: confusing limitation: in 3 cases Variable is allowed to have Reaction with Personal range
