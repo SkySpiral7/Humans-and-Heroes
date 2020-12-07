@@ -213,7 +213,10 @@ architecture:
 
 TODO: next:
 fix all possible tests
-sort all functions
+   broke: TestSuite.modifierRowHtml
+   TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
+   TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
+   TestSuite.main.updateTranscendence is destroying power
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state
    static method to determine godhood
@@ -225,6 +228,7 @@ replace sanitizeRows with duplicate check
    power row has stuff (see _addRowNoPush region) from mod on change
 sort mods on add
 test all
+sort all functions
 there's lots of tasks
 
 skill list react

@@ -275,11 +275,11 @@ function PowerRowHtml(props) {
   }, rowList));
 
   if (undefined !== state.effect) {
+    //hr after every non-blank will put it between them
     topElementList.push( /*#__PURE__*/React.createElement("hr", {
       key: "hr"
     }));
-  } //TODO: confirm that react allows this. might need a wrapper div for the hr to be allowed
-
+  }
 
   return topElementList;
 }

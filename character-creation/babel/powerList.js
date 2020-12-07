@@ -154,10 +154,7 @@ class PowerListAgnostic extends React.Component
       }
       else
       {
-         let powerState = this._rowArray[updatedIndex].getState();
-         powerState.effect = newEffect;
-
-         powerState = PowerObjectAgnostic.sanitizeState(powerState, sectionName, this._rowArray.length, transcendence);
+         const powerState = PowerObjectAgnostic.sanitizeState({effect: newEffect}, sectionName, updatedIndex, transcendence);
 
          this._rowArray[updatedIndex] = new PowerObjectAgnostic({
             key: this._rowArray[updatedIndex].getKey(),

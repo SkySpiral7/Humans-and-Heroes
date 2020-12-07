@@ -7,14 +7,22 @@ TestSuite.advantageRowHtml = function (testState = {})
 
    function getSectionFirstRowHtml()
    {
-      /*don't edit the DOM because react will die if it tries to change options that are different
+      /*don't edit the actual DOM because react will die if it tries to change options that are different
       objects even though they are identical HTML.
       even though there should be only 1 child, can't do section.innerHTML because of blank row*/
-      let html = document.getElementById('advantage-section').firstChild.outerHTML;
-      /*this removes all options from every select to make it easy to test the html (options tested elsewhere).
-      this regex avoids catastrophic backtracking because all aggregates are bound (can't overlap)*/
-      html = html.replace(/(<select\b[^>]+>)(?:<option>[^<]+<\/option>)+<\/select>/g, '$1</select>');
-      return html;
+      const sectionHolder = document.createElement('div');
+      //important: this creates a copy of the elements so that the original are not touched
+      sectionHolder.innerHTML = document.getElementById('advantage-section').firstChild.outerHTML;
+
+      const allSelects = sectionHolder.getElementsByTagName('select');
+      //HTMLCollection can be treated as an array
+      for (let i = 0; i < allSelects.length; i++)
+      {
+         //this removes all options from every select to make it easy to test the html (options tested by containsText).
+         allSelects[i].innerHTML = '';
+      }
+
+      return sectionHolder.innerHTML;
    }
 
    ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Feature');

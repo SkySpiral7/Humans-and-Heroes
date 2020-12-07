@@ -185,10 +185,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (!Data.Power.names.contains(newEffect)) {
         _this._removeRow(updatedIndex);
       } else {
-        var powerState = _this._rowArray[updatedIndex].getState();
-
-        powerState.effect = newEffect;
-        powerState = PowerObjectAgnostic.sanitizeState(powerState, sectionName, _this._rowArray.length, transcendence);
+        var powerState = PowerObjectAgnostic.sanitizeState({
+          effect: newEffect
+        }, sectionName, updatedIndex, transcendence);
         _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[updatedIndex].getKey(),
           sectionName: _this.props.sectionName,
