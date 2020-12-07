@@ -2,12 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<style>
+/*This is needed to prevent a white flash on redirect (which is also why this line is so early)*/
+html, body {
+   background-color: black;
+   color: #A0A0A0;
+}
+/*link color isn't needed but is tiny and makes page look normal*/
+a:link, a:visited {
+   color: #FF2020;
+   text-decoration: none;
+}
+a:hover, a:active {
+   text-decoration: underline;
+}
+</style>
+<meta http-equiv="refresh" content="0; url=gameplay/the-basics.html" />
 <link rel="canonical" href="gameplay/the-basics.html" />
 <!--If robots ignore the redirect then tell them to go away.-->
 <meta name="robots" content="noindex,nofollow,none,noodp,noarchive,nosnippet,noimageindex,nocache" />
-<meta http-equiv="refresh" content="0; url=gameplay/the-basics.html" />
 <title>Redirect Page</title>
-<!--don't bother loading CSS-->
+<!--don't bother loading CSS file and bootstrap-->
 </head>
 <body onload="window.location = 'gameplay/the-basics.html'">
 <p>If you are not redirected, please click <a href="gameplay/the-basics.html">here</a>.</p>
