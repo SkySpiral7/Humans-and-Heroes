@@ -22,8 +22,9 @@ TestSuite.powerRowHtml = function (testState = {})
          //this removes all options from every select to make it easy to test the html (options tested by containsText).
          allSelects[i].innerHTML = '';
       }
-      const modifierDiv = sectionHolder.querySelector('[id^=\'' + sectionName + 'ModifierSection\']');
-      //blank row has no modifiers
+      const powerKey = Main[sectionName + 'Section'].indexToKey(0);
+      const modifierDiv = sectionHolder.querySelector('#' + sectionName + 'ModifierSection' + powerKey);
+      //blank power row has no modifiers
       if (null !== modifierDiv)
       {
          //not the empty string to avoid having an empty div

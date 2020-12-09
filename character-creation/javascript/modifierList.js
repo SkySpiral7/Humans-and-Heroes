@@ -213,7 +213,6 @@ architecture:
 
 TODO: next:
 fix all possible tests
-   broke: TestSuite.modifierRowHtml
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
    TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
    TestSuite.main.updateTranscendence is destroying power

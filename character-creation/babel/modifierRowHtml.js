@@ -78,7 +78,7 @@ function ModifierRowHtml(props)
                            onChange={(event) =>
                            {
                               const nameGiven = event.target.value;
-                              powerSection.updatePropertyByKey('name', nameGiven, props.powerKey);
+                              powerSection.updatePropertyByKey('name', nameGiven, powerKey);
                            }} />
          </div>);
          if (props.powerRow.getRange() !== 'Perception')
@@ -88,7 +88,7 @@ function ModifierRowHtml(props)
                                onChange={(event) =>
                                {
                                   const nameGiven = event.target.value;
-                                  powerSection.updatePropertyByKey('skillUsed', nameGiven, props.powerKey);
+                                  powerSection.updatePropertyByKey('skillUsed', nameGiven, powerKey);
                                }} />
             </div>);
          }

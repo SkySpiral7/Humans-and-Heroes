@@ -76,7 +76,7 @@ function ModifierRowHtml(props) {
           currentValue: props.powerRow.getName(),
           onChange: function onChange(event) {
             var nameGiven = event.target.value;
-            powerSection.updatePropertyByKey('name', nameGiven, props.powerKey);
+            powerSection.updatePropertyByKey('name', nameGiven, powerKey);
           }
         })));
 
@@ -90,7 +90,7 @@ function ModifierRowHtml(props) {
             currentValue: props.powerRow.getSkillUsed(),
             onChange: function onChange(event) {
               var nameGiven = event.target.value;
-              powerSection.updatePropertyByKey('skillUsed', nameGiven, props.powerKey);
+              powerSection.updatePropertyByKey('skillUsed', nameGiven, powerKey);
             }
           })));
         }
