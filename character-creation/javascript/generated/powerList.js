@@ -488,8 +488,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       Main.updateOffense();
       Main.defenseSection.calculateValues(); //TODO: resolve godhood circle:
-      //Main.update();
-      //high CP needs to trigger godhood but prerender can't update state
+
+      Main.update(); //high CP needs to trigger godhood but prerender can't update state
     });
 
     _this.state = {

@@ -471,7 +471,7 @@ class PowerListAgnostic extends React.Component
       Main.updateOffense();
       Main.defenseSection.calculateValues();
       //TODO: resolve godhood circle:
-      //Main.update();
+      Main.update();
       //high CP needs to trigger godhood but prerender can't update state
    };
 }
