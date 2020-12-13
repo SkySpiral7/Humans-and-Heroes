@@ -255,24 +255,29 @@ TestSuite.powerRow.validateActivationInfo_valid=function(testState={})
 TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
 {
    TestRunner.clearResults(testState);
-   //this func doesn't need feature tests but it has them anyway
+   /*this func doesn't need feature tests
+   the only way to avoid reading the DOM is to call method directly since there's no derived values outside of render*/
 
-   var dataToLoad;
+   var powerState, actual;
    var assertions=[];
 
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'None action happy: getAction'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'None action happy: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'None action happy: error'});
+   const loadLocation = {
+      toString: function ()
+      {
+         assertions.push({Error: new Error('should not toString'), Description: 'should not toString'});
+         return '';
+      }
+   };
+   powerState = {"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1};
+   actual = PowerObjectAgnostic._validateAndGetPossibleActions(powerState, powerState, powerState.duration, loadLocation);
    assertions.push({
-      Expected: ['None'],
-      Actual: Main.powerSection.getRowByIndex(0)._validateAndGetPossibleActions(),
-      Description: 'None action happy: return'
+      Expected: {current: 'None', choices: ['None']},
+      Actual: actual,
+      Description: 'None action'
    });
+   assertions.push({Expected: [], Actual: Messages.list, Description: 'None action happy Feature: error'});
 
-   dataToLoad = Loader.resetData();
+   var dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'None action happy Feature: getAction'});

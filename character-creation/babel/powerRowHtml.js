@@ -1,13 +1,19 @@
 'use strict';
 
 //TODO: more doc (state, derivedValues)
-/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection, generateGodHood */
+/** @param props: keyCopy, powerRow, powerSection, generateGodHood */
 function PowerRowHtml(props)
 {
-   const state = props.state;
-   const derivedValues = props.derivedValues;
    const key = props.keyCopy;
    const displayGodhood = props.generateGodHood;
+   const sectionName = props.powerSection.getSectionName();
+
+   const state = (undefined !== props.powerRow)
+      ? props.powerRow.getState()
+      : {effect: undefined};
+   const derivedValues = (undefined !== props.powerRow)
+      ? props.powerRow.getDerivedValues()
+      : undefined;
 
    /*
    values used:
@@ -17,7 +23,7 @@ function PowerRowHtml(props)
 
    function idFor(elementLabel)
    {
-      return props.sectionName + elementLabel + key;
+      return sectionName + elementLabel + key;
    }
 
    function onChangeFor(propertyName)
@@ -165,14 +171,14 @@ function PowerRowHtml(props)
       if (Data.Power[state.effect].isAttack)
       {
          rowElementList.push(<div className="col-12 col-sm-6 col-lg-5 col-xl-4" key="powerName">
-            <PowerNameHtml sectionName={props.sectionName} powerKey={key} currentValue={state.name}
+            <PowerNameHtml sectionName={sectionName} powerKey={key} currentValue={state.name}
                            onChange={onChangeFor('name')} />
          </div>);
 
          if (undefined !== state.skillUsed)
          {
             rowElementList.push(<div className="col-12 col-sm-6 col-lg-5 col-xl-4" key="skillUsed">
-               <PowerSkillHtml sectionName={props.sectionName} powerKey={key} currentValue={state.skillUsed}
+               <PowerSkillHtml sectionName={sectionName} powerKey={key} currentValue={state.skillUsed}
                                onChange={onChangeFor('skillUsed')} />
             </div>);
          }
@@ -198,7 +204,7 @@ function PowerRowHtml(props)
                                              powerRow={props.powerRow}
                                              modifierRow={undefined} />);
 
-      rowList.push(<div id={props.sectionName + 'ModifierSection' + props.powerRow.getKey()} key="ModifierSection">
+      rowList.push(<div id={sectionName + 'ModifierSection' + props.powerRow.getKey()} key="ModifierSection">
          {modifierHtmlRows}
       </div>);
 
@@ -214,7 +220,7 @@ function PowerRowHtml(props)
       </div>);
 
       rowList.push(<div className="row" key="grandTotal">
-         <div className="col">{'Grand total for ' + props.sectionName.toTitleCase() + ': '}
+         <div className="col">{'Grand total for ' + sectionName.toTitleCase() + ': '}
             {derivedValues.total}</div>
       </div>);
    }

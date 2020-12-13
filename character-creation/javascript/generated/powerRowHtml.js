@@ -1,12 +1,15 @@
 'use strict'; //TODO: more doc (state, derivedValues)
 
-/** @param props: state, derivedValues, keyCopy, sectionName, powerRow, powerSection, generateGodHood */
+/** @param props: keyCopy, powerRow, powerSection, generateGodHood */
 
 function PowerRowHtml(props) {
-  var state = props.state;
-  var derivedValues = props.derivedValues;
   var key = props.keyCopy;
   var displayGodhood = props.generateGodHood;
+  var sectionName = props.powerSection.getSectionName();
+  var state = undefined !== props.powerRow ? props.powerRow.getState() : {
+    effect: undefined
+  };
+  var derivedValues = undefined !== props.powerRow ? props.powerRow.getDerivedValues() : undefined;
   /*
   values used:
   var state = {rowIndex, effect, skillUsed};
@@ -14,7 +17,7 @@ function PowerRowHtml(props) {
   */
 
   function idFor(elementLabel) {
-    return props.sectionName + elementLabel + key;
+    return sectionName + elementLabel + key;
   }
 
   function onChangeFor(propertyName) {
@@ -194,7 +197,7 @@ function PowerRowHtml(props) {
         className: "col-12 col-sm-6 col-lg-5 col-xl-4",
         key: "powerName"
       }, /*#__PURE__*/React.createElement(PowerNameHtml, {
-        sectionName: props.sectionName,
+        sectionName: sectionName,
         powerKey: key,
         currentValue: state.name,
         onChange: onChangeFor('name')
@@ -205,7 +208,7 @@ function PowerRowHtml(props) {
           className: "col-12 col-sm-6 col-lg-5 col-xl-4",
           key: "skillUsed"
         }, /*#__PURE__*/React.createElement(PowerSkillHtml, {
-          sectionName: props.sectionName,
+          sectionName: sectionName,
           powerKey: key,
           currentValue: state.skillUsed,
           onChange: onChangeFor('skillUsed')
@@ -239,7 +242,7 @@ function PowerRowHtml(props) {
       modifierRow: undefined
     }));
     rowList.push( /*#__PURE__*/React.createElement("div", {
-      id: props.sectionName + 'ModifierSection' + props.powerRow.getKey(),
+      id: sectionName + 'ModifierSection' + props.powerRow.getKey(),
       key: "ModifierSection"
     }, modifierHtmlRows));
     var costPerRankDisplay;
@@ -266,7 +269,7 @@ function PowerRowHtml(props) {
       key: "grandTotal"
     }, /*#__PURE__*/React.createElement("div", {
       className: "col"
-    }, 'Grand total for ' + props.sectionName.toTitleCase() + ': ', derivedValues.total)));
+    }, 'Grand total for ' + sectionName.toTitleCase() + ': ', derivedValues.total)));
   }
 
   topElementList.push( /*#__PURE__*/React.createElement("div", {

@@ -111,26 +111,12 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       don't call a main method for this because render should be pure.*/
       var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
 
-      var elementArray = _this.state.it.map(function (state, powerIndex) {
+      var elementArray = _this.state.it.map(function (_, powerIndex) {
         var powerRow = _this._rowArray[powerIndex];
-        var rowKey = powerRow.getKey(); //getDerivedValues makes a clone
-
-        var rowDerivedValues = powerRow.getDerivedValues(); //TODO: it's stupid that main use has several useless args
-
-        var loadLocation = {
-          toString: function toString() {
-            throw new AssertionError('Should already be valid.');
-          }
-        };
-        rowDerivedValues.possibleActions = PowerObjectAgnostic._validateAndGetPossibleActions(state, state, state.duration, loadLocation).choices;
-        rowDerivedValues.possibleRanges = PowerObjectAgnostic._getPossibleRanges(state, state.action, state.range);
-        rowDerivedValues.possibleDurations = PowerObjectAgnostic._validateAndGetPossibleDurations(state, state, state.range, loadLocation).choices;
+        var rowKey = powerRow.getKey();
         return /*#__PURE__*/React.createElement(PowerRowHtml, {
           key: rowKey,
           keyCopy: rowKey,
-          state: state,
-          derivedValues: rowDerivedValues,
-          sectionName: _this.props.sectionName,
           powerRow: powerRow,
           powerSection: _assertThisInitialized(_this),
           generateGodHood: generateGodHood
@@ -140,9 +126,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       elementArray.push( /*#__PURE__*/React.createElement(PowerRowHtml, {
         key: _this._blankPowerKey,
         keyCopy: _this._blankPowerKey,
-        state: {},
-        derivedValues: undefined,
-        sectionName: _this.props.sectionName,
         powerRow: undefined,
         powerSection: _assertThisInitialized(_this),
         generateGodHood: generateGodHood
@@ -164,16 +147,16 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var sectionName = _this.props.sectionName;
 
       if (updatedKey === _this._blankPowerKey) {
-        var validState = PowerObjectAgnostic.sanitizeState({
+        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({
           effect: newEffect
         }, sectionName, _this._rowArray.length, transcendence);
 
-        _this._addRowNoSetState(validState);
+        _this._addRowNoSetState(validStateAndDv);
 
         _this._prerender();
 
         _this.setState(function (state) {
-          state.it.push(validState);
+          state.it.push(validStateAndDv.state);
           return state;
         });
 
@@ -185,21 +168,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (!Data.Power.names.contains(newEffect)) {
         _this._removeRow(updatedIndex);
       } else {
-        var powerState = PowerObjectAgnostic.sanitizeState({
+        var _validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({
           effect: newEffect
         }, sectionName, updatedIndex, transcendence);
+
         _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[updatedIndex].getKey(),
           sectionName: _this.props.sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: powerState,
+          state: _validStateAndDv.state,
+          derivedValues: _validStateAndDv.derivedValues,
           modifierKeyList: _this._rowArray[updatedIndex].getModifierList().getKeyList()
         });
 
         _this._prerender();
 
         _this.setState(function (state) {
-          state.it[updatedIndex] = powerState;
+          state.it[updatedIndex] = _validStateAndDv.state;
           return state;
         });
       }
@@ -216,7 +201,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
-      powerState = PowerObjectAgnostic.sanitizeState(powerState, _this.props.sectionName, updatedIndex, transcendence); //sanitizeState may have auto added/removed modifiers so adjust key list
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, _this.props.sectionName, updatedIndex, transcendence);
+      powerState = validStateAndDv.state; //sanitizeState may have auto added/removed modifiers so adjust key list
 
       var modifierKeyList = _this._rowArray[updatedIndex].getModifierList().getKeyList(); //grow as needed (>= because blank row has key but no state):
 
@@ -232,6 +218,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
         state: powerState,
+        derivedValues: validStateAndDv.derivedValues,
         modifierKeyList: modifierKeyList
       });
 
@@ -265,19 +252,20 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
 
         newModState.Modifiers[modifierIndex].name = newName;
-        newModState = PowerObjectAgnostic.sanitizeState(newModState, sectionName, _this._rowArray.length, transcendence);
+        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(newModState, sectionName, _this._rowArray.length, transcendence);
         _this._rowArray[powerIndex] = new PowerObjectAgnostic({
           key: _this._rowArray[powerIndex].getKey(),
           sectionName: sectionName,
           powerListParent: _assertThisInitialized(_this),
-          state: newModState,
+          state: validStateAndDv.state,
+          derivedValues: validStateAndDv.derivedValues,
           modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
         });
 
         _this._prerender();
 
         _this.setState(function (state) {
-          state.it[powerIndex].Modifiers[modifierIndex] = newModState;
+          state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
           return state;
         });
       }
@@ -293,27 +281,28 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       newModState.Modifiers[modifierIndex][propertyName] = newValue;
       var transcendence = Main.getTranscendence();
-      newModState = PowerObjectAgnostic.sanitizeState(newModState, _this.props.sectionName, powerIndex, transcendence);
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(newModState, _this.props.sectionName, powerIndex, transcendence);
       _this._rowArray[powerIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: newModState,
+        state: validStateAndDv.state,
+        derivedValues: validStateAndDv.derivedValues,
         modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
       });
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[powerIndex].Modifiers[modifierIndex] = newModState;
+        state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
         return state;
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_addRowNoSetState", function (validState) {
+    _defineProperty(_assertThisInitialized(_this), "_addRowNoSetState", function (validStateAndDv) {
       //the row that was blank no longer is so use the blank key
       //need a new key for each new mod (can be 1+ for load)
-      var modifierKeyList = validState.Modifiers.map(function (_) {
+      var modifierKeyList = validStateAndDv.state.Modifiers.map(function (_) {
         return MainObject.generateKey();
       });
       modifierKeyList.push(MainObject.generateKey()); //for blank
@@ -322,7 +311,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         key: _this._blankPowerKey,
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: validState,
+        state: validStateAndDv.state,
+        derivedValues: validStateAndDv.derivedValues,
         modifierKeyList: modifierKeyList
       }); //need a new key for the new blank power row
 
@@ -339,8 +329,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
       var transcendence = Main.getTranscendence();
       var sectionName = _this.props.sectionName;
-      state = PowerObjectAgnostic.sanitizeState(state, sectionName, powerIndex, transcendence);
-      var newModState = state.Modifiers.last();
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
 
       var modifierKeyList = _this._rowArray[powerIndex].getModifierList().getKeyList();
 
@@ -349,14 +338,15 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: state,
+        state: validStateAndDv.state,
+        derivedValues: validStateAndDv.derivedValues,
         modifierKeyList: modifierKeyList
       });
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[powerIndex].Modifiers.push(newModState);
+        state.it[powerIndex] = validStateAndDv.state;
         return state;
       });
     });
@@ -386,6 +376,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var state = _this._rowArray[powerIndex].getState();
 
       state.Modifiers.remove(modifierIndex);
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
 
       var modifierKeyList = _this._rowArray[powerIndex].getModifierList().getKeyList();
 
@@ -394,14 +387,15 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,
         powerListParent: _assertThisInitialized(_this),
-        state: state,
+        state: validStateAndDv.state,
+        derivedValues: validStateAndDv.derivedValues,
         modifierKeyList: modifierKeyList
       });
 
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[powerIndex].Modifiers.remove(modifierIndex);
+        state.it[powerIndex] = validStateAndDv.state;
         return state;
       });
     });
@@ -422,9 +416,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       _this._derivedValues.total = 0;
 
       for (var i = 0; i < _this._rowArray.length; i++) {
-        _this._rowArray[i].calculateValues(); //will calculate rank and total
-
-
         var powerEffect = _this._rowArray[i].getEffect();
 
         var rank = _this._rowArray[i].getRank();
@@ -471,13 +462,13 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           });
         }
 
-        var validRowState = PowerObjectAgnostic.sanitizeState(jsonPowerRow, sectionName, powerIndex, transcendence);
+        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(jsonPowerRow, sectionName, powerIndex, transcendence);
 
-        if (undefined !== validRowState) {
+        if (undefined !== validStateAndDv) {
           //already sent message if invalid
-          newState.push(validRowState);
+          newState.push(validStateAndDv.state);
 
-          _this._addRowNoSetState(validRowState);
+          _this._addRowNoSetState(validStateAndDv);
         }
       }
 

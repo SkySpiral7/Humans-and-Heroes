@@ -61,33 +61,6 @@ function PowerObjectAgnostic(props)
    };
 
    //public function section
-   /**Counts totals etc. All values that are not user set or final are created by this method*/
-   this.calculateValues = function ()
-   {
-      var costPerRank = (state.baseCost + modifierSection.getRankTotal());
-      if (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 5) && 'Variable' === state.effect && costPerRank < 5) costPerRank = 5;
-      else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
-      derivedValues.costPerRank = costPerRank;  //save the non-decimal version
-      if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
-
-      derivedValues.total = Math.ceil(costPerRank * state.rank);  //round up
-      var flatValue = modifierSection.getFlatTotal();
-      //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
-      if (flatValue < 0 && (derivedValues.total + flatValue) < 1)
-      {
-         state.rank = (Math.abs(flatValue) / costPerRank);
-         //must be higher than for this to work. don't use ceil so that if whole number will still be +1
-         state.rank = Math.floor(state.rank) + 1;
-         derivedValues.total = Math.ceil(costPerRank * state.rank);  //round up
-      }
-      derivedValues.flatValue = flatValue;
-      derivedValues.total += flatValue;  //flatValue might be negative
-      if ('A God I Am' === state.effect) derivedValues.total += 145;  //for first ranks
-      else if ('Reality Warp' === state.effect) derivedValues.total += 75;
-      //used to calculate all auto modifiers
-      derivedValues.total = modifierSection.calculateGrandTotal(derivedValues.total);
-   };
    /**Returns a json object of this row's data*/
    this.save = function ()
    {
@@ -229,9 +202,7 @@ function PowerObjectAgnostic(props)
    this.constructor = function ()
    {
       state = props.state;
-      derivedValues = {total: 0};
-
-      derivedValues.canSetBaseCost = Data.Power[props.state.effect].hasInputBaseCost;
+      derivedValues = props.derivedValues;
       //TODO: power activation onchange
       /*
       //change to reaction action changes range to close without user message
@@ -259,14 +230,17 @@ function PowerObjectAgnostic(props)
          //either way it will cost 0
       }
       */
-      modifierSection = new ModifierList({powerRowParent: this, state: props.state.Modifiers, keyList: props.modifierKeyList});
-
-      this.calculateValues();
+      modifierSection = new ModifierList({
+         powerRowParent: this,
+         state: state.Modifiers,
+         keyList: props.modifierKeyList,
+         derivedValues: derivedValues.modifiers
+      });
    };
    this.constructor();
 }
 
-PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powerIndex, transcendence)
+PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, powerSectionName, powerIndex, transcendence)
 {
    var loadLocation = powerSectionName.toTitleCase() + ' #' + (powerIndex + 1);
    var nameToLoad = inputState.effect;
@@ -301,12 +275,12 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    validState.duration = validActivationInfoObj.duration.current;
 
    //first pass to make sure they exist and no duplicates
-   var pendingModifiers = ModifierList.sanitizeState(inputState.Modifiers, powerSectionName, powerIndex);
+   var pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(inputState.Modifiers, powerSectionName, powerIndex);
 
-   pendingModifiers = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiers);
-   pendingModifiers = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiers);
-   pendingModifiers = PowerObjectAgnostic._updateDurationModifiers(validState, pendingModifiers);
-   validState.Modifiers = pendingModifiers;
+   pendingModifiersAndDv.state = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiersAndDv.state);
+   pendingModifiersAndDv.state = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiersAndDv.state);
+   pendingModifiersAndDv.state = PowerObjectAgnostic._updateDurationModifiers(validState, pendingModifiersAndDv.state);
+   validState.Modifiers = pendingModifiersAndDv.state;
 
    var validAttackInfo = PowerObjectAgnostic._validateNameAndSkill(validState, inputState, powerSectionName, powerIndex);
    if (undefined !== validAttackInfo)
@@ -316,7 +290,47 @@ PowerObjectAgnostic.sanitizeState = function (inputState, powerSectionName, powe
    }
 
    validState.rank = sanitizeNumber(inputState.rank, 1, 1);
-   return validState;
+
+   var derivedValues = PowerObjectAgnostic._calculateDerivedValues(validState, validActivationInfoObj, pendingModifiersAndDv.derivedValues);
+   return {state: validState, derivedValues: derivedValues};
+};
+/**Counts totals etc. All values that are not user set or final are created by this method*/
+PowerObjectAgnostic._calculateDerivedValues = function (validState, validActivationInfoObj, modifierDerivedValues)
+{
+   var derivedValues = {
+      possibleActions: validActivationInfoObj.action.choices,
+      possibleRanges: validActivationInfoObj.range.choices,
+      possibleDurations: validActivationInfoObj.duration.choices,
+      total: 0,
+      canSetBaseCost: Data.Power[validState.effect].hasInputBaseCost,
+      modifiers: modifierDerivedValues
+   };
+
+   var costPerRank = (validState.baseCost + modifierDerivedValues.rankTotal);
+   if (Main.getActiveRuleset()
+      .isGreaterThanOrEqualTo(3, 5) && 'Variable' === validState.effect && costPerRank < 5) costPerRank = 5;
+   else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
+   derivedValues.costPerRank = costPerRank;  //save the non-decimal version
+   if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
+
+   derivedValues.total = Math.ceil(costPerRank * validState.rank);  //round up
+   var flatValue = modifierDerivedValues.flatTotal;
+   //flat flaw more than (or equal to) the total cost is not allowed. so adjust the power rank
+   if (flatValue < 0 && (derivedValues.total + flatValue) < 1)
+   {
+      validState.rank = (Math.abs(flatValue) / costPerRank);
+      //must be higher than for this to work. don't use ceil so that if whole number will still be +1
+      validState.rank = Math.floor(validState.rank) + 1;
+      derivedValues.total = Math.ceil(costPerRank * validState.rank);  //round up
+   }
+   derivedValues.flatValue = flatValue;
+   derivedValues.total += flatValue;  //flatValue might be negative
+   if ('A God I Am' === validState.effect) derivedValues.total += 145;  //for first ranks
+   else if ('Reality Warp' === validState.effect) derivedValues.total += 75;
+   //used to calculate all auto modifiers
+   derivedValues.total = ModifierList.calculateGrandTotal(modifierDerivedValues, derivedValues.total);
+
+   return derivedValues;
 };
 PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputState, loadLocation)
 {
