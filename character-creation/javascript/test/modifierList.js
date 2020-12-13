@@ -96,9 +96,9 @@ TestSuite.modifierList.sortOrder=function(testState={})
     Main.powerSection.getRowByIndex(0).getModifierList()._testSortStability();
     //this test proves that the sort order forces stability
 
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Stability: Modifier 1'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Stability: Modifier 2'});
-    assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Stability: Modifier 3'});
+    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Stability: Modifier 1'});
+    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Stability: Modifier 2'});
+    assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Stability: Modifier 3'});
     } catch(e){assertions.push({Error: e, Description: 'Stability'});}
 
     try{
@@ -110,10 +110,10 @@ TestSuite.modifierList.sortOrder=function(testState={})
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Free');
     //this test proves that these are in the right order: Faster Action, Increased Range, Increased Duration, else
 
-    assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Auto Extras: Modifier 1'});
-    assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Auto Extras: Modifier 2'});
-    assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Auto Extras: Modifier 3'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,3).getName(), Description: 'Auto Extras: Modifier 4'});
+    assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Auto Extras: Modifier 1'});
+    assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Auto Extras: Modifier 2'});
+    assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Auto Extras: Modifier 3'});
+    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,3).state.name, Description: 'Auto Extras: Modifier 4'});
     } catch(e){assertions.push({Error: e, Description: 'Auto Extras'});}
 
     try{
@@ -125,10 +125,10 @@ TestSuite.modifierList.sortOrder=function(testState={})
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Slow');
     //this test proves that these are in the right order: Slower Action, Reduced Range, Decreased Duration, else
 
-    assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Auto Flaws: Modifier 1'});
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Auto Flaws: Modifier 2'});
-    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Auto Flaws: Modifier 3'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,3).getName(), Description: 'Auto Flaws: Modifier 4'});
+    assertions.push({Expected: 'Slower Action', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Auto Flaws: Modifier 1'});
+    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Auto Flaws: Modifier 2'});
+    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Auto Flaws: Modifier 3'});
+    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,3).state.name, Description: 'Auto Flaws: Modifier 4'});
     } catch(e){assertions.push({Error: e, Description: 'Auto Flaws'});}
 
     try{
@@ -137,8 +137,8 @@ TestSuite.modifierList.sortOrder=function(testState={})
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     //this test proves that Aura comes before Reduced Range
 
-    assertions.push({Expected: 'Aura', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Aura sort order: Aura first'});
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Aura sort order: then range'});
+    assertions.push({Expected: 'Aura', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Aura sort order: Aura first'});
+    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Aura sort order: then range'});
     } catch(e){assertions.push({Error: e, Description: 'Aura sort order'});}
 
     try{
@@ -147,9 +147,9 @@ TestSuite.modifierList.sortOrder=function(testState={})
     ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
 
-    assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective span sorts before Range: action'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective span sorts before Range: Selective'});
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Selective span sorts before Range: then range'});
+    assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Selective span sorts before Range: action'});
+    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Selective span sorts before Range: Selective'});
+    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Selective span sorts before Range: then range'});
     } catch(e){assertions.push({Error: e, Description: 'Selective span sorts before Range'});}
 
     try{
@@ -159,9 +159,9 @@ TestSuite.modifierList.sortOrder=function(testState={})
     ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Selective');
     ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
 
-    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).getName(), Description: 'Selective non-span retains order: Duration'});
-    assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,1).getName(), Description: 'Selective non-span retains order: then rest'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,2).getName(), Description: 'Selective non-span retains order: Selective'});
+    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Selective non-span retains order: Duration'});
+    assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Selective non-span retains order: then rest'});
+    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Selective non-span retains order: Selective'});
     } catch(e){assertions.push({Error: e, Description: 'Selective non-span retains order'});}
 
     return TestRunner.displayResults('TestSuite.modifierList.sortOrder', assertions, testState);

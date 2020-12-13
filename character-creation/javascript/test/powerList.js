@@ -77,7 +77,7 @@ TestSuite.powerList.load=function(testState={})
     assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Happy Path: default action'});
     assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Happy Path: default range'});
     assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Happy Path: default duration'});
-    assertions.push({Expected: 'Other Rank Extra', Actual: Main.powerSection.getModifierRowShort(0, 0).getName(), Description: 'Happy Path: simple modifier'});
+    assertions.push({Expected: 'Other Rank Extra', Actual: Main.powerSection.getModifierRowShort(0, 0).state.name, Description: 'Happy Path: simple modifier'});
     assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Happy Path: no others modifiers'});
     assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Happy Path: rank'});
     assertions.push({Expected: 6, Actual: Main.powerSection.getTotal(), Description: 'Happy Path: Make sure update was called'});
