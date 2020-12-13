@@ -278,9 +278,12 @@ PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, pow
    var pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(inputState.Modifiers, validState.effect,
       validActivationInfoObj, powerSectionName, powerIndex);
 
-   pendingModifiersAndDv.state = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiersAndDv.state);
-   pendingModifiersAndDv.state = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiersAndDv.state);
-   pendingModifiersAndDv.state = PowerObjectAgnostic._updateDurationModifiers(validState, pendingModifiersAndDv.state);
+   pendingModifiersAndDv = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiersAndDv, validActivationInfoObj,
+      powerSectionName, powerIndex);
+   pendingModifiersAndDv = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiersAndDv, validActivationInfoObj,
+      powerSectionName, powerIndex);
+   pendingModifiersAndDv = PowerObjectAgnostic._updateDurationModifiers(validState, pendingModifiersAndDv, validActivationInfoObj,
+      powerSectionName, powerIndex);
    validState.Modifiers = pendingModifiersAndDv.state;
 
    var validAttackInfo = PowerObjectAgnostic._validateNameAndSkill(validState, inputState, powerSectionName, powerIndex);
@@ -435,18 +438,24 @@ PowerObjectAgnostic._getPossibleRanges = function (validState, validAction, vali
    return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
 };
 /**This function creates Selective if needed and recreates Faster/Slower Action as needed.*/
-PowerObjectAgnostic._updateActionModifiers = function (validState, inputPendingModifiers)
+PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
+                                                       powerIndex)
 {
-   var outputPendingModifiers = JSON.clone(inputPendingModifiers);
+   var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
    //Triggered must also be selective so it auto adds but doesn't remove
-   if ('Triggered' === validState.action) ModifierList.createByNameRank(outputPendingModifiers, 'Selective', 1);
+   if ('Triggered' === validState.action) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName,
+      powerIndex, 'Selective', 1);
 
    if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change any other modifiers
 
    //remove all if possible
-   ModifierList.removeByName(outputPendingModifiers, 'Faster Action');
-   ModifierList.removeByName(outputPendingModifiers, 'Slower Action');
-   ModifierList.removeByName(outputPendingModifiers, 'Aura');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Faster Action');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Slower Action');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Aura');
 
    if ('None' === validState.action) return outputPendingModifiers;  //don't add any modifiers
 
@@ -458,19 +467,25 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, inputPendingM
       .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === validState.action && 'Luck Control' !== validState.effect)
    {
       newActionIndex = Data.Power.actions.indexOf('Standard');  //calculate distance from Standard
-      ModifierList.createByNameRank(outputPendingModifiers, 'Aura', 1);
+      outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+         powerIndex, 'Aura', 1);
    }
 
    var actionDifference = (newActionIndex - defaultActionIndex);
-   if (actionDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Faster Action', actionDifference);
-   else if (actionDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Slower Action', -actionDifference);
+   if (actionDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName, powerIndex,
+      'Faster Action', actionDifference);
+   else if (actionDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName,
+      powerIndex, 'Slower Action', -actionDifference);
 
    return outputPendingModifiers;
 };
 /**This function recreates Increased/Decreased Duration as needed.*/
-PowerObjectAgnostic._updateDurationModifiers = function (validState, inputPendingModifiers)
+PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
+                                                         powerIndex)
 {
-   var outputPendingModifiers = JSON.clone(inputPendingModifiers);
+   var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
    if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
 
    var defaultDurationName = Data.Power[validState.effect].defaultDuration;
@@ -480,20 +495,27 @@ PowerObjectAgnostic._updateDurationModifiers = function (validState, inputPendin
       defaultDurationIndex = Data.Power.durations.indexOf('Sustained');  //calculate distance from Sustained
 
    //remove both if possible
-   ModifierList.removeByName(outputPendingModifiers, 'Increased Duration');
-   ModifierList.removeByName(outputPendingModifiers, 'Decreased Duration');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Increased Duration');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Decreased Duration');
 
    var durationDifference = (newDurationIndex - defaultDurationIndex);
-   if (durationDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Increased Duration', durationDifference);
-   else if (durationDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Decreased Duration',
+   if (durationDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName, powerIndex,
+      'Increased Duration', durationDifference);
+   else if (durationDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName,
+      powerIndex, 'Decreased Duration',
       -durationDifference);
 
    return outputPendingModifiers;
 };
 /**This function recreates Increased/Reduced Range as needed.*/
-PowerObjectAgnostic._updateRangeModifiers = function (validState, inputPendingModifiers)
+PowerObjectAgnostic._updateRangeModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
+                                                      powerIndex)
 {
-   var outputPendingModifiers = JSON.clone(inputPendingModifiers);
+   var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
    //when changing to personal nothing else needs to change
    if ('Personal' === validState.range) return outputPendingModifiers;  //only possible (for feature or) when removing a modifier
 
@@ -508,12 +530,18 @@ PowerObjectAgnostic._updateRangeModifiers = function (validState, inputPendingMo
    if ('Personal' === defaultRangeName) defaultRangeIndex = Data.Power.ranges.indexOf('Close');  //calculate distance from close
 
    //remove both if possible
-   ModifierList.removeByName(outputPendingModifiers, 'Increased Range');
-   ModifierList.removeByName(outputPendingModifiers, 'Reduced Range');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Increased Range');
+   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+      powerIndex, 'Reduced Range');
 
    var rangeDifference = (newRangeIndex - defaultRangeIndex);
-   if (rangeDifference > 0) ModifierList.createByNameRank(outputPendingModifiers, 'Increased Range', rangeDifference);
-   else if (rangeDifference < 0) ModifierList.createByNameRank(outputPendingModifiers, 'Reduced Range', -rangeDifference);
+   if (rangeDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName, powerIndex,
+      'Increased Range', rangeDifference);
+   else if (rangeDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
+      validActivationInfoObj, powerSectionName, powerIndex,
+      'Reduced Range', -rangeDifference);
 
    return outputPendingModifiers;
 };

@@ -12,7 +12,7 @@ function ModifierRowHtml(props) {
     return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
   }
 
-  var state = undefined !== props.modifierRow ? props.modifierRow : {
+  var state = undefined !== props.modifierRow ? props.modifierRow.state : {
     name: undefined
   };
   /*

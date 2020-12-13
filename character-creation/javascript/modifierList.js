@@ -30,7 +30,7 @@ function ModifierList(props)
    {
       return JSON.clone({
          state: state[rowIndex],
-         derivedValues: derivedValues[rowIndex],
+         derivedValues: derivedValues.rows[rowIndex],
          key: props.keyList[rowIndex]
       });
    };
@@ -111,6 +111,7 @@ ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffec
 };
 /**This will search each row for the name given and return the row's array index or undefined if not found.
  Note that this should only be called with modifiers that don't have text.*/
+//TODO: rename to indicate index
 ModifierList.findRowByName = function (state, rowName)
 {
    for (var i = 0; i < state.length; i++)
@@ -120,23 +121,33 @@ ModifierList.findRowByName = function (state, rowName)
    //else return undefined
 };
 /**This will set a row (by name) to the rank given. If the row doesn't exist it will be created*/
-ModifierList.createByNameRank = function (state, rowName, rowRank)
+ModifierList.createByNameRank = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName, powerIndex, rowName,
+                                          rowRank)
 {
-   var rowIndex = ModifierList.findRowByName(state, rowName);
+   var rowIndex = ModifierList.findRowByName(pendingModifiersAndDv.state, rowName);
    if (undefined === rowIndex)
    {
-      state.push({name: rowName, rank: rowRank});
+      pendingModifiersAndDv.state.push({name: rowName, rank: rowRank});
    }
    else
    {
-      state[rowIndex].rank = rowRank;
+      pendingModifiersAndDv.state[rowIndex].rank = rowRank;
    }
+   pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(pendingModifiersAndDv.state, validState.effect,
+      validActivationInfoObj, powerSectionName, powerIndex);
+   return pendingModifiersAndDv;
 };
 /**This will remove a row of the given name. Note that this should only be called with modifiers that don't have text.*/
-ModifierList.removeByName = function (state, rowName)
+ModifierList.removeByName = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName, powerIndex, rowName)
 {
-   var rowIndex = ModifierList.findRowByName(state, rowName);
-   if (undefined !== rowIndex) state.remove(rowIndex);
+   var rowIndex = ModifierList.findRowByName(pendingModifiersAndDv.state, rowName);
+   if (undefined !== rowIndex)
+   {
+      pendingModifiersAndDv.state.remove(rowIndex);
+      pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(pendingModifiersAndDv.state, validState.effect,
+         validActivationInfoObj, powerSectionName, powerIndex);
+   }
+   return pendingModifiersAndDv;
 };
 /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
 ModifierList.calculateGrandTotal = function (derivedValues, powerRowRawTotal)
@@ -202,6 +213,8 @@ architecture:
    * loading main is normal
 
 TODO: next:
+power row constructor has activation on change
+   should fix most test fails
 fix all possible tests
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
    TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
@@ -213,7 +226,6 @@ resolve godhood circle:
    but then there's CP from others
    all need static calc values (main eventually has all state?)
    this also fixes possible circle for power/mod ARD
-power row constructor has activation on change
 replace sanitizeRows with duplicate check
    power row has stuff (see _addRowNoPush region) from mod on change
 sort mods on add

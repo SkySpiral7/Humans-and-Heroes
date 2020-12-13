@@ -15,7 +15,7 @@ function ModifierRowHtml(props)
    }
 
    const state = (undefined !== props.modifierRow)
-      ? props.modifierRow
+      ? props.modifierRow.state
       : {name: undefined};
 
    /*
