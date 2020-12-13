@@ -26,9 +26,14 @@ function ModifierList(props)
       throw new AssertionError('No row with id ' + key + ' (state.length=' + state.length + ')');
    };
    /**Returns the row object or nothing if the index is out of range. Used by tests and debugging*/
-   this.getRowByIndex = function (rowIndex) {return state[rowIndex];};
-   /**Returns the row object or throws if the index is out of range. Used in order to call each onChange*/
-   this.getRowByKey = function (key) {return state[this.getIndexByKey(key)];};
+   this.getRowByIndex = function (rowIndex)
+   {
+      return JSON.clone({
+         state: state[rowIndex],
+         derivedValues: derivedValues[rowIndex],
+         key: props.keyList[rowIndex]
+      });
+   };
    /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    this.indexToKey = function (rowIndex)
    {
@@ -72,7 +77,7 @@ ModifierList.isNonPersonalModifierPresent = function (inputState)
    return false;
 };
 /**Sets data from a json object given then updates. The row array is not cleared by this function*/
-ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerSectionName, powerIndex)
+ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffect, validActivationInfoObj, powerSectionName, powerIndex)
 {
    if (undefined === inputState) inputState = [];
    var validListState = [];
@@ -81,11 +86,13 @@ ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerSecti
    for (var modIndex = 0; modIndex < inputState.length; modIndex++)
    {
       var loadLocation = (powerSectionName.toTitleCase() + ' #' + (powerIndex + 1) + ' Modifier #' + (modIndex + 1));
-      var validRowStateAndDv = ModifierObject.sanitizeStateAndGetDerivedValues({
+      var rowInputState = {
          name: inputState[modIndex].name,
          rank: inputState[modIndex].rank,
          text: inputState[modIndex].text
-      }, loadLocation);
+      };
+      var validRowStateAndDv = ModifierObject.sanitizeStateAndGetDerivedValues(rowInputState, powerEffect, validActivationInfoObj,
+         loadLocation);
       if (undefined === validRowStateAndDv) continue;  //already sent message
 
       var uniqueName = ModifierObject.getUniqueName(validRowStateAndDv.state, false);

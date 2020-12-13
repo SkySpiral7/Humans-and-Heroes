@@ -15,7 +15,7 @@ function ModifierRowHtml(props)
    }
 
    const state = (undefined !== props.modifierRow)
-      ? props.modifierRow.getState()
+      ? props.modifierRow
       : {name: undefined};
 
    /*
@@ -69,7 +69,7 @@ function ModifierRowHtml(props)
 
    if (undefined !== state.name)  //done for blank
    {
-      const derivedValues = props.modifierRow.getDerivedValues();
+      const derivedValues = props.modifierRow.derivedValues;
 
       if ('Attack' === state.name)
       {
@@ -113,7 +113,7 @@ function ModifierRowHtml(props)
                             onChange={(event) =>
                             {
                                const rankGiven = event.target.value;
-                               powerSection.updateModifierPropertyByRow('rank', rankGiven, props.modifierRow);
+                               powerSection.updateModifierPropertyByKey('rank', rankGiven, props.powerRow, props.modifierRow.key);
                             }} value={state.rank} />
                   </label>);
             }
@@ -127,7 +127,7 @@ function ModifierRowHtml(props)
                          onChange={(event) =>
                          {
                             const textGiven = event.target.value;
-                            powerSection.updateModifierPropertyByRow('text', textGiven, props.modifierRow);
+                            powerSection.updateModifierPropertyByKey('text', textGiven, props.powerRow, props.modifierRow.key);
                          }} value={state.text} />
                </label>);
          }

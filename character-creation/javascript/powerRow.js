@@ -275,7 +275,8 @@ PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, pow
    validState.duration = validActivationInfoObj.duration.current;
 
    //first pass to make sure they exist and no duplicates
-   var pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(inputState.Modifiers, powerSectionName, powerIndex);
+   var pendingModifiersAndDv = ModifierList.sanitizeStateAndGetDerivedValues(inputState.Modifiers, validState.effect,
+      validActivationInfoObj, powerSectionName, powerIndex);
 
    pendingModifiersAndDv.state = PowerObjectAgnostic._updateActionModifiers(validState, pendingModifiersAndDv.state);
    pendingModifiersAndDv.state = PowerObjectAgnostic._updateRangeModifiers(validState, pendingModifiersAndDv.state);

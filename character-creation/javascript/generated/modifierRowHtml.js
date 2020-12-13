@@ -12,7 +12,7 @@ function ModifierRowHtml(props) {
     return sectionName + 'Modifier' + elementLabel + powerKey + '.' + key;
   }
 
-  var state = undefined !== props.modifierRow ? props.modifierRow.getState() : {
+  var state = undefined !== props.modifierRow ? props.modifierRow : {
     name: undefined
   };
   /*
@@ -64,7 +64,7 @@ function ModifierRowHtml(props) {
 
   if (undefined !== state.name) //done for blank
     {
-      var derivedValues = props.modifierRow.getDerivedValues();
+      var derivedValues = props.modifierRow.derivedValues;
 
       if ('Attack' === state.name) {
         elementList.push( /*#__PURE__*/React.createElement("div", {
@@ -115,7 +115,7 @@ function ModifierRowHtml(props) {
                 id: idFor('Rank'),
                 onChange: function onChange(event) {
                   var rankGiven = event.target.value;
-                  powerSection.updateModifierPropertyByRow('rank', rankGiven, props.modifierRow);
+                  powerSection.updateModifierPropertyByKey('rank', rankGiven, props.powerRow, props.modifierRow.key);
                 },
                 value: state.rank
               })));
@@ -131,7 +131,7 @@ function ModifierRowHtml(props) {
               id: idFor('Text'),
               onChange: function onChange(event) {
                 var textGiven = event.target.value;
-                powerSection.updateModifierPropertyByRow('text', textGiven, props.modifierRow);
+                powerSection.updateModifierPropertyByKey('text', textGiven, props.powerRow, props.modifierRow.key);
               },
               value: state.text
             })));

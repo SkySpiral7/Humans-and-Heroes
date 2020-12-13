@@ -240,7 +240,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       }
 
       var modifierSection = powerRow.getModifierList();
-      var modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.getKey()); //TODO: figure out how to handle duplicates
+      var modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key); //TODO: figure out how to handle duplicates
 
       if (!Data.Modifier.names.contains(newName)) {
         _this._removeModifierRow(powerIndex, modifierIndex);
@@ -271,11 +271,11 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "updateModifierPropertyByRow", function (propertyName, newValue, updatedRow) {
-      var powerIndex = _this.getIndexByKey(updatedRow.getPower().getKey());
+    _defineProperty(_assertThisInitialized(_this), "updateModifierPropertyByKey", function (propertyName, newValue, powerRow, updatedKey) {
+      var powerIndex = _this.getIndexByKey(powerRow.getKey());
 
-      var modifierSection = updatedRow.getSection();
-      var modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
+      var modifierSection = powerRow.getModifierList();
+      var modifierIndex = modifierSection.getIndexByKey(updatedKey);
 
       var newModState = _this._rowArray[powerIndex].getState();
 

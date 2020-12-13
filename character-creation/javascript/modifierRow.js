@@ -25,12 +25,12 @@ ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEff
    var validState = {name: inputState.name};
 
    var derivedValues = {};
-   derivedValues.modifierType = Data.Modifier[state.name].type;
-   derivedValues.costPerRank = Data.Modifier[state.name].cost;
-   derivedValues.maxRank = Data.Modifier[state.name].maxRank;
+   derivedValues.modifierType = Data.Modifier[inputState.name].type;
+   derivedValues.costPerRank = Data.Modifier[inputState.name].cost;
+   derivedValues.maxRank = Data.Modifier[inputState.name].maxRank;
    derivedValues.hasRank = (1 !== derivedValues.maxRank);
-   derivedValues.hasText = Data.Modifier[state.name].hasText;
-   derivedValues.hasAutoTotal = Data.Modifier[state.name].hasAutoTotal;
+   derivedValues.hasText = Data.Modifier[inputState.name].hasText;
+   derivedValues.hasAutoTotal = Data.Modifier[inputState.name].hasAutoTotal;
 
    if (derivedValues.hasRank)
    {
@@ -47,11 +47,11 @@ ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEff
    //else: derivedValues.rawTotal = undefined
    if (!derivedValues.hasAutoTotal)
    {
-      var effectiveRank = state.rank;
-      if ((state.name === 'Decreased Duration' && Data.Power[powerEffect].defaultDuration === 'Permanent') ||
-         (state.name === 'Increased Duration' && validActivationInfoObj.current.duration === 'Permanent')) effectiveRank -= 2;
-      else if ((state.name === 'Reduced Range' && Data.Power[powerEffect].defaultRange === 'Perception') ||
-         (state.name === 'Increased Range' && validActivationInfoObj.current.range === 'Perception')) effectiveRank++;
+      var effectiveRank = inputState.rank;
+      if ((inputState.name === 'Decreased Duration' && Data.Power[powerEffect].defaultDuration === 'Permanent') ||
+         (inputState.name === 'Increased Duration' && validActivationInfoObj.duration.current === 'Permanent')) effectiveRank -= 2;
+      else if ((inputState.name === 'Reduced Range' && Data.Power[powerEffect].defaultRange === 'Perception') ||
+         (inputState.name === 'Increased Range' && validActivationInfoObj.range.current === 'Perception')) effectiveRank++;
 
       derivedValues.rawTotal = derivedValues.costPerRank * effectiveRank;
    }

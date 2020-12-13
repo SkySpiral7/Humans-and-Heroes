@@ -435,7 +435,7 @@ function MainObject()
                var accurateIndex = ModifierList.findRowByName(modifierList.getState(), 'Accurate');
                if (undefined !== accurateIndex)
                {
-                  var accurateApplications = modifierList.getRowByIndex(accurateIndex).getRank();
+                  var accurateApplications = modifierList.getRowByIndex(accurateIndex).state.rank;
                   //in all versions accurate is +2 attack/rank
                   attackBonus += accurateApplications * 2;
                }

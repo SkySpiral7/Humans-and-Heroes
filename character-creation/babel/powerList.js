@@ -215,7 +215,7 @@ class PowerListAgnostic extends React.Component
       }
 
       const modifierSection = powerRow.getModifierList();
-      const modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.getKey());
+      const modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key);
 
       //TODO: figure out how to handle duplicates
       if (!Data.Modifier.names.contains(newName))
@@ -251,12 +251,11 @@ class PowerListAgnostic extends React.Component
       }
    };
    /**Onchange function for modifier rank or text*/
-   updateModifierPropertyByRow = (propertyName, newValue, updatedRow) =>
+   updateModifierPropertyByKey = (propertyName, newValue, powerRow, updatedKey) =>
    {
-      const powerIndex = this.getIndexByKey(updatedRow.getPower()
-      .getKey());
-      const modifierSection = updatedRow.getSection();
-      const modifierIndex = modifierSection.getIndexByKey(updatedRow.getKey());
+      const powerIndex = this.getIndexByKey(powerRow.getKey());
+      const modifierSection = powerRow.getModifierList();
+      const modifierIndex = modifierSection.getIndexByKey(updatedKey);
 
       let newModState = this._rowArray[powerIndex].getState();
       newModState.Modifiers[modifierIndex][propertyName] = newValue;
