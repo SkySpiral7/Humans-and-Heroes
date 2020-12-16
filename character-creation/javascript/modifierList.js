@@ -69,12 +69,18 @@ ModifierList.isNonPersonalModifierPresent = function (inputState)
    if (undefined === inputState) return false;
    for (var i = 0; i < inputState.length; ++i)
    {
-      if ('Attack' === inputState[i].name ||
-         'Affects Others Also' === inputState[i].name ||
-         'Affects Others Only' === inputState[i].name)
+      if (ModifierList.isNonPersonalModifier(inputState[i].name))
          return true;
    }
    return false;
+};
+/**@returns {boolean} true if modifier would change range from being Personal*/
+ModifierList.isNonPersonalModifier = function (modName)
+{
+   return ('Attack' === modName ||
+      'Affects Others Also' === modName ||
+      'Affects Others Only' === modName);
+
 };
 /**Sets data from a json object given then updates. The row array is not cleared by this function*/
 ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffect, validActivationInfoObj, powerSectionName, powerIndex)
@@ -213,12 +219,12 @@ architecture:
    * loading main is normal
 
 TODO: next:
-power row constructor has activation on change
-   should fix most test fails
 fix all possible tests
+   https://stackoverflow.com/questions/24432576/reactjs-render-string-with-non-breaking-spaces
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
    TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
    TestSuite.main.updateTranscendence is destroying power
+determine why I needed the ret null in power list
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state
    static method to determine godhood
@@ -227,7 +233,7 @@ resolve godhood circle:
    all need static calc values (main eventually has all state?)
    this also fixes possible circle for power/mod ARD
 replace sanitizeRows with duplicate check
-   power row has stuff (see _addRowNoPush region) from mod on change
+   power row has stuff (see "copied from mod list" region) for mod on change
 sort mods on add
 test all
 sort all functions

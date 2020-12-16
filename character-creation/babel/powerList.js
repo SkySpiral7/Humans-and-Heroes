@@ -89,6 +89,8 @@ class PowerListAgnostic extends React.Component
       const elementArray = this.state.it.map((_, powerIndex) =>
       {
          const powerRow = this._rowArray[powerIndex];
+         //TODO: this is a work around and indicates a bug
+         if (undefined === powerRow) return null;
          const rowKey = powerRow.getKey();
          return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
                                powerRow={powerRow}
@@ -170,6 +172,21 @@ class PowerListAgnostic extends React.Component
 
       const updatedIndex = this.getIndexByKey(updatedKey);
       let powerState = this._rowArray[updatedIndex].getState();
+
+      //when change to Permanent duration change action to none
+      if ('duration' === propertyName && 'Permanent' === newValue)
+      {
+         powerState.action = 'None';
+      }
+      //none is only for Permanent duration which this no longer is
+      else if ('duration' === propertyName && 'Permanent' === powerState.duration)
+      {
+         powerState.action = Data.Power[powerState.effect].defaultAction;
+         if ('None' === powerState.action) powerState.action = 'Free';
+         //use default action if possible otherwise use Free
+         //either way it will cost 0
+      }
+
       powerState[propertyName] = newValue;
 
       const transcendence = Main.getTranscendence();
@@ -207,48 +224,83 @@ class PowerListAgnostic extends React.Component
    updateModifierNameByRow = (newName, powerRow, updatedModifierRow) =>
    {
       const powerIndex = this.getIndexByKey(powerRow.getKey());
+      let powerState = this._rowArray[powerIndex].getState();
+      const modifierSection = powerRow.getModifierList();
+      const modifierKeyList = modifierSection.getKeyList();
+
+      //if new is 'Select...' then newIsNonPersonal will be false (won't throw)
+      const newIsNonPersonal = ModifierList.isNonPersonalModifier(newName);
+      let oldWasNonPersonal = false;
+      let modifierIndex = undefined;
+      if (undefined !== updatedModifierRow)
+      {
+         modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key);
+         oldWasNonPersonal = ModifierList.isNonPersonalModifier(powerState.Modifiers[modifierIndex].name);
+      }
+
+      //TODO: consider what to do about feature
+      //non personal modifier was added
+      if (!oldWasNonPersonal && newIsNonPersonal)
+      {
+         powerState.range = 'Close';
+
+         const defaultDuration = Data.Power[powerState.effect].defaultDuration;
+         //duration can't be permanent if range isn't personal
+         if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';
+         else powerState.duration = defaultDuration;
+         //use default duration if possible. otherwise use Sustained
+         //either way it will cost 0
+
+         //none is only for Permanent duration which this no longer is
+         if ('None' === powerState.action)
+         {
+            powerState.action = Data.Power[powerState.effect].defaultAction;
+            if ('None' === powerState.action) powerState.action = 'Free';
+            //use default action if possible otherwise use Free
+            //either way it will cost 0
+         }
+      }
+      //non personal modifier was removed or changed to another mod
+      else if (oldWasNonPersonal && !newIsNonPersonal)
+      {
+         //default range. no need to change other 2
+         powerState.range = 'Personal';
+      }
 
       if (undefined === updatedModifierRow)
       {
-         this._addModifierRow(powerIndex, newName);
-         return;
+         powerState.Modifiers.push({name: newName});
+         modifierKeyList.push(MainObject.generateKey());
       }
-
-      const modifierSection = powerRow.getModifierList();
-      const modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key);
-
       //TODO: figure out how to handle duplicates
-      if (!Data.Modifier.names.contains(newName))
+      else if (!Data.Modifier.names.contains(newName))
       {
-         this._removeModifierRow(powerIndex, modifierIndex);
+         powerState.Modifiers.remove(modifierIndex);
+         modifierKeyList.remove(modifierIndex);
       }
       else
       {
-         const transcendence = Main.getTranscendence();
-         const sectionName = this.props.sectionName;
-         let newModState = this._rowArray[powerIndex].getState();
          //TODO: most of the time a new name should clear other state
-         newModState.Modifiers[modifierIndex].name = newName;
-
-         const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(newModState, sectionName, this._rowArray.length,
-            transcendence);
-
-         this._rowArray[powerIndex] = new PowerObjectAgnostic({
-            key: this._rowArray[powerIndex].getKey(),
-            sectionName: sectionName,
-            powerListParent: this,
-            state: validStateAndDv.state,
-            derivedValues: validStateAndDv.derivedValues,
-            modifierKeyList: this._rowArray[powerIndex].getModifierList()
-            .getKeyList()
-         });
-         this._prerender();
-         this.setState(state =>
-         {
-            state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
-            return state;
-         });
+         powerState.Modifiers[modifierIndex].name = newName;
       }
+
+      const transcendence = Main.getTranscendence();
+      const sectionName = this.props.sectionName;
+      const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, sectionName, powerIndex, transcendence);
+      this._rowArray[powerIndex] = new PowerObjectAgnostic({
+         key: this._rowArray[powerIndex].getKey(),
+         sectionName: this.props.sectionName,
+         powerListParent: this,
+         state: validStateAndDv.state,
+         derivedValues: validStateAndDv.derivedValues,
+         modifierKeyList: modifierKeyList
+      });
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it[powerIndex] = validStateAndDv.state;
+         return state;
+      });
    };
    /**Onchange function for modifier rank or text*/
    updateModifierPropertyByKey = (propertyName, newValue, powerRow, updatedKey) =>
@@ -303,34 +355,6 @@ class PowerListAgnostic extends React.Component
       this._blankPowerKey = MainObject.generateKey();
       this._rowArray.push(powerObject);
    };
-   /**Creates a new modifier row at the end of the power's array*/
-   _addModifierRow = (powerIndex, newName) =>
-   {
-      let state = this._rowArray[powerIndex].getState();
-      state.Modifiers.push({name: newName});
-
-      const transcendence = Main.getTranscendence();
-      const sectionName = this.props.sectionName;
-      const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
-      const modifierKeyList = this._rowArray[powerIndex].getModifierList()
-      .getKeyList();
-      modifierKeyList.push(MainObject.generateKey());
-
-      this._rowArray[powerIndex] = new PowerObjectAgnostic({
-         key: this._rowArray[powerIndex].getKey(),
-         sectionName: this.props.sectionName,
-         powerListParent: this,
-         state: validStateAndDv.state,
-         derivedValues: validStateAndDv.derivedValues,
-         modifierKeyList: modifierKeyList
-      });
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it[powerIndex] = validStateAndDv.state;
-         return state;
-      });
-   };
    getIndexByKey = (key) =>
    {
       if (key === this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
@@ -348,32 +372,6 @@ class PowerListAgnostic extends React.Component
       this.setState(state =>
       {
          state.it.remove(rowIndex);
-         return state;
-      });
-   };
-   /**Removes the row from the array and updates the index of all others in the list.*/
-   _removeModifierRow = (powerIndex, modifierIndex) =>
-   {
-      const state = this._rowArray[powerIndex].getState();
-      state.Modifiers.remove(modifierIndex);
-      const transcendence = Main.getTranscendence();
-      const sectionName = this.props.sectionName;
-      const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
-      const modifierKeyList = this._rowArray[powerIndex].getModifierList()
-      .getKeyList();
-      modifierKeyList.remove(modifierIndex);
-      this._rowArray[powerIndex] = new PowerObjectAgnostic({
-         key: this._rowArray[powerIndex].getKey(),
-         sectionName: this.props.sectionName,
-         powerListParent: this,
-         state: validStateAndDv.state,
-         derivedValues: validStateAndDv.derivedValues,
-         modifierKeyList: modifierKeyList
-      });
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it[powerIndex] = validStateAndDv.state;
          return state;
       });
    };

@@ -26,6 +26,9 @@ function ModifierRowHtml(props)
 
    let elementList = [];
 
+   /*current range can't be personal unless default is personal and it doesn't already have a non personal modifier.
+   if there is a non personal modifier then only that row should have the option*/
+   const showNonPersonalOption = (props.powerRow.getRange() === 'Personal' || ModifierList.isNonPersonalModifier(state.name));
    let amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRow.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
    //Triggered's Selective is amReadOnly even for Feature
@@ -39,6 +42,7 @@ function ModifierRowHtml(props)
       .filter(name => !(props.powerRow.getSection() === Main.equipmentSection &&
          (name === 'Removable' || name === 'Easily Removable')))
       .filter(name => props.powerRow.getEffect() === 'Feature' || !Data.Modifier[name].isReadOnly)
+      .filter(name => showNonPersonalOption || !ModifierList.isNonPersonalModifier(name))
       .map(name =>
          <option key={name}>{name}</option>
       );

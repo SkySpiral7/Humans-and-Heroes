@@ -82,41 +82,6 @@ function PowerObjectAgnostic(props)
    };
 
    //region copied from mod list
-   this._addRowNoPush = function (newName)
-   {
-      //TODO: onchange: move this up. was in mod row
-      if (false)
-      {
-         var wasAttack = ('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name);
-         //TODO: remove these modifiers from GUI for non-personal powers. Those would need to be Enhanced trait attack
-         if (wasAttack && 'Feature' !== props.powerRowParent.getEffect()) props.powerRowParent.setRange('Personal');
-
-         if (!Data.Modifier.names.contains(nameGiven))  //if row is removed, ie: 'Select Modifier'
-         {
-            this._resetValues();
-            if (wasAttack) props.powerRowParent.generateNameAndSkill();  //technically only necessary if 'Attack' === state.name
-            return;
-         }
-
-
-         if (('Attack' === state.name || 'Affects Others Only' === state.name || 'Affects Others Also' === state.name)
-            && 'Personal' === props.powerRowParent.getRange())
-            props.powerRowParent.setRange('Close');  //when loading this value is redundantly set then later overridden by load's setRange
-         if (wasAttack || 'Attack' === state.name) props.powerRowParent.generateNameAndSkill();  //create or destroy as needed
-      }
-
-      //the row that was blank no longer is so use the blank key
-      var modifierObject = new ModifierObject({
-         key: this._blankKey,
-         powerRowParent: props.powerRowParent,
-         modifierListParent: this,
-         sectionName: props.sectionName,
-         state: {name: newName}  //rest are defaulted
-      });
-      //need a new key for the new blank row
-      this._blankKey = MainObject.generateKey();
-      return modifierObject;
-   };
    /**@returns true if 2+ rows in rowArray have the same UniqueName*/
    this._hasDuplicate = function ()
    {
@@ -203,33 +168,6 @@ function PowerObjectAgnostic(props)
    {
       state = props.state;
       derivedValues = props.derivedValues;
-      //TODO: power activation onchange
-      /*
-      //change to reaction action changes range to close without user message
-      if ('Reaction' === this.state.action && 'Feature' !== this.state.effect && 'Luck Control' !== this.state.effect &&
-         Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4)) this.setRange('Close');
-
-      //changing from personal must change duration to not be permanent
-      if ('Personal' === oldRange && 'Permanent' === this.state.duration)
-      {
-         var defaultDuration = Data.Power[this.state.effect].defaultDuration;
-         if ('Permanent' === defaultDuration) this.setDuration('Sustained');
-         else this.setDuration(defaultDuration);
-         //use default duration if possible. otherwise use Sustained
-         //either way it will cost 0
-      }
-
-      if ('Permanent' === newDurationName) this.setAction('None');  //if changing to Permanent
-      else if ('Permanent' === oldDuration)  //if changing from Permanent
-      {
-         //then reset action
-         if ('Permanent' === defaultDurationName) this.setAction('Free');  //default action is None so use Free instead
-         else this.setAction(Data.Power[this.state.effect].defaultAction);
-         //use default action if possible otherwise use Free
-         //either way it will cost 0
-      }
-      */
       modifierSection = new ModifierList({
          powerRowParent: this,
          state: state.Modifiers,
@@ -269,6 +207,9 @@ PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, pow
 
    //each value is valid but maybe not the combination
    var existingActivationInfo = PowerObjectAgnostic._validateActivationInfoExists(validState, inputState, loadLocation);
+   /*unvalidated modifiers are needed to validate personal range. when mods are validated it calculates cost from the ARD
+   therefore give it short lived mods in a funny variable name to beat chicken vs egg*/
+   existingActivationInfo.Modifiers = inputState.Modifiers;
    var validActivationInfoObj = PowerObjectAgnostic._validateActivationInfo(validState, existingActivationInfo, loadLocation);
    validState.action = validActivationInfoObj.action.current;
    validState.range = validActivationInfoObj.range.current;

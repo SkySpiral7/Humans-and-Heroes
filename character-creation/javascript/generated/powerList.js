@@ -112,7 +112,9 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
 
       var elementArray = _this.state.it.map(function (_, powerIndex) {
-        var powerRow = _this._rowArray[powerIndex];
+        var powerRow = _this._rowArray[powerIndex]; //TODO: this is a work around and indicates a bug
+
+        if (undefined === powerRow) return null;
         var rowKey = powerRow.getKey();
         return /*#__PURE__*/React.createElement(PowerRowHtml, {
           key: rowKey,
@@ -197,7 +199,17 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
-      var powerState = _this._rowArray[updatedIndex].getState();
+      var powerState = _this._rowArray[updatedIndex].getState(); //when change to Permanent duration change action to none
+
+
+      if ('duration' === propertyName && 'Permanent' === newValue) {
+        powerState.action = 'None';
+      } //none is only for Permanent duration which this no longer is
+      else if ('duration' === propertyName && 'Permanent' === powerState.duration) {
+          powerState.action = Data.Power[powerState.effect].defaultAction;
+          if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
+          //either way it will cost 0
+        }
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
@@ -233,42 +245,73 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "updateModifierNameByRow", function (newName, powerRow, updatedModifierRow) {
       var powerIndex = _this.getIndexByKey(powerRow.getKey());
 
-      if (undefined === updatedModifierRow) {
-        _this._addModifierRow(powerIndex, newName);
-
-        return;
-      }
+      var powerState = _this._rowArray[powerIndex].getState();
 
       var modifierSection = powerRow.getModifierList();
-      var modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key); //TODO: figure out how to handle duplicates
+      var modifierKeyList = modifierSection.getKeyList(); //if new is 'Select...' then newIsNonPersonal will be false (won't throw)
 
-      if (!Data.Modifier.names.contains(newName)) {
-        _this._removeModifierRow(powerIndex, modifierIndex);
-      } else {
-        var transcendence = Main.getTranscendence();
-        var sectionName = _this.props.sectionName;
+      var newIsNonPersonal = ModifierList.isNonPersonalModifier(newName);
+      var oldWasNonPersonal = false;
+      var modifierIndex = undefined;
 
-        var newModState = _this._rowArray[powerIndex].getState(); //TODO: most of the time a new name should clear other state
+      if (undefined !== updatedModifierRow) {
+        modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key);
+        oldWasNonPersonal = ModifierList.isNonPersonalModifier(powerState.Modifiers[modifierIndex].name);
+      } //TODO: consider what to do about feature
+      //non personal modifier was added
 
 
-        newModState.Modifiers[modifierIndex].name = newName;
-        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(newModState, sectionName, _this._rowArray.length, transcendence);
-        _this._rowArray[powerIndex] = new PowerObjectAgnostic({
-          key: _this._rowArray[powerIndex].getKey(),
-          sectionName: sectionName,
-          powerListParent: _assertThisInitialized(_this),
-          state: validStateAndDv.state,
-          derivedValues: validStateAndDv.derivedValues,
-          modifierKeyList: _this._rowArray[powerIndex].getModifierList().getKeyList()
+      if (!oldWasNonPersonal && newIsNonPersonal) {
+        powerState.range = 'Close';
+        var defaultDuration = Data.Power[powerState.effect].defaultDuration; //duration can't be permanent if range isn't personal
+
+        if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';else powerState.duration = defaultDuration; //use default duration if possible. otherwise use Sustained
+        //either way it will cost 0
+        //none is only for Permanent duration which this no longer is
+
+        if ('None' === powerState.action) {
+          powerState.action = Data.Power[powerState.effect].defaultAction;
+          if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
+          //either way it will cost 0
+        }
+      } //non personal modifier was removed or changed to another mod
+      else if (oldWasNonPersonal && !newIsNonPersonal) {
+          //default range. no need to change other 2
+          powerState.range = 'Personal';
+        }
+
+      if (undefined === updatedModifierRow) {
+        powerState.Modifiers.push({
+          name: newName
         });
+        modifierKeyList.push(MainObject.generateKey());
+      } //TODO: figure out how to handle duplicates
+      else if (!Data.Modifier.names.contains(newName)) {
+          powerState.Modifiers.remove(modifierIndex);
+          modifierKeyList.remove(modifierIndex);
+        } else {
+          //TODO: most of the time a new name should clear other state
+          powerState.Modifiers[modifierIndex].name = newName;
+        }
 
-        _this._prerender();
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, sectionName, powerIndex, transcendence);
+      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
+        key: _this._rowArray[powerIndex].getKey(),
+        sectionName: _this.props.sectionName,
+        powerListParent: _assertThisInitialized(_this),
+        state: validStateAndDv.state,
+        derivedValues: validStateAndDv.derivedValues,
+        modifierKeyList: modifierKeyList
+      });
 
-        _this.setState(function (state) {
-          state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
-          return state;
-        });
-      }
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it[powerIndex] = validStateAndDv.state;
+        return state;
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateModifierPropertyByKey", function (propertyName, newValue, powerRow, updatedKey) {
@@ -321,36 +364,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       _this._rowArray.push(powerObject);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_addModifierRow", function (powerIndex, newName) {
-      var state = _this._rowArray[powerIndex].getState();
-
-      state.Modifiers.push({
-        name: newName
-      });
-      var transcendence = Main.getTranscendence();
-      var sectionName = _this.props.sectionName;
-      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
-
-      var modifierKeyList = _this._rowArray[powerIndex].getModifierList().getKeyList();
-
-      modifierKeyList.push(MainObject.generateKey());
-      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
-        key: _this._rowArray[powerIndex].getKey(),
-        sectionName: _this.props.sectionName,
-        powerListParent: _assertThisInitialized(_this),
-        state: validStateAndDv.state,
-        derivedValues: validStateAndDv.derivedValues,
-        modifierKeyList: modifierKeyList
-      });
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it[powerIndex] = validStateAndDv.state;
-        return state;
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
       if (key === _this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
 
@@ -368,34 +381,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
       _this.setState(function (state) {
         state.it.remove(rowIndex);
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_removeModifierRow", function (powerIndex, modifierIndex) {
-      var state = _this._rowArray[powerIndex].getState();
-
-      state.Modifiers.remove(modifierIndex);
-      var transcendence = Main.getTranscendence();
-      var sectionName = _this.props.sectionName;
-      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(state, sectionName, powerIndex, transcendence);
-
-      var modifierKeyList = _this._rowArray[powerIndex].getModifierList().getKeyList();
-
-      modifierKeyList.remove(modifierIndex);
-      _this._rowArray[powerIndex] = new PowerObjectAgnostic({
-        key: _this._rowArray[powerIndex].getKey(),
-        sectionName: _this.props.sectionName,
-        powerListParent: _assertThisInitialized(_this),
-        state: validStateAndDv.state,
-        derivedValues: validStateAndDv.derivedValues,
-        modifierKeyList: modifierKeyList
-      });
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it[powerIndex] = validStateAndDv.state;
         return state;
       });
     });

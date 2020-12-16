@@ -1094,33 +1094,6 @@ TestSuite.powerRow.calculateValues=function(testState={})
 
     return TestRunner.displayResults('TestSuite.powerRow.calculateValues', assertions, testState);
 };
-TestSuite.powerRow.generate=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   const assertions = [];
-
-   /*2 different values for each to show they aren't hard coded.
-   check DOM to show that it's passed to HTML*/
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 1'});
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectAction0', 'Move'), Description: 'Possible Actions 2'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 1'});
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerSelectRange0', 'Personal'), Description: 'Possible Ranges 2'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
-   assertions.push(
-      {Expected: true, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 1'});
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
-   assertions.push(
-      {Expected: false, Actual: SelectUtil.containsText('powerSelectDuration0', 'Permanent'), Description: 'Possible Durations 2'});
-
-   return TestRunner.displayResults('TestSuite.powerRow.generate', assertions, testState);
-};
 TestSuite.powerRow.generateNameAndSkill=function(testState={})
 {
    TestRunner.clearResults(testState);
@@ -1138,11 +1111,11 @@ TestSuite.powerRow.generateNameAndSkill=function(testState={})
    } catch(e){assertions.push({Error: e, Description: 'Default name and skill'});}
 
    try{
-      Main.clear();
-      Main.setRuleset(3,4);
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'No name'});
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'No skill'});
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack');
+      assertions.push({Expected: 'Power 1 Flight', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'attack gives name'});
 
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
