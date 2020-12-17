@@ -209,7 +209,10 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           powerState.action = Data.Power[powerState.effect].defaultAction;
           if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
           //either way it will cost 0
-        }
+        } //when change to Reaction action change range to close
+        else if ('action' === propertyName && 'Reaction' === newValue) {
+            powerState.range = 'Close';
+          }
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();

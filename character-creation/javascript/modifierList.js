@@ -263,7 +263,7 @@ TODO: next:
 fix all possible tests
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
    TestSuite.modifierList.sortOrder is calling _testSortStability
-determine why I needed the ret null in power list
+determine why I needed the return null in power list render
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state
    static method to determine godhood
