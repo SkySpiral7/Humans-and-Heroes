@@ -145,7 +145,6 @@ function ModifierRowHtml(props) {
 
 
           if (derivedValues.hasAutoTotal) {
-            //TODO: autoTotal doesn't exist
             elementList.push( /*#__PURE__*/React.createElement("div", {
               className: "col-auto",
               key: "total",

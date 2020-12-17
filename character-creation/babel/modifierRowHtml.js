@@ -138,7 +138,6 @@ function ModifierRowHtml(props)
          //auto total must see total (it doesn't show ranks)
          if (derivedValues.hasAutoTotal)
          {
-            //TODO: autoTotal doesn't exist
             elementList.push(<div className="col-auto" key="total" style={{whiteSpace: 'nowrap'}}>
                {'= ' + derivedValues.autoTotal}</div>);
          }

@@ -31,6 +31,7 @@ ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEff
    derivedValues.hasRank = (1 !== derivedValues.maxRank);
    derivedValues.hasText = Data.Modifier[validState.name].hasText;
    derivedValues.hasAutoTotal = Data.Modifier[validState.name].hasAutoTotal;
+   //derivedValues.autoTotal is undefined for most. will be set in ModifierList.calculateGrandTotal
 
    if (derivedValues.hasRank)
    {

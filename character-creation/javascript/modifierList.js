@@ -158,34 +158,50 @@ ModifierList.removeByName = function (validState, pendingModifiersAndDv, validAc
 /**Takes raw total of the power row, sets the auto ranks, and returns the power row grand total.*/
 ModifierList.calculateGrandTotal = function (derivedValues, powerRowRawTotal)
 {
+   var modIndex = undefined;
+   var map = new MapDefault(derivedValues.autoModifierNameToRowIndex, undefined);  //because this has nice method names
+
    //Alternate Effect in ruleset 1.0 forced the power to be worth a total of 1 (or 2 for Dynamic). the flaw cost is all but 1
    //technically 1.0 Alternate Effect was an extra to spent 1 point on a whole other sub-power
-   if (derivedValues.autoModifierNameSet.contains('Dynamic Alternate Effect'))
+   if (map.containsKey('Dynamic Alternate Effect'))
    {
       //only exists in ruleset 1.0
+      modIndex = map.get('Dynamic Alternate Effect');
+      //autoTotal can be positive (but generally isn't)
+      derivedValues.rows[modIndex].autoTotal = (2 - powerRowRawTotal);
       powerRowRawTotal = 2;  //cost ignores current total
    }
-   else if (derivedValues.autoModifierNameSet.contains('Alternate Effect'))
+   else if (map.containsKey('Alternate Effect'))
    {
+      modIndex = map.get('Alternate Effect');
       if (1 === Main.getActiveRuleset().major)
       {
+         //autoTotal can be 0 (but generally isn't)
+         derivedValues.rows[modIndex].autoTotal = (1 - powerRowRawTotal);
          powerRowRawTotal = 1;  //cost ignores current total
       }
       else
       {
-         powerRowRawTotal += -Math.floor(powerRowRawTotal / 2);
+         derivedValues.rows[modIndex].autoTotal = -Math.floor(powerRowRawTotal / 2);
+         powerRowRawTotal += derivedValues.rows[modIndex].autoTotal;
       }
    }
 
    //removable is applied secondly after alt effect (it stacks)
-   if (derivedValues.autoModifierNameSet.contains('Easily Removable'))
+   if (map.containsKey('Easily Removable'))
    {
-      powerRowRawTotal += -Math.floor(powerRowRawTotal * 2 / 5);
+      modIndex = map.get('Easily Removable');
+      derivedValues.rows[modIndex].autoTotal = -Math.floor(powerRowRawTotal * 2 / 5);
+      powerRowRawTotal += derivedValues.rows[modIndex].autoTotal;
    }
-   else if (derivedValues.autoModifierNameSet.contains('Removable'))
+   else if (map.containsKey('Removable'))
    {
-      powerRowRawTotal += -Math.floor(powerRowRawTotal / 5);
+      modIndex = map.get('Removable');
+      derivedValues.rows[modIndex].autoTotal = -Math.floor(powerRowRawTotal / 5);
+      powerRowRawTotal += derivedValues.rows[modIndex].autoTotal;
    }
+
+   //otherwise autoTotal is undefined
 
    return powerRowRawTotal;
 };
@@ -195,15 +211,14 @@ ModifierList.calculateValues = function (validListState, derivedValuesList)
    //TODO: fix sort/indexing
    //state.sort(this._sortOrder);
    var derivedValues = {
-      autoModifierNameSet: [],
+      autoModifierNameToRowIndex: {},  //needs to be JSON because it gets cloned in prod by updateActionModifiers etc
       rankTotal: 0,
       flatTotal: 0,
       rows: derivedValuesList
    };
    for (var i = 0; i < validListState.length; i++)
    {
-      if (derivedValuesList[i].hasAutoTotal) derivedValues.autoModifierNameSet.push(
-         validListState[i].name);
+      if (derivedValuesList[i].hasAutoTotal) derivedValues.autoModifierNameToRowIndex[validListState[i].name] = i;
       else if ('Rank' === derivedValuesList[i].modifierType) derivedValues.rankTotal += derivedValuesList[i].rawTotal;
       else derivedValues.flatTotal += derivedValuesList[i].rawTotal;  //could be flat or free. if free the total will be 0
    }

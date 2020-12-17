@@ -288,8 +288,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>' +
       '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
       '&nbsp;<input type="text" id="powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '" value="Thingy"></label>' +
-      '<div class="col-auto">' +
-      '=&nbsp;-2</div>' +
+      '<div class="col-auto" style="white-space: nowrap;">= -2</div>' +
       '</div>';
    assertions.push({
       Expected: expected,
@@ -305,8 +304,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '<select id="powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '">' +
       '</select>' +
       '</div>' +
-      '<div class="col-auto">' +
-      '=&nbsp;-2</div>' +
+      '<div class="col-auto" style="white-space: nowrap;">= -2</div>' +
       '</div>';
    assertions.push({
       Expected: expected,
@@ -320,8 +318,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">' +
       '<b>Increased Duration</b></div>' +
       '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>' +
-      '<div class="col-auto">' +
-      '=&nbsp;0</div>' +
+      '<div class="col-auto" style="white-space: nowrap;">= 0</div>' +
       '</div>';
    assertions.push({
       Expected: expected,
