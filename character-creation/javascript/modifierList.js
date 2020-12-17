@@ -134,6 +134,7 @@ ModifierList.createByNameRank = function (validState, pendingModifiersAndDv, val
    if (undefined === rowIndex)
    {
       pendingModifiersAndDv.state.push({name: rowName, rank: rowRank});
+      pendingModifiersAndDv.state = pendingModifiersAndDv.state.stableSort(ModifierList._sortOrder(validState.action));
    }
    else
    {
@@ -208,8 +209,6 @@ ModifierList.calculateGrandTotal = function (derivedValues, powerRowRawTotal)
 /**Counts totals etc. All values that are not user set or final are created by this method*/
 ModifierList.calculateValues = function (validListState, derivedValuesList)
 {
-   //TODO: fix sort/indexing
-   //state.sort(this._sortOrder);
    var derivedValues = {
       autoModifierNameToRowIndex: {},  //needs to be JSON because it gets cloned in prod by updateActionModifiers etc
       rankTotal: 0,
@@ -224,6 +223,32 @@ ModifierList.calculateValues = function (validListState, derivedValuesList)
    }
    return derivedValues;
 };
+/**The automatic modifiers come first. With action, range, duration, then others.
+ * @returns {function} that can be passed into Array.prototype.sort*/
+ModifierList._sortOrder = function (powerAction)
+{
+   var powerIsTriggered = ('Triggered' === powerAction);
+   var aFirst = -1;
+   var bFirst = 1;
+
+   return function (a, b)
+   {
+      if ('Faster Action' === a.name || 'Slower Action' === a.name) return aFirst;
+      if ('Faster Action' === b.name || 'Slower Action' === b.name) return bFirst;
+      //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
+      if ('Aura' === a.name || ('Selective' === a.name && powerIsTriggered)) return aFirst;
+      if ('Aura' === b.name || ('Selective' === b.name && powerIsTriggered)) return bFirst;
+
+      if ('Increased Range' === a.name || 'Reduced Range' === a.name) return aFirst;
+      if ('Increased Range' === b.name || 'Reduced Range' === b.name) return bFirst;
+
+      if ('Increased Duration' === a.name || 'Decreased Duration' === a.name) return aFirst;
+      if ('Increased Duration' === b.name || 'Decreased Duration' === b.name) return bFirst;
+
+      //will need to force the sort to be stable since I can't rely on the key order
+      return 0;
+   };
+};
 
 /*
 architecture:
@@ -237,8 +262,7 @@ ref: style={{whiteSpace: 'nowrap'}}
 TODO: next:
 fix all possible tests
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
-   TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
-   TestSuite.main.updateTranscendence is destroying power
+   TestSuite.modifierList.sortOrder is calling _testSortStability
 determine why I needed the ret null in power list
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state

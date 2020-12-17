@@ -720,7 +720,8 @@ function MainObject()
 //static:
 /**Value (should be private) is the previous key used.
  * First key used is 1 in contrast to the indexed ones that start at 0.
- * This is used to keep track but the keys are actually opaque strings.*/
+ * This is used to keep track but the keys are actually opaque strings.
+ * Note that react expects keys to be a string.*/
 MainObject._keyCount = 0;
 MainObject.generateKey=function(){++MainObject._keyCount; return '' + MainObject._keyCount;};
 

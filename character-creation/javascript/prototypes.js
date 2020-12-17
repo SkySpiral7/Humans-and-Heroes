@@ -37,12 +37,15 @@ Array.prototype.removeByValue=function(value)
     if(-1 === index) return;  //not found
     this.remove(index);
 };
-/**A sort that is grantee to be stable by using a wrapper*/
-Array.prototype.stableSort=function(compare)
+/**A sort that is grantee to be stable by using a wrapper.
+ * Although ECMAScript 2019 requires sort to be stable IE 11 doesn't (but has map function)
+ * Warning: does not edit the array in place (this is a feature)
+ * @returns the sorted array*/
+Array.prototype.stableSort=function (compare)
 {
    return this
    .map((item, index) => ({item, index}))
-   .sort((a, b) => compare(a.item, b.item) || a.index - b.index)
+   .sort((a, b) => compare(a.item, b.item) || (a.index - b.index))
    .map(({item}) => item);
 };
 

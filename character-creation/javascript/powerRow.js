@@ -137,29 +137,6 @@ function PowerObjectAgnostic(props)
          namesSoFar.push(modifierName);
       }
    };
-   /**Pass into Array.prototype.sort so that the automatic modifiers come first. With action, range, duration, then others.*/
-   this._sortOrder = function (a, b)
-   {
-      var aFirst = -1;
-      var bFirst = 1;
-
-      if ('Faster Action' === a.getName() || 'Slower Action' === a.getName()) return aFirst;
-      if ('Faster Action' === b.getName() || 'Slower Action' === b.getName()) return bFirst;
-      //Triggered requires Selective started between 2.0 and 2.5. Triggered isn't an action in 1.0. Triggered and Aura can't both exist
-      if ('Aura' === a.getName() || ('Selective' === a.getName() && 'Triggered' === props.powerRowParent.getAction())) return aFirst;
-      if ('Aura' === b.getName() || ('Selective' === b.getName() && 'Triggered' === props.powerRowParent.getAction())) return bFirst;
-
-      if ('Increased Range' === a.getName() || 'Reduced Range' === a.getName()) return aFirst;
-      if ('Increased Range' === b.getName() || 'Reduced Range' === b.getName()) return bFirst;
-
-      if ('Increased Duration' === a.getName() || 'Decreased Duration' === a.getName()) return aFirst;
-      if ('Increased Duration' === b.getName() || 'Decreased Duration' === b.getName()) return bFirst;
-
-      //else maintain the current order
-      //using rowIndex to force sort to be stable (since it might not be)
-      if (a.getModifierRowIndex() < b.getModifierRowIndex()) return aFirst;
-      return bFirst;
-   };
    /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
    this._testSortStability = function () {unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
    //endregion copied from mod list

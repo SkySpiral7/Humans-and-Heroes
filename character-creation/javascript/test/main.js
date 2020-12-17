@@ -576,7 +576,11 @@ TestSuite.main.updateTranscendence = function (testState = {})
    assertions.push({Expected: 3, Actual: Main.getTranscendence(), Description: 'user T can be high'});
 
    Main.clear();
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power no T'});
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am'),
+      Description: 'power no T'
+   });
    assertions.push({
       Expected: false,
       Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
@@ -584,7 +588,11 @@ TestSuite.main.updateTranscendence = function (testState = {})
    });
 
    DomUtil.changeValue('transcendence', 1);
-   assertions.push({Expected: true, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T refresh'});
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am'),
+      Description: 'power T refresh'
+   });
    assertions.push({
       Expected: true,
       Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
@@ -592,7 +600,11 @@ TestSuite.main.updateTranscendence = function (testState = {})
    });
 
    DomUtil.changeValue('transcendence', 0);
-   assertions.push({Expected: false, Actual: SelectUtil.containsText('powerChoices0', 'A God I Am'), Description: 'power T reset'});
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am'),
+      Description: 'power T reset'
+   });
    assertions.push({
       Expected: false,
       Actual: SelectUtil.containsText('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal'),
