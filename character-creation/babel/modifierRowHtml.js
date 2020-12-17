@@ -138,16 +138,17 @@ function ModifierRowHtml(props)
          //auto total must see total (it doesn't show ranks)
          if (derivedValues.hasAutoTotal)
          {
-            elementList.push(<div className="col-auto" key="total">
-               {'=&nbsp;' + derivedValues.autoTotal}</div>);
+            //TODO: autoTotal doesn't exist
+            elementList.push(<div className="col-auto" key="total" style={{whiteSpace: 'nowrap'}}>
+               {'= ' + derivedValues.autoTotal}</div>);
          }
          //if costPerRank isn't 1 then show total to show how much its worth,
          //if total doesn't match then it has had some cost quirk so show the total
          else if (Math.abs(derivedValues.costPerRank) > 1
             || derivedValues.rawTotal !== (derivedValues.costPerRank * state.rank))
          {
-            elementList.push(<div className="col-auto" key="total">
-               {'=&nbsp;' + derivedValues.rawTotal}</div>);
+            elementList.push(<div className="col-auto" key="total" style={{whiteSpace: 'nowrap'}}>
+               {'= ' + derivedValues.rawTotal}</div>);
          }
       }
    }

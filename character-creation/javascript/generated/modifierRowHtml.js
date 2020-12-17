@@ -145,17 +145,24 @@ function ModifierRowHtml(props) {
 
 
           if (derivedValues.hasAutoTotal) {
+            //TODO: autoTotal doesn't exist
             elementList.push( /*#__PURE__*/React.createElement("div", {
               className: "col-auto",
-              key: "total"
-            }, '=&nbsp;' + derivedValues.autoTotal));
+              key: "total",
+              style: {
+                whiteSpace: 'nowrap'
+              }
+            }, '= ' + derivedValues.autoTotal));
           } //if costPerRank isn't 1 then show total to show how much its worth,
           //if total doesn't match then it has had some cost quirk so show the total
           else if (Math.abs(derivedValues.costPerRank) > 1 || derivedValues.rawTotal !== derivedValues.costPerRank * state.rank) {
               elementList.push( /*#__PURE__*/React.createElement("div", {
                 className: "col-auto",
-                key: "total"
-              }, '=&nbsp;' + derivedValues.rawTotal));
+                key: "total",
+                style: {
+                  whiteSpace: 'nowrap'
+                }
+              }, '= ' + derivedValues.rawTotal));
             }
         }
     }

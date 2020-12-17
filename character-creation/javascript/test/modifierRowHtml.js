@@ -5,7 +5,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    const assertions = [];
    let expected;
 
-   function getSectionFirstRowHtml(sectionName, childIndex)
+   function getSectionRowHtml(sectionName, childIndex)
    {
       /*don't edit the actual DOM because react will die if it tries to change options that are different
       objects even though they are identical HTML.
@@ -34,10 +34,36 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div></div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'blank row'
    });
    Main.powerSection.clear();
+
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack'),
+      Description: 'personal power: non personal option'
+   });
+
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack');
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Affects Others Only'),
+      Description: 'personal attack: can undo or change non personal mod'
+   });
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Affects Others Only'),
+      Description: 'personal attack: other mod not an option'
+   });
+
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   assertions.push({
+      Expected: false,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack'),
+      Description: 'not personal: non personal not an option'
+   });
 
    //amReadOnly selective tested below since it is 2.x only
 
@@ -51,7 +77,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'Slower Action ReadOnly'
    });
 
@@ -172,7 +198,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    });
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'Attack ranged'
    });
 
@@ -190,7 +216,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    //0.0 is Increased Range
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 1),
+      Actual: getSectionRowHtml('power', 1),
       Description: 'Attack Perception'
    });
 
@@ -210,7 +236,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'Feature: ranked normally read only'
    });
 
@@ -228,7 +254,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'ranked'
    });
    Main.powerSection.clear();
@@ -246,7 +272,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'hasText'
    });
    Main.powerSection.clear();
@@ -267,7 +293,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'hasAutoTotal'
    });
    Main.powerSection.clear();
@@ -284,7 +310,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'abs(cost) > 1'
    });
 
@@ -299,7 +325,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '</div>';
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'rawTotal != cost*rank'
    });
 
@@ -313,7 +339,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    //firstChild is Faster Action
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 1),
+      Actual: getSectionRowHtml('power', 1),
       Description: 'Selective ReadOnly'
    });
 
@@ -327,7 +353,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    //there's no Faster Action
    assertions.push({
       Expected: expected,
-      Actual: getSectionFirstRowHtml('power', 0),
+      Actual: getSectionRowHtml('power', 0),
       Description: 'Feature: Selective ReadOnly'
    });
 

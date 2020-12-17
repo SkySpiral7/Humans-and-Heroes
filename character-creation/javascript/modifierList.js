@@ -217,10 +217,10 @@ architecture:
    * power list uses power html: pass down everything as props, immutable non-react below here
    * mod list delegate to power list (really main) for state mutation
    * loading main is normal
+ref: style={{whiteSpace: 'nowrap'}}
 
 TODO: next:
 fix all possible tests
-   https://stackoverflow.com/questions/24432576/reactjs-render-string-with-non-breaking-spaces
    TestSuite.powerRow.validateAndGetPossibleActions is calling _validateAndGetPossibleActions directly
    TestSuite.modifierRow.setAutoRank "getAutoTotal is not a function"
    TestSuite.main.updateTranscendence is destroying power
