@@ -209,8 +209,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           powerState.action = Data.Power[powerState.effect].defaultAction;
           if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
           //either way it will cost 0
-        } //when change to Reaction action change range to close
-        else if ('action' === propertyName && 'Reaction' === newValue) {
+        } //when changing to Aura change range to close
+        else if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'action' === propertyName && 'Reaction' === newValue && 'Feature' !== powerState.effect && 'Luck Control' !== powerState.effect) {
             powerState.range = 'Close';
           }
 

@@ -89,19 +89,6 @@ TestSuite.modifierList.sortOrder=function(testState={})
     var assertions=[];
 
     try{
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Selective');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Precise');
-    Main.powerSection.getRowByIndex(0).getModifierList()._testSortStability();
-    //this test proves that the sort order forces stability
-
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Stability: Modifier 1'});
-    assertions.push({Expected: 'Selective', Actual: Main.powerSection.getModifierRowShort(0,1).state.name, Description: 'Stability: Modifier 2'});
-    assertions.push({Expected: 'Precise', Actual: Main.powerSection.getModifierRowShort(0,2).state.name, Description: 'Stability: Modifier 3'});
-    } catch(e){assertions.push({Error: e, Description: 'Stability'});}
-
-    try{
     Main.clear();
     ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Create');
     ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Selective');
@@ -132,7 +119,7 @@ TestSuite.modifierList.sortOrder=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Auto Flaws'});}
 
     try{
-    Main.clear(); Main.setRuleset(3,4);
+    Main.setRuleset(3,4);
     ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
     //this test proves that Aura comes before Reduced Range
@@ -142,7 +129,7 @@ TestSuite.modifierList.sortOrder=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Aura sort order'});}
 
     try{
-    Main.clear(); Main.setRuleset(3,3);
+    Main.setRuleset(3,3);
     ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
     ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
     ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
@@ -153,7 +140,7 @@ TestSuite.modifierList.sortOrder=function(testState={})
     } catch(e){assertions.push({Error: e, Description: 'Selective span sorts before Range'});}
 
     try{
-    Main.clear(); Main.setRuleset(3,3);
+    Main.clear();
     ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
     ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Precise');
     ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Selective');

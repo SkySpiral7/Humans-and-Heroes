@@ -137,8 +137,6 @@ function PowerObjectAgnostic(props)
          namesSoFar.push(modifierName);
       }
    };
-   /**This is only for testing. Calling it otherwise will throw. This simply re-sorts with an unstable algorithm.*/
-   this._testSortStability = function () {unstableSort(rowArray, this._sortOrder);};  //throws if unstableSort doesn't exist
    //endregion copied from mod list
 
    this.constructor = function ()
