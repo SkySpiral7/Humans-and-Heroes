@@ -3,38 +3,120 @@ TestSuite.modifierList={};
 TestSuite.modifierList.calculateGrandTotal=function(testState={})
 {
    TestRunner.clearResults(testState);
+
    var assertions=[];
 
-   //ADD TESTS
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 99);
+   assertions.push({Expected: 99, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 initial total'});
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
+      assertions.push({Expected: 80, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 99 Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
+      assertions.push({Expected: 60, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Easily Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 99 Easily Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 50, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 99 Alternate Effect'});}
+
+   try{
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
+      assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 4 Easily Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 4 Easily Removable'});}
+
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
+      assertions.push({Expected: 80, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 100 Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
+      assertions.push({Expected: 60, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Easily Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 100 Easily Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 50, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 100 Alternate Effect'});}
+
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1);
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 1 Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Easily Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 1 Easily Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 1 Alternate Effect'});}
+
+   try{
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
+      assertions.push({Expected: 4, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 4 Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 4 Removable'});}
+
+   try{
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 2 Easily Removable power total'});
+   } catch(e){assertions.push({Error: e, Description: 'Damage 2 Easily Removable'});}
+
+   Main.clear(); Main.setRuleset(1, 0);
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 100 Dynamic Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Dynamic Alternate Effect'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 100 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Alternate Effect'});}
+
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 99);
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 99 Dynamic Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Dynamic Alternate Effect'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 99 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Alternate Effect'});}
+
+   ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1);
+
+   //TODO: look at changing 1.0 alt effects into an extra
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 1 Dynamic Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Dynamic Alternate Effect'});}
+
+   try{
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 1 Alternate Effect power total'});
+   } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Alternate Effect'});}
 
    return TestRunner.displayResults('TestSuite.modifierList.calculateGrandTotal', assertions, testState);
-};
-TestSuite.modifierList.calculateValues=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierList.calculateValues', assertions, testState);
-};
-TestSuite.modifierList.createByNameRank=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierList.createByNameRank', assertions, testState);
-};
-TestSuite.modifierList.getUniqueName=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierList.getUniqueName', assertions, testState);
 };
 TestSuite.modifierList.isNonPersonalModifierPresent=function(testState={})
 {
@@ -63,24 +145,6 @@ TestSuite.modifierList.isNonPersonalModifierPresent=function(testState={})
    assertions.push({Expected: [], Actual: Messages.list, Description: 'true: Attack'});
 
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', assertions, testState);
-};
-TestSuite.modifierList.load=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierList.load', assertions, testState);
-};
-TestSuite.modifierList.sanitizeRows=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierList.sanitizeRows', assertions, testState);
 };
 TestSuite.modifierList.sortOrder=function(testState={})
 {

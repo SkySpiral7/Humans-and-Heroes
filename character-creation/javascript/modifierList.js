@@ -98,13 +98,14 @@ ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffec
          text: inputState[modIndex].text
       };
       var validRowStateAndDv = ModifierObject.sanitizeStateAndGetDerivedValues(rowInputState, powerEffect, validActivationInfoObj,
-         loadLocation);
+         powerSectionName, loadLocation);
       if (undefined === validRowStateAndDv) continue;  //already sent message
 
       var uniqueName = ModifierObject.getUniqueName(validRowStateAndDv.state, false);
       if (duplicateCheck.contains(uniqueName))
       {
-         Main.messageUser('ModifierList.load.duplicate', loadLocation + ': ' + validRowStateAndDv.state.name +
+         Main.messageUser('ModifierList.sanitizeStateAndGetDerivedValues.duplicate', loadLocation + ': '
+            + validRowStateAndDv.state.name +
             ' is not allowed because the modifier already exists. Increase the rank instead or use different text.');
          continue;
       }
@@ -258,27 +259,40 @@ architecture:
    * mod list delegate to power list (really main) for state mutation
    * loading main is normal
 ref: style={{whiteSpace: 'nowrap'}}
-
-TODO: next:
 determine why I needed the return null in power list render
+   TestSuite.main.update: had T
+      Main.setRuleset(3, 15);
+      clear
+   TestSuite.main.updateTranscendence: god power but ad is cleared
+      Main.powerSection.clear();
+   TestSuite.powerRow.calculateValues: had 100 rank Damage (T5)
+      Main.setRuleset(3,4);
+      clear
+   path: T, clear, prerender, Main.setPowerGodhood, render before setState
+   therefore this is an issue with godhood circle
 resolve godhood circle:
    high CP needs to trigger godhood but prerender can't update state
-   static method to determine godhood
-   all setState set both at once
+   need static method to determine godhood
+   all setState set both at once (thing changed and godhood)
    but then there's CP from others
    all need static calc values (main eventually has all state?)
    this also fixes possible circle for power/mod ARD
-replace sanitizeRows with duplicate check
-   power row has stuff (see "copied from mod list" region) for mod on change
-sort mods on add
+   main needs a static to calc T that takes all state
+
+TODO: next:
+make sure mod load blocks non personal duplicate or invalid
 test all
 sort all functions
 there's lots of tasks
 
+ad row immutable
+ad list static
+   will need same render return null
 skill list react
 react abilities
 react defenses
 react main
    make offense new section
    render includes totals and every non-section thing
+remove the return null in ad/power list render (and test all)
 */

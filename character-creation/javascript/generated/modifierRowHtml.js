@@ -33,6 +33,7 @@ function ModifierRowHtml(props) {
 
   if (!amReadOnly) {
     var options = Data.Modifier.names //equipment has removable built in and can't have the modifiers
+    //TODO: make sure that everything the UI forbids is blocked by loading
     //TODO: checking Main isn't an issue because it will exist for mod. but should check constant name instead
     .filter(function (name) {
       return !(props.powerRow.getSection() === Main.equipmentSection && (name === 'Removable' || name === 'Easily Removable'));

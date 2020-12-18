@@ -18,7 +18,7 @@
  */
 function PowerObjectAgnostic(props)
 {
-   var state, derivedValues, rowArray, modifierSection;
+   var state, derivedValues, modifierSection;
 
    //Basic getter section (all single line)
    this.getAction = function () {return state.action;};
@@ -80,64 +80,6 @@ function PowerObjectAgnostic(props)
       json.rank = state.rank;
       return json;
    };
-
-   //region copied from mod list
-   /**@returns true if 2+ rows in rowArray have the same UniqueName*/
-   this._hasDuplicate = function ()
-   {
-      //can't change this to take an arg because update name/text will already be in state
-      return rowArray.map(item => item.getUniqueName())
-      .some((val, id, array) =>
-      {
-         return array.indexOf(val) !== id;
-      });
-   };
-   /**Section level validation. Such as remove blank and redundant rows and add a final blank row*/
-   this._sanitizeRows = function ()
-   {
-      var namesSoFar = [];
-      var canHaveAttack = true;
-      if (props.powerRowParent.getDefaultRange() !== 'Personal') canHaveAttack = false;  //feature has a default range of Personal
-      for (var i = 0; i < rowArray.length; i++)
-      {
-         if (rowArray[i].isBlank() && i < rowArray.length)
-         {
-            this._removeRow(i);
-            i--;
-            continue;
-         }  //remove blank row that isn't last
-         else if (rowArray[i].isBlank()) continue;  //do nothing if last row is blank
-
-         if (props.powerRowParent.getSection() === Main.equipmentSection &&
-            (rowArray[i].getName() === 'Removable' || rowArray[i].getName() === 'Easily Removable'))
-         {
-            this._removeRow(i);
-            i--;
-            continue;
-         }
-         //equipment has removable built in and can't have the modifiers
-
-         var modifierName = rowArray[i].getUniqueName(false);
-         if (namesSoFar.contains(modifierName))
-         {
-            this._removeRow(i);
-            i--;
-            continue;
-         }  //redundant modifier
-         if (modifierName === 'Attack' || modifierName === 'Affects Others')  //Affects Others Also and Affects Others Only return same name
-         {
-            if (!canHaveAttack)
-            {
-               this._removeRow(i);
-               i--;
-               continue;
-            }  //redundant or invalid modifier
-            canHaveAttack = false;
-         }
-         namesSoFar.push(modifierName);
-      }
-   };
-   //endregion copied from mod list
 
    this.constructor = function ()
    {

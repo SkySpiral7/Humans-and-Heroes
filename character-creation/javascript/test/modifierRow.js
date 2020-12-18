@@ -1,10 +1,48 @@
 'use strict';
 TestSuite.modifierRow={};
-TestSuite.modifierRow.setModifier=function(testState={})
+TestSuite.modifierRow.sanitizeStateAndGetDerivedValues=function(testState={})
 {
    TestRunner.clearResults(testState);
 
-   var assertions=[];
+   var assertions=[], dataToLoad;
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({
+      "effect": "Flight", "text": "", "action": "Move", "range": "Personal", "duration": "Sustained",
+      "Modifiers": [{"name": "invalid name"}], "rank": 1
+   });
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: 0,
+      Actual: Main.powerSection.getRowByIndex(0)
+      .getModifierList()
+      .getState().length,
+      Description: 'invalid mod: removed'
+   });
+   assertions.push({
+      Expected: ['ModifierObject.sanitizeStateAndGetDerivedValues.notExist'],
+      Actual: Messages.errorCodes(),
+      Description: 'invalid mod: error'
+   });
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Equipment.push({
+      "effect": "Flight", "text": "", "action": "Move", "range": "Personal", "duration": "Sustained",
+      "Modifiers": [{"name": "Removable"}], "rank": 1
+   });
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: 0,
+      Actual: Main.equipmentSection.getRowByIndex(0)
+      .getModifierList()
+      .getState().length,
+      Description: 'removableEquipment: removed'
+   });
+   assertions.push({
+      Expected: ['ModifierObject.sanitizeStateAndGetDerivedValues.removableEquipment'],
+      Actual: Messages.errorCodes(),
+      Description: 'removableEquipment: error'
+   });
 
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Flight is Personal'});
@@ -12,7 +50,8 @@ TestSuite.modifierRow.setModifier=function(testState={})
    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Adding Attack makes Flight Close'});
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Changing Attack to Limited makes Flight Personal'});
-   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack'); ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Select Modifier');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack');
+   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Select Modifier');
    assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Removing Attack makes Flight Personal'});
 
    Main.powerSection.clear();
@@ -29,7 +68,7 @@ TestSuite.modifierRow.setModifier=function(testState={})
    assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Removing Attack removes name'});
    assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Removing Attack removes skill'});
 
-   var dataToLoad = Loader.resetData();
+   dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Personal","duration":"Sustained",
       "Modifiers":[{"name":"Affects Others Also"}],"rank":1});
    Loader.sendData(dataToLoad);
@@ -38,141 +77,5 @@ TestSuite.modifierRow.setModifier=function(testState={})
 
    //ADD TESTS small ones for the rest
 
-   return TestRunner.displayResults('TestSuite.modifierRow.setModifier', assertions, testState);
-};
-TestSuite.modifierRow.setRank=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierRow.setRank', assertions, testState);
-};
-TestSuite.modifierRow.calculateTotal=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.modifierRow.calculateTotal', assertions, testState);
-};
-TestSuite.modifierRow.setAutoRank=function(testState={})
-{
-    TestRunner.clearResults(testState);
-
-    var assertions=[];
-
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 99);
-    assertions.push({Expected: 99, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 initial total'});
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
-    assertions.push({Expected: 80, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 99 Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
-    assertions.push({Expected: 60, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Easily Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 99 Easily Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 50, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 99 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 99 Alternate Effect'});}
-
-    try{
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
-    assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 4 Easily Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 4 Easily Removable'});}
-
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
-    assertions.push({Expected: 80, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 100 Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
-    assertions.push({Expected: 60, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Easily Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 100 Easily Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 50, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 100 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 100 Alternate Effect'});}
-
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1);
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 1 Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Easily Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 1 Easily Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 1 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 1 Alternate Effect'});}
-
-    try{
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
-    assertions.push({Expected: 4, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 4 Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 4 Removable'});}
-
-    try{
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable');
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Damage 2 Easily Removable power total'});
-    } catch(e){assertions.push({Error: e, Description: 'Damage 2 Easily Removable'});}
-
-    Main.clear(); Main.setRuleset(1, 0);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 100 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Dynamic Alternate Effect'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 100 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 100 Alternate Effect'});}
-
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 99);
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 99 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Dynamic Alternate Effect'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 99 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 99 Alternate Effect'});}
-
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1);
-
-    //TODO: look at changing 1.0 alt effects into an extra
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Dynamic Alternate Effect');
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 1 Dynamic Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Dynamic Alternate Effect'});}
-
-    try{
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Alternate Effect');
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '1.0 Damage 1 Alternate Effect power total'});
-    } catch(e){assertions.push({Error: e, Description: '1.0 Damage 1 Alternate Effect'});}
-
-    return TestRunner.displayResults('TestSuite.modifierRow.setAutoRank', assertions, testState);
+   return TestRunner.displayResults('TestSuite.modifierRow.sanitizeStateAndGetDerivedValues', assertions, testState);
 };

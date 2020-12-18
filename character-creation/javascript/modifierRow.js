@@ -13,13 +13,20 @@ ModifierObject.toSave = function (state, derivedValues)
    if (derivedValues.hasText) json.text = state.text;
    return json;
 };
-ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEffect, validActivationInfoObj, loadLocation)
+ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEffect, validActivationInfoObj, powerSectionName, loadLocation)
 {
    if (!Data.Modifier.names.contains(inputState.name))
    {
       Main.messageUser(
-         'ModifierList.load.notExist', loadLocation + ': ' +
+         'ModifierObject.sanitizeStateAndGetDerivedValues.notExist', loadLocation + ': ' +
          inputState.name + ' is not a modifier name. Did you mean "Other" with text?');
+      return;  //undefined
+   }
+   if ('equipment' === powerSectionName && ('Removable' === inputState.name || 'Easily Removable' === inputState.name))
+   {
+      Main.messageUser(
+         'ModifierObject.sanitizeStateAndGetDerivedValues.removableEquipment', loadLocation + ': ' +
+         'equipment can\'t have removable modifier since it is built in.');
       return;  //undefined
    }
    var validState = {name: inputState.name};
