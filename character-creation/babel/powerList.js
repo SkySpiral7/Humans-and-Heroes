@@ -89,7 +89,7 @@ class PowerListAgnostic extends React.Component
       const elementArray = this.state.it.map((_, powerIndex) =>
       {
          const powerRow = this._rowArray[powerIndex];
-         //TODO: this is a work around and indicates a bug
+         //workaround until resolved godhood circle
          if (undefined === powerRow) return null;
          const rowKey = powerRow.getKey();
          return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
@@ -476,9 +476,7 @@ class PowerListAgnostic extends React.Component
       }
       Main.updateOffense();
       Main.defenseSection.calculateValues();
-      //TODO: resolve godhood circle:
       Main.update();
-      //high CP needs to trigger godhood but prerender can't update state
    };
 }
 

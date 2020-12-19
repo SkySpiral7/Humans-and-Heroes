@@ -23,29 +23,37 @@ function main()
       generateFromBabel();
       generateFromNode();
 
-      console.log('done');
+      console.log('script done');
    });
 }
 
 function generateFromBabel()
 {
    const babel = require('@babel/core');
+   //slightly obfuscated so that this line won't be detected as a task
+   const findAllTasksRegex = new RegExp('TO' + 'DO:', 'g');
 
-   fs.readdir('./babel', (err, files) =>
+   fs.readdir('./babel', (err, babelFiles) =>
    {
-      if (err) throw err;
-      files.forEach(fileName =>
+      rethrow(err);
+      babelFiles.forEach(fileName =>
       {
          babel.transformFile('./babel/' + fileName, {
-               presets: ['@babel/preset-react', ['@babel/preset-env', {"targets": {
-                  "browsers": ["IE 11"]
-               }}]],
+               presets: [
+                  '@babel/preset-react', [
+                     '@babel/preset-env', {
+                        "targets": {
+                           "browsers": ["IE 11"]
+                        }
+                     }]],
                plugins: ['@babel/plugin-proposal-class-properties']
             },
             function (err, result)
             {
-               if (err) throw err;
-               //result; // => { code, map, ast }
+               rethrow(err);
+               //result = { String code, map, ast }
+               //remove all tasks from generated code to avoid them double counting
+               result.code = result.code.replace(findAllTasksRegex, 'TO-DO:');
                fs.writeFile('javascript/generated/' + fileName, result.code, 'utf8', rethrow);
             });
       });
@@ -59,7 +67,8 @@ function generateFromNode()
       entries: ['./node/ReactUtil.js']
    })
    .bundle()
-   .pipe(fs.createWriteStream("javascript/generated/ReactUtil.js"));
+   .pipe(fs.createWriteStream("javascript/generated/ReactUtil.js"))
+   .on('finish', () => console.log('node done'));
 }
 
 main();

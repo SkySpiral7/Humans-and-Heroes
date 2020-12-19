@@ -1,4 +1,4 @@
-'use strict'; //TODO: more doc (state, derivedValues)
+'use strict'; //TO-DO: more doc (state, derivedValues)
 
 /** @param props: keyCopy, powerRow, powerSection, generateGodHood */
 
@@ -101,8 +101,8 @@ function PowerRowHtml(props) {
     })));
 
     if (1 === derivedValues.possibleActions.length) {
-      //TODO: class not DRY with else (same for each ARD)
-      //TODO: if only diff is span width I could sub-function to have a single ARD
+      //TO-DO: class not DRY with else (same for each ARD)
+      //TO-DO: if only diff is span width I could sub-function to have a single ARD
       rowElementList.push( /*#__PURE__*/React.createElement("div", {
         className: "col-12 col-sm-4 col-lg-3",
         key: "Action"

@@ -71,13 +71,13 @@ ModifierObject.getUniqueName = function (state, includeText)
 {
    var nameToUse;
    //all these are exclusive:
-   if (state.name === 'Affects Others Also' || state.name === 'Affects Others Only') nameToUse = 'Affects Others';
-   else if (state.name === 'Affects Objects Also' || state.name === 'Affects Objects Only') nameToUse = 'Affects Objects';
-   else if (state.name === 'Alternate Resistance (Free)' || state.name === 'Alternate Resistance (Cost)') nameToUse = 'Alternate Resistance';
-   else if (state.name === 'Easily Removable') nameToUse = 'Removable';
-   else if (state.name === 'Dynamic Alternate Effect') nameToUse = 'Alternate Effect';
-   else if (state.name === 'Inaccurate') nameToUse = 'Accurate';
-   else if (state.name === 'Extended Range' || state.name === 'Diminished Range') nameToUse = 'Extended/Diminished Range';
+   if ('Affects Others Also' === state.name || 'Affects Others Only' === state.name || 'Attack' === state.name) nameToUse = 'Non personal';
+   else if ('Affects Objects Also' === state.name || 'Affects Objects Only' === state.name) nameToUse = 'Affects Objects';
+   else if ('Alternate Resistance (Free)' === state.name || 'Alternate Resistance (Cost)' === state.name) nameToUse = 'Alternate Resistance';
+   else if ('Easily Removable' === state.name) nameToUse = 'Removable';
+   else if ('Dynamic Alternate Effect' === state.name) nameToUse = 'Alternate Effect';
+   else if ('Inaccurate' === state.name) nameToUse = 'Accurate';
+   else if ('Extended Range' === state.name || 'Diminished Range' === state.name) nameToUse = 'Extended/Diminished Range';
    //TODO: is uncontrollable entirely a unique modifier?
    else nameToUse = state.name;
    //TODO: so I noticed that text should not be used most of the time for uniqueness (check required is only maybe)

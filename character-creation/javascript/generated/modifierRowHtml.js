@@ -1,4 +1,4 @@
-'use strict'; //TODO: more doc (state, derivedValues)
+'use strict'; //TO-DO: more doc (state, derivedValues)
 
 /** @param props: powerRow, modifierRow, keyCopy */
 
@@ -16,7 +16,7 @@ function ModifierRowHtml(props) {
     name: undefined
   };
   /*
-  mod row values used: TODO: update chart
+  mod row values used: TO-DO: update chart
   state: {name, rank};
   derivedValues: {costPerRank, hasRank, hasText, hasAutoTotal, rawTotal};
   */
@@ -33,8 +33,8 @@ function ModifierRowHtml(props) {
 
   if (!amReadOnly) {
     var options = Data.Modifier.names //equipment has removable built in and can't have the modifiers
-    //TODO: make sure that everything the UI forbids is blocked by loading
-    //TODO: checking Main isn't an issue because it will exist for mod. but should check constant name instead
+    //TO-DO: make sure that everything the UI forbids is blocked by loading
+    //TO-DO: checking Main isn't an issue because it will exist for mod. but should check constant name instead
     .filter(function (name) {
       return !(props.powerRow.getSection() === Main.equipmentSection && (name === 'Removable' || name === 'Easily Removable'));
     }).filter(function (name) {
@@ -62,7 +62,7 @@ function ModifierRowHtml(props) {
       value: state.name
     }, options)));
   } else {
-    //TODO: className un-DRY here
+    //TO-DO: className un-DRY here
     elementList.push( /*#__PURE__*/React.createElement("div", {
       className: "col-12 col-sm-5 col-lg-4 col-xl-auto",
       key: "name"
@@ -112,7 +112,7 @@ function ModifierRowHtml(props) {
                 key: "rank"
               }, 'Cost ' + state.rank));
             } else {
-              //TODO: confirm spaces and non-breaking
+              //TO-DO: confirm spaces and non-breaking
               elementList.push( /*#__PURE__*/React.createElement("label", {
                 className: "col-8 col-sm-5 col-md-4 col-lg-3 col-xl-auto",
                 key: "rank"

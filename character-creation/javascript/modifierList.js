@@ -271,6 +271,7 @@ determine why I needed the return null in power list render
    path: T, clear, prerender, Main.setPowerGodhood, render before setState
    therefore this is an issue with godhood circle
 resolve godhood circle:
+   right now power list prerender -> _notifyDependent -> Main.update()
    high CP needs to trigger godhood but prerender can't update state
    need static method to determine godhood
    all setState set both at once (thing changed and godhood)
@@ -281,18 +282,19 @@ resolve godhood circle:
 
 TODO: next:
 make sure mod load blocks non personal duplicate or invalid
-test all
-sort all functions
+test/sort all: ad, mod, pow. list, row, html
+remove all tasks from generated files
 there's lots of tasks
 
 ad row immutable
 ad list static
    will need same render return null
-skill list react
+skill list react (immutable and static)
 react abilities
 react defenses
 react main
    make offense new section
    render includes totals and every non-section thing
 remove the return null in ad/power list render (and test all)
+   notifyDependent would stop calling Main.update() because it wouldn't exist
 */

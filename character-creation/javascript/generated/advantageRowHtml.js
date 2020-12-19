@@ -27,7 +27,7 @@ function AdvantageRowHtml(props) {
         key: name
       }, name);
     }); //unshift = addFirst
-    //TODO: technically should key be undefined?
+    //TO-DO: technically should key be undefined?
 
     options.unshift( /*#__PURE__*/React.createElement("option", {
       key: "Select Advantage"

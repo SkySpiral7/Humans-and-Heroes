@@ -332,7 +332,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       }
 
       if (false && _this._hasDuplicate()) {
-        //TODO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
+        //TO-DO: is setState twice better than forceUpdate? is there a way to store a complex state using redux etc?
         _this._rowArray.pop();
 
         _this._prerender();

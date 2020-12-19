@@ -112,7 +112,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
 
       var elementArray = _this.state.it.map(function (_, powerIndex) {
-        var powerRow = _this._rowArray[powerIndex]; //TODO: this is a work around and indicates a bug
+        var powerRow = _this._rowArray[powerIndex]; //workaround until resolved godhood circle
 
         if (undefined === powerRow) return null;
         var rowKey = powerRow.getKey();
@@ -260,7 +260,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       if (undefined !== updatedModifierRow) {
         modifierIndex = modifierSection.getIndexByKey(updatedModifierRow.key);
         oldWasNonPersonal = ModifierList.isNonPersonalModifier(powerState.Modifiers[modifierIndex].name);
-      } //TODO: consider what to do about feature
+      } //TO-DO: consider what to do about feature
       //non personal modifier was added
 
 
@@ -288,12 +288,12 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
           name: newName
         });
         modifierKeyList.push(MainObject.generateKey());
-      } //TODO: figure out how to handle duplicates
+      } //TO-DO: figure out how to handle duplicates
       else if (!Data.Modifier.names.contains(newName)) {
           powerState.Modifiers.remove(modifierIndex);
           modifierKeyList.remove(modifierIndex);
         } else {
-          //TODO: most of the time a new name should clear other state
+          //TO-DO: most of the time a new name should clear other state
           powerState.Modifiers[modifierIndex].name = newName;
         }
 
@@ -409,7 +409,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         var rank = _this._rowArray[i].getRank();
 
         if (Data.Power[powerEffect].isGodhood) usingGodhoodPowers = true;else if (1 === Main.getActiveRuleset().major && 'Protection' === powerEffect) _this._derivedValues.protectionRankTotal += rank; //protection only stacks in v1
-        else if ('Protection' === powerEffect && rank > _this._derivedValues.protectionRankTotal) _this._derivedValues.protectionRankTotal = rank; //TODO: bug? what if there's multiple of same skill? why not just return [] of indexes?
+        else if ('Protection' === powerEffect && rank > _this._derivedValues.protectionRankTotal) _this._derivedValues.protectionRankTotal = rank; //TO-DO: bug? what if there's multiple of same skill? why not just return [] of indexes?
 
         if (_this._rowArray[i].getName() !== undefined) _this._derivedValues.attackEffectRanks.add(_this._rowArray[i].getSkillUsed(), i);
         _this._derivedValues.total += _this._rowArray[i].getTotal();
@@ -422,7 +422,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "getModifierRowShort", function (powerRowIndex, modifierRowIndex) {
-      //TODO: is range check needed?
+      //TO-DO: is range check needed?
       if (powerRowIndex >= powerRowIndex.length) return; //range checking of modifierRowIndex will be handled in getRowByIndex
 
       return _this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
@@ -475,9 +475,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       }
 
       Main.updateOffense();
-      Main.defenseSection.calculateValues(); //TODO: resolve godhood circle:
-
-      Main.update(); //high CP needs to trigger godhood but prerender can't update state
+      Main.defenseSection.calculateValues();
+      Main.update();
     });
 
     _this.state = {
