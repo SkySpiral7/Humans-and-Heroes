@@ -29,6 +29,14 @@ ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEff
          'equipment can\'t have removable modifier since it is built in.');
       return;  //undefined
    }
+   if (ModifierList.isNonPersonalModifier(inputState.name) &&
+      ('Personal' === validActivationInfoObj.range.current || 'Personal' !== Data.Power[powerEffect].defaultRange))
+   {
+      Main.messageUser(
+         'ModifierObject.sanitizeStateAndGetDerivedValues.nonPersonal', loadLocation + ': ' +
+         inputState.name + ' can only be applied to powers with a default range of Personal.');
+      return;  //undefined
+   }
    var validState = {name: inputState.name};
 
    var derivedValues = {};
@@ -70,7 +78,7 @@ ModifierObject.sanitizeStateAndGetDerivedValues = function (inputState, powerEff
 ModifierObject.getUniqueName = function (state, includeText)
 {
    var nameToUse;
-   //all these are exclusive:
+   //all these are exclusive. the auto mods aren't here because they are auto balanced
    if ('Affects Others Also' === state.name || 'Affects Others Only' === state.name || 'Attack' === state.name) nameToUse = 'Non personal';
    else if ('Affects Objects Also' === state.name || 'Affects Objects Only' === state.name) nameToUse = 'Affects Objects';
    else if ('Alternate Resistance (Free)' === state.name || 'Alternate Resistance (Cost)' === state.name) nameToUse = 'Alternate Resistance';

@@ -75,6 +75,7 @@ ModifierList.isNonPersonalModifierPresent = function (inputState)
    return false;
 };
 /**@returns {boolean} true if modifier would change range from being Personal*/
+//TODO: move to mod row
 ModifierList.isNonPersonalModifier = function (modName)
 {
    return ('Attack' === modName ||
@@ -281,7 +282,6 @@ resolve godhood circle:
    main needs a static to calc T that takes all state
 
 TODO: next:
-make sure mod load blocks non personal duplicate or invalid
 test/sort all: ad, mod, pow. list, row, html
 remove all tasks from generated files
 there's lots of tasks

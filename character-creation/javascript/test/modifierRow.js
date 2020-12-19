@@ -14,9 +14,7 @@ TestSuite.modifierRow.sanitizeStateAndGetDerivedValues=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({
       Expected: 0,
-      Actual: Main.powerSection.getRowByIndex(0)
-      .getModifierList()
-      .getState().length,
+      Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState().length,
       Description: 'invalid mod: removed'
    });
    assertions.push({
@@ -33,15 +31,47 @@ TestSuite.modifierRow.sanitizeStateAndGetDerivedValues=function(testState={})
    Loader.sendData(dataToLoad);
    assertions.push({
       Expected: 0,
-      Actual: Main.equipmentSection.getRowByIndex(0)
-      .getModifierList()
-      .getState().length,
+      Actual: Main.equipmentSection.getRowByIndex(0).getModifierList().getState().length,
       Description: 'removableEquipment: removed'
    });
    assertions.push({
       Expected: ['ModifierObject.sanitizeStateAndGetDerivedValues.removableEquipment'],
       Actual: Messages.errorCodes(),
       Description: 'removableEquipment: error'
+   });
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({
+      "effect": "Flight", "text": "", "action": "Move", "range": "Personal", "duration": "Sustained",
+      "Modifiers": [{"name": "Attack"}], "rank": 1
+   });
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: 0,
+      Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState().length,
+      Description: 'non personal mod but range personal: removed'
+   });
+   assertions.push({
+      Expected: ['ModifierObject.sanitizeStateAndGetDerivedValues.nonPersonal'],
+      Actual: Messages.errorCodes(),
+      Description: 'non personal mod but range personal: error'
+   });
+
+   dataToLoad = Loader.resetData();
+   dataToLoad.Powers.push({
+      "effect": "Damage", "text": "", "action": "Standard", "range": "Close", "duration": "Instant",
+      "Modifiers": [{"name": "Affects Others Only"}], "rank": 1
+   });
+   Loader.sendData(dataToLoad);
+   assertions.push({
+      Expected: 0,
+      Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState().length,
+      Description: 'non personal mod but can\'t make personal: removed'
+   });
+   assertions.push({
+      Expected: ['ModifierObject.sanitizeStateAndGetDerivedValues.nonPersonal'],
+      Actual: Messages.errorCodes(),
+      Description: 'non personal mod but can\'t make personal: error'
    });
 
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
@@ -67,15 +97,6 @@ TestSuite.modifierRow.sanitizeStateAndGetDerivedValues=function(testState={})
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack'); ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Select Modifier');
    assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Removing Attack removes name'});
    assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Removing Attack removes skill'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"Personal","duration":"Sustained",
-      "Modifiers":[{"name":"Affects Others Also"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'range trumps modifiers: range'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'range trumps modifiers: error'});
-
-   //ADD TESTS small ones for the rest
 
    return TestRunner.displayResults('TestSuite.modifierRow.sanitizeStateAndGetDerivedValues', assertions, testState);
 };
