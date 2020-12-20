@@ -34,7 +34,7 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
 {
    TestRunner.clearResults(testState);
    const assertions = [];
-   let expected;
+   let dataToLoad, expected;
 
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
    expected = {name: 'Lucky', rank: 1};
@@ -209,6 +209,40 @@ TestSuite.advantageRow.setAdvantage = function (testState = {})
       .getState(),
       Description: 'Diehard to Sidekick default text'
    });
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Advantages.push({name: 'Languages'});
+      Loader.sendData(dataToLoad);
+
+      assertions.push({
+         Expected: Data.Advantage.Languages.defaultText,
+         Actual: Main.advantageSection.getRowByIndex(0).getText(),
+         Description: 'uses default text'
+      });
+   }
+   catch (e)
+   {
+      assertions.push({Error: e, Description: 'uses default text'});
+   }
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Advantages.push({name: 'Defensive Roll'});
+      Loader.sendData(dataToLoad);
+
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getRowByIndex(0).getRank(),
+         Description: 'defaults to rank 1'
+      });
+   }
+   catch (e)
+   {
+      assertions.push({Error: e, Description: 'defaults to rank 1'});
+   }
 
    return TestRunner.displayResults('TestSuite.advantageRow.setAdvantage', assertions, testState);
 };

@@ -37,8 +37,8 @@ class AdvantageList extends React.Component
    /**the rank of the row with that unique name (if in map)*/
    getRankFromMap = (uniqueName) => {return this._derivedValues.rankMap.get(uniqueName);};
    getRankMap = () => {return this._derivedValues.rankMap;};
-   getTotal = () => {return this._derivedValues.total;};
    getState = () => {return JSON.clone(this.state);};  //defensive copy is important to prevent tamper
+   getTotal = () => {return this._derivedValues.total;};
    //endregion Single line function
 
    //region public functions
@@ -74,7 +74,7 @@ class AdvantageList extends React.Component
       }
       else if (!equipAdvDoesExists && equipAdvShouldExist)
       {
-         //doesn't use addRow because unshift instead of push and already did duplicate check
+         //doesn't use addRow because need to unshift instead of push and already did duplicate check
          const advantageObject = this._addRowNoPush('Equipment');
 
          //unshift = addFirst
@@ -212,6 +212,9 @@ class AdvantageList extends React.Component
          return state;
       });
    };
+   //endregion public functions
+
+   //region on change functions
    /**Onchange function for selecting an advantage*/
    updateNameByKey = (newName, updatedKey) =>
    {
@@ -285,7 +288,7 @@ class AdvantageList extends React.Component
          });
       }
    };
-   //endregion public functions
+   //endregion on change functions
 
    //region private functions
    /**Creates a new row at the end of the array*/
@@ -368,13 +371,10 @@ class AdvantageList extends React.Component
    /**Updates other sections which depend on advantage section*/
    _notifyDependent = () =>
    {
-      if (typeof(Main) !== 'undefined')  //happens during main's creation
-      {
-         Main.updateInitiative();  //Improved/Seize Initiative
-         Main.updateOffense();  //some 1.0 advantages affect this so it needs to be updated
-         Main.defenseSection.calculateValues();  //Defensive Roll
-         Main.update();  //updates totals and power level
-      }
+      Main.updateInitiative();  //Improved/Seize Initiative
+      Main.updateOffense();  //some 1.0 advantages affect this so it needs to be updated
+      Main.defenseSection.calculateValues();  //Defensive Roll
+      Main.update();  //updates totals and power level
    };
    /**Call this after updating rowArray but before setState*/
    _prerender = () =>

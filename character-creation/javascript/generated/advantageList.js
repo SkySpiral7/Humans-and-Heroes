@@ -67,12 +67,12 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       return _this._derivedValues.rankMap;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getTotal", function () {
-      return _this._derivedValues.total;
-    });
-
     _defineProperty(_assertThisInitialized(_this), "getState", function () {
       return JSON.clone(_this.state);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getTotal", function () {
+      return _this._derivedValues.total;
     });
 
     _defineProperty(_assertThisInitialized(_this), "calculateEquipmentRank", function (equipTotal) {
@@ -102,7 +102,7 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
       } else if (equipAdvDoesExists && !equipAdvShouldExist) {
         _this._removeRow(equipmentIndex);
       } else if (!equipAdvDoesExists && equipAdvShouldExist) {
-        //doesn't use addRow because unshift instead of push and already did duplicate check
+        //doesn't use addRow because need to unshift instead of push and already did duplicate check
         var advantageObject = _this._addRowNoPush('Equipment'); //unshift = addFirst
 
 
@@ -389,16 +389,13 @@ var AdvantageList = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_notifyDependent", function () {
-      if (typeof Main !== 'undefined') //happens during main's creation
-        {
-          Main.updateInitiative(); //Improved/Seize Initiative
+      Main.updateInitiative(); //Improved/Seize Initiative
 
-          Main.updateOffense(); //some 1.0 advantages affect this so it needs to be updated
+      Main.updateOffense(); //some 1.0 advantages affect this so it needs to be updated
 
-          Main.defenseSection.calculateValues(); //Defensive Roll
+      Main.defenseSection.calculateValues(); //Defensive Roll
 
-          Main.update(); //updates totals and power level
-        }
+      Main.update(); //updates totals and power level
     });
 
     _defineProperty(_assertThisInitialized(_this), "_prerender", function () {

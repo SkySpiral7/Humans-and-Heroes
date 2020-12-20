@@ -78,6 +78,7 @@ ModifierList.isNonPersonalModifierPresent = function (inputState)
 //TODO: move to mod row
 ModifierList.isNonPersonalModifier = function (modName)
 {
+   //could use unique name but this is more clear
    return ('Attack' === modName ||
       'Affects Others Also' === modName ||
       'Affects Others Only' === modName);
@@ -282,8 +283,17 @@ resolve godhood circle:
    main needs a static to calc T that takes all state
 
 TODO: next:
-test/sort all: ad, mod, pow. list, row, html
-remove all tasks from generated files
+test/sort all
+   advantageRow.js
+   advantageRowHtml.js
+   modifierList.js
+   modifierRow.js
+   modifierRowHtml.js
+   powerList.js
+   powerRow.js
+   powerRowHtml.js
+   ? sharedHtml.js
+remove all tasks from generated ReactUtil (although not listed by print-todos-added-since due to .gitattributes -diff)
 there's lots of tasks
 
 ad row immutable

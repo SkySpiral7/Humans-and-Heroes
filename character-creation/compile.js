@@ -68,7 +68,7 @@ function generateFromNode()
    })
    .bundle()
    .pipe(fs.createWriteStream("javascript/generated/ReactUtil.js"))
-   .on('finish', () => console.log('node done'));
+   .on('finish', () => console.log('node folder done'));
 }
 
 main();

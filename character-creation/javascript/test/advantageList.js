@@ -11,27 +11,6 @@ TestSuite.advantageList.hasSeizeInitiative = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.hasSeizeInitiative', assertions, testState);
 };
-TestSuite.advantageList.addRow = function (testState = {})
-{
-   TestRunner.clearResults(testState);
-
-   const assertions = [];
-
-   try
-   {
-      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
-      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
-      assertions.push({
-         Expected: 1,
-         Actual: Main.advantageSection.getState().it.length,
-         Description: 'removes Duplicate'
-      });
-   }
-   catch (e)
-   {assertions.push({Error: e, Description: 'removes Duplicate'});}
-
-   return TestRunner.displayResults('TestSuite.advantageList.addRow', assertions, testState);
-};
 TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
 {
    /*if (undefined === testState) testState = {};  //TODO: have tests support IE 11?
@@ -61,21 +40,21 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
-      Description: 'Equipment Row does not exist'
+      Description: 'init: Equipment Row does not exist'
    });
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getEquipmentMaxTotal(),
-      Description: 'Equipment Max Total is 0'
+      Description: 'init: Equipment Max Total is 0'
    });
 
    try
    {
-      ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Damage');  //use Damage because it has a base cost of 1
+      //use Damage because it has a base cost of 1
+      ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Damage');
       assertions.push({
          Expected: 'Equipment',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Damage Added: Equipment Row is created'
       });
       assertions.push({
@@ -110,9 +89,12 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'Add Damage'});}
+   {
+      assertions.push({Error: e, Description: 'Add Damage'});
+   }
 
-   Main.equipmentSection.clear();
+   //avoid using clear since it has code related to equipment
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Select Power');
    assertions.push({
       Expected: 0,
       Actual: Main.advantageSection.getState().it.length,
@@ -125,6 +107,27 @@ TestSuite.advantageList.calculateEquipmentRank = function (testState = {})
    });
    assertions.push({Expected: 0, Actual: Main.advantageSection.getTotal(), Description: 'Damage Removed: Advantage Total is now 0'});
 
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Seize Initiative');
+   assertions.push({
+      Expected: [{name: 'Seize Initiative', rank: 1}],
+      Actual: Main.advantageSection.getState().it,
+      Description: 'Added non equip advantage for later'
+   });
+
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Damage');
+   assertions.push({
+      Expected: [{name: 'Equipment', rank: 1}, {name: 'Seize Initiative', rank: 1}],
+      Actual: Main.advantageSection.getState().it,
+      Description: 'Equipment is sorted to first'
+   });
+
+   ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Select Power');
+   assertions.push({
+      Expected: [{name: 'Seize Initiative', rank: 1}],
+      Actual: Main.advantageSection.getState().it,
+      Description: 'Equipment removed from first'
+   });
+
    return TestRunner.displayResults('TestSuite.advantageList.calculateEquipmentRank', assertions, testState);
 };
 TestSuite.advantageList.clear = function (testState = {})
@@ -135,7 +138,27 @@ TestSuite.advantageList.clear = function (testState = {})
 
    try
    {
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Seize Initiative');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Lucky');
+      Main.advantageSection.clear();
+      assertions.push({
+         Expected: 0,
+         Actual: Main.advantageSection.getState().it.length,
+         Description: 'clear removes normal'
+      });
+
+      Main.advantageSection.clear();
+      //and doesn't throw when no rows exist
+   }
+   catch (e)
+   {
+      assertions.push({Error: e, Description: 'clear removes normal'});
+   }
+
+   try
+   {
       ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Seize Initiative');
       Main.advantageSection.clear();
       assertions.push({
          Expected: 1,
@@ -144,7 +167,9 @@ TestSuite.advantageList.clear = function (testState = {})
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'clear doesn\'t remove equipment'});}
+   {
+      assertions.push({Error: e, Description: 'clear doesn\'t remove equipment'});
+   }
 
    return TestRunner.displayResults('TestSuite.advantageList.clear', assertions, testState);
 };
@@ -157,34 +182,31 @@ TestSuite.advantageList.load = function (testState = {})
 
    try
    {
-      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
-      ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Damage');
       dataToLoad = Loader.resetData();
       dataToLoad.Advantages.push({name: 'Seize Initiative'});
       Loader.sendData(dataToLoad);
 
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Happy Path: the advantage'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'Happy Path: nothing else'});
       assertions.push({
          Expected: false,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .doesHaveRank(),
+         Actual: Main.advantageSection.getRowByIndex(0).doesHaveRank(),
          Description: 'Happy Path: has rank'
       });
       assertions.push({
          Expected: false,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .doesHaveText(),
+         Actual: Main.advantageSection.getRowByIndex(0).doesHaveText(),
          Description: 'Happy Path: has text'
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'Happy Path'});}
+   {
+      assertions.push({Error: e, Description: 'Happy Path'});
+   }
 
    try
    {
@@ -209,19 +231,19 @@ TestSuite.advantageList.load = function (testState = {})
       });
       assertions.push({
          Expected: 'Equipment',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Keeps (or regenerates) Equipment'
       });
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRowByIndex(1)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(1).getName(),
          Description: 'and loads the rest'
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'Keeps Equipment'});}
+   {
+      assertions.push({Error: e, Description: 'Keeps Equipment'});
+   }
 
    try
    {
@@ -231,8 +253,7 @@ TestSuite.advantageList.load = function (testState = {})
       Loader.sendData(dataToLoad);
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'notExist: Seize Initiative was loaded'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'notExist: Nothing else was loaded'});
@@ -243,7 +264,9 @@ TestSuite.advantageList.load = function (testState = {})
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'notExist'});}
+   {
+      assertions.push({Error: e, Description: 'notExist'});
+   }
 
    try
    {
@@ -254,12 +277,14 @@ TestSuite.advantageList.load = function (testState = {})
       assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'godhood error: Godhood is off'});
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'godhood error: Seize Initiative was loaded'
       });
-      assertions.push(
-         {Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'godhood error: Nothing else was loaded'});
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getState().it.length,
+         Description: 'godhood error: Nothing else was loaded'
+      });
       assertions.push({
          Expected: ['AdvantageList.load.godhood'],
          Actual: Messages.errorCodes(),
@@ -267,32 +292,34 @@ TestSuite.advantageList.load = function (testState = {})
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'godhood error'});}
+   {
+      assertions.push({Error: e, Description: 'godhood error'});
+   }
 
    try
    {
       dataToLoad = Loader.resetData();
       dataToLoad.Hero.transcendence = 1;  //set godhood
-      dataToLoad.Advantages.push({name: 'Seize Initiative'});  //normal to make sure transcendence isn't reset
+      dataToLoad.Advantages.push({name: 'Seize Initiative'});  //normal to make sure transcendence isn't reset by this
       dataToLoad.Advantages.push({name: 'Beyond Mortal'});  //godhood
       Loader.sendData(dataToLoad);
       assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Load godhood: Godhood is on'});
       assertions.push({
          Expected: 'Seize Initiative',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Load godhood: Seize Initiative was loaded'
       });
       assertions.push({
          Expected: 'Beyond Mortal',
-         Actual: Main.advantageSection.getRowByIndex(1)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(1).getName(),
          Description: 'Load godhood: Beyond Mortal was loaded'
       });
       assertions.push({Expected: [], Actual: Messages.list, Description: 'Load godhood: no errors'});
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'Load godhood'});}
+   {
+      assertions.push({Error: e, Description: 'Load godhood'});
+   }
 
    try
    {
@@ -303,7 +330,25 @@ TestSuite.advantageList.load = function (testState = {})
       assertions.push({Expected: [], Actual: Messages.list, Description: 'ignores Equipment ad: no error'});
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'ignores Equipment ad'});}
+   {
+      assertions.push({Error: e, Description: 'ignores Equipment ad'});
+   }
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Advantages.push({name: 'Benefit', text: 'a', rank: 2});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Benefit', text: 'a', rank: 2}],
+         Actual: Main.advantageSection.getState().it,
+         Description: 'loads text and rank'
+      });
+   }
+   catch (e)
+   {
+      assertions.push({Error: e, Description: 'loads text and rank'});
+   }
 
    try
    {
@@ -313,8 +358,7 @@ TestSuite.advantageList.load = function (testState = {})
       Loader.sendData(dataToLoad);
       assertions.push({
          Expected: 'Ultimate Effort',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'duplicate error: loads original'
       });
       assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate error: and nothing else'});
@@ -325,7 +369,9 @@ TestSuite.advantageList.load = function (testState = {})
       });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'duplicate error'});}
+   {
+      assertions.push({Error: e, Description: 'duplicate error'});
+   }
 
    try
    {
@@ -335,96 +381,20 @@ TestSuite.advantageList.load = function (testState = {})
       Loader.sendData(dataToLoad);
       assertions.push({
          Expected: 'Ultimate Effort',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'not duplicate: loads original'
       });
       assertions.push({
          Expected: 'Ultimate Effort',
-         Actual: Main.advantageSection.getRowByIndex(1)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(1).getName(),
          Description: 'not duplicate: loads other'
       });
       assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'not duplicate: uses unique name'});
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'not duplicate'});}
-
-   try
    {
-      dataToLoad = Loader.resetData();
-      dataToLoad.Advantages.push({name: 'Ultimate Effort', text: 'text'});
-      Loader.sendData(dataToLoad);
-
-      assertions.push({
-         Expected: 'Ultimate Effort',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
-         Description: 'Text: the advantage'
-      });
-      assertions.push({
-         Expected: 'text',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getText(),
-         Description: 'Text: getText'
-      });
+      assertions.push({Error: e, Description: 'not duplicate'});
    }
-   catch (e)
-   {assertions.push({Error: e, Description: 'Text'});}
-
-   try
-   {
-      dataToLoad = Loader.resetData();
-      dataToLoad.Advantages.push({name: 'Languages'});
-      Loader.sendData(dataToLoad);
-
-      assertions.push({
-         Expected: Data.Advantage.Languages.defaultText,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getText(),
-         Description: 'uses default text'
-      });
-   }
-   catch (e)
-   {assertions.push({Error: e, Description: 'uses default text'});}
-
-   try
-   {
-      dataToLoad = Loader.resetData();
-      dataToLoad.Advantages.push({name: 'Defensive Roll', rank: 3});
-      Loader.sendData(dataToLoad);
-
-      assertions.push({
-         Expected: 'Defensive Roll',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
-         Description: 'Rank: the advantage'
-      });
-      assertions.push({
-         Expected: 3,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getRank(),
-         Description: 'Rank: getRank'
-      });
-   }
-   catch (e)
-   {assertions.push({Error: e, Description: 'Rank'});}
-
-   try
-   {
-      dataToLoad = Loader.resetData();
-      dataToLoad.Advantages.push({name: 'Defensive Roll'});
-      Loader.sendData(dataToLoad);
-
-      assertions.push({
-         Expected: 1,
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getRank(),
-         Description: 'defaults to rank 1'
-      });
-   }
-   catch (e)
-   {assertions.push({Error: e, Description: 'defaults to rank 1'});}
 
    return TestRunner.displayResults('TestSuite.advantageList.load', assertions, testState);
 };
@@ -476,19 +446,51 @@ TestSuite.advantageList.updateNameByKey = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.advantageList.updateNameByKey', assertions, testState);
 };
+TestSuite.advantageList.updateRankByKey = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+   ReactUtil.changeValue('advantageRank' + Main.advantageSection.indexToKey(0), '-1');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it[0].rank, Description: 'on change sanitizes'});
+
+   return TestRunner.displayResults('TestSuite.advantageList.updateRankByKey', assertions, testState);
+};
 TestSuite.advantageList.updateTextByKey = function (testState = {})
 {
    TestRunner.clearResults(testState);
    const assertions = [];
 
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
-   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'Benefit 1');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'trimmed text   ');
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Benefit');
    assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
-   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(1), 'Benefit 1');
-   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate removed'});
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(1), '   trimmed text');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate removed (after trim)'});
 
    return TestRunner.displayResults('TestSuite.advantageList.updateTextByKey', assertions, testState);
+};
+TestSuite.advantageList.addRow = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+
+   const assertions = [];
+
+   try
+   {
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+      ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+      assertions.push({
+         Expected: 1,
+         Actual: Main.advantageSection.getState().it.length,
+         Description: 'removes Duplicate'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'removes Duplicate'});}
+
+   return TestRunner.displayResults('TestSuite.advantageList.addRow', assertions, testState);
 };
 TestSuite.advantageList.calculateValues = function (testState = {})
 {
@@ -502,8 +504,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    });
    assertions.push({
       Expected: true,
-      Actual: Main.advantageSection.getRankMap()
-      .isEmpty(),
+      Actual: Main.advantageSection.getRankMap().isEmpty(),
       Description: 'RankMap is empty'
    });
    assertions.push({
@@ -530,8 +531,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Beyond Mortal');
       assertions.push({
          Expected: 'Beyond Mortal',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Beyond Mortal is set'
       });
       assertions.push({Expected: true, Actual: Main.getEveryVar().advantageGodhood, Description: 'sets advantageGodhood to true'});
@@ -559,8 +559,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
       ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Your Petty Rules Don\'t Apply to Me');
       assertions.push({
          Expected: 'Your Petty Rules Don\'t Apply to Me',
-         Actual: Main.advantageSection.getRowByIndex(0)
-         .getName(),
+         Actual: Main.advantageSection.getRowByIndex(0).getName(),
          Description: 'Petty Rules ad is set'
       });
       assertions.push({
@@ -619,7 +618,7 @@ TestSuite.advantageList.calculateValues = function (testState = {})
    catch (e)
    {assertions.push({Error: e, Description: 'total'});}
 
-   //Improved Critical is the only one where unique name matters so have to test on v1.0
+   //Improved Critical is the only rank map one where unique name matters so have to test on v1.0
    Main.setRuleset(1, 0);
    try
    {
@@ -654,6 +653,14 @@ TestSuite.advantageList.hasDuplicate = function (testState = {})
    assertions.push({Expected: 3, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
    assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it.length, Description: 'non adjacent duplicate removed'});
+
+   Main.advantageSection.clear();
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'same text');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Benefit');
+   assertions.push({Expected: 2, Actual: Main.advantageSection.getState().it.length, Description: 'set'});
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(1), 'same text');
+   assertions.push({Expected: 1, Actual: Main.advantageSection.getState().it.length, Description: 'duplicate removed due to text'});
 
    return TestRunner.displayResults('TestSuite.advantageList.hasDuplicate', assertions, testState);
 };
