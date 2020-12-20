@@ -284,7 +284,6 @@ resolve godhood circle:
 
 TODO: next:
 test/sort all
-   advantageRow.js
    advantageRowHtml.js
    modifierList.js
    modifierRow.js

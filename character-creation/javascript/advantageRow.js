@@ -11,8 +11,8 @@ function AdvantageObject(key)
    var state, derivedValues;
 
    //region Basic getter (all single line)
-   this.getState = function () {return JSON.clone(state);};  //defensive copy is important to prevent tamper
    this.getDerivedValues = function () {return JSON.clone(derivedValues);};  //clone is for tests
+   this.getState = function () {return JSON.clone(state);};  //defensive copy is important to prevent tamper
    this.doesHaveRank = function () {return derivedValues.hasRank;};
    this.doesHaveText = function () {return derivedValues.hasText;};
    this.getCostPerRank = function () {return derivedValues.costPerRank;};
@@ -30,7 +30,7 @@ function AdvantageObject(key)
     The data set is independent of the document and doesn't call update.*/
    this.setAdvantage = function (nameGiven)
    {
-      var useNewData = !((state.name === 'Minion' && nameGiven === 'Sidekick') || (state.name === 'Sidekick' && nameGiven === 'Minion'));
+      var useNewData = !(('Minion' === state.name && 'Sidekick' === nameGiven) || ('Sidekick' === state.name && 'Minion' === nameGiven));
       //if switching between 'Minion' and 'Sidekick' then keep the data, otherwise clear it out
       state.name = nameGiven;
       derivedValues.maxRank = Data.Advantage[state.name].maxRank;

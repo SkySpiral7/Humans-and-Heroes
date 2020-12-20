@@ -6,9 +6,7 @@ function rethrow(err) {if (err) throw err;}
 
 function main()
 {
-   //rm -rf javascript/generated/ &> /dev/null
-   fs.rmdirSync('javascript/generated/', {recursive: true});
-   fs.mkdirSync('javascript/generated/');
+   //no longer deletes generated in order to save time so removing files now requires manual delete
 
    fs.access('node_modules/', (err) =>
    {
