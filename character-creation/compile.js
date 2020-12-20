@@ -1,5 +1,6 @@
 'use strict';
 
+//like all node you must run npm install before running this
 const fs = require('fs');
 
 function rethrow(err) {if (err) throw err;}
@@ -7,22 +8,10 @@ function rethrow(err) {if (err) throw err;}
 function main()
 {
    //no longer deletes generated in order to save time so removing files now requires manual delete
+   generateFromBabel();
+   generateFromNode();
 
-   fs.access('node_modules/', (err) =>
-   {
-      if (err)
-      {
-         //TODO: just npm install
-         console.log('recreating node_modules...');
-         const execSync = require('child_process').execSync;
-         execSync('npm install @babel/core @babel/preset-react @babel/plugin-proposal-class-properties ' +
-            'browserify @testing-library/react react-dom react');
-      }
-      generateFromBabel();
-      generateFromNode();
-
-      console.log('script done');
-   });
+   console.log('script done');
 }
 
 function generateFromBabel()
