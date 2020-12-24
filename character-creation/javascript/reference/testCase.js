@@ -21,19 +21,9 @@ TestSuite.test.example = function (testState = {})
    DomUtil.changeValue('equipmentRank0', 5);
    assertions.push({
       Expected: true,
-      Actual: Main.advantageSection.getRow(0)
-      .isBlank(),
+      Actual: Main.advantageSection.getRowByIndex(0).isBlank(),
       Description: 'Equipment Row is not created'
    });
 
    return TestRunner.displayResults('TestSuite.test.example', assertions, testState);
-};
-TestSuite.test.unmade = function (testState = {})
-{
-   TestRunner.clearResults(testState);
-   const assertions = [];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.test.unmade', assertions, testState);
 };

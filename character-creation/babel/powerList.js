@@ -420,8 +420,7 @@ class PowerListAgnostic extends React.Component
    {
       //TODO: is range check needed?
       if (powerRowIndex >= powerRowIndex.length) return;  //range checking of modifierRowIndex will be handled in getRowByIndex
-      return this._rowArray[powerRowIndex].getModifierList()
-      .getRowByIndex(modifierRowIndex);
+      return this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
    };
    /**Sets data from a json object given then updates*/
    load = (jsonSection) =>

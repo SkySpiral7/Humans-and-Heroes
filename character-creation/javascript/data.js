@@ -69,6 +69,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
       maxRank: new MapDefault({'Accurate': Infinity, 'Activation': 2, 'Affects Corporeal': Infinity, 'Affects Insubstantial': 2, 'Ammunition': 2,
          'Area': Infinity, 'Check Required': Infinity, 'Decreased Duration': 3, 'Dimensional': 3, 'Diminished Range': 3, 'Extended Range': Infinity,
          'Faster Action': 6, 'Fragile': Infinity, 'Homing': Infinity, 'Impervious': 1, 'Inaccurate': Infinity, 'Increased Duration': 3,
+         //TODO: maxRank Increased Range is 2 (costs 3). double check others too. make a load test for this too
          'Increased Mass': Infinity, 'Increased Range': 4, 'Indirect': 4, 'Limited': 2, 'Other Flat Extra': Infinity, 'Other Flat Flaw': Infinity,
          'Other Rank Extra': Infinity, 'Other Rank Flaw': Infinity, 'Penetrating': Infinity, 'Reach': Infinity, 'Reduced Range': 4, 'Ricochet': Infinity,
          'Side Effect': 2, 'Slower Action': 6, 'Split': Infinity, 'Subtle': 2, 'Triggered': Infinity, 'Variable Descriptor': 2}, 1),
