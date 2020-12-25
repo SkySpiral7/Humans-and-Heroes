@@ -34,7 +34,7 @@ public class Main
       rootFolderPath = Main.rootFolder.toPath().toAbsolutePath().normalize().toFile().getAbsolutePath();
       if (args.length == 0)
       {
-         UnlinkedFileDetector.detect();
+         writeToFiles();
          return;
       }
       switch (RunCommands.valueOf(args[0].toUpperCase()))
@@ -75,24 +75,22 @@ public class Main
          String originalContents = FileIoUtil.readTextFile(currentFile);
          String newContents = originalContents;
 
-         final Matcher matcher = Pattern.compile("<div class=\"col-12 col-md-3 col-xl-2 sites-layout-sidebar-left\">\n"
-                                                 + "<script type=\"text/javascript\" src=\"((?:\\.\\./?)*)/themes/"
-                                                 + "sideBar\\.js\"></script>\n" + "</div>").matcher(newContents);
-         while (matcher.find())
-         {
-            final String oldWholeText = matcher.group(0);
-            final String toRoot = matcher.group(1);
-            final String newWholeText = "<div class=\"col-12 col-md-3 col-xl-2 sites-layout-sidebar-left\">\n"
-                                        + "<p>Please enable JavaScript in order to see the generated sidebar.\n"
-                                        + "Without it you'll have to use the <a href=\"" + toRoot + "/site-map.html\">sitemap</a> in "
-                                        + "order easily navigate.</p>\n" + "\n"
-                                        + "<p>sideBar.js is harmless: it simply generates hyperlinks to major pages. It exists in a "
-                                        + "single place so that\n"
-                                        + "I don't have to update 100+ html pages with relative links whenever I want to change it.</p>\n"
-                                        + "</div>\n" + "<script type=\"text/javascript\" src=\"" + toRoot
-                                        + "/themes/sideBar.js\"></script>";
-            newContents = StringUtil.literalReplaceFirst(newContents, oldWholeText, newWholeText);
-         }
+         final String dependencyPath = FileMover.linkBetween(currentFile, new File("../themes/dependencies"));
+         newContents = newContents.replace("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1"
+                                           + ".0/css/bootstrap.min.css\" "
+                                           + "integrity=\"sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4\" "
+                                           + "crossorigin=\"anonymous\" />", "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+               + dependencyPath+ "/bootstrap.min.css\" />");
+         newContents = newContents.replace("<script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" "
+                                           + "integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" "
+                                           + "crossorigin=\"anonymous\"></script>", "<script src=\""
+                                                                                    +dependencyPath+ "/jquery.slim.min.js\"></script>");
+         newContents = newContents.replace("<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js\" "
+                                           + "integrity=\"sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm\" "
+                                           + "crossorigin=\"anonymous\"></script>", "<script src=\""
+                                                                                    +dependencyPath+ "/popper.min.js\"></script>\n"
+                                                                                    + "<script src=\""
+                                                                                    +dependencyPath+ "/bootstrap.min.js\"></script>");
 
          if (!newContents.equals(originalContents))
          {
@@ -255,7 +253,11 @@ public class Main
 
    public static File[] getAllHtmlFiles(final File containingFolder)
    {
-      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html").map(Path::toFile).toArray(File[]::new);
+      final File fakeFile = new File(Main.rootFolder + "/fake.txt");
+      return FileGatherer.searchForExtensions(containingFolder.toPath(), "html")
+                         .map(Path::toFile)
+                         .filter(file -> !FileMover.linkBetween(fakeFile, file).startsWith("character-creation/node_modules/"))
+                         .toArray(File[]::new);
    }
 
    public static List<String> getAllSideBarLinks()

@@ -1,0 +1,15 @@
+# Sources
+* https://getbootstrap.com/docs/4.5/getting-started/introduction/
+   * https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css
+   * https://code.jquery.com/jquery-3.5.1.slim.min.js
+   * https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js
+   * https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js
+* https://reactjs.org/docs/add-react-to-a-website.html#step-2-add-the-script-tags
+   * https://unpkg.com/react@17/umd/react.development.js
+      * https://unpkg.com/react@17.0.1/umd/react.development.js
+   * https://unpkg.com/react-dom@17/umd/react-dom.development.js
+      * https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js
+   * https://unpkg.com/react@17/umd/react.production.min.js
+      * https://unpkg.com/react@17.0.1/umd/react.production.min.js
+   * https://unpkg.com/react-dom@17/umd/react-dom.production.min.js
+      * https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js
