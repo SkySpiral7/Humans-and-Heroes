@@ -10,6 +10,8 @@
 
 character-creation/javascript/generated/* -diff
 character-creation/package-lock.json -diff
+themes/dependencies/bootstrap.min.css -diff
+themes/dependencies/*.js -diff
 
 *.png binary
 *.jpg binary

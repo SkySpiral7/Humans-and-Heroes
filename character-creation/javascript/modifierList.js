@@ -300,7 +300,6 @@ test/sort all
    powerRow.js
    powerRowHtml.js
    ? sharedHtml.js
-use local files for react/bootstrap
 move entire char creation into a folder (might need to be done after merging)
 remove all tasks from generated ReactUtil (although not listed by print-todos-added-since due to .gitattributes -diff)
 there's lots of tasks
