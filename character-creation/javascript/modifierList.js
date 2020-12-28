@@ -294,12 +294,10 @@ resolve godhood circle:
 
 TODO: next:
 test/sort all
-   modifierRowHtml.js
    powerList.js
    powerRow.js
    powerRowHtml.js
    ? sharedHtml.js
-move entire char creation into a folder (might need to be done after merging)
 remove all tasks from generated ReactUtil (although not listed by print-todos-added-since due to .gitattributes -diff)
 there's lots of tasks
 
@@ -314,4 +312,5 @@ react main
    render includes totals and every non-section thing
 remove the return null in ad/power list render (and test all)
    notifyDependent would stop calling Main.update() because it wouldn't exist
+move entire char creation into a folder (might need to be done after merging)
 */

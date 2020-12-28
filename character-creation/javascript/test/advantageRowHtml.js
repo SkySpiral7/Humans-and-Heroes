@@ -11,7 +11,7 @@ TestSuite.advantageRowHtml = function (testState = {})
       objects even though they are identical HTML.
       even though there should be only 1 child, can't do section.innerHTML because of blank row*/
       const sectionHolder = document.createElement('div');
-      //important: this creates a copy of the elements so that the original are not touched
+      //important: this creates a copy of the elements so that the original is not mutated
       sectionHolder.innerHTML = document.getElementById('advantage-section').firstChild.outerHTML;
 
       const allSelects = sectionHolder.getElementsByTagName('select');

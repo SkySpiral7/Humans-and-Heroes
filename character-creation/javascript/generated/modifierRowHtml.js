@@ -23,13 +23,13 @@ function ModifierRowHtml(props) {
 
   var elementList = [];
   /*current range can't be personal unless default is personal and it doesn't already have a non personal modifier.
-  if there is a non personal modifier then only that row should have the option*/
+  if there is a non personal modifier then only that row should have those mods*/
 
-  var showNonPersonalOption = props.powerRow.getRange() === 'Personal' || ModifierList.isNonPersonalModifier(state.name);
-  var amReadOnly = 'Selective' === state.name && 'Triggered' === props.powerRow.getAction(); //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
-  //Triggered's Selective is amReadOnly even for Feature
+  var showNonPersonalOption = props.powerRow.getRange() === 'Personal' || ModifierList.isNonPersonalModifier(state.name); //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
 
-  if (!amReadOnly && undefined !== state.name && props.powerRow.getEffect() !== 'Feature') amReadOnly = Data.Modifier[state.name].isReadOnly;
+  var amReadOnly = 'Selective' === state.name && 'Triggered' === props.powerRow.getAction(); //Triggered's Selective is amReadOnly even for Feature
+
+  if (!amReadOnly && undefined !== state.name && props.powerRow.getEffect() !== 'Feature') amReadOnly = Data.Modifier[state.name].isReadOnly; //blank will be false here because it doesn't match Selective and doesn't ask Data
 
   if (!amReadOnly) {
     var options = Data.Modifier.names //equipment has removable built in and can't have the modifiers
@@ -107,10 +107,11 @@ function ModifierRowHtml(props) {
           if (derivedValues.hasRank) {
             //only Feature can change the ranks of these
             if (props.powerRow.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank) {
+              //TO-DO: should be applications? double check size (tested for cost)
               elementList.push( /*#__PURE__*/React.createElement("div", {
                 className: "col-6 col-sm-3 col-xl-auto",
                 key: "rank"
-              }, 'Cost ' + state.rank));
+              }, 'Rank ' + state.rank));
             } else {
               //TO-DO: confirm spaces and non-breaking
               elementList.push( /*#__PURE__*/React.createElement("label", {
@@ -153,8 +154,9 @@ function ModifierRowHtml(props) {
                 whiteSpace: 'nowrap'
               }
             }, '= ' + derivedValues.autoTotal));
-          } //if costPerRank isn't 1 then show total to show how much its worth,
-          //if total doesn't match then it has had some cost quirk so show the total
+          }
+          /*if costPerRank isn't 1 then show total to show how much its worth,
+          if total doesn't match then it has had some cost quirk so show the total*/
           else if (Math.abs(derivedValues.costPerRank) > 1 || derivedValues.rawTotal !== derivedValues.costPerRank * state.rank) {
               elementList.push( /*#__PURE__*/React.createElement("div", {
                 className: "col-auto",

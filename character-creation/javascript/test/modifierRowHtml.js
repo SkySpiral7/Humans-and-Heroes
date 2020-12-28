@@ -12,7 +12,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       even though there should be only 1 child, can't do section.innerHTML because of blank row*/
       const sectionHolder = document.createElement('div');
       const powerKey = Main[sectionName + 'Section'].indexToKey(0);
-      //important: this creates a copy of the elements so that the original is not touched
+      //important: this creates a copy of the elements so that the original is not mutated
       sectionHolder.innerHTML = document.getElementById(sectionName + 'ModifierSection' + powerKey).children[childIndex].outerHTML;
 
       const allSelects = sectionHolder.getElementsByTagName('select');
@@ -37,7 +37,6 @@ TestSuite.modifierRowHtml = function (testState = {})
       Actual: getSectionRowHtml('power', 0),
       Description: 'blank row'
    });
-   Main.powerSection.clear();
 
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
    assertions.push({
@@ -73,7 +72,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">' +
       '<b>Slower Action</b>' +
       '</div>' +
-      '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>' +
+      '<div class="col-6 col-sm-3 col-xl-auto">Rank 2</div>' +
       '</div>';
    assertions.push({
       Expected: expected,
@@ -96,24 +95,22 @@ TestSuite.modifierRowHtml = function (testState = {})
       Actual: document.getElementById('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0)).value,
       Description: 'power: default value'
    });
-   assertions.push(
-      {
-         Expected: true,
-         Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Accurate'),
-         Description: 'power has option Accurate'
-      });
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Accurate'),
+      Description: 'power has option Accurate'
+   });
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Accurate');
    assertions.push({
       Expected: 'Accurate',
       Actual: document.getElementById('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0)).value,
       Description: 'power: selected value'
    });
-   assertions.push(
-      {
-         Expected: true,
-         Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable'),
-         Description: 'power has option Removable'
-      });
+   assertions.push({
+      Expected: true,
+      Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable'),
+      Description: 'power has option Removable'
+   });
    assertions.push({
       Expected: true,
       Actual: SelectUtil.containsText('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Easily Removable'),
@@ -158,7 +155,6 @@ TestSuite.modifierRowHtml = function (testState = {})
       Actual: SelectUtil.containsText('equipmentModifierChoices' + Main.equipmentSection.indexToPowerAndModifierKey(0, 0), 'Slower Action'),
       Description: 'equipment no read only option'
    });
-   Main.clear();
 
    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Slower Action');
@@ -257,9 +253,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       Actual: getSectionRowHtml('power', 0),
       Description: 'ranked'
    });
-   Main.powerSection.clear();
 
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Feature');
    ReactUtil.changeValue('powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Thingy');
    expected = '<div class="row">' +
@@ -267,17 +261,15 @@ TestSuite.modifierRowHtml = function (testState = {})
       '<select id="powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '">' +
       '</select>' +
       '</div>' +
-      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
-      '&nbsp;<input type="text" id="powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '" value="Thingy"></label>' +
+      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;' +
+      '<input type="text" id="powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '" value="Thingy"></label>' +
       '</div>';
    assertions.push({
       Expected: expected,
       Actual: getSectionRowHtml('power', 0),
       Description: 'hasText'
    });
-   Main.powerSection.clear();
 
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), '10');
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Removable');
    ReactUtil.changeValue('powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Thingy');
@@ -286,8 +278,8 @@ TestSuite.modifierRowHtml = function (testState = {})
       '<select id="powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '">' +
       '</select>' +
       '</div>' +
-      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text' +
-      '&nbsp;<input type="text" id="powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '" value="Thingy"></label>' +
+      '<label class="col-12 col-sm-6 col-lg-4 col-xl-6 fill-remaining">Text&nbsp;' +
+      '<input type="text" id="powerModifierText' + Main.powerSection.indexToPowerAndModifierKey(0, 0) + '" value="Thingy"></label>' +
       '<div class="col-auto" style="white-space: nowrap;">= -2</div>' +
       '</div>';
    assertions.push({
@@ -295,9 +287,7 @@ TestSuite.modifierRowHtml = function (testState = {})
       Actual: getSectionRowHtml('power', 0),
       Description: 'hasAutoTotal'
    });
-   Main.powerSection.clear();
 
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'System Dependent');
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">' +
@@ -317,7 +307,7 @@ TestSuite.modifierRowHtml = function (testState = {})
    expected = '<div class="row">' +
       '<div class="col-12 col-sm-5 col-lg-4 col-xl-auto">' +
       '<b>Increased Duration</b></div>' +
-      '<div class="col-6 col-sm-3 col-xl-auto">Cost 2</div>' +
+      '<div class="col-6 col-sm-3 col-xl-auto">Rank 2</div>' +
       '<div class="col-auto" style="white-space: nowrap;">= 0</div>' +
       '</div>';
    assertions.push({

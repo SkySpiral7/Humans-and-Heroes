@@ -27,13 +27,14 @@ function ModifierRowHtml(props)
    let elementList = [];
 
    /*current range can't be personal unless default is personal and it doesn't already have a non personal modifier.
-   if there is a non personal modifier then only that row should have the option*/
+   if there is a non personal modifier then only that row should have those mods*/
    const showNonPersonalOption = (props.powerRow.getRange() === 'Personal' || ModifierList.isNonPersonalModifier(state.name));
-   let amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRow.getAction());
    //Triggered requires Selective started between 2.0 and 2.5. Triggered is only an action in 2.x
+   let amReadOnly = ('Selective' === state.name && 'Triggered' === props.powerRow.getAction());
    //Triggered's Selective is amReadOnly even for Feature
    if (!amReadOnly && undefined !== state.name &&
       props.powerRow.getEffect() !== 'Feature') amReadOnly = Data.Modifier[state.name].isReadOnly;
+   //blank will be false here because it doesn't match Selective and doesn't ask Data
    if (!amReadOnly)
    {
       const options = Data.Modifier.names
@@ -106,8 +107,8 @@ function ModifierRowHtml(props)
             //only Feature can change the ranks of these
             if (props.powerRow.getEffect() !== 'Feature' && Data.Modifier[state.name].hasAutoRank)
             {
-               elementList.push(
-                  <div className="col-6 col-sm-3 col-xl-auto" key="rank">{'Cost ' + state.rank}</div>);
+               //TODO: should be applications? double check size (tested for cost)
+               elementList.push(<div className="col-6 col-sm-3 col-xl-auto" key="rank">{'Rank ' + state.rank}</div>);
             }
             else
             {
@@ -142,8 +143,8 @@ function ModifierRowHtml(props)
             elementList.push(<div className="col-auto" key="total" style={{whiteSpace: 'nowrap'}}>
                {'= ' + derivedValues.autoTotal}</div>);
          }
-         //if costPerRank isn't 1 then show total to show how much its worth,
-         //if total doesn't match then it has had some cost quirk so show the total
+         /*if costPerRank isn't 1 then show total to show how much its worth,
+         if total doesn't match then it has had some cost quirk so show the total*/
          else if (Math.abs(derivedValues.costPerRank) > 1
             || derivedValues.rawTotal !== (derivedValues.costPerRank * state.rank))
          {
