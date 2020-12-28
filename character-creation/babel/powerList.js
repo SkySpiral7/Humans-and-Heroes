@@ -62,8 +62,7 @@ class PowerListAgnostic extends React.Component
    {
       if (powerIndex === this._rowArray.length) throw new AssertionError('Blank power row (' + key + ') has no modifiers');
       const powerKey = this._rowArray[powerIndex].getKey();
-      const modifierKey = this._rowArray[powerIndex].getModifierList()
-      .indexToKey(modifierIndex);
+      const modifierKey = this._rowArray[powerIndex].getModifierList().indexToKey(modifierIndex);
       return powerKey + '.' + modifierKey;
    };
    /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/

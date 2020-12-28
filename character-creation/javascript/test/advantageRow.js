@@ -357,32 +357,30 @@ TestSuite.advantageRow.getUniqueName = function (testState = {})
 
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Minion');
    ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'my name');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Sidekick');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(1), 'my name');
    assertions.push({
-      Expected: 'Helper: my name',
-      Actual: Main.advantageSection.getRowByIndex(0).getUniqueName(),
-      Description: 'getUniqueName Minion'
-   });
-   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Sidekick');
-   //text stays
-   assertions.push({
-      Expected: 'Helper: my name',
-      Actual: Main.advantageSection.getRowByIndex(0).getUniqueName(),
-      Description: 'getUniqueName Sidekick'
+      Expected: 1,
+      Actual: Main.advantageSection.getState().it.length,
+      Description: 'Sidekick/Minion duplicate'
    });
 
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Benefit');
    ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(0), 'my stuff');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Benefit');
+   ReactUtil.changeValue('advantageText' + Main.advantageSection.indexToKey(1), 'my stuff');
    assertions.push({
-      Expected: 'Benefit: my stuff',
-      Actual: Main.advantageSection.getRowByIndex(0).getUniqueName(),
-      Description: 'getUniqueName hasText'
+      Expected: 1,
+      Actual: Main.advantageSection.getState().it.length,
+      Description: 'duplicate hasText'
    });
 
    ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(0), 'Lucky');
+   ReactUtil.changeValue('advantageChoices' + Main.advantageSection.indexToKey(1), 'Lucky');
    assertions.push({
-      Expected: 'Lucky',
-      Actual: Main.advantageSection.getRowByIndex(0).getUniqueName(),
-      Description: 'getUniqueName !hasText'
+      Expected: 1,
+      Actual: Main.advantageSection.getState().it.length,
+      Description: 'duplicate !hasText'
    });
 
    return TestRunner.displayResults('TestSuite.advantageRow.getUniqueName', assertions, testState);

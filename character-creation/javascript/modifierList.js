@@ -186,7 +186,7 @@ ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffec
          powerSectionName, loadLocation);
       if (undefined === validRowStateAndDv) continue;  //already sent message
 
-      var uniqueName = ModifierObject.getUniqueName(validRowStateAndDv.state, false);
+      var uniqueName = ModifierObject.getUniqueName(validRowStateAndDv.state);
       if (duplicateCheck.contains(uniqueName))
       {
          Main.messageUser('ModifierList.sanitizeStateAndGetDerivedValues.duplicate', loadLocation + ': '
@@ -294,7 +294,6 @@ resolve godhood circle:
 
 TODO: next:
 test/sort all
-   modifierRow.js
    modifierRowHtml.js
    powerList.js
    powerRow.js

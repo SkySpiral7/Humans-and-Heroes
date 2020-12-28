@@ -56,7 +56,9 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    var otherModifierNames = ['Other Rank Extra', 'Other Flat Extra', 'Other Free Modifier', 'Other Flat Flaw', 'Other Rank Flaw'];
    var modifierLookup = {
       actionRangeDuration: ['Decreased Duration', 'Faster Action', 'Increased Duration', 'Increased Range', 'Reduced Range', 'Slower Action'],
-      //could use just {} instead but that would be different than the rest and it won't matter once this function ends
+      /*could use just {} instead but that would be different than the rest and it won't matter once this function ends
+      the rest will be set to 0, 1, -1 based on type. Other flaws need to be here because they aren't in flawNames (the extras default to 1).
+      The other -1 are here because they are not in 1.x so they aren't in flawNames*/
       cost: new MapDefault({'Ammunition': -1, 'Aura': 2, 'Fragile': -1, 'Other Flat Flaw': -1, 'Other Rank Flaw': -1, 'System Dependent': -2,
          'Uncontrollable Entirely': -5, 'Uncontrollable Result': -1, 'Uncontrollable Target': -1}, undefined),
       defaultText: new MapDefault({'Activation': 'Action Required', 'Alternate Effect': 'To What', 'Alternate Resistance (Cost)': 'Name of Resistance',
@@ -85,8 +87,9 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    };
    modifierLookup.readOnly = modifierLookup.actionRangeDuration.copy();
    modifierLookup.hasAutoRank = modifierLookup.hasAutoTotal.concat(modifierLookup.actionRangeDuration);
-   modifierLookup.hasText = modifierLookup.defaultText.getAllKeys().concat(['Feature', 'Limited', 'Noticeable', 'Quirk', 'Side Effect', 'Subtle', 'Triggered']).
-      concat(otherModifierNames);
+   modifierLookup.hasText = modifierLookup.defaultText.getAllKeys()
+   .concat(['Feature', 'Limited', 'Noticeable', 'Quirk', 'Side Effect', 'Subtle', 'Triggered'])
+   .concat(otherModifierNames);
    Data.Modifier = {names: []};
 
    var powerLookup = {
