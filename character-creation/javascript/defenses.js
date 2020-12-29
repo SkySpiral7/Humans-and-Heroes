@@ -78,7 +78,7 @@ function DefenseList()
       //defensiveRollValue defaults to 0 but this is fine because it isn't compared to anything
 
       var toughnessWithoutDefensiveRoll;
-      if(null === protectionValue) toughnessWithoutDefensiveRoll = staminaValue;
+      if(undefined === protectionValue) toughnessWithoutDefensiveRoll = staminaValue;
       //in v1.0 everything stacked
       else if(1 === Main.getActiveRuleset().major) toughnessWithoutDefensiveRoll = protectionValue + staminaValue;
       else if(protectionValue > staminaValue) toughnessWithoutDefensiveRoll = protectionValue;

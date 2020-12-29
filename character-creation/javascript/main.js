@@ -235,9 +235,9 @@ function MainObject()
    {
        var powerProtectionRanks = this.powerSection.getProtectionRankTotal();
        var equipmentProtectionRanks = this.equipmentSection.getProtectionRankTotal();
-       //this correctly returns null if both are null
-       if (null === powerProtectionRanks) return equipmentProtectionRanks;
-       if (null === equipmentProtectionRanks) return powerProtectionRanks;
+       //this correctly returns undefined if both are undefined
+       if (undefined === powerProtectionRanks) return equipmentProtectionRanks;
+       if (undefined === equipmentProtectionRanks) return powerProtectionRanks;
 
        //protection stacks only in v1.0
        if(1 === activeRuleset.major) return (powerProtectionRanks + equipmentProtectionRanks);

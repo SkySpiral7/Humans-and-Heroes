@@ -113,6 +113,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
          'Healing': 'Close', 'Illusion': 'Perception', 'Luck Control': 'Perception', 'Mental Transform': 'Close', 'Mind Reading': 'Perception',
          'Mind Switch': 'Close', 'Move Object': 'Ranged', 'Nullify': 'Ranged', 'Reality Warp': 'Perception', 'Summon': 'Close', 'Summon Minion': 'Close',
          'Summon Object': 'Close', 'Transform': 'Close', 'Weaken': 'Close'}, 'Personal'),
+      //Alter Metaphysics is excluded because it creates game rules and can't be bought
       godhoodNames: ['A God I Am', 'Reality Warp'],
       hasInputBaseCost: ['Attain Knowledge', 'Concealment', 'Enhanced Trait', 'Environment', 'Feature', 'Illusion',
          'Remote Sensing', 'Senses', 'Transform'],
@@ -309,7 +310,9 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
          Data.Power['Permeate'].defaultAction = 'Move';
          Data.Power['Teleport'].defaultAction = 'Move';
 
-         var allowReaction = ['Affliction', 'Damage', 'Feature', 'Luck Control', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+         var allAttackTypes = ['Affliction', 'Damage', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
+         //Luck Control has reaction without aura, Feature is wild card, Alter Metaphysics is excluded because it creates game rules
+         var allowReaction = allAttackTypes.concat(['Luck Control', 'Feature']);
          var isMovement = ['Flight', 'Leaping', 'Movement', 'Permeate', 'Teleport'];
          var name;
          for (i = 0; i < Data.Power.names.length; ++i)
@@ -337,6 +340,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
 
    function addAdvantage(nameToAdd)
    {
+      //TODO: switch to AssertionError
       if(Data.Advantage[nameToAdd] !== undefined || Data.Advantage.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already an Advantage');
       Data.Advantage.names.push(nameToAdd);
       Data.Advantage[nameToAdd] = {

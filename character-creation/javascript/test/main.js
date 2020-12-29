@@ -225,7 +225,7 @@ TestSuite.main.getProtectionTotal=function(testState={})
       return Main.getProtectionTotal();
    }
 
-   assertions.push({Expected: null, Actual: getActual(), Description: 'Protection default: null'});
+   assertions.push({Expected: undefined, Actual: getActual(), Description: 'Protection default: undefined'});
 
    ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Protection');
    assertions.push({Expected: 1, Actual: getActual(), Description: 'uses equip when power is null'});

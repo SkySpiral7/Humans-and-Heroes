@@ -169,8 +169,8 @@ PowerObjectAgnostic._calculateDerivedValues = function (validState, validActivat
    };
 
    var costPerRank = (validState.baseCost + modifierDerivedValues.rankTotal);
-   if (Main.getActiveRuleset()
-      .isGreaterThanOrEqualTo(3, 5) && 'Variable' === validState.effect && costPerRank < 5) costPerRank = 5;
+   if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 5)
+      && 'Variable' === validState.effect && costPerRank < 5) costPerRank = 5;
    else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
    derivedValues.costPerRank = costPerRank;  //save the non-decimal version
    if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
@@ -207,6 +207,7 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
    }
    else existingActivationInfo.action = inputState.action;
 
+   //TODO: test Feature invalid range since it doesn't validate in personal
    if (undefined === inputState.range) existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
    else if (!Data.Power.ranges.contains(inputState.range))
    {
@@ -374,24 +375,27 @@ PowerObjectAgnostic._updateRangeModifiers = function (validState, pendingModifie
                                                       powerIndex)
 {
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
-   //when changing to personal nothing else needs to change
-   if ('Personal' === validState.range) return outputPendingModifiers;  //only possible (for feature or) when removing a modifier
 
-   if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
-   //TODO: refactor so that Feature has a base activation row and a current activation row
-   //so that Feature will have the modifiers auto set. This should be less confusing to the user
-   //this will also allow and require more edge case testing
+   //remove when changing to personal (even for feature). non personal non feature also removes
+   if ('Personal' === validState.range || 'Feature' !== validState.effect)
+   {
+      //remove both if possible
+      outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+         powerIndex, 'Increased Range');
+      outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
+         powerIndex, 'Reduced Range');
+   }
+   //personal and feature do not add any so we're done
+   if ('Personal' === validState.range || 'Feature' === validState.effect) return outputPendingModifiers;
+
+   /*TODO: refactor so that Feature has a base activation row and a current activation row
+   so that Feature will have the modifiers auto set. This should be less confusing to the user
+   this will also allow and require more edge case testing*/
 
    var defaultRangeName = Data.Power[validState.effect].defaultRange;
    var defaultRangeIndex = Data.Power.ranges.indexOf(defaultRangeName);
    var newRangeIndex = Data.Power.ranges.indexOf(validState.range);
    if ('Personal' === defaultRangeName) defaultRangeIndex = Data.Power.ranges.indexOf('Close');  //calculate distance from close
-
-   //remove both if possible
-   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
-      powerIndex, 'Increased Range');
-   outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
-      powerIndex, 'Reduced Range');
 
    var rangeDifference = (newRangeIndex - defaultRangeIndex);
    if (rangeDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
@@ -482,8 +486,8 @@ PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, input
       }
    }
 
-   var allowReaction = (Main.getActiveRuleset()
-   .isLessThan(3, 4) || Data.Power[validState.effect].allowReaction);
+   var allowReaction = (Main.getActiveRuleset().isLessThan(3, 4)
+      || Data.Power[validState.effect].allowReaction);
    if (!allowReaction) possibleActions.removeByValue('Reaction');
    if ('Reaction' === pendingAction && !allowReaction)
    {

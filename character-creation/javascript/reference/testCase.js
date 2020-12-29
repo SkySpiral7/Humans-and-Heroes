@@ -14,16 +14,21 @@ TestSuite.test.example = function (testState = {})
       Description: 'Feature Range does not exist: error'
    });
 
-   Main.setRuleset(2, 7);
-   ReactUtil.changeValue('powerChoices' + Main.advantageSection.indexToKey(0), 'Feature');
-   //and indexToPowerAndModifierKey
-   SelectUtil.changeText('powerChoices0', 'Feature');
-   DomUtil.changeValue('equipmentRank0', 5);
-   assertions.push({
-      Expected: true,
-      Actual: Main.advantageSection.getRowByIndex(0).isBlank(),
-      Description: 'Equipment Row is not created'
-   });
+   try
+   {
+      Main.setRuleset(2, 7);
+      ReactUtil.changeValue('powerChoices' + Main.advantageSection.indexToKey(0), 'Feature');
+      //and indexToPowerAndModifierKey(0, 0)
+      SelectUtil.changeText('powerChoices0', 'Feature');
+      DomUtil.changeValue('equipmentRank0', 5);
+      assertions.push({
+         Expected: true,
+         Actual: Main.advantageSection.getRowByIndex(0).isBlank(),
+         Description: 'Equipment Row is not created'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'description of logical group'});}
 
    return TestRunner.displayResults('TestSuite.test.example', assertions, testState);
 };

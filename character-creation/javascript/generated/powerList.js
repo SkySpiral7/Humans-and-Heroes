@@ -76,6 +76,27 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
+      if (key === _this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+
+      for (var i = 0; i < _this._rowArray.length; i++) {
+        if (_this._rowArray[i].getKey() === key) return i;
+      }
+
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + _this._rowArray.length + ')');
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getModifierRowShort", function (powerRowIndex, modifierRowIndex) {
+      //TO-DO: is range check needed?
+      if (powerRowIndex >= powerRowIndex.length) return; //range checking of modifierRowIndex will be handled in getRowByIndex
+
+      return _this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
+      return _this._rowArray[rowIndex];
+    });
+
     _defineProperty(_assertThisInitialized(_this), "indexToKey", function (rowIndex) {
       if (rowIndex === _this._rowArray.length) return _this._blankPowerKey;
       return _this._rowArray[rowIndex].getKey();
@@ -91,8 +112,32 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       return powerKey + '.' + modifierKey;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getRowByIndex", function (rowIndex) {
-      return _this._rowArray[rowIndex];
+    _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
+      //the row array isn't cleared in case some have been auto set
+      //Main.clear() is called at the start of Main.load()
+      var transcendence = Main.getTranscendence();
+      var sectionName = _this.props.sectionName;
+      var newState = [];
+
+      for (var powerIndex = 0; powerIndex < jsonSection.length; powerIndex++) {
+        var jsonPowerRow = _this._saveRowToState(jsonSection[powerIndex]);
+
+        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(jsonPowerRow, sectionName, powerIndex, transcendence);
+
+        if (undefined !== validStateAndDv) {
+          //already sent message if invalid
+          newState.push(validStateAndDv.state);
+
+          _this._addRowNoSetState(validStateAndDv);
+        }
+      }
+
+      _this._prerender();
+
+      _this.setState(function (state) {
+        state.it = newState;
+        return state;
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "save", function () {
@@ -103,36 +148,6 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       }
 
       return json; //might still be empty
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "render", function () {
-      /*equipment can't be god-like so exclude it
-      don't check usingGodhoodPowers because global includes that
-      don't call a main method for this because render should be pure.*/
-      var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
-
-      var elementArray = _this.state.it.map(function (_, powerIndex) {
-        var powerRow = _this._rowArray[powerIndex]; //workaround until resolved godhood circle
-
-        if (undefined === powerRow) return null;
-        var rowKey = powerRow.getKey();
-        return /*#__PURE__*/React.createElement(PowerRowHtml, {
-          key: rowKey,
-          keyCopy: rowKey,
-          powerRow: powerRow,
-          powerSection: _assertThisInitialized(_this),
-          generateGodHood: generateGodHood
-        });
-      });
-
-      elementArray.push( /*#__PURE__*/React.createElement(PowerRowHtml, {
-        key: _this._blankPowerKey,
-        keyCopy: _this._blankPowerKey,
-        powerRow: undefined,
-        powerSection: _assertThisInitialized(_this),
-        generateGodHood: generateGodHood
-      }));
-      return elementArray;
     });
 
     _defineProperty(_assertThisInitialized(_this), "setMainState", function (value) {
@@ -149,6 +164,7 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var sectionName = _this.props.sectionName;
 
       if (updatedKey === _this._blankPowerKey) {
+        //add row
         var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({
           effect: newEffect
         }, sectionName, _this._rowArray.length, transcendence);
@@ -168,8 +184,17 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       var updatedIndex = _this.getIndexByKey(updatedKey);
 
       if (!Data.Power.names.contains(newEffect)) {
-        _this._removeRow(updatedIndex);
+        //remove row
+        _this._rowArray.remove(updatedIndex);
+
+        _this._prerender();
+
+        _this.setState(function (state) {
+          state.it.remove(updatedIndex);
+          return state;
+        });
       } else {
+        //update row
         var _validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({
           effect: newEffect
         }, sectionName, updatedIndex, transcendence);
@@ -207,27 +232,23 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       } //none is only for Permanent duration which this no longer is
       else if ('duration' === propertyName && 'Permanent' === powerState.duration) {
           powerState.action = Data.Power[powerState.effect].defaultAction;
-          if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
-          //either way it will cost 0
+          if ('None' === powerState.action) powerState.action = 'Free';
+          /*use default action if possible otherwise use Free
+          either way it will cost 0*/
         } //when changing to Aura change range to close
         else if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'action' === propertyName && 'Reaction' === newValue && 'Feature' !== powerState.effect && 'Luck Control' !== powerState.effect) {
             powerState.range = 'Close';
-          }
+          } //when changing from Aura leave as Close range. which is default for all but Nullify
+
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
       var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, _this.props.sectionName, updatedIndex, transcendence);
       powerState = validStateAndDv.state; //sanitizeState may have auto added/removed modifiers so adjust key list
 
-      var modifierKeyList = _this._rowArray[updatedIndex].getModifierList().getKeyList(); //grow as needed (>= because blank row has key but no state):
+      var modifierKeyList = _this._rowArray[updatedIndex].getModifierList().getKeyList();
 
-
-      while (powerState.Modifiers.length >= modifierKeyList.length) {
-        modifierKeyList.push(MainObject.generateKey());
-      } //shrink as needed (+1 for blank row):
-
-
-      modifierKeyList.length = powerState.Modifiers.length + 1;
+      modifierKeyList = _this._adjustModKeyListSize(powerState, modifierKeyList);
       _this._rowArray[updatedIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[updatedIndex].getKey(),
         sectionName: _this.props.sectionName,
@@ -265,17 +286,19 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
 
       if (!oldWasNonPersonal && newIsNonPersonal) {
-        powerState.range = 'Close';
-        var defaultDuration = Data.Power[powerState.effect].defaultDuration; //duration can't be permanent if range isn't personal
+        powerState.range = 'Close'; //duration can't be permanent if range isn't personal
 
-        if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';else powerState.duration = defaultDuration; //use default duration if possible. otherwise use Sustained
-        //either way it will cost 0
-        //none is only for Permanent duration which this no longer is
+        if ('Permanent' === powerState.duration) {
+          var defaultDuration = Data.Power[powerState.effect].defaultDuration;
+          if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';else powerState.duration = defaultDuration;
+          /*use default duration if possible. otherwise use Sustained
+          either way it will cost 0*/
+          //none (the current action) is only for Permanent duration which this no longer is
 
-        if ('None' === powerState.action) {
           powerState.action = Data.Power[powerState.effect].defaultAction;
-          if ('None' === powerState.action) powerState.action = 'Free'; //use default action if possible otherwise use Free
-          //either way it will cost 0
+          if ('None' === powerState.action) powerState.action = 'Free';
+          /*use default action if possible otherwise use Free
+          either way it will cost 0*/
         }
       } //non personal modifier was removed or changed to another mod
       else if (oldWasNonPersonal && !newIsNonPersonal) {
@@ -284,22 +307,29 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         }
 
       if (undefined === updatedModifierRow) {
+        //add
         powerState.Modifiers.push({
           name: newName
         });
         modifierKeyList.push(MainObject.generateKey());
       } //TO-DO: figure out how to handle duplicates
       else if (!Data.Modifier.names.contains(newName)) {
+          //remove
           powerState.Modifiers.remove(modifierIndex);
           modifierKeyList.remove(modifierIndex);
         } else {
-          //TO-DO: most of the time a new name should clear other state
-          powerState.Modifiers[modifierIndex].name = newName;
+          //update
+          //TO-DO: most of the time a new name should clear other state (rank, text)
+          powerState.Modifiers[modifierIndex] = {
+            name: newName
+          };
         }
 
       var transcendence = Main.getTranscendence();
       var sectionName = _this.props.sectionName;
-      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, sectionName, powerIndex, transcendence);
+      var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, sectionName, powerIndex, transcendence); //sanitizeState may have auto added/removed modifiers so adjust key list
+
+      modifierKeyList = _this._adjustModKeyListSize(validStateAndDv.state, modifierKeyList);
       _this._rowArray[powerIndex] = new PowerObjectAgnostic({
         key: _this._rowArray[powerIndex].getKey(),
         sectionName: _this.props.sectionName,
@@ -340,18 +370,19 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       _this._prerender();
 
       _this.setState(function (state) {
-        state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
+        //since text isn't used for unique this is the only place that other mods can't be touched
+        state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state.Modifiers[modifierIndex];
         return state;
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "_addRowNoSetState", function (validStateAndDv) {
-      //the row that was blank no longer is so use the blank key
-      //need a new key for each new mod (can be 1+ for load)
+      /*the power row that was blank no longer is so pass it the power blank key.
+      need a new key for each new mod (can be 1 or more when loading)*/
       var modifierKeyList = validStateAndDv.state.Modifiers.map(function (_) {
         return MainObject.generateKey();
       });
-      modifierKeyList.push(MainObject.generateKey()); //for blank
+      modifierKeyList.push(MainObject.generateKey()); //for blank modifier
 
       var powerObject = new PowerObjectAgnostic({
         key: _this._blankPowerKey,
@@ -367,38 +398,21 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       _this._rowArray.push(powerObject);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getIndexByKey", function (key) {
-      if (key === _this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+    _defineProperty(_assertThisInitialized(_this), "_adjustModKeyListSize", function (powerState, modifierKeyList) {
+      //grow as needed (>= because blank row has key but no state):
+      while (powerState.Modifiers.length >= modifierKeyList.length) {
+        modifierKeyList.push(MainObject.generateKey());
+      } //shrink as needed (+1 for blank row):
 
-      for (var i = 0; i < _this._rowArray.length; i++) {
-        if (_this._rowArray[i].getKey() === key) return i;
-      }
 
-      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + _this._rowArray.length + ')');
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_removeRow", function (rowIndex) {
-      _this._rowArray.remove(rowIndex);
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it.remove(rowIndex);
-        return state;
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
-      //don't update any state
-      _this._calculateValues();
-
-      _this._notifyDependent();
+      modifierKeyList.length = powerState.Modifiers.length + 1;
+      return modifierKeyList;
     });
 
     _defineProperty(_assertThisInitialized(_this), "_calculateValues", function () {
       _this._derivedValues.attackEffectRanks.clear();
 
-      _this._derivedValues.protectionRankTotal = 0; //this makes math easier. will be set to null at bottom as needed
+      _this._derivedValues.protectionRankTotal = 0; //this makes math easier. will be set to undefined at bottom as needed
 
       var usingGodhoodPowers = false;
       _this._derivedValues.total = 0;
@@ -413,59 +427,12 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
         if (_this._rowArray[i].getName() !== undefined) _this._derivedValues.attackEffectRanks.add(_this._rowArray[i].getSkillUsed(), i);
         _this._derivedValues.total += _this._rowArray[i].getTotal();
-      } //rank 0 is impossible. if it doesn't exist then use null instead
+      } //rank 0 is impossible. if it doesn't exist then use undefined instead
 
 
-      if (0 === _this._derivedValues.protectionRankTotal) _this._derivedValues.protectionRankTotal = null; //equipment is always Godhood false. excluded to avoid messing up power Godhood
+      if (0 === _this._derivedValues.protectionRankTotal) _this._derivedValues.protectionRankTotal = undefined; //equipment is always Godhood false. excluded to avoid messing up power Godhood
 
       if (undefined !== Main && _assertThisInitialized(_this) !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getModifierRowShort", function (powerRowIndex, modifierRowIndex) {
-      //TO-DO: is range check needed?
-      if (powerRowIndex >= powerRowIndex.length) return; //range checking of modifierRowIndex will be handled in getRowByIndex
-
-      return _this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "load", function (jsonSection) {
-      //the row array isn't cleared in case some have been auto set
-      //Main.clear() is called at the start of Main.load()
-      var transcendence = Main.getTranscendence();
-      var sectionName = _this.props.sectionName;
-      var newState = [];
-
-      for (var powerIndex = 0; powerIndex < jsonSection.length; powerIndex++) {
-        var jsonPowerRow = JSON.clone(jsonSection[powerIndex]);
-        jsonPowerRow.baseCost = jsonPowerRow.cost;
-        delete jsonPowerRow.cost;
-        jsonPowerRow.skillUsed = jsonPowerRow.skill;
-        delete jsonPowerRow.skill;
-
-        if (undefined !== jsonPowerRow.Modifiers) {
-          jsonPowerRow.Modifiers = jsonPowerRow.Modifiers.map(function (jsonModRow) {
-            jsonModRow.rank = jsonModRow.applications;
-            delete jsonModRow.applications;
-            return jsonModRow;
-          });
-        }
-
-        var validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(jsonPowerRow, sectionName, powerIndex, transcendence);
-
-        if (undefined !== validStateAndDv) {
-          //already sent message if invalid
-          newState.push(validStateAndDv.state);
-
-          _this._addRowNoSetState(validStateAndDv);
-        }
-      }
-
-      _this._prerender();
-
-      _this.setState(function (state) {
-        state.it = newState;
-        return state;
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "_notifyDependent", function () {
@@ -477,6 +444,61 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
       Main.updateOffense();
       Main.defenseSection.calculateValues();
       Main.update();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_prerender", function () {
+      //don't update any state
+      _this._calculateValues();
+
+      _this._notifyDependent();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      /*equipment can't be god-like so exclude it
+      don't check usingGodhoodPowers because global includes that
+      don't call a main method for this because render should be pure.*/
+      var generateGodHood = 'equipment' !== _this.props.sectionName && _this.state.main.godhood;
+
+      var elementArray = _this.state.it.map(function (_, powerIndex) {
+        var powerRow = _this._rowArray[powerIndex]; //workaround until resolved godhood circle
+
+        if (undefined === powerRow) return null;
+        var rowKey = powerRow.getKey();
+        return /*#__PURE__*/React.createElement(PowerRowHtml, {
+          key: rowKey,
+          keyCopy: rowKey,
+          powerRow: powerRow,
+          powerSection: _assertThisInitialized(_this),
+          generateGodHood: generateGodHood
+        });
+      });
+
+      elementArray.push( /*#__PURE__*/React.createElement(PowerRowHtml, {
+        key: _this._blankPowerKey,
+        keyCopy: _this._blankPowerKey,
+        powerRow: undefined,
+        powerSection: _assertThisInitialized(_this),
+        generateGodHood: generateGodHood
+      }));
+      return elementArray;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_saveRowToState", function (saveRow) {
+      var powerRowState = JSON.clone(saveRow);
+      powerRowState.baseCost = powerRowState.cost;
+      delete powerRowState.cost;
+      powerRowState.skillUsed = powerRowState.skill;
+      delete powerRowState.skill;
+
+      if (undefined !== powerRowState.Modifiers) {
+        powerRowState.Modifiers = powerRowState.Modifiers.map(function (jsonModRow) {
+          jsonModRow.rank = jsonModRow.applications;
+          delete jsonModRow.applications;
+          return jsonModRow;
+        });
+      }
+
+      return powerRowState;
     });
 
     _this.state = {
@@ -497,7 +519,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
 
     props.callback(_assertThisInitialized(_this));
     return _this;
-  }
+  } //endregion 'private' functions
+
 
   return PowerListAgnostic;
 }(React.Component);

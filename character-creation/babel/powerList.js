@@ -31,14 +31,15 @@ class PowerListAgnostic extends React.Component
       props.callback(this);
    };
 
-   //region Single line function section
+   //region Single line function
    getAttackEffectRanks = () => {return this._derivedValues.attackEffectRanks;};
    getProtectionRankTotal = () => {return this._derivedValues.protectionRankTotal;};
    getSectionName = () => {return this.props.sectionName;};
    getState = () => {return JSON.clone(this.state);};
    getTotal = () => {return this._derivedValues.total;};
-   //endregion Single line function section
+   //endregion Single line function
 
+   //region public function
    /**Removes all rows (main.godhood is untouched)*/
    clear = () =>
    {
@@ -51,6 +52,24 @@ class PowerListAgnostic extends React.Component
          return state;
       });
    };
+   getIndexByKey = (key) =>
+   {
+      if (key === this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
+      for (let i = 0; i < this._rowArray.length; i++)
+      {
+         if (this._rowArray[i].getKey() === key) return i;
+      }
+      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + this._rowArray.length + ')');
+   };
+   /**Short hand version of Main.powerSection.getRowByIndex(0).getModifierList().getRowByIndex(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
+   getModifierRowShort = (powerRowIndex, modifierRowIndex) =>
+   {
+      //TODO: is range check needed?
+      if (powerRowIndex >= powerRowIndex.length) return;  //range checking of modifierRowIndex will be handled in getRowByIndex
+      return this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
+   };
+   /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
+   getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
    /**This is only used by tests. Blank row is considered === arr.length to make it easier to hit DOM*/
    indexToKey = (rowIndex) =>
    {
@@ -65,8 +84,33 @@ class PowerListAgnostic extends React.Component
       const modifierKey = this._rowArray[powerIndex].getModifierList().indexToKey(modifierIndex);
       return powerKey + '.' + modifierKey;
    };
-   /**Returns the row object or nothing if the index is out of range. Used in order to call each onChange*/
-   getRowByIndex = (rowIndex) => {return this._rowArray[rowIndex];};
+   /**Sets data from a json object given then updates*/
+   load = (jsonSection) =>
+   {
+      //the row array isn't cleared in case some have been auto set
+      //Main.clear() is called at the start of Main.load()
+      const transcendence = Main.getTranscendence();
+      const sectionName = this.props.sectionName;
+      const newState = [];
+      for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
+      {
+         const jsonPowerRow = this._saveRowToState(jsonSection[powerIndex]);
+         const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(jsonPowerRow, sectionName, powerIndex, transcendence);
+         if (undefined !== validStateAndDv)
+         {
+            //already sent message if invalid
+            newState.push(validStateAndDv.state);
+            this._addRowNoSetState(validStateAndDv);
+         }
+      }
+
+      this._prerender();
+      this.setState(state =>
+      {
+         state.it = newState;
+         return state;
+      });
+   };
    /**Returns an array of json objects for this section's data*/
    save = () =>
    {
@@ -76,32 +120,6 @@ class PowerListAgnostic extends React.Component
          json.push(this._rowArray[i].save());
       }
       return json;  //might still be empty
-   };
-   /**This creates the page's html (for the section)*/
-   render = () =>
-   {
-      /*equipment can't be god-like so exclude it
-      don't check usingGodhoodPowers because global includes that
-      don't call a main method for this because render should be pure.*/
-      const generateGodHood = 'equipment' !== this.props.sectionName && this.state.main.godhood;
-
-      const elementArray = this.state.it.map((_, powerIndex) =>
-      {
-         const powerRow = this._rowArray[powerIndex];
-         //workaround until resolved godhood circle
-         if (undefined === powerRow) return null;
-         const rowKey = powerRow.getKey();
-         return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
-                               powerRow={powerRow}
-                               powerSection={this}
-                               generateGodHood={generateGodHood} />);
-      });
-      elementArray.push(<PowerRowHtml key={this._blankPowerKey} keyCopy={this._blankPowerKey}
-                                      powerRow={undefined}
-                                      powerSection={this}
-                                      generateGodHood={generateGodHood} />);
-
-      return elementArray;
    };
    setMainState = (value) =>
    {
@@ -113,6 +131,9 @@ class PowerListAgnostic extends React.Component
          return state;
       });
    };
+   //endregion public function
+
+   //region onchange
    /**Onchange function for selecting a power*/
    updateEffectByKey = (newEffect, updatedKey) =>
    {
@@ -120,6 +141,7 @@ class PowerListAgnostic extends React.Component
       const sectionName = this.props.sectionName;
       if (updatedKey === this._blankPowerKey)
       {
+         //add row
          const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({effect: newEffect}, sectionName,
             this._rowArray.length, transcendence);
 
@@ -137,10 +159,18 @@ class PowerListAgnostic extends React.Component
       const updatedIndex = this.getIndexByKey(updatedKey);
       if (!Data.Power.names.contains(newEffect))
       {
-         this._removeRow(updatedIndex);
+         //remove row
+         this._rowArray.remove(updatedIndex);
+         this._prerender();
+         this.setState(state =>
+         {
+            state.it.remove(updatedIndex);
+            return state;
+         });
       }
       else
       {
+         //update row
          const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues({effect: newEffect}, sectionName, updatedIndex,
             transcendence);
 
@@ -161,6 +191,7 @@ class PowerListAgnostic extends React.Component
          });
       }
    };
+   //TODO: rename to include Power
    /**Onchange function for everything else in power*/
    updatePropertyByKey = (propertyName, newValue, updatedKey) =>
    {
@@ -182,17 +213,17 @@ class PowerListAgnostic extends React.Component
       {
          powerState.action = Data.Power[powerState.effect].defaultAction;
          if ('None' === powerState.action) powerState.action = 'Free';
-         //use default action if possible otherwise use Free
-         //either way it will cost 0
+         /*use default action if possible otherwise use Free
+         either way it will cost 0*/
       }
       //when changing to Aura change range to close
-      else if (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3, 4)
+      else if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4)
          && 'action' === propertyName && 'Reaction' === newValue
          && 'Feature' !== powerState.effect && 'Luck Control' !== powerState.effect)
       {
          powerState.range = 'Close';
       }
+      //when changing from Aura leave as Close range. which is default for all but Nullify
 
       powerState[propertyName] = newValue;
 
@@ -202,15 +233,8 @@ class PowerListAgnostic extends React.Component
       powerState = validStateAndDv.state;
 
       //sanitizeState may have auto added/removed modifiers so adjust key list
-      const modifierKeyList = this._rowArray[updatedIndex].getModifierList()
-      .getKeyList();
-      //grow as needed (>= because blank row has key but no state):
-      while (powerState.Modifiers.length >= modifierKeyList.length)
-      {
-         modifierKeyList.push(MainObject.generateKey());
-      }
-      //shrink as needed (+1 for blank row):
-      modifierKeyList.length = (powerState.Modifiers.length + 1);
+      let modifierKeyList = this._rowArray[updatedIndex].getModifierList().getKeyList();
+      modifierKeyList = this._adjustModKeyListSize(powerState, modifierKeyList);
 
       this._rowArray[updatedIndex] = new PowerObjectAgnostic({
          key: this._rowArray[updatedIndex].getKey(),
@@ -233,7 +257,7 @@ class PowerListAgnostic extends React.Component
       const powerIndex = this.getIndexByKey(powerRow.getKey());
       let powerState = this._rowArray[powerIndex].getState();
       const modifierSection = powerRow.getModifierList();
-      const modifierKeyList = modifierSection.getKeyList();
+      let modifierKeyList = modifierSection.getKeyList();
 
       //if new is 'Select...' then newIsNonPersonal will be false (won't throw)
       const newIsNonPersonal = ModifierList.isNonPersonalModifier(newName);
@@ -251,20 +275,20 @@ class PowerListAgnostic extends React.Component
       {
          powerState.range = 'Close';
 
-         const defaultDuration = Data.Power[powerState.effect].defaultDuration;
          //duration can't be permanent if range isn't personal
-         if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';
-         else powerState.duration = defaultDuration;
-         //use default duration if possible. otherwise use Sustained
-         //either way it will cost 0
-
-         //none is only for Permanent duration which this no longer is
-         if ('None' === powerState.action)
+         if ('Permanent' === powerState.duration)
          {
+            const defaultDuration = Data.Power[powerState.effect].defaultDuration;
+            if ('Permanent' === defaultDuration) powerState.duration = 'Sustained';
+            else powerState.duration = defaultDuration;
+            /*use default duration if possible. otherwise use Sustained
+            either way it will cost 0*/
+
+            //none (the current action) is only for Permanent duration which this no longer is
             powerState.action = Data.Power[powerState.effect].defaultAction;
             if ('None' === powerState.action) powerState.action = 'Free';
-            //use default action if possible otherwise use Free
-            //either way it will cost 0
+            /*use default action if possible otherwise use Free
+            either way it will cost 0*/
          }
       }
       //non personal modifier was removed or changed to another mod
@@ -276,24 +300,31 @@ class PowerListAgnostic extends React.Component
 
       if (undefined === updatedModifierRow)
       {
+         //add
          powerState.Modifiers.push({name: newName});
          modifierKeyList.push(MainObject.generateKey());
       }
       //TODO: figure out how to handle duplicates
       else if (!Data.Modifier.names.contains(newName))
       {
+         //remove
          powerState.Modifiers.remove(modifierIndex);
          modifierKeyList.remove(modifierIndex);
       }
       else
       {
-         //TODO: most of the time a new name should clear other state
-         powerState.Modifiers[modifierIndex].name = newName;
+         //update
+         //TODO: most of the time a new name should clear other state (rank, text)
+         powerState.Modifiers[modifierIndex] = {name: newName};
       }
 
       const transcendence = Main.getTranscendence();
       const sectionName = this.props.sectionName;
       const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(powerState, sectionName, powerIndex, transcendence);
+
+      //sanitizeState may have auto added/removed modifiers so adjust key list
+      modifierKeyList = this._adjustModKeyListSize(validStateAndDv.state, modifierKeyList);
+
       this._rowArray[powerIndex] = new PowerObjectAgnostic({
          key: this._rowArray[powerIndex].getKey(),
          sectionName: this.props.sectionName,
@@ -329,16 +360,19 @@ class PowerListAgnostic extends React.Component
          powerListParent: this,
          state: validStateAndDv.state,
          derivedValues: validStateAndDv.derivedValues,
-         modifierKeyList: this._rowArray[powerIndex].getModifierList()
-         .getKeyList()
+         modifierKeyList: this._rowArray[powerIndex].getModifierList().getKeyList()
       });
       this._prerender();
       this.setState(state =>
       {
-         state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state;
+         //since text isn't used for unique this is the only place that other mods can't be touched
+         state.it[powerIndex].Modifiers[modifierIndex] = validStateAndDv.state.Modifiers[modifierIndex];
          return state;
       });
    };
+   //endregion onchange
+
+   //region 'private' functions. Although all public none of these should be called from outside of this object
    /**
     * Converts blank row into PowerObjectAgnostic and pushes to rowArray but doesn't update state
     * @param validStateAndDv must already be valid and from PowerObjectAgnostic.sanitizeStateAndGetDerivedValues
@@ -346,10 +380,10 @@ class PowerListAgnostic extends React.Component
     */
    _addRowNoSetState = (validStateAndDv) =>
    {
-      //the row that was blank no longer is so use the blank key
-      //need a new key for each new mod (can be 1+ for load)
+      /*the power row that was blank no longer is so pass it the power blank key.
+      need a new key for each new mod (can be 1 or more when loading)*/
       const modifierKeyList = validStateAndDv.state.Modifiers.map(_ => MainObject.generateKey());
-      modifierKeyList.push(MainObject.generateKey());  //for blank
+      modifierKeyList.push(MainObject.generateKey());  //for blank modifier
       const powerObject = new PowerObjectAgnostic({
          key: this._blankPowerKey,
          sectionName: this.props.sectionName,
@@ -362,38 +396,23 @@ class PowerListAgnostic extends React.Component
       this._blankPowerKey = MainObject.generateKey();
       this._rowArray.push(powerObject);
    };
-   getIndexByKey = (key) =>
+   _adjustModKeyListSize = (powerState, modifierKeyList) =>
    {
-      if (key === this._blankPowerKey) throw new AssertionError('Blank row (' + key + ') has no row index');
-      for (let i = 0; i < this._rowArray.length; i++)
+      //grow as needed (>= because blank row has key but no state):
+      while (powerState.Modifiers.length >= modifierKeyList.length)
       {
-         if (this._rowArray[i].getKey() === key) return i;
+         modifierKeyList.push(MainObject.generateKey());
       }
-      throw new AssertionError('No row with id ' + key + ' (rowArray.length=' + this._rowArray.length + ')');
-   };
-   /**Removes the row from the array and updates the index of all others in the list.*/
-   _removeRow = (rowIndex) =>
-   {
-      this._rowArray.remove(rowIndex);
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it.remove(rowIndex);
-         return state;
-      });
-   };
-   /**Call this after updating rowArray but before setState*/
-   _prerender = () =>
-   {
-      //don't update any state
-      this._calculateValues();
-      this._notifyDependent();
+      //shrink as needed (+1 for blank row):
+      modifierKeyList.length = (powerState.Modifiers.length + 1);
+
+      return modifierKeyList;
    };
    /**Counts totals etc. All values that are not user set or final are created by this method*/
    _calculateValues = () =>
    {
       this._derivedValues.attackEffectRanks.clear();
-      this._derivedValues.protectionRankTotal = 0;  //this makes math easier. will be set to null at bottom as needed
+      this._derivedValues.protectionRankTotal = 0;  //this makes math easier. will be set to undefined at bottom as needed
       let usingGodhoodPowers = false;
       this._derivedValues.total = 0;
       for (let i = 0; i < this._rowArray.length; i++)
@@ -409,61 +428,11 @@ class PowerListAgnostic extends React.Component
          if (this._rowArray[i].getName() !== undefined) this._derivedValues.attackEffectRanks.add(this._rowArray[i].getSkillUsed(), i);
          this._derivedValues.total += this._rowArray[i].getTotal();
       }
-      //rank 0 is impossible. if it doesn't exist then use null instead
-      if (0 === this._derivedValues.protectionRankTotal) this._derivedValues.protectionRankTotal = null;
+      //rank 0 is impossible. if it doesn't exist then use undefined instead
+      if (0 === this._derivedValues.protectionRankTotal) this._derivedValues.protectionRankTotal = undefined;
       //equipment is always Godhood false. excluded to avoid messing up power Godhood
       if (undefined !== Main && this !== Main.equipmentSection) Main.setPowerGodhood(usingGodhoodPowers);
    };
-   /**Short hand version of Main.powerSection.getRowByIndex(0).getModifierList().getRowByIndex(0) is instead Main.powerSection.getModifierRowShort(0, 0)*/
-   getModifierRowShort = (powerRowIndex, modifierRowIndex) =>
-   {
-      //TODO: is range check needed?
-      if (powerRowIndex >= powerRowIndex.length) return;  //range checking of modifierRowIndex will be handled in getRowByIndex
-      return this._rowArray[powerRowIndex].getModifierList().getRowByIndex(modifierRowIndex);
-   };
-   /**Sets data from a json object given then updates*/
-   load = (jsonSection) =>
-   {
-      //the row array isn't cleared in case some have been auto set
-      //Main.clear() is called at the start of Main.load()
-      const transcendence = Main.getTranscendence();
-      const sectionName = this.props.sectionName;
-      const newState = [];
-      for (let powerIndex = 0; powerIndex < jsonSection.length; powerIndex++)
-      {
-         const jsonPowerRow = JSON.clone(jsonSection[powerIndex]);
-         jsonPowerRow.baseCost = jsonPowerRow.cost;
-         delete jsonPowerRow.cost;
-         jsonPowerRow.skillUsed = jsonPowerRow.skill;
-         delete jsonPowerRow.skill;
-         if (undefined !== jsonPowerRow.Modifiers)
-         {
-            jsonPowerRow.Modifiers = jsonPowerRow.Modifiers.map(jsonModRow =>
-            {
-               jsonModRow.rank = jsonModRow.applications;
-               delete jsonModRow.applications;
-               return jsonModRow;
-            });
-         }
-
-         const validStateAndDv = PowerObjectAgnostic.sanitizeStateAndGetDerivedValues(jsonPowerRow, sectionName, powerIndex, transcendence);
-         if (undefined !== validStateAndDv)
-         {
-            //already sent message if invalid
-            newState.push(validStateAndDv.state);
-            this._addRowNoSetState(validStateAndDv);
-         }
-      }
-
-      this._prerender();
-      this.setState(state =>
-      {
-         state.it = newState;
-         return state;
-      });
-   };
-
-   //'private' functions section. Although all public none of these should be called from outside of this object
    /**Updates other sections which depend on power section*/
    _notifyDependent = () =>
    {
@@ -476,6 +445,58 @@ class PowerListAgnostic extends React.Component
       Main.defenseSection.calculateValues();
       Main.update();
    };
+   /**Call this after updating rowArray but before setState*/
+   _prerender = () =>
+   {
+      //don't update any state
+      this._calculateValues();
+      this._notifyDependent();
+   };
+   /**This creates the page's html (for the section)*/
+   render = () =>
+   {
+      /*equipment can't be god-like so exclude it
+      don't check usingGodhoodPowers because global includes that
+      don't call a main method for this because render should be pure.*/
+      const generateGodHood = 'equipment' !== this.props.sectionName && this.state.main.godhood;
+
+      const elementArray = this.state.it.map((_, powerIndex) =>
+      {
+         const powerRow = this._rowArray[powerIndex];
+         //workaround until resolved godhood circle
+         if (undefined === powerRow) return null;
+         const rowKey = powerRow.getKey();
+         return (<PowerRowHtml key={rowKey} keyCopy={rowKey}
+                               powerRow={powerRow}
+                               powerSection={this}
+                               generateGodHood={generateGodHood} />);
+      });
+      elementArray.push(<PowerRowHtml key={this._blankPowerKey} keyCopy={this._blankPowerKey}
+                                      powerRow={undefined}
+                                      powerSection={this}
+                                      generateGodHood={generateGodHood} />);
+
+      return elementArray;
+   };
+   _saveRowToState = (saveRow) =>
+   {
+      const powerRowState = JSON.clone(saveRow);
+      powerRowState.baseCost = powerRowState.cost;
+      delete powerRowState.cost;
+      powerRowState.skillUsed = powerRowState.skill;
+      delete powerRowState.skill;
+      if (undefined !== powerRowState.Modifiers)
+      {
+         powerRowState.Modifiers = powerRowState.Modifiers.map(jsonModRow =>
+         {
+            jsonModRow.rank = jsonModRow.applications;
+            delete jsonModRow.applications;
+            return jsonModRow;
+         });
+      }
+      return powerRowState;
+   };
+   //endregion 'private' functions
 }
 
 function createPowerList(callback, sectionName)

@@ -1095,3 +1095,79 @@ TestSuite.powerRow.generateNameAndSkill=function(testState={})
 
    return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', assertions, testState);
 };
+TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+   let dataToLoad;
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         "effect": "Invalid", "text": "", "action": "Free", "range": "Personal", "duration": "Sustained",
+         "Modifiers": [], "rank": 1
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: 0, Actual: Main.powerSection.getState().it.length, Description: 'invalid not loaded'});
+      assertions.push({Expected: ['PowerListAgnostic.load.notExist'], Actual: Messages.errorCodes(), Description: 'invalid: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'load invalid'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         "effect": "A God I Am", "text": "", "action": "Free", "range": "Personal", "duration": "Continuous",
+         "Modifiers": [], "rank": 1
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Godhood is off'});
+      assertions.push({Expected: 0, Actual: Main.powerSection.getState().it.length, Description: 'bad godhood: not illegally loaded'});
+      assertions.push({Expected: ['PowerListAgnostic.load.godhood'], Actual: Messages.errorCodes(), Description: 'bad godhood: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'bad godhood'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Hero.transcendence = 1;  //set godhood
+      dataToLoad.Powers.push({
+         "effect": "Flight", "text": "", "action": "Move", "range": "Personal", "duration": "Sustained",
+         "Modifiers": [], "rank": 1
+      });
+      //flight is to make sure transcendence isn't reset
+      dataToLoad.Powers.push({
+         "effect": "A God I Am", "text": "", "action": "Free", "range": "Personal", "duration": "Continuous",
+         "Modifiers": [], "rank": 1
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Godhood is on'});
+      assertions.push({Expected: "A God I Am", Actual: Main.powerSection.getState().it[1].effect, Description: 'godhood: loaded'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'godhood: no error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'happy godhood'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         "effect": "Attain Knowledge", "cost": 3, "text": "", "action": "Standard", "range": "Personal", "duration": "Instant",
+         "Modifiers": [], "rank": 1
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Attain Knowledge',
+         Actual: Main.powerSection.getRowByIndex(0).getEffect(),
+         Description: 'Custom Cost: Effect'
+      });
+      assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getBaseCost(), Description: 'Custom Cost: getBaseCost'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Custom Cost'});}
+
+   return TestRunner.displayResults('TestSuite.powerRow.sanitizeStateAndGetDerivedValues', assertions, testState);
+};

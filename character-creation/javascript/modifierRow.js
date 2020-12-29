@@ -17,6 +17,7 @@ ModifierObject.getUniqueName = function (state)
    else nameToUse = state.name;
 
    //TODO: so I noticed that text should not be used most of the time for uniqueness (check required is only maybe)
+   //note that power list updateModifierPropertyByKey assumes this
    //if (includeText && undefined !== state.text) return (nameToUse + ' (' + state.text + ')');
 
    return nameToUse;

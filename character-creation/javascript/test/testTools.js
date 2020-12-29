@@ -1,6 +1,7 @@
 'use strict';
 var Loader = {};
 var Messages = {};
+//TODO: actually list should be private to avoid need for cloning
 Messages.list = [];  //intentionally public in order to clear it (without Loader) or to read amLoading
 Loader.resetData=function()
 {
