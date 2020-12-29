@@ -17,10 +17,9 @@ Messages.clear=function()
 {
    Messages._list = [];
 };
-Messages.errorCapture=function(errorCode, amLoading)
+Messages.errorCapture=function(errorCode, messageSent, amLoading)
 {
-   //TODO: why not assert message?
-   Messages._list.push({errorCode: errorCode, amLoading: amLoading});
+   Messages._list.push({errorCode: errorCode, message: messageSent, amLoading: amLoading});
 };
 Messages.getAll=function()
 {

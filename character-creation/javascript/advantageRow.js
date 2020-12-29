@@ -7,7 +7,6 @@
  */
 function AdvantageObject(key)
 {
-   //private variable section:
    var state, derivedValues;
 
    //region Basic getter (all single line)

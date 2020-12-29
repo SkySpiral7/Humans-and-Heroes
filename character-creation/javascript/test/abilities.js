@@ -41,7 +41,12 @@ TestSuite.abilityObject.set=function(testState={})
    DomUtil.changeValue('Stamina', '3');
    DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: 3, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'absent Stamina ui: reset'});
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'absent Stamina ui: errors'});
+   var errorMessage = 'It isn\'t possible to lack Stamina. Use 0 Stamina and buy Immunity to fatigue instead.';
+   assertions.push({
+      Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false, message: errorMessage}],
+      Actual: Messages.getAll(),
+      Description: 'absent Stamina ui: errors'
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Strength = 1;
@@ -51,7 +56,11 @@ TestSuite.abilityObject.set=function(testState={})
    assertions.push({Expected: 1, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Strength = 1'});
    assertions.push({Expected: true, Actual: Main.abilitySection.getByName('Agility').isAbsent(), Description: 'Absent Agility'});
    assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'Absent Stamina becomes 0'});
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'Absent Stamina: Errors'});
+   assertions.push({
+      Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true, message: errorMessage}],
+      Actual: Messages.getAll(),
+      Description: 'Absent Stamina: Errors'
+   });
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = 2;

@@ -836,22 +836,22 @@ TestSuite.main.load=function(testState={})
    let dataToLoad;
 
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'amLoading false default'});
+   assertions.push({Expected: false, Actual: Messages.getAll()[0].amLoading, Description: 'amLoading false default'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = '--';
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'amLoading true when loading'});
+   assertions.push({Expected: true, Actual: Messages.getAll()[0].amLoading, Description: 'amLoading true when loading'});
 
    Main.clear();  //I could Loader.resetData() but I don't need to save
    Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'amLoading reset to false'});
+   assertions.push({Expected: false, Actual: Messages.getAll()[0].amLoading, Description: 'amLoading reset to false'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = '--';
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'amLoading true again when loading'});
+   assertions.push({Expected: true, Actual: Messages.getAll()[0].amLoading, Description: 'amLoading true again when loading'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Hero.transcendence = -1;
@@ -878,7 +878,7 @@ TestSuite.main.loadFromString=function(testState={})
 
    Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'ui amLoading starts false'});
+   assertions.push({Expected: false, Actual: Messages.getAll()[0].amLoading, Description: 'ui amLoading starts false'});
 
    try{
    Messages.clear();
@@ -887,12 +887,12 @@ TestSuite.main.loadFromString=function(testState={})
    }
    catch(e)
    {
-      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.XML', amLoading: true}], Actual: Messages.getAll(), Description: 'XML error code'});
+      assertions.push({Expected: ['MainObject.loadFromString.parsing.XML'], Actual: Messages.errorCodes(), Description: 'XML error code'});
    }
 
    Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'loading unset amLoading'});
+   assertions.push({Expected: false, Actual: Messages.getAll()[0].amLoading, Description: 'loading unset amLoading'});
 
    try{
    Messages.clear();
@@ -901,7 +901,7 @@ TestSuite.main.loadFromString=function(testState={})
    }
    catch(e)
    {
-      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.getAll(), Description: 'JSON error code'});
+      assertions.push({Expected: ['MainObject.loadFromString.parsing.JSON'], Actual: Messages.errorCodes(), Description: 'JSON error code'});
    }
 
    return TestRunner.displayResults('TestSuite.main.loadFromString', assertions, testState);

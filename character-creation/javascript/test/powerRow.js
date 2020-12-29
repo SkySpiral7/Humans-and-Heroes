@@ -1,5 +1,51 @@
 'use strict';
-TestSuite.powerRow={};
+TestSuite.powerRow = {};
+TestSuite.powerRow.save = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+
+   const assertions = [];
+
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+   ReactUtil.changeValue('powerName' + Main.powerSection.indexToKey(0), 'big slash');
+   ReactUtil.changeValue('powerSkill' + Main.powerSection.indexToKey(0), 'sword');
+   assertions.push({
+      Expected: {
+         "effect": "Damage",
+         "text": "Descriptors and other text",
+         "action": "Standard",
+         "range": "Close",
+         "duration": "Instant",
+         "name": "big slash",
+         "skill": "sword",
+         "Modifiers": [],
+         "rank": 1
+      },
+      Actual: Main.powerSection.getRowByIndex(0).save(),
+      Description: 'all with name, skill'
+   });
+
+   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
+   assertions.push({
+      Expected: undefined,
+      Actual: Main.powerSection.getRowByIndex(0).save().skill,
+      Description: 'no skill'
+   });
+
+   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Attain Knowledge');
+   assertions.push({
+      Expected: 2,
+      Actual: Main.powerSection.getRowByIndex(0).save().cost,
+      Description: 'base cost'
+   });
+   assertions.push({
+      Expected: undefined,
+      Actual: Main.powerSection.getRowByIndex(0).save().name,
+      Description: 'no name'
+   });
+
+   return TestRunner.displayResults('TestSuite.powerRow.save', assertions, testState);
+};
 TestSuite.powerRow.disableValidationForActivationInfo=function(testState={})
 {
    TestRunner.clearResults(testState);

@@ -20,11 +20,11 @@ function PowerObjectAgnostic(props)
 {
    var state, derivedValues, modifierSection;
 
-   //Basic getter section (all single line)
+   //region Basic getter
    this.getAction = function () {return state.action;};
    this.getBaseCost = function () {return state.baseCost;};
-   this.getDuration = function () {return state.duration;};
    this.getDerivedValues = function () {return JSON.clone(derivedValues);};
+   this.getDuration = function () {return state.duration;};
    /**Get the effect name of the power*/
    this.getEffect = function () {return state.effect;};
    this.getKey = function () {return props.key;};
@@ -40,27 +40,9 @@ function PowerObjectAgnostic(props)
    this.getText = function () {return state.text;};
    /**The total with respect to auto changes and raw total*/
    this.getTotal = function () {return derivedValues.total;};
-   this.isBaseCostSettable = function () {return derivedValues.canSetBaseCost;};
    this.getSection = function () {return props.powerListParent;};
+   //endregion Basic getter
 
-   //Single line function section
-   /**Returns the default action for this power or nothing if this row is blank.*/
-   this.getDefaultAction = function ()
-   {
-      return Data.Power[state.effect].defaultAction;
-   };
-   /**Returns the default duration for this power or nothing if this row is blank.*/
-   this.getDefaultDuration = function ()
-   {
-      return Data.Power[state.effect].defaultDuration;
-   };
-   /**Returns the default range or nothing if this row is blank.*/
-   this.getDefaultRange = function ()
-   {
-      return Data.Power[state.effect].defaultRange;
-   };
-
-   //public function section
    /**Returns a json object of this row's data*/
    this.save = function ()
    {
@@ -81,7 +63,7 @@ function PowerObjectAgnostic(props)
       return json;
    };
 
-   this.constructor = function ()
+   this._constructor = function ()
    {
       state = props.state;
       derivedValues = props.derivedValues;
@@ -92,11 +74,12 @@ function PowerObjectAgnostic(props)
          derivedValues: derivedValues.modifiers
       });
    };
-   this.constructor();
+   this._constructor();
 }
 
 PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, powerSectionName, powerIndex, transcendence)
 {
+   //TODO: here I am
    var loadLocation = powerSectionName.toTitleCase() + ' #' + (powerIndex + 1);
    var nameToLoad = inputState.effect;
    if (!Data.Power.names.contains(nameToLoad))

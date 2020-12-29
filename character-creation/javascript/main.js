@@ -249,7 +249,7 @@ function MainObject()
    errorCode only exists to be sent to the mockMessenger*/
    this.messageUser=function(errorCode, messageSent)
    {
-      if (undefined !== mockMessenger) mockMessenger(errorCode, amLoading);
+      if (undefined !== mockMessenger) mockMessenger(errorCode, messageSent, amLoading);
       else if (amLoading) document.getElementById('code-box').value += messageSent + '\n';
       else alert(messageSent);
    };
