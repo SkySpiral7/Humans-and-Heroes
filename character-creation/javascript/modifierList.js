@@ -299,9 +299,6 @@ test/sort all
    ? sharedHtml.js
 double check docs of all those
 remove all tasks from generated ReactUtil (although not listed by print-todos-added-since due to .gitattributes -diff)
-there's lots of tasks. easy ones:
-   data assert
-   testTools list cloning
 
 ad row immutable
 ad list static

@@ -235,7 +235,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       'my bio\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'big doc: load errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'big doc: load errors'});
    assertions.push({Expected: expected, Actual: actual, Description: 'big doc: value'});
 
    dataToLoad = Loader.resetData();
@@ -278,7 +278,7 @@ TestSuite.conversions.jsonToMarkdown=function(testState={})
       'Complications, background and other information\n';
    document.getElementById('export-button').onclick();
    actual = document.getElementById('code-box').value;
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'transcendence, no extra skill: load errors'});
    assertions.push({Expected: expected, Actual: actual, Description: 'transcendence, no extra skill: value'});
 
    return TestRunner.displayResults('TestSuite.conversions.jsonToMarkdown', assertions, testState);

@@ -171,11 +171,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'change to Permanent: changes action to none'
       });
-      assertions.push({
-         Expected: [],
-         Actual: JSON.clone(Messages.list),
-         Description: 'change to Permanent: no error'
-      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'change to Permanent: no error'});
 
       ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
       assertions.push({
@@ -183,11 +179,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'change from Permanent: sets default action'
       });
-      assertions.push({
-         Expected: [],
-         Actual: JSON.clone(Messages.list),
-         Description: 'change from Permanent: no error'
-      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'change from Permanent: no error'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'non permanent default'});}
@@ -207,11 +199,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'change from Permanent: uses free action instead of default none'
       });
-      assertions.push({
-         Expected: [],
-         Actual: JSON.clone(Messages.list),
-         Description: 'Immunity change from Permanent: no error'
-      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Immunity change from Permanent: no error'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'permanent default'});}
@@ -226,11 +214,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
          Actual: Main.powerSection.getState().it[0].range,
          Description: 'Damage Aura: sets close range'
       });
-      assertions.push({
-         Expected: [],
-         Actual: JSON.clone(Messages.list),
-         Description: 'Damage Aura: no error'
-      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Damage Aura: no error'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'Damage Aura'});}
@@ -245,11 +229,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
          Actual: Main.powerSection.getState().it[0].range,
          Description: 'Removing Aura: leaves range as close'
       });
-      assertions.push({
-         Expected: [],
-         Actual: JSON.clone(Messages.list),
-         Description: 'Removing Aura: no error'
-      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Removing Aura: no error'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'Removing Aura'});}
@@ -313,7 +293,7 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'flight attack changes action'
       });
-      assertions.push({Expected: [], Actual: JSON.clone(Messages.list), Description: 'flight attack: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'flight attack: no errors'});
 
       ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
       //mod 0 is now increased range
@@ -344,7 +324,7 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'removing mod: same action'
       });
-      assertions.push({Expected: [], Actual: JSON.clone(Messages.list), Description: 'flight removing attack: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'flight removing attack: no errors'});
 
       //mod 0-1 are still auto but the auto range was removed
       ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Attack');
@@ -363,7 +343,7 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
          Actual: Main.powerSection.getState().it[0].duration,
          Description: 'flight attack still same duration'
       });
-      assertions.push({Expected: [], Actual: JSON.clone(Messages.list), Description: 'flight attack 2: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'flight attack 2: no errors'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'non personal default non permanent'});}
@@ -387,7 +367,7 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
          Actual: Main.powerSection.getState().it[0].action,
          Description: 'Immunity attack: changes action'
       });
-      assertions.push({Expected: [], Actual: JSON.clone(Messages.list), Description: 'Immunity attack: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Immunity attack: no errors'});
 
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
       //mod 0 is decreased action
@@ -407,7 +387,7 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
          Actual: Main.powerSection.getState().it[0].duration,
          Description: 'Immunity removing mod: same duration'
       });
-      assertions.push({Expected: [], Actual: JSON.clone(Messages.list), Description: 'Immunity removing attack: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Immunity removing attack: no errors'});
    }
    catch (e)
    {assertions.push({Error: e, Description: 'non personal default permanent'});}

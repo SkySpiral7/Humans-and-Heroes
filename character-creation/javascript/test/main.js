@@ -766,7 +766,7 @@ TestSuite.main.convertDocument=function(testState={})
    expected = JSON.parse(blankDoc);
    expected.Powers = [{"effect":"Damage","text":"Energy Aura","action":"Standard","range":"Close","duration":"Instant",
       "name":"Power 1 Damage","skill":"Skill used for attack","Modifiers":[{"name":"Selective"}],"rank":3}];
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'Convert a Power: errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Convert a Power: errors'});
    assertions.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert a Power: doc'});
    } catch(e){assertions.push({Error: e, Description: 'Convert a Power'});}
 
@@ -774,11 +774,11 @@ TestSuite.main.convertDocument=function(testState={})
    dataToLoad = Loader.resetData();
    dataToLoad.version = 1;
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'Convert old nothing: errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Convert old nothing: errors'});
    assertions.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert old nothing: doc'});
    dataToLoad = Loader.resetData();
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'Convert new nothing: errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Convert new nothing: errors'});
    assertions.push({Expected: blankDoc, Actual: useSaveButton(), Description: 'Convert new nothing: doc'});
    } catch(e){assertions.push({Error: e, Description: 'Convert nothing'});}
 
@@ -813,7 +813,7 @@ TestSuite.main.convertDocument=function(testState={})
       }
    ];
    expected.Advantages = [{"name":"Equipment","rank":1}];
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'Convert 2 Powers and 2 equipments: errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Convert 2 Powers and 2 equipments: errors'});
    assertions.push({Expected: JSON.stringify(expected), Actual: useSaveButton(), Description: 'Convert 2 Powers and 2 equipments: doc'});
    } catch(e){assertions.push({Error: e, Description: '2 each'});}
 
@@ -836,22 +836,22 @@ TestSuite.main.load=function(testState={})
    let dataToLoad;
 
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading false default'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'amLoading false default'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = '--';
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true when loading'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'amLoading true when loading'});
 
    Main.clear();  //I could Loader.resetData() but I don't need to save
-   Messages.list = [];
+   Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'amLoading reset to false'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'amLoading reset to false'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = '--';
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'amLoading true again when loading'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'amLoading true again when loading'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Hero.transcendence = -1;
@@ -874,34 +874,34 @@ TestSuite.main.loadFromString=function(testState={})
    DomUtil.changeValue('Strength', '2');
    Main.loadFromString('  \n\t');
    assertions.push({Expected: 2, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Ignore blank input'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'No errors from blank input'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'No errors from blank input'});
 
-   Messages.list = [];
+   Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'ui amLoading starts false'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'ui amLoading starts false'});
 
    try{
-   Messages.list = [];
+   Messages.clear();
    Main.loadFromString('<3');
    TestRunner.failedToThrow(assertions, 'XML error code');
    }
    catch(e)
    {
-      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.XML', amLoading: true}], Actual: Messages.list, Description: 'XML error code'});
+      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.XML', amLoading: true}], Actual: Messages.getAll(), Description: 'XML error code'});
    }
 
-   Messages.list = [];
+   Messages.clear();
    DomUtil.changeValue('Stamina', '--');
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'loading unset amLoading'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'loading unset amLoading'});
 
    try{
-   Messages.list = [];
+   Messages.clear();
    Main.loadFromString('{');
    TestRunner.failedToThrow(assertions, 'JSON error code');
    }
    catch(e)
    {
-      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.list, Description: 'JSON error code'});
+      assertions.push({Expected: [{errorCode: 'MainObject.loadFromString.parsing.JSON', amLoading: true}], Actual: Messages.getAll(), Description: 'JSON error code'});
    }
 
    return TestRunner.displayResults('TestSuite.main.loadFromString', assertions, testState);

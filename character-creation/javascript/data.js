@@ -340,8 +340,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
 
    function addAdvantage(nameToAdd)
    {
-      //TODO: switch to AssertionError
-      if(Data.Advantage[nameToAdd] !== undefined || Data.Advantage.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already an Advantage');
+      if(Data.Advantage[nameToAdd] !== undefined || Data.Advantage.names.contains(nameToAdd)) throw new AssertionError(nameToAdd + ' is already an Advantage');
       Data.Advantage.names.push(nameToAdd);
       Data.Advantage[nameToAdd] = {
          name: nameToAdd,
@@ -355,7 +354,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    }
    function addPower(nameToAdd)
    {
-      if(Data.Power[nameToAdd] !== undefined || Data.Power.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Power');
+      if(Data.Power[nameToAdd] !== undefined || Data.Power.names.contains(nameToAdd)) throw new AssertionError(nameToAdd + ' is already a Power');
       Data.Power.names.push(nameToAdd);
       Data.Power[nameToAdd] = {
          name: nameToAdd,
@@ -370,7 +369,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    }
    function addModifier(nameToAdd)
    {
-      if(Data.Modifier[nameToAdd] !== undefined || Data.Modifier.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Modifier');
+      if(Data.Modifier[nameToAdd] !== undefined || Data.Modifier.names.contains(nameToAdd)) throw new AssertionError(nameToAdd + ' is already a Modifier');
       Data.Modifier.names.push(nameToAdd);
       Data.Modifier[nameToAdd] = {
          name: nameToAdd,
@@ -393,7 +392,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    }
    function addSkill(nameToAdd)
    {
-      if(Data.Skill[nameToAdd] !== undefined || Data.Skill.names.contains(nameToAdd)) throw new Error(nameToAdd + ' is already a Skill');
+      if(Data.Skill[nameToAdd] !== undefined || Data.Skill.names.contains(nameToAdd)) throw new AssertionError(nameToAdd + ' is already a Skill');
       Data.Skill.names.push(nameToAdd);
       Data.Skill[nameToAdd] = {
          name: nameToAdd,
@@ -403,7 +402,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    }
    function remove(objectToModify, nameToRemove)
    {
-      if(objectToModify[nameToRemove] === undefined || !objectToModify.names.contains(nameToRemove)) throw new Error(nameToRemove + ' is not here');
+      if(objectToModify[nameToRemove] === undefined || !objectToModify.names.contains(nameToRemove)) throw new AssertionError(nameToRemove + ' is not here');
       delete objectToModify[nameToRemove];
       objectToModify.names.removeByValue(nameToRemove);
    }

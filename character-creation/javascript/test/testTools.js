@@ -1,11 +1,10 @@
 'use strict';
 var Loader = {};
 var Messages = {};
-//TODO: actually list should be private to avoid need for cloning
-Messages.list = [];  //intentionally public in order to clear it (without Loader) or to read amLoading
+Messages._list = [];
 Loader.resetData=function()
 {
-   Messages.list = [];
+   Messages.clear();
    Main.clear();
    return Main.save();  //return skeleton needed
 };
@@ -14,17 +13,25 @@ Loader.sendData=function(jsonData)
    document.getElementById('code-box').value = JSON.stringify(jsonData);  //to simulate user input
    document.getElementById('load-text-button').onclick();
 };
+Messages.clear=function()
+{
+   Messages._list = [];
+};
 Messages.errorCapture=function(errorCode, amLoading)
 {
    //TODO: why not assert message?
-   Messages.list.push({errorCode: errorCode, amLoading: amLoading});
+   Messages._list.push({errorCode: errorCode, amLoading: amLoading});
+};
+Messages.getAll=function()
+{
+   return JSON.clone(Messages._list);
 };
 Messages.errorCodes=function()
 {
    var result = [];
-   for (var i=0; i < Messages.list.length; ++i)
+   for (var i=0; i < Messages._list.length; ++i)
    {
-      result.push(Messages.list[i].errorCode);
+      result.push(Messages._list[i].errorCode);
    }
    return result;
 };

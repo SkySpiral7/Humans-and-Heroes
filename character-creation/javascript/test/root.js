@@ -8,7 +8,7 @@ TestConfig.betweenEach=function()
 {
    Main.clear();
    //TODO: force each test to clear list instead so I can console.error here for debugging
-   Messages.list = [];
+   Messages.clear();
    Main.setRuleset(3, latestMinorRuleset);
 };
 TestConfig.afterLast=function()

@@ -341,7 +341,7 @@ TestSuite.modifierList.isNonPersonalModifierPresent = function (testState = {})
    });
    //also note that the modifier isn't first and is last for 2 possible edge cases
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'true: Affects Others Only'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'true: Affects Others Only'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({
@@ -349,7 +349,7 @@ TestSuite.modifierList.isNonPersonalModifierPresent = function (testState = {})
       "Modifiers": [{"name": "Affects Others Also"}], "rank": 1
    });
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'true: Affects Others Also'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'true: Affects Others Also'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({
@@ -357,13 +357,13 @@ TestSuite.modifierList.isNonPersonalModifierPresent = function (testState = {})
       "Modifiers": [{"name": "Attack"}], "rank": 1
    });
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'true: Attack'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'true: Attack'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect": "Flight", "text": "", "action": "Move", "range": "Close", "duration": "Sustained", "rank": 1});
    Loader.sendData(dataToLoad);
    //actual error is tested by power row
-   assertions.push({Expected: 1, Actual: Messages.list.length, Description: 'false: Modifiers undefined'});
+   assertions.push({Expected: 1, Actual: Messages.getAll().length, Description: 'false: Modifiers undefined'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({
@@ -372,7 +372,7 @@ TestSuite.modifierList.isNonPersonalModifierPresent = function (testState = {})
    });
    Loader.sendData(dataToLoad);
    //actual error is tested by power row
-   assertions.push({Expected: 1, Actual: Messages.list.length, Description: 'false: Modifiers []'});
+   assertions.push({Expected: 1, Actual: Messages.getAll().length, Description: 'false: Modifiers []'});
 
    return TestRunner.displayResults('TestSuite.modifierList.isNonPersonalModifierPresent', assertions, testState);
 };
@@ -385,7 +385,7 @@ TestSuite.modifierList.sanitizeStateAndGetDerivedValues = function (testState = 
    dataToLoad = Loader.resetData();
    dataToLoad.Powers.push({"effect": "Damage"});
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'undefined Modifiers: no error'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'undefined Modifiers: no error'});
    assertions.push({
       Expected: [],
       Actual: Main.powerSection.getRowByIndex(0).getModifierList().save(),
@@ -396,7 +396,7 @@ TestSuite.modifierList.sanitizeStateAndGetDerivedValues = function (testState = 
    dataToLoad.Powers.push({"effect": "Flight", "Modifiers": [{name: "invalid"}]});
    Loader.sendData(dataToLoad);
    //actual error is tested by mod row
-   assertions.push({Expected: 1, Actual: Messages.list.length, Description: 'load invalid mod: error'});
+   assertions.push({Expected: 1, Actual: Messages.getAll().length, Description: 'load invalid mod: error'});
    assertions.push({
       Expected: [],
       Actual: Main.powerSection.getRowByIndex(0).getModifierList().save(),

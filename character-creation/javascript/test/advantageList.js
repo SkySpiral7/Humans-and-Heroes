@@ -314,7 +314,7 @@ TestSuite.advantageList.load = function (testState = {})
          Actual: Main.advantageSection.getRowByIndex(1).getName(),
          Description: 'Load godhood: Beyond Mortal was loaded'
       });
-      assertions.push({Expected: [], Actual: Messages.list, Description: 'Load godhood: no errors'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Load godhood: no errors'});
    }
    catch (e)
    {
@@ -327,7 +327,7 @@ TestSuite.advantageList.load = function (testState = {})
       dataToLoad.Advantages.push({name: 'Equipment'});
       Loader.sendData(dataToLoad);
       assertions.push({Expected: 0, Actual: Main.advantageSection.getState().it.length, Description: 'ignores Equipment ad: no load'});
-      assertions.push({Expected: [], Actual: Messages.list, Description: 'ignores Equipment ad: no error'});
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'ignores Equipment ad: no error'});
    }
    catch (e)
    {

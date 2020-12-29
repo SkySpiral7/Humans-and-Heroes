@@ -41,7 +41,7 @@ TestSuite.abilityObject.set=function(testState={})
    DomUtil.changeValue('Stamina', '3');
    DomUtil.changeValue('Stamina', '--');
    assertions.push({Expected: 3, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'absent Stamina ui: reset'});
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.list, Description: 'absent Stamina ui: errors'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: false}], Actual: Messages.getAll(), Description: 'absent Stamina ui: errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Strength = 1;
@@ -51,31 +51,31 @@ TestSuite.abilityObject.set=function(testState={})
    assertions.push({Expected: 1, Actual: Main.abilitySection.getByName('Strength').getValue(), Description: 'Strength = 1'});
    assertions.push({Expected: true, Actual: Main.abilitySection.getByName('Agility').isAbsent(), Description: 'Absent Agility'});
    assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'Absent Stamina becomes 0'});
-   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.list, Description: 'Absent Stamina: Errors'});
+   assertions.push({Expected: [{errorCode: 'AbilityObject.set.noStamina', amLoading: true}], Actual: Messages.getAll(), Description: 'Absent Stamina: Errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.Abilities.Stamina = 2;
    Loader.sendData(dataToLoad);
    assertions.push({Expected: 2, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'load stamina: value'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'load stamina: no Errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'load stamina: no Errors'});
 
    Main.clear();
-   Messages.list = [];
+   Messages.clear();
    DomUtil.changeValue('Stamina', '-7');
    assertions.push({Expected: -5, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'min Stamina: value'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'min Stamina: Errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'min Stamina: Errors'});
 
-   Messages.list = [];
+   Messages.clear();
    DomUtil.changeValue('Stamina', 'nope');
    assertions.push({Expected: 0, Actual: Main.abilitySection.getByName('Stamina').getValue(), Description: 'default Stamina: value'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'default Stamina: Errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'default Stamina: Errors'});
 
    dataToLoad = Loader.resetData();
    dataToLoad.ruleset = '3.10';
    dataToLoad.Abilities.Stamina = '--';
    Loader.sendData(dataToLoad);
    assertions.push({Expected: true, Actual: Main.abilitySection.getByName('Stamina').isAbsent(), Description: 'absent Stamina v3.10: set'});
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'absent Stamina v3.10: no Errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'absent Stamina v3.10: no Errors'});
 
    return TestRunner.displayResults('TestSuite.abilityObject.set', assertions, testState);
 };

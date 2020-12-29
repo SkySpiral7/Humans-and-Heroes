@@ -7,7 +7,7 @@ TestSuite.test.example = function (testState = {})
    dataToLoad = Loader.resetData();
    dataToLoad.Skills = [{"name": "Perception", "rank": 2, "ability": "Awareness"}];
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: [], Actual: Messages.list, Description: 'transcendence, no extra skill: load errors'});
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'transcendence, no extra skill: load errors'});
    assertions.push({
       Expected: ['PowerObjectAgnostic.setRange.notExist'],
       Actual: Messages.errorCodes(),
