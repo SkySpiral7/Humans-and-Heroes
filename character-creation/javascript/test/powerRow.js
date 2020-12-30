@@ -584,113 +584,6 @@ TestSuite.powerRow.validatePersonalRange=function(testState={})
 
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', assertions, testState);
 };
-TestSuite.powerRow.setAction=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var assertions=[];
-
-   var dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Create","text":"","action":"invalid action","range":"Ranged","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Standard', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Action does not exist: getAction'});
-   assertions.push({Expected: ['PowerObjectAgnostic.setAction.notExist'], Actual: Messages.errorCodes(), Description: 'Action does not exist: error'});
-
-    try{
-    Main.setRuleset(3, 3);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-    assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v2.7 Reaction Damage doesn\'t become close range: power'});
-    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v2.7 Reaction Damage doesn\'t become close range: getAction'});
-    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v2.7 Reaction Damage doesn\'t become close range: getRange'});
-    } catch(e){assertions.push({Error: e, Description: 'v2.7 Reaction Damage doesn\'t become close range'});}
-
-    try{
-    Main.setRuleset(3,4);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-    assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.4 Reaction Damage becomes close range: power'});
-    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Reaction Damage becomes close range: getAction'});
-    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Reaction Damage becomes close range: getRange'});
-    } catch(e){assertions.push({Error: e, Description: 'v3.4 Reaction Damage becomes close range'});}
-
-    try{
-    Main.setRuleset(3,4);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-    assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.4 Reaction Feature doesn\'t become close range: power'});
-    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Reaction Feature doesn\'t become close range: getAction'});
-    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Reaction Feature doesn\'t become close range: getRange'});
-    } catch(e){assertions.push({Error: e, Description: 'v3.4 Reaction Feature doesn\'t become close range'});}
-
-    try{
-    Main.setRuleset(3,4);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control');
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control starts as ranged: getAction'});
-    assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Luck Control starts as ranged: getRange'});
-
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Free');
-    assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control changed to Free'});
-    ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-    assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 Luck Control doesn\'t become close range: getAction'});
-    assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 Luck Control doesn\'t become close range: getRange'});
-    } catch(e){assertions.push({Error: e, Description: 'v3.4 Luck Control not close range'});}
-
-    return TestRunner.displayResults('TestSuite.powerRow.setAction', assertions, testState);
-};
-TestSuite.powerRow.setDuration=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var assertions=[];
-
-   var dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Protection","text":"","action":"None","range":"Personal","duration":"invalid duration","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Duration does not exist: getDuration'});
-   assertions.push({Expected: ['PowerObjectAgnostic.setDuration.notExist'], Actual: Messages.errorCodes(), Description: 'Duration does not exist: error'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Instant');
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Can change to Instant: power'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Can change to Instant: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Can change to Instant: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Can change to Instant: getDuration'});
-
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Can change from Instant: power'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Can change from Instant: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Can change from Instant: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Can change from Instant: getDuration'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Permanent');
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change to permanent (non-permanent default): power'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to permanent (non-permanent default): getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to permanent (non-permanent default): getRange'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to permanent (non-permanent default): getDuration'});
-
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from permanent (non-permanent default): getAction'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from permanent (non-permanent default): getDuration'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
-   assertions.push({Expected: 'Protection', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change from permanent (permanent default): power'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from permanent (permanent default): getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from permanent (permanent default): getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from permanent (permanent default): getDuration'});
-
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Permanent');
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to permanent (permanent default): getAction'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to permanent (permanent default): getDuration'});
-
-   return TestRunner.displayResults('TestSuite.powerRow.setDuration', assertions, testState);
-};
 TestSuite.powerRow.updateDurationModifiers=function(testState={})
 {
     TestRunner.clearResults(testState);
@@ -877,100 +770,6 @@ TestSuite.powerRow.updateActionModifiers=function(testState={})
 
     return TestRunner.displayResults('TestSuite.powerRow.updateActionModifiers', assertions, testState);
 };
-TestSuite.powerRow.setRange=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var dataToLoad;
-   var assertions=[];
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Move","range":"invalid range","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Range does not exist: power was loaded'});
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Range does not exist: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Range does not exist: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Range does not exist: getDuration'});
-   assertions.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Range does not exist: error'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"invalid range","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Range does not exist: power was loaded'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Range does not exist: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Range does not exist: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Range does not exist: getDuration'});
-   assertions.push({Expected: ['PowerObjectAgnostic.setRange.notExist'], Actual: Messages.errorCodes(), Description: 'Feature Range does not exist: error'});
-
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-   assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change to Perception: power'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to Perception: getRange before'});
-   assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change to Perception: getName before'});
-   assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change to Perception: getSkillUsed before'});
-
-   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
-   assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to Perception: getRange after'});
-   assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change to Perception: getName after'});
-   assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change to Perception: getSkillUsed after'});
-
-   try{
-   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from Perception: getRange'});
-   assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Change from Perception: getName'});
-   assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Change from Perception: getSkillUsed'});
-   } catch(e){assertions.push({Error: e, Description: 'Change from Perception'});}
-
-   try{
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Protection');
-   assertions.push({Expected: 'Protection', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Change from personal: power'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from personal: getAction before'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from personal: getRange before'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from personal: getDuration before'});
-
-   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Affects Others Only');
-   assertions.push({Expected: 'Affects Others Only', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Change from personal: modifier'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Change from personal: no other modifiers'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change from personal: getAction after'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change from personal: getRange after'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change from personal: getDuration after'});
-   } catch(e){assertions.push({Error: e, Description: 'Change from personal'});}
-
-   try{
-   ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
-   ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Select Modifier');  //removes Affects Others (first 2 are for action and duration)
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Change to personal changes nothing: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Change to personal changes nothing: getRange'});
-   assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Change to personal changes nothing: getDuration'});
-   } catch(e){assertions.push({Error: e, Description: 'Change to personal changes nothing'});}
-
-   try{
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature change from personal: power'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change from personal: getAction before'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change from personal: getRange before'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change from personal: getDuration before'});
-
-   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change from personal: getAction after'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change from personal: getRange after'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change from personal: getDuration after'});
-   } catch(e){assertions.push({Error: e, Description: 'Feature change from personal'});}
-
-   try{
-   Main.powerSection.clear();
-   ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-   ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
-   ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
-   ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Personal');  //must be last here
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature change to personal changes nothing: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature change to personal changes nothing: getRange'});
-   assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature change to personal changes nothing: getDuration'});
-   } catch(e){assertions.push({Error: e, Description: 'Feature change to personal changes nothing'});}
-
-   return TestRunner.displayResults('TestSuite.powerRow.setRange', assertions, testState);
-};
 TestSuite.powerRow.updateRangeModifiers=function(testState={})
 {
     TestRunner.clearResults(testState);
@@ -1020,92 +819,176 @@ TestSuite.powerRow.updateRangeModifiers=function(testState={})
 
     return TestRunner.displayResults('TestSuite.powerRow.updateRangeModifiers', assertions, testState);
 };
-TestSuite.powerRow.calculateValues=function(testState={})
+TestSuite.powerRow.calculateDerivedValues = function (testState = {})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var assertions=[];
-    try{
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
-    assertions.push({Expected: 16, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank extras increase cost/rank'});
-    } catch(e){assertions.push({Error: e, Description: 'Rank extras'});}
+   var assertions = [], actual;
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
-    assertions.push({Expected: 12, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws reduce cost/rank'});
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      //(7+1)*2 = 16
+      assertions.push({Expected: 8, Actual: actual.costPerRank, Description: 'Rank extras: costPerRank'});
+      assertions.push({Expected: 16, Actual: actual.total, Description: 'Rank extras: total'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Rank extras'});}
 
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws can reduce to fraction'});
+   try
+   {
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      //(7-1)*2 = 12
+      assertions.push({Expected: 6, Actual: actual.costPerRank, Description: 'Rank flaws: costPerRank'});
+      assertions.push({Expected: 12, Actual: actual.total, Description: 'Rank flaws: total'});
 
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 3);
-    assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Total cost rounds up'});
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 4);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 0, Actual: actual.costPerRank, Description: 'Rank flaws fraction: costPerRank'});
+      assertions.push({Expected: 2, Actual: actual.total, Description: 'Rank flaws fraction: total'});
 
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
-    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 100);
-    assertions.push({Expected: 20, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Rank flaws min of 1/5'});
-    } catch(e){assertions.push({Error: e, Description: 'Rank flaws'});}
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 3);
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      //costPerRank still 0
+      assertions.push({Expected: 2, Actual: actual.total, Description: 'fraction rounds up: total'});
 
-    try{
-    Main.setRuleset(3,4);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
-    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'v3.4 Variable has no min cost'});
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 100);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 100);
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: -3, Actual: actual.costPerRank, Description: 'Rank flaws min 1/5: costPerRank'});
+      assertions.push({Expected: 20, Actual: actual.total, Description: 'Rank flaws min 1/5: total'});
 
-    Main.setRuleset(3,5);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
-    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
-    assertions.push({Expected: 5, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'v3.5 Variable has a min cost of 5/rank'});
-    } catch(e){assertions.push({Error: e, Description: 'Variable min cost'});}
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+      //7-6 = 1 but is 5 instead
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 5, Actual: actual.costPerRank, Description: 'Variable has a min cost of 5/rank'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Rank flaws'});}
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Accurate');
-    assertions.push({Expected: 5, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat Extras add to cost after ranks'});
-    } catch(e){assertions.push({Error: e, Description: 'Flat Extras'});}
+   try
+   {
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 4, Actual: actual.total, Description: 'without free mod'});
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Linked');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 4, Actual: actual.total, Description: 'same total'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Free mods'});}
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Inaccurate');
-    assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat flaws reduce cost after ranks'});
+   try
+   {
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 4, Actual: actual.total, Description: 'without flat extra'});
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Accurate');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 5, Actual: actual.total, Description: 'Flat Extras add to cost after ranks'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Flat Extras'});}
 
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-    ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Inaccurate');
-    ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 3);
-    assertions.push({Expected: 4, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Flat flaws may increase ranks'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat flaws retains total of 1'});
-    } catch(e){assertions.push({Error: e, Description: 'Flat flaws'});}
+   try
+   {
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 4, Actual: actual.total, Description: 'without flat flaw'});
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Inaccurate');
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 3, Actual: actual.total, Description: 'Flat flaws reduce cost after ranks'});
 
-    try{
-    Main.powerSection.clear();
-    //Main.setRuleset(3,5);
-    DomUtil.changeValue('Strength', 100);
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    assertions.push({Expected: 155, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '2 ranks: A God I Am'});
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Area');
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Inaccurate');
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 3);
+      //2 per rank - 3
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Flat flaws may increase ranks'});
+      //(1+1)*2 - 3 = 1. this works for floor+1 but also ciel would work
+      assertions.push({Expected: 1, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'Flat flaws retains total of 1'});
 
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Reality Warp');
-    ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
-    assertions.push({Expected: 85, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '2 ranks: Reality Warp'});
-    } catch(e){assertions.push({Error: e, Description: 'Odd first rank values'});}
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 3);
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 4);
+      //4 per rank - 4
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 1);
+      //(1+3)*1 - 4 = 0 not allowed so (1+3)*2 - 4 = 4 instead. this proves the floor+1 (ciel wouldn't work)
+      assertions.push({Expected: 2, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Flat flaws can\'t make total 0'});
+      assertions.push({Expected: 4, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: 'total = flat flaw'});
 
-    return TestRunner.displayResults('TestSuite.powerRow.calculateValues', assertions, testState);
+      Main.powerSection.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Limited');
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 2);
+      //cost is 1/3
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Inaccurate');
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 3);
+      //1/3 per rank - 3
+      assertions.push({Expected: 10, Actual: Main.powerSection.getRowByIndex(0).getRank(), Description: 'Flat flaws with fraction: rank'});
+      //(1/3)*10 - 3 = 0.3 rounds to 1
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getTotal(),
+         Description: 'Flat flaws with fraction: total'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Flat flaws'});}
+
+   try
+   {
+      Main.powerSection.clear();
+      DomUtil.changeValue('transcendence', 1);
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'A God I Am');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      assertions.push({Expected: 155, Actual: Main.powerSection.getRowByIndex(0).getTotal(), Description: '2 ranks: A God I Am'});
+
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Reality Warp');
+      ReactUtil.changeValue('powerRank' + Main.powerSection.indexToKey(0), 2);
+      assertions.push({
+         Expected: 80 + Data.Power['Phantom Ranks'].baseCost,
+         Actual: Main.powerSection.getRowByIndex(0).getTotal(),
+         Description: '2 ranks: Reality Warp'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Odd first rank values'});}
+
+   try
+   {
+      Main.setRuleset(3, 4);
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Variable');
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Other Rank Flaw');
+      ReactUtil.changeValue('powerModifierRank' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 6);
+      actual = Main.powerSection.getRowByIndex(0).getDerivedValues();
+      assertions.push({Expected: 1, Actual: actual.costPerRank, Description: 'v3.4 Variable has no min cost'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'old Variable min cost'});}
+
+   return TestRunner.displayResults('TestSuite.powerRow.calculateDerivedValues', assertions, testState);
 };
 TestSuite.powerRow.generateNameAndSkill=function(testState={})
 {
@@ -1150,13 +1033,19 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
    try
    {
       dataToLoad = Loader.resetData();
-      dataToLoad.Powers.push({
-         "effect": "Invalid", "text": "", "action": "Free", "range": "Personal", "duration": "Sustained",
-         "Modifiers": [], "rank": 1
-      });
+      dataToLoad.Powers.push({effect: "Invalid"});
       Loader.sendData(dataToLoad);
       assertions.push({Expected: 0, Actual: Main.powerSection.getState().it.length, Description: 'invalid not loaded'});
-      assertions.push({Expected: ['PowerListAgnostic.load.notExist'], Actual: Messages.errorCodes(), Description: 'invalid: error'});
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.sanitizeStateAndGetDerivedValues.notExist',
+               message: 'Power #1: Invalid is not a power name.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid: error'
+      });
    }
    catch (e)
    {assertions.push({Error: e, Description: 'load invalid'});}
@@ -1164,14 +1053,21 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
    try
    {
       dataToLoad = Loader.resetData();
-      dataToLoad.Powers.push({
-         "effect": "A God I Am", "text": "", "action": "Free", "range": "Personal", "duration": "Continuous",
-         "Modifiers": [], "rank": 1
-      });
+      dataToLoad.Hero.transcendence = -1;
+      dataToLoad.Powers.push({effect: "A God I Am"});
       Loader.sendData(dataToLoad);
       assertions.push({Expected: false, Actual: Main.canUseGodhood(), Description: 'Godhood is off'});
       assertions.push({Expected: 0, Actual: Main.powerSection.getState().it.length, Description: 'bad godhood: not illegally loaded'});
-      assertions.push({Expected: ['PowerListAgnostic.load.godhood'], Actual: Messages.errorCodes(), Description: 'bad godhood: error'});
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.sanitizeStateAndGetDerivedValues.godhood',
+               message: 'Power #1: A God I Am is not allowed because transcendence is -1.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'bad godhood: error'
+      });
    }
    catch (e)
    {assertions.push({Error: e, Description: 'bad godhood'});}
@@ -1180,15 +1076,9 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
    {
       dataToLoad = Loader.resetData();
       dataToLoad.Hero.transcendence = 1;  //set godhood
-      dataToLoad.Powers.push({
-         "effect": "Flight", "text": "", "action": "Move", "range": "Personal", "duration": "Sustained",
-         "Modifiers": [], "rank": 1
-      });
-      //flight is to make sure transcendence isn't reset
-      dataToLoad.Powers.push({
-         "effect": "A God I Am", "text": "", "action": "Free", "range": "Personal", "duration": "Continuous",
-         "Modifiers": [], "rank": 1
-      });
+      dataToLoad.Powers.push({effect: "Flight"});
+      //flight is to make sure transcendence isn't reset during the loop
+      dataToLoad.Powers.push({effect: "A God I Am"});
       Loader.sendData(dataToLoad);
       assertions.push({Expected: true, Actual: Main.canUseGodhood(), Description: 'Godhood is on'});
       assertions.push({Expected: "A God I Am", Actual: Main.powerSection.getState().it[1].effect, Description: 'godhood: loaded'});
@@ -1200,20 +1090,315 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
    try
    {
       dataToLoad = Loader.resetData();
-      dataToLoad.Powers.push({
-         "effect": "Attain Knowledge", "cost": 3, "text": "", "action": "Standard", "range": "Personal", "duration": "Instant",
-         "Modifiers": [], "rank": 1
-      });
+      dataToLoad.Powers.push({effect: "Damage", cost: 3});
       Loader.sendData(dataToLoad);
       assertions.push({
-         Expected: 'Attain Knowledge',
-         Actual: Main.powerSection.getRowByIndex(0).getEffect(),
-         Description: 'Custom Cost: Effect'
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getState().baseCost,
+         Description: '!hasInputBaseCost: use default'
       });
-      assertions.push({Expected: 3, Actual: Main.powerSection.getRowByIndex(0).getBaseCost(), Description: 'Custom Cost: getBaseCost'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Attain Knowledge"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 2,
+         Actual: Main.powerSection.getRowByIndex(0).getState().baseCost,
+         Description: 'hasInputBaseCost: default baseCost'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Attain Knowledge", cost: 3});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 3,
+         Actual: Main.powerSection.getRowByIndex(0).getState().baseCost,
+         Description: 'hasInputBaseCost: valid baseCost'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Attain Knowledge", cost: -5});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getState().baseCost,
+         Description: 'hasInputBaseCost: min baseCost'
+      });
    }
    catch (e)
-   {assertions.push({Error: e, Description: 'Custom Cost'});}
+   {assertions.push({Error: e, Description: 'baseCost'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Descriptors and other text',
+         Actual: Main.powerSection.getRowByIndex(0).getState().text,
+         Description: 'default text'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", text: 'magic electric ice'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'magic electric ice',
+         Actual: Main.powerSection.getRowByIndex(0).getState().text,
+         Description: 'loaded text'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'text'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'no name'
+      });
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().skill,
+         Description: 'no skill'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", name: 'jetpack', skill: 'backpacking'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'ignores name'
+      });
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().skill,
+         Description: 'ignores skill'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'no name/skill'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", rank: -3});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getState().rank,
+         Description: 'min rank'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", rank: 3});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 3,
+         Actual: Main.powerSection.getRowByIndex(0).getState().rank,
+         Description: 'valid rank'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getState().rank,
+         Description: 'default rank'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'rank'});}
 
    return TestRunner.displayResults('TestSuite.powerRow.sanitizeStateAndGetDerivedValues', assertions, testState);
+};
+TestSuite.powerRow.validateActivationInfoExists = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+   let dataToLoad;
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage"});
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: 'Standard', Actual: Main.powerSection.getState().it[0].action, Description: 'no action: loaded default'});
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'no action: error'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", action: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push(
+         {Expected: 'Standard', Actual: Main.powerSection.getState().it[0].action, Description: 'invalid action: loaded default instead'});
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.actionNotExist',
+               message: 'Power #1: invalid is not the name of an action. Using default of Standard instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid action: error'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", action: 'Full'});
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: 'Full', Actual: Main.powerSection.getState().it[0].action, Description: 'with action: loaded'});
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'with action: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'action'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage"});
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: 'Close', Actual: Main.powerSection.getState().it[0].range, Description: 'no range: loaded default'});
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'no range: error'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", range: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Close',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'invalid range: loaded default instead'
+      });
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.rangeNotExist',
+               message: 'Power #1: invalid is not the name of a range. Using default of Close instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid range: error'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", range: 'Ranged'});
+      Loader.sendData(dataToLoad);
+      assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getState().it[0].range, Description: 'with range: loaded'});
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'with range: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'range'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Sustained',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'no duration: loaded default'
+      });
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'no duration: error'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", duration: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Sustained',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'invalid duration: loaded default instead'
+      });
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.durationNotExist',
+               message: 'Power #1: invalid is not the name of a duration. Using default of Sustained instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid duration: error'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", duration: 'Concentration'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Concentration',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'with duration: loaded'
+      });
+      assertions.push({Expected: [], Actual: Messages.getAll(), Description: 'with duration: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'duration'});}
+
+   //feature is tested because validatePersonalRange allows everything for feature
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Feature", action: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'None',
+         Actual: Main.powerSection.getState().it[0].action,
+         Description: 'invalid action feature: loaded default instead'
+      });
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.actionNotExist',
+               message: 'Power #1: invalid is not the name of an action. Using default of None instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid action feature: error'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Feature", range: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Personal',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'invalid range feature: loaded default instead'
+      });
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.rangeNotExist',
+               message: 'Power #1: invalid is not the name of a range. Using default of Personal instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid range feature: error'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Feature", duration: 'invalid'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Permanent',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'invalid duration feature: loaded default instead'
+      });
+      assertions.push({
+         Expected: [
+            {
+               errorCode: 'PowerObjectAgnostic.validateActivationInfoExists.durationNotExist',
+               message: 'Power #1: invalid is not the name of a duration. Using default of Permanent instead.',
+               amLoading: true
+            }],
+         Actual: Messages.getAll(),
+         Description: 'invalid duration feature: error'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'feature'});}
+
+   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfoExists', assertions, testState);
 };

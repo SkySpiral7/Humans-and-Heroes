@@ -79,18 +79,17 @@ function PowerObjectAgnostic(props)
 
 PowerObjectAgnostic.sanitizeStateAndGetDerivedValues = function (inputState, powerSectionName, powerIndex, transcendence)
 {
-   //TODO: here I am
    var loadLocation = powerSectionName.toTitleCase() + ' #' + (powerIndex + 1);
    var nameToLoad = inputState.effect;
    if (!Data.Power.names.contains(nameToLoad))
    {
-      Main.messageUser('PowerListAgnostic.load.notExist', loadLocation + ': ' +
+      Main.messageUser('PowerObjectAgnostic.sanitizeStateAndGetDerivedValues.notExist', loadLocation + ': ' +
          nameToLoad + ' is not a power name.');
       return;  //undefined
    }
    if (Data.Power[nameToLoad].isGodhood && transcendence <= 0)
    {
-      Main.messageUser('PowerListAgnostic.load.godhood', loadLocation + ': ' +
+      Main.messageUser('PowerObjectAgnostic.sanitizeStateAndGetDerivedValues.godhood', loadLocation + ': ' +
          nameToLoad + ' is not allowed because transcendence is ' + transcendence + '.');
       return;  //undefined
    }
@@ -156,6 +155,7 @@ PowerObjectAgnostic._calculateDerivedValues = function (validState, validActivat
       && 'Variable' === validState.effect && costPerRank < 5) costPerRank = 5;
    else if (costPerRank < -3) costPerRank = -3;  //can't be less than 1/5
    derivedValues.costPerRank = costPerRank;  //save the non-decimal version
+   //0 is 1/2, -1 is 1/3... -3 is 1/5
    if (costPerRank < 1) costPerRank = 1 / (2 - costPerRank);
 
    derivedValues.total = Math.ceil(costPerRank * validState.rank);  //round up
@@ -171,7 +171,8 @@ PowerObjectAgnostic._calculateDerivedValues = function (validState, validActivat
    derivedValues.flatValue = flatValue;
    derivedValues.total += flatValue;  //flatValue might be negative
    if ('A God I Am' === validState.effect) derivedValues.total += 145;  //for first ranks
-   else if ('Reality Warp' === validState.effect) derivedValues.total += 75;
+   //Reality Warp has only 1 real rank the rest are phantom
+   else if ('Reality Warp' === validState.effect) derivedValues.total += (80 - Data.Power['Phantom Ranks'].baseCost);
    //used to calculate all auto modifiers
    derivedValues.total = ModifierList.calculateGrandTotal(modifierDerivedValues, derivedValues.total);
 
@@ -185,17 +186,19 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
    {
       existingActivationInfo.action = Data.Power[validState.effect].defaultAction;
       Main.messageUser(
-         'PowerObjectAgnostic.setAction.notExist', loadLocation + ': ' + inputState.action + ' is not the name of an action. ' +
+         'PowerObjectAgnostic.validateActivationInfoExists.actionNotExist', loadLocation + ': ' + inputState.action +
+         ' is not the name of an action. ' +
          'Using default of ' + existingActivationInfo.action + ' instead.');
    }
    else existingActivationInfo.action = inputState.action;
 
-   //TODO: test Feature invalid range since it doesn't validate in personal
    if (undefined === inputState.range) existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
    else if (!Data.Power.ranges.contains(inputState.range))
    {
       existingActivationInfo.range = Data.Power[validState.effect].defaultRange;
-      Main.messageUser('PowerObjectAgnostic.setRange.notExist', loadLocation + ': ' + inputState.range + ' is not the name of a range. ' +
+      Main.messageUser(
+         'PowerObjectAgnostic.validateActivationInfoExists.rangeNotExist', loadLocation + ': ' + inputState.range +
+         ' is not the name of a range. ' +
          'Using default of ' + existingActivationInfo.range + ' instead.');
    }
    else existingActivationInfo.range = inputState.range;
@@ -205,7 +208,8 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
    {
       existingActivationInfo.duration = Data.Power[validState.effect].defaultDuration;
       Main.messageUser(
-         'PowerObjectAgnostic.setDuration.notExist', loadLocation + ': ' + inputState.duration + ' is not the name of a duration. ' +
+         'PowerObjectAgnostic.validateActivationInfoExists.durationNotExist', loadLocation + ': ' + inputState.duration +
+         ' is not the name of a duration. ' +
          'Using default of ' + existingActivationInfo.duration + ' instead.');
    }
    else existingActivationInfo.duration = inputState.duration;
@@ -215,6 +219,7 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
 /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
 PowerObjectAgnostic._validateNameAndSkill = function (validState, inputState, sectionName, rowIndex)
 {
+   //TODO: here I am
    //TODO: should give warning about removing name and skill?
    if (!Data.Power[validState.effect].isAttack && !validState.Modifiers.some(it => 'Attack' === it.name))
    {

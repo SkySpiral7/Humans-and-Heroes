@@ -95,6 +95,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
    var powerLookup = {
       baseCost: new MapDefault({'A God I Am': 5, 'Attain Knowledge': 2, 'Communication': 4, 'Comprehend': 2, 'Concealment': 2, 'Create': 2,
          'Enhanced Trait': 2, 'Flight': 2, 'Growth': 2, 'Healing': 2, 'Immortality': 2, 'Insubstantial': 5, 'Luck Control': 3, 'Mental Transform': 2,
+         //TODO: at some point Phantom Ranks became base cost 3. Reality Warp only has phantom
          'Mind Reading': 2, 'Mind Switch': 8, 'Morph': 5, 'Move Object': 2, 'Movement': 2, 'Nullify': 1, 'Phantom Ranks': 5, 'Reality Warp': 5,
          'Regeneration': 1, 'Resistance': 3, 'Shrinking': 2, 'Summon': 2, 'Summon Minion': 5, 'Summon Object': 2, 'Teleport': 2, 'Transform': 2,
          'Variable': 7}, 1),
@@ -310,6 +311,7 @@ Data.change = function(version)  //TODO: rename to set or something since it isn
          Data.Power['Permeate'].defaultAction = 'Move';
          Data.Power['Teleport'].defaultAction = 'Move';
 
+         //isAttack but not attack type: Illusion, Mind Reading, Move Object
          var allAttackTypes = ['Affliction', 'Damage', 'Mental Transform', 'Mind Switch', 'Nullify', 'Weaken'];
          //Luck Control has reaction without aura, Feature is wild card, Alter Metaphysics is excluded because it creates game rules
          var allowReaction = allAttackTypes.concat(['Luck Control', 'Feature']);

@@ -225,6 +225,16 @@ class PowerListAgnostic extends React.Component
       }
       //when changing from Aura leave as Close range. which is default for all but Nullify
 
+      //switching off of personal: change off of permanent without error
+      else if ('range' === propertyName && 'Personal' === powerState.range
+         && 'Feature' === powerState.effect && 'Permanent' === powerState.duration)
+      {
+         //default action is None so don't bother checking
+         powerState.action = 'Free';
+         powerState.duration = 'Sustained';
+      }
+      //switching to personal: leave same
+
       powerState[propertyName] = newValue;
 
       const transcendence = Main.getTranscendence();

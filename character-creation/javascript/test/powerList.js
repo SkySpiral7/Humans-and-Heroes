@@ -159,6 +159,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
 
    try
    {
+      Messages.clear();
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
       assertions.push({
          Expected: 'Move',
@@ -173,6 +174,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
       });
       assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'change to Permanent: no error'});
 
+      Messages.clear();
       ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
       assertions.push({
          Expected: 'Move',
@@ -186,6 +188,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
 
    try
    {
+      Messages.clear();
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Immunity');
       assertions.push({
          Expected: 'None',
@@ -206,6 +209,7 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
 
    try
    {
+      Messages.clear();
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
       ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
@@ -221,6 +225,34 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
 
    try
    {
+      Messages.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'Feature reaction: same range'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature reaction: no error'});
+
+      Messages.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control');
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'Luck Control reaction: same range'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Luck Control reaction: no error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'reaction same range'});}
+
+   try
+   {
+      Messages.clear();
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Nullify');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Standard');
@@ -235,6 +267,86 @@ TestSuite.powerList.updatePropertyByKey = function (testState = {})
    {assertions.push({Error: e, Description: 'Removing Aura'});}
 
    //testing the mod key list length is covered by the above (and there's nothing to assert except keys)
+
+   try
+   {
+      Messages.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+      assertions.push({
+         Expected: 'Free',
+         Actual: Main.powerSection.getState().it[0].action,
+         Description: 'Feature non personal: new action'
+      });
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'Feature non personal: same range'
+      });
+      assertions.push({
+         Expected: 'Sustained',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'Feature non personal: new duration'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature non personal: no error'});
+
+      Messages.clear();
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Personal');
+      assertions.push({
+         Expected: 'Free',
+         Actual: Main.powerSection.getState().it[0].action,
+         Description: 'Feature to personal: same action'
+      });
+      assertions.push({
+         Expected: 'Personal',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'Feature to personal: same range'
+      });
+      assertions.push({
+         Expected: 'Sustained',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'Feature to personal: same duration'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature to personal: no error'});
+
+      Messages.clear();
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+      assertions.push({
+         Expected: 'Free',
+         Actual: Main.powerSection.getState().it[0].action,
+         Description: 'Feature from personal non-perm: same action'
+      });
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'Feature from personal non-perm: same range'
+      });
+      assertions.push({
+         Expected: 'Sustained',
+         Actual: Main.powerSection.getState().it[0].duration,
+         Description: 'Feature from personal non-perm: same duration'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature from personal non-perm: no error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Feature personal'});}
+
+   try
+   {
+      Main.setRuleset(3, 3);
+      Messages.clear();
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getState().it[0].range,
+         Description: 'v3.3 Damage reaction: same range'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.3 Damage reaction: no error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'v3.3 Damage reaction'});}
 
    return TestRunner.displayResults('TestSuite.powerList.updatePropertyByKey', assertions, testState);
 };

@@ -239,7 +239,12 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
         else if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4) && 'action' === propertyName && 'Reaction' === newValue && 'Feature' !== powerState.effect && 'Luck Control' !== powerState.effect) {
             powerState.range = 'Close';
           } //when changing from Aura leave as Close range. which is default for all but Nullify
-
+          //switching off of personal: change off of permanent without error
+          else if ('range' === propertyName && 'Personal' === powerState.range && 'Feature' === powerState.effect && 'Permanent' === powerState.duration) {
+              //default action is None so don't bother checking
+              powerState.action = 'Free';
+              powerState.duration = 'Sustained';
+            }
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();
