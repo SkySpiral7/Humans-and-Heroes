@@ -219,7 +219,6 @@ PowerObjectAgnostic._validateActivationInfoExists = function (validState, inputS
 /**Call this in order to generate or clear out name and skill. Current values are preserved (if not cleared) or default text is generated.*/
 PowerObjectAgnostic._validateNameAndSkill = function (validState, inputState, sectionName, rowIndex)
 {
-   //TODO: here I am
    //TODO: should give warning about removing name and skill?
    if (!Data.Power[validState.effect].isAttack && !validState.Modifiers.some(it => 'Attack' === it.name))
    {
@@ -251,9 +250,9 @@ PowerObjectAgnostic._validateActivationInfo = function (validState, inputState, 
    then range again so that Reaction can have a more reasonable fallback action*/
 
    //can't trust modifiers yet since this is an unvalidated auto mod
-   var isAura = (Main.getActiveRuleset()
-      .isGreaterThanOrEqualTo(3, 4) && 'Luck Control' !== validState.effect && 'Feature' !== validState.effect &&
-      'Reaction' === actionObj.current);
+   var isAura = (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4)
+      && 'Luck Control' !== validState.effect && 'Feature' !== validState.effect
+      && 'Reaction' === actionObj.current);
    if (isAura && 'Close' !== pendingRange)
    {
       Main.messageUser('PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose',
@@ -277,9 +276,8 @@ PowerObjectAgnostic._getPossibleRanges = function (validState, validAction, vali
    if ('Feature' === validState.effect) possibleRanges.push('Personal');
    else
    {
-      if (Main.getActiveRuleset()
-         .isGreaterThanOrEqualTo(3,
-            4) && 'Reaction' === validAction && 'Luck Control' !== validState.effect) return ['Close'];
+      if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4)
+         && 'Reaction' === validAction && 'Luck Control' !== validState.effect) return ['Close'];
       if ('Personal' === validRange) return ['Personal'];
    }
    return possibleRanges.concat(['Close', 'Ranged', 'Perception']);
@@ -290,6 +288,7 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
 {
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
    //Triggered must also be selective so it auto adds but doesn't remove
+   //TODO: here I am
    if ('Triggered' === validState.action) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
       validActivationInfoObj, powerSectionName,
       powerIndex, 'Selective', 1);
@@ -522,6 +521,7 @@ PowerObjectAgnostic._validateAndGetPossibleDurations = function (validState, inp
          validState.effect + ' can\'t have Permanent duration because it isn\'t Personal range (range is ' + pendingRange + '). ' +
          'Using duration of ' + pendingDuration + ' instead.');
    }
+
    if ('Feature' === validState.effect) possibleDurations.push('Instant');
    else if ('Instant' === pendingDuration)
    {
@@ -536,7 +536,7 @@ PowerObjectAgnostic._validateAndGetPossibleDurations = function (validState, inp
 /**@returns {String} This function validates range. It changes range and creates user messages as needed.*/
 PowerObjectAgnostic._validatePersonalRange = function (validState, inputState, loadLocation)
 {
-   if ('Feature' === validState.effect) return inputState.range;  //allow everything
+   if ('Feature' === validState.effect) return inputState.range;  //allow everything (after validateActivationInfoExists)
    var defaultRange = Data.Power[validState.effect].defaultRange;
    if ('Personal' === inputState.range && 'Personal' !== defaultRange)
    {

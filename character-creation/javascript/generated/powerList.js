@@ -244,7 +244,8 @@ var PowerListAgnostic = /*#__PURE__*/function (_React$Component) {
               //default action is None so don't bother checking
               powerState.action = 'Free';
               powerState.duration = 'Sustained';
-            }
+            } //switching to personal: leave same
+
 
       powerState[propertyName] = newValue;
       var transcendence = Main.getTranscendence();

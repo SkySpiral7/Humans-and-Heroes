@@ -46,257 +46,109 @@ TestSuite.powerRow.save = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.powerRow.save', assertions, testState);
 };
-TestSuite.powerRow.disableValidationForActivationInfo=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var dataToLoad;
-   var assertions=[];
-   //these tests are things that wouldn't be valid if loaded in order: action, range, duration
-
-   Main.setRuleset(3,3);
-   try{
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Close","duration":"Sustained",
-      "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Personal to close Range: Effect'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Personal to close Range: 1 row'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Personal to close Range: getRange'});
-   } catch(e){assertions.push({Error: e, Description: 'Personal to close Range'});}
-
-   try{
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Permanent",
-      "Modifiers":[{"name":"Increased Duration","applications":2}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Action None: Effect'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it.length, Description: 'Action None: 1 row'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Action None: getAction'});
-   } catch(e){assertions.push({Error: e, Description: 'Action None'});}
-
-   return TestRunner.displayResults('TestSuite.powerRow.disableValidationForActivationInfo', assertions, testState);
-};
-TestSuite.powerRow.updateActivationModifiers=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var dataToLoad;
-   var assertions=[];
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Create","text":"","action":"Move","range":"Ranged","duration":"Sustained",
-      "Modifiers":[{"name":"Slower Action"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'updateActionModifiers: action'});
-   assertions.push({Expected: 'Faster Action', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'updateActionModifiers: modifier'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'updateActionModifiers: no more modifiers'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'updateActionModifiers: error'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Close","duration":"Sustained",
-      "Modifiers":[{"name":"Increased Range"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'updateRangeModifiers: action'});
-   assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'updateRangeModifiers: modifier'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'updateRangeModifiers: no more modifiers'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'updateRangeModifiers: error'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Create","text":"","action":"Standard","range":"Ranged","duration":"Continuous",
-      "Modifiers":[{"name":"Decreased Duration"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Continuous', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'updateDurationModifiers: action'});
-   assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'updateDurationModifiers: modifier'});
-   assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'updateDurationModifiers: no more modifiers'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'updateDurationModifiers: error'});
-
-   return TestRunner.displayResults('TestSuite.powerRow.updateActivationModifiers', assertions, testState);
-};
 TestSuite.powerRow.validateActivationInfo=function(testState={})
 {
    TestRunner.clearResults(testState);
 
    var dataToLoad;
-   var assertions=[];
+   var assertions = [];
 
    dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
+   dataToLoad.Powers.push({effect: "Damage", action: "Standard", range: "Ranged"});
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 happy reaction Damage: action'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.4 happy reaction Damage: error'});
+   assertions.push({
+      Expected: 'Standard',
+      Actual: Main.powerSection.getRowByIndex(0).getAction(),
+      Description: 'happy non-reaction Damage: action'
+   });
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'happy non-reaction Damage: no error'});
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", action: "Reaction", range: "Close"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Reaction',
+         Actual: Main.powerSection.getRowByIndex(0).getAction(),
+         Description: 'happy reaction Damage: action'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'happy reaction Damage: error'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Luck Control", action: "Reaction", range: "Ranged"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Reaction',
+         Actual: Main.powerSection.getRowByIndex(0).getAction(),
+         Description: 'happy ranged Luck Control reaction: action'
+      });
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getRowByIndex(0).getRange(),
+         Description: 'happy ranged Luck Control reaction: range'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'happy ranged Luck Control reaction: error'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Feature", action: "Reaction", range: "Ranged", duration: "Instant"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Reaction',
+         Actual: Main.powerSection.getRowByIndex(0).getAction(),
+         Description: 'happy ranged Feature reaction: action'
+      });
+      assertions.push({
+         Expected: 'Ranged',
+         Actual: Main.powerSection.getRowByIndex(0).getRange(),
+         Description: 'happy ranged Feature reaction: range'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'happy ranged Feature reaction: error'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'happy reaction'});}
 
    dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Luck Control","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
+   dataToLoad.Powers.push({effect: "Damage", action: "Reaction", range: "Ranged"});
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 ranged Luck Control reaction: action'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 ranged Luck Control reaction: range'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.4 ranged Luck Control reaction: error'});
+   assertions.push({
+      Expected: 'Reaction',
+      Actual: Main.powerSection.getRowByIndex(0).getAction(),
+      Description: 'ranged Damage reaction: keep action'
+   });
+   assertions.push({
+      Expected: 'Close',
+      Actual: Main.powerSection.getRowByIndex(0).getRange(),
+      Description: 'ranged Damage reaction: change range'
+   });
+   assertions.push({
+      Expected: [
+         {
+            errorCode: 'PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose',
+            message: 'Power #1: Damage has an action of Reaction and therefore must have a range of Close.',
+            amLoading: true
+         }],
+      Actual: Messages.getAll(),
+      Description: 'ranged Damage reaction: error'
+   });
 
+   Main.setRuleset(3, 3);
    dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
+   dataToLoad.Powers.push({effect: "Damage", action: "Reaction", range: "Ranged"});
    Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 ranged Feature reaction: action'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 ranged Feature reaction: range'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.4 ranged Feature reaction: error'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 ranged Damage reaction: action'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 ranged Damage reaction: range'});
-   assertions.push({Expected: ['PowerObjectAgnostic.validateActivationInfo.reactionRequiresClose'], Actual: Messages.errorCodes(), Description: 'v3.4 ranged Damage reaction: error'});
-
-   Main.setRuleset(3,3);
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.3 range Damage action Reaction'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.3 range Reaction Damage allows ranged range'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.3 range Reaction Damage allows ranged range: error'});
+   assertions.push({
+      Expected: 'Reaction',
+      Actual: Main.powerSection.getRowByIndex(0).getAction(),
+      Description: 'v3.3 ranged Damage Reaction: action'
+   });
+   assertions.push({
+      Expected: 'Ranged',
+      Actual: Main.powerSection.getRowByIndex(0).getRange(),
+      Description: 'v3.3 ranged Damage Reaction: allows ranged'
+   });
+   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.3 ranged Damage Reaction: error'});
 
    return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo', assertions, testState);
-};
-TestSuite.powerRow.validateActivationInfo_valid=function(testState={})
-{
-   TestRunner.clearResults(testState);
-
-   var dataToLoad;
-   var assertions=[];
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Damage","text":"","action":"Reaction","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Damage', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.4 allows reaction: power'});
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.4 allows reaction: getAction'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.4 allows reaction: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'v3.4 allows reaction: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.4 allows reaction: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Valid 1: power was loaded'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Valid 1: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Valid 1: getRange'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Valid 1: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature Valid 1: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Valid 2: power was loaded'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Valid 2: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Valid 2: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Valid 2: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature Valid 2: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Move","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Valid 3: power was loaded'});
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Valid 3: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Valid 3: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Valid 3: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature Valid 3: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Free","range":"Close","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Valid 4: power was loaded'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Valid 4: getAction'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Valid 4: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Valid 4: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature Valid 4: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Move","range":"Close","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature Valid 5: power was loaded'});
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature Valid 5: getAction'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature Valid 5: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature Valid 5: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature Valid 5: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Feature","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Feature', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Feature v3.4 allows reaction: power'});
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Feature v3.4 allows reaction: getAction'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Feature v3.4 allows reaction: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature v3.4 allows reaction: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Feature v3.4 allows reaction: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Luck Control","text":"","action":"Reaction","range":"Ranged","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Luck Control', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Luck Control v3.4 allows reaction: power'});
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Luck Control v3.4 allows reaction: getAction'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Luck Control v3.4 allows reaction: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Luck Control v3.4 allows reaction: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Luck Control v3.4 allows reaction: no errors'});
-
-   Main.setRuleset(3,3);
-   //most of these tests will have modifiers because they should be ignored and recreated
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"None","range":"Personal","duration":"Permanent","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Valid 1: power was loaded'});
-   assertions.push({Expected: 'None', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Valid 1: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Valid 1: getRange'});
-   assertions.push({Expected: 'Permanent', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Valid 1: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Valid 1: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Personal","duration":"Sustained","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Valid 2: power was loaded'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Valid 2: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Valid 2: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Valid 2: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Valid 2: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Move","range":"Personal","duration":"Instant","Modifiers":[],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Teleport', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Valid 3: power was loaded'});
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Valid 3: getAction'});
-   assertions.push({Expected: 'Personal', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Valid 3: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Valid 3: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Valid 3: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Flight","text":"","action":"Free","range":"Close","duration":"Sustained",
-      "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Flight', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Valid 4: power was loaded'});
-   assertions.push({Expected: 'Free', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Valid 4: getAction'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Valid 4: getRange'});
-   assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Valid 4: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Valid 4: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Move","range":"Close","duration":"Instant",
-      "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Teleport', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'Valid 5: power was loaded'});
-   assertions.push({Expected: 'Move', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'Valid 5: getAction'});
-   assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Valid 5: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Valid 5: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Valid 5: no errors'});
-
-   dataToLoad = Loader.resetData();
-   dataToLoad.Powers.push({"effect":"Teleport","text":"","action":"Reaction","range":"Ranged","duration":"Instant",
-      "Modifiers":[{"name":"Affects Others Only"}],"rank":1});
-   Loader.sendData(dataToLoad);
-   assertions.push({Expected: 'Teleport', Actual: Main.powerSection.getRowByIndex(0).getEffect(), Description: 'v3.3 allows reaction: power was loaded'});
-   assertions.push({Expected: 'Reaction', Actual: Main.powerSection.getRowByIndex(0).getAction(), Description: 'v3.3 allows reaction: getAction'});
-   assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'v3.3 allows reaction: getRange'});
-   assertions.push({Expected: 'Instant', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'v3.3 allows reaction: getDuration'});
-   assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'v3.3 allows reaction: no errors'});
-
-   return TestRunner.displayResults('TestSuite.powerRow.validateActivationInfo_valid', assertions, testState);
 };
 TestSuite.powerRow.validateAndGetPossibleActions=function(testState={})
 {
@@ -542,6 +394,100 @@ TestSuite.powerRow.validateAndGetPossibleDurations=function(testState={})
 
    return TestRunner.displayResults('TestSuite.powerRow.validateAndGetPossibleDurations', assertions, testState);
 };
+TestSuite.powerRow.getPossibleRanges = function (testState = {})
+{
+   TestRunner.clearResults(testState);
+   const assertions = [];
+
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+      assertions.push({
+         Expected: ['Personal', 'Close', 'Ranged', 'Perception'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'Feature choices'
+      });
+      //need to set duration because currently: Permanent with None action
+      ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: ['Personal', 'Close', 'Ranged', 'Perception'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'Feature choices same for reaction'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Feature'});}
+
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      assertions.push({
+         Expected: ['Close', 'Ranged', 'Perception'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'happy path choices'
+      });
+
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: ['Close'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'Aura: only choice is close'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Damage'});}
+
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Luck Control');
+      assertions.push({
+         Expected: 'Reaction',
+         Actual: Main.powerSection.getRowByIndex(0).getAction(),
+         Description: 'luck control default action'
+      });
+      assertions.push({
+         Expected: ['Close', 'Ranged', 'Perception'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'luck control choices'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Luck Control'});}
+
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
+      assertions.push({
+         Expected: 'Personal',
+         Actual: Main.powerSection.getRowByIndex(0).getRange(),
+         Description: 'Flight default range'
+      });
+      assertions.push({
+         Expected: ['Personal'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'Personal only choice'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Personal'});}
+
+   try
+   {
+      Main.setRuleset(3, 3);
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
+      assertions.push({
+         Expected: ['Close', 'Ranged', 'Perception'],
+         Actual: Main.powerSection.getRowByIndex(0).getDerivedValues().possibleRanges,
+         Description: 'v3.3 reaction Damage choices'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'v3.3'});}
+
+   return TestRunner.displayResults('TestSuite.powerRow.getPossibleRanges', assertions, testState);
+};
 TestSuite.powerRow.validatePersonalRange=function(testState={})
 {
    TestRunner.clearResults(testState);
@@ -644,20 +590,10 @@ TestSuite.powerRow.updateDurationModifiers=function(testState={})
 
     return TestRunner.displayResults('TestSuite.powerRow.updateDurationModifiers', assertions, testState);
 };
-TestSuite.powerRow.setPower=function(testState={})
-{
-   TestRunner.clearResults(testState);
-   var assertions=[];
-
-   //ADD TESTS
-
-   return TestRunner.displayResults('TestSuite.powerRow.setPower', assertions, testState);
-};
 TestSuite.powerRow.updateActionModifiers=function(testState={})
 {
     TestRunner.clearResults(testState);
 
-    //testing for setting to None exists in setDuration tests
     var assertions=[];
 
     try{
@@ -990,39 +926,118 @@ TestSuite.powerRow.calculateDerivedValues = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.powerRow.calculateDerivedValues', assertions, testState);
 };
-TestSuite.powerRow.generateNameAndSkill=function(testState={})
+TestSuite.powerRow.validateNameAndSkill=function(testState={})
 {
    TestRunner.clearResults(testState);
 
    const assertions=[];
-   try{
+   let dataToLoad;
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", name: 'jetpack', skill: 'backpacking'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'ignores flight name'
+      });
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
+         Description: 'ignores flight skill'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'ignores name/skill'});}
+
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", name: 'slash', skill: 'sword'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'slash',
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'Damage name'
+      });
+      assertions.push({
+         Expected: 'sword',
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
+         Description: 'Damage skill'
+      });
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Flight", name: 'sky shot', skill: 'gun', range: 'Close',
+         Modifiers: [{name: 'Attack'}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'sky shot',
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'Flight attack name'
+      });
+      assertions.push({
+         Expected: 'gun',
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
+         Description: 'Flight attack skill'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'happy'});}
+
+   try
+   {
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
-      assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Default name 1'});
-      assertions.push({Expected: 'Skill used for attack', Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Default skill 1'});
-      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(1), 'Affliction');
-      assertions.push({Expected: 'Power 2 Affliction', Actual: Main.powerSection.getRowByIndex(1).getName(), Description: 'Default name 2'});
+      assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'power Default name'});
+      assertions.push({
+         Expected: 'Skill used for attack',
+         Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(),
+         Description: 'Default skill'
+      });
       ReactUtil.changeValue('equipmentChoices' + Main.equipmentSection.indexToKey(0), 'Nullify');
-      assertions.push({Expected: 'Equipment 1 Nullify', Actual: Main.equipmentSection.getRowByIndex(0).getName(), Description: 'Default name 3'});
-      assertions.push({Expected: 'Skill used for attack', Actual: Main.equipmentSection.getRowByIndex(0).getSkillUsed(), Description: 'Default skill 2'});
-   } catch(e){assertions.push({Error: e, Description: 'Default name and skill'});}
+      assertions.push({
+         Expected: 'Equipment 1 Nullify',
+         Actual: Main.equipmentSection.getRowByIndex(0).getName(),
+         Description: 'equipment Default name'
+      });
 
-   try{
-      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight');
-      assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'No name'});
-      assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'No skill'});
-      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Attack');
-      assertions.push({Expected: 'Power 1 Flight', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'attack gives name'});
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage"});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: 'Power 1 Damage',
+         Actual: Main.powerSection.getRowByIndex(0).getState().name,
+         Description: 'load Default name'
+      });
+      assertions.push({
+         Expected: 'Skill used for attack',
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
+         Description: 'load Default skill'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Default name and skill'});}
 
+   try
+   {
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Damage');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Reaction');
-      assertions.push({Expected: 'Power 1 Damage', Actual: Main.powerSection.getRowByIndex(0).getName(), Description: 'Default name'});
       assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Aura has no skill'});
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Standard');
       ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
-      assertions.push({Expected: undefined, Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(), Description: 'Perception has no skill'});
-   } catch(e){assertions.push({Error: e, Description: 'No name or skill'});}
+      assertions.push({
+         Expected: undefined,
+         Actual: Main.powerSection.getRowByIndex(0).getSkillUsed(),
+         Description: 'Perception has no skill'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'No skill'});}
 
-   return TestRunner.displayResults('TestSuite.powerRow.generateNameAndSkill', assertions, testState);
+   return TestRunner.displayResults('TestSuite.powerRow.validateNameAndSkill', assertions, testState);
 };
 TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
 {
@@ -1163,7 +1178,7 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
       });
       assertions.push({
          Expected: undefined,
-         Actual: Main.powerSection.getRowByIndex(0).getState().skill,
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
          Description: 'no skill'
       });
 
@@ -1177,7 +1192,7 @@ TestSuite.powerRow.sanitizeStateAndGetDerivedValues = function (testState = {})
       });
       assertions.push({
          Expected: undefined,
-         Actual: Main.powerSection.getRowByIndex(0).getState().skill,
+         Actual: Main.powerSection.getRowByIndex(0).getState().skillUsed,
          Description: 'ignores skill'
       });
    }
