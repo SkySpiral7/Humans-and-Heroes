@@ -13,6 +13,7 @@ ModifierObject.getUniqueName = function (state)
    else if ('Dynamic Alternate Effect' === state.name) nameToUse = 'Alternate Effect';
    else if ('Inaccurate' === state.name) nameToUse = 'Accurate';
    else if ('Extended Range' === state.name || 'Diminished Range' === state.name) nameToUse = 'Extended/Diminished Range';
+   //TODO: the auto mods need to be unique for the sake of feature for now
    //TODO: is uncontrollable entirely a unique modifier?
    else nameToUse = state.name;
 

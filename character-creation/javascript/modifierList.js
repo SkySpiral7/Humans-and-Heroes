@@ -206,6 +206,7 @@ ModifierList.sanitizeStateAndGetDerivedValues = function (inputState, powerEffec
  * For the sake of unique name this shouldn't be called for modifiers that have text.*/
 ModifierList.removeByName = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName, powerIndex, rowName)
 {
+   //TODO: fewer args please: removeByName, createByNameRank
    var rowIndex = ModifierList.findRowByName(pendingModifiersAndDv.state, rowName);
    if (undefined !== rowIndex)
    {

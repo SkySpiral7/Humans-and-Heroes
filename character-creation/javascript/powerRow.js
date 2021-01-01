@@ -287,11 +287,9 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
                                                        powerIndex)
 {
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
-   //Triggered must also be selective so it auto adds but doesn't remove
-   //TODO: here I am
+   //Triggered (v3.3 max) must also be selective so it auto adds but doesn't remove
    if ('Triggered' === validState.action) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
-      validActivationInfoObj, powerSectionName,
-      powerIndex, 'Selective', 1);
+      validActivationInfoObj, powerSectionName, powerIndex, 'Selective', 1);
 
    if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change any other modifiers
 
@@ -309,21 +307,24 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
    if ('None' === defaultActionName) defaultActionName = 'Free';  //calculate distance from free
    var defaultActionIndex = Data.Power.actions.indexOf(defaultActionName);
    var newActionIndex = Data.Power.actions.indexOf(validState.action);
-   if (Main.getActiveRuleset()
-      .isGreaterThanOrEqualTo(3, 4) && 'Reaction' === validState.action && 'Luck Control' !== validState.effect)
+
+   if (Main.getActiveRuleset().isGreaterThanOrEqualTo(3, 4)
+      && 'Reaction' === validState.action && 'Luck Control' !== validState.effect)
    {
-      newActionIndex = Data.Power.actions.indexOf('Standard');  //calculate distance from Standard
+      //calculate distance from Standard is game rule but dead code since all default to standard (feature can't be an attack)
+      newActionIndex = Data.Power.actions.indexOf('Standard');
       outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
          powerIndex, 'Aura', 1);
    }
 
    var actionDifference = (newActionIndex - defaultActionIndex);
    if (actionDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
-      validActivationInfoObj, powerSectionName, powerIndex,
-      'Faster Action', actionDifference);
+      validActivationInfoObj, powerSectionName, powerIndex, 'Faster Action', actionDifference);
    else if (actionDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
-      validActivationInfoObj, powerSectionName,
-      powerIndex, 'Slower Action', -actionDifference);
+      validActivationInfoObj, powerSectionName, powerIndex,
+      //actionDifference is negated to make rank positive
+      'Slower Action', -actionDifference);
+   //else: 0 === actionDifference: add nothing
 
    return outputPendingModifiers;
 };
@@ -331,6 +332,7 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
 PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
                                                          powerIndex)
 {
+   //TODO: here I am
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
    if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
 
