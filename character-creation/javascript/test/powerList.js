@@ -482,8 +482,8 @@ TestSuite.powerList.updateModifierNameByRow = function (testState = {})
       assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Immunity attack: no errors'});
 
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
-      //mod 0 is decreased action
-      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 1), 'Limited');
+      //mod 0-1 is decreased action, Decreased duration
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 2), 'Limited');
       assertions.push({
          Expected: 'Personal',
          Actual: Main.powerSection.getState().it[0].range,

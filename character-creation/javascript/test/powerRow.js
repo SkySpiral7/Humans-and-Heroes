@@ -530,65 +530,98 @@ TestSuite.powerRow.validatePersonalRange=function(testState={})
 
    return TestRunner.displayResults('TestSuite.powerRow.validatePersonalRange', assertions, testState);
 };
-TestSuite.powerRow.updateDurationModifiers=function(testState={})
+TestSuite.powerRow.updateDurationModifiers = function (testState = {})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var assertions=[];
+   const assertions = [];
+   let dataToLoad;
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Feature does\'t auto gain Increased Duration: getDuration'});
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Increased Duration: before is blank'});
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Increased Duration: after is still blank'});
-    } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Increased Duration'});}
+   try
+   {
+      ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
+      ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
+      assertions.push({
+         Expected: [],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'Feature does not auto add in/decreased Duration'
+      });
+      //nothing is above Permanent so Feature can't test auto Increased Duration directly
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Decreased Duration: before is blank'});
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Decreased Duration: after is still blank'});
-    } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Decreased Duration'});}
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Increased Duration');
+      ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState().length,
+         Description: 'Feature does not auto remove Increased Duration'
+      });
 
-    try{
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
-    assertions.push({Expected: 'Continuous', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: duration'});
-    assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Increased Duration: was auto created'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0,0).state.rank, Description: 'Increased Duration: is rank 1'});
+      ReactUtil.changeValue('powerModifierChoices' + Main.powerSection.indexToPowerAndModifierKey(0, 0), 'Decreased Duration');
+      //can't test Decreased and Increased at same time because they are unique
+      ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Continuous');
+      assertions.push({
+         Expected: 1,
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState().length,
+         Description: 'Feature does not auto remove Decreased Duration'
+      });
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Feature'});}
 
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
-    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: setting the duration back'});
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Increased Duration: was auto removed'});
+   try
+   {
+      dataToLoad = Loader.resetData();
+      //default duration
+      dataToLoad.Powers.push({effect: "Flight", Modifiers: [{name: 'Increased Duration'}, {name: 'Decreased Duration'}]});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         //also tests that diff 0 adds nothing
+         Expected: [],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'auto removes all: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'auto removes all: errors'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'Auto remove'});}
 
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
-    assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Increased Duration: setting duration up then down'});
-    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Increased Duration: was auto replaced with Decreased Duration'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Increased Duration: was in fact removed'});
-    } catch(e){assertions.push({Error: e, Description: 'Increased Duration'});}
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", duration: 'Continuous'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Increased Duration', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'auto add Increased: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'auto add Increased: errors'});
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Flight'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration');
-    assertions.push({Expected: 'Concentration', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: duration'});
-    assertions.push({Expected: 'Decreased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Decreased Duration: was auto created'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0,0).state.rank, Description: 'Decreased Duration: is rank 1'});
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Flight", duration: 'Concentration'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Decreased Duration', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'auto add Decreased: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'auto add Decreased: errors'});
 
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Sustained');
-    assertions.push({Expected: 'Sustained', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: setting the duration back'});
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Decreased Duration: was auto removed'});
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Immunity", action: 'Standard', duration: 'Sustained'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: {name: 'Decreased Duration', rank: 2},
+         //mod 0 is Slower Action
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState()[1],
+         Description: 'calc from Sustained when default Permanent: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'calc from Sustained when default Permanent: errors'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'auto add in/decreased Duration'});}
 
-    ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Concentration'); ReactUtil.changeValue('powerSelectDuration' + Main.powerSection.indexToKey(0), 'Continuous');
-    assertions.push({Expected: 'Continuous', Actual: Main.powerSection.getRowByIndex(0).getDuration(), Description: 'Decreased Duration: setting duration up then down'});
-    assertions.push({Expected: 'Increased Duration', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Decreased Duration: was auto replaced with Increased Duration'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Decreased Duration: was in fact removed'});
-    } catch(e){assertions.push({Error: e, Description: 'Decreased Duration'});}
-
-    return TestRunner.displayResults('TestSuite.powerRow.updateDurationModifiers', assertions, testState);
+   return TestRunner.displayResults('TestSuite.powerRow.updateDurationModifiers', assertions, testState);
 };
 TestSuite.powerRow.updateActionModifiers = function (testState = {})
 {
@@ -734,6 +767,7 @@ TestSuite.powerRow.updateActionModifiers = function (testState = {})
    try
    {
       Main.setRuleset(3, 3);
+      Messages.clear();
       ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Teleport');
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Triggered');
       assertions.push({
@@ -742,19 +776,9 @@ TestSuite.powerRow.updateActionModifiers = function (testState = {})
          Description: 'Add Selective: action'
       });
       assertions.push({
-         Expected: 'Faster Action',
-         Actual: Main.powerSection.getModifierRowShort(0, 0).state.name,
-         Description: 'Add Selective: Faster Action was auto created'
-      });
-      assertions.push({
-         Expected: 3,
-         Actual: Main.powerSection.getModifierRowShort(0, 0).state.rank,
-         Description: 'Add Selective: Faster Action rank 3'
-      });
-      assertions.push({
-         Expected: 'Selective',
-         Actual: Main.powerSection.getModifierRowShort(0, 1).state.name,
-         Description: 'Add Selective: Selective was auto created'
+         Expected: [{name: 'Faster Action', rank: 3}, {name: 'Selective', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'Add Selective: auto faster, auto select, faster rank'
       });
 
       ReactUtil.changeValue('powerSelectAction' + Main.powerSection.indexToKey(0), 'Move');
@@ -763,6 +787,7 @@ TestSuite.powerRow.updateActionModifiers = function (testState = {})
          Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
          Description: 'triggered to move, Selective not auto removed'
       });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'to Triggered: errors'});
 
       //TODO: should Messages.get clear?
       Messages.clear();

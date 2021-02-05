@@ -287,7 +287,7 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
                                                        powerIndex)
 {
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
-   //Triggered (v3.3 max) must also be selective so it auto adds but doesn't remove
+   //Triggered (v3.3 max) must also be selective (even for feature) so it auto adds but doesn't remove
    if ('Triggered' === validState.action) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
       validActivationInfoObj, powerSectionName, powerIndex, 'Selective', 1);
 
@@ -332,15 +332,14 @@ PowerObjectAgnostic._updateActionModifiers = function (validState, pendingModifi
 PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
                                                          powerIndex)
 {
-   //TODO: here I am
+   if ('Feature' === validState.effect) return pendingModifiersAndDv;  //Feature doesn't change modifiers
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
-   if ('Feature' === validState.effect) return outputPendingModifiers;  //Feature doesn't change modifiers
+   //TODO: v1.0 INCREASED DURATION changes Instant to concentration (but no further due to rules)
 
    var defaultDurationName = Data.Power[validState.effect].defaultDuration;
    var defaultDurationIndex = Data.Power.durations.indexOf(defaultDurationName);
    var newDurationIndex = Data.Power.durations.indexOf(validState.duration);
-   if ('Permanent' === defaultDurationName && 'Personal' !== validState.range)
-      defaultDurationIndex = Data.Power.durations.indexOf('Sustained');  //calculate distance from Sustained
+   //calc from Permanent uses normal math because Permanent is last index
 
    //remove both if possible
    outputPendingModifiers = ModifierList.removeByName(validState, outputPendingModifiers, validActivationInfoObj, powerSectionName,
@@ -350,12 +349,12 @@ PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModi
 
    var durationDifference = (newDurationIndex - defaultDurationIndex);
    if (durationDifference > 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
-      validActivationInfoObj, powerSectionName, powerIndex,
-      'Increased Duration', durationDifference);
+      validActivationInfoObj, powerSectionName, powerIndex, 'Increased Duration', durationDifference);
    else if (durationDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
-      validActivationInfoObj, powerSectionName,
-      powerIndex, 'Decreased Duration',
-      -durationDifference);
+      validActivationInfoObj, powerSectionName, powerIndex,
+      //durationDifference is negated to make rank positive
+      'Decreased Duration', -durationDifference);
+   //else: 0 === durationDifference: add nothing
 
    return outputPendingModifiers;
 };
@@ -363,6 +362,7 @@ PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModi
 PowerObjectAgnostic._updateRangeModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
                                                       powerIndex)
 {
+   //TODO: here I am
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
 
    //remove when changing to personal (even for feature). non personal non feature also removes
