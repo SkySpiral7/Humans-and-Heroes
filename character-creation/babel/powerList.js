@@ -279,7 +279,7 @@ class PowerListAgnostic extends React.Component
          oldWasNonPersonal = ModifierList.isNonPersonalModifier(powerState.Modifiers[modifierIndex].name);
       }
 
-      //TODO: consider what to do about feature
+      //TODO: consider what to do about feature (adding Increased range is broken)
       //non personal modifier was added
       if (!oldWasNonPersonal && newIsNonPersonal)
       {

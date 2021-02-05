@@ -817,54 +817,135 @@ TestSuite.powerRow.updateActionModifiers = function (testState = {})
 
    return TestRunner.displayResults('TestSuite.powerRow.updateActionModifiers', assertions, testState);
 };
-TestSuite.powerRow.updateRangeModifiers=function(testState={})
+TestSuite.powerRow.updateRangeModifiers = function (testState = {})
 {
-    TestRunner.clearResults(testState);
+   TestRunner.clearResults(testState);
 
-    var assertions=[];
+   const assertions = [];
+   let dataToLoad;
 
-    try{
-    Main.powerSection.clear();
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Feature');
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Increased Range: before is blank'});
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Feature does\'t auto gain Increased Range: after is still blank'});
-    } catch(e){assertions.push({Error: e, Description: 'Feature does\'t auto gain Increased Range'});}
-    //can't test 'Feature does\'t auto gain Decreased Range' because Feature's default range is Personal
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Flight", range: 'Personal',
+         Modifiers: [{name: 'Increased Range', rank: 1}, {name: 'Reduced Range', rank: 1}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'auto remove range +/- when personal: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'auto remove range +/- when personal: errors'});
 
-    try{
-    ReactUtil.changeValue('powerChoices' + Main.powerSection.indexToKey(0), 'Move Object'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
-    assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: range'});
-    assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Increased Range: was auto created'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0,0).state.rank, Description: 'Increased Range: is rank 1'});
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Feature", range: 'Personal',
+         Modifiers: [{name: 'Increased Range', rank: 1}, {name: 'Reduced Range', rank: 1}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'feature auto remove range +/- when personal: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'feature auto remove range +/- when personal: errors'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'personal auto remove'});}
 
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: setting the range back'});
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Increased Range: was auto removed'});
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Feature", action: 'Free', range: 'Close', duration: 'Sustained',
+         Modifiers: [{name: 'Increased Range', rank: 1}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Increased Range', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'feature keeps Increased Range: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'feature keeps Increased Range: errors'});
 
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Increased Range: setting range up then down'});
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Increased Range: was auto replaced with Reduced Range'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Increased Range: was in fact removed'});
-    } catch(e){assertions.push({Error: e, Description: 'Increased Range'});}
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         //this also tests that feature doesn't auto add since the range is above default personal
+         effect: "Feature", action: 'Free', range: 'Ranged', duration: 'Sustained',
+         Modifiers: [{name: 'Reduced Range', rank: 1}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Reduced Range', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'feature keeps Reduced Range: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'feature keeps Reduced Range: errors'});
 
-    try{
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close');
-    assertions.push({Expected: 'Close', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: range'});
-    assertions.push({Expected: 'Reduced Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Reduced Range: was auto created'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getModifierRowShort(0,0).state.rank, Description: 'Reduced Range: is rank 1'});
+      //can't test that feature doesn't auto gain Decreased Range because nothing is below the default of personal
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'feature'});}
 
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Ranged');
-    assertions.push({Expected: 'Ranged', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: setting the range back'});
-    assertions.push({Expected: [], Actual: Main.powerSection.getState().it[0].Modifiers, Description: 'Reduced Range: was auto removed'});
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Damage",
+         Modifiers: [{name: 'Increased Range', rank: 1}, {name: 'Reduced Range', rank: 1}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'auto remove range +/-: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'auto remove range +/-: errors'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'auto remove normal'});}
 
-    ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Close'); ReactUtil.changeValue('powerSelectRange' + Main.powerSection.indexToKey(0), 'Perception');
-    assertions.push({Expected: 'Perception', Actual: Main.powerSection.getRowByIndex(0).getRange(), Description: 'Reduced Range: setting range down then up'});
-    assertions.push({Expected: 'Increased Range', Actual: Main.powerSection.getModifierRowShort(0,0).state.name, Description: 'Reduced Range: was auto replaced with Increased Range'});
-    assertions.push({Expected: 1, Actual: Main.powerSection.getState().it[0].Modifiers.length, Description: 'Reduced Range: was in fact removed'});
-    } catch(e){assertions.push({Error: e, Description: 'Reduced Range'});}
+   try
+   {
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Damage", range: 'Perception'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Increased Range', rank: 2}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'Increased Range auto add: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Increased Range auto add: errors'});
 
-    return TestRunner.displayResults('TestSuite.powerRow.updateRangeModifiers', assertions, testState);
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({
+         effect: "Flight", range: 'Ranged',
+         Modifiers: [{name: 'Attack'}]
+      });
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Increased Range', rank: 1}, {name: 'Attack', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'Increased Range default personal uses close: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Increased Range default personal uses close: errors'});
+
+      dataToLoad = Loader.resetData();
+      dataToLoad.Powers.push({effect: "Move Object", range: 'Close'});
+      Loader.sendData(dataToLoad);
+      assertions.push({
+         Expected: [{name: 'Reduced Range', rank: 1}],
+         Actual: Main.powerSection.getRowByIndex(0).getModifierList().getState(),
+         Description: 'Reduced Range auto add: mods'
+      });
+      assertions.push({Expected: [], Actual: Messages.errorCodes(), Description: 'Reduced Range auto add: errors'});
+   }
+   catch (e)
+   {assertions.push({Error: e, Description: 'auto add'});}
+
+   return TestRunner.displayResults('TestSuite.powerRow.updateRangeModifiers', assertions, testState);
 };
 TestSuite.powerRow.calculateDerivedValues = function (testState = {})
 {

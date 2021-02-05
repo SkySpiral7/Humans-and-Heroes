@@ -362,7 +362,6 @@ PowerObjectAgnostic._updateDurationModifiers = function (validState, pendingModi
 PowerObjectAgnostic._updateRangeModifiers = function (validState, pendingModifiersAndDv, validActivationInfoObj, powerSectionName,
                                                       powerIndex)
 {
-   //TODO: here I am
    var outputPendingModifiers = JSON.clone(pendingModifiersAndDv);
 
    //remove when changing to personal (even for feature). non personal non feature also removes
@@ -392,13 +391,16 @@ PowerObjectAgnostic._updateRangeModifiers = function (validState, pendingModifie
       'Increased Range', rangeDifference);
    else if (rangeDifference < 0) outputPendingModifiers = ModifierList.createByNameRank(validState, outputPendingModifiers,
       validActivationInfoObj, powerSectionName, powerIndex,
+      //rangeDifference is negated to make rank positive
       'Reduced Range', -rangeDifference);
+   //else: 0 === rangeDifference: add nothing
 
    return outputPendingModifiers;
 };
 /**@returns {Object} of all actions that are possible for this power based on current state.*/
 PowerObjectAgnostic._validateAndGetPossibleActions = function (validState, inputState, validDuration, loadLocation)
 {
+   //TODO: here I am
    //feature has the same action as the others (because allowReaction is true)
    var pendingAction = inputState.action;
    if ('Permanent' === validDuration)
